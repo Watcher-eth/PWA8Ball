@@ -1,0 +1,25 @@
+/* styles/fonts.css */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap");
+@font-face {
+  font-family: "Aeonik-Bold"; /* Specify your preferred font name */
+  src: url("../../public/fonts/AeonikTRIAL-Bold.otf") format("opentype");
+  /* Adjust the path to your font file as needed */
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Aeonik"; /* Specify your preferred font name */
+  src: url("../../public/fonts/AeonikTRIAL-Regular.otf") format("opentype");
+  /* Adjust the path to your font file as needed */
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Benzin-Bold"; /* Specify your preferred font name */
+  src: url("../../public/fonts/Benzin-ExtraBold.ttf") format("opentype");
+  /* Adjust the path to your font file as needed */
+  font-weight: bold;
+  font-style: normal;
+}

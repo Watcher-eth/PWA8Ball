@@ -1,0 +1,54 @@
+import { queryOptions, useQuery } from "@tanstack/react-query";
+import {
+  EightBallAddress,
+  EightballV1ABI,
+  getEightBallContract,
+} from "../contracts/Eightball";
+import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
+import { useUpdateMarketOutcome } from "@/lib/drizzle/drizzle/supabase/mutations/updateMarketOutcome";
+import { useUpdateUSDCBalance } from "@/lib/drizzle/drizzle/supabase/mutations/updateMarketBalance";
+import { rpcClient } from "../Viem";
+
+export const useGetMarketStake = (marketId: string) => {
+  const { mutate: updateUSDCBalance } = useUpdateUSDCBalance();
+
+  return useQuery<number | { isResolved: boolean; outcome: null }>({
+    queryKey: ["getMarketStake", marketId],
+    queryFn: async () => {
+      if (marketId === undefined) {
+        return { isResolved: false, outcome: null };
+      }
+      try {
+        const marketPair = await rpcClient.readContract({
+          address: EightBallAddress,
+          abi: EightballV1ABI,
+          args: [BigInt(marketId)],
+          functionName: "marketPairs",
+        });
+        const id = Number(marketId);
+        console.log("fetching stake", marketPair);
+        // After getting the outcome from the contract, update the database
+        if (marketPair) {
+          updateUSDCBalance(
+            {
+              marketId: id,
+              usdcBalance: Number(marketPair[6]),
+            },
+            {
+              onSuccess: () => {
+                // Optionally refetch or invalidate other queries that depend on this data
+              },
+            }
+          );
+          return Number(marketPair[6]);
+        }
+        console.log("Success");
+        return Number(marketPair[6]);
+      } catch (e) {
+        console.log("error", e);
+        throw new Error("Error fetching market stake");
+      }
+    },
+    enabled: marketId !== undefined, // Ensures the query runs only if marketId is provided
+  });
+};
