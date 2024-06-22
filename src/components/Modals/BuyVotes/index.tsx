@@ -19,6 +19,7 @@ import {
   PlusIcon,
   Repeat,
   ShoppingBag,
+  Vote,
   WalletCards,
   X,
 } from "lucide-react";
@@ -28,6 +29,8 @@ import ConfirmActionModal from "./confirmActionModal";
 import BuyModal from "./buyModal";
 import useVotingStore from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
+import { useModalStore } from "@/lib/stores/ModalStore";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 function VotingModal(props: {
   text: string;
@@ -36,6 +39,9 @@ function VotingModal(props: {
   image: string;
   question: string;
   options: string[];
+  marketId: string;
+  odds: number;
+  handleOpen: () => void;
 }) {
   const [goal, setGoal] = React.useState(1);
   const [step, setStep] = React.useState(1);
@@ -135,23 +141,33 @@ function VotingModal(props: {
     });
   };
 
-  const Option = useVotingStore((state) => state.option);
+  const amount = useVotingStore((state) => state.amount);
+  const { user } = useUserStore();
   return (
     <div>
       <Drawer>
         <DrawerTrigger>
-          <motion.div whileTap={{ scale: 0.93 }} className="mt-[1rem]">
+          <motion.div
+            onClick={() => {
+              if (!user?.walletaddress) props.handleOpen();
+            }}
+            whileTap={{ scale: 0.93 }}
+            className="mt-[1rem]"
+          >
             {props?.option === 0 && (
               <motion.div whileTap={{ scale: 0.95 }}>
                 <Button className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div> {props?.text} </div>
+                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
+                    {props?.text}{" "}
+                  </div>
                   <div
                     style={{
                       marginLeft: "0.2rem",
-                      fontSize: "0.79rem",
+                      fontSize: "0.81rem",
                       color: "rgba(250, 250, 250, 0.8)",
                       fontWeight: 500,
                       alignSelf: "flex-end",
+                      marginBottom: 2,
                     }}
                   >
                     {props?.multiplier}%
@@ -162,14 +178,18 @@ function VotingModal(props: {
             {props?.option === 1 && (
               <motion.div whileTap={{ scale: 0.95 }}>
                 <Button className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div> {props?.text}</div>
+                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
+                    {" "}
+                    {props?.text}
+                  </div>
                   <div
                     style={{
                       marginLeft: "0.2rem",
-                      fontSize: "0.79rem",
+                      fontSize: "0.81rem",
                       color: "rgba(250, 250, 250, 0.8)",
                       fontWeight: 500,
                       alignSelf: "flex-end",
+                      marginBottom: 2,
                     }}
                   >
                     {props?.multiplier}%
@@ -179,70 +199,18 @@ function VotingModal(props: {
             )}
           </motion.div>
         </DrawerTrigger>
-        <DrawerContent className=" border-0 rounded-3xl self-center">
+        <DrawerContent className=" border-0 rounded-[2rem] self-center">
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#131313] rounded-3xl  ml-[4vw] mb-5 w-[92vw] relative"
+            className="bg-[#131313] rounded-3xl   w-[100vw] relative"
           >
-            <div className="flex mt-6 w-[86vw] items-center justify-between">
-              {step === 1 && (
-                <WalletCards
-                  size={37}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={2}
-                />
-              )}
-              {step === 2 && (
-                <BadgeDollarSign
-                  size={37}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={2}
-                />
-              )}
-              {step === 3 && (
-                <ShoppingBag
-                  size={37}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={2}
-                />
-              )}
-              {step === 4 && (
-                <Repeat
-                  size={35}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={3}
-                />
-              )}
-              {step === 5 && (
-                <CreditCard
-                  size={37}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={3}
-                />
-              )}
-              {step === 6 && (
-                <ArrowDown
-                  size={37}
-                  className=" ml-6 stroke-gray-400"
-                  strokeWidth={3}
-                />
-              )}
-              <DrawerClose>
-                <motion.div
-                  whileTap={{ scale: 0.9 }}
-                  className=" p-2 left-6 rounded-full bg-gray-100"
-                >
-                  <X size={17} className="  stroke-gray-400" strokeWidth={5} />
-                </motion.div>
-              </DrawerClose>
-            </div>
             <AnimatePresence>
               {step === 1 && (
-                <div className="flex flex-col p-8 w-full pt-4 bg-[#131313] rounded-2xl pb-8 z-15">
-                  <div className="flex flex-row items-center bg-gray-[#212121] rounded-2xl p-1 w-full justify-center relative">
+                <div className="flex flex-col p-8 w-full pt-4 bg-[#131313] rounded-[2.5rem] pb-8 z-15">
+                  <div className="flex flex-row items-center bg-gray-[#212121] rounded-2xl  w-full justify-center relative">
                     <img
-                      className="h-8 w-8 rounded-full object-cover overflow-hidden"
+                      className="h-8 w-8 rounded-full object-cover "
                       src={props?.image}
                       alt="Question"
                     />
@@ -274,12 +242,14 @@ function VotingModal(props: {
                       userBalance.toFixed(2) || sliderValue === "" ? (
                       <div className="flex flex-row items-center mt-0">
                         <div
-                          className="p-2 bg-red-500 rounded-full"
+                          className="p-1 bg-red-500 rounded-full"
                           style={{
                             backgroundColor:
-                              Option === 1 ? "#FF0050" : "#0050FF",
+                              props.option === 0 ? "#FF0050" : "#0050FF",
                           }}
-                        ></div>
+                        >
+                          <Vote color="white" strokeWidth={3} size={16} />
+                        </div>
                         <span className="text-lg font-bold text-gray-200 ml-2">
                           {props.options[props.option]}
                         </span>
@@ -390,9 +360,31 @@ function VotingModal(props: {
                   </div>
                 </div>
               )}
-              {step === 2 && <GetGhoModal setStep={setStep} />}
+              {step === 2 && user?.balance > amount ? (
+                <ConfirmActionModal
+                  option={props?.option}
+                  options={props?.options}
+                  image={props?.image}
+                  question={props?.question}
+                  title={props?.text}
+                  setStep={setStep}
+                  id={props?.marketId}
+                  odds={props.odds}
+                />
+              ) : step === 2 ? (
+                <GetGhoModal setStep={setStep} />
+              ) : null}
               {step === 3 && (
-                <ConfirmActionModal option={props?.option} options={props?.options} image={props?.image} setStep={setStep} />
+                <ConfirmActionModal
+                  option={props?.option}
+                  options={props?.options}
+                  image={props?.image}
+                  question={props?.question}
+                  title={props?.text}
+                  setStep={setStep}
+                  id={props?.marketId}
+                  odds={props.odds}
+                />
               )}
               {step === 4 && <BuyModal setStep={setStep} method={1} />}
               {step === 5 && <BuyModal setStep={setStep} method={2} />}

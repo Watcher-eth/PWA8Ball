@@ -10,7 +10,6 @@ import {
 } from "viem";
 import { baseGoerli, baseSepolia } from "viem/chains";
 import {
-  walletClientToCustomSigner,
   type SmartAccountClient,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
@@ -22,16 +21,11 @@ import {
   createPimlicoBundlerClient,
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico";
-import {
-  EmbeddedWallet,
-  EmbeddedWalletState,
-  User,
-  getUserEmbeddedWallet,
-  useEmbeddedWallet,
-} from "@privy-io/expo";
+
 import { UsdcABI } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "./Viem";
+import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
@@ -40,7 +34,7 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
 /** Interface returned by custom `useSmartAccount` hook */
 interface SmartAccountInterface {
   /** Privy embedded wallet, used as a signer for the smart account */
-  eoa: EmbeddedWalletState | undefined;
+  eoa: ConnectedWallet | undefined;
   /** Smart account client to send signature/transaction requests to the smart account */
   smartAccountClient: SmartAccountClient | undefined;
   /** Smart account address */
@@ -62,20 +56,16 @@ export const useSmartAccount = () => {
 
 export const SmartAccountProvider = ({
   children,
-  user,
 }: {
   children: React.ReactNode;
-  user: User;
 }) => {
-  const wallet = useEmbeddedWallet();
-  const account = getUserEmbeddedWallet(user);
-
-  // Get a list of all of the wallets (EOAs) the user has connected to your site
-  // Find the embedded wallet by finding the entry in the list with a `walletClientType` of 'privy'
-  const embeddedWallet = account;
+  const { wallets } = useWallets();
+  const embeddedWallet = wallets.find(
+    (wallet) => wallet.walletClientType === "privy"
+  );
 
   // States to store the smart account and its status
-  const [eoa, setEoa] = useState<EmbeddedWalletState | undefined>();
+  const [eoa, setEoa] = useState<ConnectedWallet | undefined>();
   const [smartAccountClient, setSmartAccountClient] = useState<
     SmartAccountClient | undefined
   >();
@@ -87,13 +77,15 @@ export const SmartAccountProvider = ({
   useEffect(() => {
     // Creates a smart account given a Privy `ConnectedWallet` object representing
     // the  user's EOA.
-    const createSmartWallet = async (eoa: EmbeddedWalletState) => {
+    const createSmartWallet = async (eoa: ConnectedWallet) => {
+      const eip1193provider = await embeddedWallet.getEthereumProvider();
+
       setEoa(eoa);
       // Get an EIP1193 provider and viem WalletClient for the EOA
       const privyClient = createWalletClient({
         account: embeddedWallet?.address as `0x${string}`,
         chain: baseSepolia,
-        transport: custom(wallet.provider),
+        transport: custom(eip1193provider),
       });
       console.log("Step 0", privyClient);
 
@@ -116,23 +108,23 @@ export const SmartAccountProvider = ({
       console.log(
         "Step 1",
         simpleSmartAccount,
-        process.env.EXPO_PUBLIC_PIMLICO_PAYMASTER_URL
+        process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL
       );
 
       const pimlicoPaymaster = createPimlicoPaymasterClient({
         entryPoint: ENTRYPOINT_ADDRESS_V07,
-        transport: http(process.env.EXPO_PUBLIC_PIMLICO_PAYMASTER_URL),
+        transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
       });
 
       const pimlicoBundlerClient = createPimlicoBundlerClient({
-        transport: http(process.env.EXPO_PUBLIC_PIMLICO_PAYMASTER_URL),
+        transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
         entryPoint: ENTRYPOINT_ADDRESS_V07,
       });
       console.log("Step 2", pimlicoPaymaster);
 
       const smartAccountClient = createSmartAccountClient({
         account: simpleSmartAccount,
-        bundlerTransport: http(process.env.EXPO_PUBLIC_PIMLICO_PAYMASTER_URL),
+        bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
         middleware: {
           sponsorUserOperation: pimlicoPaymaster.sponsorUserOperation, // optional
           gasPrice: async () =>
@@ -182,7 +174,7 @@ export const SmartAccountProvider = ({
     };
 
     if (embeddedWallet) createSmartWallet(embeddedWallet);
-  }, [embeddedWallet?.address, wallet]);
+  }, [embeddedWallet?.address, embeddedWallet]);
 
   return (
     <SmartAccountContext.Provider

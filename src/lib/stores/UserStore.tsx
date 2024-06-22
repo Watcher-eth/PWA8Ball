@@ -1,10 +1,10 @@
 // useUserStore.ts
 import { create } from "zustand";
-import { User } from "../drizzle/schema";
+import { IUser } from "../supabase/mutations/updateUser";
 
 interface UserState {
-  user: (User & { balance?: string }) | null; // Add balance to User type
-  setUser: (user: (User & { balance?: string }) | null) => void;
+  user: (IUser & { balance?: string }) | null; // Add balance to User type
+  setUser: (user: (IUser & { balance?: string }) | null) => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({

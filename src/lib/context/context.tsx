@@ -13,7 +13,6 @@ import {
 } from "react";
 import { lensClient } from "../../pages/_app";
 import { useUserStore } from "./UserContext";
-import { useAccount } from "wagmi";
 
 import { createWalletClient, custom } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -35,7 +34,6 @@ export const useProfile = (): ContextData => {
 export const ProfileProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const userStore = useUserStore();
   //Get User
-  const { address } = useAccount();
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [selectedProfile, setSelectedProfile] = useState({});
 

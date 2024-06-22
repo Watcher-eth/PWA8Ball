@@ -1,9 +1,10 @@
-import {
-  type SwitchChainErrorType as viem_SwitchChainErrorType,
-  type UserRejectedRequestErrorType,
+import type {
+  AddEthereumChainParameter,
+  UserRejectedRequestErrorType,
+  SwitchChainErrorType as viem_SwitchChainErrorType,
 } from 'viem'
 
-import { type Config } from '../createConfig.js'
+import type { Config } from '../createConfig.js'
 import type { BaseErrorType, ErrorType } from '../errors/base.js'
 import {
   ChainNotConfiguredError,
@@ -15,20 +16,25 @@ import {
   type SwitchChainNotSupportedErrorType,
 } from '../errors/connector.js'
 import type { ConnectorParameter } from '../types/properties.js'
-import { type Evaluate } from '../types/utils.js'
+import type { Evaluate, ExactPartial } from '../types/utils.js'
 
 export type SwitchChainParameters<
   config extends Config = Config,
-  chainId extends config['chains'][number]['id'] = config['chains'][number]['id'],
+  chainId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
 > = Evaluate<
   ConnectorParameter & {
     chainId: chainId | config['chains'][number]['id']
+    addEthereumChainParameter?:
+      | Evaluate<ExactPartial<Omit<AddEthereumChainParameter, 'chainId'>>>
+      | undefined
   }
 >
 
 export type SwitchChainReturnType<
   config extends Config = Config,
-  chainId extends config['chains'][number]['id'] = config['chains'][number]['id'],
+  chainId extends
+    config['chains'][number]['id'] = config['chains'][number]['id'],
 > = Extract<
   config['chains'][number],
   { id: Config extends config ? number : chainId }
@@ -54,7 +60,7 @@ export async function switchChain<
   config: config,
   parameters: SwitchChainParameters<config, chainId>,
 ): Promise<SwitchChainReturnType<config, chainId>> {
-  const { chainId } = parameters
+  const { addEthereumChainParameter, chainId } = parameters
 
   const connection = config.state.connections.get(
     parameters.connector?.uid ?? config.state.current!,
@@ -63,7 +69,10 @@ export async function switchChain<
     const connector = connection.connector
     if (!connector.switchChain)
       throw new SwitchChainNotSupportedError({ connector })
-    const chain = await connector.switchChain({ chainId })
+    const chain = await connector.switchChain({
+      addEthereumChainParameter,
+      chainId,
+    })
     return chain as SwitchChainReturnType<config, chainId>
   }
 

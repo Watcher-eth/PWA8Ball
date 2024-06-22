@@ -10,12 +10,18 @@ declare type ChainAddresses = {
     nonfungiblePositionManagerAddress?: string;
     tickLensAddress?: string;
     swapRouter02Address?: string;
-    v1MixedRouteQuoterAddress?: string;
+    mixedRouteQuoterV1Address?: string;
 };
 export declare const UNI_ADDRESSES: AddressMap;
 export declare const UNISWAP_NFT_AIRDROP_CLAIM_ADDRESS = "0x8B799381ac40b838BBA4131ffB26197C432AFe78";
+/**
+ * @deprecated use V2_FACTORY_ADDRESSES instead
+ */
 export declare const V2_FACTORY_ADDRESS = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 export declare const V2_FACTORY_ADDRESSES: AddressMap;
+/**
+ * @deprecated use V2_ROUTER_ADDRESSES instead
+ */
 export declare const V2_ROUTER_ADDRESS = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 export declare const V2_ROUTER_ADDRESSES: AddressMap;
 export declare const CHAIN_TO_ADDRESSES_MAP: Record<SupportedChainsType, ChainAddresses>;
@@ -43,5 +49,5 @@ export declare const ENS_REGISTRAR_ADDRESSES: AddressMap;
 export declare const SOCKS_CONTROLLER_ADDRESSES: AddressMap;
 export declare const TICK_LENS_ADDRESSES: AddressMap;
 export declare const MIXED_ROUTE_QUOTER_V1_ADDRESSES: AddressMap;
-export declare const SWAP_ROUTER_02_ADDRESSES: (chainId: number) => string | undefined;
+export declare const SWAP_ROUTER_02_ADDRESSES: (chainId: number) => string;
 export {};

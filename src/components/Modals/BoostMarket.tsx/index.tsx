@@ -26,12 +26,16 @@ import {
 import useVotingStore from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import HoldButton from "./HoldButton";
+import SliderButton from "./HoldButton";
+import ConfirmButton from "./HoldButton";
+import { String } from "lodash";
 interface ContainerProps {
   children: ReactNode;
   image: string;
+  id: String
 }
 
-const BoostModal: React.FC<ContainerProps> = ({ children, image }) => {
+const BoostModal: React.FC<ContainerProps> = ({ children, image, id }) => {
   const [goal, setGoal] = React.useState(1);
   const [step, setStep] = React.useState(1);
 
@@ -95,7 +99,7 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image }) => {
           >
             <AnimatePresence>
               {step === 1 && (
-                <div className="flex flex-col p-4 rounded-2xl m-4 bg-[#141415]">
+                <div className="flex flex-col p-1 rounded-2xl m-4 bg-[#141415]">
                   <div className="flex flex-row items-center justify-between mb-2">
                     <img
                       src={image}
@@ -115,15 +119,15 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image }) => {
                       </motion.div>
                     </DrawerClose>
                   </div>
-                  <div className="text-2xl text-white font-bold">
+                  <div className="text-xl text-white mt-1 font-bold">
                     Boost and earn rewards
                   </div>
-                  <div className="text-base text-[#BEBDBD] font-bold">
-                    By boosting this market with your liquidity you earn 3x
-                    extra points and trading fees.
+                  <div className="text-base text-md mt-[0.1rem] mb-1 text-[#BEBDBD] font-bold">
+                    Boost this market to earn
+                    extra gold points and trading fees.
                   </div>
-                  <div className="h-1 w-full bg-[#313131] my-5"></div>
-                  <div className="flex flex-row items-center justify-between mt-1 mb-4">
+                  <div className="h-[0.1rem] w-full bg-[#313131] my-2"></div>
+                  <div className="flex flex-row items-center justify-between mt-1 mb-2">
                     <div className="flex flex-col">
                       <div className="text-sm text-[#BEBDBD] font-bold">
                         Minimum Boost
@@ -145,10 +149,7 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image }) => {
                       3 Points for every $1.00 supplied
                     </div>
                   </div>
-                  <HoldButton
-                    buttonText="Hold to Boost"
-                    onComplete={() => {}}
-                  />
+                  <ConfirmButton id={id} buttonText="Confirm" onComplete={() => {}} />
                 </div>
               )}
             </AnimatePresence>

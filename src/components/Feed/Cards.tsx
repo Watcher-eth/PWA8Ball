@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/fonts.css";
 import { LayoutGroup, motion } from "framer-motion";
 import {
@@ -16,6 +16,13 @@ import ShareModal from "../Modals/ShareModal";
 import Qourum from "./Qourum";
 import BetDetails from "../Predictions/Details";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
+import { useModalStore } from "@/lib/stores/ModalStore";
+import BettersOverviewModal from "../Predictions/Betters/OverviewModal";
+import { getUserOperationByHash } from "permissionless";
+import CommentSection from "../Posts/Comments/CommentSection";
+import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
+import { useUserStore } from "@/lib/stores/UserStore";
+import LoginModal from "../Modals/LoginModal";
 function Cards(props: {
   image: string;
   title: string;
@@ -28,6 +35,8 @@ function Cards(props: {
   topicId: string;
   optionA: { name: string; multiplier: number; odds: number };
   optionB: { name: string; multiplier: number; odds: number };
+  topicBio: string;
+  handleOpen: () => void;
 }) {
   const {
     image,
@@ -41,9 +50,18 @@ function Cards(props: {
     topicId,
     optionA,
     optionB,
+    topicBio,
   } = props;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
+  const { user } = useUserStore();
+  const openLoginModal = useModalStore((state) => state.openLoginModal);
+  const {
+    data: market,
+    error,
+    isLoading,
+    refetch,
+  } = useGetMarketById(String(id), user?.external_auth_provider_user_id);
 
   const defaultImages = [
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
@@ -64,6 +82,7 @@ function Cards(props: {
   } else {
     userImages = defaultImages;
   }
+
   return (
     <LayoutGroup>
       <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>
@@ -87,7 +106,7 @@ function Cards(props: {
 
               <div
                 style={{ zIndex: 2 }}
-                className="h-[50vw] w-[88vw]   rounded-b-xl bg-gradient-to-t from-gray-900/[0.8] to-transparent absolute bottom-0"
+                className="h-[50vw] w-[88vw]   rounded-b-xl bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
               />
               <div
                 style={{
@@ -95,7 +114,7 @@ function Cards(props: {
                   lineHeight: "2.3rem",
                   fontFamily: "Benzin-Bold",
                 }}
-                className="text-[2.3rem] text-start mb-[0.2rem] pr-4 pb-0 p-3 text-white text-bold"
+                className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold"
               >
                 {title}{" "}
               </div>
@@ -118,10 +137,10 @@ function Cards(props: {
               </div>
             </motion.div>
           </DrawerTrigger>
-          <DrawerContent className=" border-0 rounded-3xl  self-center">
+          <DrawerContent className=" border-0 rounded-3xl items-center  self-center">
             <motion.div
               onClick={() => setIsDrawerOpen(false)}
-              className="bg-black w-[100vw] h-[100vh] overflow-y-auto  flex flex-col "
+              className="bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
             >
               <div className="relative h-[100vw]">
                 <div
@@ -130,15 +149,17 @@ function Cards(props: {
                 >
                   <DrawerClose>
                     <ArrowLeft
-                      strokeWidth={3.3}
+                      strokeWidth={3.8}
                       size={33}
-                      className="p-2 rounded-full backdrop-blur-xl bg-[rgba(20, 20, 20, 0.2)]  "
+                      style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
+                      className="p-2 rounded-full backdrop-blur-lg "
                     />
                   </DrawerClose>
                   <ShareModal>
                     <Share
                       size={33}
                       strokeWidth={3.3}
+                      style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
                       className="p-2 rounded-full backdrop-blur-xl "
                     />
                   </ShareModal>
@@ -161,8 +182,10 @@ function Cards(props: {
                   zIndex: 2,
                   fontFamily: "Benzin-Bold",
                   lineHeight: "2.4rem",
+                  fontSize:
+                    title?.length < 15 ? 35 : title?.length < 21 ? 32 : 26,
                 }}
-                className="text-[2.2rem] pr-10 mt-[-7.8rem] text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white text-bold"
+                className=" pr-10 mt-[-3.8rem] text-start mb-[-0.7rem]  pl-5 pb-0 p-3 text-white text-bold"
               >
                 {title}
               </div>
@@ -182,24 +205,36 @@ function Cards(props: {
                     <div> ${stake ? (stake / 100000).toFixed(2) : "0.00"}</div>
                   </div>
                 </div>
-                <div
-                  style={{ zIndex: 2 }}
-                  className="flex space-x-[-1rem] mb-3 items-center"
+                <BettersOverviewModal
+                  title={title}
+                  question={description}
+                  image={image}
+                  optionA={optionA.name}
+                  optionB={optionB.name}
+                  odds={75}
+                  marketId={id}
+                  users={users}
                 >
-                  <Avatar>
-                    <AvatarImage src={userImages[0]} />
-                  </Avatar>
-                  <Avatar>
-                    <AvatarImage src={userImages[1]} />
-                  </Avatar>
-                  <Avatar className="border-1 border-white">
-                    <AvatarImage src={userImages[2]} />
-                  </Avatar>
-                </div>
+                  <div
+                    style={{ zIndex: 2 }}
+                    onClick={openLoginModal}
+                    className="flex space-x-[-1rem] mb-3 items-center"
+                  >
+                    <Avatar>
+                      <AvatarImage src={userImages[0]} />
+                    </Avatar>
+                    <Avatar>
+                      <AvatarImage src={userImages[1]} />
+                    </Avatar>
+                    <Avatar className="border-1 border-white">
+                      <AvatarImage src={userImages[2]} />
+                    </Avatar>
+                  </div>
+                </BettersOverviewModal>
               </div>
               <div
                 style={{ zIndex: 2 }}
-                className="h-[0.1rem] w-[89vw] mt-[-0.1rem] bg-gray-600 mx-5 rounded-full"
+                className="h-[0.1rem] w-[89vw] mt-[0rem] bg-[#212121] mx-5 rounded-full"
               />
 
               <div
@@ -208,7 +243,7 @@ function Cards(props: {
                   fontFamily: "Aeonik-Bold",
                   lineHeight: "1.35rem",
                 }}
-                className="text-[1.1rem] line-clamp-2 mb-[-1]  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
+                className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
               >
                 {description}
               </div>
@@ -217,19 +252,25 @@ function Cards(props: {
                 className="flex items-center w-[88vw]  mt-[-4] mx-5 justify-between mx-2"
               >
                 <VotingModal
+                  handleOpen={props?.handleOpen}
                   image={image}
                   multiplier={optionB.odds}
                   option={0}
                   text={optionB?.name}
                   question={description}
+                  odds={market?.outcomea}
+                  marketId={id}
                   options={[optionB.name, optionA.name]}
                 />
                 <VotingModal
+                  handleOpen={props?.handleOpen}
                   image={image}
                   multiplier={optionA.odds}
                   option={1}
                   text={optionA?.name}
                   question={description}
+                  odds={market?.outcomea}
+                  marketId={id}
                   options={[optionB.name, optionA.name]}
                 />
               </div>
@@ -242,13 +283,22 @@ function Cards(props: {
                   members={30}
                   handleBoost={() => {}}
                   joined={false}
-                  question={description}
+                  question={topicBio}
                   image={image}
                   topic={subject}
+                  id={id}
                 />
               </div>
               <div style={{ zIndex: 2 }}>
-                <Qourum quorumId="string" />
+                <CommentSection
+                  topic_id={props?.topicId}
+                  users={users}
+                  totalComments={market?.total_comments}
+                  optimisticComments={[]}
+                  marketId={id}
+                  setReply={() => {}}
+                  handleComment={() => {}}
+                />
               </div>
             </motion.div>
           </DrawerContent>

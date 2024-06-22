@@ -1,37 +1,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { ConnectKitButton } from "connectkit";
-import { ConnectWallet, shortenAddress } from "@thirdweb-dev/react";
 import { Button } from "@/components/ui/button";
-import { AtSign, CircleUser, WalletCards } from "lucide-react";
-import { useEmbeddedWallet } from "@thirdweb-dev/react"; // or /react-native
+import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useAccount } from "wagmi";
+import { usePrivy } from "@privy-io/react-auth";
 
 function SingUp(props: { setStep: (step: number) => void }) {
-  const [isEmail, setIsEmail] = useState<boolean>(false);
-  const { connect } = useEmbeddedWallet();
-  const { address } = useAccount();
+  const { ready, authenticated, login } = usePrivy();
 
-  const handleLogin = async (method: number) => {
-    if (method === 2) {
-      await connect({
-        strategy: "google",
-      });
-    }
-    if (method === 1) {
-      await connect({
-        strategy: "facebook",
-      });
-    }
-    if (method === 3) {
-      await connect({
-        strategy: "apple",
-      });
-    }
-    if (address) props.setStep(2);
-  };
+  const [isEmail, setIsEmail] = useState<boolean>(false);
 
   //Cancle to go back
   const stepVariants = {
@@ -49,71 +27,30 @@ function SingUp(props: { setStep: (step: number) => void }) {
     >
       {!isEmail && (
         <>
-          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2 font-bold mx-[1.65rem]">
-            Sign in to Blitz using an existing wallet or with your email or
-            social accounts.
+          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2  mx-[1.65rem]">
+            Sign in to Blitz using your web3 wallet or with your email or social
+            accounts.
           </div>
           <div className="h-[0.05rem] w-[80vw] my-6 bg-gray-300 mx-6 rounded-full" />
-          <ConnectKitButton.Custom>
-            {({
-              isConnected,
-              isConnecting,
-              show,
-              hide,
-              address,
-              ensName,
-              chain,
-            }) => {
-              if (isConnected) {
-                props.setStep(2);
-              }
-              return (
-                <Button
-                  style={{}}
-                  onClick={show}
-                  className="w-[80vw] stroke-gray-700 text-gray-700 h-12 my-0 space-x-2 mx-5 mb-4 bg-gray-200 flex items-center text-lg font-bold rounded-xl"
-                >
-                  <WalletCards size={23} strokeWidth={2.5} />
-                  <div>
-                    {isConnected ? shortenAddress(address) : "Connect Wallet"}
-                  </div>
-                </Button>
-              );
-            }}
-          </ConnectKitButton.Custom>
-          <motion.div
-            onClick={() => {
-              props.setStep(6);
-              setIsEmail(true);
-            }}
-            whileTap={{ scale: 0.9 }}
-          >
+
+          <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
             <Button className="w-[80vw] stroke-gray-700 text-gray-700 h-12 my-0 space-x-2 mx-5 mb-6 bg-gray-200 flex items-center text-lg font-bold rounded-xl">
-              <AtSign size={22} strokeWidth={2.5} />
-              <div>Sign in with Email</div>
+              <Wallet size={22} strokeWidth={2.5} />
+              <div>Sign in with Wallet</div>
             </Button>
           </motion.div>
           <div className="w-[70vw] mx-9 justify-between flex mb-7 items-center">
-            <motion.div
-              onClick={() => handleLogin(1)}
-              whileTap={{ scale: 0.9 }}
-            >
+            <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
               <Avatar className="bg-black   h-12 w-12">
-                <AvatarImage src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" />
+                <AvatarImage src="https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/ma7zd8j9hfh1rccf0yr1" />
               </Avatar>
             </motion.div>
-            <motion.div
-              onClick={() => handleLogin(2)}
-              whileTap={{ scale: 0.9 }}
-            >
+            <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
               <Avatar className="bg-white   h-12 w-12">
                 <AvatarImage src="https://steelbluemedia.com/wp-content/uploads/2019/06/new-google-favicon-512.png" />
               </Avatar>
             </motion.div>
-            <motion.div
-              onClick={() => handleLogin(3)}
-              whileTap={{ scale: 0.9 }}
-            >
+            <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
               <Avatar className="bg-black   h-12 w-12">
                 <AvatarImage src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8ed3d547-94ff-48e1-9f20-8c14a7030a02_2000x2000.jpeg" />
               </Avatar>
@@ -132,23 +69,13 @@ function EmailLogin(props: {
   setIsEmail: (isEmail: boolean) => void;
   setStep: (step: number) => void;
 }) {
-  const { connect, sendVerificationEmail } = useEmbeddedWallet();
   const [state, setState] = useState<number>(1);
   const [email, setEmail] = useState<string>("");
   const [code, setCode] = useState<string>("");
 
-  const preLogin = async (email: string) => {
-    // send email verification code
-    await sendVerificationEmail({ email });
-    setState(2);
-  };
   const handleLogin = async (email: string, verificationCode: string) => {
     // verify email and connect
-    await connect({
-      strategy: "email_verification",
-      email,
-      verificationCode,
-    });
+
     props.setStep(2);
   };
 
@@ -191,7 +118,7 @@ function EmailLogin(props: {
             </motion.div>
 
             <motion.div
-              onClick={() => preLogin(email)}
+              onClick={() => {}}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -238,7 +165,7 @@ function EmailLogin(props: {
             </motion.div>
 
             <motion.div
-              onClick={() => handleLogin(email, code)}
+              onClick={() => {}}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >

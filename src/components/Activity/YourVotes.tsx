@@ -3,7 +3,6 @@ import ProfileModal from "../Common/ProfileModal";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { useProfile } from "@/lib/context/context";
 import { Profile } from "@lens-protocol/react-web";
-import { useAccount } from "wagmi";
 import Image from "next/image";
 
 function YourVotes() {

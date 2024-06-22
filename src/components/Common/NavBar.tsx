@@ -1,27 +1,33 @@
-import { Home, Medal, PlusSquare } from "lucide-react";
+import { ActivityIcon, Home, Medal, PlusSquare, UserCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
+import { useUserStore } from "@/lib/stores/UserStore";
 function NavBar() {
+  const { user } = useUserStore();
   return (
     <div
-      className="w-full bg-black/[0.6] p-4 fixed bottom-0 backdrop-blur-md"
-      style={{ backdropFilter: "saturate(180%) blur(20px)", zIndex: 3 }}
+      className="bg-black/[0.2] items-center justify-center p-[0.9rem] rounded-full backdrop-blur-md"
+      style={{
+        backdropFilter: "saturate(100%) blur(35px)",
+        zIndex: 3,
+        alignSelf: "center",
+      }}
     >
-      <div className="w-[85vw] flex px-2 justify-between items-center mx-auto">
+      <div className="w-[65vw] flex px-2 justify-between items-center mx-auto">
         <Link href={"/"}>
           <motion.div whileTap={{ scale: 0.94 }}>
-            <Home className="h-7 text-white w-7" />
-          </motion.div>
-        </Link>
-        <Link href={"/create"}>
-          <motion.div whileTap={{ scale: 0.94 }}>
-            <PlusSquare className="h-7 text-white w-7" />
+            <Home className="h-6 text-white w-6" />
           </motion.div>
         </Link>
         <Link href={"/activity"}>
           <motion.div whileTap={{ scale: 0.94 }}>
-            <Medal className="h-7 text-white w-7" />
+            <ActivityIcon className="h-6 text-white w-6" />
+          </motion.div>
+        </Link>
+        <Link href={`/profile/${user?.external_auth_provider_user_id}`}>
+          <motion.div whileTap={{ scale: 0.94 }}>
+            <UserCircle className="h-6 text-white w-6" />
           </motion.div>
         </Link>
       </div>

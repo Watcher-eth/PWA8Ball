@@ -33,7 +33,6 @@ import { shortenAddress } from "@thirdweb-dev/react";
 import { useProfile } from "@/lib/context/context";
 import Link from "next/link";
 import "../../styles/fonts.css";
-import { ConnectKitButton } from "connectkit";
 interface LayoutProps {
   children: ReactNode;
   profile: ProfileFragment;
@@ -269,7 +268,6 @@ function ProfileModal({ children, profile }: LayoutProps) {
                     whileTap={{ scale: 0.95 }}
                     onClick={handleShare}
                   >
-                    <ConnectKitButton className="active:bg-gray-100 space-x-1  flex items-center hover:bg-gray-100 bg-gray-100 text-[1.15rem] text-gray-500 font-bold  h-[2.8rem] rounded-full w-[58vw]" />
                   </motion.div>
                 </div>
               </DrawerFooter>

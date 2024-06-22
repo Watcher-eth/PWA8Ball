@@ -13,7 +13,7 @@ function Profile(props: { setStep: (step: number) => void }) {
         Sign in with Lens
       </div>
       <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4  font-bold mx-[1.65rem]">
-        Please sign in with your Lens Profile or create a new one to continue.
+        Please log in with your Lens Profile or create a new one to continue.
       </div>
       <div className="h-[0.05rem] w-[80vw] my-6 bg-gray-300 mx-6 rounded-full" />
       <motion.div

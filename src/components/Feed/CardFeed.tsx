@@ -1,12 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Cards from "./Cards";
 import { useGetAllTopics } from "@/lib/supabase/queries/getTopics";
 import { useGetTrendingMarkets } from "@/lib/supabase/queries/getTrendingMarkets";
 import TopicHeader from "./TopicHeader";
 import { stripEmoji } from "@/lib/utils/stripEmoji";
 import { parseOptions } from "@/lib/utils/parseOption";
+import { useUserStore } from "@/lib/stores/UserStore";
+import LoginModal from "../Modals/LoginModal";
 
 function CardFeed() {
+  const { user } = useUserStore();
+
   const data = [
     {
       image:
@@ -74,6 +78,7 @@ function CardFeed() {
             odds: market.outcomeb || 50, // Dummy odds
           },
           type: "market",
+          topicBio: market?.topic_description,
         }))
       : [];
 
@@ -86,19 +91,30 @@ function CardFeed() {
         );
   }, [selectedTopic, topicsData, markets]);
 
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
+  const handleOpenLoginModal = () => {
+    setLoginModalOpen(true);
+  };
+
+  const handleCloseLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
   if (enrichedFeedData?.length > 0)
     return (
-      <div className="w-[100vw] flex flex-col  py-0  bg-[#101010]">
+      <div className="w-[100vw] flex flex-col  no-scrollbar py-0  bg-[#101010]">
         <TopicHeader
           setSelectedTopic={setSelectedTopic}
           selectedTopic={selectedTopic}
         />
-        <div className="px-3 flex flex-col items-center space-x-3">
+        <div className="px-3 flex flex-col items-center no-scrollbar space-x-3">
           {enrichedFeedData?.map((bet, index) => {
             if (bet?.topic !== "Farcaster")
               return (
                 <div key={index}>
                   <Cards
+                    handleOpen={handleOpenLoginModal}
                     image={bet.image!}
                     icon={bet?.icon}
                     description={bet?.description}
@@ -110,11 +126,13 @@ function CardFeed() {
                     topicId={bet?.topicId}
                     optionA={bet?.optionA}
                     optionB={bet?.optionB}
+                    topicBio={bet?.topicBio}
                   />
                 </div>
               );
           })}
         </div>
+        <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
       </div>
     );
 }

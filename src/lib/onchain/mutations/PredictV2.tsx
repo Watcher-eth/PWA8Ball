@@ -1,6 +1,4 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
+
 import { ethers } from "ethers";
 
 import { useMutation } from "@tanstack/react-query";
@@ -9,16 +7,14 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import {
-  createPrediction,
-  useCreatePrediction,
-} from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
+
 import { WalletClient, getContract } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
-import { rootOperator } from "@/constants/Operations";
 import { SmartAccountClient } from "permissionless";
-import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
+import { createPrediction } from "@/lib/supabase/mutations/addPrediction";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { rootOperator } from "../../../../constants/Operations";
 interface PredictParams {
   amount: number;
   preferYes: boolean;
@@ -43,7 +39,7 @@ async function predict(props: PredictParams) {
     const account = props.address;
 
     const preferYesNum = props.preferYes ? 1 : 0;
-
+console.log("props2", props.address, props.client  )
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,

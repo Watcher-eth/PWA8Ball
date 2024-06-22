@@ -3,6 +3,9 @@ import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { parseAndFormatDate } from "@/lib/utils/extractEndDate"; // Ensure you have this utility function
+import { useModalStore } from "@/lib/stores/ModalStore";
+import BoostModal from "../Modals/BoostMarket.tsx";
+import { useRouter } from "next/navigation";
 
 const BetDetails = ({
   endDate,
@@ -15,9 +18,10 @@ const BetDetails = ({
   joined,
   handleBoost,
   image,
+  id,
 }) => {
   const { day, month, year, fullMonth, fullDay } = parseAndFormatDate(endDate);
-
+  const router = useRouter();
   return (
     <div className="flex flex-col w-full p-4 pb-2 mb-2">
       <div className="flex flex-row w-full items-center">
@@ -50,16 +54,31 @@ const BetDetails = ({
         </div>
       </div>
 
-      <BoostMarket Boost={3} handleBoost={handleBoost} />
+      <BoostModal image={image} id={id}>
+        <BoostMarket Boost={3} handleBoost={handleBoost} />
+      </BoostModal>
 
       <motion.div
-        style={{ borderRadius: 8 }}
-        className="flex flex-row w-full mt-4 items-center border border-[#212121] rounded-md p-2 justify-between"
+        style={{ borderRadius: 12 }}
+        className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
         whileTap={{ scale: 0.95 }}
+        onClick={() =>
+          router.push({
+            pathname: `/t/${topicId}`,
+            query: {
+              id: topicId,
+              name: topic,
+              description: question,
+              image: icon,
+              topic,
+              members,
+            },
+          })
+        }
       >
         <Link
           href={{
-            pathname: `/featuredBet/${"3"}`,
+            pathname: `/t/${topicId}`,
             query: {
               id: topicId,
               name: topic,
@@ -97,11 +116,24 @@ const BetDetails = ({
             joined ? "bg-white" : "bg-transparent"
           }`}
           whileTap={{ scale: 0.95 }}
+          onClick={() =>
+            router.push({
+              pathname: `/t/${topicId}`,
+              query: {
+                id: topicId,
+                name: topic,
+                description: question,
+                image: icon,
+                topic,
+                members,
+              },
+            })
+          }
           style={{ borderRadius: 20 }}
         >
           <Link
             href={{
-              pathname: `/featuredBet/${"3"}`,
+              pathname: `/t/${topicId}`,
               query: {
                 id: topicId,
                 name: topic,
@@ -129,13 +161,13 @@ const BetDetails = ({
 const BoostMarket = ({ Boost, handleBoost }) => {
   return (
     <motion.div
-      style={{ borderRadius: 8 }}
-      className="flex flex-row items-center p-2 border border-[#212121]  rounded-md mt-4 justify-between"
+      style={{ borderRadius: 12 }}
+      className="flex flex-row w-[90vw] items-center p-2 border border-[#212121]   mt-3 justify-between"
       whileTap={{ scale: 0.95 }}
       onClick={handleBoost}
     >
       <Rocket className="ml-2 " size={30} color="white" />
-      <div className="flex flex-col ml-[-28px] space-y-[-0.1rem]">
+      <div className="flex flex-col ml-[-28px] space-y-[-0.1rem] items-start">
         <span className="text-lg font-bold text-white">Boost this market</span>
         <span className="text-sm text-white">Earn fees & $Cred</span>
       </div>

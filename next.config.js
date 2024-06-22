@@ -30,7 +30,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "zora.co",
+        hostname: "www.meisterdrucke.ie",
       },
       {
         protocol: "https",
@@ -93,6 +93,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "ik.imagekit.io",
       },
+      { protocol: "https", hostname: "www.brides.com" },
       { protocol: "https", hostname: "cloudflare-ipfs.com" },
       {
         protocol: "https",

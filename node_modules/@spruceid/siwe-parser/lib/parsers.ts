@@ -1,4 +1,7 @@
-import { ParsedMessage as ABNFParsedMessage } from './abnf';
-import { ParsedMessage as RegExpParsedMessage } from './regex';
+import { ParsedMessage as ABNFParsedMessage } from "./abnf";
+export * from './utils';
+export {
+    ABNFParsedMessage as ParsedMessage
+};
 
-export { ABNFParsedMessage as ParsedMessage, RegExpParsedMessage as ParsedMessageRegExp };
+

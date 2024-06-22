@@ -7,12 +7,31 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div style={{ paddingBottom: "80px", position: "relative" }}>
+    <div
+      style={{
+        paddingBottom: "80px",
+        position: "relative",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {/* Content of the page */}
       {children}
 
       {/* Translucent bottom navigation bar */}
-      <NavBar />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100vw",
+          position: "fixed",
+          bottom: "25px",
+          zIndex: 15,
+        }}
+      >
+        <NavBar />
+      </div>
     </div>
   );
 }

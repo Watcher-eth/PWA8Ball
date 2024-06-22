@@ -33,14 +33,6 @@ interface initializeMarketTypes {
 }
 
 async function initialize(props: initializeMarketTypes) {
-  console.log(
-    props.amount,
-    props.title,
-    props.topicId,
-    props.image,
-    props.options,
-    props.description
-  );
   if (
     !props.amount ||
     !props.title ||
@@ -89,7 +81,6 @@ async function initialize(props: initializeMarketTypes) {
         functionName: "getMarketPair",
       });
 
-      console.log("before db");
       const send = await createMarket({
         title: props.title,
         question: props.description,
@@ -104,6 +95,7 @@ async function initialize(props: initializeMarketTypes) {
         pair: marketPair.liquidityPool,
         created_by: props.created_by,
       });
+    
     }, 1000);
   } catch (error) {
     console.error("Error during market initialization", error);

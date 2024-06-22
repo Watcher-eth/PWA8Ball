@@ -1,7 +1,3 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
-
 import { useMutation } from "@tanstack/react-query";
 import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
 import { ethers } from "ethers";
@@ -12,9 +8,9 @@ import {
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
 import { WalletClient, getContract } from "viem";
-import { addLiquidityBoost } from "@/lib/drizzle/drizzle/supabase/mutations/addBoost";
 import { SmartAccountClient } from "permissionless";
-import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
+import { addLiquidityBoost } from "@/lib/supabase/mutations/addBoost";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 interface boostMarket {
   amount: number;
@@ -25,7 +21,7 @@ interface boostMarket {
 }
 
 async function boostV2(props: boostMarket) {
-  console.log("Amount", props.amount);
+  console.log("Amount", props.amount, props.userId);
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");
   }
