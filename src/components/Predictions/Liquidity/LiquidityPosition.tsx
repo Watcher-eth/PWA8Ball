@@ -26,7 +26,7 @@ const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
         paddingTop: "12px",
         paddingBottom: "12px",
         borderRadius: "15px",
-        backgroundColor: "rgba(49, 49, 49, 0.8)",
+        backgroundColor: "rgba(49, 49, 49, 0.78)",
         marginBottom: "15px",
         position: "relative",
         cursor: "pointer",
