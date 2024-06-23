@@ -11,6 +11,7 @@ import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollow
 import GeneralFeed from "@/components/profile/GeneralFeed";
 import LoginModal from "@/components/Modals/LoginModal";
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
+import Head from "next/head";
 
 interface ProfilePageProps {
   userId: string;
@@ -44,6 +45,32 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
+      <Head>
+        <title>{metadata.title}</title>
+        <meta
+          name="description"
+          content={`See what ${userC.name} believes in`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={userC.name} />
+        <meta
+          property="og:description"
+          content={`See what ${userC.name} believes in`}
+        />
+        <meta property="og:url" content={"https://tryblitz.xyz"} />
+        <meta property="og:image" content={userC.pfp} />
+        <meta property="og:image:alt" content={`${userC.name} pfp`} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={userC.name} />
+        <meta
+          name="twitter:description"
+          content={`See what ${userC.name} believes in`}
+        />
+        <meta name="twitter:image" content={userC.pfp} />
+      </Head>
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
       <div className="w-full relative">
