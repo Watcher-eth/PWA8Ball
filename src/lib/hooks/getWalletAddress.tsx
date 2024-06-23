@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEmbeddedWallet, usePrivy } from "@privy-io/expo";
 import { useEffect, useState } from "react";
 

@@ -1,4 +1,4 @@
-// fetchUsersByIds.ts
+// @ts-nocheck
 import { supabase } from "../../supabaseClient";
 import { IUser } from "../../types";
 

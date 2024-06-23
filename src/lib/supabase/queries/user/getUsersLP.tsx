@@ -1,4 +1,4 @@
-// types.ts
+// @ts-nocheck
 export interface ILP {
   id: number;
   amount: number;

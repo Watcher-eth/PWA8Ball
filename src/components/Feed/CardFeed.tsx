@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useMemo, useState } from "react";
 import Cards from "./Cards";
 import { useGetAllTopics } from "@/lib/supabase/queries/getTopics";

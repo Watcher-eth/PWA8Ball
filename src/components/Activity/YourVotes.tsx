@@ -11,23 +11,8 @@ function YourVotes() {
     <div className="flex flex-col w-[100vw] h-[100vh]">
       <div className="flex items-center justify-between my-3 w-[90vw] mx-6">
         <div className="text-[1.4rem] font-bold ">Your Dashboard</div>
-
-        <ProfileModal profile={profile?.profile}>
-          <a>
-            <Avatar className="h-8  w-8">
-              <AvatarImage
-                src={
-                  profile?.profile
-                    ? profile?.profile?.metadata?.picture?.optimized?.uri
-                    : "https://github.com/shadcn.png"
-                }
-              />
-            </Avatar>
-          </a>
-        </ProfileModal>
       </div>
 
-      <YourSubmission profile={profile?.profile} />
       <div className="text-[1.2rem] my-3 mb-1 mx-6 font-bold ">
         Your Dashboard
       </div>
@@ -38,7 +23,7 @@ function YourVotes() {
 
 export default YourVotes;
 
-export function YourSubmission(props: { profile: Profile }) {
+export function YourSubmission(props: { profile: any }) {
   const exampleProfiles = [
     "https://ik.imagekit.io/lens/media-snapshot/39843a4ba7315518ab9bc843496a5bd2e78be2ea2f61e1b65673702b72f68b13.png?tr=w-150",
     "https://ik.imagekit.io/lens/media-snapshot/b011b41aaaafa83febea13bcb991912a805874520f36ea66f3f8ab4c05fd8d08.png?tr=w-150",
@@ -82,8 +67,6 @@ export function YourSubmission(props: { profile: Profile }) {
 }
 
 function YourVotesActivity() {
-  const { address } = useAccount();
-
   //TODO: Fetch all currently active votes from contract
   const activeVotes = [
     {
@@ -127,11 +110,7 @@ function YourVotesActivity() {
               className="h-[6vh] w-[6vh] relative mr-1"
               style={{ borderRadius: "11.3px" }}
             >
-              <img
-                src={sub.pfp}
-                layout="fill"
-                style={{ borderRadius: "6px" }}
-              />
+              <img src={sub.pfp} style={{ borderRadius: "6px" }} />
             </div>
             <div className="flex justify-between w-[70vw] px-1">
               <div className="flex flex-col space-y-[-0.25rem]">

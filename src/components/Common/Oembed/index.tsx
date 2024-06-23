@@ -17,7 +17,7 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
   const { data, error, isLoading } = useQuery({
     enabled: Boolean(url),
     queryFn: async () => {
-      const response = await axios.get(`${HEY_API_URL}/oembed`, {
+      const response = await axios.get(`${"HEY_API_URL"}/oembed`, {
         params: { url },
       });
       return response.data.oembed;

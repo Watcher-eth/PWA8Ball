@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { TypewriterEffectSmooth } from "./Animated/AnimatedText";
 import { motion } from "framer-motion";

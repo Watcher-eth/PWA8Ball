@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import {

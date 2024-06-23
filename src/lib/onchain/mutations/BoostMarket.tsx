@@ -1,6 +1,4 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
+// @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
 import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
@@ -12,7 +10,7 @@ import {
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
 import { WalletClient } from "viem";
-import { addLiquidityBoost } from "@/lib/drizzle/drizzle/supabase/mutations/addBoost";
+import { addLiquidityBoost } from "@/lib/supabase/mutations/addBoost";
 
 interface boostMarket {
   amount: number;

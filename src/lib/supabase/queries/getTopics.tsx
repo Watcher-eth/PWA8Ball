@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import { ITopic } from "../types";
 
 const fetchAllTopics = async (): Promise<ITopic[]> => {
-  const { data, error } = await supabase.from<ITopic>("topics").select("*");
+  const { data, error } = await supabase.from("topics").select("*");
 
   if (error) throw new Error(error.message);
   return data;

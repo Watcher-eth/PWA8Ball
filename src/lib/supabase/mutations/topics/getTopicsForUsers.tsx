@@ -1,4 +1,4 @@
-// useGetTopicsForUser.ts
+// @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabaseClient";
 export interface ITopic {

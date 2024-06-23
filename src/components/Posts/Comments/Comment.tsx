@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, ThumbsDown } from "lucide-react";

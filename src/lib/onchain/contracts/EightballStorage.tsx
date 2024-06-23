@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export const EightBallStorageAddress =
   "0x3148255eBd8894BCc01A6A8155047F0040db2da2"; // Replace with your contract's address
 

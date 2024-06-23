@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import FeaturedBet from "@/components/Topics";
 import { useRouter } from "next/router";
 

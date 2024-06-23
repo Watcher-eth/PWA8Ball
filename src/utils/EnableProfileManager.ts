@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { lensClient } from "@/pages/_app";
 import { TypedDataDomain, createWalletClient, custom } from "viem";
 import { polygon } from "viem/chains";

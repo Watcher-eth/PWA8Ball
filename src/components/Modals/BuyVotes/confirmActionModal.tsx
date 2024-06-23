@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";

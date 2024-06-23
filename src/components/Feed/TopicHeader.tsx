@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";

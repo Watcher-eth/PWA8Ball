@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import * as Notifications from "expo-notifications";
 import { useEffect } from "react";
 import { supabase } from "../drizzle/drizzle/supabase/supabaseClient";

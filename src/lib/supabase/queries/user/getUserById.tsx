@@ -1,4 +1,4 @@
-// types.ts
+// @ts-nocheck
 interface IUser {
   internal_id: string;
   external_auth_provider_user_id: string;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -21,7 +23,8 @@ const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
         display: "flex",
         flexDirection: "column",
         padding: "14px",
-        paddingVertical: "12px",
+        paddingTop: "12px",
+        paddingBottom: "12px",
         borderRadius: "15px",
         backgroundColor: "rgba(49, 49, 49, 0.8)",
         marginBottom: "15px",
@@ -40,7 +43,6 @@ const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
           zIndex: 0,
           filter: "blur(35px)",
           transform: "scale(1.2)",
-        
         }}
         src={image}
         alt="background"

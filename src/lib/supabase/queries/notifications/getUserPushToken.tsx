@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { supabase } from "../../supabaseClient";
 
 const checkUserHasPushToken = async (userId: string): Promise<boolean> => {

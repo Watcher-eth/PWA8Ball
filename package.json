@@ -67,14 +67,15 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",
-    "@types/node": "18.7.18",
-    "@types/react": "^18.0.6",
-    "@types/react-dom": "^18.0.2",
+    "@types/node": "^20.14.8",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@uniswap/widgets": "^2.59.0",
     "drizzle-kit": "^0.20.13",
     "embla-carousel": "^8.0.0-rc19",
     "eslint": "8.23.1",
     "eslint-config-next": "13",
-    "typescript": "^4.9.5"
+    "typescript": "^5.5.2"
+    
   }
 }

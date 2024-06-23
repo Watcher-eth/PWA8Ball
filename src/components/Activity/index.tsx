@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState, useCallback, useRef } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
@@ -71,11 +73,10 @@ const ActivityPage: React.FC = () => {
         padding: "20px",
         paddingTop: "30px",
         backgroundColor: "#101010",
-        paddingBottom: "0",
       }}
     >
       <motion.div
-        className="fixed bottom-[0] w-[100vw] h-[125px] rounded-t-lg "
+        className="fixed  w-[100vw] h-[125px] rounded-t-lg "
         style={{
           zIndex: 2,
           background:

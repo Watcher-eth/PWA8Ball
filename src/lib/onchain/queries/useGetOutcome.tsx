@@ -1,7 +1,8 @@
+// @ts-nocheck
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getEightBallContract } from "../contracts/Eightball";
-import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
-import { useUpdateMarketOutcome } from "@/lib/drizzle/drizzle/supabase/mutations/updateMarketOutcome";
+import { useUpdateMarketOutcome } from "@/lib/supabase/mutations/updateMarketOutcome";
 
 export const getOutcomeOptions = (marketId: number) => {
   const updateMarketOutcome = useUpdateMarketOutcome();

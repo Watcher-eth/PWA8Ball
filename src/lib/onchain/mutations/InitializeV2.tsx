@@ -1,10 +1,8 @@
+// @ts-nocheck
+
 import { useMutation } from "@tanstack/react-query";
 import { ethers } from "ethers";
 import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
-import {
-  createMarket,
-  useCreateMarket,
-} from "@/lib/drizzle/drizzle/supabase/mutations/createMarket";
 import {
   EightBallAddress,
   EightballV1ABI,
@@ -12,12 +10,13 @@ import {
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
 import { WalletClient, getContract } from "viem";
-import { rootOperator } from "@/constants/Operations";
 import { SmartAccountClient } from "permissionless";
 import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
+import { rootOperator } from "../../../../constants/Operations";
+import { createMarket } from "@/lib/supabase/mutations/createMarket";
 
 interface initializeMarketTypes {
   amount: number;

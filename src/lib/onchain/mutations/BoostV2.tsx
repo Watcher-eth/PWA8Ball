@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useMutation } from "@tanstack/react-query";
 import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
 import { ethers } from "ethers";

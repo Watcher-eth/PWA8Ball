@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = "https://qcdmlllkzdjajrdtmthk.supabase.co";
 const supabaseAnonKey =

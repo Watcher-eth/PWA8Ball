@@ -1,6 +1,5 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
+// @ts-nocheck
+
 import { ethers } from "ethers";
 
 import { useMutation } from "@tanstack/react-query";

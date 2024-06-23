@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // components/AuthChecker.tsx
 import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";

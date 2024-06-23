@@ -1,13 +1,13 @@
+// @ts-nocheck
+
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
-import { useUpdateMarketOutcome } from "@/lib/drizzle/drizzle/supabase/mutations/updateMarketOutcome";
-import { useUpdateUSDCBalance } from "@/lib/drizzle/drizzle/supabase/mutations/updateMarketBalance";
 import { rpcClient } from "../Viem";
+import { useUpdateUSDCBalance } from "@/lib/supabase/mutations/updateMarketBalance";
 
 export const useGetMarketStake = (marketId: string) => {
   const { mutate: updateUSDCBalance } = useUpdateUSDCBalance();

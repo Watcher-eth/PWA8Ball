@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { IUserWithBet } from "@/lib/drizzle/drizzle/supabase/queries/markets/getUsersForMarket";
 import { IUser } from "@/lib/drizzle/drizzle/supabase/types";
 

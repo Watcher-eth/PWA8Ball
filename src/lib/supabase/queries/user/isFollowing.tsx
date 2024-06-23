@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { supabase } from "../../supabaseClient";
 
 const checkIfFollowing = async (followerId: string, followingId: string) => {

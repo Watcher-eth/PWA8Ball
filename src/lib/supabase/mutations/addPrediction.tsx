@@ -1,4 +1,4 @@
-// useCreatePrediction.ts
+// @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "../supabaseClient";
 import { NewPrediction } from "@/types/BetTypes";

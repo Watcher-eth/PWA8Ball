@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useQuery } from "@tanstack/react-query";
 import { rpcClient } from "../Viem";
 import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";

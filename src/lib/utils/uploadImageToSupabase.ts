@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { decode } from "base64-arraybuffer";
 import { nanoid } from "nanoid";
 import { supabase } from "../drizzle/drizzle/supabase/supabaseClient";

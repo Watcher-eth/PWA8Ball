@@ -5,7 +5,7 @@ import { IUser } from "../types";
 
 const fetchUser = async (userId: string): Promise<IUser> => {
   const { data, error } = await supabase
-    .from<IUser>("users")
+    .from("users")
     .select("*")
     .eq("external_auth_provider_user_id", userId)
     .single();

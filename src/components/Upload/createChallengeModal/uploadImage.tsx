@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ImagePlus } from "lucide-react";

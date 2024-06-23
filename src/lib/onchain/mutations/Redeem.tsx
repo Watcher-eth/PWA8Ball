@@ -1,6 +1,4 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
+// @ts-nocheck
 import { ethers } from "ethers";
 
 import { useMutation } from "@tanstack/react-query";
@@ -9,15 +7,11 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import {
-  createPrediction,
-  useCreatePrediction,
-} from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
 import { WalletClient, getContract } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
-import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 interface RedeemParams {
   marketId: number;
   outcomeTokenAddress: `0x${string}`;

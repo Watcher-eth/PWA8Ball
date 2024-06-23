@@ -17,7 +17,7 @@ const fetchPredictionsForUser = async (
   userId: string
 ): Promise<IPredictionWithMarket[]> => {
   const { data, error } = await supabase
-    .from<IPredictionWithMarket>("predictions")
+    .from("predictions")
     .select(
       `
         *,

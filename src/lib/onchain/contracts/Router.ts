@@ -1,4 +1,5 @@
-import { useEmbeddedWallet } from "@privy-io/expo";
+// @ts-nocheck
+
 import { createPublicClient, custom, getContract, http } from "viem";
 import { baseGoerli } from "viem/chains";
 import { getWalletClient, rpcClient } from "../Viem";

@@ -8,7 +8,7 @@ const fetchMarketsCreatedByUser = async (
   userId: string
 ): Promise<IMarket[]> => {
   const { data, error } = await supabase
-    .from<IMarket>("markets")
+    .from("markets")
     .select("*")
     .eq("created_by", userId);
 

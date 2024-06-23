@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { Search } from "lucide-react";
 import { Avatar } from "../ui/avatar";

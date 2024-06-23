@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { queryOptions } from "@tanstack/react-query";
 import { getEightBallContract } from "../contracts/Eightball";
 

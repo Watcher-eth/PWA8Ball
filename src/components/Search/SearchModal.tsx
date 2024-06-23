@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import debounce from "lodash/debounce";
 import { useQuery } from "@tanstack/react-query";

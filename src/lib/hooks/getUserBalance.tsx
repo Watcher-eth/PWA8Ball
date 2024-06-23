@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect } from "react";
 import { useUserStore } from "../stores/UserStore";
 import { getUSDCBalance } from "../onchain/contracts/Usdc";

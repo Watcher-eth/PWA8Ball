@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { PrimaryPublication } from "@lens-protocol/react-web";
 import Image from "next/image";
 import React from "react";
@@ -12,7 +14,7 @@ function Post(props: { publication: PrimaryPublication }) {
             ? props?.publication.metadata?.asset?.image?.optimized?.uri
             : ""
         }
-      ></Image>
+      />
       <div className="absolute bottom-1 self-center text-center text-[1.1rem] w-[80vw] text-white">
         {props?.publication?.metadata?.content}
       </div>

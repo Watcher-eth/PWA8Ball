@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { BetUploadState, BetVotingState } from "@/types/BetTypes";
 import { create } from "zustand";
 

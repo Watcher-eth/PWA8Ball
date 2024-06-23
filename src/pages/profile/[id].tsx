@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";

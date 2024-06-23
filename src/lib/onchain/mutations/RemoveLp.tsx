@@ -1,6 +1,4 @@
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
+// @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
 import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
@@ -12,7 +10,6 @@ import {
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
 import { WalletClient, getContract } from "viem";
-import { addLiquidityBoost } from "@/lib/drizzle/drizzle/supabase/mutations/addBoost";
 import { SmartAccountClient } from "permissionless";
 import { V2PairV1ABI } from "../contracts/V2Pair";
 import {

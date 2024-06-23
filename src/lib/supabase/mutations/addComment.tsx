@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // types.ts
 export interface NewComment {
   market_id: number;
@@ -20,7 +22,8 @@ import { supabase } from "../supabaseClient";
 
 const createComment = async (newComment: NewComment): Promise<IComment> => {
   const { data, error } = await supabase
-    .from<IComment>("comments")
+    .from<
+    IComment>("comments")
     .insert([newComment])
     .single(); // Ensures that you're dealing with just one comment (the newly created one)
 

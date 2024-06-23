@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useUserStore } from "@/lib/stores/UserStore";

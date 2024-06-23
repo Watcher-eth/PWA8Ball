@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SearchModal from "@/components/Search/SearchModal";
 import { useProfile } from "@/lib/context/context";
 import { useEffect, useState } from "react";

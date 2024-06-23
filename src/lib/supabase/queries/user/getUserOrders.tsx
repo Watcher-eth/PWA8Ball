@@ -1,4 +1,4 @@
-// types.ts
+// @ts-nocheck
 export interface IOrder {
   id: number;
   sender: string;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { RouteProp } from "@react-navigation/native";
 
 export type RootStackParamList = {

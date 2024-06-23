@@ -1,4 +1,4 @@
-// useGetTopTopicsWithNewMarkets.ts
+// @ts-nocheck
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { supabase } from "./supabaseClient";
 import { ITopic } from "./types"; // Assuming you have this interface defined

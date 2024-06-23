@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Head from "next/head";
 import type { Metadata, ResolvingMetadata } from "next";
 

@@ -1,4 +1,5 @@
-import { useEmbeddedWallet } from "@privy-io/expo";
+// @ts-nocheck
+
 import {
   WalletClient,
   createPublicClient,

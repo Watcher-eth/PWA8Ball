@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useCallback, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";

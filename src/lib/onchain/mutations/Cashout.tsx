@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import "fast-text-encoding";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
@@ -9,20 +11,16 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import {
-  createPrediction,
-  useCreatePrediction,
-} from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
 import { WalletClient, getContract } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
-import { rootOperator } from "@/constants/Operations";
 import { SmartAccountClient } from "permissionless";
 import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
+import { rootOperator } from "../../../../constants/Operations";
 interface CashoutParams {
   preferYes: boolean;
   option: string;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export const aggregatePredictions = (predictions) => {
     const aggregated = predictions.reduce((acc, prediction) => {
       const { market_id, option } = prediction;

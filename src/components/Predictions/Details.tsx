@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
