@@ -127,7 +127,7 @@ function YourVotesActivity() {
               className="h-[6vh] w-[6vh] relative mr-1"
               style={{ borderRadius: "11.3px" }}
             >
-              <Image
+              <img
                 src={sub.pfp}
                 layout="fill"
                 style={{ borderRadius: "6px" }}

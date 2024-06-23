@@ -5,7 +5,7 @@ import React from "react";
 function Post(props: { publication: PrimaryPublication }) {
   return (
     <div className="flex flex-col relative self-center items-center h-[72vh] w-[95vw]">
-      <Image
+      <img
         objectFit={"fill"} // {true} | {false}
         src={
           props?.publication?.__typename === "Post"

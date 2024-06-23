@@ -13,10 +13,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { PrivyProvider } from "@privy-io/react-auth";
 import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
+import withDeviceCheck from "@/components/Common/MobileOnly";
 
 export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const WrappedComponent = withDeviceCheck(Component);
+
   return (
     <QueryClientProvider client={queryClient}>
       <PrivyProvider
@@ -61,7 +64,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <link rel="shortcut icon" href="/favicon.ico" />
           </Head>
           <Layout>
-            <Component {...pageProps} />
+            <WrappedComponent {...pageProps} />
           </Layout>
         </AuthChecker>
       </PrivyProvider>

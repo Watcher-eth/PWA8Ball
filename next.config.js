@@ -166,6 +166,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.androidauthority.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.grove.wgbh.org",
+      },
     ],
   },
 };

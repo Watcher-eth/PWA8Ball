@@ -19,13 +19,17 @@ interface CommentSectionProps {
 const CommentSection: React.FC<CommentSectionProps> = (
   props: CommentSectionProps
 ) => {
+  const { user } = useUserStore();
+
   const {
     data: comments,
     error,
     isLoading,
-    refetch,
-  } = useGetAllCommentsForMarket(Number(props?.marketId));
-  const { user } = useUserStore();
+    refetch, // Method to refetch the data
+  } = useGetAllCommentsForMarket(
+    props.marketId,
+    user?.external_auth_provider_user_id
+  );
 
   const findUserByExternalAuthId = (externalAuthId: string) => {
     return props.users.find(

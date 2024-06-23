@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -6,6 +6,9 @@ import { parseAndFormatDate } from "@/lib/utils/extractEndDate"; // Ensure you h
 import { useModalStore } from "@/lib/stores/ModalStore";
 import BoostModal from "../Modals/BoostMarket.tsx";
 import { useRouter } from "next/navigation";
+import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP.tsx";
+import { useUserStore } from "@/lib/stores/UserStore.tsx";
+import BoostExplainerModal from "../Modals/Tutorials/BoostExplainer.tsx";
 
 const BetDetails = ({
   endDate,
@@ -20,8 +23,26 @@ const BetDetails = ({
   image,
   id,
 }) => {
+  const { user } = useUserStore();
   const { day, month, year, fullMonth, fullDay } = parseAndFormatDate(endDate);
   const router = useRouter();
+  const {
+    data: positions,
+    isLoading,
+    refetch,
+  } = useGetLPForUser(user?.walletaddress);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleBooster() {
+    if (positions?.length < 1) {
+      setIsOpen(true);
+    }
+    console.log("s", positions?.length < 1);
+    if (positions?.length >= 1) {
+      handleBoost();
+    }
+  }
+
   return (
     <div className="flex flex-col w-full p-4 pb-2 mb-2">
       <div className="flex flex-row w-full items-center">
@@ -53,11 +74,9 @@ const BetDetails = ({
           </span>
         </div>
       </div>
-
       <BoostModal image={image} id={id}>
-        <BoostMarket Boost={3} handleBoost={handleBoost} />
+        <BoostMarket Boost={3} handleBoost={handleBooster} />
       </BoostModal>
-
       <motion.div
         style={{ borderRadius: 12 }}
         className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
@@ -154,6 +173,13 @@ const BetDetails = ({
           </Link>
         </motion.div>
       </motion.div>
+      <BoostExplainerModal
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        isOpen={isOpen}
+        setOpen={handleBoost}
+      />
     </div>
   );
 };

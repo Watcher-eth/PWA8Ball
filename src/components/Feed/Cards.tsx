@@ -165,10 +165,9 @@ function Cards(props: {
                   </ShareModal>
                 </div>
                 <motion.div className="w-[100vw] h-[45vh] relative">
-                  <Image
+                  <img
+                    className="w-[100vw] object-cover h-[45vh] relative"
                     alt="CoverImage"
-                    layout="fill"
-                    objectFit="cover"
                     src={image}
                   />
                   <div

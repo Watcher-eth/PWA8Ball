@@ -30,10 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/profile/[id]": [
+    "/mobileOnly": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/profile/[id].js"
+      "static/chunks/pages/mobileOnly.js"
     ]
   },
   "ampFirstPages": []

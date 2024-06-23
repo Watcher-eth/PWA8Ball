@@ -182,7 +182,7 @@ function CurrentContest() {
           style={{ borderRadius: "10px" }}
           className="h-[27vw] w-[27vw] mt-2 rounded-md bg-[#262626] relative"
         >
-          <Image objectFit="fill" src="" />
+          <img objectFit="fill" src="" />
         </div>
       </div>
       <motion.div

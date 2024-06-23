@@ -3,6 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/activity": "pages/activity.js",
-  "/profile/[id]": "pages/profile/[id].js"
+  "/mobileOnly": "pages/mobileOnly.js",
+  "/t/[id]": "pages/t/[id].js"
 }

@@ -357,7 +357,7 @@ function UploadPage({ walletAddress }) {
             left: 0,
           }}
         >
-          <Image
+          <img
             fill
             layout="fill"
             objectFit="cover"
