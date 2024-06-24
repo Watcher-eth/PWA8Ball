@@ -1,5 +1,5 @@
- // stores/ModalStore.ts
-import create from 'zustand';
+// stores/ModalStore.ts
+import create from "zustand";
 
 interface ModalState {
   isLoginModalOpen: boolean;
@@ -8,6 +8,20 @@ interface ModalState {
 }
 
 export const useModalStore = create<ModalState>((set) => ({
+  isLoginModalOpen: false,
+  openLoginModal: () => set({ isLoginModalOpen: true }),
+  closeLoginModal: () => set({ isLoginModalOpen: false }),
+}));
+
+// stores/ModalStore.ts
+
+interface AuthModalState {
+  isLoginModalOpen: boolean;
+  openLoginModal: () => void;
+  closeLoginModal: () => void;
+}
+
+export const useAuthModalStore = create<AuthModalState>((set) => ({
   isLoginModalOpen: false,
   openLoginModal: () => set({ isLoginModalOpen: true }),
   closeLoginModal: () => set({ isLoginModalOpen: false }),
