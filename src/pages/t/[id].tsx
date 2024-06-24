@@ -2,17 +2,28 @@
 
 import FeaturedBet from "@/components/Topics";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-const TopicPage = () => {
+interface TopicPageProps {
+  topicData: any;
+}
+
+const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
   const router = useRouter();
+
+  if (!topicData) {
+    return <p>Loading...</p>;
+  }
+
   const { id, name, description, image, icon, topic, type, members } =
-    router.query;
+    topicData;
 
   return (
     <div>
       <Head>
-        <title>{metadata.title}</title>
+        <title>{name}</title>
         <meta name="description" content={`${description}`} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={name} />
@@ -34,22 +45,48 @@ const TopicPage = () => {
         />
         <meta name="twitter:image" content={image} />
       </Head>
-      {id ? (
-        <FeaturedBet
-          id={id}
-          name={name}
-          description={description}
-          image={image}
-          icon={icon}
-          topic={topic}
-          type={type}
-          members={parseInt(members, 10)}
-        />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <FeaturedBet
+        id={id}
+        name={name}
+        description={description}
+        image={image}
+        icon={icon}
+        topic={topic}
+        type={type}
+        members={parseInt(members, 10)}
+      />
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.query;
+
+  if (!id) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Fetch topic data from Supabase
+  const { data: topicData, error } = await supabase
+    .from("topics")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      topicData,
+    },
+  };
 };
 
 export default TopicPage;

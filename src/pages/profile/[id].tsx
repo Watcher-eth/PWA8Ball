@@ -12,12 +12,13 @@ import GeneralFeed from "@/components/profile/GeneralFeed";
 import LoginModal from "@/components/Modals/LoginModal";
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
 import Head from "next/head";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 interface ProfilePageProps {
   userId: string;
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
+const ProfilePage: React.FC<ProfilePageProps> = ({ userId, userData }) => {
   const router = useRouter();
   const [edit, setEdit] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -46,30 +47,30 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
       <Head>
-        <title>{metadata.title}</title>
+        <title>{userData.name}</title>
         <meta
           name="description"
-          content={`See what ${userC.name} believes in`}
+          content={`See what ${userData.name} believes in`}
         />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={userC.name} />
+        <meta property="og:title" content={userData.name} />
         <meta
           property="og:description"
-          content={`See what ${userC.name} believes in`}
+          content={`See what ${userData.name} believes in`}
         />
         <meta property="og:url" content={"https://tryblitz.xyz"} />
-        <meta property="og:image" content={userC.pfp} />
-        <meta property="og:image:alt" content={`${userC.name} pfp`} />
+        <meta property="og:image" content={userData.pfp} />
+        <meta property="og:image:alt" content={`${userData.name} pfp`} />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={userC.name} />
+        <meta name="twitter:title" content={userData.name} />
         <meta
           name="twitter:description"
-          content={`See what ${userC.name} believes in`}
+          content={`See what ${userData.name} believes{subData.name}}`}
         />
-        <meta name="twitter:image" content={userC.pfp} />
+        <meta name="twitter:image" content={userData.pfp} />
       </Head>
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
@@ -166,9 +167,18 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
+
+  // Fetch user data from Supabase
+  const { data: userData } = await supabase
+    .from("users")
+    .select("*")
+    .eq("external_auth_provider_user_id", id)
+    .single();
+
   return {
     props: {
       userId: id,
+      userData,
     },
   };
 };

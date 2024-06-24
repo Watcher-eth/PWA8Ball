@@ -15,6 +15,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+
       {
         protocol: "https",
         hostname: "pyxis.nymag.com",
@@ -169,6 +170,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.grove.wgbh.org",
+      },
+      {
+        protocol: "https",
+        hostname: "bostonglobe-prod.cdn.arcpublishing.com",
       },
     ],
   },
