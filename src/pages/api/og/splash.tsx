@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-
 import { IMarketWithTopicDetails } from "@/lib/supabase/queries/getTrendingMarkets";
 import { IUser } from "@/lib/supabase/types";
 import { createClient } from "@supabase/supabase-js";
@@ -10,7 +9,8 @@ export const runtime = "edge";
 
 export default async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);   const fontData = await fetch(
+    const { searchParams } = new URL(request.url);
+    const fontData = await fetch(
       new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
     ).then((res) => res.arrayBuffer());
 
@@ -105,7 +105,7 @@ export default async function GET(request: Request) {
                 gap: "9px",
               }}
             >
-              With your  
+              With your
               <div
                 style={{
                   fontSize: "1rem",
@@ -226,9 +226,10 @@ export default async function GET(request: Request) {
             >
               <img
                 src={
-                    markets?.length > 2
-                      ? markets[2].image
-                      : "https://images.wsj.net/im-951792/?width=1278&size=1"}
+                  markets?.length > 2
+                    ? markets[2].image
+                    : "https://images.wsj.net/im-951792/?width=1278&size=1"
+                }
                 alt="Image 3"
                 width="160px"
                 height="190px"
@@ -249,9 +250,11 @@ export default async function GET(request: Request) {
               }}
             >
               <img
-                src={markets?.length > 3
+                src={
+                  markets?.length > 3
                     ? markets[3].image
-                    :"https://mir-s3-cdn-cf.behance.net/project_modules/hd/e0c434105236109.5f748bd4b96a7.jpg"}
+                    : "https://mir-s3-cdn-cf.behance.net/project_modules/hd/e0c434105236109.5f748bd4b96a7.jpg"
+                }
                 alt="Image 4"
                 width="160px"
                 height="195px"
