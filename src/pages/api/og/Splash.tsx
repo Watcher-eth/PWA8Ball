@@ -10,9 +10,7 @@ export const runtime = "edge";
 
 export default async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const title = searchParams.get("title")?.slice(0, 100) || "Blitz";
-    const fontData = await fetch(
+    const { searchParams } = new URL(request.url);   const fontData = await fetch(
       new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
     ).then((res) => res.arrayBuffer());
 
@@ -50,7 +48,7 @@ export default async function GET(request: Request) {
         <div
           style={{
             position: "relative",
-            width: 1200,
+            width: "100%",
             padding: "55px",
             backgroundColor: "#151515",
             display: "flex",
@@ -58,7 +56,7 @@ export default async function GET(request: Request) {
             alignItems: "flex-start",
             justifyContent: "space-between",
             paddingTop: "65px",
-            height: 630,
+            height: "100%",
           }}
         >
           <div
