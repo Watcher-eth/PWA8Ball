@@ -84,6 +84,7 @@ function Cards(props: {
   } else {
     userImages = defaultImages;
   }
+  console.log("market2", market?.question);
 
   return (
     <LayoutGroup>
@@ -186,7 +187,7 @@ function Cards(props: {
                   fontSize:
                     title?.length < 15 ? 35 : title?.length < 21 ? 32 : 26,
                 }}
-                className=" pr-10 mt-[-3.8rem] text-start mb-[-0.7rem]  pl-5 pb-0 p-3 text-white text-bold"
+                className=" pr-10 mt-[-3.8rem] self-start text-start mb-[-0.7rem]  pl-5 pb-0 p-3 text-white text-bold"
               >
                 {title}
               </div>
@@ -234,8 +235,8 @@ function Cards(props: {
                 </BettersOverviewModal>
               </div>
               <div
-                style={{ zIndex: 2 }}
-                className="h-[0.1rem] w-[89vw] mt-[0rem] bg-[#212121] mx-5 rounded-full"
+                style={{ zIndex: 20 }}
+                className="h-2 w-[100%] color-gray-300  bg-[gray] mx-5 rounded-full"
               />
 
               <div
@@ -244,9 +245,9 @@ function Cards(props: {
                   fontFamily: "Aeonik-Bold",
                   lineHeight: "1.35rem",
                 }}
-                className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
+                className="text-[1.05rem] self-start mb-[-1] mt-1  mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5 "
               >
-                {description}
+                {market?.question}
               </div>
               <div
                 style={{ zIndex: 2 }}
@@ -255,22 +256,22 @@ function Cards(props: {
                 <VotingModal
                   handleOpen={props?.handleOpen}
                   image={image}
-                  multiplier={optionB.odds}
+                  multiplier={optionB.odds / 100}
                   option={0}
                   text={optionB?.name}
                   question={description}
-                  odds={market?.outcomea}
+                  odds={market?.outcomea / 100}
                   marketId={id}
                   options={[optionB.name, optionA.name]}
                 />
                 <VotingModal
                   handleOpen={props?.handleOpen}
                   image={image}
-                  multiplier={optionA.odds}
+                  multiplier={optionA.odds / 100}
                   option={1}
                   text={optionA?.name}
                   question={description}
-                  odds={market?.outcomea}
+                  odds={market?.outcomea / 100}
                   marketId={id}
                   options={[optionB.name, optionA.name]}
                 />

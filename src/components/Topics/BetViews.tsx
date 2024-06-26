@@ -56,18 +56,18 @@ export const BetBigView = ({
           style={{ zIndex: 10, borderRadius: "15px" }}
           className="absolute top-3 right-3 flex items-center bg-white px-[0.5rem] pr-1 p-1 rounded-lg"
         >
-          <span className="text-[#212121] font-bold text-14 mr-0">223</span>
-          <Users className="text-[#212121]" strokeWidth={3.5} height={14} />
+          <span className="text-[#212121] font-bold text-12 mr-0">223</span>
+          <Users className="text-[#212121]" strokeWidth={3.5} height={13} />
         </div>
         <h2
           style={{ zIndex: 10, fontFamily: "Aeonik-Bold" }}
-          className="text-2xl text-white font-bold mt-[-2.5rem] ml-2"
+          className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2"
         >
           {title}
         </h2>
         <p
           style={{ zIndex: 10, lineHeight: 1.2 }}
-          className="text-[1rem] text-white mt-4 ml-1 mb-[-0.1rem]"
+          className="text-[1rem] text-white mt-2 ml-1 mb-[-0.1rem]"
         >
           {question}
         </p>

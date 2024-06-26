@@ -60,9 +60,9 @@ const FeaturedBet = ({
           transition={{ duration: 0.5 }}
         />
         <div className="absolute top-0 w-[100vw] h-[37.5vh] bg-gradient-to-b from-transparent to-[#070707]"></div>
-        <div className="flex flex-col no-scrollbar p-4 mt-[-3rem]">
+        <div className="flex flex-col no-scrollbar p-4 mt-[-1.5rem]">
           <h1
-            className="text-3xl text-white font-bold"
+            className="text-[2.3rem] text-white font-bold"
             style={{ zIndex: 10, fontFamily: "Benzin-Bold" }}
           >
             {name}

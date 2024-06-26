@@ -13,6 +13,7 @@ import LandingPage from "@/components/landingPage.tsx";
 import { useAuthModalStore, useModalStore } from "@/lib/stores/ModalStore";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 import { Metadata, ResolvingMetadata } from "next";
+import { NextSeo } from "next-seo";
 
 export async function generateMetadata(
   { params },
@@ -46,15 +47,35 @@ export async function generateMetadata(
   };
 }
 export default function Home({ address }: { address?: string }) {
-  const userProfile = useProfile();
-  const profile = userProfile?.profile;
-  const [isLensAuth, setIsLensAuth] = useState<boolean>();
+
+  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/Splash`;
 
   //Lens Auth
   const { isLoginModalOpen, openLoginModal, closeLoginModal } =
     useAuthModalStore();
   return (
     <SmartAccountProvider>
+      <NextSeo
+        openGraph={{
+          title: "Blitz",
+          description: `Predict the future with your friends`,
+          type: "website",
+          url: `https://pwa-8-ball.vercel.app/`,
+          images: [
+            {
+              url: ogUrl.toString(),
+              width: 1200,
+              height: 630,
+              alt: "Splash Image",
+            },
+          ],
+        }}
+        twitter={{
+          handle: "@tryblitz",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <div className="flex flex-col items-center py-2 min-h-screen  bg-[#101010]">
         <CardFeed />
         <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />

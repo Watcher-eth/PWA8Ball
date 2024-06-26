@@ -13,6 +13,7 @@ import LoginModal from "@/components/Modals/LoginModal";
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
 import Head from "next/head";
 import { supabase } from "@/lib/supabase/supabaseClient";
+import { NextSeo } from "next-seo";
 
 interface ProfilePageProps {
   userId: string;
@@ -89,9 +90,31 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       handleOpenLoginModal();
     }
   }, []);
+  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/route?id=${userId}`;
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
+      <NextSeo
+        openGraph={{
+          title: userC?.data,
+          description: `See all of ${userC?.data}'s predictions`,
+          type: "website",
+          url: `https://pwa-8-ball.vercel.app/profile/${userId}`,
+          images: [
+            {
+              url: ogUrl.toString(),
+              width: 1200,
+              height: 630,
+              alt: "Topic Cover Image",
+            },
+          ],
+        }}
+        twitter={{
+          handle: "@tryblitz",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
       <div className="w-full relative">

@@ -32,7 +32,6 @@ const InviteFriendsPlaceholder: React.FC = () => {
         backgroundColor: "#101010",
         paddingTop: 50,
         height: height,
-        
       }}
     >
       <motion.h1
@@ -42,9 +41,9 @@ const InviteFriendsPlaceholder: React.FC = () => {
         style={{
           fontSize: 24,
           margin: "10px 0 0px",
-          fontFamily: "Aeonik-Bold",
           color: "white",
           zIndex: 10,
+          fontWeight: 700,
         }}
       >
         More fun together
@@ -71,7 +70,7 @@ const InviteFriendsPlaceholder: React.FC = () => {
         src="/images/Friends.png"
         style={{
           width: "100vw",
-          height: height / 3.8,
+          height: height / 3.9,
         }}
       />
       <motion.button
@@ -103,7 +102,7 @@ const InviteFriendsPlaceholder: React.FC = () => {
           style={{
             fontSize: 16.5,
             textAlign: "center",
-            fontFamily: "Aeonik-Bold",
+            fontWeight: 700,
             color: "black",
             marginLeft: 3,
           }}
