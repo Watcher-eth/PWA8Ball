@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, Metadata, ResolvingMetadata } from "next";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
@@ -18,7 +18,53 @@ interface ProfilePageProps {
   userId: string;
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ userId, userData }) => {
+interface Props1 {
+  params: { id: string };
+}
+
+export async function generateMetadata(
+  { params }: Props1,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = params;
+
+  // Fetch topic data from Supabase
+  // Fetch user data from Supabase
+  const { data: userData } = await supabase
+    .from("users")
+    .select("*")
+    .eq("external_auth_provider_user_id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+  }
+  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/route?id=${id}`;
+  return {
+    openGraph: {
+      title: userData?.name,
+      description: `See all of ${userData?.name}'s predictions`,
+      type: "website",
+      url: `https://pwa-8-ball.vercel.app/profile/${id}`,
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: "Topic Cover Image",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: userData?.name,
+      description: `See all of ${userData?.name}'s predictions`,
+      images: [ogUrl.toString()],
+    },
+  };
+}
+
+const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const router = useRouter();
   const [edit, setEdit] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -46,32 +92,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId, userData }) => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
-      <Head>
-        <title>{userData.name}</title>
-        <meta
-          name="description"
-          content={`See what ${userData.name} believes in`}
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={userData.name} />
-        <meta
-          property="og:description"
-          content={`See what ${userData.name} believes in`}
-        />
-        <meta property="og:url" content={"https://tryblitz.xyz"} />
-        <meta property="og:image" content={userData.pfp} />
-        <meta property="og:image:alt" content={`${userData.name} pfp`} />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={userData.name} />
-        <meta
-          name="twitter:description"
-          content={`See what ${userData.name} believes{subData.name}}`}
-        />
-        <meta name="twitter:image" content={userData.pfp} />
-      </Head>
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
       <div className="w-full relative">
@@ -168,17 +188,9 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId, userData }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
 
-  // Fetch user data from Supabase
-  const { data: userData } = await supabase
-    .from("users")
-    .select("*")
-    .eq("external_auth_provider_user_id", id)
-    .single();
-
   return {
     props: {
       userId: id,
-      userData,
     },
   };
 };

@@ -30,6 +30,7 @@
     "@thirdweb-dev/react": "^4.4.0",
     "@thirdweb-dev/sdk": "^4.0.28",
     "@types/uuid": "^9.0.8",
+    "@vercel/og": "^0.6.2",
     "@wagmi/connectors": "^5.0.14",
     "@wagmi/core": "^2.3.1",
     "autoprefixer": "^10.4.16",

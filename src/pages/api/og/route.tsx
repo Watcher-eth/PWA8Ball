@@ -1,0 +1,150 @@
+import { IUser } from "@/lib/supabase/types";
+import { createClient } from "@supabase/supabase-js";
+import { ImageResponse } from "@vercel/og";
+
+export const runtime = "edge";
+
+export default async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id")?.slice(0, 100) || "did:privy:clutganzs01rz2oqk4vvlw1ih";
+    const fontData = await fetch(
+      new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
+    ).then((res) => res.arrayBuffer());
+
+    const supabaseUrl = "https://qcdmlllkzdjajrdtmthk.supabase.co";
+    const supabaseAnonKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjZG1sbGxremRqYWpyZHRtdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEwNDc4NDYsImV4cCI6MjAyNjYyMzg0Nn0.GoF1Ppedn6Yyxxr3tjvSzugQECmt6DRJemrLdf9HVLw";
+
+    const supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true, // This is generally true for web to handle OAuth redirects
+      },
+    });
+
+    const fetchUserByExternalAuthId = async (
+      externalAuthId: string
+    ): Promise<IUser | null> => {
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("external_auth_provider_user_id", externalAuthId)
+        .single(); // Using .single() because we expect at most one record
+
+      if (error) {
+        console.error("Fetch User By External Auth ID Error:", error.message);
+        throw new Error(error.message);
+      }
+
+      return data;
+    };
+    const user = await fetchUserByExternalAuthId(
+      id
+    );
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            padding: "16px",
+            backgroundColor: "#070707",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
+          <img
+            src={user?.pfp}
+            alt="Background"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              objectFit: "cover",
+              width: 1200,
+              height: 230,
+              borderRadius: "8px",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: 1200,
+              height: 230,
+              background: "linear-gradient(to top, #070707, transparent)",
+              borderRadius: "8px",
+            }}
+          ></div>
+
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingTop: "0",
+              paddingBottom: "16px",
+            }}
+          >
+            <img
+              src={user?.pfp}
+              alt="Profile"
+              style={{
+                width: "220px",
+                height: "220px",
+                marginBottom: "20px",
+                borderRadius: "50%",
+                borderWidth: 3,
+                marginTop: "20px",
+                borderColor: "#070707",
+                border: "3px #070707 solid",
+              }}
+            />
+            <h2
+              style={{
+                fontSize: "4.78rem",
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              {user?.name}
+            </h2>
+            <p
+              style={{
+                marginTop: "-1.25rem",
+                fontSize: "3.3rem",
+                fontWeight: "normal",
+                color: "#eeeeee",
+              }}
+            >
+              15 Predictions | 98% Accuracy
+            </p>
+          </div>
+          <div
+            style={{ position: "absolute", bottom: "16px", right: "16px" }}
+          ></div>
+        </div>
+      ),
+      {
+        width: 1200,
+        height: 630,
+        fonts: [{ name: "AeonikBold", data: fontData, style: "normal" }],
+      }
+    );
+  } catch (e) {
+    return new Response("Failed to generate Market OG Image", { status: 500 });
+  }
+}

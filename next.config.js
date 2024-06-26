@@ -175,6 +175,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "bostonglobe-prod.cdn.arcpublishing.com",
       },
+      {
+        protocol: "https",
+        hostname: "bdc2020.o0bc.com",
+      },
     ],
   },
 };

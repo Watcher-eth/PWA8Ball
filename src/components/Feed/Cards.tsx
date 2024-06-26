@@ -286,6 +286,7 @@ function Cards(props: {
                   joined={false}
                   question={topicBio}
                   image={image}
+                  betId={id}
                   topic={subject}
                   id={id}
                 />

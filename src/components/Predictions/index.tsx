@@ -1,67 +1,32 @@
 // @ts-nocheck
 
 import React, { useState, useCallback, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { ChevronLeft, LineChart, Share } from "lucide-react";
-import { useGetMarketById } from "@/lib/drizzle/drizzle/supabase/queries/fetchMarketForId";
-import { useGetUsersByMarketId } from "@/lib/drizzle/drizzle/supabase/queries/markets/getUsersForMarket";
+import { ArrowLeft, ChevronLeft, LineChart, Share } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
-import VoteSideBet from "@/components/Bet/Vote/SideBet";
-import CommentSection from "@/components/post/Comments/CommentSection";
-import BetDetails from "@/components/Bet/BetDetails";
-import BetButtons from "@/components/Bet/BetButtons";
-import VotersOverviewSheet from "@/components/common/Modal/VotersOverviewSheet";
-import BoostLiquidity from "@/components/Bet/Actions/BoostLiquidityModal";
-import CommentBottomSheet from "@/components/post/Comments/CommentBottomSheet";
-import ChartModalSheet from "@/components/common/Modal/ChartModal";
-import RelatedMarkets from "@/components/common/FunctionalScreens/RelatedMarkets";
 
+import { AvatarImage, Avatar } from "../ui/avatar";
+import VotingModal from "../Modals/BuyVotes";
+import ShareModal from "../Modals/ShareModal";
+import { useModalStore } from "@/lib/stores/ModalStore";
+import { motion } from "framer-motion";
+import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
+import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
+import BettersOverviewModal from "./Betters/OverviewModal";
+import CommentSection from "../Posts/Comments/CommentSection";
+import BetDetails from "./Details";
+import { parseOptions } from "@/lib/utils/parseOption";
 
-const Bet = () => {
-  const { id } = useParams();
-  const { user } = useUserStore();
-  const navigate = useNavigate();
-  const [comments, setComments] = useState([]);
-  const bottomSheetModalRef = useRef(null);
-  const commentModalRef = useRef(null);
-  const votersModalRef = useRef(null);
-  const chartModalRef = useRef(null);
-  const BoostRef = useRef(null);
-
-  const { data: market, refetch } = useGetMarketById(
-    id,
-    user.external_auth_provider_user_id
-  );
+const Bet = ({ id }) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
-  const stake = market?.usdcstake;
-
-  const handleOpenBottomSheet = useCallback((props) => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
-  const handleOpenCommentSheet = useCallback(() => {
-    commentModalRef.current?.present();
-  }, []);
-
-  const handleOpenVotersSheet = useCallback(() => {
-    votersModalRef.current?.present();
-  }, []);
-
-  const handleBoosterSheet = useCallback(() => {
-    BoostRef.current?.present();
-  }, []);
-
-  const handleChartSheet = useCallback(() => {
-    chartModalRef.current?.present();
-  }, []);
-
-  const addComment = useCallback((newComment) => {
-    setComments((currentComments) => [newComment, ...currentComments]);
-  }, []);
+  const { user } = useUserStore();
+  const openLoginModal = useModalStore((state) => state.openLoginModal);
+  const {
+    data: market,
+    error,
+    isLoading,
+    refetch,
+  } = useGetMarketById(String(id), user?.external_auth_provider_user_id);
 
   const defaultImages = [
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
@@ -69,202 +34,201 @@ const Bet = () => {
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
   ];
 
-  const userImages = users
-    ? users
-        .map((user, index) => (index < 3 ? user.pfp : null))
-        .filter((image) => image !== null)
-    : defaultImages;
+  let userImages;
+  if (users) {
+    userImages = users
+      ?.map((user, index) => (index < 3 ? user.pfp : null))
+      .filter((image) => image !== null);
 
-  return (
-    <div className="flex flex-col h-screen bg-gray-900">
-      <BottomSheetModalProvider>
-        <div className="absolute top-10 left-0 right-0 z-10 flex justify-between items-center p-4 bg-opacity-50 bg-gray-800">
-          <button
-            onClick={() => navigate(-1)}
-            className="bg-gray-700 rounded-full p-2"
+    // Fill the remaining slots with default images if less than 3
+    while (userImages.length < 3) {
+      userImages.push(defaultImages[userImages.length]);
+    }
+  } else {
+    userImages = defaultImages;
+  }
+  console.log("market", market);
+  if (market)
+    return (
+      <motion.div
+        onClick={() => setIsDrawerOpen(false)}
+        className="bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
+      >
+        <div className="relative h-[100vw]">
+          <div
+            style={{ zIndex: 2 }}
+            className="flex items-center absolute top-3  justify-between px-6 py-2  w-[100vw]"
           >
-            <ChevronLeft className="text-white" size={21} />
-          </button>
-          <div className="text-center">
-            <h1 className="text-white text-lg font-bold">{market?.title}</h1>
+            <ArrowLeft
+              strokeWidth={3.8}
+              size={33}
+              style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
+              className="p-2 rounded-full backdrop-blur-lg "
+            />
+            <ShareModal>
+              <Share
+                size={33}
+                strokeWidth={3.3}
+                style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
+                className="p-2 rounded-full backdrop-blur-xl "
+              />
+            </ShareModal>
           </div>
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={handleChartSheet}
-              className="bg-gray-700 rounded-full p-2"
-            >
-              <LineChart className="text-white" size={16} />
-            </button>
-            <button
-              onClick={() =>
-                navigate(
-                  `/shareBetModal?topic=${market?.topic_title}&question=${market?.question}&image=${market?.image}&options=${market?.options[1].name},${market?.options[0].name}&title=${market?.title}`
-                )
-              }
-              className="bg-gray-700 rounded-full p-2"
-            >
-              <Share className="text-white" size={16} />
-            </button>
-          </div>
+          <motion.div className="w-[100vw] h-[45vh] relative">
+            <img
+              className="w-[100vw] object-cover h-[45vh] relative"
+              alt="CoverImage"
+              src={market?.image}
+            />
+            <div
+              style={{ zIndex: 2 }}
+              className="h-[40vw] w-[100vw]    bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
+            />
+          </motion.div>
+        </div>
+        <div
+          style={{
+            zIndex: 2,
+            fontFamily: "Benzin-Bold",
+            lineHeight: "2.4rem",
+            fontSize:
+              market?.title?.length < 14
+                ? 35
+                : market?.title?.length < 21
+                ? 32
+                : 26,
+          }}
+          className=" pr-10 mt-[-3.8rem] text-start mb-[-0.7rem] self-start  pl-5 pb-0 p-3 text-white text-bold"
+        >
+          {market?.title}
         </div>
 
-        <CommentBottomSheet
-          addComment={addComment}
-          id={id}
-          ref={commentModalRef}
-          reply={reply}
-        />
-
-        <div className="flex-1 overflow-auto">
-          {market?.image && (
-            <img
-              src={market.image}
-              alt="Market"
-              className="w-full h-96 object-cover"
-            />
-          )}
-
-          <div className="p-4">
-            <h1 className="text-3xl font-bold text-white">{market?.title}</h1>
-            <div className="flex justify-between items-center my-4">
-              <div>
-                <span className="text-gray-400">At stake</span>
-                <div className="text-white text-xl font-bold">
-                  ${stake ? (stake / 100000).toFixed(2) : "0.00"}
-                </div>
-              </div>
-              <AvatarGroup
-                images={userImages}
-                height={39}
-                width={39}
-                onClick={handleOpenVotersSheet}
-              />
+        <div className="flex justify-between  mt-4  items-center w-[88vw] mx-5">
+          <div className="flex flex-col">
+            <div
+              style={{ zIndex: 2 }}
+              className="text-[0.85rem]  text-gray-200 text-bold"
+            >
+              At stake
             </div>
-            <p className="text-lg text-gray-400">{market?.question}</p>
+            <div
+              style={{ zIndex: 2, fontWeight: 600 }}
+              className="text-[1.6rem] mt-[-0.25rem]  text-white flex items-center "
+            >
+              <div>
+                {" "}
+                $
+                {market?.usdcstake
+                  ? (market?.usdcstake / 100000).toFixed(2)
+                  : "0.00"}
+              </div>
+            </div>
           </div>
-
-          <BetButtons
-            question={description}
-            title={name}
-            totalPot={19325}
-            betId="123"
-            onChange={handleOpenBottomSheet}
+          <BettersOverviewModal
+            title={market?.title}
+            question={market?.description}
             image={market?.image}
             optionA={{
-              name: market?.options[1].name,
-              value: market?.outcomeb,
-              index: 1,
+              multiplier: 1, // Dummy value, adjust as necessary
+              name: market?.options[1].name, // Assuming options array is not empty
+              odds: market?.outcomea || 50, // Dummy odds, calculate or adjust as necessary
             }}
             optionB={{
-              name: market?.options[0].name,
-              value: market?.outcomea,
-              index: 2,
+              multiplier: 1, // Dummy value, adjust as necessary
+              name: market?.options[0].name, // Assuming options array is not empty
+              odds: market?.outcomeb || 50, // Dummy odds, calculate or adjust as necessary
             }}
-          />
-
-          <BetDetails
-            topicId={market?.topicid}
-            icon={market?.topic_image}
-            topic={market?.topic_title}
-            question={market?.topic_description}
-            endDate="12th September, 2024"
-            multiplier={2}
-            members={market?.members}
-            handleBoost={handleBoosterSheet}
-            joined={market?.joined}
-          />
-
-          <HighestOrderOptionComponent
-            userAddress={user?.walletaddress}
+            odds={75}
             marketId={id}
-            options={market?.options}
-          />
+            users={users}
+          >
+            <div
+              style={{ zIndex: 2 }}
+              onClick={openLoginModal}
+              className="flex space-x-[-1rem] mb-3 items-center"
+            >
+              <Avatar>
+                <AvatarImage src={userImages[0]} />
+              </Avatar>
+              <Avatar>
+                <AvatarImage src={userImages[1]} />
+              </Avatar>
+              <Avatar className="border-1 border-white">
+                <AvatarImage src={userImages[2]} />
+              </Avatar>
+            </div>
+          </BettersOverviewModal>
+        </div>
+        <div
+          style={{ zIndex: 2 }}
+          className="h-[0.1rem] w-[89vw] mt-[0rem] bg-[#212121] mx-5 rounded-full"
+        />
 
+        <div
+          style={{
+            zIndex: 2,
+            fontFamily: "Aeonik-Bold",
+            lineHeight: "1.35rem",
+          }}
+          className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
+        >
+          {market?.question}
+        </div>
+        <div
+          style={{ zIndex: 2 }}
+          className="flex items-center w-[88vw]  mt-[-4] mx-5 justify-between mx-2"
+        >
+          <VotingModal
+            handleOpen={() => {}}
+            image={market?.image}
+            multiplier={market?.outcomeb || 50}
+            option={0}
+            text={market?.options[1].name}
+            question={market?.question}
+            odds={market?.outcomea}
+            marketId={id}
+            options={[market?.options[0].name, market?.options[1].name]}
+          />
+          <VotingModal
+            handleOpen={() => {}}
+            image={market?.image}
+            multiplier={market?.outcomea || 50}
+            option={1}
+            text={market?.options[0].name}
+            question={market?.question}
+            odds={market?.outcomea}
+            marketId={id}
+            options={[market?.options[0].name, market?.options[1].name]}
+          />
+        </div>
+        <div style={{ zIndex: 2 }}>
+          <BetDetails
+            endDate={"12th September, 2024"}
+            icon={market?.topic_image}
+            multiplier={2}
+            topicId={market.topic_id}
+            members={market?.members}
+            handleBoost={() => {}}
+            joined={false}
+            question={market?.topic_description}
+            image={market?.image}
+            topic={market.topic_title}
+            id={id}
+          />
+        </div>
+        <div style={{ zIndex: 2 }}>
           <CommentSection
-            topic_id={market?.topicid}
+            topic_id={market?.topic_id}
             users={users}
             totalComments={market?.total_comments}
-            optimisticComments={comments}
+            optimisticComments={[]}
             marketId={id}
-            setReply={setReply}
-            handleComment={handleOpenCommentSheet}
+            setReply={() => {}}
+            handleComment={() => {}}
           />
-
-          <RelatedMarkets topicId={market?.topicid} id={market?.id} />
         </div>
-
-        <BottomSheetModal ref={votersModalRef}>
-          <VotersOverviewSheet
-            title={market?.title}
-            question={market?.question}
-            image={market?.image}
-            options={[market?.options[1].name, market?.options[0].name]}
-            odds={market?.outcomea}
-            marketId={id}
-            users={users}
-            setIsOpen={setIsVotersModal}
-          />
-        </BottomSheetModal>
-
-        <BottomSheetModal ref={bottomSheetModalRef}>
-          <VoteSideBet
-            refetch={refetch}
-            setIsOpen={setIsOpen}
-            image={market?.image}
-            betId={id}
-            index={2}
-            odds={market?.outcomea}
-            title={market?.title}
-            question={market?.question}
-            totalPot={19325}
-            options={[
-              {
-                name: market?.options[1].name,
-                value: (
-                  1 +
-                  (100 - market?.outcomeb) / market?.outcomeb
-                ).toFixed(2),
-                index: 1,
-              },
-              {
-                name: market?.options[0].name,
-                value: (
-                  1 +
-                  (100 - market?.outcomea) / market?.outcomea
-                ).toFixed(2),
-                index: 2,
-              },
-            ]}
-          />
-        </BottomSheetModal>
-
-        <BottomSheetModal ref={chartModalRef}>
-          <ChartModalSheet
-            title={market?.title}
-            image={market?.image}
-            options={["Yes", "No"]}
-            percentage={-15}
-            topic={market?.topicid}
-            betId={id}
-            question={market?.question}
-            setIsOpen={setIsOpen}
-          />
-        </BottomSheetModal>
-
-        <BottomSheetModal ref={BoostRef}>
-          <BoostLiquidity
-            setIsOpen={setIsBooster}
-            title="2024 US Elections"
-            question="Who will win the 2024 US federal Elections?"
-            image={market?.image}
-            betId={id}
-            options={[market?.options[1].name, market?.options[0].name]}
-            odds={0.34}
-          />
-        </BottomSheetModal>
-      </BottomSheetModalProvider>
-    </div>
-  );
+      </motion.div>
+    );
 };
 
 export default Bet;

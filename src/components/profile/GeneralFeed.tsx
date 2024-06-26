@@ -104,6 +104,7 @@ const GeneralFeed = ({
                   ? item.options[item.option + 1].name
                   : item.options[item.option - 1].name
               }
+              betId={item.market_id}
               optional={item.option}
               index={index}
               title={item.title}

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/router";
 
 const UserPredictions = ({
   index,
@@ -14,7 +15,10 @@ const UserPredictions = ({
   option,
   optional,
   onOpenBottomSheet,
+  betId,
 }) => {
+  const router = useRouter();
+  console.log("betId", betId);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -22,7 +26,9 @@ const UserPredictions = ({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
       className="flex items-center justify-between p-2 py-1 rounded-xl bg-[#171717] w-[90vw] m-1"
-      onClick={onOpenBottomSheet}
+      onClick={() => {
+        router.push({ pathname: `/p/${betId}`, query: { id: betId } });
+      }}
     >
       <div className="flex items-center gap-2">
         {image ? (

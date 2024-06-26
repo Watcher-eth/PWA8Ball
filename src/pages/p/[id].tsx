@@ -2,6 +2,9 @@
 
 import Head from "next/head";
 import type { Metadata, ResolvingMetadata } from "next";
+import Bet from "@/components/Predictions";
+import React from "react";
+import { useRouter } from "next/router";
 
 type Props = {
   params: { id: string };
@@ -60,12 +63,15 @@ export async function generateMetadata(
 }
 
 export default function MarketPage({ params, searchParams }: Props) {
-  const { id } = params;
-  const metadata = generateMetadata({ params, searchParams });
+  const router = useRouter();
+  const { id } = router.query;
+
+  // const metadata = generateMetadata({ params, searchParams });
+
   return (
     <>
       <Head>
-        <title>{metadata.title}</title>
+        {/* <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={metadata.openGraph.title} />
@@ -85,9 +91,9 @@ export default function MarketPage({ params, searchParams }: Props) {
           name="twitter:description"
           content={metadata.twitter.description}
         />
-        <meta name="twitter:image" content={metadata.twitter.images[0]} />
+        <meta name="twitter:image" content={metadata.twitter.images[0]} /> */}
       </Head>
-      <div>{/* Your page component logic */}</div>
+      <Bet id={id} />
     </>
   );
 }
