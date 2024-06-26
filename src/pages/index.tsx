@@ -56,6 +56,8 @@ export default function Home({ address }: { address?: string }) {
   return (
     <SmartAccountProvider>
       <NextSeo
+      title="Blitz"
+      description="Predict the future with your friends"
         openGraph={{
           title: "Blitz",
           description: `Predict the future with your friends`,
