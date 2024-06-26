@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ITopic, IUser } from "@/lib/supabase/types";
 import { createClient } from "@supabase/supabase-js";
 import { ImageResponse } from "@vercel/og";

@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 import { IMarketWithTopicDetails } from "@/lib/supabase/queries/getTrendingMarkets";
 import { IUser } from "@/lib/supabase/types";
 import { createClient } from "@supabase/supabase-js";

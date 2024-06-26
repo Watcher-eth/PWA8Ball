@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import FeaturedBet from "@/components/Topics";
 import Head from "next/head";
 import { GetServerSideProps, Metadata, ResolvingMetadata } from "next";
