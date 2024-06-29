@@ -25,6 +25,7 @@ import CommentSection from "../Posts/Comments/CommentSection";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useUserStore } from "@/lib/stores/UserStore";
 import LoginModal from "../Modals/LoginModal";
+import RelatedMarkets from "../Predictions/RelatedMarkets";
 function Cards(props: {
   image: string;
   title: string;
@@ -303,6 +304,7 @@ function Cards(props: {
                   handleComment={() => {}}
                 />
               </div>
+              <RelatedMarkets topicId={props?.topicId} id={id} />
             </motion.div>
           </DrawerContent>
         </Drawer>

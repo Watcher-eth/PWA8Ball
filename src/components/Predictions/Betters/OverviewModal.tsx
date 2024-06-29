@@ -113,7 +113,7 @@ const BettersOverviewModal = ({
                     marginBottom: "20px",
                   }}
                 />
-                {users.length > 0 && (
+                {users?.length > 0 && (
                   <p
                     style={{
                       fontFamily: "Aeonik-Bold",
@@ -126,7 +126,7 @@ const BettersOverviewModal = ({
                   </p>
                 )}
 
-                {users.length > 0 ? (
+                {users?.length > 0 ? (
                   <div style={{ height: "28vh", overflowY: "scroll" }}>
                     {users.map((user, index) => (
                       <motion.div
@@ -144,7 +144,7 @@ const BettersOverviewModal = ({
                 ) : (
                   <BettersOverviewPlaceholder />
                 )}
-                {users.length > 4 && (
+                {users?.length > 4 && (
                   <p
                     style={{
                       fontFamily: "AeonikBold",
