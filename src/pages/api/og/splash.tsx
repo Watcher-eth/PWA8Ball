@@ -2,47 +2,29 @@
 
 import { IMarketWithTopicDetails } from "@/lib/supabase/queries/getTrendingMarkets";
 import { IUser } from "@/lib/supabase/types";
-import { createClient } from "@supabase/supabase-js";
+
 import { ImageResponse } from "@vercel/og";
+import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
+import { aeonikFontDataPromise, benzinFontDataPromise } from "@/lib/fonts";
 
 export const runtime = "edge";
 
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const fontData = await fetch(
-      new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    const [aeonikFontData, benzinFontData] = await Promise.all([
+      aeonikFontDataPromise,
+      benzinFontDataPromise,
+    ]);
 
-    const BenzinfontData = await fetch(
-      new URL("../../../../public/fonts/Benzin-ExtraBold.ttf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
-
-    const supabaseUrl = "https://qcdmlllkzdjajrdtmthk.supabase.co";
-    const supabaseAnonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjZG1sbGxremRqYWpyZHRtdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEwNDc4NDYsImV4cCI6MjAyNjYyMzg0Nn0.GoF1Ppedn6Yyxxr3tjvSzugQECmt6DRJemrLdf9HVLw";
-
-    const supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true, // This is generally true for web to handle OAuth redirects
-      },
-    });
-
-    const fetchTrendingMarkets = async (): Promise<
-      IMarketWithTopicDetails[]
-    > => {
-      const { data, error } = await supabase.rpc("get_trending_markets");
-
-      if (error) {
-        console.error("Fetch Trending Markets Error:", error.message);
-        throw new Error(error.message);
-      }
-
-      return data;
-    };
     const markets = await fetchTrendingMarkets();
+    const imgProps = {
+      style: {
+        width: "50px",
+        height: "50px",
+        borderRadius: "50%",
+      },
+    };
     return new ImageResponse(
       (
         <div
@@ -117,19 +99,19 @@ export default async function GET(request: Request) {
                 }}
               >
                 <img
+                  {...imgProps}
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh2HDZ5kbbi4gS6Ki1m2vmkTwta2nJ4uKQA&s"
                   alt="Avatar 1"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
                 <img
+                  {...imgProps}
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGQMZpF4lfChZnNqMYSziZuMjJphYbQO7IZw&s"
                   alt="Avatar 2"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
                 <img
+                  {...imgProps}
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53_Ks7duOWtHFySS4pTDjlZ36bwfqHY-53w&s"
                   alt="Avatar 3"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
               </div>
             </div>
@@ -158,9 +140,8 @@ export default async function GET(request: Request) {
             >
               <img
                 src={
-                  markets?.length > 0
-                    ? markets[0].image
-                    : "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/71d4d17edcd49703a5ea446cc0e588e6.jpg"
+                  markets[0]?.image ??
+                    "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/71d4d17edcd49703a5ea446cc0e588e6.jpg"
                 }
                 alt="Image 1"
                 width="130px"
@@ -288,8 +269,8 @@ export default async function GET(request: Request) {
         width: 1200,
         height: 630,
         fonts: [
-          { name: "AeonikBold", data: fontData, style: "normal" },
-          { name: "Benzin", data: BenzinfontData, style: "normal" },
+          { name: "AeonikBold", data: aeonikFontData, style: "normal" },
+          { name: "Benzin", data: benzinFontData, style: "normal" },
         ],
       }
     );
@@ -297,3 +278,15 @@ export default async function GET(request: Request) {
     return new Response("Failed to generate Market OG Image", { status: 500 });
   }
 }
+
+
+async function fetchTrendingMarkets(): Promise<IMarketWithTopicDetails[]> {
+  const { data, error } = await SUPABASE_CLIENT.rpc("get_trending_markets");
+
+  if (error) {
+    console.error("Fetch Trending Markets Error:", error.message);
+    throw new Error(error.message);
+  }
+
+  return data;
+};

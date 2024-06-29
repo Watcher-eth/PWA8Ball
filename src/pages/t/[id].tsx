@@ -57,6 +57,7 @@ export async function generateMetadata(
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log({ context })
   const { id } = context.params as { id: string };
 
   const { data: topicData, error } = await supabase
@@ -79,10 +80,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+
 const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
   const router = useRouter();
-
+  console.log({ topicData });
   if (!topicData) {
+    console.log("loading")
     return <p>Loading...</p>;
   }
 
@@ -127,4 +130,27 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
   );
 };
 
+// TopicPage.getInitialProps = async (context) => {
+//   console.log({ context });
+//   const { id } = context.query as { id: string };
+
+//   const { data: topicData, error } = await supabase
+//     .from("topics")
+//     .select("*")
+//     .eq("id", id)
+//     .single();
+
+//   if (error) {
+//     console.error(error);
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return {
+//     // props: {
+//       topicData,
+//     // },
+//   };
+// };
 export default TopicPage;

@@ -1,68 +1,35 @@
 // @ts-nocheck
-
 import { ITopic, IUser } from "@/lib/supabase/types";
-import { createClient } from "@supabase/supabase-js";
 import { ImageResponse } from "@vercel/og";
 
+import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
+import { aeonikFontDataPromise, benzinFontDataPromise } from "@/lib/fonts";
+
 export const runtime = "edge";
+
 
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id")?.slice(0, 100) || "5";
-    const fontData = await fetch(
-      new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
-    const BenzinfontData = await fetch(
-      new URL("../../../../public/fonts/Benzin-ExtraBold.ttf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    const [aeonikFontData, benzinFontData] = await Promise.all([
+      aeonikFontDataPromise,
+      benzinFontDataPromise,
+    ]);
 
-    const supabaseUrl = "https://qcdmlllkzdjajrdtmthk.supabase.co";
-    const supabaseAnonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjZG1sbGxremRqYWpyZHRtdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEwNDc4NDYsImV4cCI6MjAyNjYyMzg0Nn0.GoF1Ppedn6Yyxxr3tjvSzugQECmt6DRJemrLdf9HVLw";
-
-    const supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true, // This is generally true for web to handle OAuth redirects
-      },
-    });
-
-    const fetchMembersForTopic = async (topicId: string): Promise<IUser[]> => {
-      const { data, error } = await supabase
-        .from("user_topics")
-        .select(
-          `
-              users (
-                internal_id,
-                external_auth_provider_user_id,
-                name,
-                pfp
-              )
-            `
-        )
-        .eq("topic_id", topicId)
-        .limit(5); // Limit the number of users to 5
-
-      if (error) throw new Error(error.message);
-
-      // Flatten the structure to directly get user details
-      return data.map((entry) => entry.users).flat();
-    };
-
-    const getTopics = async (searchString: string): Promise<ITopic> => {
-      const { data, error } = await supabase
-        .from("topics")
-        .select("*")
-        .eq("id", 2);
-
-      if (error) throw new Error(error.message);
-
-      return data;
-    };
     const topic = getTopics("3");
     const members = await fetchMembersForTopic("3");
+
+    const memberImgProps = {
+      width: "40px",
+      height: "40px",
+      style: {
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+      },
+    };
+
     return new ImageResponse(
       (
         <div
@@ -95,7 +62,7 @@ export default async function GET(request: Request) {
                 marginTop: "15px",
               }}
             >
-              {topic?.title ? topic?.title : "US Elections"}
+              {topic?.title ?? "US Elections"}
             </div>
             <div
               style={{
@@ -104,9 +71,7 @@ export default async function GET(request: Request) {
                 marginBottom: "25px",
               }}
             >
-              {topic?.description
-                ? topic?.description
-                : "Everything about the 2024 US Elections"}
+              {topic?.description ?? "Everything about the 2024 US Elections"}
             </div>
             <div
               style={{
@@ -123,37 +88,28 @@ export default async function GET(request: Request) {
                 }}
               >
                 <img
-                  width="40px"
-                  height="40px"
+                  {...memberImgProps}
                   src={
-                    members.length > 0
-                      ? members[0].pfp
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh2HDZ5kbbi4gS6Ki1m2vmkTwta2nJ4uKQA&s"
+                    members[0]?.pfp ??
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh2HDZ5kbbi4gS6Ki1m2vmkTwta2nJ4uKQA&s"
                   }
                   alt="Avatar 1"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
                 />
                 <img
-                  width="40px"
-                  height="40px"
+                  {...memberImgProps}
                   src={
-                    members.length > 1
-                      ? members[1].pfp
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGQMZpF4lfChZnNqMYSziZuMjJphYbQO7IZw&s"
+                    members[1]?.pfp ??
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGQMZpF4lfChZnNqMYSziZuMjJphYbQO7IZw&s"
                   }
                   alt="Avatar 2"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
                 />
                 <img
-                  width="40px"
-                  height="40px"
+                  {...memberImgProps}
                   src={
-                    members.length > 2
-                      ? members[2].pfp
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53_Ks7duOWtHFySS4pTDjlZ36bwfqHY-53w&s"
+                    members[2]?.pfp ??
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53_Ks7duOWtHFySS4pTDjlZ36bwfqHY-53w&s"
                   }
                   alt="Avatar 3"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
                 />
               </div>
               <span
@@ -246,8 +202,8 @@ export default async function GET(request: Request) {
         width: 1200,
         height: 630,
         fonts: [
-          { name: "AeonikBold", data: fontData, style: "normal" },
-          { name: "Benzin", data: BenzinfontData, style: "normal" },
+          { name: "AeonikBold", data: aeonikFontData, style: "normal" },
+          { name: "Benzin", data: benzinFontData, style: "normal" },
         ],
       }
     );
@@ -255,3 +211,35 @@ export default async function GET(request: Request) {
     return new Response("Failed to generate Market OG Image", { status: 500 });
   }
 }
+
+
+async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
+  const { data, error } = await SUPABASE_CLIENT.from("user_topics")
+    .select(
+      `
+        users (
+          internal_id,
+          external_auth_provider_user_id,
+          name,
+          pfp
+        )
+      `
+    )
+    .eq("topic_id", topicId)
+    .limit(5); // Limit the number of users to 5
+
+  if (error) throw new Error(error.message);
+
+  // Flatten the structure to directly get user details
+  return data.map((entry) => entry.users).flat();
+};
+
+async function getTopics(searchString: string): Promise<ITopic> {
+  const { data, error } = await SUPABASE_CLIENT.from("topics")
+    .select("*")
+    .eq("id", 2);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
