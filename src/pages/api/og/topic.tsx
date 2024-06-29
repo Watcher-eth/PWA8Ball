@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { ITopic, IUser } from "@/lib/supabase/types";
 import { ImageResponse } from "@vercel/og";
+
+import { ITopic, IUser } from "@/lib/supabase/types";
 
 import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
 import { aeonikFontDataPromise, benzinFontDataPromise } from "@/lib/fonts";

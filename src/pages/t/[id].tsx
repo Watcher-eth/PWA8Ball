@@ -6,6 +6,7 @@ import { GetServerSideProps, Metadata, ResolvingMetadata } from "next";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { NextSeo } from "next-seo";
+import { getApiOgTopicUrl, getTopicUrl } from "@/utils/urls";
 
 interface TopicPageProps {
   topicData: any;
@@ -31,16 +32,16 @@ export async function generateMetadata(
   if (error) {
     console.error(error);
   }
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/topic?id=${id}`;
+  const ogUrl = getApiOgTopicUrl(id);
   return {
     openGraph: {
       title: topicData?.title,
       description: topicData?.description,
       type: "website",
-      url: `https://pwa-8-ball.vercel.app/t/${id}`,
+      url: getTopicUrl(id),
       images: [
         {
-          url: ogUrl.toString(),
+          url: ogUrl,
           width: 1200,
           height: 630,
           alt: "Topic Cover Image",
@@ -51,7 +52,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: topicData?.title,
       description: topicData?.description,
-      images: [ogUrl.toString()],
+      images: [ogUrl],
     },
   };
 }
@@ -91,7 +92,7 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
 
   const { id, name, description, image, title, icon, topic, type, members } =
     topicData;
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/topic?id=${id}`;
+  const ogUrl = getApiOgTopicUrl(id);
 
   return (
     <div>
@@ -100,10 +101,10 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
           title: title,
           description: description,
           type: "website",
-          url: `https://pwa-8-ball.vercel.app/t/${id}`,
+          url: getTopicUrl(id),
           images: [
             {
-              url: ogUrl.toString(),
+              url: ogUrl,
               width: 1200,
               height: 630,
               alt: "Topic Cover Image",

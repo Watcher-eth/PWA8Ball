@@ -14,6 +14,7 @@ import { useAuthModalStore, useModalStore } from "@/lib/stores/ModalStore";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 import { Metadata, ResolvingMetadata } from "next";
 import { NextSeo } from "next-seo";
+import { OG_API_SPLASH_URL } from "@/utils/urls";
 
 export async function generateMetadata(
   { params },
@@ -22,7 +23,8 @@ export async function generateMetadata(
   if (error) {
     console.error(error);
   }
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/Splash`;
+  const ogUrl = OG_API_SPLASH_URL
+
   return {
     openGraph: {
       title: "Blitz",
@@ -31,7 +33,7 @@ export async function generateMetadata(
       url: `https://pwa-8-ball.vercel.app/`,
       images: [
         {
-          url: ogUrl.toString(),
+          url: ogUrl,
           width: 1200,
           height: 630,
           alt: "Splash Image",
@@ -42,13 +44,13 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: "Blitz",
       description: `Predict the future with your friends`,
-      images: [ogUrl.toString()],
+      images: [ogUrl],
     },
   };
 }
 export default function Home({ address }: { address?: string }) {
 
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/Splash`;
+  const ogUrl = OG_API_SPLASH_URL;
 
   //Lens Auth
   const { isLoginModalOpen, openLoginModal, closeLoginModal } =
@@ -65,7 +67,7 @@ export default function Home({ address }: { address?: string }) {
           url: `https://pwa-8-ball.vercel.app/`,
           images: [
             {
-              url: ogUrl.toString(),
+              url: ogUrl,
               width: 1200,
               height: 630,
               alt: "Splash Image",

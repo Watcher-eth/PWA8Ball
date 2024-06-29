@@ -1,19 +1,18 @@
-import { IUser } from "@/lib/supabase/types";
 import { ImageResponse } from "@vercel/og";
 
+import { IUser } from "@/lib/supabase/types";
 import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
 import { aeonikFontDataPromise } from "@/lib/fonts";
 
 export const runtime = "edge";
 
-
-
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id")?.slice(0, 100) || "did:privy:clutganzs01rz2oqk4vvlw1ih";
+    const id =
+      searchParams.get("id")?.slice(0, 100) ||
+      "did:privy:clutganzs01rz2oqk4vvlw1ih";
     const fontData = await aeonikFontDataPromise;
-
 
     const user = await fetchUserByExternalAuthId(id);
     return new ImageResponse(
@@ -122,8 +121,9 @@ export default async function GET(request: Request) {
   }
 }
 
-
-async function fetchUserByExternalAuthId(externalAuthId: string): Promise<IUser | null> {
+async function fetchUserByExternalAuthId(
+  externalAuthId: string
+): Promise<IUser | null> {
   const { data, error } = await SUPABASE_CLIENT.from("users")
     .select("*")
     .eq("external_auth_provider_user_id", externalAuthId)
@@ -135,4 +135,4 @@ async function fetchUserByExternalAuthId(externalAuthId: string): Promise<IUser 
   }
 
   return data;
-};
+}

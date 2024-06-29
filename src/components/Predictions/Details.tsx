@@ -45,6 +45,18 @@ const BetDetails = ({
     }
   }
 
+  const linkArgs = {
+    pathname: getTopicPath(topicId),
+    query: {
+      id: topicId,
+      name: topic,
+      description: question,
+      image: icon,
+      topic,
+      members,
+    },
+  };
+
   return (
     <div className="flex flex-col w-full p-4 pb-2 mb-2">
       <div className="flex flex-row w-full items-center">
@@ -83,33 +95,9 @@ const BetDetails = ({
         style={{ borderRadius: 12 }}
         className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
         whileTap={{ scale: 0.95 }}
-        onClick={() =>
-          router.push({
-            pathname: `/t/${topicId}`,
-            query: {
-              id: topicId,
-              name: topic,
-              description: question,
-              image: icon,
-              topic,
-              members,
-            },
-          })
-        }
+        onClick={() => router.push(linkArgs)}
       >
-        <Link
-          href={{
-            pathname: `/t/${topicId}`,
-            query: {
-              id: topicId,
-              name: topic,
-              description: question,
-              image: icon,
-              topic,
-              members,
-            },
-          }}
-        >
+        <Link href={linkArgs}>
           <div className="flex flex-row items-center">
             {icon ? (
               <img
@@ -137,34 +125,10 @@ const BetDetails = ({
             joined ? "bg-white" : "bg-transparent"
           }`}
           whileTap={{ scale: 0.95 }}
-          onClick={() =>
-            router.push({
-              pathname: `/t/${topicId}`,
-              query: {
-                id: topicId,
-                name: topic,
-                description: question,
-                image: icon,
-                topic,
-                members,
-              },
-            })
-          }
+          onClick={() => router.push(linkArgs)}
           style={{ borderRadius: 20 }}
         >
-          <Link
-            href={{
-              pathname: `/t/${topicId}`,
-              query: {
-                id: topicId,
-                name: topic,
-                description: question,
-                image: icon,
-                topic,
-                members,
-              },
-            }}
-          >
+          <Link href={linkArgs}>
             <span
               className={`text-md font-bold ${
                 joined ? "text-gray-200" : "text-white"

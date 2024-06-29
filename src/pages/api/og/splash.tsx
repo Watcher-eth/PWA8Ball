@@ -1,9 +1,8 @@
 // @ts-nocheck
 
-import { IMarketWithTopicDetails } from "@/lib/supabase/queries/getTrendingMarkets";
-import { IUser } from "@/lib/supabase/types";
-
 import { ImageResponse } from "@vercel/og";
+
+import { IMarketWithTopicDetails } from "@/lib/supabase/queries/getTrendingMarkets";
 import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
 import { aeonikFontDataPromise, benzinFontDataPromise } from "@/lib/fonts";
 
@@ -11,7 +10,7 @@ export const runtime = "edge";
 
 export default async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    // const { searchParams } = new URL(request.url);
     const [aeonikFontData, benzinFontData] = await Promise.all([
       aeonikFontDataPromise,
       benzinFontDataPromise,

@@ -14,6 +14,7 @@ import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserB
 import Head from "next/head";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { NextSeo } from "next-seo";
+import { getApiOgRouteUrl } from "@/utils/urls";
 
 interface ProfilePageProps {
   userId: string;
@@ -40,7 +41,7 @@ export async function generateMetadata(
   if (error) {
     console.error(error);
   }
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/route?id=${id}`;
+  const ogUrl = getApiOgRouteUrl(id) ;
   return {
     openGraph: {
       title: userData?.name,
@@ -90,7 +91,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       handleOpenLoginModal();
     }
   }, []);
-  const ogUrl = `https://pwa-8-ball.vercel.app/api/og/route?id=${userId}`;
+  const ogUrl = getApiOgRouteUrl(userId);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
