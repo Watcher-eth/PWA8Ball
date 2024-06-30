@@ -9,7 +9,7 @@ import Leaderboard from "./Leaderboard";
 import YourStats from "./YourStats";
 import { useGetFollowingPredictions } from "@/lib/supabase/queries/friends/fetchFollowingPredictionts";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { groupPredictionsByDate } from "@/utils/groupPredictions";
+import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
 import InviteFriendsPlaceholder from "../Common/Placeholders/InviteFriendsPlaceholder";
 import FollowPredictionSkeleton, {
   skeletonVariants,

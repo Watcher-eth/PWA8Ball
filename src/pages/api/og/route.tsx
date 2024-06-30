@@ -1,48 +1,20 @@
-import { IUser } from "@/lib/supabase/types";
-import { createClient } from "@supabase/supabase-js";
 import { ImageResponse } from "@vercel/og";
+
+import { IUser } from "@/lib/supabase/types";
+import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
+import { aeonikFontDataPromise } from "@/lib/fonts";
 
 export const runtime = "edge";
 
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id")?.slice(0, 100) || "did:privy:clutganzs01rz2oqk4vvlw1ih";
-    const fontData = await fetch(
-      new URL("../../../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    const id =
+      searchParams.get("id")?.slice(0, 100) ||
+      "did:privy:clutganzs01rz2oqk4vvlw1ih";
+    const fontData = await aeonikFontDataPromise;
 
-    const supabaseUrl = "https://qcdmlllkzdjajrdtmthk.supabase.co";
-    const supabaseAnonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjZG1sbGxremRqYWpyZHRtdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEwNDc4NDYsImV4cCI6MjAyNjYyMzg0Nn0.GoF1Ppedn6Yyxxr3tjvSzugQECmt6DRJemrLdf9HVLw";
-
-    const supabase = createClient(supabaseUrl!, supabaseAnonKey!, {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true, // This is generally true for web to handle OAuth redirects
-      },
-    });
-
-    const fetchUserByExternalAuthId = async (
-      externalAuthId: string
-    ): Promise<IUser | null> => {
-      const { data, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("external_auth_provider_user_id", externalAuthId)
-        .single(); // Using .single() because we expect at most one record
-
-      if (error) {
-        console.error("Fetch User By External Auth ID Error:", error.message);
-        throw new Error(error.message);
-      }
-
-      return data;
-    };
-    const user = await fetchUserByExternalAuthId(
-      id
-    );
+    const user = await fetchUserByExternalAuthId(id);
     return new ImageResponse(
       (
         <div
@@ -147,4 +119,20 @@ export default async function GET(request: Request) {
   } catch (e) {
     return new Response("Failed to generate Market OG Image", { status: 500 });
   }
+}
+
+async function fetchUserByExternalAuthId(
+  externalAuthId: string
+): Promise<IUser | null> {
+  const { data, error } = await SUPABASE_CLIENT.from("users")
+    .select("*")
+    .eq("external_auth_provider_user_id", externalAuthId)
+    .single(); // Using .single() because we expect at most one record
+
+  if (error) {
+    console.error("Fetch User By External Auth ID Error:", error.message);
+    throw new Error(error.message);
+  }
+
+  return data;
 }

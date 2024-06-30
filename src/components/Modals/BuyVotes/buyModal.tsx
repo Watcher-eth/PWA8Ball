@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { Copy } from "lucide-react";
-import { copyTextToClipboard } from "@/utils/copyToClipboard";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 import { SwapWidget } from "@uniswap/widgets";
 import "@uniswap/widgets/fonts.css";
 import { useUserStore } from "@/lib/stores/UserStore";
@@ -120,7 +120,7 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
             whileHover={{ scale: 1.4 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => {
-              navigator.clipboard.writeText(user?.walletaddress);
+              copyToClipboard(user?.walletaddress);
             }}
           >
             <Copy className="mt-[0.1rem]" size={18} strokeWidth={3} />
@@ -165,7 +165,7 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
-            navigator.clipboard.writeText(user?.walletaddress);
+            copyToClipboard(user?.walletaddress);
           }}
         >
           <Button className="active:bg-[#1D1D1D] space-x-1 flex items-center text-[#D9D9D9] hover:bg-[#1D1D1D] bg-[#1D1D1D] text-[1.15rem] text-white font-bold  h-[2.9rem] rounded-full w-[40vw]">

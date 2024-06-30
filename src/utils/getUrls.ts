@@ -1,4 +1,4 @@
-export const Regex = {
+export const REGEX = {
   // modified version of https://stackoverflow.com/a/6041965/961254 to support unicode international characters
   url: /\b(http|https):\/\/([\p{L}\p{N}_-]+(?:(?:\.[\p{L}\p{N}_-]+)+))([\p{L}\p{N}_.,@?^=%&:\/~+#-]*[\p{L}\p{N}_@?^=%&\/~+#-])/gu,
   mention: /@[\w.\-]{1,30}[\w-]/g,
@@ -9,17 +9,16 @@ export const Regex = {
 
   gm: /\bgm\b/i,
 };
+
 /**
  * Returns an array of URLs found in the specified text.
  *
  * @param text The text to get URLs from.
  * @returns An array of URLs.
  */
-const getURLs = (text: string): string[] => {
+export default function getURLs(text: string): string[] {
   if (!text) {
     return [];
   }
-  return text.match(Regex.url) || [];
-};
-
-export default getURLs;
+  return text.match(REGEX.url) || [];
+};;

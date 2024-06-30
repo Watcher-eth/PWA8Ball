@@ -2,6 +2,7 @@
 
 import Head from "next/head";
 import type { Metadata, ResolvingMetadata } from "next";
+import { getMarketPreviewUrl, getMarketUrl } from '@/utils/urls';
 
 type Props = {
   params: { id: string };
@@ -52,10 +53,10 @@ export async function generateMetadata(
     openGraph: {
       title: title,
       description: market.question,
-      url: `https://tryblitz.xyz/market/${id}`,
+      url: getMarketUrl(id),
       images: [
         {
-          url: `https://tryblitz.xyz/api/marketPreview?id=${id}`, // Use the API endpoint to generate the image
+          url: getMarketPreviewUrl(id),
           width: 1200,
           height: 630,
         },
@@ -66,7 +67,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: title,
       description: market.question,
-      images: [`https://tryblitz.xyz/api/marketPreview?id=${id}`],
+      images: [getMarketPreviewUrl(id)],
     },
   };
 }
