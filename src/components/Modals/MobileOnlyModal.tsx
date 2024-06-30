@@ -4,35 +4,22 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
-import { Button } from "../ui/button";
+} from "../ui/drawer.tsx";
+import { Button } from "../ui/button.tsx";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
+import { AspectRatio } from "../ui/aspect-ratio.tsx";
 import Image from "next/image";
 import { toast } from "sonner";
 import ShareBetModal from "../Share/ShareBet.tsx";
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
-import { Toaster } from "../ui/sonner";
+import { Toaster } from "../ui/sonner.tsx";
+import { MobileOnly } from "@/components/Common/MobileOnly";
 
 interface ShareModal {
-  children: ReactNode;
-  id: string;
-  title: string;
-  image: string;
-  topic: string;
-  question: string;
-  options: string;
+  open: boolean;
 }
-function ShareModal({
-  children,
-  id,
-  title,
-  image,
-  topic,
-  question,
-  options,
-}: ShareModal) {
+function MobileOnlyModal({ open }: ShareModal) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -53,16 +40,7 @@ function ShareModal({
 
   return (
     <div>
-      <Drawer>
-        <DrawerTrigger>
-          <motion.div
-            whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
-            className="mt-[1rem]"
-          >
-            {children}
-          </motion.div>
-        </DrawerTrigger>
+      <Drawer open={open}>
         <Toaster
           position="top-center"
           style={{ zIndex: 100 }}
@@ -75,16 +53,9 @@ function ShareModal({
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
             className="bg-white rounded-3xl  
-        h-[90vh] mb-5 w-[100vw] relative"
+        h-[100vh] mb-5 w-[100vw] relative"
           >
-            <ShareBetModal
-              id={id}
-              title={title}
-              image={image}
-              topic={topic}
-              question={question}
-              options={options}
-            />
+            <MobileOnly />
           </motion.div>
         </DrawerContent>
       </Drawer>
@@ -92,4 +63,4 @@ function ShareModal({
   );
 }
 
-export default ShareModal;
+export default MobileOnlyModal;

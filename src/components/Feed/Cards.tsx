@@ -159,7 +159,13 @@ function Cards(props: {
                       className="p-2 rounded-full backdrop-blur-lg "
                     />
                   </DrawerClose>
-                  <ShareModal>
+                  <ShareModal
+                    image={image}
+                    title={title}
+                    question={description}
+                    topic={subject}
+                    options={[optionB, optionA]}
+                  >
                     <Share
                       size={33}
                       strokeWidth={3.3}
@@ -248,7 +254,7 @@ function Cards(props: {
                 }}
                 className="text-[1.05rem] self-start mb-[-1] mt-1  mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5 "
               >
-                {market?.question}
+                {description}
               </div>
               <div
                 style={{ zIndex: 2 }}

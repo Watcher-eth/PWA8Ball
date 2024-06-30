@@ -14,11 +14,14 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 import withDeviceCheck from "@/components/Common/MobileOnly";
+import amplitude from "amplitude-js";
 
 export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const WrappedComponent = withDeviceCheck(Component);
+
+  amplitude.getInstance().init("YOUR_API_KEY");
 
   return (
     <QueryClientProvider client={queryClient}>

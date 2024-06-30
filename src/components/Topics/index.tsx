@@ -63,7 +63,12 @@ const FeaturedBet = ({
         <div className="flex flex-col no-scrollbar p-4 mt-[-1.5rem]">
           <h1
             className="text-[2.3rem] text-white font-bold"
-            style={{ zIndex: 10, fontFamily: "Benzin-Bold" }}
+            style={{
+              zIndex: 10,
+              lineHeight: name?.length < 17 ? "2.2rem" : "1.6rem",
+              fontSize: name?.length < 17 ? "2.3rem" : "1.7rem",
+              fontFamily: "Benzin-Bold",
+            }}
           >
             {name}
           </h1>

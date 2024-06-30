@@ -70,21 +70,26 @@ export function MobileOnly() {
 
 // components/withDeviceCheck.js
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isMobile } from "@/utils/isMobile";
+import MobileOnlyModal from "@/components/Modals/MobileOnlyModal";
 
 const withDeviceCheck = (WrappedComponent) => {
   const Wrapper = (props) => {
     const router = useRouter();
-
+    const [open, setOpen] = useState(false);
     useEffect(() => {
       if (!isMobile()) {
-        router.replace("/mobileOnly");
+        setOpen(true);
       }
     }, [router]);
 
-    return <WrappedComponent {...props} />;
+    return (
+      <WrappedComponent {...props}>
+        <MobileOnlyModal open={open} />
+      </WrappedComponent>
+    );
   };
 
   return Wrapper;

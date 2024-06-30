@@ -27,13 +27,9 @@ const RelatedMarkets = (props: { topicId: string; id: number }) => {
                 key={index}
                 onClick={() =>
                   router.push({
-                    pathname: `/market/${item.id}`,
+                    pathname: `/p/${item.id}`,
                     query: {
-                      name: item.title,
-                      description: item.question,
-                      icon: item.topic_image,
-                      image: item.image,
-                      topic: item.topic_title,
+                      id: item.id,
                     },
                   })
                 }
