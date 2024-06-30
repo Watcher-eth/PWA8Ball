@@ -23,7 +23,7 @@ export const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   const WrappedComponent = withDeviceCheck(Component);
 
-  amplitude.getInstance().init("YOUR_API_KEY");
+  // amplitude.getInstance().init("YOUR_API_KEY");
 
   return (
     <QueryClientProvider client={queryClient}>
