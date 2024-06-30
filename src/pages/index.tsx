@@ -16,38 +16,38 @@ import { Metadata, ResolvingMetadata } from "next";
 import { NextSeo } from "next-seo";
 import { OG_API_SPLASH_URL } from "@/utils/urls";
 
-export async function generateMetadata(
-  { params },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  if (error) {
-    console.error(error);
-  }
-  const ogUrl = OG_API_SPLASH_URL
+// export async function generateMetadata(
+//   { params },
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   if (error) {
+//     console.error(error);
+//   }
+//   const ogUrl = OG_API_SPLASH_URL
 
-  return {
-    openGraph: {
-      title: "Blitz",
-      description: `Predict the future with your friends`,
-      type: "website",
-      url: `https://pwa-8-ball.vercel.app/`,
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: "Splash Image",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Blitz",
-      description: `Predict the future with your friends`,
-      images: [ogUrl],
-    },
-  };
-}
+//   return {
+//     openGraph: {
+//       title: "Blitz",
+//       description: `Predict the future with your friends`,
+//       type: "website",
+//       url: `https://pwa-8-ball.vercel.app/`,
+//       images: [
+//         {
+//           url: ogUrl,
+//           width: 1200,
+//           height: 630,
+//           alt: "Splash Image",
+//         },
+//       ],
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: "Blitz",
+//       description: `Predict the future with your friends`,
+//       images: [ogUrl],
+//     },
+//   };
+// }
 export default function Home({ address }: { address?: string }) {
 
   const ogUrl = OG_API_SPLASH_URL;
@@ -58,28 +58,28 @@ export default function Home({ address }: { address?: string }) {
   return (
     <SmartAccountProvider>
       <NextSeo
-      title="Blitz"
-      description="Predict the future with your friends"
-        openGraph={{
-          title: "Blitz",
-          description: `Predict the future with your friends`,
-          type: "website",
-          url: `https://pwa-8-ball.vercel.app/`,
-          images: [
-            {
-              url: ogUrl,
-              width: 1200,
-              height: 630,
-              alt: "Splash Image",
-            },
-          ],
-        }}
-        twitter={{
-          handle: "@tryblitz",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      />
+        title="Blitz"
+        description="Predict the future with your friends"
+          openGraph={{
+            title: "Blitz",
+            description: `Predict the future with your friends`,
+            type: "website",
+            url: `https://pwa-8-ball.vercel.app/`,
+            images: [
+              {
+                url: ogUrl,
+                width: 1200,
+                height: 630,
+                alt: "Splash Image",
+              },
+            ],
+          }}
+          twitter={{
+            handle: "@tryblitz",
+            site: "@site",
+            cardType: "summary_large_image",
+          }}
+        />
       <div className="flex flex-col items-center py-2 min-h-screen  bg-[#101010]">
         <CardFeed />
         <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />

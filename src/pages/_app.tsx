@@ -17,6 +17,7 @@ import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 import withDeviceCheck from "@/components/Common/MobileOnly";
 import amplitude from "amplitude-js";
+import { OG_API_SPLASH_URL } from "@/utils/urls";
 
 export const queryClient = new QueryClient();
 
@@ -60,6 +61,9 @@ export default function App({ Component, pageProps }: AppProps) {
               name="viewport"
               content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
             />
+            <meta property="og:image" content={OG_API_SPLASH_URL} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
             <link
               rel="apple-touch-icon"
               sizes="180x180"
