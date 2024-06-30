@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP.tsx";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import BoostExplainerModal from "../Modals/Tutorials/BoostExplainer.tsx";
+import { getTopicPath } from "@/utils/urls/index.ts";
 
 const BetDetails = ({
   endDate,
