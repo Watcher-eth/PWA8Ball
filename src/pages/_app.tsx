@@ -22,6 +22,7 @@ import { OG_API_SPLASH_URL } from "@/utils/urls";
 export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log({pageProps})
   const WrappedComponent = withDeviceCheck(Component);
 
   // amplitude.getInstance().init("YOUR_API_KEY");
