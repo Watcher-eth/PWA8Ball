@@ -35,7 +35,7 @@ export default function AuthChecker({
 
   if (!ready) {
     console.log("isLoading");
-    return <>{children}</>; // Show nothing while loading
+    return <></>; // Show nothing while loading
   }
 
   if (requireAuth && !authenticated) {
