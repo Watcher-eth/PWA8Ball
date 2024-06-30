@@ -8,6 +8,7 @@ import { BetBigView, BetSmallView } from "./BetViews"; // Adjust import path as 
 import { Users, ChevronLeft, Share, Star, Newspaper, Plus } from "lucide-react";
 import { useGetMarketsForTopic } from "@/lib/supabase/queries/getAllMarketsForTopic";
 import { useGetMembersForTopic } from "@/lib/supabase/mutations/topics/getMemberForTopic";
+import ShareTopicModal from "../Modals/ShareTopicModal";
 
 const FeaturedBet = ({
   name,
@@ -46,12 +47,22 @@ const FeaturedBet = ({
         >
           <Star color="white" size={20} strokeWidth={3} />
         </button>
-        <button
-          onClick={() => router.push("/shareCommunity")}
-          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-4 z-10"
+
+        <ShareTopicModal
+          image={image}
+          title={name}
+          question={description}
+          topic={id}
+          members={membersProfiles}
+          markets={markets.length}
         >
-          <Share color="white" size={19} strokeWidth={4} />
-        </button>
+          <Share
+            size={33}
+            strokeWidth={3.3}
+            style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
+            className=" bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-4 z-10 "
+          />
+        </ShareTopicModal>
         <motion.div
           className="w-[100vw] h-[35vh] bg-cover bg-center"
           style={{ backgroundImage: `url(${image})` }}

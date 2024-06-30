@@ -1,115 +1,263 @@
 // @ts-nocheck
 
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import { ChevronLeft } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useGetLeaderboardForTopic } from "@/lib/supabase/queries/leaderboard/fetchLeaderBoardForTopic";
 
 const Leaderboard = ({ topicId }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const topPredictors = []; // Mock data
-  const error = null; // Mock error
+  const router = useRouter();
+
+  const {
+    data: topPredictors,
+    error,
+    isLoading,
+  } = useGetLeaderboardForTopic(topicId);
 
   if (isLoading) {
     return (
-      <div className="flex flex-col mt-2">
-        <div className="flex flex-row justify-between items-center mb-2">
-          <span className="text-white font-bold">Name</span>
-          <span className="text-white font-bold">At stake</span>
-        </div>
-        {[1, 2, 3, 4].map((index) => (
-          <motion.div
-            key={index}
-            className="flex flex-row justify-between items-center mb-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+      <div style={{ display: "flex", flexDirection: "column", marginTop: 7 }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              margin: "12px 0",
+            }}
           >
-            <div className="flex flex-row items-center">
-              <span className="text-white font-bold">{index + 1}</span>
-              <div className="h-8 w-8 bg-gray-600 rounded-full ml-2"></div>
-              <div className="h-4 w-20 bg-gray-600 ml-2 rounded"></div>
+            <span
+              style={{ color: "white", fontFamily: "AeonikBold", fontSize: 15 }}
+            >
+              Name
+            </span>
+            <span
+              style={{ color: "white", fontFamily: "AeonikBold", fontSize: 15 }}
+            >
+              At stake
+            </span>
+          </div>
+          {[1, 2, 3, 4].map((index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                margin: "10px 0",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ color: "white", fontFamily: "AeonikBold" }}>
+                  {index + 1}
+                </span>
+                <div style={{ margin: "0 18px", marginLeft: 10 }}>
+                  <Skeleton className="w-30 h-30 rounded-full" />
+                </div>
+                <Skeleton className="h-17 w-40" />
+              </div>
+              <Skeleton className="h-14 w-25" />
             </div>
-            <div className="h-4 w-12 bg-gray-600 rounded"></div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <span className="text-white">An error occurred: {error.message}</span>
+      <span style={{ color: "white" }}>An error occurred: {error.message}</span>
     );
   }
 
-  if (topPredictors.length === 0) {
+  if (!topPredictors) {
     return (
-      <div className="mt-2">
-        <div className="h-64 bg-gray-700 rounded-lg"></div>
+      <div style={{ marginTop: 8 }}>
+        <Skeleton className="w-full h-[600px] rounded-lg" />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col mt-2">
-      <div className="flex flex-row justify-between items-center mb-2">
-        <span className="text-white font-bold">Name</span>
-        <span className="text-white font-bold">At stake</span>
-      </div>
-      {topPredictors.map((predictor, index) => (
-        <motion.div
-          key={index}
-          className="flex flex-row justify-between items-center mb-2"
-          whileHover={{ scale: 1.02 }}
-          onClick={() => router.push(`/profile/${predictor.user_id}`)}
+    <div style={{ display: "flex", flexDirection: "column", marginTop: 7 }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "12px 0",
+          }}
         >
-          <div className="flex flex-row items-center">
-            <span className="text-white font-bold">{index + 1}</span>
-            <img
-              src={predictor.pfp}
-              alt="Avatar"
-              className="h-8 w-8 rounded-full ml-2"
-            />
-            <span className="text-white ml-2">{predictor.name}</span>
-          </div>
-          <span className="text-lightgray">
-            {(predictor.total_amount / 1000000).toFixed(2)}
+          <span
+            style={{ color: "white", fontFamily: "AeonikBold", fontSize: 15 }}
+          >
+            Name
           </span>
-        </motion.div>
-      ))}
+          <span
+            style={{ color: "white", fontFamily: "AeonikBold", fontSize: 15 }}
+          >
+            At stake
+          </span>
+        </div>
+        {topPredictors.map((predictor, index) => (
+          <div
+            onClick={() => router.push(`/profile?id=${predictor.user_id}`)}
+            key={index}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              margin: "7px 0",
+              cursor: "pointer",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ color: "white", fontFamily: "AeonikBold" }}>
+                {index + 1}
+              </span>
+              <img
+                src={predictor.pfp}
+                alt="Profile"
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: "50%",
+                  margin: "0 20px",
+                  marginLeft: 10,
+                }}
+              />
+              <span
+                style={{
+                  color: "white",
+                  fontFamily: "AeonikBold",
+                  fontSize: 17,
+                }}
+              >
+                {predictor.name}
+              </span>
+            </div>
+            <span
+              style={{
+                color: "lightgray",
+                fontFamily: "AeonikRegular",
+                fontSize: 15,
+              }}
+            >
+              ${(predictor.total_amount / 1000000).toFixed(2)}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 const TopicLeaderboard = ({ image, name, topicId }) => {
   const router = useRouter();
-  const { width, height } = {
-    width: window.innerWidth,
-    height: window.innerHeight,
-  };
 
   return (
-    <div className="flex flex-col w-full p-5 bg-[#101010]" style={{ height }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        padding: 20,
+        paddingTop: 75,
+        backgroundColor: "#101010",
+        height: "100vh",
+        position: "relative",
+      }}
+    >
       <img
         src={image}
-        alt="Topic Image"
-        className="absolute top-0 w-full h-20 object-cover"
+        alt="Topic"
+        style={{ position: "absolute", top: 0, width: width, height: 88 }}
       />
-      <div className="absolute top-0 w-full h-20 bg-gradient-to-b from-transparent to-[#101010]"></div>
-      <div className="flex flex-row justify-between items-center mb-4">
-        <button
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          height: 88,
+          backdropFilter: "blur(20px)",
+        }}
+      />
+      <div
+        style={{
+          background:
+            "linear-gradient(0deg, #101010 0%, rgba(10,10,10,0.9) 25%, rgba(10,10,10,0.8) 50%, rgba(10,10,10,0.7) 75%, transparent 100%)",
+          position: "absolute",
+          top: 0,
+          width: "100%",
+          height: 88,
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 10,
+          gap: 7,
+        }}
+      >
+        <div
+          style={{
+            padding: 6,
+            borderRadius: 20,
+            backgroundColor: "#1C1C1E",
+            cursor: "pointer",
+          }}
           onClick={() => router.back()}
-          className="p-2 rounded-full bg-gray-700"
         >
-          <span className="text-white">←</span>
-        </button>
-        <h1 className="text-xl text-white font-bold">{name} Leaderboard</h1>
-        <img src={image} alt="Topic Icon" className="h-8 w-8 rounded-full" />
+          <ChevronLeft color={"white"} strokeWidth={5} size={19} />
+        </div>
+
+        <span
+          style={{
+            fontSize: name.length < 22 ? 20 : 17,
+            color: "white",
+            fontWeight: "700",
+            fontFamily: "AeonikBold",
+          }}
+        >
+          {name} Leaderboard
+        </span>
+        <img
+          src={image}
+          alt="Topic"
+          style={{
+            height: 30,
+            width: 30,
+            overflow: "hidden",
+            borderRadius: "50%",
+          }}
+        />
       </div>
-      <motion.div className="overflow-auto">
+
+      <div style={{ overflowY: "scroll", width: "100%" }}>
         <Leaderboard topicId={topicId} />
-      </motion.div>
+      </div>
     </div>
   );
 };

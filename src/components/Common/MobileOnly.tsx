@@ -81,6 +81,7 @@ const withDeviceCheck = (WrappedComponent) => {
     const [open, setOpen] = useState(false);
     useEffect(() => {
       if (!isMobile()) {
+        console.log("is not mobile");
         setOpen(true);
       }
     }, [router]);
