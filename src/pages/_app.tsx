@@ -23,7 +23,7 @@ export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   console.log({pageProps})
-  const WrappedComponent = withDeviceCheck(Component);
+  // const WrappedComponent = withDeviceCheck(Component);
 
   // amplitude.getInstance().init("YOUR_API_KEY");
 
@@ -46,7 +46,8 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <AuthChecker>
           <Layout>
-            <WrappedComponent {...pageProps} />
+            {/* <WrappedComponent {...pageProps} /> */}
+            <Component {...pageProps} />
           </Layout>
         </AuthChecker>
       </PrivyProvider>
