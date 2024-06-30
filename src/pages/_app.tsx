@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { polygon, polygonMumbai } from "viem/chains";
 const chains = [polygon, polygonMumbai];
 
-import { APP_DESCRIPTION, APP_NAME, network } from "@/utils/consts";
+import { APP_DESCRIPTION, APP_NAME, network } from "@/utils/constants";
 import { LocalStorageProvider } from "@/lib/shared/LocalStorageProvider";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
