@@ -9,13 +9,24 @@ export function getTopicPath(topicId: string) {
   return `/t/${topicId}` as const;
 }
 
+export function getProfilePath(userId: string) {
+  return `/profile/${userId}` as const;
+}
+
+export function getMarketPath(id: string) {
+  return `/market/${id}` as const;
+}
+
 export function getMarketPreviewUrl(id: string) {
   return `${BASE_URL}/api/marketPreview?id=${id}` as const;
 }
 
+export function getProfileUrl(userId: string) {
+  return `${PWA_URL}${getProfilePath(userId)}` as const;
+}
 
 export function getMarketUrl(id: string) {
-  return `${BASE_URL}/market/${id}` as const;
+  return `${BASE_URL}${getMarketPath(id)}` as const;
 }
 
 
