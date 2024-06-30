@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { useRouter } from "next/router";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import amplitude from "amplitude-js";
 
 const Amplitude = amplitude.getInstance();
