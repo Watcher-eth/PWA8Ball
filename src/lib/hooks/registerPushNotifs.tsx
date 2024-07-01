@@ -1,54 +1,50 @@
+// src/utils/registerForPushNotifications.js
 // @ts-nocheck
 
-import * as Notifications from "expo-notifications";
-import { useEffect } from "react";
-import { supabase } from "../drizzle/drizzle/supabase/supabaseClient";
-import Constants from "expo-constants";
+import { supabase } from "../supabase/supabaseClient";
 
-export async function registerForPushNotificationsAsync(userId: string) {
-  const { status: existingStatus } = await Notifications.getPermissionsAsync();
-  let finalStatus = existingStatus;
-  if (existingStatus !== "granted") {
-    console.log("Granted already");
+const applicationServerPublicKey = "YOUR_PUBLIC_VAPID_KEY";
 
-    const { status } = await Notifications.requestPermissionsAsync();
-    finalStatus = status;
+function urlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, "+")
+    .replace(/_/g, "/");
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
   }
-  if (finalStatus !== "granted") {
-    alert("Failed to get push token for push notification!");
-    return;
-  }
-  console.log("After if and before token");
-  const projectId =
-    Constants.expoConfig?.extra?.eas?.projectId ||
-    Constants.easConfig?.projectId;
-  if (!projectId) {
-    console.error("Project ID not found");
-    return;
-  }
-
-  // Fetch the Expo push token
-  const { data: tokenData } = await Notifications.getExpoPushTokenAsync({
-    projectId,
-  });
-  const token = tokenData;
-  console.log("Push token:", token);
-  console.log(token);
-
-  // Use the userId parameter when inserting the token to Supabase
-  const { data, error } = await supabase
-    .from("push_tokens")
-    .insert([{ token, user_id: userId }]);
-
-  console.log("After store", data);
-
-  if (error) {
-    console.error("Error saving token to Supabase", error);
-  } else {
-    // You can add any success logic here, for example:
-    alert("Notifications have been turned on.");
-  }
+  return outputArray;
 }
 
-// Example: Assuming you're calling this inside a component
-// and the userId is obtained from somewhere like the app's auth state
+export async function registerForPushNotificationsAsync(userId: string) {
+  if ("serviceWorker" in navigator && "PushManager" in window) {
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(applicationServerPublicKey),
+      });
+
+      const token = JSON.stringify(subscription);
+      console.log("Push token:", token);
+
+      const { data, error } = await supabase
+        .from("push_tokens")
+        .insert([{ token, user_id: userId }]);
+
+      if (error) {
+        console.error("Error saving token to Supabase", error);
+      } else {
+        alert("Notifications have been turned on.");
+      }
+    } catch (error) {
+      console.error("Error during subscription to push notifications", error);
+    }
+  } else {
+    console.warn("Push messaging is not supported");
+  }
+}

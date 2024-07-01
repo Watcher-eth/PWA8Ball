@@ -25,7 +25,7 @@ const FollowPredictionSkeleton: React.FC<FollowPredictionSkeletonProps> = ({
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 20 }}
     transition={{ delay: index * 0.2 }}
-    className="flex flex-row w-full items-center justify-between p-2 bg-[#101010] rounded-[15px] my-2"
+    className="flex flex-row w-full items-center justify-between p-2 bg-[#171717] rounded-[15px] my-2"
   >
     <motion.div
       className="flex flex-row items-center gap-3"

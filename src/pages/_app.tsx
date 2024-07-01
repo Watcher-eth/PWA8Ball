@@ -17,6 +17,7 @@ import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 import withDeviceCheck from "@/components/Common/MobileOnly";
 import amplitude from "amplitude-js";
+import { useServiceWorker } from "@/lib/hooks/useServiceWorker"; // Import the hook
 
 export const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const WrappedComponent = withDeviceCheck(Component);
 
   // amplitude.getInstance().init("YOUR_API_KEY");
+  useServiceWorker(); // Use the custom hook
 
   return (
     <QueryClientProvider client={queryClient}>

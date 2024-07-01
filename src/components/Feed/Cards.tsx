@@ -10,37 +10,20 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import VotingModal from "../Modals/BuyVotes/index";
 import { ArrowLeft, Share } from "lucide-react";
 import ShareModal from "../Modals/ShareModal";
-import Qourum from "./Qourum";
 import BetDetails from "../Predictions/Details";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import BettersOverviewModal from "../Predictions/Betters/OverviewModal";
-import { getUserOperationByHash } from "permissionless";
 import CommentSection from "../Posts/Comments/CommentSection";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useUserStore } from "@/lib/stores/UserStore";
-import LoginModal from "../Modals/LoginModal";
 import RelatedMarkets from "../Predictions/RelatedMarkets";
-function Cards(props: {
-  image: string;
-  title: string;
-  description: string;
-  icon: string;
-  subject: string;
-  stake: number;
-  id: number;
-  multiplier: number;
-  topicId: string;
-  optionA: { name: string; multiplier: number; odds: number };
-  optionB: { name: string; multiplier: number; odds: number };
-  topicBio: string;
-  handleOpen: () => void;
-}) {
+
+function Cards(props) {
   const {
     image,
     title,
@@ -90,7 +73,7 @@ function Cards(props: {
   return (
     <LayoutGroup>
       <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>
-        <Drawer>
+        <Drawer disablePreventScroll={false}>
           <DrawerTrigger asChild>
             <motion.div
               onClick={() => setIsDrawerOpen(true)}
@@ -141,22 +124,22 @@ function Cards(props: {
               </div>
             </motion.div>
           </DrawerTrigger>
-          <DrawerContent className=" border-0 rounded-3xl items-center  self-center">
+          <DrawerContent className=" flex flex-col fixed  max-h-[103%] border-0 rounded-3xl items-center self-center">
             <motion.div
               onClick={() => setIsDrawerOpen(false)}
-              className="bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
+              className="bg-[#070707] w-[100vw] overflow-auto flex flex-col"
             >
               <div className="relative h-[100vw]">
                 <div
                   style={{ zIndex: 2 }}
-                  className="flex items-center absolute top-3  justify-between px-6 py-2  w-[100vw]"
+                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-[100vw]"
                 >
                   <DrawerClose>
                     <ArrowLeft
                       strokeWidth={3.8}
                       size={33}
                       style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-                      className="p-2 rounded-full backdrop-blur-lg "
+                      className="p-2 rounded-full backdrop-blur-lg"
                     />
                   </DrawerClose>
                   <ShareModal
@@ -170,7 +153,7 @@ function Cards(props: {
                       size={33}
                       strokeWidth={3.3}
                       style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-                      className="p-2 rounded-full backdrop-blur-xl "
+                      className="p-2 rounded-full backdrop-blur-xl"
                     />
                   </ShareModal>
                 </div>
@@ -182,7 +165,7 @@ function Cards(props: {
                   />
                   <div
                     style={{ zIndex: 2 }}
-                    className="h-[40vw] w-[100vw]    bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
+                    className="h-[40vw] w-[100vw] bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
                   />
                 </motion.div>
               </div>
@@ -194,22 +177,22 @@ function Cards(props: {
                   fontSize:
                     title?.length < 15 ? 35 : title?.length < 21 ? 32 : 26,
                 }}
-                className=" pr-10 mt-[-3.8rem] self-start text-start mb-[-0.7rem]  pl-5 pb-0 p-3 text-white text-bold"
+                className="pr-10 mt-[-3.8rem] self-start text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white text-bold"
               >
                 {title}
               </div>
 
-              <div className="flex justify-between  mt-4  items-center w-[88vw] mx-5">
+              <div className="flex justify-between mt-4 items-center w-[88vw] mx-5">
                 <div className="flex flex-col">
                   <div
                     style={{ zIndex: 2, fontFamily: "Aeonik-Bold" }}
-                    className="text-[0.85rem]  text-gray-200 text-bold"
+                    className="text-[0.85rem] text-gray-200 text-bold"
                   >
                     At stake
                   </div>
                   <div
                     style={{ zIndex: 2, fontFamily: "Aeonik-Bold" }}
-                    className="text-[1.6rem] mt-[-0.25rem]  text-white flex items-center "
+                    className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center"
                   >
                     <div> ${stake ? (stake / 100000).toFixed(2) : "0.00"}</div>
                   </div>
@@ -243,7 +226,7 @@ function Cards(props: {
               </div>
               <div
                 style={{ zIndex: 20 }}
-                className="h-2 w-[100%] color-gray-300  bg-[gray] mx-5 rounded-full"
+                className="h-2 w-[100%] color-gray-300 bg-[gray] mx-5 rounded-full"
               />
 
               <div
@@ -252,13 +235,13 @@ function Cards(props: {
                   fontFamily: "Aeonik-Bold",
                   lineHeight: "1.35rem",
                 }}
-                className="text-[1.05rem] self-start mb-[-1] mt-1  mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5 "
+                className="text-[1.05rem] self-start mb-[-1] mt-1 mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5"
               >
                 {description}
               </div>
               <div
                 style={{ zIndex: 2 }}
-                className="flex items-center w-[88vw]  mt-[-4] mx-5 justify-between mx-2"
+                className="flex items-center w-[88vw] mt-[-4] mx-5 justify-between mx-2"
               >
                 <VotingModal
                   handleOpen={props?.handleOpen}
