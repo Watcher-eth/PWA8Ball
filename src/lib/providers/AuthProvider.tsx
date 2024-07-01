@@ -35,9 +35,15 @@ export default function AuthChecker({
 
   if (!ready) {
     console.log("isLoading");
-    return <></>; // Show nothing while loading
+    // try {
+    //   return <>{children}</>;
+    // } catch (error) {
+    //   console.log(error);
+    //   return <></>; // Show nothing while loading
+    // }
+    return <>{children}</>;
   }
-
+  console.log({ requireAuth, authenticated });
   if (requireAuth && !authenticated) {
     console.log("need auth");
     return null; // Return null while showing modal

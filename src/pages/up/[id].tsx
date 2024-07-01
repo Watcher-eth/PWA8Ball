@@ -9,75 +9,75 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { id } = params;
+// export async function generateMetadata(
+//   { params, searchParams }: Props,
+//   parent: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const { id } = params;
 
-  // Fetch data from your Supabase table
-  const { data: prediction, error } = await supabase
-    .from("predictions")
-    .select("marketId, userId, option")
-    .eq("id", id)
-    .single();
+//   // Fetch data from your Supabase table
+//   const { data: prediction, error } = await supabase
+//     .from("predictions")
+//     .select("marketId, userId, option")
+//     .eq("id", id)
+//     .single();
 
-  const { data: market, marketError } = await supabase
-    .from("markets")
-    .select("title, question")
-    .eq("id", prediction?.marketId)
-    .single();
+//   const { data: market, marketError } = await supabase
+//     .from("markets")
+//     .select("title, question")
+//     .eq("id", prediction?.marketId)
+//     .single();
 
-  const { data: user } = await supabase
-    .from("user")
-    .select("name, pfp")
-    .eq("external_auth_provider_user_id", prediction?.userId)
-    .single();
+//   const { data: user } = await supabase
+//     .from("user")
+//     .select("name, pfp")
+//     .eq("external_auth_provider_user_id", prediction?.userId)
+//     .single();
 
-  if (error || !market || !prediction) {
-    // Handle error or empty response
-    console.error("Failed to fetch user prediction:", error);
-    return {
-      title: "Lost in the Ether",
-      description: "You went to deep down the rabbithole.",
-      openGraph: { title: "Lost in the Ether" },
-      twitter: { title: "Lost in the Ether" },
-    };
-  }
+//   if (error || !market || !prediction) {
+//     // Handle error or empty response
+//     console.error("Failed to fetch user prediction:", error);
+//     return {
+//       title: "Lost in the Ether",
+//       description: "You went to deep down the rabbithole.",
+//       openGraph: { title: "Lost in the Ether" },
+//       twitter: { title: "Lost in the Ether" },
+//     };
+//   }
 
-  const previousImages = (await parent).openGraph?.images || [];
-  const title = `${user?.name} predicted ${prediction?.option?.name}`;
-  return {
-    title: title,
-    description: market.question,
-    openGraph: {
-      title: title,
-      description: market.question,
-      url: getMarketUrl(id),
-      images: [
-        {
-          url: getMarketPreviewUrl(id),
-          width: 1200,
-          height: 630,
-        },
-        ...previousImages,
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: title,
-      description: market.question,
-      images: [getMarketPreviewUrl(id)],
-    },
-  };
-}
+//   const previousImages = (await parent).openGraph?.images || [];
+//   const title = `${user?.name} predicted ${prediction?.option?.name}`;
+//   return {
+//     title: title,
+//     description: market.question,
+//     openGraph: {
+//       title: title,
+//       description: market.question,
+//       url: getMarketUrl(id),
+//       images: [
+//         {
+//           url: getMarketPreviewUrl(id),
+//           width: 1200,
+//           height: 630,
+//         },
+//         ...previousImages,
+//       ],
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: title,
+//       description: market.question,
+//       images: [getMarketPreviewUrl(id)],
+//     },
+//   };
+// }
 
 export default function MarketPage({ params, searchParams }: Props) {
   const { id } = params ?? {};
-  const metadata = generateMetadata({ params, searchParams });
+  // const metadata = generateMetadata({ params, searchParams });
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta property="og:type" content="website" />
@@ -99,7 +99,7 @@ export default function MarketPage({ params, searchParams }: Props) {
           content={metadata.twitter.description}
         />
         <meta name="twitter:image" content={metadata.twitter.images[0]} />
-      </Head>
+      </Head> */}
       <div>{/* Your page component logic */}</div>
     </>
   );

@@ -52,46 +52,45 @@ function CardFeed() {
   } = useGetTrendingMarkets();
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
-  const enrichedFeedData = useMemo(() => {
-    const taggedMarketsData = markets
-      ? markets.map((market) => ({
-          marketId: market.id,
-          name: market.title, // Use title as name
-          description: market.question, // Use question as description
-          topic: market.topic_title || "Unknown", // Extract topic title if available
-          image: market.image || "", // Use image if available
-          icon: market.topic_image, // You might need a default or conditional icon
-          stake: market.usdcstake,
-          topicId: market.topic_id,
-          multiplier:
-            market.outcomea === market.outcomeb
-              ? 2
-              : market.outcomea > market.outcomeb
-              ? 1 + (100 - market.outcomeb) / market.outcomeb
-              : 1 + (100 - market.outcomea) / market.outcomea,
-          optionA: {
-            multiplier: 1, // Dummy value, adjust as necessary
-            name: parseOptions(market?.options, 1), // Assuming options array is not empty
-            odds: market.outcomea || 50, // Dummy odds, calculate or adjust as necessary
-          },
-          optionB: {
-            multiplier: 1, // Dummy value
-            name: parseOptions(market?.options, 2), // Assuming two options minimum
-            odds: market.outcomeb || 50, // Dummy odds
-          },
-          type: "market",
-          topicBio: market?.topic_description,
-        }))
-      : [];
+      const taggedMarketsData = markets
+        ? markets.map((market) => ({
+            marketId: market.id,
+            name: market.title, // Use title as name
+            description: market.question, // Use question as description
+            topic: market.topic_title || "Unknown", // Extract topic title if available
+            image: market.image || "", // Use image if available
+            icon: market.topic_image, // You might need a default or conditional icon
+            stake: market.usdcstake,
+            topicId: market.topic_id,
+            multiplier:
+              market.outcomea === market.outcomeb
+                ? 2
+                : market.outcomea > market.outcomeb
+                ? 1 + (100 - market.outcomeb) / market.outcomeb
+                : 1 + (100 - market.outcomea) / market.outcomea,
+            optionA: {
+              multiplier: 1, // Dummy value, adjust as necessary
+              name: parseOptions(market?.options, 1), // Assuming options array is not empty
+              odds: market.outcomea || 50, // Dummy odds, calculate or adjust as necessary
+            },
+            optionB: {
+              multiplier: 1, // Dummy value
+              name: parseOptions(market?.options, 2), // Assuming two options minimum
+              odds: market.outcomeb || 50, // Dummy odds
+            },
+            type: "market",
+            topicBio: market?.topic_description,
+          }))
+        : [];
 
-    return selectedTopic === "🔥 Trending"
+  const enrichedFeedData =
+    selectedTopic === "🔥 Trending"
       ? taggedMarketsData
       : taggedMarketsData.filter((item) =>
           item?.topic
             ? stripEmoji(item.topic) === stripEmoji(selectedTopic)
             : stripEmoji(item.name) === stripEmoji(selectedTopic)
-        );
-  }, [selectedTopic, topicsData, markets]);
+        )
 
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -103,40 +102,39 @@ function CardFeed() {
     setLoginModalOpen(false);
   };
 
-  if (enrichedFeedData?.length > 0)
-    return (
-      <div className="w-[100vw] flex flex-col  no-scrollbar py-0  bg-[#101010]">
-        <TopicHeader
-          setSelectedTopic={setSelectedTopic}
-          selectedTopic={selectedTopic}
-        />
-        <div className="px-3 flex flex-col items-center no-scrollbar space-x-3">
-          {enrichedFeedData?.map((bet, index) => {
-            if (bet?.topic !== "Farcaster")
-              return (
-                <div key={index}>
-                  <Cards
-                    handleOpen={handleOpenLoginModal}
-                    image={bet.image!}
-                    icon={bet?.icon}
-                    description={bet?.description}
-                    title={bet.name}
-                    subject={bet?.topic}
-                    id={bet?.marketId}
-                    stake={bet?.stake}
-                    multiplier={bet?.multiplier}
-                    topicId={bet?.topicId}
-                    optionA={bet?.optionA}
-                    optionB={bet?.optionB}
-                    topicBio={bet?.topicBio}
-                  />
-                </div>
-              );
-          })}
-        </div>
-        <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
+  return (
+    <div className="w-[100vw] flex flex-col  no-scrollbar py-0  bg-[#101010]">
+      <TopicHeader
+        setSelectedTopic={setSelectedTopic}
+        selectedTopic={selectedTopic}
+      />
+      <div className="px-3 flex flex-col items-center no-scrollbar space-x-3">
+        {enrichedFeedData?.map((bet, index) => {
+          if (bet?.topic !== "Farcaster")
+            return (
+              <div key={index}>
+                <Cards
+                  handleOpen={handleOpenLoginModal}
+                  image={bet.image!}
+                  icon={bet?.icon}
+                  description={bet?.description}
+                  title={bet.name}
+                  subject={bet?.topic}
+                  id={bet?.marketId}
+                  stake={bet?.stake}
+                  multiplier={bet?.multiplier}
+                  topicId={bet?.topicId}
+                  optionA={bet?.optionA}
+                  optionB={bet?.optionB}
+                  topicBio={bet?.topicBio}
+                />
+              </div>
+            );
+        })}
       </div>
-    );
+      <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
+    </div>
+  );
 }
 
 export default CardFeed;
