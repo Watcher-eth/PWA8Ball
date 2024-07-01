@@ -16,49 +16,8 @@ interface Props1 {
   params: { id: string };
 }
 
-export async function generateMetadata(
-  { params }: Props1,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { id } = params;
-
-  // Fetch topic data from Supabase
-  const { data: topicData, error } = await supabase
-    .from("topics")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) {
-    console.error(error);
-  }
-  const ogUrl = getApiOgTopicUrl(id);
-  return {
-    openGraph: {
-      title: topicData?.title,
-      description: topicData?.description,
-      type: "website",
-      url: getTopicUrl(id),
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: "Topic Cover Image",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: topicData?.title,
-      description: topicData?.description,
-      images: [ogUrl],
-    },
-  };
-}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log({ context })
   const { id } = context.params as { id: string };
 
   const { data: topicData, error } = await supabase
@@ -96,7 +55,7 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
 
   return (
     <div>
-      <NextSeo
+      {/* <NextSeo
         openGraph={{
           title: title,
           description: description,
@@ -116,7 +75,7 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
           site: "@site",
           cardType: "summary_large_image",
         }}
-      />
+      /> */}
       <FeaturedBet
         id={id}
         name={title}

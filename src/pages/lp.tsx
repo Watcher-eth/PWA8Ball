@@ -1,10 +1,6 @@
-import LiquidityPage from '@/components/Predictions/Liquidity/LiquidityPage'
-import React from 'react'
+import React from "react";
+import LiquidityPage from "@/components/Predictions/Liquidity/LiquidityPage";
 
-function lp() {
-  return (
-    <LiquidityPage/>
-  )
+export default function Lp() {
+  return <LiquidityPage />;
 }
-
-export default lp

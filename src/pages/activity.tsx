@@ -1,8 +1,8 @@
 import ActivityPage from "@/components/Activity";
 import React from "react";
 
-function activity() {
-  return <ActivityPage />;
-}
 
-export default activity;
+
+export default function Activity() {
+  return <ActivityPage />;
+};

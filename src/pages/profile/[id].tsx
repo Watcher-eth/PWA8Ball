@@ -24,47 +24,6 @@ interface Props1 {
   params: { id: string };
 }
 
-export async function generateMetadata(
-  { params }: Props1,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { id } = params;
-
-  // Fetch topic data from Supabase
-  // Fetch user data from Supabase
-  const { data: userData } = await supabase
-    .from("users")
-    .select("*")
-    .eq("external_auth_provider_user_id", id)
-    .single();
-
-  if (error) {
-    console.error(error);
-  }
-  const ogUrl = getApiOgRouteUrl(id) ;
-  return {
-    openGraph: {
-      title: userData?.name,
-      description: `See all of ${userData?.name}'s predictions`,
-      type: "website",
-      url: getProfileUrl(id),
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: "Topic Cover Image",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: userData?.name,
-      description: `See all of ${userData?.name}'s predictions`,
-      images: [ogUrl],
-    },
-  };
-}
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const router = useRouter();
@@ -91,31 +50,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       handleOpenLoginModal();
     }
   }, []);
-  const ogUrl = getApiOgRouteUrl(userId);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
-      <NextSeo
-        openGraph={{
-          title: userC?.data,
-          description: `See all of ${userC?.data}'s predictions`,
-          type: "website",
-          url: getProfileUrl(userId),
-          images: [
-            {
-              url: ogUrl,
-              width: 1200,
-              height: 630,
-              alt: "Topic Cover Image",
-            },
-          ],
-        }}
-        twitter={{
-          handle: "@tryblitz",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      />
+
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
       <div className="w-full relative">
