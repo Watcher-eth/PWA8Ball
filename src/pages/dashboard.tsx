@@ -1,8 +1,6 @@
-import YourVotes from "@/components/Activity/YourVotes";
 import React from "react";
+import YourVotes from "@/components/Activity/YourVotes";
 
-function YourDashboard() {
+export default function YourDashboard() {
   return <YourVotes />;
 }
-
-export default YourDashboard;
