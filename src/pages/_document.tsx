@@ -23,9 +23,9 @@ export default function Document() {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
         />
-        <meta property="og:image" content={OG_API_SPLASH_URL} />
+        {/* <meta property="og:image" content={OG_API_SPLASH_URL} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="630" /> */}
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -4,7 +4,7 @@ import { NextSeo } from "next-seo";
 import Head from "next/head"
 
 export function CustomHead({ topicData, router, ...rest }) {
-
+  console.log({topicData})
   return (
     <>
       {topicData && <TopicSeo {...topicData} />}
