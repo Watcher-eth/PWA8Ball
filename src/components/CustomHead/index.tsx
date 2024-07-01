@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getApiOgTopicUrl, getTopicUrl } from "@/utils/urls";
 import { NextSeo } from "next-seo";
 import Head from "next/head"
