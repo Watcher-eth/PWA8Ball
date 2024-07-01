@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion, useAnimation } from "framer-motion";
 import { MailCheck } from "lucide-react";
+import FindFriendsModal from "@/components/Modals/FindFriends";
 
 const InviteFriendsPlaceholder: React.FC = () => {
   const router = useRouter();
@@ -73,43 +74,42 @@ const InviteFriendsPlaceholder: React.FC = () => {
           height: height / 3.9,
         }}
       />
-      <motion.button
-        custom={4}
-        initial={{ opacity: 0 }}
-        animate={controls}
-        style={{
-          padding: "7px 22px",
-          borderRadius: 20,
-          overflow: "hidden",
-          backgroundColor: "white",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          cursor: "pointer",
-          border: "none",
-        }}
-        onClick={() => {
-          router.push("/findFriendsModal");
-        }}
-      >
-        <MailCheck
-          style={{ marginBottom: -1 }}
-          color="black"
-          size={17}
-          strokeWidth={3.4}
-        />
-        <span
+      <FindFriendsModal>
+        <motion.button
+          custom={4}
+          initial={{ opacity: 0 }}
+          animate={controls}
           style={{
-            fontSize: 16.5,
-            textAlign: "center",
-            fontWeight: 700,
-            color: "black",
-            marginLeft: 3,
+            padding: "7px 22px",
+            borderRadius: 20,
+            overflow: "hidden",
+            backgroundColor: "white",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            cursor: "pointer",
+            border: "none",
           }}
         >
-          Invite
-        </span>
-      </motion.button>
+          <MailCheck
+            style={{ marginBottom: -1 }}
+            color="black"
+            size={17}
+            strokeWidth={3.4}
+          />
+          <span
+            style={{
+              fontSize: 16.5,
+              textAlign: "center",
+              fontWeight: 700,
+              color: "black",
+              marginLeft: 3,
+            }}
+          >
+            Invite
+          </span>
+        </motion.button>
+      </FindFriendsModal>
     </div>
   );
 };

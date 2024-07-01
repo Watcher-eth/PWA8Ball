@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/router";
+import { skeletonVariants } from "../Activity/ActivitySkelleton";
 
 const UserPredictions = ({
   index,
@@ -69,16 +70,36 @@ export const UserPredictionSkeleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex items-center justify-between p-2 rounded-lg bg-[#1B1B1E] my-2"
+    className="flex items-center w-[90vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
-      <Skeleton className="w-14 h-14 rounded-lg" />
+      <motion.div
+        className="w-14 h-14 bg-[#252525] rounded-xl"
+        variants={skeletonVariants}
+        initial="initial"
+        animate="pulse"
+      />
       <div className="flex flex-col gap-2">
-        <Skeleton className="w-[80%] h-[19px]" />
-        <Skeleton className="w-[80%] h-[14px]" />
+        <motion.div
+          className="w-[50vw] h-[20px] bg-[#252525] rounded-xl"
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
+        <motion.div
+          className="w-[45vw] h-[17px] bg-[#252525] rounded-xl"
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
       </div>
     </div>
-    <Skeleton className="w-[38%] h-[30px] rounded-lg" />
+    <motion.div
+      className="w-[18%] h-[35px] bg-[#252525] rounded-xl"
+      variants={skeletonVariants}
+      initial="initial"
+      animate="pulse"
+    />
   </motion.div>
 );
 

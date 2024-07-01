@@ -24,12 +24,11 @@ interface Props1 {
   params: { id: string };
 }
 
-
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const router = useRouter();
   const [edit, setEdit] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const { user, setUser } = useUserStore();
+  const { user } = useUserStore();
   const { data: totalFollowers } = useGetTotalFollowers(userId);
   const { data: userC, isLoading } = useGetUserByExternalAuthId(userId);
 
@@ -53,7 +52,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
-
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
 
       <div className="w-full relative">
@@ -67,13 +65,15 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       </div>
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
-        <motion.div
-          className="absolute top-6 left-6 p-2 bg-[rgba(40, 40, 40, 0.6) backdrop-blur-lg "
-          style={{ borderRadius: 25 }}
-          onClick={() => router.push({ pathname: "/lp" })}
-        >
-          <PieChart size={19} strokeWidth={3} />
-        </motion.div>
+        {user?.name === userC?.name && (
+          <motion.div
+            className="absolute top-6 left-6 p-2 bg-[rgba(40, 40, 40, 0.6) backdrop-blur-lg "
+            style={{ borderRadius: 25 }}
+            onClick={() => router.push({ pathname: "/lp" })}
+          >
+            <PieChart size={19} strokeWidth={3} />
+          </motion.div>
+        )}
         <img
           src={userC?.pfp}
           className="h-[5rem] w-[5rem] rounded-full border-4 border-[#202020] "

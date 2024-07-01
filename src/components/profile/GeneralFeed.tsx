@@ -60,8 +60,6 @@ const GeneralFeed = ({
       <div className="flex flex-col items-center">
         <UserPredictionSkeleton index={0} />
         <UserPredictionSkeleton index={1} />
-        <UserPredictionSkeleton index={2} />
-        <UserPredictionSkeleton index={3} />
       </div>
     );
   }

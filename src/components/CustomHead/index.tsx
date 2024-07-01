@@ -1,28 +1,31 @@
 // @ts-nocheck
-import { OG_API_SPLASH_URL, getApiOgRouteUrl, getApiOgTopicUrl, getMarketPreviewUrl, getMarketUrl, getTopicUrl } from "@/utils/urls";
+import {
+  OG_API_SPLASH_URL,
+  getApiOgRouteUrl,
+  getApiOgTopicUrl,
+  getMarketPreviewUrl,
+  getMarketUrl,
+  getTopicUrl,
+  getProfileUrl,
+} from "@/utils/urls";
 import { NextSeo } from "next-seo";
 
 export function CustomHead({ topicData, userId, router, ...rest }) {
-  let headSeo
+  let headSeo;
   if (topicData) {
-    headSeo = <TopicSeo {...topicData} />
+    headSeo = <TopicSeo {...topicData} />;
   } else if (userId) {
-    headSeo = <ProfileSeo userId={userId} />
+    headSeo = <ProfileSeo userId={userId} />;
   } else if (router?.query?.id) {
     // NOTE: This if statement needs to be more specific given its rn
     //       likely to catch too much
-    headSeo = <MarketSeo id={router?.query?.id} />
+    headSeo = <MarketSeo id={router?.query?.id} />;
   } else {
-    headSeo = <SplashSeo />
+    headSeo = <SplashSeo />;
   }
 
-  return (
-    <>
-      {headSeo}
-    </>
-  );
+  return <>{headSeo}</>;
 }
-
 
 function SplashSeo() {
   return (
@@ -45,7 +48,17 @@ function SplashSeo() {
   );
 }
 
-function TopicSeo({ id, name, description, image, title, icon, topic, type, members }) {
+function TopicSeo({
+  id,
+  name,
+  description,
+  image,
+  title,
+  icon,
+  topic,
+  type,
+  members,
+}) {
   const ogUrl = getApiOgTopicUrl(id);
   return (
     <NextSeo
@@ -94,7 +107,6 @@ function MarketSeo({ id }) {
     />
   );
 }
-
 
 function ProfileSeo({ userId }) {
   const ogUrl = getApiOgRouteUrl(userId);

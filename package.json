@@ -13,6 +13,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@airstack/airstack-react": "^0.6.3",
     "@emotion/use-insertion-effect-with-fallbacks": "^1.0.1",
     "@lens-protocol/client": "^2.0.0-alpha.27",
     "@lens-protocol/react-web": "^2.0.0-alpha.27",
