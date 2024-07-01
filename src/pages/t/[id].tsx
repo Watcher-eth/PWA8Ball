@@ -96,7 +96,7 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
 
   return (
     <div>
-      <NextSeo
+      {/* <NextSeo
         openGraph={{
           title: title,
           description: description,
@@ -116,7 +116,7 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
           site: "@site",
           cardType: "summary_large_image",
         }}
-      />
+      /> */}
       <FeaturedBet
         id={id}
         name={title}
