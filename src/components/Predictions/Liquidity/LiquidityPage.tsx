@@ -76,7 +76,7 @@ const LiquidityPage: React.FC = () => {
           style={{
             color: "white",
             fontSize: "23px",
-            fontFamily: "Aeonik-Bold",
+            fontWeight: 600,
           }}
         >
           Your Boosts

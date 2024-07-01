@@ -4,22 +4,14 @@ import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 
 const NewPlaceholder = ({ isUser }) => {
   const router = useRouter();
   return (
     <div className="flex flex-col items-center w-[94%] p-2 mt-2 mx-auto">
       {[...Array(3)].map((_, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-center w-full mb-4 p-4 bg-[#1B1B1E] rounded-lg"
-        >
-          <Skeleton className="w-full h-[55px] rounded-lg mb-2" />
-          <div className="flex flex-col gap-2 w-full">
-            <Skeleton className="h-[19px] w-[70%]" />
-            <Skeleton className="h-[14px] w-[55%]" />
-          </div>
-        </div>
+        <UserPredictionSkeleton index={index} />
       ))}
       <div
         style={{
@@ -27,7 +19,7 @@ const NewPlaceholder = ({ isUser }) => {
             "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.5) 50%, rgba(10, 10, 10, 0.7) 70%, #101010 100%)",
           height: "225px",
           width: "100%",
-          marginTop: "-208px",
+          marginTop: "-230px",
         }}
       />
       <div className="flex flex-col items-center mt-10">
@@ -79,7 +71,7 @@ export const UserPredictionSkelleton = ({ index }) => (
 
 export const UserLpSkelleton = ({ index }) => (
   <motion.div
-    className="flex flex-col p-4 bg-[#1B1B1E] rounded-lg my-2"
+    className="flex flex-col p-4 bg-[#171717] w-[90vw] rounded-2xl my-2"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 20 }}
@@ -88,15 +80,40 @@ export const UserLpSkelleton = ({ index }) => (
     <div className="flex flex-row items-center justify-between mb-2">
       <div className="flex flex-row items-center gap-2 w-full">
         <div className="flex flex-col gap-2 w-full">
-          <Skeleton className="h-[19px] w-[70%]" />
-          <Skeleton className="h-[14px] w-[55%]" />
+          <motion.div
+            className="h-[19px] w-[70%] bg-[#252525] rounded-xl"
+            variants={skeletonVariants}
+            initial="initial"
+            animate="pulse"
+          />
+          <motion.div
+            className="h-[14px] w-[55%] bg-[#252525] rounded-xl"
+            variants={skeletonVariants}
+            initial="initial"
+            animate="pulse"
+          />
         </div>
-        <Skeleton className="h-[50px] w-[50px] rounded-full" />
+        <motion.div
+          className="h-[50px] w-[55px] bg-[#252525] rounded-xl"
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
       </div>
     </div>
     <div className="flex flex-row items-center justify-between mt-2">
-      <Skeleton className="h-[35px] w-[50%]" />
-      <Skeleton className="h-[25px] rounded-full w-[52%]" />
+      <motion.div
+        className="h-[35px] w-[50%] bg-[#252525] rounded-xl"
+        variants={skeletonVariants}
+        initial="initial"
+        animate="pulse"
+      />
+      <motion.div
+        className="h-[25px] w-[22%] bg-[#252525] rounded-xl"
+        variants={skeletonVariants}
+        initial="initial"
+        animate="pulse"
+      />
     </div>
   </motion.div>
 );
@@ -105,7 +122,7 @@ export const NewPlaceholderLp = ({ isUser }) => {
   const router = useRouter();
   return (
     <div className="flex flex-col items-center w-full p-2 mt-2 mx-auto">
-      {[...Array(3)].map((_, index) => (
+      {[...Array(2)].map((_, index) => (
         <UserLpSkelleton key={index} index={index} />
       ))}
       <div
@@ -113,8 +130,8 @@ export const NewPlaceholderLp = ({ isUser }) => {
           background:
             "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.5) 50%, rgba(10, 10, 10, 0.7) 70%, #101010 100%)",
           height: "265px",
-          width: "100%",
-          marginTop: "-268px",
+          width: "100vw",
+          marginTop: "-270px",
         }}
       />
       <div className="flex flex-col items-center mt-10">

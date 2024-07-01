@@ -14,6 +14,7 @@ import InviteFriendsPlaceholder from "../Common/Placeholders/InviteFriendsPlaceh
 import FollowPredictionSkeleton, {
   skeletonVariants,
 } from "./ActivitySkelleton";
+import NotificationsModal from "../Modals/NotificationsModal";
 
 interface Prediction {
   // Define the structure of a prediction here
@@ -73,10 +74,11 @@ const ActivityPage: React.FC = () => {
         padding: "20px",
         paddingTop: "30px",
         backgroundColor: "#101010",
+        position: "relative",
       }}
     >
       <motion.div
-        className="fixed  w-[100vw] h-[125px] rounded-t-lg "
+        className="fixed  w-[100vw] h-[125px] bottom-0 rounded-t-lg "
         style={{
           zIndex: 2,
           background:
@@ -91,6 +93,7 @@ const ActivityPage: React.FC = () => {
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "10px",
+          backgroundColor: "#101010",
         }}
       >
         <motion.button
@@ -116,16 +119,17 @@ const ActivityPage: React.FC = () => {
         >
           {page ? "Global" : "Your Friends"}
         </h1>
-        <motion.button
-          style={{
-            padding: "6px",
-            borderRadius: "20px",
-            backgroundColor: "#1C1C1E",
-          }}
-          onClick={() => router.push("/Notifications")}
-        >
-          <Bell color="white" strokeWidth={3} size={20} />
-        </motion.button>
+        <NotificationsModal>
+          <motion.button
+            style={{
+              padding: "6px",
+              borderRadius: "20px",
+              backgroundColor: "#1C1C1E",
+            }}
+          >
+            <Bell color="white" strokeWidth={3} size={20} />
+          </motion.button>
+        </NotificationsModal>
       </div>
 
       <div>
