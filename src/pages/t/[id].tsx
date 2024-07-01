@@ -55,27 +55,6 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
 
   return (
     <div>
-      {/* <NextSeo
-        openGraph={{
-          title: title,
-          description: description,
-          type: "website",
-          url: getTopicUrl(id),
-          images: [
-            {
-              url: ogUrl,
-              width: 1200,
-              height: 630,
-              alt: "Topic Cover Image",
-            },
-          ],
-        }}
-        twitter={{
-          handle: "@tryblitz",
-          site: "@site",
-          cardType: "summary_large_image",
-        }}
-      /> */}
       <FeaturedBet
         id={id}
         name={title}
