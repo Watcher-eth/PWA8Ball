@@ -10,6 +10,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useAuthModalStore } from "@/lib/stores/ModalStore";
+
 function NavBar() {
   const { user } = useUserStore();
   const { isLoginModalOpen, openLoginModal, closeLoginModal } =
