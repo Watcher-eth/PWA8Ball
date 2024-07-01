@@ -73,7 +73,7 @@ export async function generateMetadata(
 }
 
 export default function MarketPage({ params, searchParams }: Props) {
-  const { id } = params;
+  const { id } = params ?? {};
   const metadata = generateMetadata({ params, searchParams });
   return (
     <>
