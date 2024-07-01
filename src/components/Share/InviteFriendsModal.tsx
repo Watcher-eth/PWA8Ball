@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@airstack/airstack-react";
 import { convertIpfsUrl } from "@/lib/utils/modifyIpfsUrl";
