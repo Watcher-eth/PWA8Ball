@@ -38,7 +38,7 @@ async function boostV2(props: boostMarket) {
       address: EightBallAddress,
       client: { public: rpcClient, wallet: props.client },
     });
-    console.log("Contract", contract);
+    console.log("Contract", contract, props);
     // Boost the market
     const hash = await contract.write.boostMarket([
       BigInt(props.amount),
@@ -71,6 +71,7 @@ async function boostV2(props: boostMarket) {
       .update({ liquiditypoints: newLiquidityPoints })
       .match({ external_auth_provider_user_id: props?.userId })
       .single();
+    console.log("after boost", hash);
   } catch (error) {
     console.error("Error during market boost", error);
     throw error; // Rethrow the error after logging it

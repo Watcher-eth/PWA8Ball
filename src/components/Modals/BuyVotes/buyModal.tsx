@@ -4,12 +4,10 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { shortenAddress } from "@thirdweb-dev/react";
 import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
-import { SwapWidget } from "@uniswap/widgets";
-import "@uniswap/widgets/fonts.css";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { shortenAddress } from "@/lib/utils/shortenAddress";
 const stepVariants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },

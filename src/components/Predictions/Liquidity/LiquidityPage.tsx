@@ -18,7 +18,6 @@ const LiquidityPage: React.FC = () => {
     refetch,
   } = useGetLPForUser(user?.walletaddress);
   const [refreshing, setRefreshing] = useState(false);
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch().finally(() => setRefreshing(false));
@@ -91,19 +90,7 @@ const LiquidityPage: React.FC = () => {
               amount={item.amount / 10 ** 6}
               image={item.image}
               title={item.title}
-              onChange={() => {
-                router.push({
-                  pathname: "/RemoveLiquidity",
-                  query: {
-                    name: item.title,
-                    title: item.title,
-                    question: item.question,
-                    image: item.image,
-                    totalPot: item.amount / 10 ** 6,
-                    betId: item.marketid,
-                  },
-                });
-              }}
+              id={item.marketId}
             />
           ))}
         </div>

@@ -42,7 +42,7 @@ const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
           router.push({
             pathname: `/lp`,
           });
-        }, 4500);
+        }, 8500);
       } catch (error) {
         console.error("Failed to boost market:", error);
         alert("Failed to boost market!");

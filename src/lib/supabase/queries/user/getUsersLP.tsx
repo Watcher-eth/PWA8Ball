@@ -9,8 +9,6 @@ export interface ILP {
   title: string;
 }
 
-// If you want to extend this with market data, you can create an extended interface similarly to IOrderWithMarket
-
 // useGetLPForUser.ts
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabaseClient";
