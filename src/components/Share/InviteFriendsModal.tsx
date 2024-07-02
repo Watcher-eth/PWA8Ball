@@ -129,6 +129,8 @@ const FindFriends = ({ type }) => {
         alignItems: "center",
         width: "100%",
         padding: 8,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
         backgroundColor: "#101010",
       }}
     >
@@ -309,11 +311,12 @@ const FindFriends = ({ type }) => {
       </div>
       <div
         style={{
-          width: width,
-          height: 40,
+          width: "100vw",
+          height: 30,
           position: "absolute",
-          bottom: 80,
-          backgroundImage: "linear-gradient(rgba(10,10,10,0.1), #101010)",
+          bottom: 85,
+          backgroundImage:
+            "linear-gradient(rgba(10 ,10 ,10 , 0.6),#101010, #101010)",
         }}
       />
       <div
@@ -335,7 +338,7 @@ const FindFriends = ({ type }) => {
             router.back();
           }}
           style={{
-            width: width / 1.2,
+            width: "90vw",
             height: 50,
             borderRadius: 28,
             overflow: "hidden",

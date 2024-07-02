@@ -63,7 +63,7 @@ function FindFriendsModal({ children }: ShareModal) {
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-white rounded-3xl  
+            className="bg-[#101010] rounded-3xl  
         h-[90vh] mb-5 w-[100vw] relative"
           >
             <FindFriends type={1} />

@@ -1,14 +1,94 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { usePrivy } from "@privy-io/react-auth";
+import { useConnectWallet, useLogin, usePrivy } from "@privy-io/react-auth";
+import { useCreateUser } from "@/lib/supabase/mutations/addUser";
+import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";
+import { NewUser } from "@/lib/supabase/types";
 
 function SingUp(props: { setStep: (step: number) => void }) {
-  const { ready, authenticated, login } = usePrivy();
+  const createUserMutation = useCreateUser();
+  const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
 
+  const handleCreateUser = async (userData: NewUser) => {
+    try {
+      const newUser = {
+        external_auth_provider_user_id: userData.id, // Use the ID from the user object
+      };
+
+      const response = await createUserMutation.mutateAsync(newUser);
+      console.log("User created successfully", response);
+    } catch (error) {
+      console.error("Error creating user:", error);
+    }
+  };
+
+  const { login } = useLogin({
+    onComplete: (
+      user,
+      isNewUser,
+      wasAlreadyAuthenticated,
+      loginMethod,
+      loginAccount
+    ) => {
+      try {
+        handleCreateUser({
+          id: user.id,
+          liquiditypoints: 0,
+          rewardpoints: 0,
+        });
+        const hasTwitterLinked = user.linkedAccounts.some(
+          (account) => account.type === "twitter_oauth"
+        );
+
+        if (hasTwitterLinked) {
+          const twitterAccount = user.linkedAccounts.find(
+            (account) => account.type === "twitter_oauth"
+          );
+          const getLargeProfileImageUrl = (url: string) => {
+            return url.replace("_normal", "_400x400");
+          };
+
+          const profilePictureUrl = getLargeProfileImageUrl(
+            twitterAccount.profile_picture_url
+          );
+          const name = twitterAccount.name;
+          const pfp = profilePictureUrl;
+
+          const userId = user?.id;
+          updateUserProfile({
+            userId,
+            updates: {
+              name,
+              pfp,
+              socials: {
+                twitter: {
+                  username: twitterAccount.username,
+                  name: name,
+                  pfp: profilePictureUrl,
+                },
+              },
+            },
+          });
+        }
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+    },
+    onError: (error) => {
+      console.log("OAuth error", error);
+    },
+    onOAuthLoginComplete: (oAuthTokens) => {
+      console.log("OAuth login complete:", oAuthTokens);
+    },
+  });
+
+  const { connectWallet } = useConnectWallet();
   const [isEmail, setIsEmail] = useState<boolean>(false);
 
   //Cancle to go back
@@ -27,14 +107,14 @@ function SingUp(props: { setStep: (step: number) => void }) {
     >
       {!isEmail && (
         <>
-          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2  mx-[1.65rem]">
+          <div className="text-[lightgray] flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2  mx-[1.65rem]">
             Sign in to Blitz using your web3 wallet or with your email or social
             accounts.
           </div>
           <div className="h-[0.05rem] w-[80vw] my-6 bg-gray-300 mx-6 rounded-full" />
 
-          <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
-            <Button className="w-[80vw] stroke-gray-700 text-gray-700 h-12 my-0 space-x-2 mx-5 mb-6 bg-gray-200 flex items-center text-lg font-bold rounded-xl">
+          <motion.div onClick={connectWallet} whileTap={{ scale: 0.9 }}>
+            <Button className="w-[80vw] stroke-[lightgray] text-[lightgray] h-12 my-0 space-x-2 mx-5 mb-6 bg-[#282828] flex items-center text-lg font-bold rounded-xl">
               <Wallet size={22} strokeWidth={2.5} />
               <div>Sign in with Wallet</div>
             </Button>
@@ -46,7 +126,7 @@ function SingUp(props: { setStep: (step: number) => void }) {
               </Avatar>
             </motion.div>
             <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
-              <Avatar className="bg-white   h-12 w-12">
+              <Avatar className="bg-[#171717]   h-12 w-12">
                 <AvatarImage src="https://steelbluemedia.com/wp-content/uploads/2019/06/new-google-favicon-512.png" />
               </Avatar>
             </motion.div>

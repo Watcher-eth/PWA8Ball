@@ -33,7 +33,6 @@ const Bet = ({ id }) => {
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
   ];
-  console.log("market2", market?.description);
   let userImages;
   if (users) {
     userImages = users

@@ -58,11 +58,11 @@ function LoginModal({ isOpen, onClose }) {
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
+          className="bg-[#171717] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
         >
           <div className="flex mt-6 w-[86vw] items-center justify-between">
             {step === 1 && (
-              <div className="text-gray-900 text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
+              <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
                 Log in to continue
               </div>
             )}
@@ -95,9 +95,9 @@ function LoginModal({ isOpen, onClose }) {
             <DrawerClose>
               <motion.div
                 whileTap={{ scale: 0.9 }}
-                className="p-2 left-6 rounded-full self-start bg-gray-100"
+                className="p-2 left-6 rounded-full self-start bg-[#282828]"
               >
-                <X size={17} className="stroke-gray-400" strokeWidth={5} />
+                <X size={17} className="stroke-[lightgray]" strokeWidth={5} />
               </motion.div>
             </DrawerClose>
           </div>

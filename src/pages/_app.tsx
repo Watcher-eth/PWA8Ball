@@ -16,13 +16,16 @@ import amplitude from "amplitude-js";
 import { useServiceWorker } from "@/lib/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/CustomHead";
+import { DrawerProvider } from "@/lib/stores/DrawerContext";
+import withDeviceCheck from "@/components/Common/MobileOnly";
+import MobileOnlyModal from "@/components/Modals/MobileOnlyModal";
 
 export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
   // console.log({pageProps})
-  // const WrappedComponent = withDeviceCheck(Component);
+  const CheckedComponent = withDeviceCheck(Component);
 
   // amplitude.getInstance().init("YOUR_API_KEY");
   useServiceWorker(); // Use the custom hook
@@ -32,7 +35,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <CustomHead {...pageProps} router={router} />
       <QueryClientProvider client={queryClient}>
         <AirstackProvider
-          apiKey={process.env.NEXT_PUBLIC_AIRSTACK_API_KEY ?? ""}
+          apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}
         >
           <PrivyProvider
             appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
@@ -51,7 +54,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
           >
             <AuthChecker>
               <Layout>
-                <Component {...pageProps} />
+                <DrawerProvider>
+                  <CheckedComponent>
+                    <Component {...pageProps} />
+                  </CheckedComponent>
+                </DrawerProvider>
               </Layout>
             </AuthChecker>
           </PrivyProvider>

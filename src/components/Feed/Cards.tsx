@@ -68,8 +68,6 @@ function Cards(props) {
   } else {
     userImages = defaultImages;
   }
-  console.log("market2", market?.question);
-
   return (
     <LayoutGroup>
       <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>

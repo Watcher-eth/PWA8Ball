@@ -5,7 +5,13 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { AnimatePresence, motion } from "framer-motion";
-import { Pencil, PieChart, Twitter } from "lucide-react";
+import {
+  Pencil,
+  EllipsisVertical,
+  PieChart,
+  Twitter,
+  CircleEllipsis,
+} from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
 import GeneralFeed from "@/components/profile/GeneralFeed";
@@ -67,11 +73,20 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
         {user?.name === userC?.name && (
           <motion.div
-            className="absolute top-6 left-6 p-2 bg-[rgba(40, 40, 40, 0.6) backdrop-blur-lg "
+            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
             style={{ borderRadius: 25 }}
             onClick={() => router.push({ pathname: "/lp" })}
           >
-            <PieChart size={19} strokeWidth={3} />
+            <PieChart size={19} color="white" strokeWidth={3} />
+          </motion.div>
+        )}
+        {user?.name === userC?.name && (
+          <motion.div
+            className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+            style={{ borderRadius: 25 }}
+            onClick={() => router.push({ pathname: "/lp" })}
+          >
+            <CircleEllipsis size={19} color="white" strokeWidth={3} />
           </motion.div>
         )}
         <img
@@ -79,50 +94,39 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
           className="h-[5rem] w-[5rem] rounded-full border-4 border-[#202020] "
           alt="Profile"
         />
-        <div
-          style={{ fontFamily: "Aeonik-Bold" }}
-          className="text-white text-sm absolute top-[4rem] p-1 bg-[#202020] rounded-full font-bold mt-3"
-        >
+        <div className="text-white text-sm absolute top-[4rem] p-1 bg-[#202020] rounded-full font-bold mt-3">
           0%
         </div>
-        <p
-          style={{ fontFamily: "Aeonik-Bold" }}
-          className="text-white text-xl font-bold mt-6"
-        >
-          {userC?.name}
-        </p>
+        <p className="text-white text-xl font-bold mt-6">{userC?.name}</p>
 
         <div className="flex flex-col items-center mt-0">
           {userC?.socials?.twitter ? (
             <div className="flex items-center mt-0">
               <Twitter className="h-4 text-gray-200" />
               <p
-                style={{ fontFamily: "Aeonik-Bold" }}
+                style={{ fontWeight: 500 }}
                 className="text-gray-200 text-md font-bold ml-1"
               >
                 @{userC?.socials?.twitter?.username}
               </p>
             </div>
           ) : userC?.socials?.farcaster ? (
-            <div className="flex items-center mt-0">
+            <div style={{ fontWeight: 500 }} className="flex items-center mt-0">
               <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
               <p
-                style={{ fontFamily: "Aeonik-Bold" }}
+                style={{ fontWeight: 500 }}
                 className="text-gray-200 text-lg font-bold ml-1"
               >
                 @{userC?.socials?.farcaster?.name}
               </p>
             </div>
           ) : null}
-          <div className="flex items-center mt-2">
-            <p
-              style={{ fontFamily: "Aeonik-Bold" }}
-              className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl"
-            >
+          <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
+            <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
               ${userBalance.toFixed(2)}
             </p>
             <p
-              style={{ fontFamily: "Aeonik-Bold" }}
+              style={{ fontWeight: 500 }}
               className="text-gray-100 text-sm bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
             >
               {totalFollowers} Followers
