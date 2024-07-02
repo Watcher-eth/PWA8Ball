@@ -23,6 +23,8 @@ import Head from "next/head";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { NextSeo } from "next-seo";
 import { getApiOgRouteUrl, getProfileUrl } from "@/utils/urls";
+import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
+import { skeletonVariants } from "@/components/Activity/ActivitySkelleton";
 
 interface ProfilePageProps {
   userId: string;
@@ -37,32 +39,25 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const { id: userID } = router.query; // Get the userId from the URL
 
   const [edit, setEdit] = useState<boolean>(false);
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const { user } = useUserStore();
   const { data: totalFollowers } = useGetTotalFollowers(userID);
   const { data: userC, isLoading } = useGetUserByExternalAuthId(userID);
+  const [balanceLoading, setBalanceLoading] = useState(true);
+  const [userCBalance, setUserBalance] = useState(0);
 
-  const userBalance = Number(user?.balance) / 1000000;
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  async function getUserBalances() {
+    const balance = await getUSDCBalance(userC?.walletaddress);
+    setBalanceLoading(false);
+    setUserBalance(Number(balance));
 
-  const handleOpenLoginModal = () => {
-    setLoginModalOpen(true);
-  };
-
-  const handleCloseLoginModal = () => {
-    setLoginModalOpen(false);
-  };
+    return balance;
+  }
 
   useEffect(() => {
-    handleOpenLoginModal();
-    if (!user?.walletaddress) {
-      handleOpenLoginModal();
-    }
+    const balance = getUserBalances();
   }, []);
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
-      <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
-
       <div className="w-full relative">
         <img
           src={userC?.pfp}
@@ -74,24 +69,22 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       </div>
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
-        {user?.name === userC?.name && (
-          <motion.div
-            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-            style={{ borderRadius: 25 }}
-            onClick={() => router.push({ pathname: "/lp" })}
-          >
-            <PieChart size={19} color="white" strokeWidth={3} />
-          </motion.div>
-        )}
-        {user?.name === userC?.name && (
-          <motion.div
-            className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-            style={{ borderRadius: 25 }}
-            onClick={() => router.push({ pathname: "/lp" })}
-          >
-            <CircleEllipsis size={19} color="white" strokeWidth={3} />
-          </motion.div>
-        )}
+        <motion.div
+          className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+          style={{ borderRadius: 25 }}
+          onClick={() => router.push({ pathname: "/lp" })}
+        >
+          <PieChart size={19} color="white" strokeWidth={3} />
+        </motion.div>
+
+        <motion.div
+          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+          style={{ borderRadius: 25 }}
+          onClick={() => router.push({ pathname: "/lp" })}
+        >
+          <CircleEllipsis size={19} color="white" strokeWidth={3} />
+        </motion.div>
+
         <img
           src={userC?.pfp}
           className="h-[5rem] w-[5rem] rounded-full border-4 border-[#202020] "
@@ -125,9 +118,20 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             </div>
           ) : null}
           <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
-            <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
-              ${userBalance.toFixed(2)}
-            </p>
+            {balanceLoading ? (
+              <div style={{ marginRight: 7 }}>
+                <motion.div
+                  className="h-[33px] w-[75px] bg-[#252525] rounded-xl"
+                  variants={skeletonVariants}
+                  initial="initial"
+                  animate="pulse"
+                />
+              </div>
+            ) : (
+              <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
+                ${userCBalance.toFixed(2)}
+              </p>
+            )}
             <p
               style={{ fontWeight: 500 }}
               className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"

@@ -47,7 +47,8 @@ const FollowButton: React.FC<FollowButtonProps> = (props) => {
     setTemporaryUnfollow(true);
   };
 
-  if ((!props.isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
+  const isUser = user?.external_auth_provider_user_id === props.profileId;
+  if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <motion.button
         onClick={handleFollow}
@@ -82,7 +83,7 @@ const FollowButton: React.FC<FollowButtonProps> = (props) => {
     );
   }
 
-  if ((!props.isUser && isFollowing) || (isFollowing2 && !temporaryUnfollow)) {
+  if ((!isUser && isFollowing) || (isFollowing2 && !temporaryUnfollow)) {
     return (
       <motion.button
         onClick={handleUnfollow}
@@ -116,7 +117,7 @@ const FollowButton: React.FC<FollowButtonProps> = (props) => {
     );
   }
 
-  if (props.isUser) {
+  if (isUser) {
     return (
       <motion.button
         onClick={props.setEdit}
