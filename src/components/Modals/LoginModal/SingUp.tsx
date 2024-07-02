@@ -37,44 +37,47 @@ function SingUp(props: { setStep: (step: number) => void }) {
       loginAccount
     ) => {
       try {
-        handleCreateUser({
-          id: user.id,
-          liquiditypoints: 0,
-          rewardpoints: 0,
-        });
-        const hasTwitterLinked = user.linkedAccounts.some(
-          (account) => account.type === "twitter_oauth"
-        );
-
-        if (hasTwitterLinked) {
-          const twitterAccount = user.linkedAccounts.find(
+        console.log("login completed", user);
+        if (isNewUser) {
+          handleCreateUser({
+            id: user.id,
+            liquiditypoints: 0,
+            rewardpoints: 0,
+          });
+          const hasTwitterLinked = user.linkedAccounts.some(
             (account) => account.type === "twitter_oauth"
           );
-          const getLargeProfileImageUrl = (url: string) => {
-            return url.replace("_normal", "_400x400");
-          };
 
-          const profilePictureUrl = getLargeProfileImageUrl(
-            twitterAccount.profile_picture_url
-          );
-          const name = twitterAccount.name;
-          const pfp = profilePictureUrl;
+          if (hasTwitterLinked) {
+            const twitterAccount = user.linkedAccounts.find(
+              (account) => account.type === "twitter_oauth"
+            );
+            const getLargeProfileImageUrl = (url: string) => {
+              return url.replace("_normal", "_400x400");
+            };
 
-          const userId = user?.id;
-          updateUserProfile({
-            userId,
-            updates: {
-              name,
-              pfp,
-              socials: {
-                twitter: {
-                  username: twitterAccount.username,
-                  name: name,
-                  pfp: profilePictureUrl,
+            const profilePictureUrl = getLargeProfileImageUrl(
+              twitterAccount.profile_picture_url
+            );
+            const name = twitterAccount.name;
+            const pfp = profilePictureUrl;
+
+            const userId = user?.id;
+            updateUserProfile({
+              userId,
+              updates: {
+                name,
+                pfp,
+                socials: {
+                  twitter: {
+                    username: twitterAccount.username,
+                    name: name,
+                    pfp: profilePictureUrl,
+                  },
                 },
               },
-            },
-          });
+            });
+          }
         }
       } catch (error) {
         console.error("Error creating user:", error);

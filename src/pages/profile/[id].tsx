@@ -15,6 +15,8 @@ import {
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
 import GeneralFeed from "@/components/profile/GeneralFeed";
+import FollowButton from "@/components/profile/FollowButton";
+
 import LoginModal from "@/components/Modals/LoginModal";
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
 import Head from "next/head";
@@ -32,11 +34,13 @@ interface Props1 {
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const router = useRouter();
+  const { id: userID } = router.query; // Get the userId from the URL
+
   const [edit, setEdit] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const { user } = useUserStore();
-  const { data: totalFollowers } = useGetTotalFollowers(userId);
-  const { data: userC, isLoading } = useGetUserByExternalAuthId(userId);
+  const { data: totalFollowers } = useGetTotalFollowers(userID);
+  const { data: userC, isLoading } = useGetUserByExternalAuthId(userID);
 
   const userBalance = Number(user?.balance) / 1000000;
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -55,7 +59,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       handleOpenLoginModal();
     }
   }, []);
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
       <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
@@ -127,10 +130,15 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             </p>
             <p
               style={{ fontWeight: 500 }}
-              className="text-gray-100 text-sm bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
+              className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
             >
               {totalFollowers} Followers
             </p>
+            <FollowButton
+              setEdit={() => setEdit(true)}
+              profileId={userC?.external_auth_provider_user_id}
+              isUser={user?.name === userC?.name}
+            />
           </div>
         </div>
       </div>
