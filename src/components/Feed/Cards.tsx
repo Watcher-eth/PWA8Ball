@@ -22,11 +22,7 @@ import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 
-<<<<<<< HEAD
 export function Cards(props) {
-=======
-export default function Cards(props) {
->>>>>>> 4eda6a19ec6272e2ea0568b856a6eb30513b2a17
   const {
     image,
     title,
@@ -301,7 +297,3 @@ export default function Cards(props) {
     </LayoutGroup>
   );
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 4eda6a19ec6272e2ea0568b856a6eb30513b2a17
