@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-function YourFriends() {
+export function YourFriends() {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Get followers portfolios
@@ -19,5 +19,3 @@ function YourFriends() {
       </div>
     );
 }
-
-export default YourFriends;

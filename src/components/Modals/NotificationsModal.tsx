@@ -7,20 +7,14 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/button";
 import { motion } from "framer-motion";
-import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
-import Image from "next/image";
 import { toast } from "sonner";
-import ShareBetModal from "../Share/ShareBet.tsx";
-import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
 import { Toaster } from "../ui/sonner";
-import NotificationsModalPage from "../Notifications/NotificationModalPage";
+import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 interface ShareModal {
   children: ReactNode;
 }
-function NotificationsModal({ children }: ShareModal) {
+export function NotificationsModal({ children }: ShareModal) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -72,5 +66,3 @@ function NotificationsModal({ children }: ShareModal) {
     </div>
   );
 }
-
-export default NotificationsModal;

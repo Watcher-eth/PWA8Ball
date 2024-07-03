@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
+import Link from "next/link";
 
 const NewPlaceholder = ({ isUser }) => {
   const router = useRouter();
@@ -30,15 +31,14 @@ const NewPlaceholder = ({ isUser }) => {
           Start by making predictions for the future and they will show up here
         </div>
       </div>
-      <motion.button
-        onClick={() => {
-          router.push("/");
-        }}
-        className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
-        whileTap={{ scale: 0.95 }}
-      >
-        {isUser ? "Make your first Prediction" : "Come back later"}
-      </motion.button>
+      <Link href={"/"}>
+        <motion.button
+          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
+          whileTap={{ scale: 0.95 }}
+        >
+          {isUser ? "Make your first Prediction" : "Come back later"}
+        </motion.button>
+      </Link>
     </div>
   );
 };
@@ -143,15 +143,14 @@ export const NewPlaceholderLp = ({ isUser }) => {
           efficient
         </div>
       </div>
-      <motion.button
-        onClick={() => {
-          router.push("/");
-        }}
-        className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
-        whileTap={{ scale: 0.95 }}
-      >
-        {isUser ? "Boost a market" : "Boost a market"}
-      </motion.button>
+      <Link href="/">
+        <motion.button
+          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
+          whileTap={{ scale: 0.95 }}
+        >
+          {isUser ? "Boost a market" : "Boost a market"}
+        </motion.button>
+      </Link>
     </div>
   );
 };

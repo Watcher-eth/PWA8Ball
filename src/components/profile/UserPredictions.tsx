@@ -27,9 +27,6 @@ const UserPredictions = ({
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
       className="flex items-center justify-between p-2 py-1 rounded-xl bg-[#171717] w-[90vw] m-1"
-      onClick={() => {
-        router.push({ pathname: `/p/${betId}`, query: { id: betId } });
-      }}
     >
       <div className="flex items-center gap-2">
         {image ? (

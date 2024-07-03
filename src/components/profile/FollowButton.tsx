@@ -15,7 +15,7 @@ interface FollowButtonProps {
   showToast?: () => void;
 }
 
-const FollowButton: React.FC<FollowButtonProps> = (props) => {
+export const FollowButton: React.FC<FollowButtonProps> = (props) => {
   const { user } = useUserStore();
   const followerId = user?.external_auth_provider_user_id;
   const followingId = props.profileId;
@@ -154,5 +154,3 @@ const FollowButton: React.FC<FollowButtonProps> = (props) => {
 
   return null;
 };
-
-export default FollowButton;

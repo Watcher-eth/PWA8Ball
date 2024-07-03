@@ -13,7 +13,7 @@ interface RemoveLPOverviewProps {
   totalPot: number;
 }
 
-const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
+export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
   const width = window.innerWidth;
 
   return (
@@ -220,5 +220,3 @@ const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
     </div>
   );
 };
-
-export default Overview;

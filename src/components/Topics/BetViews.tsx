@@ -92,6 +92,7 @@ export const BetBigView = ({
 };
 
 import { Users } from "lucide-react";
+import Link from "next/link";
 
 export const BetSmallView = ({
   index,

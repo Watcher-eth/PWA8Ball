@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import React, { useEffect } from "react";
 import {
   Drawer,
@@ -11,29 +10,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowDown,
-  AtSign,
-  BadgeDollarSign,
-  Contact,
-  CreditCard,
-  MinusIcon,
-  PlusIcon,
-  Repeat,
-  ShoppingBag,
-  WalletCards,
-  X,
-} from "lucide-react";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import GetGhoModal from "../BuyVotes/getGhoModal";
-import ConfirmActionModal from "../BuyVotes/confirmActionModal";
-import BuyModal from "../BuyVotes/buyModal";
-import SingUp from "./SingUp";
-import Profile from "./Profile";
-import Overview from "./Overview";
-import RemoveLPConfirmationScreen from "./Confirm";
+import { Overview } from "./Overview";
+import { RemoveLPConfirmationScreen } from "./Confirm";
 
 interface RemoveLPProps {
   children: ReactNode;

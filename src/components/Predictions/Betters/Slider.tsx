@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const ProportionalSlider = ({ value }) => {
+export const ProportionalSlider = ({ value }) => {
   const firstSegmentWidth = value * 100;
   const secondSegmentWidth = (1 - value) * 100;
 
@@ -41,4 +41,3 @@ const proportionalStyles = {
   },
 };
 
-export default ProportionalSlider;

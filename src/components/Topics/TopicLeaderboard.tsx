@@ -111,66 +111,67 @@ const Leaderboard = ({ topicId }) => {
           </span>
         </div>
         {topPredictors.map((predictor, index) => (
-          <div
-            onClick={() => router.push(`/profile?id=${predictor.user_id}`)}
-            key={index}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: "7px 0",
-              cursor: "pointer",
-            }}
-          >
+          <Link href={`/profile?id=${predictor.user_id}`}>
             <div
+              key={index}
               style={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "space-between",
+                margin: "7px 0",
+                cursor: "pointer",
               }}
             >
-              <span style={{ color: "white", fontFamily: "AeonikBold" }}>
-                {index + 1}
-              </span>
-              <img
-                src={predictor.pfp}
-                alt="Profile"
+              <div
                 style={{
-                  height: 30,
-                  width: 30,
-                  borderRadius: "50%",
-                  margin: "0 20px",
-                  marginLeft: 10,
-                }}
-              />
-              <span
-                style={{
-                  color: "white",
-                  fontFamily: "AeonikBold",
-                  fontSize: 17,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                {predictor.name}
+                <span style={{ color: "white", fontFamily: "AeonikBold" }}>
+                  {index + 1}
+                </span>
+                <img
+                  src={predictor.pfp}
+                  alt="Profile"
+                  style={{
+                    height: 30,
+                    width: 30,
+                    borderRadius: "50%",
+                    margin: "0 20px",
+                    marginLeft: 10,
+                  }}
+                />
+                <span
+                  style={{
+                    color: "white",
+                    fontFamily: "AeonikBold",
+                    fontSize: 17,
+                  }}
+                >
+                  {predictor.name}
+                </span>
+              </div>
+              <span
+                style={{
+                  color: "lightgray",
+                  fontFamily: "AeonikRegular",
+                  fontSize: 15,
+                }}
+              >
+                ${(predictor.total_amount / 1000000).toFixed(2)}
               </span>
             </div>
-            <span
-              style={{
-                color: "lightgray",
-                fontFamily: "AeonikRegular",
-                fontSize: 15,
-              }}
-            >
-              ${(predictor.total_amount / 1000000).toFixed(2)}
-            </span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
 };
 
-const TopicLeaderboard = ({ image, name, topicId }) => {
+export const TopicLeaderboard = ({ image, name, topicId }) => {
   const router = useRouter();
 
   return (
@@ -261,5 +262,3 @@ const TopicLeaderboard = ({ image, name, topicId }) => {
     </div>
   );
 };
-
-export default TopicLeaderboard;

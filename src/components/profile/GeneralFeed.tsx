@@ -10,7 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useGetOrdersForUser } from "@/lib/supabase/queries/user/getUserOrders";
 import { useGetMarketsCreatedByUser } from "@/lib/supabase/queries/getUserCreatedMarkets";
 import NewPlaceholder from "../Common/Placeholders/NewPlaceholders";
-
+import { BetModal } from "../Modals/MyBetModal.tsx";
 const aggregatePredictedItems = (orders: any) => {
   const aggregated = {};
 
@@ -26,7 +26,7 @@ const aggregatePredictedItems = (orders: any) => {
   return Object.values(aggregated);
 };
 
-const GeneralFeed = ({
+export const GeneralFeed = ({
   handleOpenBottomSheet,
   walletAddy,
   id,
@@ -80,36 +80,56 @@ const GeneralFeed = ({
       ) : (
         mergedData.map((item, index) =>
           item.type === "predicted" ? (
-            <UserPredictions
+            <BetModal
               key={`predicted-${item.id}-${item.option}`}
-              onOpenBottomSheet={() =>
-                handleOpenBottomSheet({
-                  amount: item.amount / 100000,
-                  title: item.title,
-                  image: item.image,
-                  price: item.amount,
-                  question: item.question,
-                  betId: item.market_id,
-                  topic: item.market_id,
-                  option:
-                    item.option === 0
-                      ? item.options[item.option + 1].name
-                      : item.options[item.option - 1].name,
-                })
-              }
-              option={
-                item.option === 0
-                  ? item.options[item.option + 1].name
-                  : item.options[item.option - 1].name
-              }
-              betId={item.market_id}
-              optional={item.option}
-              index={index}
               title={item.title}
-              question={item.question}
               image={item.image}
-              amount={String(item.amount / 100000)}
-            />
+              price={item.amount}
+              ownedAmount={item.amount / 100000}
+              options={item.options}
+              percentage={item.percentage}
+              betId={item.market_id}
+              topic={item.market_id}
+              icon={item.icon}
+              question={item.question}
+              option={item.option}
+              optionNumber={item.optionNumber}
+              isExternal={item.isExternal}
+              onClose={() => handleOpenBottomSheet({})}
+              openCashout={() => handleOpenBottomSheet({})}
+              handleReceipt={() => handleOpenBottomSheet({})}
+            >
+              <UserPredictions
+                key={`predicted-${item.id}-${item.option}`}
+                onOpenBottomSheet={() =>
+                  handleOpenBottomSheet({
+                    amount: item.amount / 100000,
+                    title: item.title,
+                    image: item.image,
+                    price: item.amount,
+                    question: item.question,
+                    betId: item.market_id,
+                    topic: item.market_id,
+                    option:
+                      item.option === 0
+                        ? item.options[item.option + 1].name
+                        : item.options[item.option - 1].name,
+                  })
+                }
+                option={
+                  item.option === 0
+                    ? item.options[item.option + 1].name
+                    : item.options[item.option - 1].name
+                }
+                betId={item.market_id}
+                optional={item.option}
+                index={index}
+                title={item.title}
+                question={item.question}
+                image={item.image}
+                amount={String(item.amount / 100000)}
+              />
+            </BetModal>
           ) : (
             <CreatedPrediction
               key={`created-${item.id}`}
@@ -139,5 +159,3 @@ const GeneralFeed = ({
     </div>
   );
 };
-
-export default GeneralFeed;

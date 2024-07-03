@@ -1,75 +1,32 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  AlertTriangle,
-  X,
-  ArrowDown,
-  Check,
-  CheckCircle,
-  Clock,
-} from "lucide-react";
-import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { Toaster, toast } from "sonner";
+// @ts-nocheck
 
-interface RemoveLPConfirmationScreenProps {
-  setStep: (num: number) => void;
+import React, { useState } from "react";
+import { AlertTriangle, Clock, Share as ShareIcon, X } from "lucide-react";
+import { motion } from "framer-motion";
+interface CashOutWarningScreenProps {
+  changeStep: () => void;
   onClose: () => void;
-  refetch: () => void;
   title: string;
   multiplier: number;
   points: number;
   id: number;
+  option: number;
 }
 
-export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProps> = (
-  props
-) => {
+const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
   const { onClose } = props;
-  const { smartAccountReady, smartAccountClient, smartAccountAddress } =
-    useSmartAccount();
-  const { user: userCon } = useUserStore();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-
   const width = window.innerWidth;
 
-  const { mutate: removeLP, isSuccess } = useRemoveLp();
-
-  const showToast = () => {
-    toast.success("Boost withdrawal successful!", {
-      icon: <CheckCircle />,
-      style: { backgroundColor: "#5ACE5A", color: "white" },
-    });
-  };
-
-  async function executePrediction() {
-    if (smartAccountReady) {
-      try {
-        setLoading(true);
-        removeLP({
-          userId: userCon?.external_auth_provider_user_id!,
-          marketId: props.id,
-          client: smartAccountClient,
-          address: smartAccountAddress!,
-        });
-
-        setTimeout(() => setLoading(false), 500);
-
-        setSuccess(true);
-        showToast();
-
-        setTimeout(() => {
-          onClose();
-          props.refetch();
-        }, 7000);
-      } catch (error) {
-        console.error("Failed to withdraw boost:", error);
-        alert("Failed to withdraw boost!");
-      }
-    } else {
+  async function cashOutPrediction() {
+    try {
+      setLoading(true);
+      // Cash out logic here
+      setSuccess(true);
+    } catch (error) {
+      console.error("Failed to cash out:", error);
+      alert("Failed to cash out!");
     }
   }
 
@@ -86,6 +43,14 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
         borderRadius: "30px",
       }}
     >
+      {/* <CustomToastSuccess
+        visible={toastVisible}
+        message="Your withdrawal was successful!"
+        icon={CheckCircle}
+        position="top-center"
+        color="#5ACE5A"
+      /> */}
+
       <motion.div
         style={{
           display: "flex",
@@ -105,18 +70,20 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
           }}
         >
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
-          <motion.button
-            onClick={onClose}
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            onClick={() => onClose()}
             style={{
-              padding: "8.5px 6px",
+              paddingVertical: "8.5px",
+              paddingHorizontal: "6px",
               borderRadius: "17px",
+              overflow: "hidden",
               backgroundColor: "#1C1C1C",
-              border: "none",
+              alignSelf: "flex-start",
+              cursor: "pointer",
             }}
           >
             <X color={"#585858"} strokeWidth={5} height={18} />
-          </motion.button>
+          </motion.div>
         </div>
         <span
           style={{
@@ -126,7 +93,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             marginTop: "14px",
           }}
         >
-          Are you sure you want to withdraw your Boost?
+          Are you sure you want cash out prior to resolution?
         </span>
         <span
           style={{
@@ -136,15 +103,15 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             marginTop: "8px",
           }}
         >
-          If you keep your boost till after the market resolves you earn 3x
-          Points
+          If you cash out now you will sell at the current probability and won't
+          get any multiplier
         </span>
         <div
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            marginTop: "27px",
+            marginTop: "35px",
             marginBottom: "6px",
           }}
         >
@@ -157,14 +124,15 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
               marginLeft: "4px",
             }}
           >
-            Hold and earn 3x
+            Hold and earn more
           </span>
         </div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            padding: "14px 16px",
+            padding: "14px",
+            paddingVertical: "16px",
             borderRadius: "15px",
             marginTop: "9px",
             backgroundColor: "#1C1C1C",
@@ -195,7 +163,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
                 color: "lightgray",
               }}
             >
-              {props.points.toFixed(0)} $Cred
+              ${props.points.toFixed(2)}
             </span>
           </div>
           <div
@@ -213,7 +181,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
                 color: "white",
               }}
             >
-              After Resolution
+              Possible Payout
             </span>
             <span
               style={{
@@ -222,7 +190,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
                 color: "white",
               }}
             >
-              {(props.points * 3).toFixed(0)} $Cred
+              ${(props.points * 3).toFixed(2)}
             </span>
           </div>
         </div>
@@ -234,40 +202,40 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
           alignItems: "center",
           gap: "5px",
           marginBottom: "0",
-          marginTop: "22px",
+          marginTop: "25px",
         }}
       >
-        <motion.button
+        <motion.div
           onClick={() => {
             onClose();
+            props?.onClose();
           }}
-          whileTap={{ scale: 0.95 }}
           style={{
             marginTop: "12px",
             padding: "13px",
             borderRadius: "24px",
+            overflow: "hidden",
             backgroundColor: "#1C1C1C",
             width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
-            border: "none",
+            cursor: "pointer",
           }}
         >
           <span
             style={{
               fontSize: "20px",
               color: "#D9D9D9",
-              fontWeight: 800,
+              fontWeight: "800",
             }}
           >
             Hold
           </span>
-        </motion.button>
-        <motion.button
+        </motion.div>
+        <motion.div
           onClick={() => {
-            success ? () => {} : executePrediction();
+            cashOutPrediction();
           }}
-          whileTap={{ scale: 0.95 }}
           style={{
             marginTop: "12px",
             display: "flex",
@@ -275,18 +243,16 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             marginLeft: "16px",
             padding: "11px",
             borderRadius: "24px",
+            overflow: "hidden",
             backgroundColor: "#D9D9D9",
             width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
-            border: "none",
+            cursor: "pointer",
           }}
         >
           {loading ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -294,56 +260,20 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
                 justifyContent: "center",
               }}
             >
-              <span className="loader" />
+              <div className="loader"></div>
               <span
                 style={{
                   fontSize: "20px",
                   color: "#1D1D1D",
-                  fontWeight: 800,
+                  fontWeight: "800",
                   marginLeft: "3px",
                 }}
               >
-                Withdrawing
+                Cashing out
               </span>
-            </motion.div>
-          ) : success ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  padding: "4px",
-                  borderRadius: "19px",
-                  marginRight: "4px",
-                  backgroundColor: "#5ACE5A",
-                }}
-              >
-                <Check strokeWidth={5} color="white" size={15} />
-              </div>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: 800,
-                  marginLeft: "3px",
-                }}
-              >
-                Success
-              </span>
-            </motion.div>
+            </div>
           ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -351,21 +281,22 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
                 justifyContent: "center",
               }}
             >
-              <ArrowDown color="black" strokeWidth={3} height={23} />
-              <span
+              <motion.span
                 style={{
                   fontSize: "20px",
                   color: "#1D1D1D",
-                  fontWeight: 800,
+                  fontWeight: "800",
                   marginLeft: "3px",
                 }}
               >
-                Withdraw
-              </span>
-            </motion.div>
+                Confirm
+              </motion.span>
+            </div>
           )}
-        </motion.button>
+        </motion.div>
       </div>
     </div>
   );
 };
+
+export default CashOutWarningScreen;

@@ -4,8 +4,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/lib/supabase/queries/Reccomendations/RelatedMarkets";
+import Link from "next/link";
 
-const RelatedMarkets = (props: { topicId: string; id: number }) => {
+export const RelatedMarkets = (props: { topicId: string; id: number }) => {
   const router = useRouter();
   const { topicId, id } = props;
 
@@ -61,7 +62,6 @@ const RelatedMarkets = (props: { topicId: string; id: number }) => {
   return null;
 };
 
-export default RelatedMarkets;
 const styles = {
   relatedMarkets: {
     display: "flex",

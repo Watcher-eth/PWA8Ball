@@ -17,7 +17,7 @@ interface FollowPredictionSkeletonProps {
   index: number;
 }
 
-const FollowPredictionSkeleton: React.FC<FollowPredictionSkeletonProps> = ({
+export const FollowPredictionSkeleton: React.FC<FollowPredictionSkeletonProps> = ({
   index,
 }) => (
   <motion.div
@@ -69,4 +69,3 @@ const FollowPredictionSkeleton: React.FC<FollowPredictionSkeletonProps> = ({
   </motion.div>
 );
 
-export default FollowPredictionSkeleton;

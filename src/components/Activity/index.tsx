@@ -4,23 +4,24 @@ import React, { useState, useCallback, useRef } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { Bell, Users, Globe } from "lucide-react";
-import ActivityField from "./ActivityField";
-import Leaderboard from "./Leaderboard";
-import YourStats from "./YourStats";
+import { ActivityField } from "./ActivityField";
+import { Leaderboard } from "./Leaderboard";
+import { YourStats } from "./YourStats";
 import { useGetFollowingPredictions } from "@/lib/supabase/queries/friends/fetchFollowingPredictionts";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
-import InviteFriendsPlaceholder from "../Common/Placeholders/InviteFriendsPlaceholder";
-import FollowPredictionSkeleton, {
+import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
+import {
   skeletonVariants,
+  FollowPredictionSkeleton,
 } from "./ActivitySkelleton";
-import NotificationsModal from "../Modals/NotificationsModal";
+import { NotificationsModal } from "../Modals/NotificationsModal";
 
 interface Prediction {
   // Define the structure of a prediction here
 }
 
-const ActivityPage: React.FC = () => {
+export const ActivityPage: React.FC = () => {
   const router = useRouter();
   const [page, setPage] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -182,5 +183,3 @@ const ActivityPage: React.FC = () => {
     </div>
   );
 };
-
-export default ActivityPage;

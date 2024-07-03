@@ -2,7 +2,7 @@ import React from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetOrderCountForUser } from "@/lib/supabase/queries/user/getTotalPredictions";
 
-const YourStats: React.FC = () => {
+export const YourStats: React.FC = () => {
   const { user } = useUserStore();
   const { data: count } = useGetOrderCountForUser(user?.walletaddress!);
 
@@ -34,4 +34,3 @@ const YourStats: React.FC = () => {
   );
 };
 
-export default YourStats;

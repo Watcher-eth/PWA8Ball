@@ -32,6 +32,7 @@
     "@thirdweb-dev/sdk": "^4.0.28",
     "@types/uuid": "^9.0.8",
     "@vercel/og": "^0.6.2",
+    "@visx/visx": "^3.11.0",
     "@wagmi/connectors": "^5.0.14",
     "@wagmi/core": "^2.3.1",
     "amplitude-js": "^8.21.9",

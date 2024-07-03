@@ -27,13 +27,10 @@ import {
   X,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import GetGhoModal from "../BuyVotes/getGhoModal";
-import ConfirmActionModal from "../BuyVotes/confirmActionModal";
 import BuyModal from "../BuyVotes/buyModal";
 import SingUp from "./SingUp";
-import Profile from "./Profile";
 
-function LoginModal({ isOpen, onClose }) {
+export function LoginModal({ isOpen, onClose }) {
   const [goal, setGoal] = React.useState(1);
   const [step, setStep] = React.useState(1);
 
@@ -103,7 +100,6 @@ function LoginModal({ isOpen, onClose }) {
           </div>
           <AnimatePresence>
             {step === 1 && <SingUp setStep={setStep} />}
-            {step === 2 && <Profile setStep={setStep} />}
             {step === 4 && <BuyModal setStep={setStep} method={1} />}
             {step === 5 && <BuyModal setStep={setStep} method={2} />}
             {step === 6 && <SingUp setStep={setStep} />}
@@ -113,5 +109,3 @@ function LoginModal({ isOpen, onClose }) {
     </Drawer>
   );
 }
-
-export default LoginModal;

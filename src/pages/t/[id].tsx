@@ -1,11 +1,9 @@
 // @ts-nocheck
 
-import FeaturedBet from "@/components/Topics";
-import Head from "next/head";
+import { FeaturedBet } from "@/components/Topics";
 import { GetServerSideProps, Metadata, ResolvingMetadata } from "next";
 import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { NextSeo } from "next-seo";
 import { getApiOgTopicUrl, getTopicUrl } from "@/utils/urls";
 
 interface TopicPageProps {
@@ -15,7 +13,6 @@ interface TopicPageProps {
 interface Props1 {
   params: { id: string };
 }
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
@@ -40,12 +37,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-
 const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
   const router = useRouter();
   console.log({ topicData });
   if (!topicData) {
-    console.log("loading")
+    console.log("loading");
     return <p>Loading...</p>;
   }
 

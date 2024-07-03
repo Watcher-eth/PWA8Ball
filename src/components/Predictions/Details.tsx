@@ -13,7 +13,7 @@ import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import BoostExplainerModal from "../Modals/Tutorials/BoostExplainer.tsx";
 import { getTopicPath } from "@/utils/urls/index.ts";
 
-const BetDetails = ({
+export const BetDetails = ({
   endDate,
   multiplier,
   topic,
@@ -92,54 +92,58 @@ const BetDetails = ({
       <BoostModal image={image} id={id}>
         <BoostMarket Boost={3} handleBoost={handleBooster} />
       </BoostModal>
-      <motion.div
-        style={{ borderRadius: 12 }}
-        className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
-        whileTap={{ scale: 0.95 }}
-        onClick={() => router.push(linkArgs)}
-      >
-        <Link href={linkArgs}>
-          <div className="flex flex-row items-center">
-            {icon ? (
-              <img
-                src={icon}
-                alt={topic}
-                style={{ borderRadius: 6 }}
-                className="h-12 w-12 object-cover	 rounded-md overflow-hidden mr-2"
-              />
-            ) : (
-              <div className="h-12 w-12 rounded-md bg-gray-200 mr-2" />
-            )}
-            <div className="flex flex-col space-y-[-0.1rem]">
-              <span className="text-sm font-bold text-gray-400">/{topic}</span>
-              <div className="flex flex-row items-center">
-                <Users color="white" size={17} strokeWidth={3.2} />
-                <span className="text-lg font-bold text-white ml-1">
-                  {members} {members > 1 ? "Members" : "Member"}
-                </span>
-              </div>
-            </div>
-          </div>
-        </Link>
+      <Link href={linkArgs}>
         <motion.div
-          className={`flex items-center justify-center px-5 py-2 border  border-[#212121] rounded-md ${
-            joined ? "bg-white" : "bg-transparent"
-          }`}
+          style={{ borderRadius: 12 }}
+          className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
           whileTap={{ scale: 0.95 }}
-          onClick={() => router.push(linkArgs)}
-          style={{ borderRadius: 20 }}
         >
           <Link href={linkArgs}>
-            <span
-              className={`text-md font-bold ${
-                joined ? "text-gray-200" : "text-white"
+            <div className="flex flex-row items-center">
+              {icon ? (
+                <img
+                  src={icon}
+                  alt={topic}
+                  style={{ borderRadius: 6 }}
+                  className="h-12 w-12 object-cover	 rounded-md overflow-hidden mr-2"
+                />
+              ) : (
+                <div className="h-12 w-12 rounded-md bg-gray-200 mr-2" />
+              )}
+              <div className="flex flex-col space-y-[-0.1rem]">
+                <span className="text-sm font-bold text-gray-400">
+                  /{topic}
+                </span>
+                <div className="flex flex-row items-center">
+                  <Users color="white" size={17} strokeWidth={3.2} />
+                  <span className="text-lg font-bold text-white ml-1">
+                    {members} {members > 1 ? "Members" : "Member"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+          <Link href={linkArgs}>
+            <motion.div
+              className={`flex items-center justify-center px-5 py-2 border  border-[#212121] rounded-md ${
+                joined ? "bg-white" : "bg-transparent"
               }`}
+              whileTap={{ scale: 0.95 }}
+              style={{ borderRadius: 20 }}
             >
-              {joined ? "Joined" : "Join"}
-            </span>
+              <Link href={linkArgs}>
+                <span
+                  className={`text-md font-bold ${
+                    joined ? "text-gray-200" : "text-white"
+                  }`}
+                >
+                  {joined ? "Joined" : "Join"}
+                </span>
+              </Link>
+            </motion.div>
           </Link>
         </motion.div>
-      </motion.div>
+      </Link>
       <BoostExplainerModal
         onClose={() => {
           setIsOpen(false);
@@ -174,5 +178,3 @@ const BoostMarket = ({ Boost, handleBoost }) => {
     </motion.div>
   );
 };
-
-export default BetDetails;

@@ -9,8 +9,9 @@ import { Users, ChevronLeft, Share, Star, Newspaper, Plus } from "lucide-react";
 import { useGetMarketsForTopic } from "@/lib/supabase/queries/getAllMarketsForTopic";
 import { useGetMembersForTopic } from "@/lib/supabase/mutations/topics/getMemberForTopic";
 import ShareTopicModal from "../Modals/ShareTopicModal";
+import Link from "next/link";
 
-const FeaturedBet = ({
+export const FeaturedBet = ({
   name,
   description,
   image,
@@ -41,12 +42,12 @@ const FeaturedBet = ({
         >
           <ChevronLeft color="white" size={20} strokeWidth={4} />
         </button>
-        <button
-          onClick={() => router.push("/CommunityLeaderboard")}
+        <Link
+          href={"/CommunityLeaderboard"}
           className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-14 z-10"
         >
           <Star color="white" size={20} strokeWidth={3} />
-        </button>
+        </Link>
 
         <ShareTopicModal
           image={image}
@@ -165,8 +166,6 @@ const FeaturedBet = ({
 
   return null;
 };
-
-export default FeaturedBet;
 
 export const AvatarGroup = ({ images }) => {
   return (

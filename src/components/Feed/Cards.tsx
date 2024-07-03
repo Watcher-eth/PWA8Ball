@@ -14,16 +14,16 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import VotingModal from "../Modals/BuyVotes/index";
 import { ArrowLeft, Share } from "lucide-react";
 import ShareModal from "../Modals/ShareModal";
-import BetDetails from "../Predictions/Details";
+import { BetDetails } from "../Predictions/Details";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import BettersOverviewModal from "../Predictions/Betters/OverviewModal";
-import CommentSection from "../Posts/Comments/CommentSection";
+import { CommentSection } from "../Posts/Comments/CommentSection";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useUserStore } from "@/lib/stores/UserStore";
-import RelatedMarkets from "../Predictions/RelatedMarkets";
+import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 
-function Cards(props) {
+export function Cards(props) {
   const {
     image,
     title,
@@ -299,5 +299,3 @@ function Cards(props) {
     </LayoutGroup>
   );
 }
-
-export default Cards;

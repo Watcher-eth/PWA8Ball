@@ -1,16 +1,16 @@
 // @ts-nocheck
 
 import React, { useEffect, useMemo, useState } from "react";
-import Cards from "./Cards";
+import {Cards} from "./Cards";
 import { useGetAllTopics } from "@/lib/supabase/queries/getTopics";
 import { useGetTrendingMarkets } from "@/lib/supabase/queries/getTrendingMarkets";
-import TopicHeader from "./TopicHeader";
+import {TopicHeader} from "./TopicHeader";
 import { stripEmoji } from "@/lib/utils/stripEmoji";
 import { parseOptions } from "@/lib/utils/parseOption";
 import { useUserStore } from "@/lib/stores/UserStore";
-import LoginModal from "../Modals/LoginModal";
+import {LoginModal} from "../Modals/LoginModal";
 
-function CardFeed() {
+export function CardFeed() {
   const { user } = useUserStore();
 
   const data = [
@@ -137,4 +137,3 @@ function CardFeed() {
   );
 }
 
-export default CardFeed;

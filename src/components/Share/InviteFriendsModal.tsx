@@ -9,7 +9,7 @@ import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
 
-const FindFriends = ({ type }) => {
+export const FindFriends = ({ type }) => {
   const address = "0x8512B8f41a6D1f2Aa0D09ae710b705498735F265";
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
@@ -363,8 +363,6 @@ const FindFriends = ({ type }) => {
     </div>
   );
 };
-
-export default FindFriends;
 
 function FindFriendsItem(props) {
   const { name, pfp, handle, isFollowing, type } = props;

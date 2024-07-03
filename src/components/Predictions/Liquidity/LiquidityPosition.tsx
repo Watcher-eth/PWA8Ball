@@ -11,7 +11,7 @@ interface LiquidityPositionProps {
   onChange: () => void;
 }
 
-const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
+export const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
   image,
   title,
   amount,
@@ -154,5 +154,3 @@ const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
     </RemoveLiquidityModal>
   );
 };
-
-export default LiquidityPosition;

@@ -16,7 +16,7 @@ interface ActivityFieldProps {
   onOpenBottomSheet: () => void;
 }
 
-const ActivityField: React.FC<ActivityFieldProps> = ({
+export const ActivityField: React.FC<ActivityFieldProps> = ({
   index,
   pfp,
   name,
@@ -138,4 +138,3 @@ const ActivityField: React.FC<ActivityFieldProps> = ({
   );
 };
 
-export default ActivityField;

@@ -73,7 +73,7 @@ export function MobileOnly() {
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { isMobile } from "@/utils/isMobile";
-import MobileOnlyModal from "@/components/Modals/MobileOnlyModal";
+import { MobileOnlyModal } from "@/components/Modals/MobileOnlyModal";
 import { useDrawer } from "@/lib/stores/DrawerContext";
 
 const withDeviceCheck = (WrappedComponent) => {

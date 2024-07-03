@@ -12,19 +12,14 @@ import {
   Twitter,
   CircleEllipsis,
 } from "lucide-react";
-import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
-import GeneralFeed from "@/components/profile/GeneralFeed";
-import FollowButton from "@/components/profile/FollowButton";
+import { GeneralFeed } from "@/components/profile/GeneralFeed";
+import { FollowButton } from "@/components/profile/FollowButton";
 
-import LoginModal from "@/components/Modals/LoginModal";
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
-import Head from "next/head";
-import { supabase } from "@/lib/supabase/supabaseClient";
-import { NextSeo } from "next-seo";
-import { getApiOgRouteUrl, getProfileUrl } from "@/utils/urls";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { skeletonVariants } from "@/components/Activity/ActivitySkelleton";
+import Link from "next/link";
 
 interface ProfilePageProps {
   userId: string;
@@ -69,18 +64,18 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       </div>
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
-        <motion.div
-          className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-          style={{ borderRadius: 25 }}
-          onClick={() => router.push({ pathname: "/lp" })}
-        >
-          <PieChart size={19} color="white" strokeWidth={3} />
-        </motion.div>
+        <Link href="/lp">
+          <motion.div
+            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+            style={{ borderRadius: 25 }}
+          >
+            <PieChart size={19} color="white" strokeWidth={3} />
+          </motion.div>
+        </Link>
 
         <motion.div
           className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
           style={{ borderRadius: 25 }}
-          onClick={() => router.push({ pathname: "/lp" })}
         >
           <CircleEllipsis size={19} color="white" strokeWidth={3} />
         </motion.div>
@@ -141,7 +136,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             <FollowButton
               setEdit={() => setEdit(true)}
               profileId={userC?.external_auth_provider_user_id}
-              isUser={user?.name === userC?.name}
+              isUser={false}
             />
           </div>
         </div>

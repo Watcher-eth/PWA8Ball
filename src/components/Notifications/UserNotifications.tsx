@@ -71,7 +71,7 @@ const NotificationCard = ({ type, user, message, image, comment, index }) => {
   );
 };
 
-const NotificationsPage = ({ userId }) => {
+export const NotificationsPage = ({ userId }) => {
   const {
     data: notifications,
     isLoading,
@@ -189,4 +189,3 @@ const FollowButton = styled.span`
   font-weight: bold;
 `;
 
-export default NotificationsPage;

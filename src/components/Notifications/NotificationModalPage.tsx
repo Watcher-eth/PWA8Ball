@@ -1,13 +1,12 @@
 // @ts-nocheck
-
 import { registerForPushNotificationsAsync } from "@/lib/hooks/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/getNotificationsForUser";
 import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/getUserPushToken";
 import React from "react";
-import NotificationsPage from "./UserNotifications";
+import { NotificationsPage } from "./UserNotifications";
 
-const NotificationsModalPage = () => {
+export const NotificationsModalPage = () => {
   const { user } = useUserStore();
   const handlePressTurnOnNotifications = () => {
     registerForPushNotificationsAsync(user?.external_auth_provider_user_id);
@@ -121,12 +120,10 @@ const styles = {
   },
 };
 
-export default NotificationsModalPage;
-
 import { motion } from "framer-motion";
-import FollowPredictionSkeleton from "../Activity/ActivitySkelleton";
+import { FollowPredictionSkeleton } from "../Activity/ActivitySkelleton";
 
-const NotificationsPlaceHolder = () => {
+export const NotificationsPlaceHolder = () => {
   return (
     <div
       className="rounded-t-3xl"

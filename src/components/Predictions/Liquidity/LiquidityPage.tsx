@@ -3,13 +3,13 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useUserStore } from "@/lib/stores/UserStore";
-import LiquiditiyPosition from "./LiquidityPosition";
+import { LiquidityPosition } from "./LiquidityPosition";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP";
 import { NewPlaceholderLp } from "@/components/Common/Placeholders/NewPlaceholders";
 
-const LiquidityPage: React.FC = () => {
+export const LiquidityPage: React.FC = () => {
   const router = useRouter();
   const { user } = useUserStore();
   const {
@@ -85,7 +85,7 @@ const LiquidityPage: React.FC = () => {
       {filteredPositions?.length > 0 ? (
         <div style={{ paddingBottom: 20 }}>
           {filteredPositions.map((item, index: number) => (
-            <LiquiditiyPosition
+            <LiquidityPosition
               key={index}
               amount={item.amount / 10 ** 6}
               image={item.image}
@@ -107,4 +107,3 @@ const LiquidityPage: React.FC = () => {
   );
 };
 
-export default LiquidityPage;

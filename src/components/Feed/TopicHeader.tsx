@@ -17,7 +17,7 @@ const testTopics = [
   "⚽ UEFA European Cup",
 ];
 
-const TopicHeader = ({ setSelectedTopic, selectedTopic }) => {
+export const TopicHeader = ({ setSelectedTopic, selectedTopic }) => {
   const handleTopicPress = (item) => {
     if (selectedTopic === item) {
       setSelectedTopic("🔥 Trending");
@@ -77,5 +77,3 @@ const TopicHeader = ({ setSelectedTopic, selectedTopic }) => {
     </div>
   );
 };
-
-export default TopicHeader;

@@ -8,6 +8,7 @@ import { BetComment } from "@/types/PostTypes";
 import { timeAgo } from "@/lib/utils/timeAgo";
 import { parseOption } from "@/lib/utils/parseOption";
 import { useDeleteComment } from "@/lib/supabase/mutations/comments/deleteComment";
+import Link from "next/link";
 
 interface CommentProps extends BetComment {
   setReply: (name: string) => void;
@@ -16,7 +17,7 @@ interface CommentProps extends BetComment {
   user2: any; // Define the proper type for user2 if possible
 }
 
-const Comment: React.FC<CommentProps> = (props) => {
+export const Comment: React.FC<CommentProps> = (props) => {
   const { mutate: deleteComment } = useDeleteComment();
   const [temporaryLike, setTemporaryLike] = useState(false);
   const [temporaryDislike, setTemporaryDislike] = useState(false);
@@ -61,12 +62,8 @@ const Comment: React.FC<CommentProps> = (props) => {
           marginTop: 20,
         }}
       >
-        <div
-          onClick={() =>
-            router.push(
-              `/profile?id=${props.user2?.external_auth_provider_user_id}`
-            )
-          }
+        <Link
+          href={`/profile?id=${props.user2?.external_auth_provider_user_id}`}
           style={{ cursor: "pointer" }}
         >
           <div
@@ -139,7 +136,7 @@ const Comment: React.FC<CommentProps> = (props) => {
               </p>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
 
       <p
@@ -236,5 +233,3 @@ const Comment: React.FC<CommentProps> = (props) => {
     </motion.div>
   );
 };
-
-export default Comment;

@@ -4,8 +4,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/fetchTopUsersByPredictionAmount";
+import Link from "next/link";
 
-const Leaderboard: React.FC = () => {
+export const Leaderboard: React.FC = () => {
   const { data: topPredictors, error, isLoading } = useGetTopPredictors();
   const router = useRouter();
 
@@ -54,63 +55,63 @@ const Leaderboard: React.FC = () => {
           </h2>
         </div>
         {topPredictors?.map((predictor, index) => (
-          <motion.button
-            key={index}
-            onClick={() => router.push(`/profile/${predictor.user_id}`)}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: "5px 0",
-            }}
-          >
-            <div
+          <Link href={`/profile/${predictor.user_id}`}>
+            <motion.button
+              key={index}
               style={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "space-between",
+                margin: "5px 0",
               }}
             >
-              <p style={{ color: "white", fontWeight: 700 }}>{index + 1}</p>
-              <img
-                src={predictor.pfp}
-                alt="Profile"
+              <div
                 style={{
-                  height: "30px",
-                  width: "30px",
-                  borderRadius: "15px",
-                  margin: "0 12px 0 10px",
-                  objectFit: "cover",
-                }}
-              />
-              <p
-                style={{
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: "17px",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                {predictor.name}
+                <p style={{ color: "white", fontWeight: 700 }}>{index + 1}</p>
+                <img
+                  src={predictor.pfp}
+                  alt="Profile"
+                  style={{
+                    height: "30px",
+                    width: "30px",
+                    borderRadius: "15px",
+                    margin: "0 12px 0 10px",
+                    objectFit: "cover",
+                  }}
+                />
+                <p
+                  style={{
+                    color: "white",
+                    fontWeight: 600,
+                    fontSize: "17px",
+                  }}
+                >
+                  {predictor.name}
+                </p>
+              </div>
+              <p
+                style={{
+                  color: "lightgray",
+                  fontSize: "15px",
+                  fontWeight: 500,
+                }}
+              >
+                ${(predictor.total_amount / 1000000).toFixed(2)}
               </p>
-            </div>
-            <p
-              style={{
-                color: "lightgray",
-                fontSize: "15px",
-                fontWeight: 500,
-              }}
-            >
-              ${(predictor.total_amount / 1000000).toFixed(2)}
-            </p>
-          </motion.button>
+            </motion.button>
+          </Link>
         ))}
       </div>
     </motion.div>
   );
 };
 
-export default Leaderboard;
 
 export const skeletonVariants = {
   initial: { opacity: 1 },

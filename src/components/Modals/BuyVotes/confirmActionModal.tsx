@@ -9,9 +9,9 @@ import useVotingStore from "@/lib/stores/VotingStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
-import LoadingPrediction from "./SuccessScreen";
+import { LoadingPrediction } from "./SuccessScreen";
 import { useRouter } from "next/router";
-function ConfirmActionModal(props: {
+export function ConfirmActionModal(props: {
   setStep: (step: number) => void;
   image: string;
   option: string;
@@ -258,5 +258,3 @@ function ConfirmActionModal(props: {
     </div>
   );
 }
-
-export default ConfirmActionModal;

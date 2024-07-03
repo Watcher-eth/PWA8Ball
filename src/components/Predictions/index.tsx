@@ -12,8 +12,8 @@ import { motion } from "framer-motion";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import BettersOverviewModal from "./Betters/OverviewModal";
-import CommentSection from "../Posts/Comments/CommentSection";
-import BetDetails from "./Details";
+import { CommentSection } from "../Posts/Comments/CommentSection";
+import { BetDetails } from "./Details";
 import { parseOptions } from "@/lib/utils/parseOption";
 
 const Bet = ({ id }) => {

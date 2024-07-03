@@ -8,8 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import ProportionalSlider from "./Slider";
+import { ProportionalSlider } from "./Slider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/router";
 import { shortenAddress } from "@/lib/utils/shortenAddress";

@@ -130,7 +130,7 @@ interface LoadingPredictionProps {
   success: boolean;
 }
 
-const LoadingPrediction: React.FC<LoadingPredictionProps> = ({
+export const LoadingPrediction: React.FC<LoadingPredictionProps> = ({
   image,
   question,
   answer,
@@ -212,4 +212,3 @@ const LoadingPrediction: React.FC<LoadingPredictionProps> = ({
   );
 };
 
-export default LoadingPrediction;

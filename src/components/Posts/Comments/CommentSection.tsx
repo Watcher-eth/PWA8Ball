@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
-import Comment from "./Comment";
+import { Comment } from "./Comment";
 import { BetComment } from "@/types/PostTypes";
 import { useGetAllCommentsForMarket } from "@/lib/supabase/queries/getComments";
 import { IUserWithBet } from "@/lib/supabase/queries/markets/getUsersForMarket";
@@ -18,7 +18,7 @@ interface CommentSectionProps {
   users: IUserWithBet[];
 }
 
-const CommentSection: React.FC<CommentSectionProps> = (
+export const CommentSection: React.FC<CommentSectionProps> = (
   props: CommentSectionProps
 ) => {
   const { user } = useUserStore();
@@ -104,5 +104,3 @@ const CommentSection: React.FC<CommentSectionProps> = (
     </div>
   );
 };
-
-export default CommentSection;

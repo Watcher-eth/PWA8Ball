@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { motion, useAnimation } from "framer-motion";
 import { MailCheck } from "lucide-react";
-import FindFriendsModal from "@/components/Modals/FindFriends";
+import { FindFriendsModal } from "@/components/Modals/FindFriends";
 
 const InviteFriendsPlaceholder: React.FC = () => {
   const router = useRouter();
