@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio";
-import Image from "next/image";
+
 import { toast } from "sonner";
 import ShareBetModal from "../Share/ShareBet.tsx";
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
@@ -62,7 +62,7 @@ function NotificationsModal({ children }: ShareModal) {
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-[#171717] rounded-t-3xl  
+            className="bg-[#171717] rounded-t-3xl
         h-[95vh] mb-5 w-[100vw] relative"
           >
             <NotificationsModalPage />

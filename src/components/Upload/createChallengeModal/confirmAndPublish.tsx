@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useUploadStore } from "@/lib/context/UploadContext";
-import Image from "next/image";
+
 import "../../../styles/fonts.css";
 function ConfirmSceen() {
   const uploadStore = useUploadStore();
@@ -23,12 +23,10 @@ function ConfirmSceen() {
       exit="exit"
     >
       <div className="flex flex-col my-4 mx-3 rounded-2xl relative justify-end h-[98vw] w-[86vw]">
-        <Image
+        <img
           alt="CoverPreview"
           src={uploadStore?.mediaHash}
-          className="rounded-2xl"
-          objectFit="cover"
-          layout="fill"
+          className="rounded-2xl object-cover w-full h-full"
         />
         <div
           style={{ zIndex: 2 }}

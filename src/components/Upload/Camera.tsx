@@ -6,7 +6,7 @@ import { ArrowRight, XCircle } from "lucide-react";
 import { useUploadStore } from "../../lib/context/UploadContext";
 import CID from "cids";
 import { useStorage, useStorageUpload } from "@thirdweb-dev/react";
-import Image from "next/image";
+
 
 const CameraContext = createContext();
 

@@ -3,7 +3,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";
-import Image from "next/image";
+
 import { BetBigView, BetSmallView } from "./BetViews"; // Adjust import path as necessary
 import { Users, ChevronLeft, Share, Star, Newspaper, Plus } from "lucide-react";
 import { useGetMarketsForTopic } from "@/lib/supabase/queries/getAllMarketsForTopic";

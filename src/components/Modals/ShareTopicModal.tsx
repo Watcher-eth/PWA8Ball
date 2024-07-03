@@ -11,7 +11,7 @@ import { Button } from "../ui/button.tsx";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio.tsx";
-import Image from "next/image";
+
 import { toast } from "sonner";
 import ShareBetModal from "../Share/ShareBet.tsx";
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
@@ -79,7 +79,7 @@ function ShareTopicModal({
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-white rounded-3xl  
+            className="bg-white rounded-3xl
         h-[90vh] mb-5 w-[100vw] relative"
           >
             <ShareCommunity

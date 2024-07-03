@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { useUploadStore } from "@/lib/context/UploadContext";
 import CID from "cids";
 import { useStorage, useStorageUpload } from "@thirdweb-dev/react";
-import Image from "next/image";
 
 function UploadImage(props: { setStep: (step: number) => void }) {
   const uploadStore = useUploadStore();
@@ -101,12 +100,10 @@ function UploadImage(props: { setStep: (step: number) => void }) {
             onClick={handleFileInputClick}
             className="rounded-2xl h-[82vw] mx-5 my-5 mt-6 w-[82vw] items-center flex flex-col justify-center bg-[#1A1A1A] relative"
           >
-            <Image
+            <img
               alt="uploadPreview"
               src={uploadStore?.media}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-2xl"
+              className="rounded-2xl object-cover w-full h-full"
             />
           </motion.div>
         )}

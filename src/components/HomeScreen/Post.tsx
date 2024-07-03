@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { PrimaryPublication } from "@lens-protocol/react-web";
-import Image from "next/image";
 import React from "react";
 
 function Post(props: { publication: PrimaryPublication }) {

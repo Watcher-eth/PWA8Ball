@@ -25,8 +25,8 @@ import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import Image from "next/image";
-import RandomMemoji from "../Common/MemojiAvatar";
+
+import { RandomMemoji } from "../Common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
 import YourVotes, { YourSubmission } from "../Activity/YourVotes";
 
@@ -51,7 +51,7 @@ function SearchModal() {
     enabled: !!debouncedSearchQuery,
     queryFn: async () => {
       try {
-       
+
       } catch (error) {
         throw new Error("Error fetching search results");
       }
@@ -105,7 +105,7 @@ function SearchModal() {
                   onChange={handleChange}
                   style={{ border: "1px solid lightgray" }}
                   placeholder="Who are you looking for..."
-                  className="text-[1.25rem]  ml-5 mt-5 pl-9 w-[83vw]   py-6  rounded-xl 
+                  className="text-[1.25rem]  ml-5 mt-5 pl-9 w-[83vw]   py-6  rounded-xl
                  self-start"
                 ></Input>
               </div>

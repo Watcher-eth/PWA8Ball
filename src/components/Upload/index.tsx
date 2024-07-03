@@ -27,7 +27,7 @@ import { Badge } from "../ui/badge";
 import Home from "./UseGifModal";
 import { Drawer } from "vaul";
 import { useUploadStore } from "../../lib/context/UploadContext";
-import Image from "next/image";
+
 import { HighlightHashtags } from "../Feed/Post";
 import ChooseTimeModal from "./ChooseTimeModal";
 import "../../app/fonts.css";
@@ -37,7 +37,6 @@ import { lensClient } from "../../pages";
 import { motion } from "framer-motion";
 import { useStorage, useStorageUpload } from "@thirdweb-dev/react";
 import CID from "cids";
-import RandomMemoji from "../ui/MemojiAvatar";
 import { useProfile } from "../../lib/context/context";
 import { Avatar } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
