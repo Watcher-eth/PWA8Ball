@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import "../../styles/fonts.css";
 import { LayoutGroup, motion } from "framer-motion";
@@ -23,7 +22,11 @@ import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 
+<<<<<<< HEAD
 export function Cards(props) {
+=======
+export default function Cards(props) {
+>>>>>>> 4eda6a19ec6272e2ea0568b856a6eb30513b2a17
   const {
     image,
     title,
@@ -80,11 +83,10 @@ export function Cards(props) {
               className="flex items-start flex-col rounded-xl w-[88vw] m-3 justify-end h-[105vw] relative"
             >
               <motion.div className="image-container">
-                <Image
+                <img
                   alt="Card_Preview"
-                  layout="fill"
-                  objectFit="cover"
                   src={image}
+                  className="w-full h-full object-cover rounded-xl"
                   style={{ zIndex: 1, borderRadius: "18px" }}
                 />
               </motion.div>
@@ -299,3 +301,7 @@ export function Cards(props) {
     </LayoutGroup>
   );
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4eda6a19ec6272e2ea0568b856a6eb30513b2a17

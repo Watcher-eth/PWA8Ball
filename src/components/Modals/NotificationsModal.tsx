@@ -8,6 +8,12 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { motion } from "framer-motion";
+<<<<<<< HEAD
+=======
+import { AtSign, Copy, Share, Users, X } from "lucide-react";
+import { AspectRatio } from "../ui/aspect-ratio";
+
+>>>>>>> 4eda6a19ec6272e2ea0568b856a6eb30513b2a17
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
@@ -56,7 +62,7 @@ export function NotificationsModal({ children }: ShareModal) {
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-[#171717] rounded-t-3xl  
+            className="bg-[#171717] rounded-t-3xl
         h-[95vh] mb-5 w-[100vw] relative"
           >
             <NotificationsModalPage />

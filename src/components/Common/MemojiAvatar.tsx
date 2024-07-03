@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import Image from "next/image";
 import randomColor from "randomcolor";
 import TigerImage from "../../../public/images/Memojis/Tiger.png";
 import LionImage from "../../../public/images/Memojis/Lion.png";
@@ -33,7 +32,7 @@ function getRandomPastelColor() {
   });
 }
 
-function RandomMemoji({ width, height, pfp, rounded }) {
+ export function RandomMemoji({ width, height, pfp, rounded }) {
   const randomImage = getRandomImage();
   const circleColor = getRandomPastelColor();
 
@@ -57,14 +56,18 @@ function RandomMemoji({ width, height, pfp, rounded }) {
   };
   return (
     <div style={pfp === true ? pfpStyle : circleStyle}>
-      <div
-        className="relative "
+      <img
+        className="relative"
+        src={randomImage}
+        alt={randomImage}
         style={{ width: `${width * 0.89}rem`, height: `${height * 0.89}rem` }}
+      />
+      {/* <div
+        className="relative "
+
       >
-        <Image src={randomImage} alt={randomImage} fill={true} />
-      </div>
+        <Image fill={true} />
+      </div> */}
     </div>
   );
 }
-
-export default RandomMemoji;

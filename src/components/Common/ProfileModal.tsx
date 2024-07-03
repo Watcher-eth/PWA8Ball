@@ -25,7 +25,6 @@ import {
   WalletCards,
   X,
 } from "lucide-react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Input } from "../ui/input";
@@ -74,7 +73,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
         {profile?.id ? (
           <DrawerContent className=" border-0 rounded-3xl self-center ">
             <div
-              className="mx-auto ml-[4vw]  rounded-3xl  mb-5 w-[92vw] relative flex flex-col bg-white text-black  items-center min-h-[40vh] 
+              className="mx-auto ml-[4vw]  rounded-3xl  mb-5 w-[92vw] relative flex flex-col bg-white text-black  items-center min-h-[40vh]
         "
             >
               <div className="">
@@ -212,7 +211,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
         ) : (
           <DrawerContent className=" border-0 rounded-3xl self-center ">
             <div
-              className="mx-auto ml-[4vw]  rounded-3xl  mb-5 w-[92vw] relative flex flex-col bg-white text-black  items-center min-h-[40vh] 
+              className="mx-auto ml-[4vw]  rounded-3xl  mb-5 w-[92vw] relative flex flex-col bg-white text-black  items-center min-h-[40vh]
     "
             >
               <div className="">
