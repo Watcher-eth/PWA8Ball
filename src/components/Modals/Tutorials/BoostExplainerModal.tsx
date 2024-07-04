@@ -88,7 +88,7 @@ function BoostExplainer({ setOpen, onClose }: {
           whileTap={{ scale: 0.97 }}
           onClick={onClose}
           className={`
-            px-[6px] py-2 rounded-[17px] overflow-hidden
+            px-1.5 py-2 rounded-[17px] overflow-hidden
             bg-[#282828] top-[75px] left-[85%]
             border-none cursor-pointer
           `}
@@ -121,7 +121,7 @@ function BoostExplainer({ setOpen, onClose }: {
           />
           <div className="flex flex-col">
             <h3
-              className="text-[20px] text-white font-semibold mb-[6px] self-start"
+              className="text-[20px] text-white font-semibold mb-1.5 self-start"
             >
               Improve accuracy of odds
             </h3>
@@ -145,7 +145,7 @@ function BoostExplainer({ setOpen, onClose }: {
           />
           <div className="flex flex-col">
             <h3
-              className="text-[20px] text-white font-semibold mb-[6px] self-start"
+              className="text-[20px] text-white font-semibold mb-1.5 self-start"
             >
               Get rewarded
             </h3>
@@ -170,7 +170,7 @@ function BoostExplainer({ setOpen, onClose }: {
           />
           <div className="flex flex-col">
             <h3
-              className="text-[20px] text-white font-semibold mb-[6px] self-start"
+              className="text-[20px] text-white font-semibold mb-1.5 self-start"
             >
               Play the long game
             </h3>
@@ -199,7 +199,7 @@ function BoostExplainer({ setOpen, onClose }: {
             mt-3 flex flex-row
             rounded-[24px] overflow-hidden
             border-none cursor-pointer
-            bg-[#D9D9D9] w-[85vw] p-[10px]
+            bg-[#D9D9D9] w-[85vw] p-2.5
             items-center justify-center
           `}
         >
