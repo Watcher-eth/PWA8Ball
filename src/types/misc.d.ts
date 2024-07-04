@@ -27,9 +27,11 @@ export interface OG {
   html: string | null
 }
 
+export type ProfileCategory = { label: string; id: string }
+
 export interface ProfileInterest {
-  category: { label: string; id: string }
-  subCategories: { label: string; id: string }[]
+  category: ProfileCategory
+  subCategories: ProfileCategory[]
 }
 
 export interface Emoji {

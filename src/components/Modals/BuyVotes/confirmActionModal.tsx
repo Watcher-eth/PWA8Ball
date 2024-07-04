@@ -11,6 +11,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { LoadingPrediction } from "./SuccessScreen";
 import { useRouter } from "next/router";
+import { getProfilePath } from "@/utils/urls";
 export function ConfirmActionModal(props: {
   setStep: (step: number) => void;
   image: string;
@@ -71,7 +72,7 @@ export function ConfirmActionModal(props: {
 
         setTimeout(() => {
           router.push({
-            pathname: `/profile/${userCon?.external_auth_provider_user_id}`,
+            pathname: getProfilePath(userCon?.external_auth_provider_user_id),
           });
         }, 6500);
       } catch (error) {

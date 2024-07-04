@@ -4,7 +4,7 @@ import { Globe } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <div className="flex flex-row">
       <div className="w-[70%] bg-white flex flex-col justify-between">
@@ -52,4 +52,3 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;

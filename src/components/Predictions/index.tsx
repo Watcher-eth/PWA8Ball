@@ -5,8 +5,8 @@ import { ArrowLeft, ChevronLeft, LineChart, Share } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 import { AvatarImage, Avatar } from "../ui/avatar";
-import VotingModal from "../Modals/BuyVotes";
-import ShareModal from "../Modals/ShareModal";
+import { VotingModal } from "../Modals/BuyVotes/VotingModal";
+import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { motion } from "framer-motion";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";

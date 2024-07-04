@@ -13,10 +13,11 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
-interface ShareModal {
+
+
+export function NotificationsModal({ children }: {
   children: ReactNode;
-}
-export function NotificationsModal({ children }: ShareModal) {
+}) {
   const handleShare = async () => {
     if (navigator.share) {
       try {

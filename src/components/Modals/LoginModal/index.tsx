@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -31,8 +31,8 @@ import BuyModal from "../BuyVotes/buyModal";
 import SingUp from "./SingUp";
 
 export function LoginModal({ isOpen, onClose }) {
-  const [goal, setGoal] = React.useState(1);
-  const [step, setStep] = React.useState(1);
+  const [goal, setGoal] = useState(1);
+  const [step, setStep] = useState(1);
 
   function onClick(adjustment: number) {
     setGoal(Math.max(1, Math.min(15, goal + adjustment)));

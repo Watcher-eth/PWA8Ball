@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 import Link from "next/link";
+import { HOME_PATH } from "@/utils/urls";
 
 const NewPlaceholder = ({ isUser }) => {
   const router = useRouter();
@@ -31,10 +32,9 @@ const NewPlaceholder = ({ isUser }) => {
           Start by making predictions for the future and they will show up here
         </div>
       </div>
-      <Link href={"/"}>
+      <Link href={HOME_PATH}>
         <motion.button
-          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
-          whileTap={{ scale: 0.95 }}
+          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95"
         >
           {isUser ? "Make your first Prediction" : "Come back later"}
         </motion.button>
@@ -143,10 +143,9 @@ export const NewPlaceholderLp = ({ isUser }) => {
           efficient
         </div>
       </div>
-      <Link href="/">
+      <Link href={HOME_PATH}>
         <motion.button
-          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg"
-          whileTap={{ scale: 0.95 }}
+          className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95"
         >
           {isUser ? "Boost a market" : "Boost a market"}
         </motion.button>

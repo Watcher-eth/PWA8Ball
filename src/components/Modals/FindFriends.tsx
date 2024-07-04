@@ -18,10 +18,9 @@ import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
 import { Toaster } from "../ui/sonner";
 import {FindFriends} from "../Share/InviteFriendsModal";
 
-interface ShareModal {
-  children: ReactNode;
-}
-export function FindFriendsModal({ children }: ShareModal) {
+
+
+export function FindFriendsModal({ children }: { children: ReactNode }) {
   const handleShare = async () => {
     if (navigator.share) {
       try {

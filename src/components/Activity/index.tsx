@@ -66,17 +66,7 @@ export const ActivityPage: React.FC = () => {
 
   return (
     <div
-      className="no-scrollbar"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        minHeight: "100vh",
-        padding: "20px",
-        paddingTop: "30px",
-        backgroundColor: "#101010",
-        position: "relative",
-      }}
+      className={`no-scrollbar flex flex-col w-full min-h-[100vh] p-[20px] pt-[30px] bg-[#101010] relative`}
     >
       <motion.div
         className="fixed  w-[100vw] h-[125px] bottom-0 rounded-t-lg "
@@ -112,21 +102,13 @@ export const ActivityPage: React.FC = () => {
           )}
         </motion.button>
         <h1
-          style={{
-            fontSize: "20px",
-            color: "white",
-            fontWeight: "700",
-          }}
+          className="text-[20px] text-white font-bold"
         >
           {page ? "Global" : "Your Friends"}
         </h1>
         <NotificationsModal>
           <motion.button
-            style={{
-              padding: "6px",
-              borderRadius: "20px",
-              backgroundColor: "#1C1C1E",
-            }}
+            className="p-[6px] rounded-[20px] bg-[#1C1C1E]"
           >
             <Bell color="white" strokeWidth={3} size={20} />
           </motion.button>
@@ -145,13 +127,10 @@ export const ActivityPage: React.FC = () => {
                   {Object.keys(groupedPredictions).map((dateKey, index) => (
                     <div key={dateKey}>
                       <h2
-                        style={{
-                          fontWeight: "800",
-                          color: "white",
-                          fontSize: "20px",
-                          marginBottom: "1px",
-                          marginTop: index === 0 ? "15px" : "22px",
-                        }}
+                        className={`
+                          font-extrabold text-[20px] text-white mb-[1px]
+                          ${index === 0 ? "mt-[15px]" : "mt-[22px]"}
+                        `}
                       >
                         {dateKey}
                       </h2>
@@ -171,7 +150,7 @@ export const ActivityPage: React.FC = () => {
                       ))}
                     </div>
                   ))}
-                  <div style={{ height: "110px" }} />
+                  <div className="h-[110px]"/>
                 </div>
               ) : (
                 <InviteFriendsPlaceholder />

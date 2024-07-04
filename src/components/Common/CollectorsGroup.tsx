@@ -1,7 +1,5 @@
 import React from "react";
 
-function CollectorsGroup() {
+export default function CollectorsGroup() {
   return <div>CollectorsGroup</div>;
-}
-
-export default CollectorsGroup;
+};

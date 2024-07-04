@@ -17,16 +17,7 @@ import ShareBetModal from "../Share/ShareBet.tsx";
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
 import { Toaster } from "../ui/sonner";
 
-interface ShareModal {
-  children: ReactNode;
-  id: string;
-  title: string;
-  image: string;
-  topic: string;
-  question: string;
-  options: string;
-}
-function ShareModal({
+export function ShareModal({
   children,
   id,
   title,
@@ -34,7 +25,15 @@ function ShareModal({
   topic,
   question,
   options,
-}: ShareModal) {
+}: {
+  children: ReactNode;
+  id: string;
+  title: string;
+  image: string;
+  topic: string;
+  question: string;
+  options: string;
+}) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -94,4 +93,3 @@ function ShareModal({
   );
 }
 
-export default ShareModal;

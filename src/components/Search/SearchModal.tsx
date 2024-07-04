@@ -29,6 +29,7 @@ import { Button } from "../ui/button";
 import { RandomMemoji } from "../Common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
 import YourVotes, { YourSubmission } from "../Activity/YourVotes";
+import { ACTIVITY_PATH } from "@/utils/urls";
 
 function SearchModal() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -162,8 +163,7 @@ export default SearchModal;
 function CurrentContest() {
   return (
     <div
-      style={{ borderRadius: "14px" }}
-      className="w-[86vw] bg-gray-100 self-center mt-5flex flex-col mx-3  py-2 px-3"
+      className="w-[86vw] bg-gray-100 self-center mt-5 flex flex-col mx-3  py-2 px-3 rounded-[14px]"
     >
       <div className="flex justify-between items-center">
         <div className="flex items-start flex-col">
@@ -187,20 +187,21 @@ function CurrentContest() {
           <img objectFit="fill" src="" />
         </div>
       </div>
-      <motion.div
-        className="bg-[#262626]  flex items-center justify-center mt-4 mb-2"
-        whileTap={{ scale: 0.95 }}
-        style={{ borderRadius: "8px" }}
+      <div
+        className={`
+          bg-[#262626]  flex items-center justify-center mt-4 mb-2
+          transition-all rounded-[8px] active:scale-95
+        `}
       >
         <Button className="bg-[#262626] font-bold text-white ">Join Now</Button>
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 function LeaderboardButton() {
   return (
-    <Link href={"/activity"}>
+    <Link href={ACTIVITY_PATH}>
       <motion.div
         whileTap={{ scale: 0.95 }}
         style={{ borderRadius: "14px" }}

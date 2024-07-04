@@ -24,13 +24,13 @@ export type BetVotingState = {
   reset: () => void;
 };
 
-export type betOptions = { name: string; value: number };
+export type BetOption = { name: string; value: number };
 export type BetModalProps = {
   image: string;
   betId: string;
   question: string;
   title: string;
-  options: betOptions[];
+  options: BetOption[];
   totalPot: number;
   index: number;
   refetch?: () => void;
@@ -43,14 +43,14 @@ export interface VotingScreenProps {
   totalPot: number;
   title: string;
   odds: number;
-  options: betOptions[];
+  options: BetOption[];
   onClose: () => void;
 }
 
 export interface BetModalConfirmationScreenProps {
   title: string;
   image: string;
-  options: betOptions[];
+  options: BetOption[];
   question: string;
   id: any;
   changeStep: (step: number) => void;
@@ -59,6 +59,12 @@ export interface BetModalConfirmationScreenProps {
   refetch: ()=> void
 }
 
+
+type BetViewOption = {
+  amount: number
+  name: string
+  image: string
+}
 export interface BetViewProps {
   index: number;
   title: string;
@@ -66,8 +72,8 @@ export interface BetViewProps {
   image: string;
   topic: string;
   marketId: string;
-  option1: { amount: number; name: string; image: string };
-  option2: { amount: number; name: string; image: string };
+  option1: BetViewOption;
+  option2: BetViewOption;
 }
 
 // Assuming this file is /src/types.ts

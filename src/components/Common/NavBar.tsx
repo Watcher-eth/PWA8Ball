@@ -10,6 +10,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useAuthModalStore } from "@/lib/stores/ModalStore";
+import { ACTIVITY_PATH, HOME_PATH, getProfilePath } from "@/utils/urls";
 
 function NavBar() {
   const { user } = useUserStore();
@@ -26,19 +27,21 @@ function NavBar() {
       }}
     >
       <div className="w-[65vw] flex px-2 justify-between items-center mx-auto">
-        <Link href={"/"}>
+        <Link href={HOME_PATH}>
           <motion.div whileTap={{ scale: 0.94 }}>
             <Home className="h-6 text-white w-6" />
           </motion.div>
         </Link>
         {user?.walletaddress ? (
           <>
-            <Link href="/activity">
+            <Link href={ACTIVITY_PATH}>
               <motion.div whileTap={{ scale: 0.94 }}>
                 <ActivityIcon className="h-6 text-white w-6" />
               </motion.div>
             </Link>
-            <Link href={`/profile/${user.external_auth_provider_user_id}`}>
+            <Link
+              href={getProfilePath(user.external_auth_provider_user_id)}
+            >
               <motion.div whileTap={{ scale: 0.94 }}>
                 <UserCircle className="h-6 text-white w-6" />
               </motion.div>

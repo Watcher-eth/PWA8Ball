@@ -10,35 +10,36 @@ import { parseOptions } from "@/lib/utils/parseOption";
 import { useUserStore } from "@/lib/stores/UserStore";
 import {LoginModal} from "../Modals/LoginModal";
 
+const TEST_DATA = [
+  {
+    image:
+      "https://variety.com/wp-content/uploads/2024/01/MCDBARB_WB059.jpg?w=1000&h=563&crop=1",
+    title: "Best Picture",
+    description: "Will Barbie win the 2024 Academy Awards: Best Picture?",
+    icon: "https://t2.gstatic.com/images?q=tbn:ANd9GcQEsRX4rvaUjN6bxmAR9bT6qlWkBFVJfgMLan-evEeWBLrh4KFqljv4ZUagBVmvCZVzN1jGbQ",
+    subject: "Barbie Movie",
+  },
+  {
+    image:
+      "https://zora.co/api/thumbnail/8453/0xbfdb5d8d1856b8617f1881fd718580256fa8cf35",
+    title: "100k MAU's",
+    description: "Will Farcaster reach 100k monthly active users by July?",
+    icon: "https://pbs.twimg.com/profile_images/1546487688601096192/QoG0ZVgH_400x400.jpg",
+    subject: "Farcaster",
+  },
+  {
+    image:
+      "https://core.colorsxstudios.com/wp-content/uploads/2023/06/collect-bryann-2048x1152.jpeg",
+    title: "10k Mints",
+    description: "Will Colors Studio reach 10k mints on Zora by 2025?",
+    icon: "https://www.colorsxstudio.com/static/e090ee77c7abac6371ab387b8035f1fa/logo.gif",
+    subject: "Colors Studio",
+  },
+];
 export function CardFeed() {
   const { user } = useUserStore();
 
-  const data = [
-    {
-      image:
-        "https://variety.com/wp-content/uploads/2024/01/MCDBARB_WB059.jpg?w=1000&h=563&crop=1",
-      title: "Best Picture",
-      description: "Will Barbie win the 2024 Academy Awards: Best Picture?",
-      icon: "https://t2.gstatic.com/images?q=tbn:ANd9GcQEsRX4rvaUjN6bxmAR9bT6qlWkBFVJfgMLan-evEeWBLrh4KFqljv4ZUagBVmvCZVzN1jGbQ",
-      subject: "Barbie Movie",
-    },
-    {
-      image:
-        "https://zora.co/api/thumbnail/8453/0xbfdb5d8d1856b8617f1881fd718580256fa8cf35",
-      title: "100k MAU's",
-      description: "Will Farcaster reach 100k monthly active users by July?",
-      icon: "https://pbs.twimg.com/profile_images/1546487688601096192/QoG0ZVgH_400x400.jpg",
-      subject: "Farcaster",
-    },
-    {
-      image:
-        "https://core.colorsxstudios.com/wp-content/uploads/2023/06/collect-bryann-2048x1152.jpeg",
-      title: "10k Mints",
-      description: "Will Colors Studio reach 10k mints on Zora by 2025?",
-      icon: "https://www.colorsxstudio.com/static/e090ee77c7abac6371ab387b8035f1fa/logo.gif",
-      subject: "Colors Studio",
-    },
-  ];
+  // const data = TEST_DATA
   const {
     data: topicsData,
     isLoading: topicsLoading,

@@ -1,4 +1,4 @@
-import { betOptions } from "./BetTypes";
+import { BetOption } from "./BetTypes";
 
 export type CardType = {
   name: string;

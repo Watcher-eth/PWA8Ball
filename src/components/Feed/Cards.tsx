@@ -10,9 +10,9 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import VotingModal from "../Modals/BuyVotes/index";
+import { VotingModal } from "../Modals/BuyVotes/VotingModal";
 import { ArrowLeft, Share } from "lucide-react";
-import ShareModal from "../Modals/ShareModal";
+import { ShareModal } from "../Modals/ShareModal";
 import { BetDetails } from "../Predictions/Details";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
 import { useModalStore } from "@/lib/stores/ModalStore";

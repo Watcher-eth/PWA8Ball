@@ -34,7 +34,7 @@ import Marquee from "react-fast-marquee";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-function VotingModal(props: {
+export function VotingModal(props: {
   text: string;
   option: number;
   multiplier: number;
@@ -399,4 +399,4 @@ function VotingModal(props: {
   );
 }
 
-export default VotingModal;
+
