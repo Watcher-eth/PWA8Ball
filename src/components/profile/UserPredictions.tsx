@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 import { useRouter } from "next/router";
 import { skeletonVariants } from "../Activity/ActivitySkelleton";
 
-const UserPredictions = ({
+export function UserPredictions({
   index,
   image,
   question,
@@ -17,7 +17,7 @@ const UserPredictions = ({
   optional,
   onOpenBottomSheet,
   betId,
-}) => {
+}) {
   const router = useRouter();
   console.log("betId", betId);
   return (
@@ -141,4 +141,3 @@ export const CreatedPrediction = ({
   );
 };
 
-export default UserPredictions;

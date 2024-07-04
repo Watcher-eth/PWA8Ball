@@ -18,13 +18,13 @@ export interface UserSuggestion {
 
 export interface OG {
   url: string
-  title: string | null
-  description: string | null
-  site: string | null
-  image: string | null
-  favicon: string | null
-  isLarge: boolean | null
-  html: string | null
+  title?: string
+  description?: string
+  site?: string
+  image?: string
+  favicon?: string
+  isLarge?: boolean
+  html?: string
 }
 
 export type ProfileCategory = { label: string; id: string }

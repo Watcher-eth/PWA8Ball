@@ -2,9 +2,14 @@
 import { create } from "zustand";
 import { IUser } from "../supabase/mutations/updateUser";
 
+
+interface ExtendedUser extends IUser {
+  balance?: string;
+}
+
 interface UserState {
-  user: (IUser & { balance?: string }) | null; // Add balance to User type
-  setUser: (user: (IUser & { balance?: string }) | null) => void;
+  user: ExtendedUser | null; // Add balance to User type
+  setUser: (user: ExtendedUser | null) => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({

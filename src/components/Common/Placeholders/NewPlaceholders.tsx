@@ -8,7 +8,7 @@ import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
 
-const NewPlaceholder = ({ isUser }) => {
+export function NewPlaceholder({ isUser }) {
   const router = useRouter();
   return (
     <div className="flex flex-col items-center w-[94%] p-2 mt-2 mx-auto">
@@ -42,8 +42,6 @@ const NewPlaceholder = ({ isUser }) => {
     </div>
   );
 };
-
-export default NewPlaceholder;
 
 export const UserPredictionSkelleton = ({ index }) => (
   <motion.div

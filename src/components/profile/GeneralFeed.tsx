@@ -2,14 +2,15 @@
 
 import React, { useEffect } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import UserPredictions, {
+import {
+  UserPredictions,
   CreatedPrediction,
   UserPredictionSkeleton,
 } from "./UserPredictions";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetOrdersForUser } from "@/lib/supabase/queries/user/getUserOrders";
 import { useGetMarketsCreatedByUser } from "@/lib/supabase/queries/getUserCreatedMarkets";
-import NewPlaceholder from "../Common/Placeholders/NewPlaceholders";
+import { NewPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { BetModal } from "../Modals/MyBetModal.tsx";
 const aggregatePredictedItems = (orders: any) => {
   const aggregated = {};

@@ -123,27 +123,14 @@ export const FindFriends = ({ type }) => {
   const router = useRouter();
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%",
-        padding: 8,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        backgroundColor: "#101010",
-      }}
+      className={`
+        flex flex-col items-center w-full p-2 rounded-t-[20px] bg-[#101010]
+      `}
     >
       <p
-        style={{
-          fontSize: 19,
-          paddingTop: 58,
-          color: "white",
-          fontWeight: "700",
-          marginTop: -20,
-          position: "relative",
-          top: -10,
-        }}
+        className={`
+          text-[19px] pt-[58px] text-white font-bold -mt-5 relative -top-2.5
+        `}
       >
         {type === 1 ? "Find your friends" : "Invite your friends"}
       </p>
@@ -151,45 +138,32 @@ export const FindFriends = ({ type }) => {
       <input
         selectionColor={"#FF0050"}
         placeholderTextColor={"gray"}
-        style={{
-          fontSize: 18,
-          display: "flex",
-          width: "90%",
-          backgroundColor: "rgb(24, 24, 24)",
-          padding: 10,
-          margin: "15px 10px 0 10px",
-          color: "lightgray",
-          borderRadius: 20,
-        }}
+        className={`
+          flex
+          text-[18px] w-[90%]
+          p-2.5 mt-[15px] mx-[10px] mb-0
+          bg-[rgb(24,24,24)] text-[lightgray] rounded-[20px]
+        `}
         onChange={(e) => handleTextChange(e.target.value)}
         value={text}
         placeholder="Search..."
       />
       <p
-        style={{
-          fontSize: 16,
-          color: "lightgray",
-          fontWeight: "600",
-          marginBottom: 12,
-          alignSelf: "flex-start",
-          marginLeft: 22,
-          marginTop: 18,
-        }}
+        className={`
+          text-[16px] text-[lightgray] font-semibold
+          mb-3 ml-[22px] mt-[18px]
+          self-start
+        `}
       >
         Find friends on other apps
       </p>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "90%",
-          borderRadius: 20,
-          height: 80,
-          backgroundColor: "rgb(24, 24, 24)",
-          padding: "8px 15px",
-        }}
+        className={`
+          flex flex-row items-center justify-between
+          w-[90%] rounded-[20px] bg-[rgb(24,24,24)]
+          px-[15px] py-2
+          h-20
+        `}
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -197,12 +171,7 @@ export const FindFriends = ({ type }) => {
         >
           <button onClick={() => {}}>
             <img
-              style={{
-                height: 55,
-                width: 55,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
+              className="size-[55px] rounded-[10px] overflow-hidden"
               src="https://avatars.githubusercontent.com/u/108458858?s=200&v=4"
               alt="social"
             />
@@ -214,13 +183,7 @@ export const FindFriends = ({ type }) => {
         >
           <button onClick={() => linkTwitter()}>
             <img
-              style={{
-                height: 55,
-                width: 55,
-                borderRadius: 10,
-                overflow: "hidden",
-                backgroundColor: "black",
-              }}
+              className="size-[55px] rounded-[10px] overflow-hidden bg-black"
               src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png"
               alt="twitter"
             />
@@ -236,12 +199,7 @@ export const FindFriends = ({ type }) => {
             }
           >
             <img
-              style={{
-                height: 55,
-                width: 55,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
+              className="size-[55px] rounded-[10px] overflow-hidden"
               src="https://s3-alpha.figma.com/hub/file/2654611074/ce2996c3-aa3d-470f-9cd1-ad5d8ddd72c1-cover.png"
               alt="farcaster"
             />
@@ -257,12 +215,7 @@ export const FindFriends = ({ type }) => {
             }}
           >
             <img
-              style={{
-                height: 55,
-                width: 55,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
+              className="size-[55px] rounded-[10px] overflow-hidden"
               src="https://publish.one37pm.net/wp-content/uploads/2023/11/Screenshot-2023-11-29-at-2.41.58-PM-e1701286954195.png?resize=630%2C682"
               alt="another social"
             />
@@ -270,25 +223,24 @@ export const FindFriends = ({ type }) => {
         </motion.div>
       </div>
       <p
-        style={{
-          fontSize: 16,
-          color: "lightgray",
-          fontWeight: "600",
-          marginBottom: 12,
-          alignSelf: "flex-start",
-          marginLeft: 22,
-          marginTop: 14,
-        }}
+        className={`
+          text-[16px] text-[lightgray] font-semibold
+          mb-3 ml-[22px] mt-[14px]
+          self-start
+        `}
       >
         People you may know
       </p>
-      <div style={{ height: height / 1.78, width: "88%", overflowY: "scroll" }}>
+      <div
+        className="w-[88%] overflow-y-scroll"
+        style={{ height: height / 1.78 }}
+      >
         {dataToRender?.map((item, index) => (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: index * 0.1 } }}
             key={index}
-            style={{ display: "flex", flexDirection: "column" }}
+            className="flex flex-col"
           >
             <FindFriendsItem
               type={type}
@@ -298,64 +250,45 @@ export const FindFriends = ({ type }) => {
               name={item.followingAddress.socials[0].profileName}
             />
             <div
+              className="h-[1px] bg-[rgb(50,50,50)] self-end my-[1px] "
               style={{
-                height: 1,
                 width: width / 1.42,
-                backgroundColor: "rgb(50, 50, 50)",
-                alignSelf: "flex-end",
-                marginVertical: 1,
               }}
             />
           </motion.div>
         ))}
       </div>
       <div
+        className={`
+          w-[100vw] h-[30px]
+          absolute bottom-[85px]
+        `}
         style={{
-          width: "100vw",
-          height: 30,
-          position: "absolute",
-          bottom: 85,
           backgroundImage:
             "linear-gradient(rgba(10 ,10 ,10 , 0.6),#101010, #101010)",
         }}
       />
       <div
+        className={`
+          h-[80px] absolute bottom-0
+          flex items-center justify-center
+          p-2.5 pb-[45px] bg-[#101010]
+        `}
         style={{
           width: width,
-          height: 80,
-          position: "absolute",
-          bottom: 0,
-          backgroundColor: "#101010",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: 10,
-          paddingBottom: 45,
         }}
       >
         <button
           onClick={() => {
             router.back();
           }}
-          style={{
-            width: "90vw",
-            height: 50,
-            borderRadius: 28,
-            overflow: "hidden",
-            backgroundColor: "rgb(24, 24, 24)",
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-            marginTop: 15,
-          }}
+          className={`
+            w-[90vw] h-[50px] rounded-[28px]
+            overflow-hidden flex items-center justify-center
+            bg-[rgb(24,24,24)] mt-[15px]
+          `}
         >
-          <p
-            style={{
-              fontSize: 16,
-              color: "white",
-              fontWeight: "600",
-            }}
-          >
+          <p className="text-[16px] text-white font-semibold">
             Done
           </p>
         </button>
@@ -364,8 +297,8 @@ export const FindFriends = ({ type }) => {
   );
 };
 
-function FindFriendsItem(props) {
-  const { name, pfp, handle, isFollowing, type } = props;
+function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
+
   const { user } = useUserStore();
 
   const shareLink = async () => {
@@ -382,61 +315,24 @@ function FindFriendsItem(props) {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "100%",
-        margin: "8px 0",
-      }}
+      className="flex flex-row items-center justify-between w-full my-2"
     >
       <button
         onClick={() => {
           type === 1 ? console.log("follow") : shareLink();
         }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-        }}
+        className="flex flex-row items-center bg-none border-none cursor-pointer"
       >
         <img
-          style={{
-            height: 40,
-            width: 40,
-            borderRadius: 19,
-            overflow: "hidden",
-          }}
+          className="size-10 rounded-[19px] overflow-hidden"
           src={convertIpfsUrl(pfp)}
           alt="profile"
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginLeft: 8,
-          }}
-        >
-          <p
-            style={{
-              fontSize: 17,
-              color: "white",
-              fontWeight: "700",
-            }}
-          >
+        <div className="flex flex-col ml-2">
+          <p className="text-[17px] text-white font-bold">
             {name}
           </p>
-          <p
-            style={{
-              fontSize: 14,
-              color: "lightgray",
-              fontWeight: "500",
-            }}
-          >
+          <p className="text-[14px] text-[lightgray] font-semibold">
             {handle}
           </p>
         </div>
@@ -445,17 +341,12 @@ function FindFriendsItem(props) {
         onClick={() => {
           type === 1 ? console.log("follow") : shareLink();
         }}
-        style={{
-          color: !isFollowing ? "rgb(22, 22, 22)" : "gray",
-          fontWeight: "700",
-          fontSize: 14,
-          padding: 10,
-          borderRadius: 18,
-          overflow: "hidden",
-          backgroundColor: !isFollowing ? "white" : "lightgray",
-          border: "none",
-          cursor: "pointer",
-        }}
+        className={`
+          font-bold text-sm p-2.5 rounded-[18px] overflow-hidden
+          ${isFollowing ? "text-gray-500" : "text-[rgb(22,22,22)]"}
+          ${isFollowing ? "bg-gray-300" : "bg-white"}
+          border-none cursor-pointer
+        `}
       >
         {type === 1
           ? isFollowing
