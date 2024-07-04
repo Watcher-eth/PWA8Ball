@@ -31,29 +31,28 @@ function NavBar() {
             <Home className="h-6 text-white w-6" />
           </motion.div>
         </Link>
-
         {user?.walletaddress ? (
-          <Link href={"/activity"}>
-            <motion.div whileTap={{ scale: 0.94 }}>
+          <>
+            <Link href="/activity">
+              <motion.div whileTap={{ scale: 0.94 }}>
+                <ActivityIcon className="h-6 text-white w-6" />
+              </motion.div>
+            </Link>
+            <Link href={`/profile/${user.external_auth_provider_user_id}`}>
+              <motion.div whileTap={{ scale: 0.94 }}>
+                <UserCircle className="h-6 text-white w-6" />
+              </motion.div>
+            </Link>
+          </>
+        ) : (
+          <>
+            <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
               <ActivityIcon className="h-6 text-white w-6" />
             </motion.div>
-          </Link>
-        ) : (
-          <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
-            <ActivityIcon className="h-6 text-white w-6" />
-          </motion.div>
-        )}
-
-        {user?.walletaddress ? (
-          <Link href={`/profile/${user?.external_auth_provider_user_id}`}>
-            <motion.div whileTap={{ scale: 0.94 }}>
+            <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
               <UserCircle className="h-6 text-white w-6" />
             </motion.div>
-          </Link>
-        ) : (
-          <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
-            <UserCircle className="h-6 text-white w-6" />
-          </motion.div>
+          </>
         )}
       </div>
     </div>
