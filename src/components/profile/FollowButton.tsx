@@ -8,17 +8,21 @@ import { useUnfollowUser } from "@/lib/supabase/mutations/follow/useUnfollowUser
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useCheckIfFollowing } from "@/lib/supabase/queries/user/isFollowing";
 
-interface FollowButtonProps {
+
+export const FollowButton = ({
+  profileId,
+  // isUser,
+  setEdit,
+  showToast,
+}: {
   profileId: string;
-  isUser: boolean;
+  // isUser: boolean;
   setEdit: () => void;
   showToast?: () => void;
-}
-
-export const FollowButton: React.FC<FollowButtonProps> = (props) => {
+}) => {
   const { user } = useUserStore();
   const followerId = user?.external_auth_provider_user_id;
-  const followingId = props.profileId;
+  const followingId = profileId;
   const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId);
 
   const [isFollowing, setFollowing] = useState<boolean>(false);
@@ -36,9 +40,7 @@ export const FollowButton: React.FC<FollowButtonProps> = (props) => {
   const handleFollow = () => {
     followUser({ followerId, followingId });
     setFollowing(true);
-    if (props.showToast) {
-      props.showToast();
-    }
+    showToast?.();
   };
 
   const handleUnfollow = () => {
@@ -47,7 +49,7 @@ export const FollowButton: React.FC<FollowButtonProps> = (props) => {
     setTemporaryUnfollow(true);
   };
 
-  const isUser = user?.external_auth_provider_user_id === props.profileId;
+  const isUser = user?.external_auth_provider_user_id === profileId;
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <motion.button
@@ -120,7 +122,7 @@ export const FollowButton: React.FC<FollowButtonProps> = (props) => {
   if (isUser) {
     return (
       <motion.button
-        onClick={props.setEdit}
+        onClick={setEdit}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         style={{

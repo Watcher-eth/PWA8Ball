@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { GetServerSideProps, Metadata, ResolvingMetadata } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { AnimatePresence, motion } from "framer-motion";
@@ -12,24 +13,34 @@ import {
   Twitter,
   CircleEllipsis,
 } from "lucide-react";
-import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
-import { GeneralFeed } from "@/components/profile/GeneralFeed";
-import { FollowButton } from "@/components/profile/FollowButton";
 
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
+import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
+
+import { GeneralFeed } from "@/components/profile/GeneralFeed";
+import { FollowButton } from "@/components/profile/FollowButton";
+
+
 import { skeletonVariants } from "@/components/Activity/ActivitySkelleton";
-import Link from "next/link";
 
-interface ProfilePageProps {
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string };
+
+  return {
+    props: {
+      userId: id,
+    },
+  };
+};
+
+export default function ProfilePage({
+  userId,
+}: {
   userId: string;
-}
-
-interface Props1 {
-  params: { id: string };
-}
-
-const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
+}) {
   const router = useRouter();
   const { id: userID } = router.query; // Get the userId from the URL
 
@@ -157,15 +168,3 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
     </div>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
-
-  return {
-    props: {
-      userId: id,
-    },
-  };
-};
-
-export default ProfilePage;
