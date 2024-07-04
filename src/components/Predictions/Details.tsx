@@ -10,7 +10,7 @@ import BoostModal from "../Modals/BoostMarket.tsx";
 import { useRouter } from "next/navigation";
 import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP.tsx";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
-import BoostExplainerModal from "../Modals/Tutorials/BoostExplainer.tsx";
+import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
 import { getTopicPath } from "@/utils/urls/index.ts";
 
 export const BetDetails = ({
