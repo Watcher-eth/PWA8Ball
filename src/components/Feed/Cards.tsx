@@ -10,17 +10,23 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { VotingModal } from "../Modals/BuyVotes/VotingModal";
+
 import { ArrowLeft, Share } from "lucide-react";
 import { ShareModal } from "../Modals/ShareModal";
-import { BetDetails } from "../Predictions/Details";
+import { VotingModal } from "../Modals/BuyVotes/VotingModal";
+
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
-import { useModalStore } from "@/lib/stores/ModalStore";
-import BettersOverviewModal from "../Predictions/Betters/OverviewModal";
-import { CommentSection } from "../Posts/Comments/CommentSection";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
+import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
+
+import { CommentSection } from "../Posts/Comments/CommentSection";
+
+
+import { BetDetails } from "../Predictions/Details";
 import { RelatedMarkets } from "../Predictions/RelatedMarkets";
+import { BettersOverviewModal } from "../Predictions/Betters/OverviewModal";
+
 
 export function Cards(props) {
   const {
@@ -36,6 +42,7 @@ export function Cards(props) {
     optionA,
     optionB,
     topicBio,
+    handleOpen,
   } = props;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
@@ -231,7 +238,7 @@ export function Cards(props) {
                   fontFamily: "Aeonik-Bold",
                   lineHeight: "1.35rem",
                 }}
-                className="text-[1.05rem] self-start mb-[-1] mt-1 mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5"
+                className="text-[1.05rem] self-start mb-[-1] mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5"
               >
                 {description}
               </div>
@@ -240,7 +247,7 @@ export function Cards(props) {
                 className="flex items-center w-[88vw] mt-[-4] mx-5 justify-between mx-2"
               >
                 <VotingModal
-                  handleOpen={props?.handleOpen}
+                  handleOpen={handleOpen}
                   image={image}
                   multiplier={optionB.odds / 100}
                   option={0}
@@ -251,7 +258,7 @@ export function Cards(props) {
                   options={[optionB.name, optionA.name]}
                 />
                 <VotingModal
-                  handleOpen={props?.handleOpen}
+                  handleOpen={handleOpen}
                   image={image}
                   multiplier={optionA.odds / 100}
                   option={1}
@@ -278,9 +285,9 @@ export function Cards(props) {
                   id={id}
                 />
               </div>
-              <div style={{ zIndex: 2 }}>
+              <div className="z-[2]" >
                 <CommentSection
-                  topic_id={props?.topicId}
+                  topicId={topicId}
                   users={users}
                   totalComments={market?.total_comments}
                   optimisticComments={[]}
@@ -289,7 +296,7 @@ export function Cards(props) {
                   handleComment={() => {}}
                 />
               </div>
-              <RelatedMarkets topicId={props?.topicId} id={id} />
+              <RelatedMarkets topicId={topicId} id={id} />
             </motion.div>
           </DrawerContent>
         </Drawer>

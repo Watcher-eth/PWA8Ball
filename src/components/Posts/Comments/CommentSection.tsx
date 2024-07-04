@@ -9,18 +9,22 @@ import { useGetAllCommentsForMarket } from "@/lib/supabase/queries/getComments";
 import { IUserWithBet } from "@/lib/supabase/queries/markets/getUsersForMarket";
 import { NewPlaceholderComment } from "@/components/Common/Placeholders/NewPlaceholders";
 
-interface CommentSectionProps {
-  handleComment: () => void;
-  setReply: (name: string) => void;
+
+export const CommentSection = ({
+  marketId,
+  totalComments,
+  optimisticComments,
+  users,
+  handleComment,
+  setReply,
+}: {
+  marketId: string;
   totalComments: number;
   optimisticComments: BetComment[];
-  marketId: string;
   users: IUserWithBet[];
-}
-
-export const CommentSection: React.FC<CommentSectionProps> = (
-  props: CommentSectionProps
-) => {
+  handleComment: () => void;
+  setReply: (name: string) => void;
+}) => {
   const { user } = useUserStore();
 
   const {
@@ -29,22 +33,19 @@ export const CommentSection: React.FC<CommentSectionProps> = (
     isLoading,
     refetch, // Method to refetch the data
   } = useGetAllCommentsForMarket(
-    props.marketId,
+    marketId,
     user?.external_auth_provider_user_id
   );
 
   const findUserByExternalAuthId = (externalAuthId: string) => {
-    return props.users.find(
+    return users.find(
       (user) => user.external_auth_provider_user_id === externalAuthId
     );
   };
 
   const allComments = React.useMemo(() => {
     const commentIds = new Set();
-    const combinedComments = [
-      ...props?.optimisticComments,
-      ...(comments || []),
-    ];
+    const combinedComments = [...optimisticComments, ...(comments || [])];
     return combinedComments.filter((comment) => {
       if (commentIds.has(comment.id)) {
         return false;
@@ -53,7 +54,7 @@ export const CommentSection: React.FC<CommentSectionProps> = (
         return true;
       }
     });
-  }, [comments, props?.optimisticComments]);
+  }, [comments, optimisticComments]);
 
   if (allComments?.length < 1) {
     return (
@@ -63,22 +64,10 @@ export const CommentSection: React.FC<CommentSectionProps> = (
 
   return (
     <div
-      style={{
-        width: "96vw",
-        display: "flex",
-        flexDirection: "column",
-        padding: 20,
-        paddingBottom: 78,
-      }}
+      className="w-[96vw] flex flex-col p-5 pb-[78px]"
     >
       <p
-        style={{
-          fontSize: 21,
-          fontFamily: "Aeonik-Bold",
-          color: "white",
-          marginTop: 4,
-          marginBottom: -8,
-        }}
+        className="text-[21px] font-[Aeonik-Bold] text-white mt-1 -mb-2"
       >
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
@@ -86,7 +75,7 @@ export const CommentSection: React.FC<CommentSectionProps> = (
         {allComments.map((item) => {
           let commentUser;
 
-          if (props?.users?.length > 0)
+          if (users?.length > 0)
             commentUser = findUserByExternalAuthId(item.created_by);
 
           return (

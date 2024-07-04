@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import useVotingStore from "@/lib/stores/VotingStore";
+import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { ProposeAnswer } from "./Propose";
 import { SubmitProof } from "./Proof";

@@ -3,7 +3,7 @@
 import { BetUploadState, BetVotingState } from "@/types/BetTypes";
 import { create } from "zustand";
 
-const useVotingStore = create<BetVotingState>((set) => ({
+export const useVotingStore = create<BetVotingState>((set) => ({
   question: "",
   title: "",
   betId: "",
@@ -14,4 +14,3 @@ const useVotingStore = create<BetVotingState>((set) => ({
     set(() => ({ question: "", title: "", betId: "", amount: 0, option: 0 })),
 }));
 
-export default useVotingStore;

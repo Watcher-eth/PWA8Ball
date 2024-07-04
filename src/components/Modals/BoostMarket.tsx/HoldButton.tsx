@@ -1,12 +1,13 @@
 // @ts-nocheck
 
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { motion, useAnimation } from "framer-motion";
 import { Check, Loader } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { useRouter } from "next/router";
+
 
 const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
   const [isComplete, setIsComplete] = useState(false);

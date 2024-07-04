@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import { motion, useAnimation } from "framer-motion";
 import { MailCheck } from "lucide-react";
 import { FindFriendsModal } from "@/components/Modals/FindFriends";
 
-const InviteFriendsPlaceholder: React.FC = () => {
-  const router = useRouter();
+export function InviteFriendsPlaceholder() {
   const controls = useAnimation();
   const { height, width } = {
     height: window.innerHeight,
@@ -26,12 +24,8 @@ const InviteFriendsPlaceholder: React.FC = () => {
 
   return (
     <div
+      className="flex flex-col items-center bg-[#101010] pt-[50px]"
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "#101010",
-        paddingTop: 50,
         height: height,
       }}
     >
@@ -39,13 +33,7 @@ const InviteFriendsPlaceholder: React.FC = () => {
         custom={1}
         initial={{ opacity: 0 }}
         animate={controls}
-        style={{
-          fontSize: 24,
-          margin: "10px 0 0px",
-          color: "white",
-          zIndex: 10,
-          fontWeight: 700,
-        }}
+        className="text-[24px] my-[10px] z-10 text-white font-bold"
       >
         More fun together
       </motion.h1>
@@ -53,14 +41,7 @@ const InviteFriendsPlaceholder: React.FC = () => {
         custom={2}
         initial={{ opacity: 0 }}
         animate={controls}
-        style={{
-          fontSize: 15,
-          textAlign: "center",
-          padding: "0 10px",
-          color: "lightgray",
-          marginBottom: -20,
-          zIndex: 10,
-        }}
+        className="text-[15px] text-center px-[10px] text-[lightgray] -mb-5 z-10"
       >
         Invite your friends and see what they believe in
       </motion.p>
@@ -69,8 +50,8 @@ const InviteFriendsPlaceholder: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={controls}
         src="/images/Friends.png"
+        className="w-[100vw]"
         style={{
-          width: "100vw",
           height: height / 3.9,
         }}
       />
@@ -79,17 +60,11 @@ const InviteFriendsPlaceholder: React.FC = () => {
           custom={4}
           initial={{ opacity: 0 }}
           animate={controls}
-          style={{
-            padding: "7px 22px",
-            borderRadius: 20,
-            overflow: "hidden",
-            backgroundColor: "white",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            cursor: "pointer",
-            border: "none",
-          }}
+          className={`
+            flex flex-row items-center justify-center
+            py-[7px] px-[22px]  rounded-[20px] overflow-hidden
+            bg-white border-none cursor-pointer
+          `}
         >
           <MailCheck
             style={{ marginBottom: -1 }}
@@ -98,13 +73,7 @@ const InviteFriendsPlaceholder: React.FC = () => {
             strokeWidth={3.4}
           />
           <span
-            style={{
-              fontSize: 16.5,
-              textAlign: "center",
-              fontWeight: 700,
-              color: "black",
-              marginLeft: 3,
-            }}
+            className="text-[16.5px] text-center font-bold text-black ml-[3px]"
           >
             Invite
           </span>
@@ -114,4 +83,3 @@ const InviteFriendsPlaceholder: React.FC = () => {
   );
 };
 
-export default InviteFriendsPlaceholder;

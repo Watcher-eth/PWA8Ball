@@ -29,7 +29,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import GetGhoModal from "./getGhoModal";
 import {ConfirmActionModal} from "./confirmActionModal";
 import BuyModal from "./buyModal";
-import useVotingStore from "@/lib/stores/VotingStore";
+import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";

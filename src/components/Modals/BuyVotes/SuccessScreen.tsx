@@ -10,12 +10,11 @@ const WHITE_COLOR = "#FFFFFF";
 const BORDER_COLOR = "#212121";
 const SUCCESS_COLOR = "#4CAF50";
 
-interface SpinnerProps {
+
+function Spinner({ loading, success }: {
   loading: boolean;
   success: boolean;
-}
-
-const Spinner: React.FC<SpinnerProps> = ({ loading, success }) => {
+}) {
   const controls = useAnimation();
   const morphControls = useAnimation();
 

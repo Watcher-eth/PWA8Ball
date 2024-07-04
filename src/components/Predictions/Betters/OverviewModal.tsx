@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/router";
 import { shortenAddress } from "@/lib/utils/shortenAddress";
 
-const BettersOverviewModal = ({
+export function BettersOverviewModal({
   children,
   title,
   question,
@@ -23,7 +23,7 @@ const BettersOverviewModal = ({
   odds,
   marketId,
   users,
-}) => {
+}) {
   const router = useRouter();
 
   return (
@@ -166,7 +166,6 @@ const BettersOverviewModal = ({
   );
 };
 
-export default BettersOverviewModal;
 
 const BettersOverviewItem = ({
   name,

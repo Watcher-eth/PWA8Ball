@@ -2,16 +2,20 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { useConnectWallet, useLogin, usePrivy } from "@privy-io/react-auth";
+
 import { useCreateUser } from "@/lib/supabase/mutations/addUser";
 import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";
 import { NewUser } from "@/lib/supabase/types";
 
-function SingUp(props: { setStep: (step: number) => void }) {
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
+
+
+export function SignUp({ setStep }: { setStep: (step: number) => void }) {
   const createUserMutation = useCreateUser();
   const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
 
@@ -142,13 +146,13 @@ function SingUp(props: { setStep: (step: number) => void }) {
         </>
       )}
       {isEmail && (
-        <EmailLogin setIsEmail={setIsEmail} setStep={props.setStep} />
+        <EmailLogin setIsEmail={setIsEmail} setStep={setStep} />
       )}
     </motion.div>
   );
 }
 
-function EmailLogin(props: {
+function EmailLogin({ setIsEmail, setStep }: {
   setIsEmail: (isEmail: boolean) => void;
   setStep: (step: number) => void;
 }) {
@@ -159,7 +163,7 @@ function EmailLogin(props: {
   const handleLogin = async (email: string, verificationCode: string) => {
     // verify email and connect
 
-    props.setStep(2);
+    setStep(2);
   };
 
   //Cancle to go back
@@ -189,8 +193,8 @@ function EmailLogin(props: {
           <div className="flex items-center ml-5 my-6 justify-between mx-6">
             <motion.div
               onClick={() => {
-                props.setStep(1);
-                props.setIsEmail(false);
+                setStep(1);
+                setIsEmail(false);
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -231,12 +235,12 @@ function EmailLogin(props: {
             onChange={(e) => setCode(e.target.value)}
             value={code}
             style={{ border: "0.2px solid lightgray" }}
-            className="w-[81vw] mb-4   mt-2 rounded-xl mx-5 text-gray-400 text-[1.15rem] p-3 "
+            className="w-[81vw] mb-4 mt-2 rounded-xl mx-5 text-gray-400 text-[1.15rem] p-3 "
           />
           <div className="flex items-center ml-5 my-6 justify-between mx-6">
             <motion.div
               onClick={() => {
-                props.setStep(1);
+                setStep(1);
                 setState(1);
               }}
               whileHover={{ scale: 1.1 }}
@@ -262,5 +266,3 @@ function EmailLogin(props: {
     </motion.div>
   );
 }
-
-export default SingUp;

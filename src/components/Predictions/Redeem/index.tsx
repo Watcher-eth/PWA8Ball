@@ -10,13 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 
-import useVotingStore from "@/lib/stores/VotingStore";
+import { useVotingStore } from "@/lib/stores/VotingStore";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 
 import ProposeAnswer from "./Propose";
 import SubmitProof from "./Proof";
-import { RedeemOverview } from "./overview";
+import { RedeemOverview } from "./RedeemOverview";
 import { CashoutConfirmScrreen } from "../Cashout/confirm";
 
 export function RedeemModal(props: {

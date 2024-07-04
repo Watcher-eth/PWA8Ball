@@ -24,19 +24,22 @@ import {
   X,
 } from "lucide-react";
 
-import useVotingStore from "@/lib/stores/VotingStore";
+import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import HoldButton from "./HoldButton";
 import SliderButton from "./HoldButton";
 import ConfirmButton from "./HoldButton";
-import { String } from "lodash";
-interface ContainerProps {
+
+
+export default function BoostModal({
+  children,
+  image,
+  id,
+}: {
   children: ReactNode;
   image: string;
-  id: String
-}
-
-const BoostModal: React.FC<ContainerProps> = ({ children, image, id }) => {
+  id: string;
+}) {
   const [goal, setGoal] = React.useState(1);
   const [step, setStep] = React.useState(1);
 
@@ -124,8 +127,8 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image, id }) => {
                     Boost and earn rewards
                   </div>
                   <div className="text-base text-md mt-[0.1rem] mb-1 text-[#BEBDBD] font-bold">
-                    Boost this market to earn
-                    extra gold points and trading fees.
+                    Boost this market to earn extra gold points and trading
+                    fees.
                   </div>
                   <div className="h-[0.1rem] w-full bg-[#313131] my-2"></div>
                   <div className="flex flex-row items-center justify-between mt-1 mb-2">
@@ -150,7 +153,11 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image, id }) => {
                       3 Points for every $1.00 supplied
                     </div>
                   </div>
-                  <ConfirmButton id={id} buttonText="Confirm" onComplete={() => {}} />
+                  <ConfirmButton
+                    id={id}
+                    buttonText="Confirm"
+                    onComplete={() => {}}
+                  />
                 </div>
               )}
             </AnimatePresence>
@@ -161,4 +168,4 @@ const BoostModal: React.FC<ContainerProps> = ({ children, image, id }) => {
   );
 };
 
-export default BoostModal;
+

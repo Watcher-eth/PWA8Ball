@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import BuyModal from "../BuyVotes/buyModal";
-import SingUp from "./SingUp";
+import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {
   const [goal, setGoal] = useState(1);
@@ -99,10 +99,10 @@ export function LoginModal({ isOpen, onClose }) {
             </DrawerClose>
           </div>
           <AnimatePresence>
-            {step === 1 && <SingUp setStep={setStep} />}
+            {step === 1 && <SignUp setStep={setStep} />}
             {step === 4 && <BuyModal setStep={setStep} method={1} />}
             {step === 5 && <BuyModal setStep={setStep} method={2} />}
-            {step === 6 && <SingUp setStep={setStep} />}
+            {step === 6 && <SignUp setStep={setStep} />}
           </AnimatePresence>
         </motion.div>
       </DrawerContent>
