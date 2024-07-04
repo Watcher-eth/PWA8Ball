@@ -17,7 +17,7 @@ import { useServiceWorker } from "@/lib/hooks/useServiceWorker"; // Import the h
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
-import withDeviceCheck from "@/components/Common/MobileOnly";
+import { withDeviceCheck} from "@/components/Common/MobileOnly";
 import MobileOnlyModal from "@/components/Modals/MobileOnlyModal";
 
 export const queryClient = new QueryClient();

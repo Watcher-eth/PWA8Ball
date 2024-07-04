@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import GetGhoModal from "./getGhoModal";
-import {ConfirmActionModal} from "./confirmActionModal";
+import {ConfirmActionModal} from "./ConfirmActionModal_";
 import BuyModal from "./buyModal";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
