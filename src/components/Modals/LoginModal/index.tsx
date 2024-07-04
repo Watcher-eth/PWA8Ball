@@ -27,7 +27,7 @@ import {
   X,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import BuyModal from "../BuyVotes/BuyModal_";
+import BuyModal from "../BuyVotes/BuyModal";
 import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {

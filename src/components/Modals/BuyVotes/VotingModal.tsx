@@ -28,7 +28,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import GetGhoModal from "./getGhoModal";
 import {ConfirmActionModal} from "./ConfirmActionModal";
-import BuyModal from "./BuyModal_";
+import BuyModal from "./BuyModal";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import { useModalStore } from "@/lib/stores/ModalStore";
