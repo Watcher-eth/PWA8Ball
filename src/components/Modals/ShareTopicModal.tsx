@@ -6,28 +6,12 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer.tsx";
-import { Button } from "../ui/button.tsx";
+} from "@/components/ui/drawer.tsx";
 import { motion } from "framer-motion";
-import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio.tsx";
 
-import { toast } from "sonner";
-import ShareBetModal from "../Share/ShareBet.tsx";
-import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
-import { Toaster } from "../ui/sonner.tsx";
-import ShareCommunity from "../Share/ShareTopic.tsx";
+import { Toaster } from "@/components/ui/sonner";
+import ShareCommunity from "@/components/Share/ShareTopic";
 
-interface ShareModalProps {
-  children: ReactNode;
-  id: string;
-  title: string;
-  image: string;
-  topic: string;
-  question: string;
-  members: number;
-  markets: number;
-}
 function ShareTopicModal({
   children,
   id,
@@ -37,7 +21,16 @@ function ShareTopicModal({
   question,
   members,
   markets,
-}: ShareModalProps) {
+}: {
+  children: ReactNode;
+  id: string;
+  title: string;
+  image: string;
+  topic: string;
+  question: string;
+  members: number;
+  markets: number;
+}) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
