@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { parseAndFormatDate } from "@/lib/utils/extractEndDate"; // Ensure you have this utility function
 import { useModalStore } from "@/lib/stores/ModalStore";
-import BoostModal from "../Modals/BoostMarket.tsx";
+import BoostModal from "../Modals/BoostMarket";
 import { useRouter } from "next/navigation";
 import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP.tsx";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
-import { getTopicPath } from "@/utils/urls/index.ts";
+import { getTopicPath } from "@/utils/urls";
 
 export const BetDetails = ({
   endDate,

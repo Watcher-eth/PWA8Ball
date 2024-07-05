@@ -37,13 +37,13 @@ export const FeaturedBet = ({
       >
         <button
           onClick={() => router.back()}
-          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 left-4 z-10"
+          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 left-4"
         >
           <ChevronLeft color="white" size={20} strokeWidth={4} />
         </button>
         <Link
           href={"/CommunityLeaderboard"}
-          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-14 z-10"
+          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 right-14"
         >
           <Star color="white" size={20} strokeWidth={3} />
         </Link>
@@ -80,9 +80,7 @@ export const FeaturedBet = ({
           >
             {name}
           </h1>
-          <p className="text-[0.9rem] text-[lightgray] " style={{ zIndex: 10 }}>
-            {description}
-          </p>
+          <p className="text-[0.9rem] text-[lightgray] z-10">{description}</p>
           <div className="flex items-center mt-1 ml-[-0.2rem]">
             <AvatarGroup images={membersProfiles?.map((item) => item.pfp)} />
 
@@ -100,7 +98,6 @@ export const FeaturedBet = ({
             <Star color="white" strokeWidth={3.5} height={20} />
             <span
               className="text-white text-xl ml-1 font-['Aeonik-Bold']"
-              style={{ fontFamily: "Aeonik-Bold" }}
             >
               Trending Bets
             </span>
