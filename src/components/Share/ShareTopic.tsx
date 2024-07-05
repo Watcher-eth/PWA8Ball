@@ -3,7 +3,8 @@
 import React from "react";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 
-export interface ShareCommunityProps {
+
+export const ShareTopic = ({ id, title, image, question, members, markets }: {
   id: string;
   title: string;
   image: string;
@@ -11,10 +12,7 @@ export interface ShareCommunityProps {
   question: string;
   members: number;
   markets: number;
-}
-
-const ShareCommunity: React.FC<ShareCommunityProps> = (props) => {
-  const { id, title, image, question, members, markets } = props;
+}) => {
 
   const copyToClipboard = async () => {
     navigator.clipboard.writeText("hello world");
@@ -34,75 +32,106 @@ const ShareCommunity: React.FC<ShareCommunityProps> = (props) => {
   };
 
   return (
-    <div style={styles.modal}>
-      <h1 style={styles.header}>More fun</h1>
-      <div style={styles.subHeader}>
-        <div style={styles.imageGroup}>
+    <div className={CLASSNAMES.modal}>
+      <h1 className={CLASSNAMES.header}>More fun</h1>
+      <div className={CLASSNAMES.subHeader}>
+        <div className={CLASSNAMES.imageGroup}>
           <img
             src="/images/Guy1Memoji.png"
             alt="Guy1 Memoji"
             width={40}
             height={40}
-            style={styles.memoji}
+            className={CLASSNAMES.memoji}
           />
           <img
             src="/images/LadyMemoji.png"
             alt="Lady Memoji"
             width={40}
             height={40}
-            style={styles.memoji}
+            className={CLASSNAMES.memoji}
           />
           <img
             src="/images/Guy2Memoji.png"
             alt="Guy2 Memoji"
             width={40}
             height={40}
-            style={styles.memoji}
+            className={CLASSNAMES.memoji}
           />
         </div>
-        <h1 style={styles.header}> together</h1>
+        <h1 className={CLASSNAMES.header}> together</h1>
       </div>
-      <p style={styles.inviteText}>
+      <p className={CLASSNAMES.inviteText}>
         Invite your friends and earn points when they make their first
         prediction
       </p>
-      <div style={styles.card}>
-        <img src={image} alt={title} style={styles.cardImage} />
-        <div style={styles.cardOverlay}>
-          <div style={styles.cardContent}>
-            <p style={styles.markets}>{markets} Live Predictions</p>
-            <p style={styles.cardQuestion}>{question}</p>
-            <button style={styles.joinButton}>Join</button>
+      <div className={CLASSNAMES.card}>
+        <img src={image} alt={title} className={CLASSNAMES.cardImage} />
+        <div className={CLASSNAMES.cardOverlay}>
+          <div className={CLASSNAMES.cardContent}>
+            <p className={CLASSNAMES.markets}>{markets} Live Predictions</p>
+            <p className={CLASSNAMES.cardQuestion}>{question}</p>
+            <button className={CLASSNAMES.joinButton}>Join</button>
           </div>
         </div>
-        <div style={styles.cardHeader}>
-          <img src={image} alt={title} style={styles.cardThumb} />
+        <div className={CLASSNAMES.cardHeader}>
+          <img src={image} alt={title} className={CLASSNAMES.cardThumb} />
           <div>
-            <h2 style={styles.cardTitle}>/{title}</h2>
-            <p style={styles.cardMembers}>
+            <h2 className={CLASSNAMES.cardTitle}>/{title}</h2>
+            <p className={CLASSNAMES.cardMembers}>
               {members} {members > 1 ? "Members" : "Member"}
             </p>
           </div>
         </div>
       </div>
-      <div style={styles.actionGroup}>
-        <button style={styles.copyButton} onClick={copyToClipboard}>
+      <div className={CLASSNAMES.actionGroup}>
+        <button className={CLASSNAMES.copyButton} onClick={copyToClipboard}>
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
-          <span style={styles.actionText}>Copy</span>
+          <span className={CLASSNAMES.actionText}>Copy</span>
         </button>
-        <button style={styles.shareButton} onClick={shareLink}>
+        <button className={CLASSNAMES.shareButton} onClick={shareLink}>
           <ShareIcon height={20} color={"#1D1D1D"} strokeWidth={3} />
-          <span style={styles.shareText}>Share</span>
+          <span className={CLASSNAMES.shareText}>Share</span>
         </button>
       </div>
-      <div style={styles.earnings}>
+      <div className={CLASSNAMES.earnings}>
         <Gift color="lightgrey" size={16} />
-        <span style={styles.earningsText}>
+        <span className={CLASSNAMES.earningsText}>
           Earn 10% of every point your friend receives
         </span>
       </div>
     </div>
   );
+};
+
+const CLASSNAMES = {
+  modal: "h-[110%] w-full flex flex-col p-5 bg-[#131316] pt-10 rounded-t-[20px]",
+  header: "text-4xl text-white -mb-2",
+  subHeader: "flex flex-row items-center mt-0.5",
+  imageGroup: "flex flex-row items-center mx-2.5",
+  memoji: "rounded-full -ml-2.5",
+  inviteText: "text-lg mb-2.5 text-gray-300 mt-1.75",
+  card: "w-full rounded-2xl bg-[#1B1B1E] flex flex-col p-5 mt-5.5 relative",
+  cardImage: "rounded-2xl object-cover absolute w-full h-full",
+  cardOverlay: "absolute bottom-0 w-full bg-black bg-opacity-50 rounded-b-2xl",
+  cardContent: "flex flex-col p-4",
+  markets: "text-sm text-white font-['AeonikRegular']",
+  cardQuestion: "text-lg text-white font-['AeonikBold'] max-w-full",
+  joinButton:
+    "py-2 px-4 rounded-2xl bg-white text-sm text-black font-['AeonikBold'] self-end",
+  cardHeader: "flex flex-row items-center mb-3.75 mt-1.25 gap-[-2px]",
+  cardThumb: "size-[42px] rounded object-cover mr-[9px]",
+  cardTitle: "text-lg text-white",
+  cardMembers: "text-base text-white",
+  actionGroup:
+    "flex flex-row items-center mt-8 self-center justify-between w-[90%] absolute bottom-4.5 px-2.5",
+  copyButton:
+    "mt-3 p-3 rounded-3xl bg-[#1D1D1D] w-[45%] items-center justify-center flex flex-row gap-0.75",
+  shareButton:
+    "mt-3 flex flex-row p-2.5 rounded-3xl bg-[#D9D9D9] w-[45%] items-center justify-center",
+  actionText: "text-xl text-[#D9D9D9] font-extrabold",
+  shareText: "text-xl text-[#1D1D1D] font-extrabold ml-0.75",
+  earnings: "flex mt-4.25 flex-row items-center gap-1 self-center",
+  earningsText: "text-sm text-gray-300",
 };
 
 const styles = {
@@ -278,4 +307,3 @@ const styles = {
   },
 };
 
-export default ShareCommunity;

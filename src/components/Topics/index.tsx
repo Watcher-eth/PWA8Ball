@@ -3,14 +3,14 @@
 import React, { useCallback, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";
-
-import { BetBigView, BetSmallView } from "./BetViews"; // Adjust import path as necessary
-import { Users, ChevronLeft, Share, Star, Newspaper, Plus } from "lucide-react";
+import Link from "next/link";
+ // Adjust import path as necessary
+import { ChevronLeft, Share, Star } from "lucide-react";
 import { useGetMarketsForTopic } from "@/lib/supabase/queries/getAllMarketsForTopic";
 import { useGetMembersForTopic } from "@/lib/supabase/mutations/topics/getMemberForTopic";
-import ShareTopicModal from "../Modals/ShareTopicModal";
-import Link from "next/link";
+import { ShareTopicModal } from "@/components/Modals/ShareTopicModal";
 
+import { BetBigView, BetSmallView } from "./BetViews";
 export const FeaturedBet = ({
   name,
   description,
@@ -23,7 +23,6 @@ export const FeaturedBet = ({
 }) => {
   const router = useRouter();
   const scrollRef = useRef(null);
-  const buttonOpacity = useAnimation();
 
   const user = { external_auth_provider_user_id: "user-id" }; // Mock user data
   const userId = user.external_auth_provider_user_id;
@@ -74,13 +73,10 @@ export const FeaturedBet = ({
         <div className="absolute top-0 w-[100vw] h-[37.5vh] bg-gradient-to-b from-transparent to-[#070707]"></div>
         <div className="flex flex-col no-scrollbar p-4 mt-[-1.5rem]">
           <h1
-            className="text-[2.3rem] text-white font-bold"
-            style={{
-              zIndex: 10,
-              lineHeight: name?.length < 17 ? "2.2rem" : "1.6rem",
-              fontSize: name?.length < 17 ? "2.3rem" : "1.7rem",
-              fontFamily: "Benzin-Bold",
-            }}
+            className={`
+              text-[2.3rem] text-white font-bold z-10 font-['Benzin-Bold']
+              ${name?.length < 17 ? "text-4xl" : "text-2xl"}
+            `}
           >
             {name}
           </h1>
@@ -90,10 +86,7 @@ export const FeaturedBet = ({
           <div className="flex items-center mt-1 ml-[-0.2rem]">
             <AvatarGroup images={membersProfiles?.map((item) => item.pfp)} />
 
-            <span
-              className="text-[lightgray] text-15 ml-1"
-              style={{ fontFamily: "Aeonik-Bold" }}
-            >
+            <span className="text-[lightgray] text-15 ml-1 font-['Aeonik-Bold']">
               {membersProfiles?.length > 0
                 ? `${membersProfiles[0].name}${
                     membersProfiles.length > 1
@@ -106,7 +99,7 @@ export const FeaturedBet = ({
           <div className="flex items-center mt-4">
             <Star color="white" strokeWidth={3.5} height={20} />
             <span
-              className="text-white text-xl ml-1"
+              className="text-white text-xl ml-1 font-['Aeonik-Bold']"
               style={{ fontFamily: "Aeonik-Bold" }}
             >
               Trending Bets

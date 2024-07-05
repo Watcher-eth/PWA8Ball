@@ -29,7 +29,7 @@ export type ShareBetType = {
   options: [];
 };
 
-export type ShareCommunityType = {
+export type ShareTopicType = {
   topic: string;
   question: string;
   image: string;
