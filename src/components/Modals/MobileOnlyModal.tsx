@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-import MobileOnly from "@/components/Common/MobileOnly";
+import { MobileOnly } from "@/components/Common/MobileOnly";
 
 
 export function MobileOnlyModal({ open }: { open: boolean }) {

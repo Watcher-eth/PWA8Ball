@@ -12,8 +12,18 @@ import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { LoadingPrediction } from "./SuccessScreen";
 import { useRouter } from "next/router";
 import { getProfilePath } from "@/utils/urls";
-export function ConfirmActionModal(props: {
-  setStep: (step: number) => void;
+
+
+export function ConfirmActionModal({
+  image,
+  option,
+  options,
+  question,
+  title,
+  id,
+  odds,
+  setStep,
+}: {
   image: string;
   option: string;
   options: string[];
@@ -21,6 +31,7 @@ export function ConfirmActionModal(props: {
   title: string;
   id: string;
   odds: number;
+  setStep: (step: number) => void;
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,12 +65,12 @@ export function ConfirmActionModal(props: {
         setLoading(true);
         predictV2({
           userId: userCon.external_auth_provider_user_id!,
-          marketId: Number(props.id),
+          marketId: Number(id),
           amount: Number(amount.toFixed(4)) * 1000000,
           client: smartAccountClient,
           address: smartAccountAddress,
-          preferYes: Number(props.option) === 1 ? false : true,
-          option: props.options[Number(props.option) - 1],
+          preferYes: Number(option) === 1 ? false : true,
+          option: options[Number(option) - 1],
           isBuy: true,
         });
 
@@ -93,23 +104,15 @@ export function ConfirmActionModal(props: {
       console.error("Error during sharing", error);
     }
   };
-  console.log("props", props.option, Number(props.option) === 1);
+  console.log("props", option, Number(option) === 1);
   return (
     <div className="flex flex-col items-center w-full bg-[#131313] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
       {loading || success ? (
-        // <LoadingPrediction
-        //   image={image}
-        //   loading={loading}
-        //   question={question}
-        //   option={Option}
-        //   success={success && !loading}
-        //   answer={options[Option - 1].name}
-        // />
         <LoadingPrediction
-          image={props.image}
-          question={props.question}
-          answer={props.options[props.option]}
-          option={props.option}
+          image={image}
+          question={question}
+          answer={options[option]}
+          option={option}
           loading={loading}
           success={success}
         />
@@ -117,15 +120,15 @@ export function ConfirmActionModal(props: {
         <motion.div className="flex flex-col items-center w-full bg-[#131313] px-6  rounded-lg">
           <div className="flex flex-col w-full my-2 mt-0">
             <img
-              src={props.image}
-              alt={props.title}
+              src={image}
+              alt={title}
               className="h-16 w-16 object-cover rounded-full"
             />
           </div>
           <h2 className="text-2xl text-white font-bold mb-2 self-start">
             {success
               ? "Prediction Successful"
-              : `Confirm your prediction for: ${props.title}`}
+              : `Confirm your prediction for: ${title}`}
           </h2>
 
           <div className="flex flex-col items-center w-full">
@@ -136,17 +139,15 @@ export function ConfirmActionModal(props: {
               <div
                 style={{ borderRadius: 10 }}
                 className={`flex items-center px-2 py-1 rounded-lg ${
-                  props.option === 0 ? "bg-[#75171D]" : "bg-[#013145]"
+                  option === 0 ? "bg-[#75171D]" : "bg-[#013145]"
                 }`}
               >
                 <span
                   className={`text-md font-semibold ${
-                    props.option === 0 ? "text-[#E23B3B]" : "text-[#0596FF]"
+                    option === 0 ? "text-[#E23B3B]" : "text-[#0596FF]"
                   }`}
                 >
-                  {Number(props.option) === 1
-                    ? props.options[props.option]
-                    : props.options[props.option]}
+                  {Number(option) === 1 ? options[option] : options[option]}
                 </span>
               </div>
             </div>
@@ -172,9 +173,9 @@ export function ConfirmActionModal(props: {
               </span>
               <span className="text-lg text-white font-bold">
                 $
-                {props.option === 2
-                  ? ((100 / props.odds) * amount).toFixed(2)
-                  : ((100 / (100 - props.odds)) * amount).toFixed(2)}
+                {option === 2
+                  ? ((100 / odds) * amount).toFixed(2)
+                  : ((100 / (100 - odds)) * amount).toFixed(2)}
               </span>
             </div>
             <div className="w-full  bg-[#424242] h-px my-3"></div>
@@ -187,7 +188,7 @@ export function ConfirmActionModal(props: {
               <span className="text-lg text-[#626262] font-bold">Question</span>
             </div>
             <p className="text-md text-white font-medium mb-4 self-start">
-              {props.question}
+              {question}
             </p>
             <p className="text-sm text-[#424242] mt-3 font-medium text-center px-3">
               Review the above carefully before confirming. Once made, your
@@ -201,7 +202,7 @@ export function ConfirmActionModal(props: {
         className="flex items-center gap-2 mb-4"
       >
         <motion.button
-          onClick={() => props.setStep(1)}
+          onClick={() => setStep(1)}
           className="mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold"
           initial={{ width: "40vw" }}
           animate={{
@@ -231,26 +232,27 @@ export function ConfirmActionModal(props: {
           ) : (
             <div className="flex items-center gap-2">
               {success ? (
-                <ShareIcon className="text-black" strokeWidth={3} size={23} />
+                <>
+                  <ShareIcon className="text-black" strokeWidth={3} size={23} />
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: success ? 1 : 0 }}
+                    className="transition-opacity duration-500"
+                  >
+                    Share your Prediction
+                  </motion.span>
+                </>
               ) : (
-                <ScanFace className="text-black" strokeWidth={3} size={23} />
-              )}
-              {!success ? (
-                <motion.span
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: success ? 0 : 1 }}
-                  className="transition-opacity duration-500"
-                >
-                  Predict
-                </motion.span>
-              ) : (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: success ? 1 : 0 }}
-                  className="transition-opacity duration-500"
-                >
-                  Share your Prediction
-                </motion.span>
+                <>
+                  <ScanFace className="text-black" strokeWidth={3} size={23} />
+                  <motion.span
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: success ? 0 : 1 }}
+                    className="transition-opacity duration-500"
+                  >
+                    Predict
+                  </motion.span>
+                </>
               )}
             </div>
           )}
