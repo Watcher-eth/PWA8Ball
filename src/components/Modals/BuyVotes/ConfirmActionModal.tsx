@@ -1,9 +1,8 @@
 // @ts-nocheck
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+
 import { AlignLeft, ScanFace, ShareIcon, Vote } from "lucide-react";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";

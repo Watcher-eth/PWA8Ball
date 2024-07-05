@@ -157,47 +157,18 @@ export function VotingModal(props: {
             className="mt-[1rem]"
           >
             {props?.option === 0 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {props?.text}{" "}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+              <OptionDisplayButton
+                className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050]"
+                text={props?.text}
+                multiplier={props?.multiplier}
+              />
             )}
             {props?.option === 1 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {" "}
-                    {props?.text}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+              <OptionDisplayButton
+                className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF]"
+                text={props?.text}
+                multiplier={props?.multiplier}
+              />
             )}
           </motion.div>
         </DrawerTrigger>
@@ -302,39 +273,24 @@ export function VotingModal(props: {
                         className="flex flex-row justify-between items-center px-2 py-4"
                       >
                         {row.map((num) => (
-                          <motion.button
+                          <KeyPadButton
                             key={num}
                             onClick={() => handleButtonPress(num)}
-                            className="text-xl font-bold text-white px-5"
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {num}
-                          </motion.button>
+                            val={num}
+                          />
                         ))}
                       </div>
                     ))}
                     <div className="flex flex-row justify-between items-center px-2 py-4 pb-0">
-                      <motion.button
-                        onClick={() => handleButtonPress(".")}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        .
-                      </motion.button>
-                      <motion.button
+                      <KeyPadButton
+                        val={"."}
+                        onClick={() => handleButtonPress(num)}
+                      />
+                      <KeyPadButton
+                        val={"<"}
                         onClick={() => handleButtonPress("0")}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        0
-                      </motion.button>
-                      <motion.button
-                        onClick={handleDelete}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {`<`}
-                      </motion.button>
+                      />
+                      <KeyPadButton val={"0"} onClick={handleDelete} />
                     </div>
                   </div>
                   <div className="flex flex-row items-center w-full mt-4 justify-center">
@@ -400,3 +356,44 @@ export function VotingModal(props: {
 }
 
 
+function OptionDisplayButton({ className, text, multiplier }: {
+  className: string,
+  text?: string,
+  multiplier?: number
+}) {
+  return (
+    <motion.div whileTap={{ scale: 0.95 }}>
+      <Button
+        className={`
+          text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]
+          ${className}
+        `}>
+        <div className={text?.length < 6 ? "text-[22px]" : "text-[18px]" }>
+          {text}{" "}
+        </div>
+        <div
+          className={`
+            ml-[0.2rem] text-[0.81rem] text-[rgba(250,250,250,0.8)]
+            font-medium self-end mb-0.5
+          `}
+        >
+          {multiplier}%
+        </div>
+      </Button>
+    </motion.div>
+  );
+}
+
+
+function KeyPadButton({ val, onClick }: { val: string | number, onClick: () => void }) {
+  return (
+    <motion.button
+      key={val}
+      onClick={onClick}
+      className="text-xl font-bold text-white px-5"
+      whileTap={{ scale: 0.95 }}
+    >
+      {val}
+    </motion.button>
+  );
+}
