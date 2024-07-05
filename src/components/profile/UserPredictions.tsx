@@ -2,10 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton, AltSkeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/router";
-import { skeletonVariants } from "../Activity/ActivitySkelleton";
+
 
 export function UserPredictions({
   index,
@@ -70,33 +70,13 @@ export const UserPredictionSkeleton = ({ index }) => (
     className="flex items-center w-[90vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
-      <motion.div
-        className="w-14 h-14 bg-[#252525] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
+      <AltSkeleton className="w-14 h-14" />
       <div className="flex flex-col gap-2">
-        <motion.div
-          className="w-[50vw] h-[20px] bg-[#252525] rounded-xl"
-          variants={skeletonVariants}
-          initial="initial"
-          animate="pulse"
-        />
-        <motion.div
-          className="w-[45vw] h-[17px] bg-[#252525] rounded-xl"
-          variants={skeletonVariants}
-          initial="initial"
-          animate="pulse"
-        />
+        <AltSkeleton className="w-[50vw] h-[20px]" />
+        <AltSkeleton className="w-[45vw] h-[17px]" />
       </div>
     </div>
-    <motion.div
-      className="w-[18%] h-[35px] bg-[#252525] rounded-xl"
-      variants={skeletonVariants}
-      initial="initial"
-      animate="pulse"
-    />
+    <AltSkeleton className="w-[18%] h-[35px]"/>
   </motion.div>
 );
 

@@ -21,8 +21,7 @@ import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollow
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 
-
-import { skeletonVariants } from "@/components/Activity/ActivitySkelleton";
+import { AltSkeleton } from "@/components/ui/skeleton";
 
 
 
@@ -126,12 +125,7 @@ export default function ProfilePage({
           <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
             {balanceLoading ? (
               <div style={{ marginRight: 7 }}>
-                <motion.div
-                  className="h-[33px] w-[75px] bg-[#252525] rounded-xl"
-                  variants={skeletonVariants}
-                  initial="initial"
-                  animate="pulse"
-                />
+                <AltSkeleton className="h-[33px] w-[75px]" />
               </div>
             ) : (
               <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">

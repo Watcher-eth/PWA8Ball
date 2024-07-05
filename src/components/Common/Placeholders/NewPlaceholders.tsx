@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
+import { AltSkeleton } from "@/components/ui/skeleton";
 
 export function NewPlaceholder({ isUser }) {
   const router = useRouter();
@@ -78,40 +79,15 @@ export const UserLpSkelleton = ({ index }) => (
     <div className="flex flex-row items-center justify-between mb-2">
       <div className="flex flex-row items-center gap-2 w-full">
         <div className="flex flex-col gap-2 w-full">
-          <motion.div
-            className="h-[19px] w-[70%] bg-[#252525] rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
-          <motion.div
-            className="h-[14px] w-[55%] bg-[#252525] rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
+          <AltSkeleton className="h-[19px] w-[70%]" />
+          <AltSkeleton className="h-[14px] w-[55%]" />
         </div>
-        <motion.div
-          className="h-[50px] w-[55px] bg-[#252525] rounded-xl"
-          variants={skeletonVariants}
-          initial="initial"
-          animate="pulse"
-        />
+        <AltSkeleton className="h-[50px] w-[55px]" />
       </div>
     </div>
     <div className="flex flex-row items-center justify-between mt-2">
-      <motion.div
-        className="h-[35px] w-[50%] bg-[#252525] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
-      <motion.div
-        className="h-[25px] w-[22%] bg-[#252525] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
+      <AltSkeleton className="h-[35px] w-[50%]" />
+      <AltSkeleton className="h-[25px] w-[22%]" />
     </div>
   </motion.div>
 );
@@ -151,17 +127,7 @@ export const NewPlaceholderLp = ({ isUser }) => {
     </div>
   );
 };
-export const skeletonVariants = {
-  initial: { opacity: 1 },
-  pulse: {
-    opacity: 0.4,
-    transition: {
-      duration: 0.8,
-      yoyo: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
+
 
 const CommentSkeleton = ({ index }) => (
   <motion.div
@@ -175,46 +141,16 @@ const CommentSkeleton = ({ index }) => (
     <div className="flex flex-row items-center justify-between mb-2 w-full">
       <div className="flex flex-row justify-between items-center gap-3 w-full">
         <div className="flex flex-row items-center gap-2">
-          <motion.div
-            className="h-[32px] w-[32px] rounded-full bg-[#212121]"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
-          <motion.div
-            className="h-[18px] w-[95px] bg-[#212121] rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
+          <AltSkeleton className="h-[32px] w-[32px] !bg-[#212121] !rounded-full" />
+          <AltSkeleton className="h-[18px] w-[95px] !bg-[#212121]" />
         </div>
-        <motion.div
-          className="h-[17px] w-[55px] bg-[#212121] rounded-xl"
-          variants={skeletonVariants}
-          initial="initial"
-          animate="pulse"
-        />
+        <AltSkeleton className="h-[17px] w-[55px] !bg-[#212121]" />
       </div>
     </div>
     <div className="flex flex-col gap-3 w-full mt-1">
-      <motion.div
-        className="h-[14px] w-[78vw] bg-[#212121] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
-      <motion.div
-        className="h-[14px] w-[75vw] bg-[#212121] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
-      <motion.div
-        className="h-[14px] w-[65vw] bg-[#212121] rounded-xl"
-        variants={skeletonVariants}
-        initial="initial"
-        animate="pulse"
-      />
+      <AltSkeleton className="h-[14px] w-[78vw] !bg-[#212121]" />
+      <AltSkeleton className="h-[14px] w-[75vw] !bg-[#212121]" />
+      <AltSkeleton className="h-[14px] w-[65vw] !bg-[#212121]" />
     </div>
   </motion.div>
 );

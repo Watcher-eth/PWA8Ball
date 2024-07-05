@@ -11,11 +11,9 @@ import { useGetFollowingPredictions } from "@/lib/supabase/queries/friends/fetch
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
 import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
-import {
-  skeletonVariants,
-  FollowPredictionSkeleton,
-} from "./ActivitySkelleton";
+import { FollowPredictionSkeleton } from "./ActivitySkelleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
+import { AltSkeleton } from "@/components/ui/skeleton";
 
 interface Prediction {
   // Define the structure of a prediction here
@@ -40,23 +38,13 @@ export const ActivityPage: React.FC = () => {
         style={{ height: (500 / 3) * 2, padding: "15px", maxWidth: "99%" }}
       >
         <div className="my-3">
-          <motion.div
-            className="h-4.5 w-[40%] bg-[#212121] rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
+          <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121] "/>
         </div>
         {[0, 1, 2, 3, 4, 5].map((index) => (
           <FollowPredictionSkeleton key={index} index={index} />
         ))}
         <div className="my-5">
-          <motion.div
-            className="h-4.5 w-[40%] bg-[#212121] rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
+          <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121]" />
         </div>
       </motion.div>
     );

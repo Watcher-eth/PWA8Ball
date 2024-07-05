@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/fetchTopUsersByPredictionAmount";
 import Link from "next/link";
+import { AltSkeleton } from "@/components/ui/skeleton";
 
 export const Leaderboard: React.FC = () => {
   const { data: topPredictors, error, isLoading } = useGetTopPredictors();
@@ -113,17 +114,7 @@ export const Leaderboard: React.FC = () => {
 };
 
 
-export const skeletonVariants = {
-  initial: { opacity: 1 },
-  pulse: {
-    opacity: 0.4,
-    transition: {
-      duration: 0.8,
-      yoyo: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
+
 
 const LoadingSkeleton = () => (
   <motion.div
@@ -145,26 +136,11 @@ const LoadingSkeleton = () => (
           <div className="flex flex-row items-center">
             <span className="text-white font-bold">{index + 1}</span>
             <div className="mx-3 ml-2.5">
-              <motion.div
-                className="h-7.5 w-7.5 rounded-full bg-gray-900"
-                variants={skeletonVariants}
-                initial="initial"
-                animate="pulse"
-              />
+              <AltSkeleton className="h-7.5 w-7.5 !rounded-full !bg-gray-900" />
             </div>
-            <motion.div
-              className="h-4.25 w-10 bg-gray-900 rounded-xl"
-              variants={skeletonVariants}
-              initial="initial"
-              animate="pulse"
-            />
+            <AltSkeleton className="h-4.25 w-10 !bg-gray-900" />
           </div>
-          <motion.div
-            className="h-3.5 w-6.25 bg-gray-900 rounded-xl"
-            variants={skeletonVariants}
-            initial="initial"
-            animate="pulse"
-          />
+          <AltSkeleton className="h-3.5 w-6.25 bg-gray-900"/>
         </motion.div>
       ))}
     </div>
