@@ -1,5 +1,5 @@
 // stores/ModalStore.ts
-import create from "zustand";
+import { create } from "zustand";
 
 interface ModalState {
   isLoginModalOpen: boolean;

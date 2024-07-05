@@ -1,5 +1,5 @@
 // useAppBlockStore.ts
-import create from "zustand";
+import { create } from "zustand";
 
 type AppState = {
   isBlocked: boolean;
