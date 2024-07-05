@@ -215,11 +215,10 @@ export function VotingModal(props: {
                       userBalance.toFixed(2) || sliderValue === "" ? (
                       <div className="flex flex-row items-center mt-0">
                         <div
-                          className="p-1 bg-red-500 rounded-full"
-                          style={{
-                            backgroundColor:
-                              props.option === 0 ? "#FF0050" : "#0050FF",
-                          }}
+                          className={`
+                            p-1 bg-red-500 rounded-full
+                            ${props.option === 0 ? "!bg-[#FF0050]" : "!bg-[#0050FF]"}
+                          `}
                         >
                           <Vote color="white" strokeWidth={3} size={16} />
                         </div>
