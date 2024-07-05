@@ -75,20 +75,16 @@ export default function ProfilePage({
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
         <Link href="/lp">
-          <motion.div
-            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-            style={{ borderRadius: 25 }}
-          >
+          <div className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5)] backdrop-blur-lg rounded-[25px]">
             <PieChart size={19} color="white" strokeWidth={3} />
-          </motion.div>
+          </div>
         </Link>
 
-        <motion.div
-          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-          style={{ borderRadius: 25 }}
+        <div
+          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5)] backdrop-blur-lg rounded-[25px]"
         >
           <CircleEllipsis size={19} color="white" strokeWidth={3} />
-        </motion.div>
+        </div>
 
         <img
           src={userC?.pfp}
@@ -112,30 +108,24 @@ export default function ProfilePage({
               </p>
             </div>
           ) : userC?.socials?.farcaster ? (
-            <div style={{ fontWeight: 500 }} className="flex items-center mt-0">
+            <div className="font-medium flex items-center mt-0">
               <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
-              <p
-                style={{ fontWeight: 500 }}
-                className="text-gray-200 text-lg font-bold ml-1"
-              >
+              <p className="text-gray-200 text-lg font-medium  ml-1">
                 @{userC?.socials?.farcaster?.name}
               </p>
             </div>
           ) : null}
-          <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
+          <div className="font-medium flex items-center mt-2">
             {balanceLoading ? (
-              <div style={{ marginRight: 7 }}>
+              <div className="mr-[7px]">
                 <AltSkeleton className="h-[33px] w-[75px]" />
               </div>
             ) : (
-              <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
+              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl">
                 ${userCBalance.toFixed(2)}
               </p>
             )}
-            <p
-              style={{ fontWeight: 500 }}
-              className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
-            >
+            <p className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2 font-medium">
               {totalFollowers} Followers
             </p>
             <FollowButton

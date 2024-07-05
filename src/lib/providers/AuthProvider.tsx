@@ -4,19 +4,17 @@
 import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { usePrivy } from "@privy-io/react-auth";
-import { useUserStore } from "../stores/UserStore";
-import { useInitializeUser } from "../hooks/useInitializeUser";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { useInitializeUser } from "@/lib/hooks/useInitializeUser";
 import { useModalStore } from "@/lib/stores/ModalStore"; // Ensure to import modal store
-
-interface AuthCheckerProps {
-  children: ReactNode;
-  requireAuth?: boolean;
-}
 
 export default function AuthChecker({
   children,
   requireAuth = false,
-}: AuthCheckerProps) {
+}: {
+  children: ReactNode;
+  requireAuth?: boolean;
+}) {
   const { ready, authenticated } = usePrivy();
   const { user } = useUserStore();
   const router = useRouter();

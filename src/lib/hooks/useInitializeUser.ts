@@ -3,9 +3,9 @@
 // hooks/useInitializeUser.ts
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { useUserStore } from "../stores/UserStore";
-import { getUSDCBalance } from "../onchain/contracts/Usdc";
-import { useSmartAccount } from "../onchain/SmartAccount";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
+import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy();
@@ -22,7 +22,7 @@ export function useInitializeUser() {
           // Update user context with DB values
           console.log("dbUser", dbUser);
           const balance = await getUSDCBalance(dbUser?.walletaddress);
-    
+
           const updatedUser = { ...dbUser, balance };
           setUser(updatedUser);
           console.log("Balance", balance, smartAccountAddress);
