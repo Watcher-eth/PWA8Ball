@@ -52,107 +52,64 @@ export const FollowButton = ({
   const isUser = user?.external_auth_provider_user_id === profileId;
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
-      <motion.button
+      <FollowActionButton
         onClick={handleFollow}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          paddingLeft: 12,
-          backgroundColor: "#1B1B1E",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 8,
-          marginBottom: 10,
-        }}
-      >
-        <UserPlus color={"lightgray"} strokeWidth={3} height={15} />
-        <div
-          style={{
-            fontSize: 14,
-            color: "lightgray",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
-          Follow
-        </div>
-      </motion.button>
+        icon={<UserPlus color={"lightgray"} strokeWidth={3} height={15} />}
+        label="Follow"
+      />
     );
   }
 
   if ((!isUser && isFollowing) || (isFollowing2 && !temporaryUnfollow)) {
     return (
-      <motion.button
+      <FollowActionButton
         onClick={handleUnfollow}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          paddingLeft: 12,
-          backgroundColor: "white",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 8,
-          marginBottom: 10,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 14,
-            color: "#1B1B1E",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
-          Following
-        </div>
-      </motion.button>
+        label="Following"
+      />
     );
   }
 
   if (isUser) {
     return (
-      <motion.button
+      <FollowActionButton
         onClick={setEdit}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          backgroundColor: "#1B1B1E",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 8,
-          paddingLeft: 6,
-          marginBottom: 10,
-        }}
-      >
-        <PenBox color={"lightgray"} strokeWidth={3} height={14} />
-        <div
-          style={{
-            fontSize: 14,
-            color: "lightgray",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
-          Edit
-        </div>
-      </motion.button>
+        icon={<PenBox color={"lightgray"} strokeWidth={3} height={14} />}
+        label="Edit"
+        className="!pl-1.5"
+      />
     );
   }
 
   return null;
 };
+
+
+function FollowActionButton({
+  label,
+  icon,
+  className,
+  onClick,
+}: {
+  label: string;
+  icon?: React.ReactNode;
+  className?: string;
+  onClick: () => void;
+}) {
+  return (
+    <motion.button
+      onClick={handleFollow}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`
+        flex flex-row mt-2 px-3 bg-[#1B1B1E]
+        rounded-2xl overflow-hidden items-center
+        py-2 mb-2.5 ${className}
+      `}
+    >
+      {icon}
+      <div className="text-[14px] text-[lightgray] self-center font-semibold">
+        {label}
+      </div>
+    </motion.button>
+  );
+}

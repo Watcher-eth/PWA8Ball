@@ -13,7 +13,7 @@ import { AtSign, Copy, Share, Users, X } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio";
 import Image from "next/image";
 import { toast } from "sonner";
-import ShareBetModal from "../Share/ShareBet.tsx";
+
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
 import { Toaster } from "../ui/sonner";
 import MyBetModal from "../Common/Charts/MyBetModal.tsx";
@@ -101,7 +101,7 @@ export function BetModal({
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className=" rounded-t-3xl  
+            className=" rounded-t-3xl
         h-[90vh] w-[100vw] relative"
           >
             <MyBetModal

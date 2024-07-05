@@ -3,22 +3,27 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-interface option {
+interface Option {
   name: string;
   value: number;
 }
-export interface ShareBetProps {
+
+export const ShareBetModal = ({
+  id,
+  title,
+  image,
+  topic,
+  question,
+  options,
+}: {
   id: string;
   title: string;
   image: string;
   topic: string;
   question: string;
-  options: option[];
-}
-
-const ShareBetModal: React.FC<ShareBetProps> = (props) => {
+  options: Option[];
+}) => {
   const router = useRouter();
-  const { id, title, image, topic, question, options } = props;
 
   const copyToClipboard = async () => {
     navigator.clipboard.writeText("hello world");
@@ -281,5 +286,3 @@ const styles = {
     color: "lightgrey",
   },
 };
-
-export default ShareBetModal;

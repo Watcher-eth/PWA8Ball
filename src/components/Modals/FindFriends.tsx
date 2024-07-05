@@ -13,7 +13,7 @@ import { AtSign, Copy, Share, Users, X } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio";
 
 import { toast } from "sonner";
-import ShareBetModal from "../Share/ShareBet.tsx";
+
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
 import { Toaster } from "../ui/sonner";
 import {FindFriends} from "../Share/InviteFriendsModal";
