@@ -1,36 +1,21 @@
 // @ts-nocheck
-
-// MobileOnlyModal.tsx
-import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import MobileOnly from "@/components/Common/MobileOnly";
 
-interface MobileOnlyModalProps {
-  open: boolean;
-}
 
-export function MobileOnlyModal({ open }: MobileOnlyModalProps) {
+export function MobileOnlyModal({ open }: { open: boolean }) {
   if (!open) return null;
 
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0, 0, 0, 0.85)",
-        zIndex: 1000,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className={`
+        fixed top-0 left-0 w-[100vw] h-[100vh] z-1000 flex justify-center items-center
+      `}
     >
       <motion.div
         layout
         transition={{ duration: 0.2 }}
-        style={{ borderRadius: 20, padding: "20px", backgroundColor: "#fff" }}
+        className="rounded-[20px] p-5 bg-white"
       >
         <MobileOnly />
       </motion.div>
