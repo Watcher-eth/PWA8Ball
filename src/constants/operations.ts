@@ -1,6 +1,6 @@
-export const rootOperator = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853";
+export const ROOT_OPERATOR_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853";
 
-export const topicList = [
+export const TOPIC_LIST = [
   "US 2024 Elections.",
   "Taylor Swift.",
   "Oscars 2024",
@@ -9,7 +9,7 @@ export const topicList = [
   "Dune",
   "TikTok",
   "Jake Paul"
-];
+] as const;
 
-export const baseFeeAddress = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"
-export const baseOperator = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"
+export const BASE_FEE_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"
+export const BASE_OPERATOR_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"

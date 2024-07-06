@@ -1,5 +1,4 @@
 // @ts-nocheck
-// hooks/useInitializeUser.ts
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { useUserStore } from "@/lib/stores/UserStore";

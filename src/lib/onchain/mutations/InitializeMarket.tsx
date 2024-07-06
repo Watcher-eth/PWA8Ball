@@ -14,7 +14,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { rootOperator } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { createMarket } from "@/lib/supabase/mutations/createMarket";
 
 interface initializeMarketTypes {
@@ -74,7 +74,7 @@ async function initialize(props: initializeMarketTypes) {
       account,
       address: EightBallAddress,
       abi: EightballV1ABI,
-      args: [account, rootOperator, BigInt(initialProb)],
+      args: [account, ROOT_OPERATOR_ADDRESS, BigInt(initialProb)],
       functionName: "initializeMarket",
     });
     const result = await props.client.writeContract(request);

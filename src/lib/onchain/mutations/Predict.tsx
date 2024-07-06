@@ -15,7 +15,7 @@ import {
 import { WalletClient, Address } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
-import { rootOperator } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
 interface PredictParams {
   amount: number;
@@ -72,7 +72,7 @@ async function predict(props: PredictParams) {
         BigInt(props.amount),
         preferYesNum,
         BigInt(props.marketId),
-        rootOperator,
+        ROOT_OPERATOR_ADDRESS,
         990,
       ],
       functionName: "predict",

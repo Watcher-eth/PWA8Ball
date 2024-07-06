@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export async function checkWallet() {
   const [ownerAddress, setOwnerAddress] = useState("");
   const wallet = useEmbeddedWallet();
-  const { isReady, user, logout } = usePrivy() as any;
+  const { isReady, user, logout } = usePrivy();
 
   useEffect(() => {
     checkWalletAddress();

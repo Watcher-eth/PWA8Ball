@@ -19,7 +19,7 @@ import {
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
-import { rootOperator } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 interface CashoutParams {
   preferYes: boolean;
   option: string;
@@ -70,7 +70,7 @@ async function cashoutPrediction(props: CashoutParams) {
       ownedTokens,
       preferYesNum,
       BigInt(props.marketId),
-      rootOperator,
+      ROOT_OPERATOR_ADDRESS,
     ]);
 
     //TODO: Update to cashed out

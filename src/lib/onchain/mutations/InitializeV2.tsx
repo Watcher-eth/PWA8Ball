@@ -15,7 +15,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { rootOperator } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { createMarket } from "@/lib/supabase/mutations/createMarket";
 
 interface initializeMarketTypes {
@@ -59,7 +59,7 @@ async function initialize(props: initializeMarketTypes) {
     });
     // Boost the market
     const hash = await contract.write.initializeMarket([
-      rootOperator,
+      ROOT_OPERATOR_ADDRESS,
       account,
       BigInt(initialProb),
     ]);

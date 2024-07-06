@@ -7,7 +7,7 @@ import {
   EightBallAddress,
   EightballV1ABI,
   getEightBallContract,
-} from "../contracts/Eightball";
+} from "@/lib/onchain/contracts/Eightball";
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
@@ -15,7 +15,7 @@ import { rpcClient } from "../Viem";
 
 import { createPrediction } from "@/lib/supabase/mutations/addPrediction";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { rootOperator } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 
 interface PredictParams {
   amount: number;
@@ -56,7 +56,7 @@ async function predict(props: PredictParams) {
       BigInt(props.amount / 10),
       preferYesNum,
       BigInt(props.marketId),
-      rootOperator,
+      ROOT_OPERATOR_ADDRESS,
       990,
     ]);
 
