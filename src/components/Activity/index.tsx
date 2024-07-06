@@ -13,7 +13,7 @@ import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
 import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
 import { FollowPredictionSkeleton } from "./ActivitySkelleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
-import { AltSkeleton } from "@/components/ui/Skeleton_";
+import { AltSkeleton } from "@/components/ui/Skeleton";
 
 
 export function ActivityPage() {

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/drawer";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProportionalSlider } from "./Slider";
-import { Skeleton } from "@/components/ui/Skeleton_";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useRouter } from "next/router";
 import { shortenAddress } from "@/lib/utils/shortenAddress";
 

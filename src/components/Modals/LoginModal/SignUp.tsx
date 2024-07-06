@@ -9,8 +9,8 @@ import { useCreateUser } from "@/lib/supabase/mutations/useCreateUser";
 import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";
 import { NewUser } from "@/lib/supabase/types";
 
-import { Input } from "@/components/ui/Input_";
-import { Button } from "@/components/ui/Button_";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 

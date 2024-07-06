@@ -20,11 +20,11 @@ import {
   WalletCards,
   X,
 } from "lucide-react";
-import { Input } from "../ui/Input_";
+import { Input } from "../ui/Input";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
-import { Button } from "../ui/Button_";
+import { Button } from "../ui/Button";
 
 import { RandomMemoji } from "../Common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";

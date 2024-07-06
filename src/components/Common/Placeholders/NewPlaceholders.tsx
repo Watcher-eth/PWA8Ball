@@ -1,13 +1,13 @@
 // @ts-nocheck
 
 import React from "react";
-import { Skeleton } from "@/components/ui/Skeleton_";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
-import { AltSkeleton } from "@/components/ui/Skeleton_";
+import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export function NewPlaceholder({ isUser }) {
   const router = useRouter();

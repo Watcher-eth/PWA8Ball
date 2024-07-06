@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/useGetTopPredictors";
 import Link from "next/link";
-import { AltSkeleton } from "@/components/ui/Skeleton_";
+import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export const Leaderboard: React.FC = () => {
   const { data: topPredictors, error, isLoading } = useGetTopPredictors();

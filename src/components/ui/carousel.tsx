@@ -1,7 +1,4 @@
 // @ts-nocheck
-
-"use client"
-
 import * as React from "react"
 import useEmblaCarousel, {
   type EmblaCarouselType as CarouselApi,
@@ -11,7 +8,7 @@ import useEmblaCarousel, {
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/Button_"
+import { Button } from "@/components/ui/Button"
 
 type CarouselProps = {
   opts?: CarouselOptions

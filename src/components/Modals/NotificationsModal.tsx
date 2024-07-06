@@ -9,7 +9,7 @@ import {
 } from "../ui/drawer";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
+import { AspectRatio } from "../ui/AspectRatio";
 import { toast } from "sonner";
 import { Toaster } from "../ui/Toaster";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";

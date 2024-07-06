@@ -1,5 +1,5 @@
-import { LENS_MEDIA_SNAPSHOT_URL } from './stopEventProppagation'
-
+const LENS_MEDIA_SNAPSHOT_URL =
+  'https://ik.imagekit.io/lens/media-snapshot'
 /**
  * Transforms the URL of an image to use ImageKit.
  *
@@ -7,7 +7,7 @@ import { LENS_MEDIA_SNAPSHOT_URL } from './stopEventProppagation'
  * @param name The transformation name (optional).
  * @returns A transformed URL.
  */
-const imageKit = (url: string, name?: string): string => {
+export function imageKit(url: string, name?: string) {
   if (!url) {
     return ''
   }
@@ -22,4 +22,4 @@ const imageKit = (url: string, name?: string): string => {
   return url
 }
 
-export default imageKit
+

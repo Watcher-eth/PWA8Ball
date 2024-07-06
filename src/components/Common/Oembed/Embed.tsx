@@ -1,11 +1,13 @@
 // @ts-nocheck
 
-import imageKit from "../../../utils/imageKit";
-import stopEventPropagation from "../../..//utils/stopEventProppagation";
-import type { OG } from "../../../types/misc";
-import "../../../styles/fonts.css";
-import Link from "next/link";
+import "@/styles/fonts.css";
 import type { FC } from "react";
+import { imageKit } from "@/utils/imageKit";
+
+import type { OG } from "@/types/misc";
+
+import Link from "next/link";
+
 
 interface EmbedProps {
   og: OG;
@@ -22,7 +24,7 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
       <Link
         href={og.url}
         onClick={(event) => {
-          stopEventPropagation(event);
+          event.stopPropagation();
         }}
         target={og.url.includes(location.host) ? "_self" : "_blank"}
         rel="noreferrer noopener"

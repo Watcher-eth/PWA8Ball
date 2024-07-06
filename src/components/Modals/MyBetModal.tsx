@@ -7,10 +7,10 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/Button_";
+import { Button } from "../ui/Button";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
+import { AspectRatio } from "../ui/AspectRatio";
 import Image from "next/image";
 import { toast } from "sonner";
 
