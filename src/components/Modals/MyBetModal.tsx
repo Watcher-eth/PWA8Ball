@@ -7,7 +7,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button_";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
 import { AspectRatio } from "../ui/aspect-ratio";
@@ -15,7 +15,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
-import { Toaster } from "../ui/sonner";
+import { Toaster } from "../ui/Toaster";
 import MyBetModal from "../Common/Charts/MyBetModal.tsx";
 
 interface BetModalProps {

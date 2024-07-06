@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { Bell, Users, Globe } from "lucide-react";
@@ -13,10 +13,10 @@ import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
 import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
 import { FollowPredictionSkeleton } from "./ActivitySkelleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
-import { AltSkeleton } from "@/components/ui/skeleton";
+import { AltSkeleton } from "@/components/ui/Skeleton_";
 
 
-export const ActivityPage: React.FC = () => {
+export function ActivityPage() {
   const router = useRouter();
   const [page, setPage] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState(false);

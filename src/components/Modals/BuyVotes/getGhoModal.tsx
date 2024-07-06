@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button_";
 import { ArrowDown, CreditCard, Repeat } from "lucide-react";
 
 function GetGhoModal(props: { setStep: (step: number) => void }) {

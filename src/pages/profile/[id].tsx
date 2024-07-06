@@ -21,7 +21,7 @@ import { useUserBalance } from "@/lib/hooks/useUserBalance";
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 
-import { AltSkeleton } from "@/components/ui/skeleton";
+import { AltSkeleton } from "@/components/ui/Skeleton_";
 
 
 

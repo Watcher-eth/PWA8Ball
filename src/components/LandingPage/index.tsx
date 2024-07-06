@@ -2,7 +2,7 @@
 
 import { Globe } from "lucide-react";
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button_";
 
 export default function LandingPage() {
   return (

@@ -3,7 +3,7 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button_";
 import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";

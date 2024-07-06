@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 import {
@@ -8,10 +8,10 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "@/components/ui/drawer.tsx";
+} from "@/components/ui/drawer";
 
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/Toaster";
 import { ShareTopic } from "@/components/Share/ShareTopic";
 
 export function ShareTopicModal({

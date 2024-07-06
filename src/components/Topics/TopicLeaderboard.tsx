@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton_";
 import { useGetLeaderboardForTopic } from "@/lib/supabase/queries/leaderboard/useGetLeaderboardForTopic";
 
 const Leaderboard = ({ topicId }) => {

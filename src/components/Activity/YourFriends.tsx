@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../ui/Skeleton_";
 
 export function YourFriends() {
   const [loading, setLoading] = useState<boolean>(false);

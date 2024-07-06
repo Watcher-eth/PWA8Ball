@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { parseOption, parseOptionJSON } from "@/lib/utils/parseOption";
 
 
 export const ActivityField: React.FC<ActivityFieldProps> = ({
@@ -26,8 +25,7 @@ export const ActivityField: React.FC<ActivityFieldProps> = ({
   option: { name: string; value: number };
   onOpenBottomSheet: () => void;
 }) => {
-  console.log({option})
-  const Option = parseOptionJSON(option);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -129,9 +127,9 @@ export const ActivityField: React.FC<ActivityFieldProps> = ({
           ${(amount / 10).toFixed(2)}
         </p>
         <p style={{ fontSize: "14px", color: "#C7C7C7", fontWeight: "700" }}>
-          {Option?.name?.length < 8
-            ? Option.name
-            : Option?.name?.substring(0, 3)}
+          {option?.name?.length < 8
+            ? option.name
+            : option?.name?.substring(0, 3)}
         </p>
       </div>
     </motion.div>

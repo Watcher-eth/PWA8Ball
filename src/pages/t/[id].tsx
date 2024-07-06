@@ -6,13 +6,6 @@ import { useRouter } from "next/router";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { getApiOgTopicUrl, getTopicUrl } from "@/utils/urls";
 
-interface TopicPageProps {
-  topicData: any;
-}
-
-interface Props1 {
-  params: { id: string };
-}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
@@ -37,7 +30,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
+export default function TopicPage({
+  topicData,
+}: {
+  topicData: any;
+}) {
   const router = useRouter();
   console.log({ topicData });
   if (!topicData) {
@@ -64,28 +61,3 @@ const TopicPage: React.FC<TopicPageProps> = ({ topicData }) => {
     </div>
   );
 };
-
-// TopicPage.getInitialProps = async (context) => {
-//   console.log({ context });
-//   const { id } = context.query as { id: string };
-
-//   const { data: topicData, error } = await supabase
-//     .from("topics")
-//     .select("*")
-//     .eq("id", id)
-//     .single();
-
-//   if (error) {
-//     console.error(error);
-//     return {
-//       notFound: true,
-//     };
-//   }
-
-//   return {
-//     // props: {
-//       topicData,
-//     // },
-//   };
-// };
-export default TopicPage;

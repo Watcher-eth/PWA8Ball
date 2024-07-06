@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AltSkeleton } from "@/components/ui/skeleton";
+import { AltSkeleton } from "@/components/ui/Skeleton_";
 
 interface FollowPredictionSkeletonProps {
   index: number;

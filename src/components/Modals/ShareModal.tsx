@@ -1,21 +1,17 @@
 // @ts-nocheck
 
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { Toaster } from "@/components/ui/Toaster";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
-import { Button } from "../ui/button";
-import { motion } from "framer-motion";
-import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
+} from "@/components/ui/drawer";
 
-import { toast } from "sonner";
-import { ShareBetModal } from "../Share/ShareBet.tsx";
-import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
-import { Toaster } from "../ui/sonner";
+import { ShareBetModal } from "@/components/Share/ShareBetModal";
+
+
 
 export function ShareModal({
   children,

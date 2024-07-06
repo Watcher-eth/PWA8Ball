@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
 
 import Layout from "@/components/Common/Layout";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/Toaster";
 import { PrivyProvider } from "@privy-io/react-auth";
 import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";

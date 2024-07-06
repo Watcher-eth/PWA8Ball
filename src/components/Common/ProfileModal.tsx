@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import React, { ReactNode } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Button_";
 import {
   DrawerClose,
   DrawerContent,
@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { Input } from "../ui/input";
+import { Input } from "../ui/Input_";
 import { Profile, ProfileFragment } from "@lens-protocol/client";
 import { Badge } from "../ui/badge";
 import { shortenAddress } from "@thirdweb-dev/react";
