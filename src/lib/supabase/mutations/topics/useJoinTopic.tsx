@@ -1,15 +1,11 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-interface JoinTopicData {
+async function joinTopic({ userId, topicId }: {
   userId: string;
   topicId: string;
-}
-
-const joinTopic = async (joinData: JoinTopicData) => {
-  const { userId, topicId } = joinData;
-
+}) {
   const { data, error } = await supabase.rpc("join_topic", {
     user_id: userId,
     topic_id: topicId,
@@ -20,7 +16,7 @@ const joinTopic = async (joinData: JoinTopicData) => {
   return data;
 };
 
-export const useJoinTopic = () => {
+export function useJoinTopic() {
   return useMutation({
     mutationFn: joinTopic,
     onError: (error) => {

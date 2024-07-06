@@ -1,4 +1,6 @@
-// types.ts
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
+
 export interface IUser {
   internal_id: string;
   external_auth_provider_user_id: string;
@@ -6,11 +8,7 @@ export interface IUser {
   pfp: string;
 }
 
-// useGetMembersForTopic.ts
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
-
-const fetchMembersForTopic = async (topicId: string): Promise<IUser[]> => {
+async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
   const { data, error } = await supabase
     .from("user_topics")
     .select(
@@ -32,7 +30,7 @@ const fetchMembersForTopic = async (topicId: string): Promise<IUser[]> => {
   return data.map((entry) => entry.users).flat();
 };
 
-export const useGetMembersForTopic = (topicId: string) => {
+export function useGetMembersForTopic(topicId: string) {
   return useQuery({
     queryKey: ["members", topicId],
     queryFn: () => fetchMembersForTopic(topicId),

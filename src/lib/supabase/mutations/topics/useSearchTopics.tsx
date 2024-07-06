@@ -1,13 +1,7 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
-
-export interface ITopic {
-  id: string;
-  title: string;
-  description: string;
-  image?: string; // Marked as optional in case some topics might not have an image
-}
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { ITopic } from "@/lib/supabase/types";
 
 const searchTopics = async (searchString: string): Promise<ITopic[]> => {
   const { data, error } = await supabase

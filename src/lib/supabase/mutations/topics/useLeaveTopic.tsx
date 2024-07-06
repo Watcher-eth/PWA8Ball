@@ -1,16 +1,13 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-interface LeaveTopicData {
+
+async function leaveTopic({ userId, topicId }: {
   userId: string;
   topicId: string;
-}
-
-const leaveTopic = async (leaveData: LeaveTopicData) => {
-  const { userId, topicId } = leaveData;
-
+}) {
   const { data, error } = await supabase.rpc("leave_topic", {
     user_id: userId,
     topic_id: topicId,

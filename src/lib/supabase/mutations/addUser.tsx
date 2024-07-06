@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { IUser, NewUser } from "../types";
 
 const createUser = async (newUser: NewUser): Promise<IUser> => {

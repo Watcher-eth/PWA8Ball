@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { NewPrediction } from "@/types/BetTypes";
 
 export const createPrediction = async (

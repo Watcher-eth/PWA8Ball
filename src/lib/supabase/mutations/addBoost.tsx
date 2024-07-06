@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 interface UserBoost {
   user_id: string;

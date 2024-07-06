@@ -1,10 +1,12 @@
 // @ts-nocheck
+import { Address } from "viem"
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
+
 interface UpdateUserArgs {
   userId: string;
   updates: {
-    walletaddress: string;
+    walletaddress: Address;
   };
 }
 export interface IUser {
@@ -12,7 +14,7 @@ export interface IUser {
   external_auth_provider_user_id: string;
   liquiditypoints: number;
   rewardpoints: number;
-  walletaddress: string;
+  walletaddress: Address;
   socials: object;
   friends: object;
   web_push_subscription: object;

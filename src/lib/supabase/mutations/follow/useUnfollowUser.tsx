@@ -1,15 +1,15 @@
 // @ts-nocheck
-
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-interface UnfollowUserData {
+
+async function unfollowUser({
+  followerId,
+  followingId
+}: {
   followerId: string;
   followingId: string;
-}
-
-const unfollowUser = async (unfollowData: UnfollowUserData) => {
-  const { followerId, followingId } = unfollowData;
+}) {
   const { error } = await supabase
     .from("user_follows")
     .delete()

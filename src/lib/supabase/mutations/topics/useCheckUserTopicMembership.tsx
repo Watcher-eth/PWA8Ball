@@ -1,11 +1,11 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-const checkUserTopicMembership = async (
+async function checkUserTopicMembership(
   userId: string,
   topicId: string
-): Promise<boolean> => {
+): Promise<boolean> {
   const { data, error } = await supabase
     .from("user_topics")
     .select("user_id, topic_id")
@@ -18,10 +18,10 @@ const checkUserTopicMembership = async (
   return !!data; // Returns true if there's an entry, false otherwise.
 };
 
-export const useCheckUserTopicMembership = (
+export function useCheckUserTopicMembership(
   userId: string,
   topicId: string
-) => {
+) {
   return useQuery({
     queryKey: ["userTopicMembership", userId, topicId],
     queryFn: () => checkUserTopicMembership(userId, topicId),

@@ -1,6 +1,6 @@
 // supabaseFunctions.js
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient"; // Import your Supabase client
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 interface UpdateUSDCBalanceArgs {
   marketId: number;

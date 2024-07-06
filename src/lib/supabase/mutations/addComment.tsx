@@ -18,7 +18,7 @@ export interface IComment {
   likes: any; // Again, adjust according to your schema
 }
 // commentsAPI.ts
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const createComment = async (newComment: NewComment): Promise<IComment> => {
   const { data, error } = await supabase

@@ -2,7 +2,7 @@
 
 // useCreateTopic.ts
 import { useMutation } from '@tanstack/react-query';
-import { supabase } from '../supabaseClient';
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { NewTopic, ITopic } from '../types';
 
 const createTopic = async (newTopic: NewTopic): Promise<ITopic> => {

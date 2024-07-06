@@ -1,4 +1,7 @@
 // @ts-nocheck
+import { useMutation } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IComment } from "../addComment";
 
 const deleteComment = async (commentId: string): Promise<IComment[] | null> => {
   const { data, error } = await supabase
@@ -12,11 +15,8 @@ const deleteComment = async (commentId: string): Promise<IComment[] | null> => {
   return data; // Now returning data or null, consistent with Supabase's response
 };
 
-// useDeleteComment.ts
-import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
-import { IComment } from "../addComment";
-export const useDeleteComment = () => {
+
+export function useDeleteComment() {
   return useMutation<IComment[] | null, Error, string>({
     mutationFn: deleteComment,
     onError: (error) => {

@@ -1,15 +1,16 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-interface FollowUserData {
+
+async function followUser({
+  followerId,
+  followingId,
+}: {
   followerId: string;
   followingId: string;
-}
-
-const followUser = async (followData: FollowUserData) => {
-  const { followerId, followingId } = followData;
+}) {
   const { data, error } = await supabase
     .from("user_follows")
     .insert([{ follower_id: followerId, following_id: followingId }])

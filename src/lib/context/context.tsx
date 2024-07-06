@@ -7,16 +7,12 @@ import {
   Dispatch,
   SetStateAction,
   useState,
-  FC,
   ReactNode,
   useEffect,
 } from "react";
-import { lensClient } from "../../pages/_app";
+
 import { useUserStore } from "./UserContext";
 
-import { createWalletClient, custom } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { polygon } from "viem/chains";
 
 type ContextData = {
   setSelectedProfile: Dispatch<SetStateAction>;
@@ -24,14 +20,14 @@ type ContextData = {
   setAuthenticated: Dispatch<SetStateAction<boolean>>;
 };
 
-const ProfileContext = createContext<ContextData>(null);
+export const ProfileContext = createContext<ContextData>(null);
 ProfileContext.displayName = "ProfileContext";
 
 export const useProfile = (): ContextData => {
   return useContext(ProfileContext);
 };
 
-export const ProfileProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function ProfileProvider({ children }: { children?: ReactNode }) {
   const userStore = useUserStore();
   //Get User
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
@@ -41,7 +37,6 @@ export const ProfileProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ProfileContext.Provider
       value={{
-  
         isAuthenticated,
         setAuthenticated,
         setSelectedProfile,
@@ -52,4 +47,3 @@ export const ProfileProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export default ProfileContext;
