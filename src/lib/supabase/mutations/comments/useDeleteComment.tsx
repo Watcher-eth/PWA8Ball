@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { IComment } from "../addComment";
+import { IComment } from "../useCreateComment";
 
 const deleteComment = async (commentId: string): Promise<IComment[] | null> => {
   const { data, error } = await supabase

@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
-import { ITopic } from "../types";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { ITopic } from "@/lib/supabase/types";
 
-const fetchTopic = async (topicId: string): Promise<ITopic> => {
+async function fetchTopic(topicId: string): Promise<ITopic> {
   const { data, error } = await supabase
     .from("topics")
     .select("*")
@@ -14,7 +14,7 @@ const fetchTopic = async (topicId: string): Promise<ITopic> => {
   return data;
 };
 
-export const useGetTopic = (topicId: string) => {
+export function useGetTopic(topicId: string) {
   return useQuery({
     queryKey: ["topic", topicId],
     queryFn: () => fetchTopic(topicId),

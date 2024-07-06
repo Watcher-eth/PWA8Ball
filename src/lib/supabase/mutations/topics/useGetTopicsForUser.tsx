@@ -1,14 +1,9 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
-export interface ITopic {
-  id: string;
-  title: string;
-  description: string;
-  image?: string; // Marked as optional in case some topics might not have an image
-}
+import { ITopic } from "@/lib/supabase/types";
 
-const fetchTopicsForUser = async (userId: string): Promise<ITopic[]> => {
+async function fetchTopicsForUser(userId: string): Promise<ITopic[]> {
   const { data, error } = await supabase
     .from("user_topics")
     .select(
@@ -26,7 +21,7 @@ const fetchTopicsForUser = async (userId: string): Promise<ITopic[]> => {
   return data.map((entry) => entry.topics);
 };
 
-export const useGetTopicsForUser = (userId: string) => {
+export function useGetTopicsForUser(userId: string) {
   return useQuery({
     queryKey: ["topics", userId],
     queryFn: () => fetchTopicsForUser(userId),

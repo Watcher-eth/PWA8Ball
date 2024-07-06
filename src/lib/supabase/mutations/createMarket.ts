@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { NewMarket } from "../types";
+import { NewMarket } from "@/lib/supabase/types";
 
 export const createMarket = async (
   marketData: NewMarket

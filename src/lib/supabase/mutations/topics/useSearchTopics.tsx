@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { ITopic } from "@/lib/supabase/types";
 
-const searchTopics = async (searchString: string): Promise<ITopic[]> => {
+async function searchTopics(searchString: string): Promise<ITopic[]> {
   const { data, error } = await supabase
     .from("topics")
     .select("*")
@@ -15,7 +15,7 @@ const searchTopics = async (searchString: string): Promise<ITopic[]> => {
   return data;
 };
 
-export const useSearchTopics = (searchString: string) => {
+export function useSearchTopics(searchString: string) {
   return useQuery({
     queryKey: ["searchTopics", searchString],
     queryFn: () => searchTopics(searchString),

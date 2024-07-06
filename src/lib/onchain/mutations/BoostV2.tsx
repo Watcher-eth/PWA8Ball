@@ -10,7 +10,7 @@ import {
 import { rpcClient } from "../Viem";
 import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
-import { addLiquidityBoost } from "@/lib/supabase/mutations/addBoost";
+import { addLiquidityBoost } from "@/lib/supabase/mutations/addLiquidityBoost";
 import { supabase } from "@/lib/supabase/supabaseClient";
 
 interface boostMarket {

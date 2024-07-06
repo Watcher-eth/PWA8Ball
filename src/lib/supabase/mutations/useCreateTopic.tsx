@@ -1,11 +1,9 @@
 // @ts-nocheck
-
-// useCreateTopic.ts
 import { useMutation } from '@tanstack/react-query';
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { NewTopic, ITopic } from '../types';
+import { NewTopic, ITopic } from '@/lib/supabase/types';
 
-const createTopic = async (newTopic: NewTopic): Promise<ITopic> => {
+async function createTopic(newTopic: NewTopic): Promise<ITopic> {
   const { data, error } = await supabase
     .from<ITopic>('topics')
     .insert([newTopic])
@@ -15,7 +13,7 @@ const createTopic = async (newTopic: NewTopic): Promise<ITopic> => {
   return data;
 };
 
-export const useCreateTopic = () => {
+export function useCreateTopic() {
   return useMutation({
     mutationFn: createTopic,
   });

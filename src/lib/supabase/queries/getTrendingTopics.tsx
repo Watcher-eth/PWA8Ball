@@ -1,12 +1,12 @@
 // @ts-nocheck
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { supabase } from "./supabaseClient";
-import { ITopic } from "./types"; // Assuming you have this interface defined
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { ITopic } from "@/lib/supabase/types";
 
-export const useGetTopTopicsWithNewMarkets = (): UseQueryResult<
+export function useGetTopTopicsWithNewMarkets(): UseQueryResult<
   ITopic[],
   Error
-> => {
+> {
   return useQuery<ITopic[], Error>(["topTopicsNewMarkets"], async () => {
     let { data: markets, error: marketError } = await supabase
       .from("markets")

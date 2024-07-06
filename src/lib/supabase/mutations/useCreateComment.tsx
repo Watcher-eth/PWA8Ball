@@ -1,6 +1,7 @@
 // @ts-nocheck
+import { useMutation } from "@tanstack/react-query";
 
-// types.ts
+import { supabase } from "@/lib/supabase/supabaseClient";
 export interface NewComment {
   market_id: number;
   content: string;
@@ -17,8 +18,7 @@ export interface IComment {
   created_at: Date;
   likes: any; // Again, adjust according to your schema
 }
-// commentsAPI.ts
-import { supabase } from "@/lib/supabase/supabaseClient";
+
 
 const createComment = async (newComment: NewComment): Promise<IComment> => {
   const { data, error } = await supabase
@@ -33,8 +33,7 @@ const createComment = async (newComment: NewComment): Promise<IComment> => {
   return data;
 };
 
-// useCreateComment.ts
-import { useMutation } from "@tanstack/react-query";
+
 
 export const useCreateComment = () => {
   return useMutation<IComment, Error, NewComment>({

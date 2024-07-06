@@ -13,7 +13,7 @@ import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
 
 
-import { createPrediction } from "@/lib/supabase/mutations/addPrediction";
+import { createPrediction } from "@/lib/supabase/mutations/createPrediction";
 import { supabase } from "@/lib/supabase/supabaseClient";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 

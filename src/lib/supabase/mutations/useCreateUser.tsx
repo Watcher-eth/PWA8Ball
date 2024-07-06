@@ -13,7 +13,7 @@ const createUser = async (newUser: NewUser): Promise<IUser> => {
   return data;
 };
 
-export const useCreateUser = () => {
+export function useCreateUser() {
   return useMutation({
     mutationFn: createUser,
   });

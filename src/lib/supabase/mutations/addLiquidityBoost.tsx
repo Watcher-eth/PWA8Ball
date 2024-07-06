@@ -8,9 +8,7 @@ interface UserBoost {
   amount_added: number;
 }
 
-export const addLiquidityBoost = async (
-  newBoost: UserBoost
-): Promise<UserBoost> => {
+export async function addLiquidityBoost(newBoost: UserBoost): Promise<UserBoost> {
   const { data, error } = await supabase
     .from<UserBoost>("user_boosts")
     .insert([newBoost])
