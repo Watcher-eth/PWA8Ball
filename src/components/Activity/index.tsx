@@ -30,9 +30,8 @@ export const ActivityPage: React.FC = () => {
 
   if (isLoading || predictions === undefined) {
     return (
-      <motion.div
-        className="flex flex-col items-center"
-        style={{ height: (500 / 3) * 2, padding: "15px", maxWidth: "99%" }}
+      <div
+        className="flex flex-col items-center w-[99%] h-[333px] p-4"
       >
         <div className="my-3">
           <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121] "/>
@@ -43,7 +42,7 @@ export const ActivityPage: React.FC = () => {
         <div className="my-5">
           <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121]" />
         </div>
-      </motion.div>
+      </div>
     );
   }
 
@@ -51,50 +50,48 @@ export const ActivityPage: React.FC = () => {
 
   return (
     <div
-      className={`no-scrollbar flex flex-col w-full min-h-[100vh] p-[20px] pt-[30px] bg-[#101010] relative`}
+      className={`
+        no-scrollbar flex flex-col
+        w-full min-h-[100vh]
+        p-[20px] pt-[30px]
+        bg-[#101010] relative
+      `}
     >
-      <motion.div
-        className="fixed  w-[100vw] h-[125px] bottom-0 rounded-t-lg "
+      <div
+        className={`
+          fixed  w-[100vw] h-[125px] bottom-0 rounded-t-lg
+          z-[2]
+        `}
         style={{
-          zIndex: 2,
           background:
             "linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.8))",
         }}
       />
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "10px",
-          backgroundColor: "#101010",
-        }}
+        className={`
+          flex flex-row w-full justify-between items-center
+          mb-2.5 bg-[#101010]
+        `}
       >
         <motion.button
           style={{
             padding: "7px",
             borderRadius: "20px",
-            backgroundColor: !page ? "#1C1C1E" : "#FF0050",
+            backgroundColor: page ? "#FF0050" : "#1C1C1E",
           }}
           onClick={() => setPage(!page)}
         >
-          {!page ? (
-            <Users color="white" strokeWidth={3} size={18} />
-          ) : (
+          {page ? (
             <Globe color="white" strokeWidth={3} size={18} />
+          ) : (
+            <Users color="white" strokeWidth={3} size={18} />
           )}
         </motion.button>
-        <h1
-          className="text-[20px] text-white font-bold"
-        >
+        <h1 className="text-[20px] text-white font-bold">
           {page ? "Global" : "Your Friends"}
         </h1>
         <NotificationsModal>
-          <motion.button
-            className="p-[6px] rounded-[20px] bg-[#1C1C1E]"
-          >
+          <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
             <Bell color="white" strokeWidth={3} size={20} />
           </motion.button>
         </NotificationsModal>
@@ -135,7 +132,7 @@ export const ActivityPage: React.FC = () => {
                       ))}
                     </div>
                   ))}
-                  <div className="h-[110px]"/>
+                  <div className="h-[110px]" />
                 </div>
               ) : (
                 <InviteFriendsPlaceholder />

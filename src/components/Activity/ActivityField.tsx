@@ -4,17 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { parseOption, parseOptionJSON } from "@/lib/utils/parseOption";
 
-interface ActivityFieldProps {
-  index: number;
-  pfp: string;
-  name: string;
-  amount: number;
-  title: string;
-  image: string;
-  question: string;
-  option: { name: string; value: number };
-  onOpenBottomSheet: () => void;
-}
 
 export const ActivityField: React.FC<ActivityFieldProps> = ({
   index,
@@ -26,6 +15,16 @@ export const ActivityField: React.FC<ActivityFieldProps> = ({
   question,
   option,
   onOpenBottomSheet,
+}: {
+  index: number;
+  pfp: string;
+  name: string;
+  amount: number;
+  title: string;
+  image: string;
+  question: string;
+  option: { name: string; value: number };
+  onOpenBottomSheet: () => void;
 }) => {
   console.log({option})
   const Option = parseOptionJSON(option);

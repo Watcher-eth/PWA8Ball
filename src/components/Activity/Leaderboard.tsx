@@ -24,84 +24,34 @@ export const Leaderboard: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{ display: "flex", flexDirection: "column", marginTop: "7px" }}
+      className="flex flex-col mt-2"
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            margin: "7px 0",
-          }}
-        >
-          <h2
-            style={{
-              color: "white",
-              fontSize: "15px",
-              fontWeight: 700,
-            }}
-          >
-            Name
-          </h2>
-          <h2
-            style={{
-              color: "white",
-              fontSize: "15px",
-              fontWeight: 700,
-            }}
-          >
-            At stake
-          </h2>
+      <div className="flex flex-col">
+        <div className="flex flex-row items-center justify-between my-1.5">
+          <h2 className="text-white text-[15px] font-bold">Name</h2>
+          <h2 className="text-white text-[15px] font-bold">At stake</h2>
         </div>
         {topPredictors?.map((predictor, index) => (
           <Link href={`/profile/${predictor.user_id}`}>
             <motion.button
               key={index}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                margin: "5px 0",
-              }}
+              className="flex flex-row items-center justify-between my-1.5"
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <p style={{ color: "white", fontWeight: 700 }}>{index + 1}</p>
+              <div className="flex flex-row items-center">
+                <p className="text-white font-bold">{index + 1}</p>
                 <img
                   src={predictor.pfp}
                   alt="Profile"
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    borderRadius: "15px",
-                    margin: "0 12px 0 10px",
-                    objectFit: "cover",
-                  }}
+                  className="size-[30px] rounded-full object-cover ml-2.5 mr-3"
                 />
                 <p
-                  style={{
-                    color: "white",
-                    fontWeight: 600,
-                    fontSize: "17px",
-                  }}
+                  className="text-white text-[17px] font-semibold"
                 >
                   {predictor.name}
                 </p>
               </div>
               <p
-                style={{
-                  color: "lightgray",
-                  fontSize: "15px",
-                  fontWeight: 500,
-                }}
+                className="text-[lightgray] text-[15px] font-medium"
               >
                 ${(predictor.total_amount / 1000000).toFixed(2)}
               </p>
