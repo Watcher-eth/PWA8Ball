@@ -1,6 +1,5 @@
 // @ts-nocheck
 import Bet from "@/components/Predictions";
-import React from "react";
 import { useRouter } from "next/router";
 
 

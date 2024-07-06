@@ -1,8 +1,10 @@
 // @ts-nocheck
 
-import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+
+import { Users } from "lucide-react";
+import Link from "next/link";
 
 export const BetBigView = ({
   index,
@@ -91,8 +93,7 @@ export const BetBigView = ({
   );
 };
 
-import { Users } from "lucide-react";
-import Link from "next/link";
+
 
 export const BetSmallView = ({
   index,
@@ -151,7 +152,7 @@ export const BetSmallView = ({
   );
 };
 
-const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
+export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
   const total = yesValue + noValue;
   const yesPercentage = (yesValue / total) * 100;
   const noPercentage = (noValue / total) * 100;
@@ -187,7 +188,7 @@ const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
 
 const MAX_LENGTH = 11;
 
-const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) => {
+export const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) => {
   const total = yesValue.amount + noValue.amount;
   const yesPercentage = (yesValue.amount / total) * 100;
   const noPercentage = (noValue.amount / total) * 100;
@@ -243,4 +244,3 @@ const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) => {
   );
 };
 
-export { PollingComponent, PollingComponentImage };

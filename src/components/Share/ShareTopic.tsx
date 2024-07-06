@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-import React from "react";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 
 
