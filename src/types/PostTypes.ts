@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import { IUserWithBet } from "@/lib/drizzle/drizzle/supabase/queries/markets/getUsersForMarket";
-import { IUser } from "@/lib/drizzle/drizzle/supabase/types";
+import { IUser, IUserWithBet } from "@/lib/supabase/types";
 
 export type PostFeedType = {
   name: string;

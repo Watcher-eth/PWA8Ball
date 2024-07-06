@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { IComment } from "../getComments";
+import { IComment } from "../useGetAllCommentsForMarket";
 
 
 interface ICommentWithMarket extends IComment {

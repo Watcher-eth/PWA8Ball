@@ -1,13 +1,9 @@
 // @ts-nocheck
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
-import { IMarket } from "../types";
-import { rpcClient } from "@/lib/onchain/Viem";
-import {
-  EightBallAddress,
-  EightballV1ABI,
-} from "@/lib/onchain/contracts/Eightball";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IMarket } from "@/lib/supabase/types";
+
 export interface IMarketWithTopicDetails extends IMarket {
   // Extend your IMarket interface with additional properties that your function returns
   usdcStake: number;

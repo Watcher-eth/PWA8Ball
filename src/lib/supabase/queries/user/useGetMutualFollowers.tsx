@@ -1,6 +1,6 @@
 // @ts-nocheck
-
-import { supabase } from "../../supabaseClient";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchMutualFollowers = async (userXId: string, userYId: string) => {
   const response = await supabase.raw(
@@ -21,7 +21,7 @@ const fetchMutualFollowers = async (userXId: string, userYId: string) => {
 
   return response.data; // This will contain the list of up to 3 users
 };
-import { useQuery } from "@tanstack/react-query";
+
 
 export const useGetMutualFollowers = (userXId: string, userYId: string) => {
   return useQuery({

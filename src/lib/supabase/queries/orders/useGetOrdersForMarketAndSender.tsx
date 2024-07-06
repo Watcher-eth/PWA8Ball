@@ -1,4 +1,7 @@
 // @ts-nocheck
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
+
 export interface IOrder {
   id: number;
   sender: string;
@@ -6,9 +9,7 @@ export interface IOrder {
   price: number;
 }
 
-// fetchOrders.ts
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+
 
 const fetchOrdersForMarketAndSender = async (
   marketId: number, // Here marketId maps to 'id' in your table
@@ -28,11 +29,11 @@ const fetchOrdersForMarketAndSender = async (
   return data;
 };
 
-// useGetOrdersForMarketAndSender.ts
-export const useGetOrdersForMarketAndSender = (
+
+export function useGetOrdersForMarketAndSender(
   marketId: number,
   senderAddress: string
-) => {
+) {
   return useQuery<IOrder[], Error>({
     queryKey: ["orders", marketId, senderAddress],
     queryFn: () => fetchOrdersForMarketAndSender(marketId, senderAddress),

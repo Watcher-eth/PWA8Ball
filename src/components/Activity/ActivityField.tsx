@@ -27,6 +27,7 @@ export const ActivityField: React.FC<ActivityFieldProps> = ({
   option,
   onOpenBottomSheet,
 }) => {
+  console.log({option})
   const Option = parseOptionJSON(option);
   return (
     <motion.div

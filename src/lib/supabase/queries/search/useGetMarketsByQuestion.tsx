@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchMarketsByQuestion = async (searchString: string): Promise<any[]> => {
   const { data, error } = await supabase

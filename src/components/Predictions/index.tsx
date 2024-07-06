@@ -10,7 +10,7 @@ import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { motion } from "framer-motion";
 import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
+import { useGetMarketById } from "@/lib/supabase/queries/useGetMarketById";
 import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";

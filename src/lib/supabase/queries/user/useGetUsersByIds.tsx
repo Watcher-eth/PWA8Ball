@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { supabase } from "../../supabaseClient";
-import { IUser } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/lib/supabase/types";
 
 const fetchUsersByIds = async (userIds: string[]): Promise<IUser[]> => {
   const { data, error } = await supabase
@@ -16,10 +17,7 @@ const fetchUsersByIds = async (userIds: string[]): Promise<IUser[]> => {
   return data;
 };
 
-export default fetchUsersByIds;
 
-// useGetUsersByIds.ts
-import { useQuery } from "@tanstack/react-query";
 
 export const useGetUsersByIds = (userIds: string[]) => {
   return useQuery<IUser[], Error>({

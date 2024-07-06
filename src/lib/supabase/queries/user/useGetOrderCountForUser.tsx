@@ -1,6 +1,6 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchOrderCountForUser = async (userAddress: string) => {
   const { data, error } = await supabase.rpc("count_orders_by_user", {
@@ -15,7 +15,7 @@ const fetchOrderCountForUser = async (userAddress: string) => {
   return data;
 };
 
-export const useGetOrderCountForUser = (userAddress: string) => {
+export function useGetOrderCountForUser(userAddress: string) {
   return useQuery({
     queryKey: ["userOrderCount", userAddress],
     queryFn: () => fetchOrderCountForUser(userAddress),

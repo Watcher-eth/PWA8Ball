@@ -1,4 +1,6 @@
-// @ts-nocheck
+
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 export interface ILP {
   id: number;
   amount: number;
@@ -9,9 +11,7 @@ export interface ILP {
   title: string;
 }
 
-// useGetLPForUser.ts
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+
 
 const fetchLPForUser = async (userAddress: string): Promise<ILP[]> => {
   const { data, error } = await supabase.rpc("get_lp_by_user", {
@@ -26,7 +26,7 @@ const fetchLPForUser = async (userAddress: string): Promise<ILP[]> => {
   return data;
 };
 
-export const useGetLPForUser = (userAddress: string) => {
+export function useGetLPForUser(userAddress: string) {
   return useQuery({
     queryKey: ["userLP", userAddress],
     queryFn: () => fetchLPForUser(userAddress),

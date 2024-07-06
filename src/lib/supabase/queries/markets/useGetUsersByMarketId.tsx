@@ -1,19 +1,10 @@
 // @ts-nocheck
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
-
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUserWithBet } from "@/lib/supabase/types";
 // types.ts
-export interface IUserWithBet {
-  external_auth_provider_user_id: string;
-  name: string;
-  liquiditypoints: number;
-  rewardpoints: number;
-  pfp: string;
-  walletaddress: string;
-  amount: number; // Amount bet on the specific market
-  option: string; // Betting option chosen
-}
+
 
 const fetchUsersByMarketId = async (
   marketId: number

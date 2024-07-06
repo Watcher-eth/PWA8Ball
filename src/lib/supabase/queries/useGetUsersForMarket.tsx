@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchUsersForMarket = async (marketId: string): Promise<string[]> => {
   const { data, error } = await supabase
@@ -12,7 +12,7 @@ const fetchUsersForMarket = async (marketId: string): Promise<string[]> => {
   return data.map((entry) => entry.user_id);
 };
 
-export const useGetUsersForMarket = (marketId: string) => {
+export function useGetUsersForMarket(marketId: string) {
   return useQuery({
     queryKey: ["users", marketId],
     queryFn: () => fetchUsersForMarket(marketId),

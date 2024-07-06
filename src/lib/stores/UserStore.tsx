@@ -1,6 +1,6 @@
 // useUserStore.ts
 import { create } from "zustand";
-import { IUser } from "../supabase/mutations/updateUser";
+import { IUser } from "@/lib/supabase/types";
 
 
 interface ExtendedUser extends IUser {

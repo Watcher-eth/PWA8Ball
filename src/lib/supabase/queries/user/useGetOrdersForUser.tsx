@@ -1,4 +1,7 @@
 // @ts-nocheck
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
+
 export interface IOrder {
   id: number;
   sender: string;
@@ -16,9 +19,7 @@ export interface IOrderWithMarket extends IOrder {
   };
 }
 
-// useGetOrdersForUser.ts
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+
 
 const fetchOrdersForUser = async (userAddress: string) => {
   const { data, error } = await supabase.rpc("get_orders_with_market", {
@@ -33,7 +34,7 @@ const fetchOrdersForUser = async (userAddress: string) => {
   return data;
 };
 
-export const useGetOrdersForUser = (userAddress: string) => {
+export function useGetOrdersForUser(userAddress: string) {
   return useQuery({
     queryKey: ["userOrders", userAddress],
     queryFn: () => fetchOrdersForUser(userAddress),

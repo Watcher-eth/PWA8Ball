@@ -6,7 +6,7 @@ import { PenBox, UserMinus, UserPlus, UserRoundPlus } from "lucide-react";
 import { useFollowUser } from "@/lib/supabase/mutations/follow/useFollowUser";
 import { useUnfollowUser } from "@/lib/supabase/mutations/follow/useUnfollowUser";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useCheckIfFollowing } from "@/lib/supabase/queries/user/isFollowing";
+import { useCheckIfFollowing } from "@/lib/supabase/queries/user/useCheckIfFollowing";
 
 
 export const FollowButton = ({

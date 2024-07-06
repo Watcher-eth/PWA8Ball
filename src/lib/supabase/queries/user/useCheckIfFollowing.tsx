@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { supabase } from "../../supabaseClient";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const checkIfFollowing = async (followerId: string, followingId: string) => {
   const { data, error } = await supabase
@@ -18,12 +19,12 @@ const checkIfFollowing = async (followerId: string, followingId: string) => {
   return data !== null; // Return true if data exists, otherwise false
 };
 
-import { useQuery } from "@tanstack/react-query";
 
-export const useCheckIfFollowing = (
+
+export function useCheckIfFollowing(
   followerId: string,
   followingId: string
-) => {
+) {
   return useQuery({
     queryKey: ["isFollowing", followerId, followingId],
     queryFn: () => checkIfFollowing(followerId, followingId),

@@ -1,7 +1,7 @@
 // useGetUser.ts
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
-import { IUser } from "../types";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/lib/supabase/types";
 
 const fetchUser = async (userId: string): Promise<IUser> => {
   const { data, error } = await supabase
@@ -14,7 +14,7 @@ const fetchUser = async (userId: string): Promise<IUser> => {
   return data;
 };
 
-export const useGetUser = (userId: string) => {
+export function useGetUser(userId: string) {
   return useQuery({
     queryKey: ["user", userId],
     queryFn: () => fetchUser(userId),

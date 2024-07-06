@@ -1,22 +1,8 @@
 // @ts-nocheck
-interface IUser {
-  internal_id: string;
-  external_auth_provider_user_id: string;
-  liquiditypoints: number;
-  rewardpoints: number;
-  walletaddress: string;
-  socials: any; // Adjust according to the specific structure if known
-  friends: any; // Adjust according to the specific structure if known
-  created_at: string;
-  updated_at: string;
-  theme: string;
-  name: string;
-  pfp: string;
-}
-
-// useGetUserByExternalAuthId.ts
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/lib/supabase/types";
+
 
 const fetchUserByExternalAuthId = async (
   externalAuthId: string

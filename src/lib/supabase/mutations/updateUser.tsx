@@ -2,6 +2,7 @@
 import { Address } from "viem"
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/lib/supabase/types";
 
 interface UpdateUserArgs {
   userId: string;
@@ -9,21 +10,7 @@ interface UpdateUserArgs {
     walletaddress: Address;
   };
 }
-export interface IUser {
-  internal_id: string;
-  external_auth_provider_user_id: string;
-  liquiditypoints: number;
-  rewardpoints: number;
-  walletaddress: Address;
-  socials: object;
-  friends: object;
-  web_push_subscription: object;
-  created_at: Date;
-  updated_at: Date;
-  theme: string;
-  name: string; // Ensure these are included
-  pfp: string; // Ensure these are included
-}
+
 const updateUser = async ({
   userId,
   updates,

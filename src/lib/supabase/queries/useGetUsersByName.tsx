@@ -12,7 +12,7 @@ const fetchUsersByName = async (searchString: string): Promise<any[]> => {
   return data;
 };
 
-export const useGetUsersByName = (searchString: string) => {
+export function useGetUsersByName(searchString: string) {
   return useQuery({
     queryKey: ["usersByName", searchString],
     queryFn: () => fetchUsersByName(searchString),

@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/lib/supabase/types";
 
-export interface IUser {
-  internal_id: string;
-  external_auth_provider_user_id: string;
-  name: string;
-  pfp: string;
-}
 
 async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
   const { data, error } = await supabase

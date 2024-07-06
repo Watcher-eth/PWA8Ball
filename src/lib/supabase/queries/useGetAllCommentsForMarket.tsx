@@ -1,8 +1,10 @@
-import { supabase } from "../supabaseClient";
-interface IUser {
-  name: string;
-  pfp: string; // profile picture
-}
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { useQuery } from "@tanstack/react-query";
+import { IUser } from "@/lib/supabase/types";
+// interface IUser {
+//   name: string;
+//   pfp: string; // profile picture
+// }
 
 export interface IComment {
   id: string;
@@ -38,7 +40,7 @@ const fetchCommentsForMarket = async (
         total_replies,
         parent_id,
         created_by,
-        user:created_by ( 
+        user:created_by (
           name,
           pfp
         ),
@@ -97,9 +99,9 @@ const fetchCommentsForMarket = async (
   return commentsWithDetails.filter((comment: any) => !comment.parent_id);
 };
 
-export default fetchCommentsForMarket;
 
-import { useQuery } from "@tanstack/react-query";
+
+
 
 export const useGetAllCommentsForMarket = (
   marketId: number,

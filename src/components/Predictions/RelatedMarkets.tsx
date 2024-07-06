@@ -1,14 +1,11 @@
 // @ts-nocheck
 
 import React from "react";
-import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
-import { useGetRelatedMarkets } from "@/lib/supabase/queries/Reccomendations/RelatedMarkets";
+import { useGetRelatedMarkets } from "@/lib/supabase/queries/Reccomendations/useGetRelatedMarkets";
 import Link from "next/link";
 
-export const RelatedMarkets = (props: { topicId: string; id: number }) => {
-  const router = useRouter();
-  const { topicId, id } = props;
+export function RelatedMarkets({ topicId, id }: { topicId: string; id: number }) {
 
   // Get Markets from topic
   const { data: markets, error, isLoading } = useGetRelatedMarkets(topicId);
@@ -23,35 +20,36 @@ export const RelatedMarkets = (props: { topicId: string; id: number }) => {
         {markets?.map((item, index) => {
           if (index < 4 && item.id !== id)
             return (
-              <div
-                style={styles.marketItem}
+              <Link
+                href={{
+                  pathname: `/p/${item.id}`,
+                  query: {
+                    id: item.id,
+                  },
+                }}
                 key={index}
-                onClick={() =>
-                  router.push({
-                    pathname: `/p/${item.id}`,
-                    query: {
-                      id: item.id,
-                    },
-                  })
-                }
               >
-                <img
-                  style={styles.marketImage}
-                  src={item?.image}
-                  alt={item?.title}
-                />
-                <div style={styles.marketDetails} className="space-y-[-4px]">
-                  <span className="line-clamp-1	" style={styles.marketQuestion}>
-                    {item?.question}
-                  </span>
-                  <span style={styles.marketProbability}>
-                    {item?.currentprob ? item?.currentprob : item?.initialprob}%{" "}
-                    {item?.option === 0
-                      ? item?.options[item?.option + 1].name
-                      : item.options[item?.option - 1].name}
-                  </span>
+                <div
+                  style={styles.marketItem}
+                >
+                  <img
+                    style={styles.marketImage}
+                    src={item?.image}
+                    alt={item?.title}
+                  />
+                  <div style={styles.marketDetails} className="space-y-[-4px]">
+                    <span className="line-clamp-1	" style={styles.marketQuestion}>
+                      {item?.question}
+                    </span>
+                    <span style={styles.marketProbability}>
+                      {item?.currentprob ? item?.currentprob : item?.initialprob}%{" "}
+                      {item?.option === 0
+                        ? item?.options[item?.option + 1].name
+                        : item.options[item?.option - 1].name}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             );
         })}
 

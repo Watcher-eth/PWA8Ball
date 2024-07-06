@@ -1,6 +1,6 @@
 import React from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetOrderCountForUser } from "@/lib/supabase/queries/user/getTotalPredictions";
+import { useGetOrderCountForUser } from "@/lib/supabase/queries/user/useGetOrderCountForUser";
 
 export const YourStats: React.FC = () => {
   const { user } = useUserStore();
