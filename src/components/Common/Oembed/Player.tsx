@@ -1,21 +1,18 @@
 // @ts-nocheck
 
-import type { OG } from '../../../types/misc'
+import type { OG } from '@/types/misc'
 import type { FC } from 'react'
 
-interface PlayerProps {
-  og: OG
-}
 
-const Player: FC<PlayerProps> = ({ og }) => {
-  const width = '100%' // Adjust the width as needed
-  const height = '300px' // Adjust the height as needed
+export function Player({ og }: { og: OG }) {
+  const width = "100%"; // Adjust the width as needed
+  const height = "300px"; // Adjust the height as needed
 
   // Modify the og.html content to include width and height
   const modifiedHtml = og.html.replace(
     /<iframe /,
-    `<iframe width="${width}" height="${height}" `,
-  )
+    `<iframe width="${width}" height="${height}" `
+  );
 
   return (
     <div
@@ -27,7 +24,6 @@ const Player: FC<PlayerProps> = ({ og }) => {
         dangerouslySetInnerHTML={{ __html: modifiedHtml as string }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Player

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -17,9 +17,19 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import ProposeAnswer from "./Propose";
 import SubmitProof from "./Proof";
 import { RedeemOverview } from "./RedeemOverview";
-import { CashoutConfirmScrreen } from "../Cashout/confirm";
+import { CashoutConfirmScreen } from "../Cashout/CashoutConfirmScreen";
 
-export function RedeemModal(props: {
+export function RedeemModal({
+  text,
+  option,
+  multiplier,
+  image,
+  question,
+  options,
+  marketId,
+  odds,
+  handleOpen,
+}: {
   text: string;
   option: number;
   multiplier: number;
@@ -30,62 +40,36 @@ export function RedeemModal(props: {
   odds: number;
   handleOpen: () => void;
 }) {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
 
   const { user } = useUserStore();
+
   return (
     <div>
       <Drawer>
         <DrawerTrigger>
           <motion.div
             onClick={() => {
-              if (!user?.walletaddress) props.handleOpen();
+              if (!user?.walletaddress) {
+                handleOpen();
+              }
             }}
             whileTap={{ scale: 0.93 }}
-            className="mt-[1rem]"
+            className="mt-4"
           >
-            {props?.option === 0 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {props?.text}{" "}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+            {option === 0 && (
+              <RedeemOptionButton
+                className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050]"
+                text={text}
+                multiplier={multiplier}
+              />
             )}
-            {props?.option === 1 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {" "}
-                    {props?.text}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+            {option === 1 && (
+              <RedeemOptionButton
+                className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF]"
+                text={text}
+                multiplier={multiplier}
+              />
             )}
           </motion.div>
         </DrawerTrigger>
@@ -93,15 +77,47 @@ export function RedeemModal(props: {
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#131313] rounded-3xl   w-[100vw] relative"
+            className="bg-[#131313] rounded-3xl w-[100vw] relative"
           >
             <AnimatePresence>
               {step === 1 && <RedeemOverview />}
-              {step === 2 && <CashoutConfirmScrreen />}
+              {step === 2 && <CashoutConfirmScreen />}
             </AnimatePresence>
           </motion.div>
         </DrawerContent>
       </Drawer>
     </div>
+  );
+}
+
+
+function RedeemOptionButton({ text, multiplier, className }: {
+  text: string,
+  multiplier: number,
+  className: string
+}) {
+  return (
+    <motion.div whileTap={{ scale: 0.95 }}>
+      <Button
+        className={`
+        text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]
+        ${className}
+      `}
+      >
+        <div
+          className={text?.length < 6 ? "text-[22px]" : "text-[18px]"}
+        >
+          {text}{" "}
+        </div>
+        <div
+          className={`
+            ml-1 mb-0.5 text-[0.81rem] text-[rgba(250,250,250,0.8)]
+            font-medium
+          `}
+        >
+          {multiplier}%
+        </div>
+      </Button>
+    </motion.div>
   );
 }

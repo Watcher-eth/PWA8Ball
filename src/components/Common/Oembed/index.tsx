@@ -1,19 +1,18 @@
-import type { OG } from "../../../types/misc";
+
+import type { OG } from "@/types/misc";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import type { FC } from "react";
+
 import urlcat from "urlcat";
 
-import Embed from "./Embed";
-import Player from "./Player";
+import { Embed } from "./Embed";
+import { Player } from "./Player";
 
-interface OembedProps {
+export function Oembed({ url, publicationId, onData }: {
   url?: string;
   publicationId?: string;
   onData: (data: OG) => void;
-}
-
-const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
+}) {
   const { data, error, isLoading } = useQuery({
     enabled: Boolean(url),
     queryFn: async () => {
@@ -55,4 +54,4 @@ const Oembed: FC<OembedProps> = ({ url, publicationId, onData }) => {
   );
 };
 
-export default Oembed;
+

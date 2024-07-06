@@ -1,7 +1,7 @@
-// import Oembed from "../Oembed";
-// import getURLs from "../../../utils/getUrls";
-// import removeUrlAtEnd from "../../../utils/removeUrlAtEnd";
-// import type { OG } from "../../../types/misc";
+// import { Oembed } from "../Oembed";
+// import getURLs from "@/utils/getUrls";
+// import removeUrlAtEnd from "@/utils/removeUrlAtEnd";
+// import type { OG } from "@/types/misc";
 
 // import Link from "next/link";
 // import type { FC } from "react";

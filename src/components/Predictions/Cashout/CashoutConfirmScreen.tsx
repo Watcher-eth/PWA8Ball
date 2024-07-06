@@ -21,7 +21,7 @@ interface RemoveLPConfirmationScreenProps {
   options: [];
 }
 
-export const CashoutConfirmScrreen: React.FC<RemoveLPConfirmationScreenProps> = (
+export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
   props
 ) => {
   const { onClose } = props;

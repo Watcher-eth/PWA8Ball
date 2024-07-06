@@ -1,7 +1,6 @@
 // @ts-nocheck
-
 import "@/styles/fonts.css";
-import type { FC } from "react";
+
 import { imageKit } from "@/utils/imageKit";
 
 import type { OG } from "@/types/misc";
@@ -9,12 +8,8 @@ import type { OG } from "@/types/misc";
 import Link from "next/link";
 
 
-interface EmbedProps {
-  og: OG;
-  publicationId?: string;
-}
 
-const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
+export function Embed({ og, publicationId }: { og: OG; publicationId?: string }) {
   return (
     <div
       className="mt-4 text-sm sm:w-4/6 rounded-xl"
@@ -30,7 +25,7 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
         rel="noreferrer noopener"
       >
         <div className="rounded-xl py-1 flex">
-          {(og.isLarge && og.image) && (
+          {og.isLarge && og.image && (
             <img
               className="size-[144px] divider aspect-2 w-full rounded-t-xl object-cover"
               onError={({ currentTarget }) => {
@@ -43,7 +38,7 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
             />
           )}
           <div className="flex max-w-[85vw]  items-center rounded-xl bg-white py-2  shadow-md">
-            {(!og.isLarge && og.image) && (
+            {!og.isLarge && og.image && (
               <div className="truncate w-full  p-5  bg-white   rounded-l-xl    p-4 px-8">
                 <div className="space-y-1  ml-[-0.9rem]">
                   {og.title && (
@@ -76,7 +71,7 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
                 </div>
               </div>
             )}
-            {(!og.isLarge && og.image) && (
+            {!og.isLarge && og.image && (
               <img
                 className=" size-[35vw] mr-3 rounded-lg border-r shadow-xl dark:border-gray-700"
                 height={144}
@@ -135,4 +130,3 @@ const Embed: FC<EmbedProps> = ({ og, publicationId }) => {
   );
 };
 
-export default Embed;

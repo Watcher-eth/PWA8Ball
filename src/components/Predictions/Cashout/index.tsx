@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { CashoutOverview } from "./overview";
 import CashOutWarningScreen from "./warning";
-import { CashoutConfirmScrreen } from "./confirm";
+import { CashoutConfirmScreen } from "./CashoutConfirmScreen";
 
 export function CashoutModal(props: {
   text: string;
@@ -95,7 +95,7 @@ export function CashoutModal(props: {
               {step === 1 && <CashoutOverview />}
               {step === 2 && <CashOutWarningScreen />}
               {step === 3 && (
-                <CashoutConfirmScrreen
+                <CashoutConfirmScreen
                   option={props?.option}
                   options={props?.options}
                   image={props?.image}
