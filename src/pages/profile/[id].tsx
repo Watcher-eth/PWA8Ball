@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { AnimatePresence, motion } from "framer-motion";
+
 import {
   Pencil,
   EllipsisVertical,
@@ -15,13 +15,14 @@ import {
 } from "lucide-react";
 
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/getUserById";
-import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { useGetTotalFollowers } from "@/lib/supabase/queries/user/getTotalFollowers";
+import { useUserBalance } from "@/lib/hooks/useUserBalance";
 
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 
 import { AltSkeleton } from "@/components/ui/skeleton";
+
 
 
 
@@ -45,21 +46,12 @@ export default function ProfilePage({
 
   const [edit, setEdit] = useState<boolean>(false);
   const { data: totalFollowers } = useGetTotalFollowers(userID);
-  const { data: userC, isLoading } = useGetUserByExternalAuthId(userID);
-  const [balanceLoading, setBalanceLoading] = useState(true);
-  const [userCBalance, setUserBalance] = useState(0);
+  const { data: userC } = useGetUserByExternalAuthId(userID);
 
-  async function getUserBalances() {
-    const balance = await getUSDCBalance(userC?.walletaddress);
-    setBalanceLoading(false);
-    setUserBalance(Number(balance));
+  const { balance, isLoading } = useUserBalance({
+    userAddress: userC?.walletaddress,
+  });
 
-    return balance;
-  }
-
-  useEffect(() => {
-    const balance = getUserBalances();
-  }, []);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
@@ -116,13 +108,13 @@ export default function ProfilePage({
             </div>
           ) : null}
           <div className="font-medium flex items-center mt-2">
-            {balanceLoading ? (
+            {isLoading ? (
               <div className="mr-[7px]">
                 <AltSkeleton className="h-[33px] w-[75px]" />
               </div>
             ) : (
               <p className="text-gray-100 text-sm bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl">
-                ${userCBalance.toFixed(2)}
+                ${balance.toFixed(2)}
               </p>
             )}
             <p className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2 font-medium">

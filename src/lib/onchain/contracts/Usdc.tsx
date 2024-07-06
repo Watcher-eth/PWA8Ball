@@ -5,6 +5,7 @@ import {
   custom,
   getContract,
   http,
+  Address
 } from "viem";
 import { baseGoerli } from "viem/chains";
 import { getWalletClient, rpcClient } from "../Viem";
@@ -126,7 +127,7 @@ export async function getUSDCContract(walletClient: WalletClient) {
   return contract;
 }
 
-export async function getUSDCBalance(address: `0x${string}`) {
+export async function getUSDCBalance(address: Address) {
   const balance = await rpcClient.readContract({
     address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
     abi: UsdcABI,
