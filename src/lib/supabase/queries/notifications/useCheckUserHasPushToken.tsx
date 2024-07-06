@@ -1,8 +1,8 @@
 // @ts-nocheck
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-import { supabase } from "../../supabaseClient";
-
-const checkUserHasPushToken = async (userId: string): Promise<boolean> => {
+async function checkUserHasPushToken(userId: string): Promise<boolean> {
   const { data, error, count } = await supabase
     .from("push_tokens")
     .select("id", { count: "exact" }) // Using count to get the number of entries
@@ -12,9 +12,9 @@ const checkUserHasPushToken = async (userId: string): Promise<boolean> => {
   return count > 0; // Returns true if there's at least one token, false otherwise
 };
 
-import { useQuery } from "@tanstack/react-query";
 
-export const useCheckUserHasPushToken = (userId: string) => {
+
+export function useCheckUserHasPushToken(userId: string) {
   return useQuery({
     queryKey: ["userPushToken", userId],
     queryFn: () => checkUserHasPushToken(userId),

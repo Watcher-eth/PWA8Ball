@@ -9,7 +9,7 @@ import { VotingModal } from "../Modals/BuyVotes/VotingModal";
 import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { motion } from "framer-motion";
-import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
+import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/useGetUsersByMarketId";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";

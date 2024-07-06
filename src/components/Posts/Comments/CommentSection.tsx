@@ -6,7 +6,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { Comment } from "./Comment";
 import { BetComment } from "@/types/PostTypes";
 import { useGetAllCommentsForMarket } from "@/lib/supabase/queries/getComments";
-import { IUserWithBet } from "@/lib/supabase/queries/markets/getUsersForMarket";
+import { IUserWithBet } from "@/lib/supabase/queries/markets/useGetUsersByMarketId";
 import { NewPlaceholderComment } from "@/components/Common/Placeholders/NewPlaceholders";
 
 

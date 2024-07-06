@@ -1,7 +1,7 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
-import { IMarket } from "../../types";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IMarket } from "@/lib/supabase/types";
 
 interface IMarketWithTopicDetails extends IMarket {
   // Extend your IMarket interface with additional properties that your function returns

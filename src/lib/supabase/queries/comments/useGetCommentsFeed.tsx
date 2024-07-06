@@ -7,7 +7,7 @@ interface ICommentWithMarket extends IComment {
   market_image: string;
 }
 
-const fetchCommentsForTopic = async (): Promise<ICommentWithMarket[]> => {
+async function fetchCommentsForTopic(): Promise<ICommentWithMarket[]> {
   const { data, error } = await supabase
     .from("comments")
     .select(
@@ -42,7 +42,7 @@ const fetchCommentsForTopic = async (): Promise<ICommentWithMarket[]> => {
   }));
 };
 
-export const useGetCommentsFeed = () => {
+export function useGetCommentsFeed() {
   return useQuery({
     queryKey: ["commentsForTopic"],
     queryFn: () => fetchCommentsForTopic(),

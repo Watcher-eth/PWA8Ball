@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 // Function to fetch the leaderboard for a specific topic
 const fetchLeaderboardForTopic = async (topicId: string) => {
@@ -16,7 +16,7 @@ const fetchLeaderboardForTopic = async (topicId: string) => {
 };
 
 // Hook to use the leaderboard data
-export const useGetLeaderboardForTopic = (topicId: string) => {
+export function useGetLeaderboardForTopic(topicId: string) {
   return useQuery({
     queryKey: ["leaderboardForTopic", topicId],
     queryFn: () => fetchLeaderboardForTopic(topicId),

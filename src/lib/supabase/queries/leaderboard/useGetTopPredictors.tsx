@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchTopPredictors = async () => {
   const { data, error } = await supabase.rpc("fetch_top_predictors");
@@ -12,7 +12,7 @@ const fetchTopPredictors = async () => {
   return data;
 };
 
-export const useGetTopPredictors = () => {
+export function useGetTopPredictors() {
   return useQuery({
     queryKey: ["topPredictors"],
     queryFn: fetchTopPredictors,

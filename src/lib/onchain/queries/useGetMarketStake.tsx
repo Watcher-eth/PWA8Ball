@@ -7,7 +7,7 @@ import {
   getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
-import { useUpdateUSDCBalance } from "@/lib/supabase/mutations/updateMarketBalance";
+import { useUpdateUSDCBalance } from "@/lib/supabase/mutations/useUpdateUSDCBalance";
 
 export const useGetMarketStake = (marketId: string) => {
   const { mutate: updateUSDCBalance } = useUpdateUSDCBalance();

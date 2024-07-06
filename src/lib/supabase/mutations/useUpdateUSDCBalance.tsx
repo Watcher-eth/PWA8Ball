@@ -2,15 +2,15 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/supabaseClient";
 
-interface UpdateUSDCBalanceArgs {
-  marketId: number;
-  usdcBalance: number; // New type and parameter for updating the USDC balance
-}
 
-const updateUSDCBalance = async ({
+
+async function updateUSDCBalance({
   marketId,
   usdcBalance,
-}: UpdateUSDCBalanceArgs) => {
+}: {
+  marketId: number;
+  usdcBalance: number; // New type and parameter for updating the USDC balance
+}) {
   const { data, error } = await supabase
     .from("markets") // Assuming your table is named 'markets'
     .update({ USDC_Balance: usdcBalance }) // updating USDC_Balance
@@ -24,7 +24,7 @@ const updateUSDCBalance = async ({
   return data;
 };
 
-export const useUpdateUSDCBalance = () => {
+export function useUpdateUSDCBalance() {
   return useMutation({
     mutationFn: updateUSDCBalance,
   });

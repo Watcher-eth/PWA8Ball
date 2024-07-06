@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { registerForPushNotificationsAsync } from "@/lib/hooks/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/getNotificationsForUser";
-import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/getUserPushToken";
+import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/useGetNotificationsForUser";
+import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/useCheckUserHasPushToken";
 import React from "react";
 import { NotificationsPage } from "./UserNotifications";
 

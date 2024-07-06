@@ -15,7 +15,7 @@ import { ArrowLeft, Share } from "lucide-react";
 import { ShareModal } from "../Modals/ShareModal";
 import { VotingModal } from "../Modals/BuyVotes/VotingModal";
 
-import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/getUsersForMarket";
+import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/useGetUsersByMarketId";
 import { useGetMarketById } from "@/lib/supabase/queries/fetchMarketForId";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";

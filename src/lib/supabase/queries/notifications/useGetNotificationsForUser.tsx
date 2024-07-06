@@ -1,8 +1,8 @@
 // @ts-nocheck
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
-import { supabase } from "../../supabaseClient";
-
-const fetchNotificationsForUser = async (userId: string) => {
+async function fetchNotificationsForUser(userId: string) {
   const { data, error } = await supabase
     .from("notifications")
     .select("*")
@@ -15,9 +15,9 @@ const fetchNotificationsForUser = async (userId: string) => {
   return data;
 };
 
-import { useQuery } from "@tanstack/react-query";
 
-export const useGetNotificationsForUser = (userId: string) => {
+
+export function useGetNotificationsForUser(userId: string) {
   return useQuery({
     queryKey: ["notifications", userId],
     queryFn: () => fetchNotificationsForUser(userId),

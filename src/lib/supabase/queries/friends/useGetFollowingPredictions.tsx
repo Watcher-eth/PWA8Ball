@@ -1,6 +1,6 @@
 // @ts-nocheck
-
-import { supabase } from "../../supabaseClient";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchFollowingIds = async (userId: string) => {
   const { data, error } = await supabase
@@ -50,9 +50,9 @@ const fetchPredictionsByFollowing = async (followingIds) => {
   return data;
 };
 
-import { useQuery } from "@tanstack/react-query";
 
-export const useGetFollowingPredictions = (userId: string) => {
+
+export function useGetFollowingPredictions(userId: string) {
   return useQuery({
     queryKey: ["followingPredictions", userId],
     queryFn: async () => {

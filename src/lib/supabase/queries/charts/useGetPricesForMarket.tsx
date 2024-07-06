@@ -1,4 +1,5 @@
-import { supabase } from "../../supabaseClient";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchPricesForMarket = async (
   marketId: string,
@@ -41,9 +42,7 @@ const fetchPricesForMarket = async (
   return data;
 };
 
-import { useQuery } from "@tanstack/react-query";
-
-export const useGetPricesForMarket = (marketId: string, timespan: string) => {
+export function useGetPricesForMarket(marketId: string, timespan: string) {
   return useQuery({
     queryKey: ["marketPrices", marketId, timespan],
     queryFn: () => fetchPricesForMarket(marketId, timespan),

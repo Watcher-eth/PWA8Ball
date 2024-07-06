@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/fetchTopUsersByPredictionAmount";
+import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/useGetTopPredictors";
 import Link from "next/link";
 import { AltSkeleton } from "@/components/ui/skeleton";
 
