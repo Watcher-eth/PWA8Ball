@@ -15,7 +15,7 @@ import {
 import { WalletClient, Address } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
-import { rootOperator } from "@/constants/_operations";
+import { rootOperator } from "@/constants/operations";
 import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
 interface PredictParams {
   amount: number;

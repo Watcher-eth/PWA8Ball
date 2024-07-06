@@ -15,7 +15,7 @@ import { rpcClient } from "../Viem";
 
 import { createPrediction } from "@/lib/supabase/mutations/addPrediction";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { rootOperator } from "@/constants/_operations";
+import { rootOperator } from "@/constants/operations";
 
 interface PredictParams {
   amount: number;

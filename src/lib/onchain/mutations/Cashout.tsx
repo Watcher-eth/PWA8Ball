@@ -19,7 +19,7 @@ import {
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
-import { rootOperator } from "@/constants/_operations";
+import { rootOperator } from "@/constants/operations";
 interface CashoutParams {
   preferYes: boolean;
   option: string;
