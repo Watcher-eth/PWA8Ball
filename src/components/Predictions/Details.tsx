@@ -125,11 +125,12 @@ export const BetDetails = ({
           </Link>
           <Link href={linkArgs}>
             <motion.div
-              className={`flex items-center justify-center px-5 py-2 border  border-[#212121] rounded-md ${
-                joined ? "bg-white" : "bg-transparent"
-              }`}
+              className={`
+                flex items-center justify-center px-5 py-2
+                border  border-[#212121] rounded-[20px]
+                ${ joined ? "bg-white" : "bg-transparent"}
+              `}
               whileTap={{ scale: 0.95 }}
-              style={{ borderRadius: 20 }}
             >
               <Link href={linkArgs}>
                 <span

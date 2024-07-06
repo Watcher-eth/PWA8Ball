@@ -6,8 +6,14 @@ export type CardType = {
   topic: string;
   image: string;
   icon: string;
-  optionA: { multiplier: number; name: string; odds: number };
-  optionB: { multiplier: number; name: string; odds: number };
+  optionA: OptionType;
+  optionB: OptionType;
+};
+
+export type OptionType = {
+  multiplier: number;
+  name: string;
+  odds: number
 };
 
 export type BetType = {
@@ -26,7 +32,7 @@ export type ShareBetType = {
   question: string;
   image: string;
   title: string;
-  options: [];
+  options: OptionType[];
 };
 
 export type ShareTopicType = {
