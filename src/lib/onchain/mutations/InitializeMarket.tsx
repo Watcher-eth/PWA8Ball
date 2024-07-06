@@ -14,7 +14,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { rootOperator } from "../../../../constants/Operations";
+import { rootOperator } from "@/constants/Operations";
 import { createMarket } from "@/lib/supabase/mutations/createMarket";
 
 interface initializeMarketTypes {

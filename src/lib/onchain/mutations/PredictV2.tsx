@@ -8,14 +8,15 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-
+import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
-import { UsdcABI } from "../contracts/Usdc";
-import { SmartAccountClient } from "permissionless";
+
+
 import { createPrediction } from "@/lib/supabase/mutations/addPrediction";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { rootOperator } from "../../../../constants/Operations";
+import { rootOperator } from "@/constants/Operations";
+
 interface PredictParams {
   amount: number;
   preferYes: boolean;
