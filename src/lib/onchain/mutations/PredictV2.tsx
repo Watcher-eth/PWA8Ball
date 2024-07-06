@@ -9,7 +9,7 @@ import {
   getEightBallContract,
 } from "../contracts/Eightball";
 
-import { WalletClient, getContract } from "viem";
+import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
 import { SmartAccountClient } from "permissionless";
@@ -24,7 +24,7 @@ interface PredictParams {
   marketId: number;
   userId: string;
   client: SmartAccountClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function predict(props: PredictParams) {
@@ -40,7 +40,7 @@ async function predict(props: PredictParams) {
     const account = props.address;
 
     const preferYesNum = props.preferYes ? 1 : 0;
-console.log("props2", props.address, props.client  )
+    console.log("props2", props.address, props.client  )
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,

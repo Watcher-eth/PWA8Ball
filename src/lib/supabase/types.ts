@@ -1,10 +1,11 @@
+import type { Address } from "viem"
 // types.ts
 export interface IUser {
   internal_id: string;
   external_auth_provider_user_id: string;
   liquiditypoints: number;
   rewardpoints: number;
-  walletaddress?: string;
+  walletaddress?: Address; // Walet address should be, you know, and address
   socials: any; // Consider making this more specific if possible
   friends: any; // Same here
   web_push_subscription?: any; // And here

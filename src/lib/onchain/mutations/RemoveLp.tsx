@@ -1,15 +1,14 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
-import { ethers } from "ethers";
+
 import {
   EightBallAddress,
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
-import { WalletClient, getContract } from "viem";
+import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { V2PairV1ABI } from "../contracts/V2Pair";
 import {
@@ -21,7 +20,7 @@ interface boostMarket {
   userId: string;
   marketId: number;
   client: SmartAccountClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function removeLp(props: boostMarket) {

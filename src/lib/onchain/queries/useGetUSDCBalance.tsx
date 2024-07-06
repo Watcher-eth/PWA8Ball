@@ -1,8 +1,8 @@
 // hooks/useUSDCBalance.js
 import { useQuery } from "@tanstack/react-query";
 import { getUSDCBalance } from "../contracts/Usdc";
-
-export const useUSDCBalance = (address: `0x${string}`) => {
+import type { Address } from "viem"
+export const useUSDCBalance = (address: Address) => {
   return useQuery({
     queryKey: ["usdcBalance", address],
     queryFn: () => getUSDCBalance(address),
@@ -10,3 +10,5 @@ export const useUSDCBalance = (address: `0x${string}`) => {
     enabled: !!address, // Only run the query if the address is provided
   });
 };
+
+//`0x${string}`

@@ -7,17 +7,17 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { WalletClient, getContract } from "viem";
+import { WalletClient, getContract, Address } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { supabase } from "@/lib/supabase/supabaseClient";
 interface RedeemParams {
   marketId: number;
-  outcomeTokenAddress: `0x${string}`;
+  outcomeTokenAddress: Address;
   userId: string;
   client: WalletClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function cashoutPrediction(props: RedeemParams) {

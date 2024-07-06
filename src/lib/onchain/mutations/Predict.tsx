@@ -12,7 +12,7 @@ import {
   createPrediction,
   useCreatePrediction,
 } from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
-import { WalletClient } from "viem";
+import { WalletClient, Address } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
 import { rootOperator } from "@/constants/Operations";
@@ -25,7 +25,7 @@ interface PredictParams {
   marketId: number;
   userId: string;
   client: WalletClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function predict(props: PredictParams) {

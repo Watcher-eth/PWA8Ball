@@ -138,7 +138,7 @@ export async function getUSDCBalance(address: Address) {
 }
 
 export async function setUSDCBalance(
-  address: `0x${string}`,
+  address: Address,
   client: WalletClient
 ) {
   const account = address;

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import {
+  type Address,
   createPublicClient,
   createWalletClient,
   custom,
@@ -40,7 +41,7 @@ interface SmartAccountInterface {
   /** Smart account client to send signature/transaction requests to the smart account */
   smartAccountClient: SmartAccountClient | undefined;
   /** Smart account address */
-  smartAccountAddress: `0x${string}` | undefined;
+  smartAccountAddress?: Address;
   /** Boolean to indicate whether the smart account state has initialized */
   smartAccountReady: boolean;
 }
@@ -71,9 +72,7 @@ export const SmartAccountProvider = ({
   const [smartAccountClient, setSmartAccountClient] = useState<
     SmartAccountClient | undefined
   >();
-  const [smartAccountAddress, setSmartAccountAddress] = useState<
-    `0x${string}` | undefined
-  >();
+  const [smartAccountAddress, setSmartAccountAddress] = useState<Address>();
   const [smartAccountReady, setSmartAccountReady] = useState(false);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export const SmartAccountProvider = ({
       setEoa(eoa);
       // Get an EIP1193 provider and viem WalletClient for the EOA
       const privyClient = createWalletClient({
-        account: embeddedWallet?.address as `0x${string}`,
+        account: embeddedWallet?.address,
         chain: baseSepolia,
         transport: custom(eip1193provider),
       });
@@ -161,7 +160,7 @@ export const SmartAccountProvider = ({
 
           const hash = await contract.write.approve([
             EightBallAddress,
-            BigInt(10000000000),
+            10000000000n,
           ]);
           console.log("hash", hash);
         } catch (error) {

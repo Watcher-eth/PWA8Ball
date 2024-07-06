@@ -1,15 +1,14 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
-import { ethers } from "ethers";
+
 import {
   EightBallAddress,
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
-import { WalletClient, getContract } from "viem";
+import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { addLiquidityBoost } from "@/lib/supabase/mutations/addBoost";
 import { supabase } from "@/lib/supabase/supabaseClient";
@@ -19,7 +18,7 @@ interface boostMarket {
   userId: string;
   marketId: number;
   client: SmartAccountClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function boostV2(props: boostMarket) {

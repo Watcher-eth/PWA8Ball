@@ -9,7 +9,7 @@ import {
   getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "../Viem";
-import { WalletClient } from "viem";
+import { Address, WalletClient } from "viem";
 import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
@@ -25,7 +25,7 @@ interface initializeMarketTypes {
   topicId: string;
   image: string;
   client: WalletClient;
-  address: `0x${string}`;
+  address: Address;
   created_by: string;
   initialPron: number;
 }
@@ -107,7 +107,7 @@ async function initialize(props: initializeMarketTypes) {
         pair: marketPair.liquidityPool,
         created_by: props.created_by,
       });
-      
+
     }, 1000);
   } catch (error) {
     console.error("Error during market initialization", error);

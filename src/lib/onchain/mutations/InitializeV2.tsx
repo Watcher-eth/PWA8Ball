@@ -26,7 +26,7 @@ interface initializeMarketTypes {
   topicId: string;
   image: string;
   client: SmartAccountClient;
-  address: `0x${string}`;
+  address: Address;
   created_by: string;
   initialProb: number;
 }
@@ -94,7 +94,7 @@ async function initialize(props: initializeMarketTypes) {
         pair: marketPair.liquidityPool,
         created_by: props.created_by,
       });
-    
+
     }, 1000);
   } catch (error) {
     console.error("Error during market initialization", error);

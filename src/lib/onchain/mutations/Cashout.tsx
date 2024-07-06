@@ -3,7 +3,6 @@
 import "fast-text-encoding";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
-import { ethers } from "ethers";
 
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -11,7 +10,7 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { WalletClient, getContract } from "viem";
+import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
 import { UsdcABI } from "../contracts/Usdc";
 import { SmartAccountClient } from "permissionless";
@@ -27,7 +26,7 @@ interface CashoutParams {
   marketId: number;
   userId: string;
   client: SmartAccountClient;
-  address: `0x${string}`;
+  address: Address;
 }
 
 async function cashoutPrediction(props: CashoutParams) {
@@ -47,7 +46,7 @@ async function cashoutPrediction(props: CashoutParams) {
       args: [currentPairId],
       functionName: "getMarketPair",
     });
-    
+
     const tokenAddy = props.preferYes
       ? marketPair.yesToken
       : marketPair.noToken;
