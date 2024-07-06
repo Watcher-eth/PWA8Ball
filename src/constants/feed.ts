@@ -1,6 +1,6 @@
 import { CardType } from "@/types/FeedTypes";
 
-export const feedData: CardType[] = [
+export const TEST_FEED_DATA: CardType[] = [
   {
     name: "100k MAUs",
     description: "Will Farcaster reach 100K MAU’s before the end of Q2 2024?",
@@ -52,4 +52,4 @@ export const feedData: CardType[] = [
     optionA: { multiplier: 3.4, name: "No", odds: 0.66 },
     optionB: { multiplier: 1.15, name: "Yes", odds: 0.34 },
   },
-];
+] as const;
