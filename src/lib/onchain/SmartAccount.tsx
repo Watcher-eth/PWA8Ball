@@ -25,7 +25,7 @@ import {
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico";
 
-import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
+import { USDC_ADDRESS, USDC_ABI, getUSDCContract } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
@@ -77,6 +77,8 @@ export const SmartAccountProvider = ({
   const [smartAccountReady, setSmartAccountReady] = useState(false);
 
   async function createSmartWallet(eoa: ConnectedWallet) {
+    // Creates a smart account given a Privy `ConnectedWallet` object representing
+    // the  user's EOA.
     const eip1193provider = await embeddedWallet.getEthereumProvider();
 
     setEoa(eoa);
@@ -130,11 +132,8 @@ export const SmartAccountProvider = ({
       chain: baseSepolia, // Replace this with the chain for your app
     });
     console.log("Step 2.5", smartAccountClient);
-
-    const smartAccountAddress = smartAccountClient.account?.address;
     const account = smartAccountClient.account?.address;
-    console.log("Step 3", smartAccountAddress);
-    const gas = (await pimlicoBundlerClient.getUserOperationGasPrice()).fast;
+    console.log("Step 3", account);
     const allowance = await publicClient.readContract({
       address: USDC_ADDRESS,
       abi: USDC_ABI,
@@ -165,16 +164,14 @@ export const SmartAccountProvider = ({
     }
 
     setSmartAccountClient(smartAccountClient);
-    setSmartAccountAddress(smartAccountAddress);
+    setSmartAccountAddress(account);
     setSmartAccountReady(true);
   };
 
   useEffect(() => {
-    // Creates a smart account given a Privy `ConnectedWallet` object representing
-    // the  user's EOA.
-
-
-    if (embeddedWallet) createSmartWallet(embeddedWallet);
+    if (embeddedWallet) {
+      createSmartWallet(embeddedWallet);
+    }
   }, [embeddedWallet?.address, embeddedWallet]);
 
   return (
