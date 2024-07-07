@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { TypewriterEffectSmooth } from "./Animated/AnimatedText";
+import { TypewriterEffectSmooth } from "./Animated/TypewriterEffect";
 import { motion } from "framer-motion";
 
 import { isMobile } from "@/utils/isMobile";
@@ -49,7 +49,7 @@ export function MobileOnly() {
       className: "text-[#212121] dark:white text-[1.1rem]",
     },
     {
-      text: "destionation",
+      text: "destination",
       className: "text-[#212121] dark:white text-[1.1rem]",
     },
   ];
