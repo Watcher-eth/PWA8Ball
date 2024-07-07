@@ -12,7 +12,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useAuthModalStore } from "@/lib/stores/ModalStore";
 import { ACTIVITY_PATH, HOME_PATH, getProfilePath } from "@/utils/urls";
 
-function NavBar() {
+export function NavBar() {
   const { user } = useUserStore();
   const { isLoginModalOpen, openLoginModal, closeLoginModal } =
     useAuthModalStore();
@@ -61,5 +61,3 @@ function NavBar() {
     </div>
   );
 }
-
-export default NavBar;

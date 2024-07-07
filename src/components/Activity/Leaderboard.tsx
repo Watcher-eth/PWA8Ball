@@ -1,22 +1,26 @@
 // @ts-nocheck
-
-import React from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
 import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/useGetTopPredictors";
 import Link from "next/link";
+import { getProfilePath } from "@/utils/urls";
+
 import { AltSkeleton } from "@/components/ui/Skeleton";
+
+
 
 export const Leaderboard: React.FC = () => {
   const { data: topPredictors, error, isLoading } = useGetTopPredictors();
-  const router = useRouter();
 
   if (isLoading) {
     return <LoadingSkeleton />;
   }
 
   if (error) {
-    return <p style={{ color: "white" }}>An error occurred: {error.message}</p>;
+    return (
+      <p className="text-white">
+        An error occurred: {error.message}
+      </p>
+    );
   }
 
   return (
@@ -32,7 +36,7 @@ export const Leaderboard: React.FC = () => {
           <h2 className="text-white text-[15px] font-bold">At stake</h2>
         </div>
         {topPredictors?.map((predictor, index) => (
-          <Link href={`/profile/${predictor.user_id}`}>
+          <Link href={getProfilePath(predictor.user_id)}>
             <motion.button
               key={index}
               className="flex flex-row items-center justify-between my-1.5"

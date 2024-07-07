@@ -6,21 +6,33 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
 
-import Layout from "@/components/Common/Layout";
+import { Layout } from "@/components/Common/Layout";
 import { Toaster } from "@/components/ui/Toaster";
 import { PrivyProvider } from "@privy-io/react-auth";
 import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 
-import amplitude from "amplitude-js";
 import { useServiceWorker } from "@/lib/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
 import { withDeviceCheck} from "@/components/Common/MobileOnly";
-import MobileOnlyModal from "@/components/Modals/MobileOnlyModal";
+
 
 export const queryClient = new QueryClient();
+
+const PRIVY_CONFIG = {
+  loginMethods: ["email", "wallet", "google", "farcaster"],
+  appearance: {
+    theme: "dark",
+    accentColor: "#0050FF",
+    logo: "https://your-logo-url",
+  },
+  embeddedWallets: {
+    createOnLogin: "users-without-wallets",
+    noPromptOnSignature: true,
+  },
+};
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
@@ -39,18 +51,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         >
           <PrivyProvider
             appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
-            config={{
-              loginMethods: ["email", "wallet", "google", "farcaster"],
-              appearance: {
-                theme: "dark",
-                accentColor: "#0050FF",
-                logo: "https://your-logo-url",
-              },
-              embeddedWallets: {
-                createOnLogin: "users-without-wallets",
-                noPromptOnSignature: true,
-              },
-            }}
+            config={PRIVY_CONFIG}
           >
             <AuthChecker>
               <Layout>

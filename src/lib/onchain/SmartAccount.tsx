@@ -29,6 +29,7 @@ import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
+
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =

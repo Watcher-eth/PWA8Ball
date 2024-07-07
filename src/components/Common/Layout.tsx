@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
-import NavBar from "./NavBar"; // Assuming NavBar is in the same directory
+import { NavBar } from "@/components/Common/NavBar"; // Assuming NavBar is in the same directory
 import { isMobile } from "@/utils/isMobile";
 
 
 
-export default function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="relative pb-20 items-center justify-center">
       {/* Content of the page */}

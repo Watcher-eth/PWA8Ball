@@ -3,7 +3,7 @@
 import { supabase } from "@/lib/supabase/supabaseClient"; // Import your Supabase client
 import { IUser } from "@/lib/supabase/types";
 
-export async function getUserFromDB(userId: string): Promise<IUser | null> {
+export async function getUserFromDB(userId: string) {
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -16,7 +16,7 @@ export async function getUserFromDB(userId: string): Promise<IUser | null> {
   return data as IUser;
 }
 
-export async function createUserInDB(userId: string): Promise<IUser | null> {
+export async function createUserInDB(userId: string) {
   const { data, error } = await supabase
     .from("users")
     .insert([{ external_auth_provider_user_id: userId }])
@@ -31,7 +31,7 @@ export async function createUserInDB(userId: string): Promise<IUser | null> {
 export async function updateUserInDB(
   userId: string,
   updates: Partial<IUser>
-): Promise<IUser | null> {
+) {
   const { data, error } = await supabase
     .from("users")
     .update(updates)
