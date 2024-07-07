@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 
-export const ActivityField: React.FC<ActivityFieldProps> = ({
+export const ActivityField = ({
   index,
   pfp,
   name,

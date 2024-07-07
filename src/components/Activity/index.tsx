@@ -1,7 +1,6 @@
 // @ts-nocheck
+import { useState } from "react";
 
-import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { Bell, Users, Globe } from "lucide-react";
 import { ActivityField } from "./ActivityField";
@@ -11,15 +10,13 @@ import { useGetFollowingPredictions } from "@/lib/supabase/queries/friends/useGe
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/groupPredictionsByDate";
 import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
-import { FollowPredictionSkeleton } from "./ActivitySkelleton";
+import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 
 export function ActivityPage() {
-  const router = useRouter();
   const [page, setPage] = useState<boolean>(false);
-  const [refreshing, setRefreshing] = useState(false);
   const { user } = useUserStore();
   const {
     data: predictions,
@@ -30,19 +27,7 @@ export function ActivityPage() {
 
   if (isLoading || predictions === undefined) {
     return (
-      <div
-        className="flex flex-col items-center w-[99%] h-[333px] p-4"
-      >
-        <div className="my-3">
-          <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121] "/>
-        </div>
-        {[0, 1, 2, 3, 4, 5].map((index) => (
-          <FollowPredictionSkeleton key={index} index={index} />
-        ))}
-        <div className="my-5">
-          <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121]" />
-        </div>
-      </div>
+      <ActivitySkeleton/>
     );
   }
 
@@ -144,3 +129,20 @@ export function ActivityPage() {
     </div>
   );
 };
+
+
+function ActivitySkeleton() {
+  return (
+    <div className="flex flex-col items-center w-[99%] h-[333px] p-4">
+      <div className="my-3">
+        <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121] " />
+      </div>
+      {[0, 1, 2, 3, 4, 5].map((index) => (
+        <FollowPredictionSkeleton key={index} index={index} />
+      ))}
+      <div className="my-5">
+        <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121]" />
+      </div>
+    </div>
+  );
+}

@@ -121,7 +121,7 @@ const styles = {
 };
 
 import { motion } from "framer-motion";
-import { FollowPredictionSkeleton } from "../Activity/ActivitySkelleton";
+import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
 
 export const NotificationsPlaceHolder = () => {
   return (
