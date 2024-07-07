@@ -147,7 +147,7 @@ export const SmartAccountProvider = ({
         functionName: "allowance",
       });
 
-      if (allowance < BigInt(1)) {
+      if (allowance < 1n) {
         console.log("allowance", allowance);
         try {
           const contract = getContract({

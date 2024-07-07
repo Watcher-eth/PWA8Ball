@@ -16,14 +16,12 @@ import {
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 
-interface boostMarket {
+async function removeLp(props: {
   userId: string;
   marketId: number;
   client: SmartAccountClient;
   address: Address;
-}
-
-async function removeLp(props: boostMarket) {
+}) {
   if (!props.marketId) {
     throw new Error("All fields must be provided");
   }

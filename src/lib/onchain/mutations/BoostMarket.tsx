@@ -2,7 +2,6 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { USDC_ADDRESS, USDC_ABI, getUSDCContract } from "../contracts/Usdc";
-import { ethers } from "ethers";
 import {
   EightBallAddress,
   EightballV1ABI,
@@ -33,10 +32,6 @@ async function boost({
   }
   // console.log("Props", props);
   try {
-    // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-    const adjustedAmount = ethers.utils
-      .parseUnits(amount.toString(), 6)
-      .toBigInt();
     const account = address;
     const allowance = await rpcClient.readContract({
       address: USDC_ADDRESS,

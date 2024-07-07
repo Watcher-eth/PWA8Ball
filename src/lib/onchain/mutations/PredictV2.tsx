@@ -1,7 +1,4 @@
 // @ts-nocheck
-
-import { ethers } from "ethers";
-
 import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
@@ -35,9 +32,6 @@ async function predict(props: PredictParams) {
   }
   try {
     // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-    const adjustedAmount = ethers.utils
-      .parseUnits(props.amount.toString(), 6)
-      .toBigInt();
     const account = props.address;
 
     const preferYesNum = props.preferYes ? 1 : 0;

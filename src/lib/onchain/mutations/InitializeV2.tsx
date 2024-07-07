@@ -1,12 +1,8 @@
 // @ts-nocheck
-
 import { useMutation } from "@tanstack/react-query";
-import { ethers } from "ethers";
-import { USDC_ABI, getUSDCContract } from "../contracts/Usdc";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract } from "viem";
@@ -18,7 +14,8 @@ import {
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { createMarket } from "@/lib/supabase/mutations/createMarket";
 
-interface initializeMarketTypes {
+
+async function initialize(props: {
   amount: number;
   title: string;
   description: string;
@@ -29,9 +26,7 @@ interface initializeMarketTypes {
   address: Address;
   created_by: string;
   initialProb: number;
-}
-
-async function initialize(props: initializeMarketTypes) {
+}) {
   if (
     !props.amount ||
     !props.title ||
@@ -45,9 +40,6 @@ async function initialize(props: initializeMarketTypes) {
   try {
     // Parse the amount to the correct unit expected by the contract
     const account = props.address;
-    const adjustedAmount = ethers.utils
-      .parseUnits(props.amount.toString(), 6)
-      .toBigInt();
 
     // Initialize the market
     const initialProb = props?.initialProb ? props?.initialProb : 50;
@@ -72,11 +64,11 @@ async function initialize(props: initializeMarketTypes) {
         abi: EightballStorageV1ABI,
         functionName: "currentPairId",
       });
-      console.log("currentPair", currentPairId - BigInt(1));
+      console.log("currentPair", currentPairId - 1n);
       const marketPair = await rpcClient.readContract({
         address: EightBallStorageAddress,
         abi: EightballStorageV1ABI,
-        args: [currentPairId - BigInt(1)],
+        args: [currentPairId - 1n],
         functionName: "getMarketPair",
       });
 
@@ -94,7 +86,6 @@ async function initialize(props: initializeMarketTypes) {
         pair: marketPair.liquidityPool,
         created_by: props.created_by,
       });
-
     }, 1000);
   } catch (error) {
     console.error("Error during market initialization", error);
