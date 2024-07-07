@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useGetLeaderboardForTopic } from "@/lib/supabase/queries/leaderboard/useGetLeaderboardForTopic";
+import { getProfilePath } from "@/utils/urls";
+import { PredictorInfo } from "../Activity/PredictorInfo";
 
 const Leaderboard = ({ topicId }) => {
   const router = useRouter();
@@ -81,35 +83,10 @@ const Leaderboard = ({ topicId }) => {
           </span>
         </div>
         {topPredictors.map((predictor, index) => (
-          <Link href={`/profile?id=${predictor.user_id}`}>
-            <div
-              key={index}
-              className="flex flex-row items-center justify-between my-[7px] cursor-pointer"
-            >
-              <div
-                className="flex flex-row items-center"
-              >
-                <span className="text-white font-[AeonikBold]">
-                  {index + 1}
-                </span>
-                <img
-                  src={predictor.pfp}
-                  alt="Profile"
-                  className="size-[30px] rounded-[50%] mr-[20px] ml-[10px]"
-                />
-                <span
-                  className="text-white font-[AeonikBold] text-[17px]"
-                >
-                  {predictor.name}
-                </span>
-              </div>
-              <span
-                className="text-[lightgray] font-[AeonikRegular] text-[15px]"
-              >
-                ${(predictor.total_amount / 1000000).toFixed(2)}
-              </span>
-            </div>
-          </Link>
+          <PredictorInfo
+            {...predictor}
+            index={index}
+          />
         ))}
       </div>
     </div>

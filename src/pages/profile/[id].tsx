@@ -7,8 +7,6 @@ import React, { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 
 import {
-  Pencil,
-  EllipsisVertical,
   PieChart,
   Twitter,
   CircleEllipsis,
@@ -44,6 +42,7 @@ export default function ProfilePage({
   const router = useRouter();
   const { id: userID } = router.query; // Get the userId from the URL
 
+  console.log({userId, userID});
   const [edit, setEdit] = useState<boolean>(false);
   const { data: totalFollowers } = useGetTotalFollowers(userID);
   const { data: userC } = useGetUserByExternalAuthId(userID);
