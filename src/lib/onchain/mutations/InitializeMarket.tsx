@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { ethers } from "ethers";
-import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
+import { USDC_ADDRESS, USDC_ABI, getUSDCContract } from "../contracts/Usdc";
 import {
   EightBallAddress,
   EightballV1ABI,
@@ -49,8 +49,8 @@ async function initialize(props: initializeMarketTypes) {
       .toBigInt();
 
     const allowance = await rpcClient.readContract({
-      address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      abi: UsdcABI,
+      address: USDC_ADDRESS,
+      abi: USDC_ABI,
       args: [account, EightBallAddress],
       functionName: "allowance",
     });
@@ -59,9 +59,9 @@ async function initialize(props: initializeMarketTypes) {
       // Approve the USDC transfer
       const { request: usdcRequest } = await rpcClient.simulateContract({
         account,
-        address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-        abi: UsdcABI,
-        args: [EightBallAddress, BigInt(1500000)],
+        address: USDC_ADDRESS,
+        abi: USDC_ABI,
+        args: [EightBallAddress, 1500000n],
         functionName: "approve",
       });
 

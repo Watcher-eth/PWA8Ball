@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { ethers } from "ethers";
-import { UsdcABI, getUSDCContract } from "../contracts/Usdc";
+import { USDC_ABI, getUSDCContract } from "../contracts/Usdc";
 import {
   EightBallAddress,
   EightballV1ABI,

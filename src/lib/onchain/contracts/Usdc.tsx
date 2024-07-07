@@ -11,10 +11,10 @@ import { baseGoerli } from "viem/chains";
 import { getWalletClient, rpcClient } from "../Viem";
 import { EightBallAddress } from "./Eightball";
 
-const contractAddress = "0x036CbD53842c5426634e7929541eC2318f3dCF7e"; // Replace with your contract's address
+export const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e"; // Replace with your contract's address
 const mainnetUSDC = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
 
-export const UsdcABI = [
+export const USDC_ABI = [
   {
     type: "function",
     name: "allowance",
@@ -119,8 +119,8 @@ export const USDCByteCode =
 export async function getUSDCContract(walletClient: WalletClient) {
   // Use walletClient for write operations and rpcClient for read operations
   const contract = getContract({
-    abi: UsdcABI,
-    address: contractAddress,
+    abi: USDC_ABI,
+    address: USDC_ADDRESS,
     client: { public: rpcClient, wallet: walletClient },
   });
 
@@ -129,8 +129,8 @@ export async function getUSDCContract(walletClient: WalletClient) {
 
 export async function getUSDCBalance(address: Address) {
   const balance = await rpcClient.readContract({
-    address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-    abi: UsdcABI,
+    address: USDC_ADDRESS,
+    abi: USDC_ABI,
     args: [address],
     functionName: "balanceOf",
   });
@@ -144,9 +144,9 @@ export async function setUSDCBalance(
   const account = address;
   const { request: usdcRequest } = await rpcClient.simulateContract({
     account,
-    address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-    abi: UsdcABI,
-    args: [EightBallAddress, BigInt(1500000)],
+    address: USDC_ADDRESS,
+    abi: USDC_ABI,
+    args: [EightBallAddress, 1500000n],
     functionName: "approve",
   });
   console.log("after sim");

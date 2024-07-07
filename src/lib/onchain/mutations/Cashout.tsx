@@ -12,7 +12,7 @@ import {
 } from "../contracts/Eightball";
 import { type Address, getContract } from "viem";
 import { rpcClient } from "../Viem";
-import { UsdcABI } from "../contracts/Usdc";
+import { USDC_ABI } from "../contracts/Usdc";
 import { SmartAccountClient } from "permissionless";
 import {
   EightBallStorageAddress,

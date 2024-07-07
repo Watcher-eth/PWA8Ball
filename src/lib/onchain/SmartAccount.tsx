@@ -25,7 +25,7 @@ import {
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico";
 
-import { UsdcABI } from "./contracts/Usdc";
+import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "./Viem";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
@@ -141,8 +141,8 @@ export const SmartAccountProvider = ({
       console.log("Step 3", smartAccountAddress);
       const gas = (await pimlicoBundlerClient.getUserOperationGasPrice()).fast;
       const allowance = await publicClient.readContract({
-        address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-        abi: UsdcABI,
+        address: USDC_ADDRESS,
+        abi: USDC_ABI,
         args: [account, EightBallAddress],
         functionName: "allowance",
       });
@@ -151,8 +151,8 @@ export const SmartAccountProvider = ({
         console.log("allowance", allowance);
         try {
           const contract = getContract({
-            abi: UsdcABI,
-            address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+            abi: USDC_ABI,
+            address: USDC_ADDRESS,
             client: { public: rpcClient, wallet: smartAccountClient },
           });
 

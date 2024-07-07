@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import { ethers } from "ethers";
-
 import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
@@ -14,7 +12,7 @@ import {
 } from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
 import { WalletClient, Address } from "viem";
 import { rpcClient } from "../Viem";
-import { UsdcABI } from "../contracts/Usdc";
+import { USDC_ADDRESS, USDC_ABI } from "../contracts/Usdc";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";
 interface PredictParams {
@@ -34,15 +32,11 @@ async function predict(props: PredictParams) {
     throw new Error("All fields must be provided");
   }
   try {
-    // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-    const adjustedAmount = ethers.utils
-      .parseUnits(props.amount.toString(), 6)
-      .toBigInt();
     const account = props.address;
 
     const allowance = await rpcClient.readContract({
-      address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      abi: UsdcABI,
+      address: USDC_ADDRESS,
+      abi: USDC_ABI,
       args: [account, EightBallAddress],
       functionName: "allowance",
     });
@@ -51,9 +45,9 @@ async function predict(props: PredictParams) {
       // Approve the USDC transfer
       const { request: usdcRequest } = await rpcClient.simulateContract({
         account,
-        address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-        abi: UsdcABI,
-        args: [EightBallAddress, BigInt(1500000)],
+        address: USDC_ADDRESS,
+        abi: USDC_ABI,
+        args: [EightBallAddress, 1500000n],
         functionName: "approve",
       });
 

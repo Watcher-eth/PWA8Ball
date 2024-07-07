@@ -9,7 +9,7 @@ import {
 } from "../contracts/Eightball";
 import { WalletClient, getContract, Address } from "viem";
 import { rpcClient } from "../Viem";
-import { UsdcABI } from "../contracts/Usdc";
+import { USDC_ABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { supabase } from "@/lib/supabase/supabaseClient";
 interface RedeemParams {
