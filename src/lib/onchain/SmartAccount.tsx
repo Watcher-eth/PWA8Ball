@@ -25,7 +25,7 @@ import {
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico";
 
-import { USDC_ADDRESS, USDC_ABI, getUSDCContract } from "./contracts/Usdc";
+import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
