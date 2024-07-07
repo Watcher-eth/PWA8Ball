@@ -36,18 +36,14 @@ const NotificationCard = ({ type, user, message, image, comment, index }) => {
         )}
         <TextContainer>
           {type === "like" && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "baseline",
-              }}
-            >
-              <Username>{user && user.name} </Username>
-              <Text>liked your comment</Text>
-            </div>
+            <>
+              <div className="flex flex-row items-baseline">
+                <Username>{user && user.name} </Username>
+                <Text>liked your comment</Text>
+              </div>
+              <Message>{comment.content}</Message>
+            </>
           )}
-          {type === "like" && <Message>{comment.content}</Message>}
           {type === "follow" && (
             <>
               <Username>{message}</Username>

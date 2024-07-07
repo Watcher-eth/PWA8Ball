@@ -1,9 +1,11 @@
 // @ts-nocheck
+import { motion } from "framer-motion";
+import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
+
 import { registerForPushNotificationsAsync } from "@/lib/hooks/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/useGetNotificationsForUser";
 import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/useCheckUserHasPushToken";
-import React from "react";
 import { NotificationsPage } from "./UserNotifications";
 
 export const NotificationsModalPage = () => {
@@ -24,7 +26,7 @@ export const NotificationsModalPage = () => {
   } = useGetNotificationsForUser(user?.external_auth_provider_user_id);
 
   if (hasToken && notifications?.length === 0) {
-    return <NotificationsPlaceHolder />;
+    return <NotificationsPlaceholder />;
   }
   console.log(notifications?.length, isLoadingToken, hasToken);
   if (notifications?.length > 0) {
@@ -120,10 +122,8 @@ const styles = {
   },
 };
 
-import { motion } from "framer-motion";
-import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
 
-export const NotificationsPlaceHolder = () => {
+const NotificationsPlaceholder = () => {
   return (
     <div
       className="rounded-t-3xl"
