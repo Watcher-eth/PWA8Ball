@@ -1,77 +1,18 @@
 // @ts-nocheck
-
-import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useGetLeaderboardForTopic } from "@/lib/supabase/queries/leaderboard/useGetLeaderboardForTopic";
-import { getProfilePath } from "@/utils/urls";
+
 import { PredictorInfo } from "../Activity/PredictorInfo";
 
-const Leaderboard = ({ topicId }) => {
-  const router = useRouter();
 
+const Leaderboard = ({ topicId }) => {
   const {
     data: topPredictors,
     error,
     isLoading,
   } = useGetLeaderboardForTopic(topicId);
-
-  if (isLoading) {
-    return (
-      <div className="flex flex-col mt-[7px]">
-        <div className="flex flex-col">
-          <div className="flex flex-col items-center justify-between my-3">
-            <span
-              className="text-white text-[15px] font-[AeonikBold]"
-            >
-              Name
-            </span>
-            <span
-              className="text-white text-[15px] font-[AeonikBold]"
-            >
-              At stake
-            </span>
-          </div>
-          {[1, 2, 3, 4].map((index) => (
-            <div
-              key={index}
-              className="flex flex-row items-center justify-between my-[10px]"
-            >
-              <div
-                className="flex flex-row items-center"
-              >
-                <span className="text-white font-[AeonikBold]">
-                  {index + 1}
-                </span>
-                <div className="mr-[18px] ml-[10px]">
-                  <Skeleton className="w-30 h-30 rounded-full" />
-                </div>
-                <Skeleton className="h-17 w-40" />
-              </div>
-              <Skeleton className="h-14 w-25" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <span className="text-white">
-        An error occurred: {error.message}
-      </span>
-    );
-  }
-
-  if (!topPredictors) {
-    return (
-      <div className="mt-2">
-        <Skeleton className="w-full h-[600px] rounded-lg" />
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col mt-[7px]">
@@ -82,16 +23,34 @@ const Leaderboard = ({ topicId }) => {
             At stake
           </span>
         </div>
-        {topPredictors.map((predictor, index) => (
-          <PredictorInfo
-            {...predictor}
-            index={index}
-          />
-        ))}
+        {error && (
+          <span className="text-white">An error occurred: {error.message}</span>
+        )}
+        {topPredictors?.map((predictor, index) => (
+          <PredictorInfo {...predictor} index={index} />
+        )) ?? <LeaderboardSkeleton />}
       </div>
     </div>
   );
 };
+
+function LeaderboardSkeleton() {
+  return [1, 2, 3, 4].map((index) => (
+    <div
+      key={index}
+      className="flex flex-row items-center justify-between my-2.5"
+    >
+      <div className="flex flex-row items-center">
+        <span className="text-white font-[AeonikBold]">{index + 1}</span>
+        <div className="mr-[18px] ml-2.5">
+          <Skeleton className="w-30 h-30 rounded-full" />
+        </div>
+        <Skeleton className="h-17 w-40" />
+      </div>
+      <Skeleton className="h-14 w-25" />
+    </div>
+  ));
+}
 
 export const TopicLeaderboard = ({ image, name, topicId }) => {
   const router = useRouter();
@@ -102,7 +61,7 @@ export const TopicLeaderboard = ({ image, name, topicId }) => {
         src={image}
         alt="Topic"
         className="absolute top-0 w-full h-[88px]"
-        style={{ width: width}}
+        style={{ width: width }}
       />
       <div
         className="absolute top-0 w-full h-[88px] backdrop-blur-[20px]"
