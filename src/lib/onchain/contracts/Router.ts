@@ -4,9 +4,9 @@ import { createPublicClient, custom, getContract, http } from "viem";
 
 import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 
-const contractAddress = "0x2D5ed3c261FEdbe544DcB63b75c5F306ba35dFEA"; // Replace with your contract's address
+const ROUTER_V1_ADDRESS = "0x2D5ed3c261FEdbe544DcB63b75c5F306ba35dFEA"; // Replace with your contract's address
 
-export const RouterV1ABI = [
+export const ROUTER_V1_ABI = [
   {
     type: "constructor",
     inputs: [
@@ -352,8 +352,8 @@ export async function getRouterContract() {
 
   // Use walletClient for write operations and rpcClient for read operations
   const contract = getContract({
-    abi: RouterV1ABI,
-    address: contractAddress,
+    abi: ROUTER_V1_ABI,
+    address: ROUTER_V1_ADDRESS,
     client: { public: rpcClient, wallet: walletClient },
   });
 

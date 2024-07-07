@@ -10,7 +10,7 @@ import {
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
-import { V2PairV1ABI } from "../contracts/V2Pair";
+import { V2_PAIR_ABI } from "../contracts/V2Pair";
 import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
@@ -41,7 +41,7 @@ async function removeLp(props: {
 
     const liquidityTokens = await rpcClient.readContract({
       address: marketPair.liquidityPool,
-      abi: V2PairV1ABI,
+      abi: V2_PAIR_ABI,
       args: [account],
       functionName: "balanceOf",
     });
