@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-
+import { copyToClipboard } from "@/utils/copyToClipboard";
 
 export const ShareTopic = ({ id, title, image, question, members, markets }: {
   id: string;
@@ -11,11 +11,6 @@ export const ShareTopic = ({ id, title, image, question, members, markets }: {
   members: number;
   markets: number;
 }) => {
-
-  const copyToClipboard = async () => {
-    navigator.clipboard.writeText("hello world");
-    alert("Copied to Clipboard");
-  };
 
   const shareLink = async () => {
     try {
@@ -82,7 +77,7 @@ export const ShareTopic = ({ id, title, image, question, members, markets }: {
         </div>
       </div>
       <div className={CLASSNAMES.actionGroup}>
-        <button className={CLASSNAMES.copyButton} onClick={copyToClipboard}>
+        <button className={CLASSNAMES.copyButton} onClick={() => copyToClipboard("share copy")}>
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
           <span className={CLASSNAMES.actionText}>Copy</span>
         </button>

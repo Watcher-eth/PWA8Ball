@@ -1,8 +1,7 @@
 // @ts-nocheck
-
-import React from "react";
-import { useRouter } from "next/router";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
+import { copyToClipboard } from "@/utils/copyToClipboard";
+
 interface Option {
   name: string;
   value: number;
@@ -23,12 +22,7 @@ export const ShareBetModal = ({
   question: string;
   options: Option[];
 }) => {
-  const router = useRouter();
 
-  const copyToClipboard = async () => {
-    navigator.clipboard.writeText("hello world");
-    alert("Copied to Clipboard");
-  };
 
   const shareLink = async () => {
     try {
@@ -98,7 +92,10 @@ export const ShareBetModal = ({
         </div>
       </div>
       <div style={styles.actionGroup}>
-        <button style={styles.copyButton} onClick={copyToClipboard}>
+        <button
+          style={styles.copyButton}
+          onClick={() => copyToClipboard("share bet")}
+        >
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
           <span style={styles.actionText}>Copy</span>
         </button>
