@@ -6,7 +6,7 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { useUpdateUSDCBalance } from "@/lib/supabase/mutations/useUpdateUSDCBalance";
 
 export const useGetMarketStake = (marketId: string) => {

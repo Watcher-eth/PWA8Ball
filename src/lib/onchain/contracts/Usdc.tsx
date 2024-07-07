@@ -7,8 +7,8 @@ import {
   http,
   Address
 } from "viem";
-import { baseGoerli } from "viem/chains";
-import { getWalletClient, rpcClient } from "../Viem";
+
+import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 import { EightBallAddress } from "./Eightball";
 
 export const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e"; // Replace with your contract's address

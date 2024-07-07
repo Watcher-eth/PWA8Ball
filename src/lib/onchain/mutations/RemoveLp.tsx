@@ -7,7 +7,7 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { V2PairV1ABI } from "../contracts/V2Pair";

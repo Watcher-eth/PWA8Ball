@@ -2,7 +2,7 @@
 
 import { createPublicClient, custom, getContract, http } from "viem";
 import { baseGoerli } from "viem/chains";
-import { getWalletClient, rpcClient } from "../Viem";
+import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 
 const contractAddress = "0xYOUR_CONTRACT_ADDRESS"; // Replace with your contract's address
 

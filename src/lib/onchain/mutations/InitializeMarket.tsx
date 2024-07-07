@@ -8,7 +8,7 @@ import {
   EightballV1ABI,
   getEightBallContract,
 } from "../contracts/Eightball";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { Address, WalletClient } from "viem";
 import {
   EightBallStorageAddress,

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { useQuery } from "@tanstack/react-query";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
 
 export const useGetMultiplier = (marketId: number, tokenAddress: string) => {

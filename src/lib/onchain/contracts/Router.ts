@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { createPublicClient, custom, getContract, http } from "viem";
-import { baseGoerli } from "viem/chains";
-import { getWalletClient, rpcClient } from "../Viem";
+
+import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 
 const contractAddress = "0x2D5ed3c261FEdbe544DcB63b75c5F306ba35dFEA"; // Replace with your contract's address
 

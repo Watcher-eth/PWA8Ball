@@ -10,7 +10,7 @@ import {
 } from "@/lib/onchain/contracts/Eightball";
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 
 
 import { createPrediction } from "@/lib/supabase/mutations/createPrediction";

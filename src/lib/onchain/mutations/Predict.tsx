@@ -11,7 +11,7 @@ import {
   useCreatePrediction,
 } from "@/lib/drizzle/drizzle/supabase/mutations/addPrediction";
 import { WalletClient, Address } from "viem";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { USDC_ADDRESS, USDC_ABI } from "../contracts/Usdc";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { supabase } from "@/lib/drizzle/drizzle/supabase/supabaseClient";

@@ -8,7 +8,7 @@ import {
   getEightBallContract,
 } from "../contracts/Eightball";
 import { WalletClient, getContract, Address } from "viem";
-import { rpcClient } from "../Viem";
+import { rpcClient } from "@/lib/onchain/rpcClient";
 import { USDC_ABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { supabase } from "@/lib/supabase/supabaseClient";
