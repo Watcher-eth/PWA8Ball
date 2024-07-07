@@ -2,7 +2,7 @@
 
 import React from "react";
 import { StarHalf } from "lucide-react";
-import { useGetRelatedMarkets } from "@/lib/supabase/queries/Reccomendations/useGetRelatedMarkets";
+import { useGetRelatedMarkets } from "@/lib/supabase/queries/reccomendations/useGetRelatedMarkets";
 import Link from "next/link";
 
 export function RelatedMarkets({ topicId, id }: { topicId: string; id: number }) {
