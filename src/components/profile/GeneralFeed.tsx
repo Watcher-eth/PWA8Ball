@@ -11,21 +11,8 @@ import { useGetOrdersForUser } from "../../supabase/queries/user/useGetOrdersFor
 import { useGetMarketsCreatedByUser } from "../../supabase/queries/useGetMarketsCreatedByUser";
 import { NewPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { BetModal } from "../Modals/PredictionPositionModal";
+import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-const aggregatePredictedItems = (orders: any) => {
-  const aggregated = {};
-
-  orders.forEach((item: any) => {
-    const key = `${item.market_id}-${item.option}`;
-    if (aggregated[key]) {
-      aggregated[key].amount += item.amount;
-    } else {
-      aggregated[key] = { ...item };
-    }
-  });
-
-  return Object.values(aggregated);
-};
 
 export const GeneralFeed = ({
   handleOpenBottomSheet,

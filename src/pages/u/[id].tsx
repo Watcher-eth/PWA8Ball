@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -26,8 +28,8 @@ export default function ProfilePage({ userId }: { userId: string }) {
   const { id: userID } = router.query; // Get the userId from the URL
 
   const [edit, setEdit] = useState<boolean>(false);
-  const { data: totalFollowers } = useGetTotalFollowers(userID);
-  const { data: userC, isLoading } = useGetUserByExternalAuthId(userID);
+  const { data: totalFollowers } = useGetTotalFollowers(userId);
+  const { data: userC, isLoading } = useGetUserByExternalAuthId(userId);
   const [balanceLoading, setBalanceLoading] = useState(true);
   const [userCBalance, setUserBalance] = useState(0);
 

@@ -13,7 +13,7 @@ export function getTopicPath(topicId: string) {
 }
 
 export function getProfilePath(userId: string) {
-  return `/profile/${userId}` as const;
+  return `/u/${userId}` as const;
 }
 
 export function getMarketPath(id: string) {

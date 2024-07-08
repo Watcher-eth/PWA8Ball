@@ -19,8 +19,6 @@ export interface IOrderWithMarket extends IOrder {
   };
 }
 
-
-
 const fetchOrdersForUser = async (userAddress: string) => {
   const { data, error } = await supabase.rpc("get_orders_with_market", {
     user_address: userAddress,
@@ -40,4 +38,4 @@ export function useGetOrdersForUser(userAddress: string) {
     queryFn: () => fetchOrdersForUser(userAddress),
     enabled: !!userAddress, // This query will only run if userAddress is truthy
   });
-};
+}

@@ -9,8 +9,8 @@ import { useCreateUser } from "../../../supabase/mutations/useCreateUser";
 import { useUpdateUserProfile } from "../../../supabase/mutations/updateUser";
 import { NewUser } from "@/lib/supabase/types";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export function SignUp({ setStep }: { setStep: (step: number) => void }) {

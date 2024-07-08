@@ -16,3 +16,19 @@ export const aggregatePredictions = (predictions) => {
   // Convert the aggregated object back to an array
   return Object.values(aggregated);
 };
+
+
+export const aggregatePredictedItems = (orders: any) => {
+  const aggregated = {};
+
+  orders.forEach((item: any) => {
+    const key = `${item.market_id}-${item.option}`;
+    if (aggregated[key]) {
+      aggregated[key].amount += item.amount;
+    } else {
+      aggregated[key] = { ...item };
+    }
+  });
+
+  return Object.values(aggregated);
+};

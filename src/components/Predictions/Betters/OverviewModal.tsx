@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/drawer";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProportionalSlider } from "./Slider";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useRouter } from "next/router";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 
@@ -182,7 +182,7 @@ const BettersOverviewItem = ({
       onClick={() => {
         onClose();
         router.push({
-          pathname: `/profile/${external_auth_provider_user_id}`,
+          pathname: `/u/${external_auth_provider_user_id}`,
           query: { id: external_auth_provider_user_id },
         });
       }}

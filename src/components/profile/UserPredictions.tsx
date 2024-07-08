@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Skeleton, skeletonVariants } from "@/components/ui/skeleton";
+import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/router";
 

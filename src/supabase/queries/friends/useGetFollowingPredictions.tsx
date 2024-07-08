@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/supabase/supabaseClient";
+
+import { supabase } from "../../supabaseClient";
 
 const fetchFollowingIds = async (userId: string) => {
   const { data, error } = await supabase
@@ -16,7 +16,7 @@ const fetchFollowingIds = async (userId: string) => {
   return data.map((row) => row.following_id);
 };
 
-const fetchPredictionsByFollowing = async (followingIds) => {
+const fetchPredictionsByFollowing = async (followingIds: string[]) => {
   if (followingIds.length === 0) {
     return [];
   }
@@ -29,30 +29,54 @@ const fetchPredictionsByFollowing = async (followingIds) => {
         markets (
           image,
           question,
-          title
+          title,
+          id
         ),
         users (
-            pfp,
-            name,
-            external_auth_provider_user_id
+          pfp,
+          name,
+          external_auth_provider_user_id
         )
       `
     )
     .in("user_id", followingIds)
     .order("created_at", { ascending: false })
-    .limit(25);
+    .limit(65);
 
   if (error) {
     console.error("Error fetching predictions:", error.message);
     throw new Error(error.message);
   }
 
-  return data;
+  // Fetch initialProb for each market
+  const marketIds = data.map((prediction) => prediction.markets.id);
+
+  const { data: onchainData, error: onchainError } = await supabase
+    .from("OnchainMarkets")
+    .select("id, initialProb")
+    .in("id", marketIds);
+
+  if (onchainError) {
+    console.error("Error fetching onchain market data:", onchainError.message);
+    throw new Error(onchainError.message);
+  }
+
+  const initialProbMap = Object.fromEntries(
+    onchainData.map((item) => [item.id, item.initialProb])
+  );
+
+  return data.map((prediction) => ({
+    ...prediction,
+    markets: {
+      ...prediction.markets,
+      initialProb: initialProbMap[prediction.markets.id] || null,
+    },
+  }));
 };
 
+import { useQuery } from "@tanstack/react-query";
 
-
-export function useGetFollowingPredictions(userId: string) {
+export const useGetFollowingPredictions = (userId) => {
   return useQuery({
     queryKey: ["followingPredictions", userId],
     queryFn: async () => {

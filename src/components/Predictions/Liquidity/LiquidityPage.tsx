@@ -6,10 +6,10 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import LiquiditiyPosition from "./LiquidityPosition";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
-import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP";
+import { useGetLPForUser } from "../../../supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/Common/Placeholders/NewPlaceholders";
 
-const LiquidityPage: React.FC = () => {
+export const LiquidityPage: React.FC = () => {
   const router = useRouter();
   const { user } = useUserStore();
   const {
@@ -107,4 +107,3 @@ const LiquidityPage: React.FC = () => {
   );
 };
 
-export default LiquidityPage;
