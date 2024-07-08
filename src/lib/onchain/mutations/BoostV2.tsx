@@ -9,8 +9,8 @@ import {
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
-import { addLiquidityBoost } from "@/lib/supabase/mutations/addLiquidityBoost";
-import { supabase } from "@/lib/supabase/supabaseClient";
+import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
+import { supabase } from "@/supabase/supabaseClient";
 
 interface boostMarket {
   amount: number;

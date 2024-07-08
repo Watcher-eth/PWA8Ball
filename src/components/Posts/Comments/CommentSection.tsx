@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { Comment } from "./Comment";
 import { BetComment } from "@/types/PostTypes";
-import { useGetAllCommentsForMarket } from "@/lib/supabase/queries/useGetAllCommentsForMarket";
-import { IUserWithBet } from "@/lib/supabase/types";
+import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
+import { IUserWithBet } from "@/supabase/types";
 import { NewPlaceholderComment } from "@/components/Common/Placeholders/NewPlaceholders";
 
 

@@ -4,8 +4,8 @@ import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
 
 import { registerForPushNotificationsAsync } from "@/utils/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/useGetNotificationsForUser";
-import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/useCheckUserHasPushToken";
+import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
+import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCheckUserHasPushToken";
 import { NotificationsPage } from "./UserNotifications";
 
 export const NotificationsModalPage = () => {

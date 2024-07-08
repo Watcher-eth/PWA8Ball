@@ -1,7 +1,7 @@
 import { ImageResponse } from "@vercel/og";
 
-import { IUser } from "@/lib/supabase/types";
-import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
+import { IUser } from "@/supabase/types";
+import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
 import { aeonikFontDataPromise } from "@/utils/fonts";
 
 export const runtime = "edge";

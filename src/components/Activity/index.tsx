@@ -6,7 +6,7 @@ import { Bell, Users, Globe } from "lucide-react";
 import { ActivityField } from "./ActivityField";
 import { Leaderboard } from "./Leaderboard";
 import { YourStats } from "./YourStats";
-import { useGetFollowingPredictions } from "@/lib/supabase/queries/friends/useGetFollowingPredictions";
+import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
 import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";

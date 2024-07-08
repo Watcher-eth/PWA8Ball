@@ -10,8 +10,8 @@ import { type Address, getContract } from "viem";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 
 
-import { createPrediction } from "@/lib/supabase/mutations/createPrediction";
-import { supabase } from "@/lib/supabase/supabaseClient";
+import { createPrediction } from "@/supabase/mutations/createPrediction";
+import { supabase } from "@/supabase/supabaseClient";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 
 interface PredictParams {

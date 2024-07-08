@@ -10,8 +10,8 @@ import { VotingModal } from "../Modals/BuyVotes/VotingModal";
 import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
 
-import { useGetUsersByMarketId } from "@/lib/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/lib/supabase/queries/useGetMarketById";
+import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
+import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
 import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";

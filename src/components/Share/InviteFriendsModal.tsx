@@ -5,7 +5,7 @@ import { useQuery } from "@airstack/airstack-react";
 import { convertIpfsUrl } from "@/utils/urls/modifyIpfsUrl";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { motion } from "framer-motion";
-import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";
+import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
 

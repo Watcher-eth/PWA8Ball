@@ -12,8 +12,8 @@ import {
   CircleEllipsis,
 } from "lucide-react";
 
-import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/useGetUserByExternalAuthId";
-import { useGetTotalFollowers } from "@/lib/supabase/queries/user/useGetTotalFollowers";
+import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
+import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 import { useUserBalance } from "@/hooks/useUserBalance";
 
 import { GeneralFeed } from "@/components/profile/GeneralFeed";

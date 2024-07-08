@@ -2,8 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import {Cards} from "./Cards";
-import { useGetAllTopics } from "@/lib/supabase/queries/useGetAllTopics";
-import { useGetTrendingMarkets } from "@/lib/supabase/queries/useGetTrendingMarkets";
+import { useGetAllTopics } from "@/supabase/queries/useGetAllTopics";
+import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import {TopicHeader} from "./TopicHeader";
 import { stripEmoji } from "@/utils/string/stripEmoji";
 import { parseOptions } from "@/utils/predictions/parseOption";

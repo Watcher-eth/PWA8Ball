@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
  // Adjust import path as necessary
 import { ChevronLeft, Share, Star } from "lucide-react";
-import { useGetMarketsForTopic } from "@/lib/supabase/queries/useGetMarketsForTopic";
-import { useGetMembersForTopic } from "@/lib/supabase/mutations/topics/useGetMembersForTopic";
+import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { ShareTopicModal } from "@/components/Modals/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";

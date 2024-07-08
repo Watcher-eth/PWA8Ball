@@ -4,7 +4,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { getUserFromDB, createUserInDB } from "@/lib/supabase/userApi";
+import { getUserFromDB, createUserInDB } from "@/supabase/userApi";
 
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy();

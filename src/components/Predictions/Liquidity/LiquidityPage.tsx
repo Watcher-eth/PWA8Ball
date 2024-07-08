@@ -6,7 +6,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { LiquidityPosition } from "./LiquidityPosition";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
-import { useGetLPForUser } from "@/lib/supabase/queries/user/useGetLPForUser";
+import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/Common/Placeholders/NewPlaceholders";
 
 export const LiquidityPage: React.FC = () => {

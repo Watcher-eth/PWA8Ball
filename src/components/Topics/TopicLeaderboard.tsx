@@ -2,7 +2,7 @@
 import { useRouter } from "next/router";
 import { ChevronLeft } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { useGetLeaderboardForTopic } from "@/lib/supabase/queries/leaderboard/useGetLeaderboardForTopic";
+import { useGetLeaderboardForTopic } from "@/supabase/queries/leaderboard/useGetLeaderboardForTopic";
 
 import { PredictorInfo } from "../Activity/PredictorInfo";
 

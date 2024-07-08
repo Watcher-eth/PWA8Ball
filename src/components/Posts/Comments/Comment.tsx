@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { BetComment } from "@/types/PostTypes";
 import { timeAgo } from "@/utils/datetime/timeAgo";
 import { parseOption } from "@/utils/predictions/parseOption";
-import { useDeleteComment } from "@/lib/supabase/mutations/comments/useDeleteComment";
+import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
 import Link from "next/link";
 
 interface CommentProps extends BetComment {

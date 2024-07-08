@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { IUser, IUserWithBet } from "@/lib/supabase/types";
+import { IUser, IUserWithBet } from "@/supabase/types";
 
 export type PostFeedType = {
   name: string;

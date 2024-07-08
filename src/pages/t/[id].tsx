@@ -2,7 +2,7 @@
 
 
 import { GetServerSideProps } from "next";
-import { supabase } from "@/lib/supabase/supabaseClient";
+import { supabase } from "@/supabase/supabaseClient";
 import { FeaturedBet } from "@/components/Topics";
 
 

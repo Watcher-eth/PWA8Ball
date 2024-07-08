@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { ImageResponse } from "@vercel/og";
 
-import { ITopic, IUser } from "@/lib/supabase/types";
+import { ITopic, IUser } from "@/supabase/types";
 
-import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
+import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
 import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts";
 
 export const runtime = "edge";

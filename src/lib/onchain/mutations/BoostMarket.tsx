@@ -9,7 +9,7 @@ import {
 } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, Address } from "viem";
-import { addLiquidityBoost } from "@/lib/supabase/mutations/addLiquidityBoost";
+import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
 
 
 

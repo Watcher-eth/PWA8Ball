@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getEightBallContract } from "../contracts/Eightball";
-import { useUpdateMarketOutcome } from "@/lib/supabase/mutations/useUpdateMarketOutcome";
+import { useUpdateMarketOutcome } from "@/supabase/mutations/useUpdateMarketOutcome";
 
 export const getOutcomeOptions = (marketId: number) => {
   const updateMarketOutcome = useUpdateMarketOutcome();

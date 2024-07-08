@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-import { useGetTopPredictors } from "@/lib/supabase/queries/leaderboard/useGetTopPredictors";
+import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors";
 
 import { AltSkeleton } from "@/components/ui/Skeleton";
 import { PredictorInfo } from "./PredictorInfo";

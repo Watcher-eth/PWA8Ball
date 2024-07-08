@@ -8,7 +8,7 @@ import { parseAndFormatDate } from "@/utils/datetime/extractEndDate"; // Ensure 
 import { useModalStore } from "@/lib/stores/ModalStore";
 import BoostModal from "../Modals/BoostMarket";
 import { useRouter } from "next/navigation";
-import { useGetLPForUser } from "@/lib/supabase/queries/user/useGetLPForUser";
+import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
 import { getTopicPath } from "@/utils/urls";

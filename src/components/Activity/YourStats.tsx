@@ -1,5 +1,5 @@
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetOrderCountForUser } from "@/lib/supabase/queries/user/useGetOrderCountForUser";
+import { useGetOrderCountForUser } from "@/supabase/queries/user/useGetOrderCountForUser";
 
 export function YourStats() {
   const { user } = useUserStore();

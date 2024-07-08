@@ -3,7 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Heart, UserPlus, MessageSquareText, Bell } from "lucide-react";
-import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/useGetNotificationsForUser";
+import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 
 const NotificationCard = ({ type, user, message, image, comment, index }) => {
   let icon;

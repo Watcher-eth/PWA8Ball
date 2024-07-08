@@ -1,7 +1,7 @@
 // src/utils/registerForPushNotifications.js
 // @ts-nocheck
 
-import { supabase } from "@/lib/supabase/supabaseClient";
+import { supabase } from "@/supabase/supabaseClient";
 
 const applicationServerPublicKey = "YOUR_PUBLIC_VAPID_KEY";
 
