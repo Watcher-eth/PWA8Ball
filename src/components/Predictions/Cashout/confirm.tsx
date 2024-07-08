@@ -21,9 +21,9 @@ interface RemoveLPConfirmationScreenProps {
   options: [];
 }
 
-export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
-  props
-) => {
+export const CashoutConfirmScrreen: React.FC<
+  RemoveLPConfirmationScreenProps
+> = (props) => {
   const { onClose } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -52,9 +52,8 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "93%",
-        backgroundColor: "#131313",
-        marginTop: "50px",
+        backgroundColor: "#101010",
+        marginTop: "0",
         padding: "20px",
         borderRadius: "30px",
       }}
@@ -67,7 +66,7 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
             display: "flex",
             flexDirection: "column",
             width: "100%",
-            backgroundColor: "#131313",
+            backgroundColor: "#101010",
             borderRadius: "20px",
           }}
         >
@@ -103,10 +102,10 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
               <span
                 style={{
                   fontSize: "17px",
-                  fontFamily: "AeonikBold",
                   color: "white",
-                  marginHorizontal: "6px",
+                  margin: "0 6px",
                   alignSelf: "center",
+                  fontWeight: 600,
                 }}
               >
                 Yes
@@ -136,6 +135,21 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
               justifyContent: "center",
             }}
           >
+            <div
+              style={{
+                fontSize: "3em",
+                fontWeight: "bold",
+                background:
+                  "linear-gradient(90deg,#dcedc1, white, #dcedc1, #a8e6cf, #dcedc1)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                textFillColor: "transparent",
+                margin: "10px 0",
+              }}
+            >
+              {props.points?.toFixed(2)} $12,392
+            </div>
             {/* <GradientText
               text={`${props.points?.toFixed(2)}`}
               fontSize={45}
@@ -163,7 +177,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
           >
             <span
               style={{
-                fontFamily: "AeonikBold",
                 fontSize: "17.5px",
                 color: "lightgray",
               }}
@@ -179,7 +192,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
             >
               <span
                 style={{
-                  fontFamily: "AeonikBold",
                   fontSize: "20px",
                   color: "white",
                   marginRight: "9px",
@@ -212,7 +224,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
           >
             <span
               style={{
-                fontFamily: "AeonikBold",
                 fontSize: "17.5px",
                 color: "lightgray",
               }}
@@ -228,7 +239,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
             >
               <span
                 style={{
-                  fontFamily: "AeonikBold",
                   fontSize: "19px",
                   color: "lightgray",
                   marginRight: "4px",
@@ -238,7 +248,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
               </span>
               <span
                 style={{
-                  fontFamily: "AeonikBold",
                   fontSize: "19px",
                   color: "white",
                   marginRight: "7px",
@@ -257,15 +266,14 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
                   borderRadius: "10px",
                   backgroundColor: "#181818",
                   alignItems: "center",
-                  gap: "-3px",
                   justifyContent: "center",
                 }}
               >
                 <span
                   style={{
                     fontSize: "8px",
-                    fontFamily: "AeonikBold",
                     color: "#FF0050",
+                    marginBottom: -10,
                   }}
                 >
                   Sept
@@ -293,7 +301,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
           >
             <span
               style={{
-                fontFamily: "AeonikBold",
                 fontSize: "17.5px",
                 color: "lightgray",
               }}
@@ -303,7 +310,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
 
             <span
               style={{
-                fontFamily: "AeonikBold",
                 fontSize: "20px",
                 color: "white",
                 textDecoration: "underline",
@@ -324,7 +330,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
           >
             <span
               style={{
-                fontFamily: "AeonikBold",
                 fontSize: "17.5px",
                 color: "lightgray",
               }}
@@ -340,7 +345,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
             >
               <span
                 style={{
-                  fontFamily: "AeonikBold",
                   fontSize: "20px",
                   marginRight: "5px",
                   color: "white",
@@ -417,4 +421,3 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
     </div>
   );
 };
-

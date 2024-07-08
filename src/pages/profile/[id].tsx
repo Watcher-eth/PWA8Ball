@@ -1,28 +1,15 @@
-// @ts-nocheck
-
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { usePrivy } from "@privy-io/react-auth";
-
-import {
-  PieChart,
-  Twitter,
-  CircleEllipsis,
-} from "lucide-react";
-
-import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
-import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
-import { useUserBalance } from "@/hooks/useUserBalance";
-
-import { GeneralFeed } from "@/components/profile/GeneralFeed";
+import { motion } from "framer-motion";
+import { PieChart, Twitter, CircleEllipsis } from "lucide-react";
+import { useGetUserByExternalAuthId } from "../../supabase/queries/user/useGetUserByExternalAuthId";
+import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
+import { useGetTotalFollowers } from "../../supabase/queries/user/useGetTotalFollowers";
+import { GeneralFeed } from "../../components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
-
-import { AltSkeleton } from "@/components/ui/Skeleton";
-
-
-
+import { skeletonVariants } from "@/components/ui/Skeleton";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
@@ -34,23 +21,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default function ProfilePage({
-  userId,
-}: {
-  userId: string;
-}) {
+export default function ProfilePage({ userId }: { userId: string }) {
   const router = useRouter();
   const { id: userID } = router.query; // Get the userId from the URL
 
-  console.log({userId, userID});
   const [edit, setEdit] = useState<boolean>(false);
   const { data: totalFollowers } = useGetTotalFollowers(userID);
-  const { data: userC } = useGetUserByExternalAuthId(userID);
+  const { data: userC, isLoading } = useGetUserByExternalAuthId(userID);
+  const [balanceLoading, setBalanceLoading] = useState(true);
+  const [userCBalance, setUserBalance] = useState(0);
 
-  const { balance, isLoading } = useUserBalance({
-    userAddress: userC?.walletaddress,
-  });
+  async function getUserBalances() {
+    const balance = await getUSDCBalance(userC?.walletaddress);
+    setBalanceLoading(false);
+    setUserBalance(Number(balance));
 
+    return balance;
+  }
+
+  useEffect(() => {
+    const balance = getUserBalances();
+  }, []);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
@@ -66,16 +57,20 @@ export default function ProfilePage({
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
         <Link href="/lp">
-          <div className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5)] backdrop-blur-lg rounded-[25px]">
+          <motion.div
+            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+            style={{ borderRadius: 25 }}
+          >
             <PieChart size={19} color="white" strokeWidth={3} />
-          </div>
+          </motion.div>
         </Link>
 
-        <div
-          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5)] backdrop-blur-lg rounded-[25px]"
+        <motion.div
+          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
+          style={{ borderRadius: 25 }}
         >
           <CircleEllipsis size={19} color="white" strokeWidth={3} />
-        </div>
+        </motion.div>
 
         <img
           src={userC?.pfp}
@@ -99,24 +94,35 @@ export default function ProfilePage({
               </p>
             </div>
           ) : userC?.socials?.farcaster ? (
-            <div className="font-medium flex items-center mt-0">
+            <div style={{ fontWeight: 500 }} className="flex items-center mt-0">
               <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
-              <p className="text-gray-200 text-lg font-medium  ml-1">
+              <p
+                style={{ fontWeight: 500 }}
+                className="text-gray-200 text-lg font-bold ml-1"
+              >
                 @{userC?.socials?.farcaster?.name}
               </p>
             </div>
           ) : null}
-          <div className="font-medium flex items-center mt-2">
-            {isLoading ? (
-              <div className="mr-[7px]">
-                <AltSkeleton className="h-[33px] w-[75px]" />
+          <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
+            {balanceLoading ? (
+              <div style={{ marginRight: 7 }}>
+                <motion.div
+                  className="h-[33px] w-[75px] bg-[#252525] rounded-xl"
+                  variants={skeletonVariants}
+                  initial="initial"
+                  animate="pulse"
+                />
               </div>
             ) : (
-              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl">
-                ${balance.toFixed(2)}
+              <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
+                ${(userCBalance / 10 ** 6).toFixed(2)}
               </p>
             )}
-            <p className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2 font-medium">
+            <p
+              style={{ fontWeight: 500 }}
+              className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
+            >
               {totalFollowers} Followers
             </p>
             <FollowButton
@@ -142,4 +148,4 @@ export default function ProfilePage({
       {/* {isModalOpen && <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />} */}
     </div>
   );
-};
+}

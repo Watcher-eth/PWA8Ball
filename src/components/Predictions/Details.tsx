@@ -4,14 +4,12 @@ import React, { useState } from "react";
 import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { parseAndFormatDate } from "@/utils/datetime/extractEndDate"; // Ensure you have this utility function
-import { useModalStore } from "@/lib/stores/ModalStore";
-import BoostModal from "../Modals/BoostMarket";
-import { useRouter } from "next/navigation";
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
+import BoostModal from "../Modals/BoostMarket.tsx";
+import { useGetLPForUser } from "../../supabase/queries/user/useGetLPForUser";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
-import { getTopicPath } from "@/utils/urls";
+import { getTopicPath } from "@/utils/urls/index.ts";
+import { parseAndFormatDate } from "@/utils/datetime/extractEndDate";
 
 export const BetDetails = ({
   endDate,
@@ -28,7 +26,6 @@ export const BetDetails = ({
 }) => {
   const { user } = useUserStore();
   const { day, month, year, fullMonth, fullDay } = parseAndFormatDate(endDate);
-  const router = useRouter();
   const {
     data: positions,
     isLoading,
@@ -125,12 +122,11 @@ export const BetDetails = ({
           </Link>
           <Link href={linkArgs}>
             <motion.div
-              className={`
-                flex items-center justify-center px-5 py-2
-                border  border-[#212121] rounded-[20px]
-                ${ joined ? "bg-white" : "bg-transparent"}
-              `}
+              className={`flex items-center justify-center px-5 py-2 border  border-[#212121] rounded-md ${
+                joined ? "bg-white" : "bg-transparent"
+              }`}
               whileTap={{ scale: 0.95 }}
+              style={{ borderRadius: 20 }}
             >
               <Link href={linkArgs}>
                 <span

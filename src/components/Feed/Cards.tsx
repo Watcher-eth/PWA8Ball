@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import React, { useEffect, useState } from "react";
-import "@/styles/fonts.css";
+import "../../styles/fonts.css";
 import { LayoutGroup, motion } from "framer-motion";
 import {
   Drawer,
@@ -10,23 +10,17 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Avatar, AvatarImage } from "../ui/avatar";
-
 import { ArrowLeft, Share } from "lucide-react";
 import { ShareModal } from "../Modals/ShareModal";
-import { VotingModal } from "../Modals/BuyVotes/VotingModal";
-
-import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
+import { PredictModal } from "../Modals/PredictModal";
+import { useGetUsersByMarketId } from "../../supabase/queries/markets/useGetUsersByMarketId";
+import { useGetMarketById } from "../../supabase/queries/useGetMarketById";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
-
 import { CommentSection } from "../Posts/Comments/CommentSection";
-
-
 import { BetDetails } from "../Predictions/Details";
 import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 import { BettersOverviewModal } from "../Predictions/Betters/OverviewModal";
-
 
 export function Cards(props) {
   const {
@@ -160,15 +154,15 @@ export function Cards(props) {
                     />
                   </ShareModal>
                 </div>
-                <motion.div className="w-[100vw] h-[45vh] relative">
+                <motion.div className="w-[100vw] h-[42vh] relative">
                   <img
-                    className="w-[100vw] object-cover h-[45vh] relative"
+                    className="w-[100vw] object-cover h-[42vh] relative"
                     alt="CoverImage"
                     src={image}
                   />
                   <div
                     style={{ zIndex: 2 }}
-                    className="h-[40vw] w-[100vw] bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
+                    className="h-[38vw] w-[100vw] bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
                   />
                 </motion.div>
               </div>
@@ -178,7 +172,7 @@ export function Cards(props) {
                   fontFamily: "Benzin-Bold",
                   lineHeight: "2.4rem",
                   fontSize:
-                    title?.length < 15 ? 35 : title?.length < 21 ? 32 : 26,
+                    title?.length < 14 ? 35 : title?.length < 21 ? 32 : 26.5,
                 }}
                 className="pr-10 mt-[-3.8rem] self-start text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white text-bold"
               >
@@ -246,7 +240,7 @@ export function Cards(props) {
                 style={{ zIndex: 2 }}
                 className="flex items-center w-[88vw] mt-[-4] mx-5 justify-between mx-2"
               >
-                <VotingModal
+                <PredictModal
                   handleOpen={handleOpen}
                   image={image}
                   multiplier={optionB.odds / 100}
@@ -257,7 +251,7 @@ export function Cards(props) {
                   marketId={id}
                   options={[optionB.name, optionA.name]}
                 />
-                <VotingModal
+                <PredictModal
                   handleOpen={handleOpen}
                   image={image}
                   multiplier={optionA.odds / 100}
@@ -285,7 +279,7 @@ export function Cards(props) {
                   id={id}
                 />
               </div>
-              <div className="z-[2]" >
+              <div className="z-[2]">
                 <CommentSection
                   topicId={topicId}
                   users={users}

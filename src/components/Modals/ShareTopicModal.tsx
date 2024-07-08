@@ -1,29 +1,16 @@
 // @ts-nocheck
 
-import { ReactNode } from "react";
-import { motion } from "framer-motion";
-
+import React, { ReactNode } from "react";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "../ui/drawer.tsx";
+import { motion } from "framer-motion";
+import { Toaster } from "../ui/sonner.tsx";
+import ShareCommunity from "../Share/ShareTopic.tsx";
 
-
-import { Toaster } from "@/components/ui/Toaster";
-import { ShareTopic } from "@/components/Share/ShareTopic";
-
-export function ShareTopicModal({
-  children,
-  id,
-  title,
-  image,
-  topic,
-  question,
-  members,
-  markets,
-}: {
+interface ShareModalProps {
   children: ReactNode;
   id: string;
   title: string;
@@ -32,7 +19,17 @@ export function ShareTopicModal({
   question: string;
   members: number;
   markets: number;
-}) {
+}
+function ShareTopicModal({
+  children,
+  id,
+  title,
+  image,
+  topic,
+  question,
+  members,
+  markets,
+}: ShareModalProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -73,9 +70,11 @@ export function ShareTopicModal({
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-white rounded-3xl h-[90vh] mb-5 w-[100vw] relative"
+            style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
+            className="bg-white rounded-3xl
+        h-[90vh] mb-5 w-[100vw] relative"
           >
-            <ShareTopic
+            <ShareCommunity
               id={id}
               title={title}
               image={image}
@@ -91,3 +90,4 @@ export function ShareTopicModal({
   );
 }
 
+export default ShareTopicModal;

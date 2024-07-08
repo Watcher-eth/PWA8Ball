@@ -3,7 +3,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 
-
 async function followUser({
   followerId,
   followingId,
@@ -18,7 +17,7 @@ async function followUser({
 
   if (error) throw new Error(error.message);
   return data;
-};
+}
 
 export const useFollowUser = () => {
   return useMutation({

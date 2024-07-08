@@ -3,7 +3,7 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";
@@ -13,17 +13,10 @@ const stepVariants = {
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -10 },
 };
-const NATIVE = "NATIVE"; // Special address for native token
-
-function BuyModal(props: { setStep: (step: number) => void; method: number }) {
-  // Innitate contract
-  // Check price and submission
-  // Check if still active
-  // Check if neccesary balance
-  //Cancle to go back
-
-  // Stablecoin as the default output token
-
+export function OnrampStep(props: {
+  setStep: (step: number) => void;
+  method: number;
+}) {
   return (
     <div>
       {props?.method === 1 && <BuyWithUniswap setStep={props?.setStep} />}
@@ -249,4 +242,3 @@ function BuyWithFiat(props: { setStep: (step: number) => void }) {
     </motion.div>
   );
 }
-export default BuyModal;

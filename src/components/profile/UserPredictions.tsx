@@ -2,10 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Skeleton, AltSkeleton } from "@/components/ui/Skeleton";
+import { Skeleton, skeletonVariants } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/router";
-
 
 export function UserPredictions({
   index,
@@ -38,14 +37,11 @@ export function UserPredictions({
         ) : (
           <Skeleton className="w-14 h-14 rounded-lg" />
         )}
-        <div className="flex flex-col ">
-          <p
-            className="text-white text-md font-bold"
-            style={{ fontFamily: "Aeonik-Bold" }}
-          >
-            {title}
+        <div className="flex flex-col items-start ">
+          <p className="text-white text-md font-bold">{title}</p>
+          <p className="text-gray-200 text-sm text-start max-w-[55vw] line-clamp-2">
+            {question}
           </p>
-          <p className="text-gray-200 text-sm line-clamp-2">{question}</p>
         </div>
       </div>
       <div
@@ -59,7 +55,7 @@ export function UserPredictions({
       </div>
     </motion.div>
   );
-};
+}
 
 export const UserPredictionSkeleton = ({ index }) => (
   <motion.div
@@ -70,13 +66,33 @@ export const UserPredictionSkeleton = ({ index }) => (
     className="flex items-center w-[90vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
-      <AltSkeleton className="w-14 h-14" />
+      <motion.div
+        className="w-14 h-14 bg-[#252525] rounded-xl"
+        variants={skeletonVariants}
+        initial="initial"
+        animate="pulse"
+      />
       <div className="flex flex-col gap-2">
-        <AltSkeleton className="w-[50vw] h-[20px]" />
-        <AltSkeleton className="w-[45vw] h-[17px]" />
+        <motion.div
+          className="w-[50vw] h-[20px] bg-[#252525] rounded-xl"
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
+        <motion.div
+          className="w-[45vw] h-[17px] bg-[#252525] rounded-xl"
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
       </div>
     </div>
-    <AltSkeleton className="w-[18%] h-[35px]"/>
+    <motion.div
+      className="w-[18%] h-[35px] bg-[#252525] rounded-xl"
+      variants={skeletonVariants}
+      initial="initial"
+      animate="pulse"
+    />
   </motion.div>
 );
 
@@ -120,4 +136,3 @@ export const CreatedPrediction = ({
     </motion.div>
   );
 };
-

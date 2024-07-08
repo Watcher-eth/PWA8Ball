@@ -7,12 +7,12 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { CashoutOverview } from "./overview";
 import CashOutWarningScreen from "./warning";
-import { CashoutConfirmScreen } from "./CashoutConfirmScreen";
+import { CashoutConfirmScrreen } from "./confirm";
 
 export function CashoutModal(props: {
   text: string;
@@ -25,7 +25,6 @@ export function CashoutModal(props: {
   odds: number;
   handleOpen: () => void;
 }) {
-  const [goal, setGoal] = React.useState(1);
   const [step, setStep] = React.useState(1);
 
   const { user } = useUserStore();
@@ -95,7 +94,7 @@ export function CashoutModal(props: {
               {step === 1 && <CashoutOverview />}
               {step === 2 && <CashOutWarningScreen />}
               {step === 3 && (
-                <CashoutConfirmScreen
+                <CashoutConfirmScrreen
                   option={props?.option}
                   options={props?.options}
                   image={props?.image}

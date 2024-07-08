@@ -1,17 +1,10 @@
 // @ts-nocheck
 
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { motion } from "framer-motion";
-import { Toaster } from "@/components/ui/Toaster";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-
-import { ShareBetModal } from "@/components/Share/ShareBetModal";
-
-
+import ShareBetModal from "../Share/ShareBetModal.tsx";
+import { Toaster } from "../ui/sonner";
 
 export function ShareModal({
   children,
@@ -88,4 +81,3 @@ export function ShareModal({
     </div>
   );
 }
-

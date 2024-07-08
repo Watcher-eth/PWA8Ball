@@ -1,47 +1,22 @@
 // @ts-nocheck
 
-import React, { useState, useEffect } from "react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/Button";
+import React, { useEffect } from "react";
+import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowDown,
   AtSign,
-  BadgeDollarSign,
-  Contact,
-  CreditCard,
-  MinusIcon,
-  PlusIcon,
   Repeat,
   ShoppingBag,
   WalletCards,
   X,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import BuyModal from "../BuyVotes/BuyModal";
+import { OnrampStep } from "../PredictModal/OnrampStep";
 import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {
-  const [goal, setGoal] = useState(1);
-  const [step, setStep] = useState(1);
-
-  function onClick(adjustment: number) {
-    setGoal(Math.max(1, Math.min(15, goal + adjustment)));
-  }
-  const stepVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
+  const [step, setStep] = React.useState(1);
 
   useEffect(() => {
     if (isOpen) {
@@ -55,7 +30,7 @@ export function LoginModal({ isOpen, onClose }) {
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-[#171717] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
+          className="bg-[#131313] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
         >
           <div className="flex mt-6 w-[86vw] items-center justify-between">
             {step === 1 && (
@@ -100,9 +75,7 @@ export function LoginModal({ isOpen, onClose }) {
           </div>
           <AnimatePresence>
             {step === 1 && <SignUp setStep={setStep} />}
-            {step === 4 && <BuyModal setStep={setStep} method={1} />}
-            {step === 5 && <BuyModal setStep={setStep} method={2} />}
-            {step === 6 && <SignUp setStep={setStep} />}
+            {step === 4 && <OnrampStep setStep={setStep} method={1} />}
           </AnimatePresence>
         </motion.div>
       </DrawerContent>

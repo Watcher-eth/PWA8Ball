@@ -37,7 +37,7 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
         flexDirection: "column",
         alignItems: "center",
         width: "93%",
-        backgroundColor: "#131313",
+        backgroundColor: "#101010",
         marginTop: "50px",
         padding: "20px",
         borderRadius: "30px",
@@ -73,8 +73,7 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
           <motion.div
             onClick={() => onClose()}
             style={{
-              paddingVertical: "8.5px",
-              paddingHorizontal: "6px",
+              padding: "8.5px 6px",
               borderRadius: "17px",
               overflow: "hidden",
               backgroundColor: "#1C1C1C",
@@ -88,7 +87,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
         <span
           style={{
             fontSize: "21px",
-            fontFamily: "AeonikBold",
             color: "white",
             marginTop: "14px",
           }}
@@ -98,7 +96,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
         <span
           style={{
             fontSize: "15px",
-            fontFamily: "AeonikBold",
             color: "lightgray",
             marginTop: "8px",
           }}
@@ -119,7 +116,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
           <span
             style={{
               fontSize: "18px",
-              fontFamily: "AeonikBold",
               color: "white",
               marginLeft: "4px",
             }}
@@ -131,8 +127,7 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            padding: "14px",
-            paddingVertical: "16px",
+            padding: "16px 14px",
             borderRadius: "15px",
             marginTop: "9px",
             backgroundColor: "#1C1C1C",
@@ -150,7 +145,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
             <span
               style={{
                 fontSize: "16.5px",
-                fontFamily: "AeonikBold",
                 color: "lightgray",
               }}
             >
@@ -159,7 +153,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
             <span
               style={{
                 fontSize: "16.5px",
-                fontFamily: "AeonikBold",
                 color: "lightgray",
               }}
             >
@@ -177,7 +170,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
             <span
               style={{
                 fontSize: "20px",
-                fontFamily: "AeonikBold",
                 color: "white",
               }}
             >
@@ -186,7 +178,6 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
             <span
               style={{
                 fontSize: "20px",
-                fontFamily: "AeonikBold",
                 color: "white",
               }}
             >
@@ -207,8 +198,7 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
       >
         <motion.div
           onClick={() => {
-            onClose();
-            props?.onClose();
+            props.changeStep(1);
           }}
           style={{
             marginTop: "12px",

@@ -24,10 +24,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "93%",
-        backgroundColor: "#131313",
-        padding: "20px",
-        marginTop: "50px",
+        backgroundColor: "#101010",
+        padding: "30px 20px",
         borderRadius: "30px",
         alignSelf: "center",
       }}
@@ -39,6 +37,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           alignItems: "center",
           justifyContent: "space-between",
           width: "100%",
+          marginBottom: "18px",
+          fontWeight: 600,
         }}
       >
         <div
@@ -60,7 +60,6 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           <span
             style={{
               marginLeft: "8px",
-              fontFamily: "AeonikBold",
               fontSize: "22px",
               color: "white",
             }}
@@ -71,8 +70,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         <motion.div
           onClick={() => props.onClose()}
           style={{
-            paddingVertical: "8.5px",
-            paddingHorizontal: "6px",
+            padding: "8.5px 6px",
             borderRadius: "17px",
             overflow: "hidden",
             backgroundColor: "#1C1C1C",
@@ -80,12 +78,13 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
             cursor: "pointer",
           }}
         >
-          <X color={"#585858"} strokeWidth={5} height={18} />
+          <X color={"#585858"} strokeWidth={5.5} height={18} />
         </motion.div>
       </div>
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           padding: "20px",
           borderRadius: "20px",
           backgroundColor: "#1C1C1C",
@@ -95,17 +94,16 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           width: "101%",
         }}
       >
-        <span
-          style={{ fontFamily: "AeonikBold", fontSize: "50px", color: "white" }}
-        >
-          ${props?.totalPot.toFixed(2)}
+        <span style={{ fontSize: "50px", color: "white", fontWeight: 800 }}>
+          ${props?.totalPot?.toFixed(2)}
         </span>
 
         <span
           style={{
-            fontFamily: "AeonikBold",
             fontSize: "15px",
             color: "lightgray",
+            fontWeight: 400,
+            marginTop: -11,
           }}
         >
           Unresolved
@@ -117,14 +115,13 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "5px 0",
+          margin: "18px 0 5px 0",
           width: "99%",
         }}
       >
         <span
           style={{
-            fontFamily: "AeonikBold",
-            fontSize: "17.5px",
+            fontSize: "17px",
             color: "lightgray",
           }}
         >
@@ -132,8 +129,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </span>
         <span
           style={{
-            fontFamily: "AeonikBold",
             fontSize: "20px",
+            fontWeight: 600,
             color: "white",
           }}
         >
@@ -152,8 +149,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
       >
         <span
           style={{
-            fontFamily: "AeonikBold",
-            fontSize: "17.5px",
+            fontSize: "17px",
             color: "lightgray",
           }}
         >
@@ -161,8 +157,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </span>
         <span
           style={{
-            fontFamily: "AeonikBold",
             fontSize: "20px",
+            fontWeight: 600,
             color: "white",
           }}
         >
@@ -181,8 +177,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
       >
         <span
           style={{
-            fontFamily: "AeonikBold",
-            fontSize: "17.5px",
+            fontSize: "17px",
             color: "lightgray",
           }}
         >
@@ -190,8 +185,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </span>
         <span
           style={{
-            fontFamily: "AeonikBold",
             fontSize: "20px",
+            fontWeight: 600,
             color: "white",
           }}
         >
@@ -209,7 +204,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         }}
       >
         <motion.div
-          onClick={() => props?.onClose()}
+          onClick={() => props?.changeStep(1)}
           style={{
             marginTop: "12px",
             display: "flex",
@@ -236,7 +231,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           </span>
         </motion.div>
         <motion.div
-          onClick={() => props?.changeStep(1)}
+          onClick={() => props?.changeStep(4)}
           style={{
             marginTop: "12px",
             display: "flex",
@@ -267,4 +262,3 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
     </div>
   );
 };
-

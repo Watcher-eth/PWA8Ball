@@ -19,11 +19,12 @@ export function NavBar() {
 
   return (
     <div
-      className="bg-black/[0.2] items-center justify-center p-[0.9rem] rounded-full backdrop-blur-md"
+      className="bg-black/[0.2]  items-center justify-center p-[0.9rem] rounded-full backdrop-blur-sm"
       style={{
         backdropFilter: "saturate(100%) blur(35px)",
         zIndex: 3,
         alignSelf: "center",
+        border: "0.5px solid rgba(255, 255, 255, 0.4)",
       }}
     >
       <div className="w-[65vw] flex px-2 justify-between items-center mx-auto">
@@ -39,11 +40,13 @@ export function NavBar() {
                 <ActivityIcon className="h-6 text-white w-6" />
               </motion.div>
             </Link>
-            <Link
-              href={getProfilePath(user.external_auth_provider_user_id)}
-            >
+            <Link href={getProfilePath(user.external_auth_provider_user_id)}>
               <motion.div whileTap={{ scale: 0.94 }}>
-                <UserCircle className="h-6 text-white w-6" />
+                {user?.pfp ? (
+                  <img className="h-6 w-6 rounded-full" src={user?.pfp} />
+                ) : (
+                  <UserCircle className="h-6 text-white w-6" />
+                )}
               </motion.div>
             </Link>
           </>
@@ -53,7 +56,11 @@ export function NavBar() {
               <ActivityIcon className="h-6 text-white w-6" />
             </motion.div>
             <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
-              <UserCircle className="h-6 text-white w-6" />
+              {user?.pfp ? (
+                <img className="h-6 w-6 rounded-full" src={user?.pfp} />
+              ) : (
+                <UserCircle className="h-6 text-white w-6" />
+              )}
             </motion.div>
           </>
         )}

@@ -16,8 +16,6 @@ import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
-import { withDeviceCheck} from "@/components/Common/MobileOnly";
-
 
 export const queryClient = new QueryClient();
 
@@ -37,7 +35,6 @@ const PRIVY_CONFIG = {
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
   // console.log({pageProps})
-  const CheckedComponent = withDeviceCheck(Component);
 
   // amplitude.getInstance().init("YOUR_API_KEY");
   useServiceWorker(); // Use the custom hook
@@ -56,9 +53,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             <AuthChecker>
               <Layout>
                 <DrawerProvider>
-                  <CheckedComponent>
-                    <Component {...pageProps} />
-                  </CheckedComponent>
+                  <Component {...pageProps} />
                 </DrawerProvider>
               </Layout>
             </AuthChecker>

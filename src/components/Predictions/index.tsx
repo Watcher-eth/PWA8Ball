@@ -1,33 +1,29 @@
 // @ts-nocheck
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ArrowLeft, Share } from "lucide-react";
-import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 import { AvatarImage, Avatar } from "../ui/avatar";
-import { VotingModal } from "../Modals/BuyVotes/VotingModal";
-import { ShareModal } from "../Modals/ShareModal";
+import { PredictModal } from "../Modals/PredictModal";
+import ShareModal from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
-
-import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
-import { BettersOverviewModal } from "./Betters/OverviewModal";
+import { motion } from "framer-motion";
+import { useGetUsersByMarketId } from "../../supabase/queries/markets/useGetUsersByMarketId";
+import { useGetMarketById } from "../../supabase/queries/useGetMarketById";
+import BettersOverviewModal from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";
-
 
 const Bet = ({ id }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const {
-    data: market,
-    error,
-    isLoading,
-    refetch,
-  } = useGetMarketById(String(id), user?.external_auth_provider_user_id);
+  const { data: market } = useGetMarketById(
+    String(id),
+    user?.external_auth_provider_user_id
+  );
 
   const defaultImages = [
     "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
@@ -56,7 +52,8 @@ const Bet = ({ id }) => {
       >
         <div className="relative h-[100vw]">
           <div
-            className="z-[2] flex items-center absolute top-3 justify-between px-6 py-2  w-[100vw]"
+            style={{ zIndex: 2 }}
+            className="flex items-center absolute top-3  justify-between px-6 py-2  w-[100vw]"
           >
             <ArrowLeft
               strokeWidth={3.8}
@@ -169,15 +166,15 @@ const Bet = ({ id }) => {
             fontFamily: "Aeonik-Bold",
             lineHeight: "1.35rem",
           }}
-          className="text-[1.05rem] line-clamp-2 mb-[-1] mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
+          className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
         >
           {market?.question}
         </div>
         <div
           style={{ zIndex: 2 }}
-          className="flex items-center w-[88vw]  mt-[-4] justify-between mx-2"
+          className="flex items-center w-[88vw]  mt-[-4] mx-5 justify-between mx-2"
         >
-          <VotingModal
+          <PredictModal
             handleOpen={() => {}}
             image={market?.image}
             multiplier={market?.outcomeb || 50}
@@ -188,7 +185,7 @@ const Bet = ({ id }) => {
             marketId={id}
             options={[market?.options[0].name, market?.options[1].name]}
           />
-          <VotingModal
+          <PredictModal
             handleOpen={() => {}}
             image={market?.image}
             multiplier={market?.outcomea || 50}
@@ -217,7 +214,7 @@ const Bet = ({ id }) => {
         </div>
         <div style={{ zIndex: 2 }}>
           <CommentSection
-            topicId={market?.topic_id}
+            topic_id={market?.topic_id}
             users={users}
             totalComments={market?.total_comments}
             optimisticComments={[]}

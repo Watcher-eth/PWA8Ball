@@ -7,38 +7,11 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/Button";
 import { motion } from "framer-motion";
-import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/AspectRatio";
-
-import { toast } from "sonner";
-
-import ChallengeFriends from "../../../public/images/ChallengeFriends.png";
-import { Toaster } from "../ui/Toaster";
+import { Toaster } from "../ui/sonner";
 import {FindFriends} from "../Share/InviteFriendsModal";
 
-
-
 export function FindFriendsModal({ children }: { children: ReactNode }) {
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "WebShare Example",
-          text: "Check out this website!",
-          url: "https://www.example.com",
-        });
-        console.log("Data was shared successfully");
-      } catch (err) {
-        console.error("Share failed:");
-      }
-    } else {
-      // Fallback for browsers that don't support the Web Share API
-      console.log("Web Share not supported on this browser");
-    }
-  };
-
   return (
     <div>
       <Drawer>

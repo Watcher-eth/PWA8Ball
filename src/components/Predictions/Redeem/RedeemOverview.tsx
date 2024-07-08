@@ -21,6 +21,7 @@ interface ProposeOutcomeProps {
 }
 
 export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
+  const { changeStep, onClose } = props;
   const { smartAccountReady, smartAccountClient, smartAccountAddress } =
     useSmartAccount();
 

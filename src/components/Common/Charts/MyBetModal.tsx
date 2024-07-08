@@ -11,7 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { AnimatedChart } from "./AnimatedChart";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
+import { useGetPricesForMarket } from "../../../supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -34,11 +34,14 @@ const MyBetModal = (props: {
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
+  setStep: () => void;
 }) => {
   const [timeframe, setTimeframe] = useState("1D");
 
-  const { data: prices, error: priceError } = useGetPricesForMarket("15", "1D");
-  console.log("pricces", prices);
+  const { data: prices, error: priceError } = useGetPricesForMarket(
+    props.betId,
+    timeframe
+  );
 
   const router = useRouter();
   const userOutcome = props?.optionNumber;
@@ -58,6 +61,11 @@ const MyBetModal = (props: {
     percentageDifference = ((lastPrice - firstPrice) / firstPrice) * 100;
   }
   if (currentPrices && currentPrices?.length <= 1) {
+    const now = new Date();
+    const oneMinuteLater = new Date(now.getTime() + 60000);
+    currentPrices.push({ value: 50, date: now });
+    currentPrices.push({ value: 50, date: oneMinuteLater });
+
     percentageDifference = 0;
   }
 
@@ -73,8 +81,8 @@ const MyBetModal = (props: {
         gap: 2,
         padding: 15,
         paddingTop: 10,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
       }}
     >
       <div
@@ -151,7 +159,7 @@ const MyBetModal = (props: {
               ? prices[prices.length - 1].value / 100
               : 100 - props.price
             : props.price}
-          % {props.option}
+          % {props.options[props?.option === 1 ? 0 : 1].name}
         </span>
         <span
           style={{
@@ -172,13 +180,14 @@ const MyBetModal = (props: {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          marginTop: -3,
         }}
       >
         <span
           style={{
             fontSize: 17,
             color: "lightgray",
-            fontWeight: 700,
+            fontWeight: 600,
           }}
         >
           {props.title}
@@ -187,7 +196,7 @@ const MyBetModal = (props: {
           style={{
             color: "lightgray",
             fontSize: 17,
-            fontWeight: 700,
+            fontWeight: 600,
           }}
         >
           {timeframe === "1D"
@@ -200,7 +209,7 @@ const MyBetModal = (props: {
         </span>
       </div>
       {prices ? (
-        <div style={{ width: "95%" }}>
+        <div style={{ height: "34.2vh" }}>
           <AnimatedChart prices={currentPrices} option={props.optionNumber} />
         </div>
       ) : (
@@ -222,7 +231,8 @@ const MyBetModal = (props: {
             key={index}
             onClick={() => setTimeframe(item)}
             style={{
-              padding: 6,
+              padding: "4px 7px",
+
               backgroundColor: timeframe === item ? "lightgray" : "transparent",
               borderRadius: 15,
             }}
@@ -365,7 +375,7 @@ const MyBetModal = (props: {
                 fontWeight: 600,
               }}
             >
-              {props.option}
+              {props.options[props?.option === 1 ? 0 : 1].name}
             </span>
           </div>
           <div
@@ -394,7 +404,7 @@ const MyBetModal = (props: {
                 $
                 {(
                   props.ownedAmount *
-                  (prices[prices.length - 1].value / 1000000)
+                  (prices[prices.length - 1]?.value / 1000000)
                 ).toFixed(2)}
               </span>
             )}
@@ -406,8 +416,8 @@ const MyBetModal = (props: {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 12,
-          marginBottom: 13,
+          marginTop: 8,
+          marginBottom: 10,
           alignSelf: "center",
           justifyContent: "space-between",
           width: "100%",
@@ -416,28 +426,18 @@ const MyBetModal = (props: {
         <motion.div
           onClick={() => {
             if (props.name) {
-              props.onClose();
               router.push({ pathname: "profile", query: { id: props.userId } });
             } else {
-              props.onClose();
-              setTimeout(() => {
-                props.openCashout({
-                  betId: props.betId,
-                  image: props.image,
-                  amount: props.ownedAmount,
-                  title: props.title,
-                  option: props.option,
-                });
-              }, 500);
+              props.setStep(2);
             }
           }}
           style={{
             marginTop: 11,
             borderRadius: 25,
-            padding: "12px 10px",
+            padding: "10px 10px",
             overflow: "hidden",
             backgroundColor: "#1D1D1D",
-            width: "45vw",
+            width: "44vw",
             alignItems: "center",
             justifyContent: "center",
             display: "flex",
@@ -471,27 +471,18 @@ const MyBetModal = (props: {
                 },
               });
             } else {
-              props.onClose();
-              setTimeout(() => {
-                props.handleReceipt({
-                  betId: props.betId,
-                  image: props.image,
-                  amount: props.ownedAmount,
-                  title: props.title,
-                  option: props.option,
-                });
-              }, 300);
+              props.setStep(4);
             }
           }}
           style={{
             marginTop: 11,
             display: "flex",
-            padding: "11px 8px",
+            padding: "10px 8px",
             flexDirection: "row",
             borderRadius: 25,
             overflow: "hidden",
             backgroundColor: "#D9D9D9",
-            width: "45vw",
+            width: "44vw",
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -515,7 +506,7 @@ const MyBetModal = (props: {
           width: "101%",
           backgroundColor: "rgba(100,100,100, 0.3)",
           margin: "14px 0",
-          marginTop: 30,
+          marginTop: 20,
         }}
       />
       <div
@@ -527,14 +518,21 @@ const MyBetModal = (props: {
         }}
       >
         <Lightbulb color="white" strokeWidth={3} size={17} />
-        <span style={{ color: "white", fontWeight: 600, fontSize: 19 }}>
+        <span
+          style={{
+            color: "white",
+            fontWeight: 600,
+            fontSize: 19,
+          }}
+        >
           About {props.title}
         </span>
       </div>
       <span
         style={{
           color: "white",
-          fontSize: 17.5,
+          fontSize: 16.5,
+          lineHeight: "19px",
           marginTop: "5px",
         }}
       >
@@ -543,10 +541,10 @@ const MyBetModal = (props: {
       <div
         style={{
           height: 1,
-          width: "101%",
+          width: "100%",
           backgroundColor: "rgba(100,100,100, 0.3)",
           margin: "14px 0",
-          marginTop: 18,
+          marginTop: 12,
         }}
       />
       <div

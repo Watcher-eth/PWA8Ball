@@ -1,5 +1,6 @@
 // @ts-nocheck
-import Link from "next/link";
+
+import React from "react";
 import {
   Drawer,
   DrawerClose,
@@ -7,11 +8,10 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProportionalSlider } from "./ProportionalSlider";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { ProportionalSlider } from "./Slider";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/router";
 import { shortenAddress } from "@/utils/address/shortenAddress";
-import { getProfilePath } from "@/utils/urls";
-
 
 export function BettersOverviewModal({
   children,
@@ -24,9 +24,10 @@ export function BettersOverviewModal({
   marketId,
   users,
 }) {
+  const router = useRouter();
 
   return (
-    <div className="z-[2]">
+    <div style={{ zIndex: 2 }}>
       <Drawer>
         <DrawerTrigger>{children}</DrawerTrigger>
         <DrawerContent className="border-0 rounded-3xl self-center">
@@ -40,46 +41,92 @@ export function BettersOverviewModal({
                 <div className="flex flex-row items-center ">
                   <img
                     src={image}
-                    className="h-14 w-14 rounded-[8px] object-cover overflow-hidden mr-2"
+                    className="h-14 w-14 rounded-md object-cover overflow-hidden mr-2"
+                    style={{ borderRadius: 8 }}
                   />
                   <div className="max-w-[70%]">
-                    <div className="font-[Aeonik-Bold] text-[17px] text-white">
+                    <div
+                      style={{
+                        fontFamily: "Aeonik-Bold",
+                        fontSize: "17px",
+                        color: "white",
+                      }}
+                    >
                       {title}
                     </div>
                     <div
-                      className={`
-                        font-[Aeonik-Bold] text-[lightgray] text-[12px] line-clamp-2
-                      `}
+                      style={{
+                        fontFamily: "Aeonik-Bold",
+                        fontSize: "12px",
+                        color: "lightgray",
+                      }}
+                      className="line-clamp-2"
                     >
                       {question}
                     </div>
                   </div>
                 </div>
                 <div
-                  className={`
-                    flex flex-row justify-between items-center mt-3 -mb-1
-                  `}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "12px",
+                    marginBottom: "-3px",
+                  }}
                 >
-                  <p className="font-[Aeonik-Bold] text-[15px] text-white">
+                  <p
+                    style={{
+                      fontFamily: "Aeonik-Bold",
+                      fontSize: "15px",
+                      color: "white",
+                    }}
+                  >
                     {(100 - odds).toFixed(0)}% {optionA}
                   </p>
-                  <p className="font-[Aeonik-Bold] text-[15px] text-white">
+                  <p
+                    style={{
+                      fontFamily: "Aeonik-Bold",
+                      fontSize: "15px",
+                      color: "white",
+                    }}
+                  >
                     {odds.toFixed(0)}% {optionB}
                   </p>
                 </div>
 
-                <div className="w-full">
+                <div
+                  style={{
+                    width: "100%",
+                  }}
+                >
                   <ProportionalSlider value={odds / 99} />
                 </div>
-                <div className="h-[1px] w-full bg-[#454141] my-5"/>
+                <div
+                  style={{
+                    height: "1px",
+                    width: "100%",
+                    backgroundColor: "#454141",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                />
                 {users?.length > 0 && (
-                  <p className="font-[Aeonik-Bold] text-[20px] text-white">
+                  <p
+                    style={{
+                      fontFamily: "Aeonik-Bold",
+                      fontSize: "20px",
+                      color: "white",
+                      marginBottom: "0px",
+                    }}
+                  >
                     {title} Predictors
                   </p>
                 )}
 
                 {users?.length > 0 ? (
-                  <div className="h-[28vh] overflow-y-scroll">
+                  <div style={{ height: "28vh", overflowY: "scroll" }}>
                     {users.map((user, index) => (
                       <motion.div
                         key={index}
@@ -98,10 +145,14 @@ export function BettersOverviewModal({
                 )}
                 {users?.length > 4 && (
                   <p
-                    className={`
-                      font-[AeonikBold] text-[14px] text-[#DCDCDC]
-                      my-4 text-center
-                    `}
+                    style={{
+                      fontFamily: "AeonikBold",
+                      fontSize: "14px",
+                      color: "#DCDCDC",
+                      marginBottom: "15px",
+                      marginTop: "15px",
+                      alignSelf: "center",
+                    }}
                   >
                     Show {users.length - 4} more
                   </p>
@@ -113,8 +164,7 @@ export function BettersOverviewModal({
       </Drawer>
     </div>
   );
-};
-
+}
 
 const BettersOverviewItem = ({
   name,
@@ -125,55 +175,122 @@ const BettersOverviewItem = ({
   external_auth_provider_user_id,
   onClose,
 }) => {
+  const router = useRouter();
 
   return (
-    <Link href={getProfilePath(external_auth_provider_user_id)}>
+    <div
+      onClick={() => {
+        onClose();
+        router.push({
+          pathname: `/profile/${external_auth_provider_user_id}`,
+          query: { id: external_auth_provider_user_id },
+        });
+      }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+        marginTop: "8px",
+        marginBottom: "8px",
+        cursor: "pointer",
+      }}
+    >
       <div
-        onClick={() => {
-          onClose();
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
         }}
-        className={`
-          flex flex-row justify-between items-center w-full
-          my-2 cursor-pointer
-        `}
       >
-        <div className="flex flex-row items-center">
-          <img
-            src={pfp}
-            alt={name}
-            className="size-[45px] rounded-[22px] overflow-hidden object-cover"
-          />
-          <div className="flex flex-col ml-2 max-w-[70%]">
-            <p className="font-[Aeonik-Bold] text-[18px] text-white">{name}</p>
-            <p className="font-[Aeonik-Bold] text-[14px] text-[lightgray]">
-              {shortenAddress(walletaddress)}
-            </p>
-          </div>
-        </div>
+        <img
+          src={pfp}
+          alt={name}
+          style={{
+            height: "45px",
+            width: "45px",
+            borderRadius: "22px",
+            overflow: "hidden",
+            objectFit: "cover",
+          }}
+        />
         <div
-          className={`
-            flex items-center justify-center
-            px-2.5 py-1.5 min-w-[90px] mr-1.5
-            border border-[#212121] rounded-[20px]
-            overflow-hidden
-          `}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "7px",
+            maxWidth: "70%",
+          }}
         >
-          <p className="font-[Aeonik-Bold] text-[15px] text-white">
-            ${(amount / 10 ** 6).toFixed(2)} {option.name}
+          <p
+            style={{
+              fontFamily: "Aeonik-Bold",
+
+              fontSize: "18px",
+              color: "white",
+            }}
+          >
+            {name}
+          </p>
+          <p
+            style={{
+              fontFamily: "Aeonik-Bold",
+              fontSize: "14px",
+              color: "lightgray",
+            }}
+          >
+            {shortenAddress(walletaddress)}
           </p>
         </div>
       </div>
-    </Link>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "6px 10px",
+          minWidth: "90px",
+          marginRight: "5px",
+          borderWidth: "1.5px",
+          borderColor: "#212121",
+          borderRadius: "20px",
+          overflow: "hidden",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "15px",
+            fontFamily: "Aeonik-Bold",
+            color: "white",
+          }}
+        >
+          ${(amount / 10 ** 6).toFixed(2)} {option.name}
+        </p>
+      </div>
+    </div>
   );
 };
 
 export function BettersOverviewPlaceholder() {
   return (
     <div
-      className="flex flex-row justify-between items-center w-full my-2"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+        marginTop: "8px",
+        marginBottom: "8px",
+      }}
     >
       <div
-        className="flex flex-row items-center"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
       >
         <Skeleton style={{ width: 45, borderRadius: 22 }} />
 
@@ -186,6 +303,7 @@ export function BettersOverviewPlaceholder() {
           }}
         >
           <Skeleton style={{ width: "40%", borderRadius: 10 }} />
+
           <Skeleton style={{ width: "65%", borderRadius: 10 }} />
         </div>
       </div>

@@ -5,15 +5,13 @@ import { motion } from "framer-motion";
 import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
 import { useConnectWallet, useLogin, usePrivy } from "@privy-io/react-auth";
 
-import { useCreateUser } from "@/supabase/mutations/useCreateUser";
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
-import { NewUser } from "@/supabase/types";
+import { useCreateUser } from "../../../supabase/mutations/useCreateUser";
+import { useUpdateUserProfile } from "../../../supabase/mutations/updateUser";
+import { NewUser } from "@/lib/supabase/types";
 
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-
-
 
 export function SignUp({ setStep }: { setStep: (step: number) => void }) {
   const createUserMutation = useCreateUser();
@@ -145,14 +143,15 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
           </div>
         </>
       )}
-      {isEmail && (
-        <EmailLogin setIsEmail={setIsEmail} setStep={setStep} />
-      )}
+      {isEmail && <EmailLogin setIsEmail={setIsEmail} setStep={setStep} />}
     </motion.div>
   );
 }
 
-function EmailLogin({ setIsEmail, setStep }: {
+function EmailLogin({
+  setIsEmail,
+  setStep,
+}: {
   setIsEmail: (isEmail: boolean) => void;
   setStep: (step: number) => void;
 }) {

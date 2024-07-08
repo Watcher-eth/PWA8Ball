@@ -9,9 +9,9 @@ import {
 } from "../ui/drawer";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/AspectRatio";
+import { AspectRatio } from "../ui/aspect-ratio";
 import { toast } from "sonner";
-import { Toaster } from "../ui/Toaster";
+import { Toaster } from "../ui/sonner";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 
 

@@ -1,51 +1,17 @@
 // @ts-nocheck
 
-import React, { useState, useEffect } from "react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/Button";
+import React, { useState } from "react";
+import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowDown,
   AtSign,
-  BadgeDollarSign,
   BatteryCharging,
   CalendarClock,
-  Contact,
-  CreditCard,
-  MinusIcon,
-  PlusIcon,
-  Repeat,
-  ShoppingBag,
-  WalletCards,
-  Receipt,
-  X,
 } from "lucide-react";
 
-
-
-
 export function BoostExplainerModal({ isOpen, setOpen, onClose }) {
-  const [goal, setGoal] = useState(1);
-  const [step, setStep] = useState(1);
-
-  function onClick(adjustment: number) {
-    setGoal(Math.max(1, Math.min(15, goal + adjustment)));
-  }
-  const stepVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
-
   return (
     <Drawer open={isOpen}>
       <DrawerContent className="border-0 rounded-3xl self-center">
@@ -63,14 +29,13 @@ export function BoostExplainerModal({ isOpen, setOpen, onClose }) {
   );
 }
 
-
-
-function BoostExplainer({ setOpen, onClose }: {
+function BoostExplainer({
+  setOpen,
+  onClose,
+}: {
   setOpen: () => void;
   onClose: () => void;
 }) {
-
-
   return (
     <div
       className={`
@@ -120,9 +85,7 @@ function BoostExplainer({ setOpen, onClose }: {
             style={{ marginRight: "10px", marginTop: -10 }}
           />
           <div className="flex flex-col">
-            <h3
-              className="text-[20px] text-white font-semibold mb-1.5 self-start"
-            >
+            <h3 className="text-[20px] text-white font-semibold mb-1.5 self-start">
               Improve accuracy of odds
             </h3>
             <p
@@ -144,9 +107,7 @@ function BoostExplainer({ setOpen, onClose }: {
             style={{ marginRight: "10px", marginTop: -12 }}
           />
           <div className="flex flex-col">
-            <h3
-              className="text-[20px] text-white font-semibold mb-1.5 self-start"
-            >
+            <h3 className="text-[20px] text-white font-semibold mb-1.5 self-start">
               Get rewarded
             </h3>
             <p
@@ -169,9 +130,7 @@ function BoostExplainer({ setOpen, onClose }: {
             style={{ marginRight: "10px", marginTop: -11 }}
           />
           <div className="flex flex-col">
-            <h3
-              className="text-[20px] text-white font-semibold mb-1.5 self-start"
-            >
+            <h3 className="text-[20px] text-white font-semibold mb-1.5 self-start">
               Play the long game
             </h3>
             <p
@@ -204,9 +163,7 @@ function BoostExplainer({ setOpen, onClose }: {
           `}
         >
           <div className="flex flex-row items-center justify-center">
-            <span
-              className="text-[20px] font-extrabold text-[#1D1D1D]"
-            >
+            <span className="text-[20px] font-extrabold text-[#1D1D1D]">
               Got it
             </span>
           </div>
@@ -214,4 +171,4 @@ function BoostExplainer({ setOpen, onClose }: {
       </div>
     </div>
   );
-};
+}

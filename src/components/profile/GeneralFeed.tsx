@@ -7,11 +7,11 @@ import {
   CreatedPrediction,
   UserPredictionSkeleton,
 } from "./UserPredictions";
-import { useQueryClient } from "@tanstack/react-query";
-import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
-import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
+import { useGetOrdersForUser } from "../../supabase/queries/user/useGetOrdersForUser";
+import { useGetMarketsCreatedByUser } from "../../supabase/queries/useGetMarketsCreatedByUser";
 import { NewPlaceholder } from "../Common/Placeholders/NewPlaceholders";
-import { BetModal } from "../Modals/MyBetModal.tsx";
+import { BetModal } from "../Modals/PredictionPositionModal";
+
 const aggregatePredictedItems = (orders: any) => {
   const aggregated = {};
 
