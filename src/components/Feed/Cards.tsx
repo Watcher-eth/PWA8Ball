@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import React, { useEffect, useState } from "react";
-import "../../styles/fonts.css";
+import "@/styles/fonts.css";
 import { LayoutGroup, motion } from "framer-motion";
 import {
   Drawer,

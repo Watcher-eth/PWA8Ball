@@ -1,6 +1,8 @@
 // @ts-nocheck
 
 import React, { ReactNode } from "react";
+import "@/styles/fonts.css";
+
 import { Button } from "../ui/Button";
 import {
   DrawerClose,
@@ -33,7 +35,7 @@ import { Badge } from "../ui/Badge";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { useProfile } from "@/lib/context/ProfileProvider";
 import Link from "next/link";
-import "../../styles/fonts.css";
+
 interface LayoutProps {
   children: ReactNode;
   profile: ProfileFragment;

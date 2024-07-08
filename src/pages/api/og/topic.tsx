@@ -4,7 +4,7 @@ import { ImageResponse } from "@vercel/og";
 import { ITopic, IUser } from "@/lib/supabase/types";
 
 import { SUPABASE_CLIENT } from "@/lib/supabase/supabaseClient";
-import { aeonikFontDataPromise, benzinFontDataPromise } from "@/lib/fonts";
+import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts";
 
 export const runtime = "edge";
 
