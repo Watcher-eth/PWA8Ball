@@ -9,7 +9,7 @@ import { init, AirstackProvider } from "@airstack/airstack-react";
 import { Layout } from "@/components/Common/Layout";
 import { Toaster } from "@/components/ui/Toaster";
 import { PrivyProvider } from "@privy-io/react-auth";
-import AuthChecker from "@/lib/providers/AuthProvider";
+import { AuthChecker } from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 
 import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
