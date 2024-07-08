@@ -31,7 +31,7 @@ import { Input } from "../ui/Input";
 import { Profile, ProfileFragment } from "@lens-protocol/client";
 import { Badge } from "../ui/Badge";
 import { shortenAddress } from "@thirdweb-dev/react";
-import { useProfile } from "@/lib/context/context";
+import { useProfile } from "@/lib/context/ProfileProvider";
 import Link from "next/link";
 import "../../styles/fonts.css";
 interface LayoutProps {
