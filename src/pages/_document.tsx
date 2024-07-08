@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { APP_DESCRIPTION, APP_NAME } from "@/utils/constants";
-import { OG_API_SPLASH_URL } from "@/utils/urls";
+import { APP_DESCRIPTION, APP_NAME } from "@/constants";
+
 
 
 export default function Document() {

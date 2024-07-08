@@ -1,6 +1,12 @@
+// @ts-nocheck
 import _ from "lodash"
 
-export function ExternalLink({ label, IconComponent, href, iconClassName="" }) {
+export function ExternalLink({ label, IconComponent, href, iconClassName="" }: {
+  label?: string
+  IconComponent?: any
+  href?: string
+  iconClassName?: string
+}) {
   return ( href && (href !== "unknown") && (href?.length > 0) &&
     <a
       className="group rounded-md bg-slate-400/10 ring-1 ring-white/10 hover:ring-white/20 m-1 pb-0.5"

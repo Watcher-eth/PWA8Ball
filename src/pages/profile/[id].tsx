@@ -14,7 +14,7 @@ import {
 
 import { useGetUserByExternalAuthId } from "@/lib/supabase/queries/user/useGetUserByExternalAuthId";
 import { useGetTotalFollowers } from "@/lib/supabase/queries/user/useGetTotalFollowers";
-import { useUserBalance } from "@/lib/hooks/useUserBalance";
+import { useUserBalance } from "@/hooks/useUserBalance";
 
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";

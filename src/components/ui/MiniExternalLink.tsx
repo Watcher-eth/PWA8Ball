@@ -1,9 +1,14 @@
-import _ from "lodash"
+// @ts-nocheck
+import _ from "lodash";
 
 export function MiniExternalLink({
   IconComponent,
   href,
-  iconClassName = "",
+  iconClassName = ""
+}: {
+  IconComponent?: any,
+  href?: string,
+  iconClassName?: string
 }) {
   return (
     href &&
@@ -17,8 +22,7 @@ export function MiniExternalLink({
         <IconComponent
           className={`w-3 h-3 inline-block mx-1.5 -mt-0.5 ${iconClassName}`}
         />
-
       </a>
     )
-  )
+  );
 }

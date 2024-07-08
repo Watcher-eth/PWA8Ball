@@ -12,7 +12,7 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import AuthChecker from "@/lib/providers/AuthProvider";
 import LoginModal from "@/components/Modals/LoginModal";
 
-import { useServiceWorker } from "@/lib/hooks/useServiceWorker"; // Import the hook
+import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
