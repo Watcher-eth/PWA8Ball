@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
 
-import { registerForPushNotificationsAsync } from "@/lib/utils/registerPushNotifs";
+import { registerForPushNotificationsAsync } from "@/utils/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/lib/supabase/queries/notifications/useGetNotificationsForUser";
 import { useCheckUserHasPushToken } from "@/lib/supabase/queries/notifications/useCheckUserHasPushToken";

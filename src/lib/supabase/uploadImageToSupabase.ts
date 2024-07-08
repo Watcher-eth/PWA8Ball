@@ -2,7 +2,7 @@
 
 import { decode } from "base64-arraybuffer";
 import { nanoid } from "nanoid";
-import { supabase } from "../drizzle/drizzle/supabase/supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 export const uploadToSupabase = async (
   base64Image: string,

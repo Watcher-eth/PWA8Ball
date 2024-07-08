@@ -9,7 +9,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { ProportionalSlider } from "./ProportionalSlider";
 import { Skeleton } from "@/components/ui/Skeleton";
-import { shortenAddress } from "@/lib/utils/shortenAddress";
+import { shortenAddress } from "@/utils/address/shortenAddress";
 import { getProfilePath } from "@/utils/urls";
 
 

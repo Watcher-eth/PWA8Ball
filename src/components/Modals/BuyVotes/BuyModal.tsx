@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { shortenAddress } from "@/lib/utils/shortenAddress";
+import { shortenAddress } from "@/utils/address/shortenAddress";
 const stepVariants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },

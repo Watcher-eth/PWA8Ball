@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@airstack/airstack-react";
-import { convertIpfsUrl } from "@/lib/utils/modifyIpfsUrl";
+import { convertIpfsUrl } from "@/utils/urls/modifyIpfsUrl";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { motion } from "framer-motion";
 import { useUpdateUserProfile } from "@/lib/supabase/mutations/updateUser";

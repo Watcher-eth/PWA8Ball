@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { Heart, ThumbsDown } from "lucide-react";
 import { useRouter } from "next/router";
 import { BetComment } from "@/types/PostTypes";
-import { timeAgo } from "@/lib/utils/timeAgo";
-import { parseOption } from "@/lib/utils/parseOption";
+import { timeAgo } from "@/utils/datetime/timeAgo";
+import { parseOption } from "@/utils/predictions/parseOption";
 import { useDeleteComment } from "@/lib/supabase/mutations/comments/useDeleteComment";
 import Link from "next/link";
 

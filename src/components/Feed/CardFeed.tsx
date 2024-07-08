@@ -5,8 +5,8 @@ import {Cards} from "./Cards";
 import { useGetAllTopics } from "@/lib/supabase/queries/useGetAllTopics";
 import { useGetTrendingMarkets } from "@/lib/supabase/queries/useGetTrendingMarkets";
 import {TopicHeader} from "./TopicHeader";
-import { stripEmoji } from "@/lib/utils/stripEmoji";
-import { parseOptions } from "@/lib/utils/parseOption";
+import { stripEmoji } from "@/utils/string/stripEmoji";
+import { parseOptions } from "@/utils/predictions/parseOption";
 import { useUserStore } from "@/lib/stores/UserStore";
 import {LoginModal} from "../Modals/LoginModal";
 

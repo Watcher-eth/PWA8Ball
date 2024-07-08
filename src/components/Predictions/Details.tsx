@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { parseAndFormatDate } from "@/lib/utils/extractEndDate"; // Ensure you have this utility function
+import { parseAndFormatDate } from "@/utils/datetime/extractEndDate"; // Ensure you have this utility function
 import { useModalStore } from "@/lib/stores/ModalStore";
 import BoostModal from "../Modals/BoostMarket";
 import { useRouter } from "next/navigation";
