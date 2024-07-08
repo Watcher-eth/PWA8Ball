@@ -1,7 +1,7 @@
 // useGetMarketsCreatedByUser.ts
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
-import { IMarket } from "../types";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { IMarket } from "@/lib/supabase/types";
 
 // This function fetches markets created by a specific user
 const fetchMarketsCreatedByUser = async (

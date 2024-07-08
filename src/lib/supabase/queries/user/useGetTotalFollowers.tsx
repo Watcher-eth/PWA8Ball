@@ -1,6 +1,6 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 
 const fetchTotalFollowers = async (userId: string) => {
   const { data, error, count } = await supabase

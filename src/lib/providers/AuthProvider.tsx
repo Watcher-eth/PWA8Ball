@@ -2,8 +2,8 @@
 import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { usePrivy } from "@privy-io/react-auth";
-import { useUserStore } from "@/lib/stores/UserStore";
 import { useInitializeUser } from "@/hooks/useInitializeUser";
+import { useUserStore } from "@/lib/stores/UserStore";
 import { useModalStore } from "@/lib/stores/ModalStore"; // Ensure to import modal store
 
 export function AuthChecker({

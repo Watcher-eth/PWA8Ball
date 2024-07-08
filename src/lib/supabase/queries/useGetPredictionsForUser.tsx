@@ -1,6 +1,6 @@
 // useGetPredictionsForUser.ts
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../supabaseClient";
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { IPrediction } from "@/types/BetTypes";
 
 // Extending IPrediction to include market data
