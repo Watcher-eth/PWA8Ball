@@ -17,7 +17,7 @@ const testTopics = [
   "⚽ UEFA European Cup",
 ];
 
-export const TopicHeader = ({ setSelectedTopic, selectedTopic }) => {
+export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
   const handleTopicPress = (item) => {
     if (selectedTopic === item) {
       setSelectedTopic("🔥 Trending");
@@ -27,7 +27,10 @@ export const TopicHeader = ({ setSelectedTopic, selectedTopic }) => {
   };
 
   return (
-    <div className="flex flex-col w-full bg-[#101010] pt-4 pb-4 pl-0">
+    <div
+      style={{ background: isDesktop === true ? "#080808" : "#101010" }}
+      className="flex flex-col w-full pt-4 pb-4 pl-0"
+    >
       <Marquee speed={40} gradient={false}>
         <div className="flex flex-row">
           {testTopics.slice(0, testTopics.length / 2).map((item, index) => (

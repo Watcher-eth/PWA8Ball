@@ -27,7 +27,7 @@ export function NavBar() {
         border: "0.5px solid rgba(255, 255, 255, 0.4)",
       }}
     >
-      <div className="w-[65vw] flex px-2 justify-between items-center mx-auto">
+      <div className="w-[65vw] max-w-[17rem] flex px-2 justify-between items-center mx-auto">
         <Link href={HOME_PATH}>
           <motion.div whileTap={{ scale: 0.94 }}>
             <Home className="h-6 text-white w-6" />

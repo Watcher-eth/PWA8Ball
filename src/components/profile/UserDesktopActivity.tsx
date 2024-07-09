@@ -4,13 +4,14 @@ import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCrea
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 interface UserActivityProps {
   walletAddress: string;
   userId: string;
   onParentRefresh?: boolean;
 }
 
-const UserActivity: React.FC<UserActivityProps> = ({
+export const DesktopUserActivity: React.FC<UserActivityProps> = ({
   walletAddress,
   userId,
   onParentRefresh,
@@ -50,22 +51,25 @@ const UserActivity: React.FC<UserActivityProps> = ({
   ];
 
   return (
-    <div className="h-screen w-full p-6">
-      <h1 className="text-white text-2xl mb-4">Your Activity</h1>
-      <div className="grid grid-cols-2 gap-4">
+    <div className="h-screen w-full p-6 pl-14">
+      <h1 className="text-white text-2xl font-semibold mb-4">Your Activity</h1>
+      <div className="grid grid-cols-2 gap-[-1rem]">
         {mergedData.map((item, index) => (
-          <div
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            onPress={{ scale: 0.99 }}
             key={index}
-            className="relative bg-cover bg-center rounded-lg shadow-lg"
-            style={{ backgroundImage: `url(${item.imageUrl})` }}
+            className="relative h-[25vh] w-[25vh] bg-cover bg-center rounded-[1.5rem] shadow-lg"
+            style={{ backgroundImage: `url(${item.image})` }}
           >
-            <div className="absolute inset-0 bg-black opacity-30 rounded-lg"></div>
-            <div className="relative p-4 text-white">
-              <span className="bg-green-500 text-xs font-semibold uppercase px-2 py-1 rounded">
+            <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
+
+            <div className="absolute bottom-0   p-4 text-white">
+              <span className="bg-green-500/[0.7] backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
                 {item.type === "predicted" ? "Active" : "Correct"}
               </span>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

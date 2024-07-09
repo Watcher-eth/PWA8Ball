@@ -77,20 +77,17 @@ export function Cards(props) {
               onClick={() => setIsDrawerOpen(true)}
               whileTap={{ scale: 0.96 }}
               style={{ borderRadius: "18px", fontFamily: "Aeonik-Bold" }}
-              className="flex items-start flex-col rounded-xl w-[88vw] m-3 justify-end h-[105vw] relative"
+              className="flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] m-3 justify-end h-[105vw] relative"
             >
-              <motion.div className="image-container">
-                <img
-                  alt="Card_Preview"
-                  src={image}
-                  className="w-full h-full object-cover rounded-xl"
-                  style={{ zIndex: 1, borderRadius: "18px" }}
-                />
-              </motion.div>
-
+              <img
+                alt="Card_Preview"
+                src={image}
+                className="w-full h-full absolute  object-cover rounded-xl"
+                style={{ zIndex: 1, borderRadius: "18px" }}
+              />
               <div
                 style={{ zIndex: 2 }}
-                className="h-[50vw] w-[88vw]   rounded-b-xl bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
+                className="h-[50vw] w-[88vw]  max-w-[21.5rem] max-h-[21.5rem]  rounded-b-xl bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
               />
               <div
                 style={{
@@ -102,14 +99,13 @@ export function Cards(props) {
               >
                 {title}{" "}
               </div>
-
               <div
                 style={{ zIndex: 2 }}
-                className="rounded-b-xl w-[88vw] items-center p-3 px-3 bg-gray-800/[0.2] backdrop-blur-lg flex"
+                className="rounded-b-xl w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2] backdrop-blur-lg flex"
               >
                 <img
                   style={{ borderRadius: "8px" }}
-                  className="h-[13vw] object-cover w-[13vw] relative"
+                  className="h-[13vw] max-w-[3.4rem] max-h-[3.4rem] object-cover w-[13vw] relative"
                   src={icon}
                 />
                 <div

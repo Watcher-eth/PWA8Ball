@@ -1,32 +1,41 @@
 // @ts-nocheck
 
 import React from "react";
-import useUserStore from "./useUserStore";
-import { User } from "./types";
 import { Bell } from "lucide-react";
-
+import { useUserStore } from "@/lib/stores/UserStore";
+import { motion } from "framer-motion";
 export const DesktopNavbar: React.FC = () => {
-  const user = useUserStore();
+  const { user } = useUserStore();
 
   return (
-    <div className="flex justify-between items-center p-4 bg-black text-white">
-      <div className="flex items-center">
+    <div className="flex justify-between items-center p-0 pb-8 pt-3 bg-[#080808] text-white">
+      <motion.div
+        onPress={{ scale: 0.98 }}
+        whileHover={{ scale: 1.05 }}
+        className="flex items-center"
+      >
         <img
-          src="https://path-to-your-left-image.png" // Replace with your image path
+          src="/images/OrbLogo.png" // Replace with your image path
           alt="Left Icon"
-          className="w-8 h-8 rounded-full"
+          className="w-12 h-12 rounded-full"
         />
-      </div>
+      </motion.div>
       <div className="flex items-center space-x-4">
-        <Bell className="w-6 h-6" />
+        <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
+          <Bell className="w-6 h-6" strokeWidth={3} />
+        </motion.div>
         {user && (
-          <div className="flex items-center space-x-2">
+          <motion.div
+            onPress={{ scale: 0.98 }}
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center space-x-2"
+          >
             <img
-              src={user.avatarUrl}
-              alt={user.username}
+              src={user.pfp}
+              alt={user.name}
               className="w-8 h-8 rounded-full"
             />
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
