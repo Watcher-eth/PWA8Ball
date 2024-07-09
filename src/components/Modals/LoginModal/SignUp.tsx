@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
 import { useConnectWallet, useLogin, usePrivy } from "@privy-io/react-auth";
 
-import { useCreateUser } from "../../../supabase/mutations/useCreateUser";
-import { useUpdateUserProfile } from "../../../supabase/mutations/updateUser";
+import { useCreateUser } from "@/supabase/mutations/useCreateUser";
+import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { NewUser } from "@/lib/supabase/types";
 
 import { Input } from "@/components/ui/Input";

@@ -11,7 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { AnimatedChart } from "./AnimatedChart";
-import { useGetPricesForMarket } from "../../../supabase/queries/charts/useGetPricesForMarket";
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 const timeframes = ["1H", "1D", "1W", "1M"];
 

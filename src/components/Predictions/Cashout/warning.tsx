@@ -13,7 +13,7 @@ interface CashOutWarningScreenProps {
   option: number;
 }
 
-const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
+export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
   const { onClose } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -289,4 +289,4 @@ const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
   );
 };
 
-export default CashOutWarningScreen;
+

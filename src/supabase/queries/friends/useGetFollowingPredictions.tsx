@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/supabase/supabaseClient";
 
 const fetchFollowingIds = async (userId: string) => {
   const { data, error } = await supabase

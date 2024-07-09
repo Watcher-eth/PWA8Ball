@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PenBox, UserMinus, UserPlus, UserRoundPlus } from "lucide-react";
-import { useFollowUser } from "../../supabase/mutations/follow/useFollowUser";
-import { useUnfollowUser } from "../../supabase/mutations/follow/useUnfollowUser";
+import { useFollowUser } from "@/supabase/mutations/follow/useFollowUser";
+import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useCheckIfFollowing } from "../../supabase/queries/user/useCheckIfFollowing";
+import { useCheckIfFollowing } from "@/supabase/queries/user/useCheckIfFollowing";
 
 export const FollowButton = ({
   profileId,

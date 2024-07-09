@@ -1,5 +1,5 @@
-import { useGetMembersForTopic } from "../../supabase/mutations/topics/useGetMembersForTopic";
-import { useGetMarketsForTopic } from "../../supabase/queries/useGetMarketsForTopic";
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
+import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import React from "react";
 
 interface EventCardProps {

@@ -7,8 +7,8 @@ import {
   CreatedPrediction,
   UserPredictionSkeleton,
 } from "./UserPredictions";
-import { useGetOrdersForUser } from "../../supabase/queries/user/useGetOrdersForUser";
-import { useGetMarketsCreatedByUser } from "../../supabase/queries/useGetMarketsCreatedByUser";
+import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
+import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { NewPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { BetModal } from "../Modals/PredictionPositionModal";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";

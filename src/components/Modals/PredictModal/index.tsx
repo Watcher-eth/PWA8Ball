@@ -16,6 +16,7 @@ import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { ConfirmPrediction } from "./ConfirmPrediction";
+import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 export function PredictModal(props: {
   text: string;
@@ -137,47 +138,18 @@ export function PredictModal(props: {
             className="mt-[1rem]"
           >
             {props?.option === 0 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {props?.text}{" "}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+              <OutcomeButton
+                text={props?.text}
+                multiplier={props?.multiplier}
+                option={props?.option}
+              />
             )}
             {props?.option === 1 && (
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Button className="active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF] text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]">
-                  <div style={{ fontSize: props?.text?.length < 6 ? 22 : 18 }}>
-                    {" "}
-                    {props?.text}
-                  </div>
-                  <div
-                    style={{
-                      marginLeft: "0.2rem",
-                      fontSize: "0.81rem",
-                      color: "rgba(250, 250, 250, 0.8)",
-                      fontWeight: 500,
-                      alignSelf: "flex-end",
-                      marginBottom: 2,
-                    }}
-                  >
-                    {props?.multiplier}%
-                  </div>
-                </Button>
-              </motion.div>
+              <OutcomeButton
+                text={props?.text}
+                multiplier={props?.multiplier}
+                option={props?.option}
+              />
             )}
           </motion.div>
         </DrawerTrigger>

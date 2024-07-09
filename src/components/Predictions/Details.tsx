@@ -5,7 +5,7 @@ import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import BoostModal from "../Modals/BoostMarket.tsx";
-import { useGetLPForUser } from "../../supabase/queries/user/useGetLPForUser";
+import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
 import { getTopicPath } from "@/utils/urls/index.ts";

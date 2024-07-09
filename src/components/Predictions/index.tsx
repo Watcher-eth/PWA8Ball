@@ -6,12 +6,12 @@ import { useUserStore } from "@/lib/stores/UserStore";
 
 import { AvatarImage, Avatar } from "../ui/avatar";
 import { PredictModal } from "../Modals/PredictModal";
-import ShareModal from "../Modals/ShareModal";
+import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { motion } from "framer-motion";
-import { useGetUsersByMarketId } from "../../supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "../../supabase/queries/useGetMarketById";
-import BettersOverviewModal from "./Betters/OverviewModal";
+import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
+import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
+import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";
 
