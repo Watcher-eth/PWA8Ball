@@ -7,7 +7,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { Vote } from "lucide-react";
 import GetGhoModal from "./getGhoModal";

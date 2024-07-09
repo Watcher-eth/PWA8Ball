@@ -1,15 +1,15 @@
 // @ts-nocheck
 
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PieChart, Twitter, CircleEllipsis } from "lucide-react";
-import { useGetUserByExternalAuthId } from "../../supabase/queries/user/useGetUserByExternalAuthId";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
-import { useGetTotalFollowers } from "../../supabase/queries/user/useGetTotalFollowers";
-import { GeneralFeed } from "../../components/profile/GeneralFeed";
+import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
+import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
+import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 import { skeletonVariants } from "@/components/ui/Skeleton";
 
@@ -24,10 +24,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function ProfilePage({ userId }: { userId: string }) {
-  const router = useRouter();
-  const { id: userID } = router.query; // Get the userId from the URL
 
-  const [edit, setEdit] = useState<boolean>(false);
+  const [edit, setEdit] = useState(false);
   const { data: totalFollowers } = useGetTotalFollowers(userId);
   const { data: userC, isLoading } = useGetUserByExternalAuthId(userId);
   const [balanceLoading, setBalanceLoading] = useState(true);

@@ -3,7 +3,7 @@
 import React, { ReactNode } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { motion } from "framer-motion";
-import ShareBetModal from "../Share/ShareBetModal.tsx";
+import { ShareBetModal } from "../Share/ShareBetModal.tsx";
 import { Toaster } from "../ui/sonner";
 
 export function ShareModal({

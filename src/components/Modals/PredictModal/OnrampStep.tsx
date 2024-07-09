@@ -13,6 +13,7 @@ const stepVariants = {
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -10 },
 };
+
 export function OnrampStep(props: {
   setStep: (step: number) => void;
   method: number;
