@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import React, { ReactNode, useState } from "react";
+import { useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -16,27 +15,6 @@ import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
 import { CashoutConfirmScrreen } from "../Predictions/Cashout/confirm.tsx";
 
-interface BetModalProps {
-  children: ReactNode;
-  title: string;
-  image: string;
-  price: number;
-  ownedAmount: number;
-  options: string[];
-  percentage: number;
-  betId: string;
-  topic: string;
-  icon: string;
-  question: string;
-  name?: string;
-  userId?: string;
-  option?: number;
-  optionNumber?: number;
-  isExternal?: boolean;
-  onClose: () => void;
-  openCashout: () => void;
-  handleReceipt: () => void;
-}
 export function BetModal({
   children,
   title,
@@ -57,11 +35,31 @@ export function BetModal({
   onClose,
   openCashout,
   handleReceipt,
-}: BetModalProps) {
+}: {
+  children: React.ReactNode;
+  title: string;
+  image: string;
+  price: number;
+  ownedAmount: number;
+  options: string[];
+  percentage: number;
+  betId: string;
+  topic: string;
+  icon: string;
+  question: string;
+  name?: string;
+  userId?: string;
+  option?: number;
+  optionNumber?: number;
+  isExternal?: boolean;
+  onClose: () => void;
+  openCashout: () => void;
+  handleReceipt: () => void;
+}) {
   const [snap, setSnap] = useState<number | string | null>(
     `${window.innerHeight * 0.85}px`
   );
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
 
   return (
     <div>
