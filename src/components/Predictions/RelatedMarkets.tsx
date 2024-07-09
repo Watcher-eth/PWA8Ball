@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
-import { useGetRelatedMarkets } from "../../supabase/queries/Reccomendations/useGetRelatedMarkets";
+import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
 export const RelatedMarkets = (props: { topicId: string; id: number }) => {
   const router = useRouter();
