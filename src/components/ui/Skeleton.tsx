@@ -13,7 +13,13 @@ export function Skeleton({
   );
 }
 
-export function AltSkeleton({ className, children }: { className?: string, children?: React.ReactNode }) {
+export function AltSkeleton({
+  className,
+  children
+}: {
+  className?: string
+  children?: React.ReactNode
+}) {
   return (
     <motion.div
       className={`bg-[#252525] rounded-xl ${className}`}

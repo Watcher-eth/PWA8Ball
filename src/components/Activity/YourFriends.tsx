@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Skeleton } from "../ui/Skeleton";
 
 export function YourFriends() {

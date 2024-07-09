@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { ReactNode, useEffect, useState } from "react";
+import {useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -26,7 +26,7 @@ export function CashoutModal(props: {
   odds: number;
   handleOpen: () => void;
 }) {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
 
   const { user } = useUserStore();
   return (
