@@ -25,10 +25,8 @@ import {
 } from "lucide-react";
 
 import { useVotingStore } from "@/lib/stores/VotingStore";
-import Marquee from "react-fast-marquee";
-import HoldButton from "./HoldButton";
-import SliderButton from "./HoldButton";
-import ConfirmButton from "./HoldButton";
+
+import { ConfirmButton } from "./ConfirmButton";
 
 
 export function BoostModal({

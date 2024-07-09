@@ -9,7 +9,7 @@ import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 
 
-const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
+export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const controls = useAnimation();
@@ -100,4 +100,4 @@ const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
   );
 };
 
-export default ConfirmButton;
+
