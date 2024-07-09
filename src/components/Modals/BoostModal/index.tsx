@@ -31,7 +31,7 @@ import SliderButton from "./HoldButton";
 import ConfirmButton from "./HoldButton";
 
 
-export default function BoostModal({
+export function BoostModal({
   children,
   image,
   id,

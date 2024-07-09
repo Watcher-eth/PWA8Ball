@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Gift, Users, Rocket, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import BoostModal from "../Modals/BoostMarket.tsx";
+import { BoostModal } from "../Modals/BoostModal";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
