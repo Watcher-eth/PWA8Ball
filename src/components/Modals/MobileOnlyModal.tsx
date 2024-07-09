@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import MobileOnly from "@/components/Common/MobileOnly";
+import { MobileOnly } from "@/components/Common/MobileOnly";
 
 interface MobileOnlyModalProps {
   open: boolean;
