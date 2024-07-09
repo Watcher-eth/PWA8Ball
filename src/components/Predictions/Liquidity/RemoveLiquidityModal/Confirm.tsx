@@ -11,7 +11,7 @@ import {
 import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 interface RemoveLPConfirmationScreenProps {
   setStep: (num: number) => void;

@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
 
 import { Layout } from "@/components/Common/Layout";
-import { Toaster } from "@/components/ui/Toaster";
+import { SonnerToaster } from "@/components/ui/SonnerToaster";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { AuthChecker } from "@/lib/providers/AuthProvider";
 
@@ -59,6 +59,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
           </PrivyProvider>
         </AirstackProvider>
       </QueryClientProvider>
+      {/**Need to check if this is valid*/}
+      <SonnerToaster
+        position="top-center"
+        style={{ zIndex: 100 }}
+        className="bg-gray-200 rounded-xl"
+      />
     </>
   );
 }

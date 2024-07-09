@@ -7,7 +7,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer.tsx";
 import { motion } from "framer-motion";
-import { Toaster } from "@/components/ui/sonner.tsx";
+
 import { ShareTopic } from "../Share/ShareTopic.tsx";
 
 export function ShareTopicModal({
@@ -59,12 +59,6 @@ export function ShareTopicModal({
             {children}
           </motion.div>
         </DrawerTrigger>
-        <Toaster
-          position="top-center"
-          style={{ zIndex: 100 }}
-          className="bg-gray-200 rounded-xl"
-        />
-
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div
             layout

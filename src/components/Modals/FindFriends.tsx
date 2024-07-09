@@ -8,7 +8,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { Toaster } from "@/components/ui/sonner";
 import {FindFriends} from "../Share/InviteFriendsModal";
 
 export function FindFriendsModal({ children }: { children: ReactNode }) {
@@ -24,12 +23,6 @@ export function FindFriendsModal({ children }: { children: ReactNode }) {
             {children}
           </motion.div>
         </DrawerTrigger>
-        <Toaster
-          position="top-center"
-          style={{ zIndex: 100 }}
-          className="bg-gray-200 rounded-xl"
-        />
-
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div
             layout

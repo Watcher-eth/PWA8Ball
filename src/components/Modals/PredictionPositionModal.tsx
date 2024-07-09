@@ -9,7 +9,6 @@ import {
   NestedDrawer,
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { Toaster } from "@/components/ui/sonner.tsx";
 import MyBetModal from "../Common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
@@ -86,12 +85,6 @@ export function BetModal({
             {children}
           </motion.div>
         </DrawerTrigger>
-        <Toaster
-          position="top-center"
-          style={{ zIndex: 100 }}
-          className="bg-gray-200 rounded-xl"
-        />
-
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div
             layout

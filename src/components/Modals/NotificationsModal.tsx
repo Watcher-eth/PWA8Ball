@@ -3,15 +3,10 @@
 import React, { ReactNode } from "react";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 
 
@@ -48,12 +43,6 @@ export function NotificationsModal({ children }: {
             {children}
           </motion.div>
         </DrawerTrigger>
-        <Toaster
-          position="top-center"
-          style={{ zIndex: 100 }}
-          className="bg-gray-200 rounded-xl"
-        />
-
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div
             layout
