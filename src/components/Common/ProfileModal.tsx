@@ -3,7 +3,7 @@
 import React, { ReactNode } from "react";
 import "@/styles/fonts.css";
 
-import { Button } from "../ui/Button";
+import { Button } from "@/components/ui/Button";
 import {
   DrawerClose,
   DrawerContent,
@@ -13,7 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
   Drawer,
-} from "../ui/drawer";
+} from "@/components/ui/drawer";
 import {
   Activity,
   Calendar,
@@ -28,10 +28,10 @@ import {
   X,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Avatar, AvatarImage } from "../ui/avatar";
-import { Input } from "../ui/Input";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/Input";
 import { Profile, ProfileFragment } from "@lens-protocol/client";
-import { Badge } from "../ui/Badge";
+import { Badge } from "@/components/ui/Badge";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { useProfile } from "@/lib/context/ProfileProvider";
 import Link from "next/link";

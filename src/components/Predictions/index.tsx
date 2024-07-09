@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { ArrowLeft, Share } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-import { AvatarImage, Avatar } from "../ui/avatar";
+import { AvatarImage, Avatar } from "@/components/ui/avatar";
 import { PredictModal } from "../Modals/PredictModal";
 import { ShareModal } from "../Modals/ShareModal";
 import { useModalStore } from "@/lib/stores/ModalStore";

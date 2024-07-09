@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { GetServerSideProps } from "next";
-
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -57,24 +56,28 @@ export default function ProfilePage({ userId }: { userId: string }) {
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
         <Link href="/lp">
-          <motion.div
-            className="absolute top-6 left-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-            style={{ borderRadius: 25 }}
+          <div
+            className={`
+              absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
+              top-6 left-6
+            `}
           >
             <PieChart size={19} color="white" strokeWidth={3} />
-          </motion.div>
+          </div>
         </Link>
 
-        <motion.div
-          className="absolute top-5 right-6 p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg "
-          style={{ borderRadius: 25 }}
+        <div
+          className={`
+              absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
+              top-5 right-6
+            `}
         >
           <CircleEllipsis size={19} color="white" strokeWidth={3} />
-        </motion.div>
+        </div>
 
         <img
           src={userC?.pfp}
-          className="h-[5rem] w-[5rem] rounded-full border-4 border-[#202020] "
+          className="size-[5rem] rounded-full border-4 border-[#202020] "
           alt="Profile"
         />
         <div className="text-white text-sm absolute top-[4rem] p-1 bg-[#202020] rounded-full font-bold mt-3">

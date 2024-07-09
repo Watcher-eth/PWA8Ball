@@ -6,12 +6,12 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
+} from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { AtSign, Copy, Share, Users, X } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { toast } from "sonner";
-import { Toaster } from "../ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 
 

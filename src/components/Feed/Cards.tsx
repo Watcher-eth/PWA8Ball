@@ -8,8 +8,8 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
-import { Avatar, AvatarImage } from "../ui/avatar";
+} from "@/components/ui/drawer";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Share } from "lucide-react";
 import { ShareModal } from "../Modals/ShareModal";
 import { PredictModal } from "../Modals/PredictModal";

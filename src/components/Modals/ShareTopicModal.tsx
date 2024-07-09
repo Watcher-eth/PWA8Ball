@@ -5,9 +5,9 @@ import {
   Drawer,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer.tsx";
+} from "@/components/ui/drawer.tsx";
 import { motion } from "framer-motion";
-import { Toaster } from "../ui/sonner.tsx";
+import { Toaster } from "@/components/ui/sonner.tsx";
 import { ShareTopic } from "../Share/ShareTopic.tsx";
 
 export function ShareTopicModal({

@@ -1,10 +1,10 @@
 // @ts-nocheck
 
 import React, { ReactNode } from "react";
-import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { ShareBetModal } from "../Share/ShareBetModal.tsx";
-import { Toaster } from "../ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export function ShareModal({
   children,

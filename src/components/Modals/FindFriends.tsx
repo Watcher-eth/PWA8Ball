@@ -6,9 +6,9 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
-} from "../ui/drawer";
+} from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { Toaster } from "../ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import {FindFriends} from "../Share/InviteFriendsModal";
 
 export function FindFriendsModal({ children }: { children: ReactNode }) {

@@ -8,9 +8,9 @@ import {
   DrawerOverlay,
   DrawerTrigger,
   NestedDrawer,
-} from "../ui/drawer.tsx";
+} from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { Toaster } from "../ui/sonner.tsx";
+import { Toaster } from "@/components/ui/sonner.tsx";
 import MyBetModal from "../Common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";

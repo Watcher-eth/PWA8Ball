@@ -10,7 +10,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerClose,
-} from "../ui/drawer";
+} from "@/components/ui/drawer";
 import {
   Calendar,
   MinusIcon,
@@ -20,11 +20,11 @@ import {
   WalletCards,
   X,
 } from "lucide-react";
-import { Input } from "../ui/Input";
+import { Input } from "@/components/ui/Input";
 import { motion } from "framer-motion";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/ui/Button";
 
 import { RandomMemoji } from "../Common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
