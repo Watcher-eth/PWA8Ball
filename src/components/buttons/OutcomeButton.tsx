@@ -16,36 +16,36 @@ export function OutcomeButton({
 }) {
   const outcomeOptionClassName = getClassNameFromOption(option);
   return (
-    <motion.div whileTap={{ scale: 0.95 }}>
-      <Button
-        style={{ width: isDesktop ? "18vw" : "42vw" }}
-        className={`
+    <Button
+      onClick={(e) => e.stopPropagation()}
+      className={`
             ${outcomeOptionClassName}
-            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl 
+            active:scale-[0.99] hover:scale-[1.01] transition-all
+            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl
+            ${isDesktop ? "w-[18vw]" : "w-[42vw]"}
             ${className}
         `}
+    >
+      <div className={text?.length < 6 ? "text-[22px]" : "text-[18px]"}>
+        {text}{" "}
+      </div>
+      <div
+        className={`
+          text-[0.81rem] font-medium text-white/80
+          self-end mb-0.5 ml-1
+        `}
       >
-        <div className={text?.length < 6 ? "text-[22px]" : "text-[18px]"}>
-          {text}{" "}
-        </div>
-        <div
-          className={`
-            text-[0.81rem] font-medium text-[rgba(250,250,250,0.8)]
-            self-end mb-0.5 ml-1
-          `}
-        >
-          {multiplier}%
-        </div>
-      </Button>
-    </motion.div>
+        {multiplier}%
+      </div>
+    </Button>
   );
 }
 
 function getClassNameFromOption(option: string | number) {
   if (option == 0) {
-    return "active:bg-[#FF0050] hover:bg-[#FF0050] bg-[#FF0050]" as const; // red
+    return "bg-rose-600 hover:!bg-rose-700 active:bg-rose-800" as const; // red
   } else if (option == 1) {
-    return "active:bg-[#0050FF] hover:bg-[#0050FF] bg-[#0050FF]" as const;
+    return "bg-blue-600 hover:!bg-blue-700 active:bg-blue-800" as const;
   } else {
     return "";
   }
