@@ -6,19 +6,22 @@ export function OutcomeButton({
   multiplier,
   option,
   className,
+  isDesktop,
 }: {
   text: string;
   multiplier: number;
   option: number;
   className?: string;
+  isDesktop?: boolean;
 }) {
   const outcomeOptionClassName = getClassNameFromOption(option);
   return (
     <motion.div whileTap={{ scale: 0.95 }}>
       <Button
+        style={{ width: isDesktop ? "18vw" : "42vw" }}
         className={`
             ${outcomeOptionClassName}
-            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl w-[42vw]
+            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl 
             ${className}
         `}
       >

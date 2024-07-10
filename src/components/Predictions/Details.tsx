@@ -23,6 +23,7 @@ export const BetDetails = ({
   handleBoost,
   image,
   id,
+  isDesktop,
 }) => {
   const { user } = useUserStore();
   const { day, month, year, fullMonth, fullDay } = parseAndFormatDate(endDate);
@@ -87,12 +88,16 @@ export const BetDetails = ({
         </div>
       </div>
       <BoostModal image={image} id={id}>
-        <BoostMarket Boost={3} handleBoost={handleBooster} />
+        <BoostMarket
+          isDesktop={isDesktop}
+          Boost={3}
+          handleBoost={handleBooster}
+        />
       </BoostModal>
       <Link href={linkArgs}>
         <motion.div
-          style={{ borderRadius: 12 }}
-          className="flex flex-row w-[90vw] mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
+          style={{ borderRadius: 12, width: isDesktop ? "36.5vw" : "90vw" }}
+          className="flex flex-row  mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
           whileTap={{ scale: 0.95 }}
         >
           <Link href={linkArgs}>
@@ -152,18 +157,22 @@ export const BetDetails = ({
   );
 };
 
-const BoostMarket = ({ Boost, handleBoost }) => {
+const BoostMarket = ({ Boost, handleBoost, isDesktop }) => {
   return (
     <motion.div
-      style={{ borderRadius: 12 }}
-      className="flex flex-row w-[90vw] items-center p-2 border border-[#212121]   mt-3 justify-between"
+      style={{ borderRadius: 12, width: isDesktop ? "36.5vw" : "90vw" }}
+      className="flex flex-row  items-center p-2 border border-[#212121]   mt-3 justify-between"
       whileTap={{ scale: 0.95 }}
       onClick={handleBoost}
     >
-      <Rocket className="ml-2 " size={30} color="white" />
-      <div className="flex flex-col ml-[-28px] space-y-[-0.1rem] items-start">
-        <span className="text-lg font-bold text-white">Boost this market</span>
-        <span className="text-sm text-white">Earn fees & $Cred</span>
+      <div className="flex flex-row space-x-4 items-center">
+        <Rocket className="ml-2 " size={30} color="white" />
+        <div className="flex flex-col ml-[-28px] space-y-[-0.1rem] items-start">
+          <span className="text-lg font-bold text-white">
+            Boost this market
+          </span>
+          <span className="text-sm text-white">Earn fees & $Cred</span>
+        </div>
       </div>
       <motion.div
         style={{ borderRadius: 20 }}

@@ -27,6 +27,7 @@ export function PredictModal(props: {
   options: string[];
   marketId: string;
   odds: number;
+  isDesktop?: boolean;
   handleOpen: () => void;
 }) {
   const [goal, setGoal] = React.useState(1);
@@ -139,6 +140,7 @@ export function PredictModal(props: {
           >
             {props?.option === 0 && (
               <OutcomeButton
+                isDesktop={props?.isDesktop}
                 text={props?.text}
                 multiplier={props?.multiplier}
                 option={props?.option}
@@ -146,6 +148,7 @@ export function PredictModal(props: {
             )}
             {props?.option === 1 && (
               <OutcomeButton
+                isDesktop={props?.isDesktop}
                 text={props?.text}
                 multiplier={props?.multiplier}
                 option={props?.option}

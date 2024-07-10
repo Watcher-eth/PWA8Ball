@@ -8,7 +8,7 @@ export const DesktopNavbar: React.FC = () => {
   const { user } = useUserStore();
 
   return (
-    <div className="flex justify-between items-center p-0 pb-8 pt-3 bg-[#080808] text-white">
+    <div className="flex justify-between items-center p-0 pb-8 pt-3  text-white">
       <motion.div
         onPress={{ scale: 0.98 }}
         whileHover={{ scale: 1.05 }}

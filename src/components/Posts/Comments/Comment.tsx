@@ -11,8 +11,6 @@ import { parseOption } from "@/utils/predictions/parseOption";
 import { getProfilePath } from "@/utils/urls";
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
 
-
-
 interface CommentProps extends BetComment {
   setReply: (name: string) => void;
   handleComment: () => void;
@@ -78,9 +76,7 @@ export function Comment({
             />
             <div className="flex flex-col">
               <div className="flex flex-row items-center">
-                <p className="text-[16.5px] font-[Aeonik-Bold] text-white">
-                  {user?.name}
-                </p>
+                <p className="text-[16.5px]  text-white">{user?.name}</p>
                 {hasPosition && (
                   <p
                     className={`
@@ -100,8 +96,7 @@ export function Comment({
               </div>
 
               <p className="text-[14.5px] text-lightgray mt-2">
-                Replied{" "}
-                {timeAgo(created_at ?? date)}
+                Replied {timeAgo(created_at ?? date)}
               </p>
             </div>
           </div>
@@ -156,4 +151,4 @@ export function Comment({
       <div className="w-[110%] self-center h-[0.35px] bg-[#303030] mt-1.5 mb-px z-20" />
     </motion.div>
   );
-};
+}

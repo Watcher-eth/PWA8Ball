@@ -9,7 +9,6 @@ import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllComments
 import { IUserWithBet } from "@/supabase/types";
 import { NewPlaceholderComment } from "@/components/Common/Placeholders/NewPlaceholders";
 
-
 export const CommentSection = ({
   marketId,
   totalComments,
@@ -63,12 +62,8 @@ export const CommentSection = ({
   }
 
   return (
-    <div
-      className="w-[96vw] flex flex-col p-5 pb-[78px]"
-    >
-      <p
-        className="text-[21px] font-[Aeonik-Bold] text-white mt-1 -mb-2"
-      >
+    <div className="w-[96vw] flex flex-col p-5 pb-[78px]">
+      <p className="text-[21px]  text-white mt-1 -mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
       <div>

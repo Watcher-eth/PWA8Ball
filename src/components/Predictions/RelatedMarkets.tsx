@@ -5,7 +5,11 @@ import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
-export const RelatedMarkets = (props: { topicId: string; id: number }) => {
+export const RelatedMarkets = (props: {
+  topicId: string;
+  id: number;
+  isDesktop?: boolean;
+}) => {
   const router = useRouter();
   const { topicId, id } = props;
 
@@ -14,7 +18,15 @@ export const RelatedMarkets = (props: { topicId: string; id: number }) => {
 
   if (markets && markets?.length >= 2)
     return (
-      <div style={styles.relatedMarkets}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: 20,
+          marginTop: -80,
+          backgroundColor: props?.isDesktop ? "transparent" : "#121212",
+        }}
+      >
         <div style={styles.header}>
           <StarHalf color={"white"} strokeWidth={3} />
           <span style={styles.headerText}>Related Predictions</span>
@@ -62,13 +74,6 @@ export const RelatedMarkets = (props: { topicId: string; id: number }) => {
 };
 
 const styles = {
-  relatedMarkets: {
-    display: "flex",
-    flexDirection: "column",
-    padding: 20,
-    backgroundColor: "#101010",
-    marginTop: -80,
-  },
   header: {
     display: "flex",
     flexDirection: "row",
