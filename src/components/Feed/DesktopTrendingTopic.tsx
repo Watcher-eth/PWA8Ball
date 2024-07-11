@@ -1,22 +1,11 @@
 // @ts-nocheck
-
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
-import React from "react";
 import { Cards } from "./Cards";
 import { parseOptions } from "@/utils/predictions/parseOption";
 
-interface EventCardProps {
-  title: string;
-  subtitle: string;
-  amount: string;
-  participants: string[];
-  date: string;
-  imageUrl: string;
-  topicId: string;
-}
 
-export const DesktopTrendingTopics: React.FC<EventCardProps> = ({
+export function DesktopTrendingTopics({
   title,
   subtitle,
   amount,
@@ -24,10 +13,17 @@ export const DesktopTrendingTopics: React.FC<EventCardProps> = ({
   date,
   imageUrl,
   topicId,
-}) => {
-  const id = topicId;
-  const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { data: markets, error, isLoading } = useGetMarketsForTopic(id);
+}: {
+  title: string;
+  subtitle: string;
+  amount: string;
+  participants: string[];
+  date: string;
+  imageUrl: string;
+  topicId: string;
+}) {
+  const { data: membersProfiles } = useGetMembersForTopic(topicId);
+  const { data: markets, error, isLoading } = useGetMarketsForTopic(topicId);
 
   return (
     <div className="relative w-[calc(100%-64px)] flex align-center h-[48vh] mx-8 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
