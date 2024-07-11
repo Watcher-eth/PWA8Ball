@@ -15,7 +15,7 @@ import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";
 
-const Bet = ({ id }) => {
+export function Predictions({ id }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
   const { user } = useUserStore();
@@ -227,4 +227,3 @@ const Bet = ({ id }) => {
     );
 };
 
-export default Bet;

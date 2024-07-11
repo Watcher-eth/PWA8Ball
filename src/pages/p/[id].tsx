@@ -1,5 +1,5 @@
 // @ts-nocheck
-import Bet from "@/components/Predictions";
+import { Predictions } from "@/components/Predictions";
 import { useRouter } from "next/router";
 
 
@@ -12,7 +12,7 @@ export default function MarketPage({ params, searchParams }: {
 
   return (
     <>
-      <Bet id={id} />
+      <Predictions id={id} />
     </>
   );
 }
