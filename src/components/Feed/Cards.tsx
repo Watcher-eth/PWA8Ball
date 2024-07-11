@@ -73,11 +73,13 @@ export function Cards(props) {
       <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>
         <Drawer disablePreventScroll={false}>
           <DrawerTrigger asChild>
-            <motion.div
+            <div
               onClick={() => setIsDrawerOpen(true)}
-              whileTap={{ scale: 0.96 }}
               style={{ borderRadius: "18px", fontFamily: "Aeonik-Bold" }}
-              className="flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative"
+              className={`
+                flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
+                shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-[1.01] active:scale-[0.96] transition-all
+              `}
             >
               <img
                 alt="Card_Preview"
@@ -87,7 +89,7 @@ export function Cards(props) {
               />
               <div
                 style={{ zIndex: 2 }}
-                className="h-[50vw] w-[88vw]  max-w-[21.5rem] max-h-[21.5rem]  rounded-b-xl bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
+                className="h-[50vw] w-[88vw]  max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
               />
               <div
                 style={{
@@ -100,8 +102,10 @@ export function Cards(props) {
                 {title}{" "}
               </div>
               <div
-                style={{ zIndex: 2 }}
-                className="rounded-b-xl w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2] backdrop-blur-lg flex"
+                className={`
+                  z-[2]
+                  rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2] backdrop-blur-lg flex
+                `}
               >
                 <img
                   style={{ borderRadius: "8px" }}
@@ -115,7 +119,7 @@ export function Cards(props) {
                   {description}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </DrawerTrigger>
           <DrawerContent className=" flex flex-col fixed  max-h-[103%] border-0 rounded-3xl items-center self-center">
             <motion.div

@@ -81,7 +81,7 @@ export function DesktopTrendingTopics({
         </div>
       </div>
       <div className="relative w-[70vw] -mt-3">
-        <div className="overflow-x-auto flex space-x-4">
+        <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2">
           {formatMarketArr({ markets })?.map((market, index) => {
             console.log("Rendering card for market:", market); // Log each market being rendered
             return (

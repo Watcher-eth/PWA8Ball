@@ -25,11 +25,12 @@ export function DesktopHomePage({ trendingMarkets }) {
           selectedTopic={selectedTopic}
         />
       </div>
-      <div className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6">
+      <div className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible">
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
               <Cards
+
                 image={bet.image!}
                 icon={bet?.icon}
                 description={bet?.description}

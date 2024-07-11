@@ -39,8 +39,13 @@ export function parseOption(option: string) {
   }
 
 
-  export function parseOptions(option: string, index: number) {
+  export function parseOptions(option: any, index: number) {
     // First, we check if the option is a JSON-like string using regex
+    const zeroBasedIndex = index - 1;
+    if ((typeof option)!= "string") {
+      return option[zeroBasedIndex].name
+    }
+
     if (/^\[.*\]$/.test(option)) {
       try {
         // Attempt to parse the JSON string
@@ -48,7 +53,7 @@ export function parseOption(option: string) {
         // Check if the index is valid (1 or 2) and within the array bounds
         if (Array.isArray(jsonArray) && jsonArray.length >= index) {
           // Convert 1-based index to 0-based
-          const zeroBasedIndex = index - 1;
+
           // Check if the object at the specified index has the 'name' key
           if (jsonArray[zeroBasedIndex] && jsonArray[zeroBasedIndex].name) {
             return jsonArray[zeroBasedIndex].name;
@@ -63,4 +68,3 @@ export function parseOption(option: string) {
     // If not a JSON array string, return an error message
     return "Invalid option format";
   }
-  
