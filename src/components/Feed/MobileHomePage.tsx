@@ -14,18 +14,6 @@ import { formatMarketArr } from "./formatMarketArr";
 export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();
 
-  const {
-    data: topicsData,
-    isLoading: topicsLoading,
-    error: topicsError,
-  } = useGetAllTopics();
-  // const {
-  //   data: markets,
-  //   isLoading,
-  //   error,
-  //   refetch: refetchMarkets,
-  // } = useGetTrendingMarkets();
-
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enrichedFeedData = formatMarketArr({ trendingMarkets, selectedTopic });
 

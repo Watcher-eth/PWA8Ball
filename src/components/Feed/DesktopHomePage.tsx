@@ -1,23 +1,14 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
+
 import { Cards } from "@/components/Feed/Cards";
 import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/Feed/TopicHeader";
-import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
-import { parseOptions } from "@/utils/predictions/parseOption";
-import { stripEmoji } from "@/utils/string/stripEmoji";
+
 import { formatMarketArr } from "./formatMarketArr";
 
 
 export function DesktopHomePage({ trendingMarkets }) {
-
-  // const {
-  //   data: markets,
-  //   isLoading,
-  //   error,
-  //   refetch: refetchMarkets,
-  // } = useGetTrendingMarkets();
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enrichedFeedData = formatMarketArr({ trendingMarkets, selectedTopic });
 
