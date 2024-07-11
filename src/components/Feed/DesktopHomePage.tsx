@@ -29,21 +29,7 @@ export function DesktopHomePage({ trendingMarkets }) {
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
-              <Cards
-
-                image={bet.image!}
-                icon={bet?.icon}
-                description={bet?.description}
-                title={bet.name}
-                subject={bet?.topic}
-                id={bet?.marketId}
-                stake={bet?.stake}
-                multiplier={bet?.multiplier}
-                topicId={bet?.topicId}
-                optionA={bet?.optionA}
-                optionB={bet?.optionB}
-                topicBio={bet?.topicBio}
-              />
+              <Cards {...bet}/>
             </div>
           );
         })}
