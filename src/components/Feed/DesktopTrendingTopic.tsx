@@ -83,7 +83,7 @@ export const DesktopTrendingTopics: React.FC<EventCardProps> = ({
           </div>
         </div>
       </div>
-      <div className="relative w-[70vw] mt-[-1.6rem]">
+      <div className="relative w-[70vw] -mt-3">
         <div className="overflow-x-auto flex space-x-4">
           {markets?.map((market, index) => {
             console.log("Rendering card for market:", market); // Log each market being rendered
