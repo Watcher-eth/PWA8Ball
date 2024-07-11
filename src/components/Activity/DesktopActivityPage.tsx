@@ -36,4 +36,3 @@ export const DesktopUserSideProfile: React.FC = () => {
   );
 };
 
-export default test;
