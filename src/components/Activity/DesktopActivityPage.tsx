@@ -1,13 +1,19 @@
 // @ts-nocheck
+import React from "react";
 
 import { ActivityPage } from "@/components/Activity";
 import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
 import { useUserStore } from "@/lib/stores/UserStore";
-import React from "react";
 
-function test() {
+
+export const DesktopUserSideProfile: React.FC = () => {
+  const { user } = useUserStore();
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
   const { user } = useUserStore();
   return (
     <div className="flex flex-col bg-[#080808]">
@@ -28,6 +34,6 @@ function test() {
       </div>
     </div>
   );
-}
+};
 
 export default test;
