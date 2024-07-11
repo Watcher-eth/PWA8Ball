@@ -15,7 +15,10 @@ export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();
 
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
-  const enrichedFeedData = formatMarketArr({ trendingMarkets, selectedTopic });
+  const enrichedFeedData = formatMarketArr({
+    markets: trendingMarkets,
+    selectedTopic,
+  });
 
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
@@ -40,6 +43,7 @@ export function MobileHomePage({ trendingMarkets }) {
               <div key={index}>
                 <Cards
                   handleOpen={handleOpenLoginModal}
+                  {...bet}
                   image={bet.image!}
                   icon={bet?.icon}
                   description={bet?.description}

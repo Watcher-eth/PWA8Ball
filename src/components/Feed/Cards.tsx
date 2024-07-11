@@ -28,7 +28,7 @@ export function Cards(props) {
     title,
     description,
     icon,
-    subject,
+    topic,
     id,
     stake,
     multiplier,
@@ -139,7 +139,7 @@ export function Cards(props) {
                     image={image}
                     title={title}
                     question={description}
-                    topic={subject}
+                    topic={topic}
                     options={[optionB, optionA]}
                   >
                     <Share
@@ -271,7 +271,7 @@ export function Cards(props) {
                   question={topicBio}
                   image={image}
                   betId={id}
-                  topic={subject}
+                  topic={topic}
                   id={id}
                 />
               </div>

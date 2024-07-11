@@ -3,6 +3,7 @@ import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembers
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { Cards } from "./Cards";
 import { parseOptions } from "@/utils/predictions/parseOption";
+import { formatMarketArr } from "./formatMarketArr";
 
 
 export function DesktopTrendingTopics({
@@ -81,39 +82,11 @@ export function DesktopTrendingTopics({
       </div>
       <div className="relative w-[70vw] -mt-3">
         <div className="overflow-x-auto flex space-x-4">
-          {markets?.map((market, index) => {
+          {formatMarketArr({ markets })?.map((market, index) => {
             console.log("Rendering card for market:", market); // Log each market being rendered
             return (
               <div key={index}>
-                <Cards
-                  handleOpen={() => {}}
-                  image={market.image || ""}
-                  icon={market.topic_image || ""}
-                  description={market.question || ""}
-                  title={market.title || ""}
-                  subject={market.topic_title || "Unknown"}
-                  id={market.id || ""}
-                  stake={market.usdcstake || 0}
-                  multiplier={
-                    market.outcomea === market.outcomeb
-                      ? 2
-                      : market.outcomea > market.outcomeb
-                      ? 1 + (100 - market.outcomeb) / market.outcomeb
-                      : 1 + (100 - market.outcomea) / market.outcomea
-                  }
-                  topicId={market.topic_id || ""}
-                  optionA={{
-                    multiplier: 1,
-                    name: parseOptions(market?.options, 1),
-                    odds: market.outcomea || 50,
-                  }}
-                  optionB={{
-                    multiplier: 1,
-                    name: parseOptions(market?.options, 2),
-                    odds: market.outcomeb || 50,
-                  }}
-                  topicBio={market?.topic_description || ""}
-                />
+                <Cards handleOpen={() => {}} {...market} />
               </div>
             );
           })}

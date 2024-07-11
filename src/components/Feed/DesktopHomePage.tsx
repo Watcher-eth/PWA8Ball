@@ -10,7 +10,10 @@ import { formatMarketArr } from "./formatMarketArr";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
-  const enrichedFeedData = formatMarketArr({ trendingMarkets, selectedTopic });
+  const enrichedFeedData = formatMarketArr({
+    markets: trendingMarkets,
+    selectedTopic,
+  });
 
 
   return (

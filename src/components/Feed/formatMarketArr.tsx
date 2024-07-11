@@ -3,28 +3,32 @@ import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarket
 import { parseOptions } from "@/utils/predictions/parseOption";
 import { stripEmoji } from "@/utils/string/stripEmoji";
 
-export function formatMarketArr({
-  trendingMarkets,
-  selectedTopic,
-}: {
-  trendingMarkets: IMarketWithTopicDetails[];
-  selectedTopic: string;
-}) {
-  const strippedSelectedTopic = stripEmoji(selectedTopic);
-  const enrichedFeedData =
-    trendingMarkets
-      ?.map(formatMarket)
-      ?.filter((item) =>
-        selectedTopic === "🔥 Trending"
+export function formatMarketArr(
+  {
+    markets,
+    selectedTopic,
+  }: {
+    markets: IMarketWithTopicDetails[]
+    selectedTopic?: string;
+  }
+) {
+  const strippedSelectedTopic = stripEmoji(selectedTopic ?? "");
+  const enrichedFeedData = markets
+    ?.map(formatMarket)
+    ?.filter((item) =>
+      selectedTopic
+        ? selectedTopic === "🔥 Trending"
           ? true
           : stripEmoji(item?.topic ?? item?.name) === strippedSelectedTopic
-      )
+        : true
+    );
   return enrichedFeedData ?? [];
 }
 
 
 function formatMarket(market: IMarketWithTopicDetails) {
   return {
+    ...market,
     marketId: market.id,
     name: market.title, // Use title as name
     description: market.question, // Use question as description
