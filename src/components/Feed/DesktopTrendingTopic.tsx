@@ -30,7 +30,7 @@ export const DesktopTrendingTopics: React.FC<EventCardProps> = ({
   const { data: markets, error, isLoading } = useGetMarketsForTopic(id);
 
   return (
-    <div className="relative w-[95vw] flex align-center h-[48vh] p-3 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
+    <div className="relative w-[calc(100%-64px)] flex align-center h-[48vh] mx-8 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}

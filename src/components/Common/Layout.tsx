@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { NavBar } from "@/components/Common/NavBar"; // Assuming NavBar is in the same directory
 import { isMobile } from "@/utils/isMobile";
 

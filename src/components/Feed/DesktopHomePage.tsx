@@ -1,5 +1,5 @@
 // @ts-nocheck
-
+import React, { useState } from "react";
 import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
 import { Cards } from "@/components/Feed/Cards";
 import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
@@ -7,7 +7,7 @@ import { TopicHeader } from "@/components/Feed/TopicHeader";
 import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import { parseOptions } from "@/utils/predictions/parseOption";
 import { stripEmoji } from "@/utils/string/stripEmoji";
-import React, { useState } from "react";
+
 
 export function DesktopHomePage() {
   const {
@@ -59,8 +59,7 @@ export function DesktopHomePage() {
         );
 
   return (
-    <div className=" w-[100vw] bg-[#080808]  h-full flex flex-col pt-3 p-10">
-      <DesktopNavbar />
+    <>
       <div className="mt-[-1rem]">
         <TopicHeader
           isDesktop={true}
@@ -68,7 +67,7 @@ export function DesktopHomePage() {
           selectedTopic={selectedTopic}
         />
       </div>
-      <div className="flex flex-row overflow-x-auto  no-scrollbar mb-7 w-full">
+      <div className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6">
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
@@ -97,6 +96,6 @@ export function DesktopHomePage() {
         amount={"260,032"}
         topicId="1"
       />
-    </div>
+    </>
   );
 }

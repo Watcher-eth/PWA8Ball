@@ -29,7 +29,7 @@ export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
   return (
     <div
       style={{ background: isDesktop === true ? "#080808" : "#101010" }}
-      className="flex flex-col w-full pt-4 pb-4 pl-0"
+      className="flex flex-col w-full pt-4 pb-4 "
     >
       <Marquee speed={40} gradient={false}>
         <div className="flex flex-row">

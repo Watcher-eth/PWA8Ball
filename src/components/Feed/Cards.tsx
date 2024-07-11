@@ -77,7 +77,7 @@ export function Cards(props) {
               onClick={() => setIsDrawerOpen(true)}
               whileTap={{ scale: 0.96 }}
               style={{ borderRadius: "18px", fontFamily: "Aeonik-Bold" }}
-              className="flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] m-3 justify-end h-[105vw] relative"
+              className="flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative"
             >
               <img
                 alt="Card_Preview"

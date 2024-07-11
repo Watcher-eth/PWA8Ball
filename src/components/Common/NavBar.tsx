@@ -8,7 +8,6 @@ import {
   UserCircle,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useAuthModalStore } from "@/lib/stores/ModalStore";
@@ -21,7 +20,7 @@ export function NavBar() {
 
   return (
     <div
-      className="bg-black/[0.2]  items-center justify-center p-[0.9rem] rounded-full backdrop-blur-sm"
+      className="bg-black/20 items-center justify-center p-[0.9rem] rounded-full backdrop-blur-sm"
       style={{
         backdropFilter: "saturate(100%) blur(35px)",
         zIndex: 3,
