@@ -21,7 +21,7 @@ export function OutcomeButton({
       className={`
             ${outcomeOptionClassName}
             active:scale-[0.99] hover:scale-[1.01] transition-all
-            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-xl
+            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-lg
             ${isDesktop ? "w-[18vw]" : "w-[42vw]"}
             ${className}
         `}
