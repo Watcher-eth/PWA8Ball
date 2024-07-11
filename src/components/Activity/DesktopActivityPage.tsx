@@ -1,62 +1,33 @@
 // @ts-nocheck
+
+import { ActivityPage } from "@/components/Activity";
+import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
+import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
+import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
+import { useUserStore } from "@/lib/stores/UserStore";
 import React from "react";
 
-import { Share, Share2 } from "lucide-react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { motion } from "framer-motion";
-export const DesktopUserSideProfile: React.FC = () => {
+function test() {
   const { user } = useUserStore();
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="h-[90vh] w-[55vw] p-6 bg-[#080808] pl-2 pr-10 flex flex-col text-white">
-      <div className="flex flex-col  mb-6">
-        <img
-          src={user.pfp}
-          alt={user.name}
-          className="rounded-full w-24 h-24 mb-4"
-        />
-        <h1 className="text-[1.8rem] font-bold">{user.name}</h1>
-        <p className="text-lg">@{user.name}</p>
-      </div>
-      <div className=" mb-8 mr-4">
-        <div className="flex justify-between text-lg mb-10">
-          <div className="flex flex-col">
-            <p className="font-semibold">Rank</p>
-            <p className="text-[1.45rem] font-semibold text-[lightgray]">
-              #1276{user.rank}
-            </p>
-          </div>
-          <div className="flex flex-col">
-            <p className="font-semibold">Cred</p>
-            <p className="text-[1.45rem] font-semibold text-[lightgray]">
-              {user.cred}345 $Cred
-            </p>
-          </div>
+    <div className="flex flex-col bg-[#080808]">
+      <DesktopNavbar />
+      <div className="grid grid-cols-10 gap-4 px-8 bg-[#080808] flex-grow">
+        <div className="col-span-3">
+          <DesktopUserSideProfile />
         </div>
-        <div className="mb-6">
-          <p className="font-semibold">Predictions made</p>
-          <p className="text-[1.45rem] font-semibold text-[lightgray]">
-            {user.predictionsMade}15 Predictions
-          </p>
+        <div className="col-span-4">
+          <ActivityPage isDesktop={true} />
         </div>
-        <div>
-          <p className="font-semibold">Correct Predictions</p>
-          <p className="text-[1.45rem] font-semibold text-[lightgray]">
-            {user.correctPredictions}4 Correct
-          </p>
+        <div className="col-span-3">
+          <DesktopUserActivity
+            walletAddress={user?.walletaddress}
+            userId={user?.external_auth_provider_user_id}
+          />
         </div>
       </div>
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        className="flex items-center justify-center px-5 py-3 bg-[#121212] font-semibold rounded-full mt-auto"
-      >
-        <Share className="w-5 h-5 mr-2" strokeWidth={3} size={20} />
-        Share your score
-      </motion.button>
     </div>
   );
-};
+}
+
+export default test;

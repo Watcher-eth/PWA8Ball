@@ -360,7 +360,7 @@ export const CashoutConfirmScrreen: React.FC<
                   marginRight: "-10px",
                   overflow: "hidden",
                 }}
-                src="/assets/icons/Pen.png"
+                src="/images/Pen.png"
                 alt="Pen"
               />
             </div>

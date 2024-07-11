@@ -12,7 +12,7 @@ export const DesktopUserSideProfile: React.FC = () => {
   }
 
   return (
-    <div className="h-[90vh] w-[55vw] p-6 bg-[#080808] pl-2 pr-10 flex flex-col text-white">
+    <div className="h-[90vh] w-full p-12 bg-[#121212] flex flex-col text-white">
       <div className="flex flex-col  mb-6">
         <img
           src={user.pfp}
@@ -52,7 +52,7 @@ export const DesktopUserSideProfile: React.FC = () => {
       </div>
       <motion.button
         whileHover={{ scale: 1.02 }}
-        className="flex items-center justify-center px-5 py-3 bg-[#121212] font-semibold rounded-full mt-auto"
+        className="flex items-center self-center w-full justify-center px-5 py-3 bg-[#151515] font-semibold rounded-full mt-auto"
       >
         <Share className="w-5 h-5 mr-2" strokeWidth={3} size={20} />
         Share your score

@@ -44,7 +44,7 @@ export function Comment({
       },
     });
   };
-
+  console.log("date", created_at, date);
   const handleLikePress = () => {
     setTemporaryLike(!temporaryLike);
     setTemporaryDislike(false);
@@ -96,7 +96,7 @@ export function Comment({
               </div>
 
               <p className="text-[14.5px] text-lightgray mt-2">
-                Replied {timeAgo(created_at ?? date)}
+                Replied {timeAgo(created_at ?? created_at)}
               </p>
             </div>
           </div>

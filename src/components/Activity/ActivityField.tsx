@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
 
-
 export const ActivityField = ({
   index,
   pfp,
@@ -11,6 +10,7 @@ export const ActivityField = ({
   image,
   question,
   option,
+  isDesktop,
   onOpenBottomSheet,
 }: {
   index: number;
@@ -20,10 +20,10 @@ export const ActivityField = ({
   title: string;
   image: string;
   question: string;
+  isDesktop?: boolean;
   option: { name: string; value: number };
   onOpenBottomSheet: () => void;
 }) => {
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -34,7 +34,10 @@ export const ActivityField = ({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        margin: "13.5px 0",
+        margin: isDesktop ? "13.5px 0" : "13.5px 10px",
+        background: isDesktop ? "#121212" : "transparent",
+        padding: isDesktop ? "12px 10px" : "0",
+        borderRadius: isDesktop ? "10px" : "0",
       }}
       onClick={onOpenBottomSheet}
     >
@@ -133,4 +136,3 @@ export const ActivityField = ({
     </motion.div>
   );
 };
-
