@@ -14,8 +14,7 @@ import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
-
-export function ActivityPage() {
+export function ActivityPage(props: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
   const { user } = useUserStore();
   const {
@@ -26,9 +25,7 @@ export function ActivityPage() {
   } = useGetFollowingPredictions(user?.external_auth_provider_user_id);
 
   if (isLoading || predictions === undefined) {
-    return (
-      <ActivitySkeleton/>
-    );
+    return <ActivitySkeleton />;
   }
 
   const groupedPredictions = groupPredictionsByDate(predictions);
@@ -37,9 +34,9 @@ export function ActivityPage() {
     <div
       className={`
         no-scrollbar flex flex-col
-        w-full min-h-[100vh]
+        ${props.isDesktop ? "w-[41vw]" : "w-full"} min-h-[100vh]
         p-[20px] pt-[30px]
-        bg-[#101010] relative
+        ${props.isDesktop ? "bg-[transparent]" : "bg-[#101010]"} relative
       `}
     >
       <div
@@ -55,7 +52,7 @@ export function ActivityPage() {
       <div
         className={`
           flex flex-row w-full justify-between items-center
-          mb-2.5 bg-[#101010]
+          mb-2.5 ${props?.isDesktop ? "bg-[transparent]" : "bg-[#101010]"}
         `}
       >
         <motion.button
@@ -75,7 +72,7 @@ export function ActivityPage() {
         <h1 className="text-[20px] text-white font-bold">
           {page ? "Global" : "Your Friends"}
         </h1>
-        <NotificationsModal>
+        <NotificationsModal isDesktop={props?.isDesktop}>
           <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
             <Bell color="white" strokeWidth={3} size={20} />
           </motion.button>
@@ -103,6 +100,7 @@ export function ActivityPage() {
                       </h2>
                       {groupedPredictions[dateKey].map((item, idx) => (
                         <ActivityField
+                          isDesktop={props?.isDesktop}
                           key={idx}
                           index={idx}
                           question={item.markets.question}
@@ -128,8 +126,7 @@ export function ActivityPage() {
       </div>
     </div>
   );
-};
-
+}
 
 function ActivitySkeleton() {
   return (

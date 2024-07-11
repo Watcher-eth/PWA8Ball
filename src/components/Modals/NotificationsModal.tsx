@@ -1,18 +1,18 @@
 // @ts-nocheck
 
 import React, { ReactNode } from "react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 
-
-export function NotificationsModal({ children }: {
+export function NotificationsModal({
+  children,
+  isDesktop,
+}: {
   children: ReactNode;
+  isDesktop?: boolean;
 }) {
+  console.log("notifs", isDesktop);
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -48,10 +48,10 @@ export function NotificationsModal({ children }: {
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-[#171717] rounded-t-3xl
-        h-[95vh] mb-5 w-[100vw] relative"
+            className={`bg-[#171717] rounded-t-3xl
+        h-[95vh] mb-5 ${isDesktop ? "w-[25vw]" : "w-[100vw]"} relative`}
           >
-            <NotificationsModalPage />
+            <NotificationsModalPage isDesktop={isDesktop} />
           </motion.div>
         </DrawerContent>
       </Drawer>

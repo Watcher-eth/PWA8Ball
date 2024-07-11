@@ -5,6 +5,7 @@ import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import { BetModal } from "../Modals/PredictionPositionModal";
 interface UserActivityProps {
   walletAddress: string;
   userId: string;
@@ -53,23 +54,43 @@ export const DesktopUserActivity: React.FC<UserActivityProps> = ({
   return (
     <div className="h-screen w-full p-6 pl-14">
       <h1 className="text-white text-2xl font-semibold mb-4">Your Activity</h1>
-      <div className="grid grid-cols-2 gap-[-1rem]">
+      <div className="grid grid-cols-2 gap-[1.5rem]">
         {mergedData.map((item, index) => (
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            onPress={{ scale: 0.99 }}
-            key={index}
-            className="relative h-[25vh] w-[25vh] bg-cover bg-center rounded-[1.5rem] shadow-lg"
-            style={{ backgroundImage: `url(${item.image})` }}
+          <BetModal
+            key={`predicted-${item.id}-${item.option}`}
+            title={item.title}
+            image={item.image}
+            price={item.amount}
+            ownedAmount={item.amount / 100000}
+            options={item.options}
+            percentage={item.percentage}
+            betId={item.market_id}
+            topic={item.market_id}
+            icon={item.icon}
+            question={item.question}
+            option={item.option}
+            optionNumber={item.optionNumber}
+            isExternal={item.isExternal}
+            onClose={() => handleOpenBottomSheet({})}
+            openCashout={() => handleOpenBottomSheet({})}
+            handleReceipt={() => handleOpenBottomSheet({})}
           >
-            <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              onPress={{ scale: 0.99 }}
+              key={index}
+              className="relative h-[20vh] w-[20vh] bg-cover bg-center rounded-[1rem] shadow-lg"
+              style={{ backgroundImage: `url(${item.image})` }}
+            >
+              <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
 
-            <div className="absolute bottom-0   p-4 text-white">
-              <span className="bg-green-500/[0.7] backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
-                {item.type === "predicted" ? "Active" : "Correct"}
-              </span>
-            </div>
-          </motion.div>
+              <div className="absolute bottom-0   p-4 text-white">
+                <span className="bg-green-500/[0.7] backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
+                  {item.type === "predicted" ? "Active" : "Correct"}
+                </span>
+              </div>
+            </motion.div>
+          </BetModal>
         ))}
       </div>
     </div>

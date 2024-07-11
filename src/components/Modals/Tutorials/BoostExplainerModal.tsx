@@ -9,6 +9,8 @@ import {
   AtSign,
   BatteryCharging,
   CalendarClock,
+  Receipt,
+  X,
 } from "lucide-react";
 
 export function BoostExplainerModal({ isOpen, setOpen, onClose }) {

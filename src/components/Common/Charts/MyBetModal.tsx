@@ -154,11 +154,11 @@ const MyBetModal = (props: {
         >
           {prices
             ? props.optionNumber === 1
-              ? prices[prices.length - 1].value / 100
+              ? prices[prices.length - 1].value / 10000
               : prices.length > 0
-              ? prices[prices.length - 1].value / 100
+              ? prices[prices.length - 1].value / 10000
               : 100 - props.price
-            : props.price}
+            : props.price / 10000}
           % {props.options[props?.option === 1 ? 0 : 1].name}
         </span>
         <span

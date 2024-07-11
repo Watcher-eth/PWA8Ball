@@ -8,7 +8,7 @@ import { useGetNotificationsForUser } from "@/supabase/queries/notifications/use
 import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCheckUserHasPushToken";
 import { NotificationsPage } from "./UserNotifications";
 
-export const NotificationsModalPage = () => {
+export const NotificationsModalPage = (props: { isDesktop?: boolean }) => {
   const { user } = useUserStore();
   const handlePressTurnOnNotifications = () => {
     registerForPushNotificationsAsync(user?.external_auth_provider_user_id);
@@ -40,7 +40,17 @@ export const NotificationsModalPage = () => {
 
   if (!isLoadingToken && !hasToken) {
     return (
-      <div style={styles.container}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: props?.isDesktop ? "25vw" : "100vw",
+          height: "90vh",
+          top: 0,
+          backgroundColor: "#101010",
+        }}
+      >
         <img
           style={styles.image}
           src={"./images/Notifications.png"}
@@ -68,15 +78,6 @@ export const NotificationsModalPage = () => {
 };
 
 const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100vw",
-    height: "90vh",
-    top: 0,
-    backgroundColor: "#101010",
-  },
   image: {
     height: "70vh",
     width: "100vw",
@@ -121,7 +122,6 @@ const styles = {
     cursor: "pointer",
   },
 };
-
 
 const NotificationsPlaceholder = () => {
   return (

@@ -79,7 +79,7 @@ export function BetModal({
         <DrawerTrigger>
           <motion.div
             whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.01 }}
             className="mt-[1rem]"
           >
             {children}
