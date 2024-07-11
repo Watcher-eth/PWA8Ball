@@ -1,5 +1,8 @@
 // @ts-nocheck
 
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
 import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
 import { PredictModal } from "@/components/Modals/PredictModal";
 import { ShareModal } from "@/components/Modals/ShareModal";
@@ -9,15 +12,14 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
 import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
 import { ArrowLeft, Share } from "lucide-react";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
 
-function DesktopHomePage() {
+export function DesktopMarketPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(10);
   const { user } = useUserStore();
@@ -230,4 +232,4 @@ function DesktopHomePage() {
   );
 }
 
-export default DesktopHomePage;
+
