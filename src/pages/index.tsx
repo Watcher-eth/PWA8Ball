@@ -1,31 +1,30 @@
 // @ts-nocheck
+import { GetServerSideProps } from "next";
 
-import {LoginModal} from "@/components/Modals/LoginModal";
-import {CardFeed} from "@/components/Feed/CardFeed";
 
-import { useAuthModalStore, useModalStore } from "@/lib/stores/ModalStore";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 import { DesktopHomePage } from "@/components/Feed/DesktopHomePage";
+import { MobileHomePage } from "@/components/Feed/MobileHomePage";
 import { MobiTop } from "@/components/ui/MobiTop";
+import { fetchTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 
 
-export default function Home({ address }: { address?: string }) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const trendingMarkets = await fetchTrendingMarkets();
 
-  //Lens Auth
-  const { isLoginModalOpen, openLoginModal, closeLoginModal } =
-    useAuthModalStore();
+  return {
+    props: {
+      trendingMarkets,
+    },
+  };
+};
+export default function Home({ trendingMarkets }) {
   return (
     <SmartAccountProvider>
       <MobiTop
-        mobile={
-          <div className="flex flex-col items-center py-2 min-h-screen  bg-[#101010]">
-            <CardFeed />
-            <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
-          </div>
-        }
-        desktop={<DesktopHomePage />}
+        mobile={<MobileHomePage trendingMarkets={trendingMarkets} />}
+        desktop={<DesktopHomePage trendingMarkets={trendingMarkets} />}
       />
-      {/*  */}
     </SmartAccountProvider>
   );
 }

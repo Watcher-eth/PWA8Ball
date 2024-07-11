@@ -16,7 +16,7 @@ export interface IMarketWithTopicDetails extends IMarket {
   topic_image: string;
 }
 
-const fetchTrendingMarkets = async (): Promise<IMarketWithTopicDetails[]> => {
+export const fetchTrendingMarkets = async (): Promise<IMarketWithTopicDetails[]> => {
   const { data, error } = await supabase.rpc("get_trending_markets");
 
   if (error) {
