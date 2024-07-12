@@ -14,6 +14,7 @@ export const ShareBetModal = ({
   topic,
   question,
   options,
+  isDesktop,
 }: {
   id: string;
   title: string;
@@ -21,9 +22,8 @@ export const ShareBetModal = ({
   topic: string;
   question: string;
   options: Option[];
+  isDesktop?: boolean;
 }) => {
-
-
   const shareLink = async () => {
     try {
       await navigator.share({
@@ -37,249 +37,104 @@ export const ShareBetModal = ({
   };
 
   return (
-    <div style={styles.modal}>
-      <h1 style={styles.header}>More fun</h1>
-      <div style={styles.subHeader}>
-        <div style={styles.imageGroup}>
+    <div
+      className={`${
+        isDesktop ? "h-[65vh]" : "h-[110%]"
+      } w-full flex flex-col p-5 ${
+        isDesktop ? "bg-[#080808]" : "bg-[#121212]"
+      } ${isDesktop ? "pt-5" : "pt-10"}  rounded-t-[20px]`}
+    >
+      <h1 className="text-4xl font-semibold text-white mb-[-2]">More fun</h1>
+      <div className="flex flex-row items-center mt-2">
+        <div className="flex flex-row items-center mx-[10px]">
           <img
             src="/images/Guy1Memoji.png"
             alt="Guy1 Memoji"
-            style={styles.memoji}
+            className="h-10 w-10 rounded-full ml-[-10px]"
           />
           <img
             src="/images/LadyMemoji.png"
             alt="Lady Memoji"
-            style={styles.memoji}
+            className="h-10 w-10 rounded-full ml-[-10px]"
           />
           <img
             src="/images/Guy2Memoji.png"
             alt="Guy2 Memoji"
-            style={styles.memoji}
+            className="h-10 w-10 rounded-full ml-[-10px]"
           />
         </div>
-        <h1 style={styles.header}> together</h1>
+        <h1 className="text-4xl font-semibold text-white mb-[-2]"> together</h1>
       </div>
-      <p style={styles.inviteText}>
+      <p
+        style={{ lineHeight: "1.4rem" }}
+        className="text-[1.1rem] mb-2 mt-4 text-lightgrey mt-2"
+      >
         Invite your friends and earn points when they make their first
         prediction
       </p>
-      <div style={styles.card}>
-        <div style={styles.cardHeader}>
-          <img src={image} alt={title} style={styles.cardImage} />
+      <div
+        className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
+      >
+        <div className="flex flex-row items-center mb-4 mt-2">
+          <img
+            src={image}
+            alt={title}
+            className="h-11 w-11 rounded-[4px] mr-2.5 object-cover"
+          />
           <div>
-            <h2 style={styles.cardTitle}>{title}</h2>
-            <p style={styles.cardTopic}>/{topic}</p>
+            <h2 className="text-lg text-white">{title}</h2>
+            <p className="text-base -mt-1 text-[lightgrey]">/{topic}</p>
           </div>
         </div>
-        <h2 style={styles.question}>{question}</h2>
-        <div style={styles.buttonGroup}>
-          <button
-            style={{ ...styles.optionButton, backgroundColor: "#FF0050" }}
-          >
-            <span style={styles.optionText}>{props.options[0].name}</span>
-            <span style={styles.optionPercentage}>
-              /{(100 / Number(props.options[0].value)).toFixed(0)}%
+        <h2
+          style={{ lineHeight: "1.8rem" }}
+          className="text-[1.4rem] text-white leading-none"
+        >
+          {question}
+        </h2>
+        <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
+          <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
+            <span className="text-xl text-white font-medium">
+              {options[0]?.name}
+            </span>
+            <span className="text-sm text-lightgrey">
+              /{options[0]?.value / 100}%
             </span>
           </button>
-          <button
-            style={{ ...styles.optionButton, backgroundColor: "#0050FF" }}
-          >
-            <span style={styles.optionText}>{props.options[1].name}</span>
-            <span style={styles.optionPercentage}>
-              /{(100 / Number(props.options[1].value)).toFixed(0)}%
+          <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
+            <span className="text-xl text-white font-medium">
+              {options[1].name}
+            </span>
+            <span className="text-sm text-lightgrey">
+              /{options[1].value / 100}%
             </span>
           </button>
         </div>
       </div>
-      <div style={styles.actionGroup}>
+      <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
         <button
-          style={styles.copyButton}
+          className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1"
           onClick={() => copyToClipboard("share bet")}
         >
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
-          <span style={styles.actionText}>Copy</span>
+          <span className="text-xl text-[#D9D9D9] font-extrabold">Copy</span>
         </button>
-        <button style={styles.shareButton} onClick={shareLink}>
+        <button
+          className="mt-3 p-2.5 rounded-[24px] bg-[#D9D9D9] w-[45%] flex flex-row items-center justify-center transition-transform transform hover:scale-102 active:scale-98"
+          onClick={shareLink}
+        >
           <ShareIcon height={20} color={"#1D1D1D"} strokeWidth={3} />
-          <span style={styles.shareText}>Share</span>
+          <span className="text-xl text-[#1D1D1D] font-extrabold ml-1">
+            Share
+          </span>
         </button>
       </div>
-      <div style={styles.earnings}>
+      <div className="flex flex-row items-center gap-1 mt-4 self-center transition-transform transform hover:scale-102 active:scale-98">
         <Gift color="lightgrey" size={16} />
-        <span style={styles.earningsText}>
+        <span className="text-sm text-lightgrey">
           Earn 10% of every point your friend receives
         </span>
       </div>
     </div>
   );
-};
-
-const styles = {
-  modal: {
-    height: "110%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    padding: 20,
-    backgroundColor: "#121212",
-    paddingTop: 40,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-  },
-  header: {
-    fontSize: 40,
-    color: "white",
-    marginBottom: -8,
-  },
-  subHeader: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 2,
-  },
-  imageGroup: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    margin: "0px 10px",
-  },
-  memoji: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    overflow: "hidden",
-    marginLeft: -10,
-  },
-  inviteText: {
-    fontSize: 18,
-    marginBottom: 10,
-    color: "lightgrey",
-    marginTop: 7,
-  },
-  card: {
-    width: "100%",
-    borderRadius: 20,
-    backgroundColor: "#191919",
-    display: "flex",
-    flexDirection: "column",
-    padding: 20,
-    marginTop: 65,
-  },
-  cardHeader: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 15,
-    marginTop: 5,
-    gap: -2,
-  },
-  cardImage: {
-    height: 42,
-    width: 42,
-    borderRadius: 4,
-    overflow: "hidden",
-    marginRight: 9,
-    objectFit: "cover",
-  },
-  cardTitle: {
-    fontSize: 19,
-    color: "white",
-  },
-  cardTopic: {
-    fontSize: 16,
-    color: "lightgrey",
-  },
-  question: {
-    fontSize: 26,
-    color: "white",
-    lineHeight: 1,
-  },
-  buttonGroup: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 15,
-    marginBottom: 5,
-    gap: 10,
-  },
-  optionButton: {
-    width: "50.5%",
-    padding: 11,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "baseline",
-    justifyContent: "center",
-    borderRadius: 10,
-    gap: 3,
-    overflow: "hidden",
-    zIndex: 20,
-  },
-  optionText: {
-    fontSize: 22,
-    color: "white",
-  },
-  optionPercentage: {
-    fontSize: 15,
-    color: "lightgray",
-  },
-  actionGroup: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 32,
-    alignSelf: "center",
-    justifyContent: "space-between",
-    width: "90%",
-    position: "absolute",
-    bottom: 18,
-    padding: "0 10px",
-  },
-  copyButton: {
-    marginTop: 12,
-    padding: 12,
-    borderRadius: 24,
-    overflow: "hidden",
-    backgroundColor: "#191919",
-    width: "45%",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    flexDirection: "row",
-    gap: 3,
-  },
-  shareButton: {
-    marginTop: 12,
-    display: "flex",
-    flexDirection: "row",
-    padding: 10,
-    borderRadius: 24,
-    overflow: "hidden",
-    backgroundColor: "#D9D9D9",
-    width: "45%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  actionText: {
-    fontSize: 20,
-    color: "#D9D9D9",
-    fontWeight: "800",
-  },
-  shareText: {
-    fontSize: 20,
-    color: "#1D1D1D",
-    fontWeight: "800",
-    marginLeft: 3,
-  },
-  earnings: {
-    display: "flex",
-    marginTop: 17,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    alignSelf: "center",
-  },
-  earningsText: {
-    fontSize: 13.5,
-    color: "lightgrey",
-  },
 };

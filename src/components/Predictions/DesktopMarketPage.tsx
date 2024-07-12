@@ -19,13 +19,11 @@ import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
 
-
 const DEFAULT_IMAGES = [
   "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
   "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
   "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
 ];
-
 
 export function DesktopMarketPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -189,7 +187,23 @@ export function DesktopMarketPage() {
               </div>
             </div>
             <div className="col-span-3  flex flex-col items-center p-3 px-1 -mr-9    pb-1 rounded-[1.4rem]">
-              <DesktopChart id={market?.id} question={market?.question} />
+              <DesktopChart
+                id={market?.id}
+                question={market?.question}
+                title={market?.title}
+                image={market?.image}
+                options={[
+                  {
+                    name: market?.options[0].name,
+                    value: market?.outcomea,
+                  },
+                  {
+                    name: market?.options[1].name,
+                    value: market?.outcomeb,
+                  },
+                ]}
+                topic={market?.topic_title}
+              />
             </div>
             <div className="col-span-3 bg-[#080808] p-4  pt-[3.8rem] rounded-lg">
               <RelatedMarkets
