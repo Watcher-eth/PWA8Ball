@@ -15,7 +15,7 @@ import { NotificationCard } from "./UserNotifications";
 import { NotificationsPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { SearchOverview } from "./SearchOverview";
 
-export function SearchDesktopModal({
+export function DesktopSearchModal({
   children,
   userId,
 }: {
