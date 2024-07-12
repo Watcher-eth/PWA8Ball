@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { TrendingUp } from "lucide-react";
+import { Share, TrendingUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { motion } from "framer-motion";
 import {
