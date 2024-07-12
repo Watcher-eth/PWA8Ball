@@ -12,7 +12,7 @@ export function DesktopNavbar() {
   return (
     <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
       <div
-        className="flex items-center active:scale-[0.98] hover:scale-[1.05] transition-all duration-300"
+        className="flex items-center active:scale-98 hover:scale-105 transition-all duration-300"
       >
         <img
           src="/images/OrbLogo.png" // Replace with your image path
@@ -22,7 +22,7 @@ export function DesktopNavbar() {
       </div>
       <div className="flex items-center space-x-8">
         <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
-          <div className="active:scale-[0.98] hover:scale-[1.05]">
+          <div className="active:scale-98 hover:scale-105">
             <Search className="w-6 h-6" strokeWidth={3} />
           </div>
         </DesktopSearchModal>

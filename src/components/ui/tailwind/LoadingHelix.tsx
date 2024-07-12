@@ -12,7 +12,7 @@ export function LoadingHelix({
 
   return (
     <div className="translate-x-1/2">
-     <div className="loader scale-[0.6] left-[90px] w-full ">
+     <div className="loader scale-60 left-[90px] w-full ">
        {dots.map(dot => (
          <div key={dot} className="dot"></div>
        ))}

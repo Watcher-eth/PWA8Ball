@@ -299,11 +299,11 @@ function SearchItem({
         flex items-center justify-between p-2 rounded-md
          transition-all duration-150 cursor-pointer
         ring-1 ring-transparent
-        hover:!bg-[#151515]/100 hover:!ring-white/10 hover:!scale-[1.01]
-        active:!scale-[0.99]
+        hover:!bg-[#151515]/100 hover:!ring-white/10 hover:!scale-101
+        active:!scale-99
         ${
           idx === currentIdx
-            ? "!ring-white/10 bg-[#151515]/50 !scale-[1.01]"
+            ? "!ring-white/10 bg-[#151515]/50 !scale-101"
             : "scale-100"
         }
       `}

@@ -62,7 +62,7 @@ export function Cards(props) {
               style={{ fontFamily: "Aeonik-Bold" }}
               className={`
                 flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
-                shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-[1.01] active:scale-[0.96] transition-all
+                shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-101 active:scale-96 transition-all
                 cursor-pointer
               `}
             >

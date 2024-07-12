@@ -61,7 +61,7 @@ export function MobileOnly() {
         <TypewriterEffectSmooth index={1} words={words} />
 
         <img
-          className="h-[20vh] rounded-[2rem] shadow-lg active:scale-[0.97] hover:scale-[1.02] transition-all"
+          className="h-[20vh] rounded-[2rem] shadow-lg active:scale-97 hover:scale-102 transition-all"
           src={"/images/Logo.png"}
         />
 
