@@ -143,7 +143,6 @@ export function DesktopMarketPage() {
                 <div className="h-[0.1rem] mt-[0rem] bg-[#212121] mx-5 rounded-full" />
                 <div
                   style={{
-                    fontFamily: "Aeonik-Bold",
                     lineHeight: "1.35rem",
                   }}
                   className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1 mt-2 text-start leading-6 text-gray-300 max-w-full ml-5"
@@ -192,17 +191,17 @@ export function DesktopMarketPage() {
                 />
               </div>
             </div>
-            <div className="col-span-3 bg-[#121212] flex flex-col items-center p-3 rounded-[1.4rem]">
-              <DesktopChart question="Will Gta 6 cost more than 80 Dollars on release?" />
+            <div className="col-span-3 bg-[#121212] flex flex-col items-center p-3  pb-1 rounded-[1.4rem]">
+              <DesktopChart question={market?.question} />
             </div>
-            <div className="col-span-3 bg-[#080808] p-4 pt-16 rounded-lg">
+            <div className="col-span-3 bg-[#080808] p-4 pt-[3.8rem] rounded-lg">
               <RelatedMarkets
                 isDesktop={true}
                 topicId={market?.topic_id}
                 id={market?.id}
               />
             </div>
-            <div className="col-span-7 bg-[#080808] p-4 rounded-lg mt-4">
+            <div className="col-span-4 bg-[#080808] max-w-[70vw] p-4 rounded-lg mt-4">
               <CommentSection
                 topic_id={market?.topic_id}
                 users={users}
@@ -210,6 +209,7 @@ export function DesktopMarketPage() {
                 optimisticComments={[]}
                 marketId={id}
                 setReply={() => {}}
+                isDesktop={true}
                 handleComment={() => {}}
               />
             </div>

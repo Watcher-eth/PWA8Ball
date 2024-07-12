@@ -95,7 +95,7 @@ export function Comment({
                 )}
               </div>
 
-              <p className="text-[14.5px] text-lightgray mt-2">
+              <p className="text-[14.5px] text-[lightgray] mt-0">
                 Replied {timeAgo(created_at ?? created_at)}
               </p>
             </div>
@@ -111,7 +111,7 @@ export function Comment({
             handleComment();
           }}
           className={`
-            text-[15px] font-[Aeonik-Bold] text-[#DDDDDD]
+            text-[15px] text-[#DDDDDD]
             bg-none border-none cursor-pointer
           `}
         >

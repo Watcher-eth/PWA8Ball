@@ -125,7 +125,7 @@ export function DesktopChart(props: { question: string }) {
       <motion.div
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.98 }}
-        className="w-[25vw] bg-[#171717] rounded-xl p-5 py-4 flex flex-row items-center self-center justify-center"
+        className="w-[25vw] bg-[#171717] mt-4 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
       >
         <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
         <p className="text-[1.1rem] font-semibold self-center text-white">

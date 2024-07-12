@@ -35,7 +35,16 @@ export const RelatedMarkets = (props: {
           if (index < 4 && item.id !== id)
             return (
               <div
-                style={styles.marketItem}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  padding: 7,
+                  borderRadius: 10,
+                  marginTop: 11,
+                  backgroundColor: props?.isDesktop ? "#121212" : "#1A1A1A",
+                  cursor: "pointer",
+                }}
                 key={index}
                 onClick={() =>
                   router.push({

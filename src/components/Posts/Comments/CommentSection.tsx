@@ -14,6 +14,7 @@ export const CommentSection = ({
   totalComments,
   optimisticComments,
   users,
+  isDesktop,
   handleComment,
   setReply,
 }: {
@@ -22,6 +23,7 @@ export const CommentSection = ({
   optimisticComments: BetComment[];
   users: IUserWithBet[];
   handleComment: () => void;
+  isDesktop?: boolean;
   setReply: (name: string) => void;
 }) => {
   const { user } = useUserStore();
@@ -62,7 +64,11 @@ export const CommentSection = ({
   }
 
   return (
-    <div className="w-[96vw] flex flex-col p-5 pb-[78px]">
+    <div
+      className={`${
+        isDesktop ? "w-[65vw]" : "w-[96vw]"
+      } flex flex-col p-5 pb-[78px]`}
+    >
       <p className="text-[21px]  text-white mt-1 -mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
