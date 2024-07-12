@@ -32,7 +32,7 @@ export function Predictions({ id }) {
     return (
       <motion.div
         onClick={() => setIsDrawerOpen(false)}
-        className="bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
+        className=" bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
       >
         <div className="relative h-[100vw]">
           <div
