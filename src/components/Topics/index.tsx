@@ -59,8 +59,7 @@ export const FeaturedBet = ({
           <Share
             size={33}
             strokeWidth={3.3}
-            style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-            className=" bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-4 z-10 "
+            className=" bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-4 z-10 bg-[rgba(17, 17, 17, 0.15)]"
           />
         </ShareTopicModal>
         <motion.div
@@ -96,9 +95,7 @@ export const FeaturedBet = ({
           </div>
           <div className="flex items-center mt-4">
             <Star color="white" strokeWidth={3.5} height={20} />
-            <span
-              className="text-white text-xl ml-1 font-['Aeonik-Bold']"
-            >
+            <span className="text-white text-xl ml-1 font-['Aeonik-Bold']">
               Trending Bets
             </span>
           </div>

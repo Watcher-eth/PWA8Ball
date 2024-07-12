@@ -42,15 +42,13 @@ export function Predictions({ id }) {
             <ArrowLeft
               strokeWidth={3.8}
               size={33}
-              style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-              className="p-2 rounded-full backdrop-blur-lg "
+              className="p-2 rounded-full backdrop-blur-lg bg-[rgba(17, 17, 17, 0.15)]"
             />
             <ShareModal>
               <Share
                 size={33}
                 strokeWidth={3.3}
-                style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-                className="p-2 rounded-full backdrop-blur-xl "
+                className="p-2 rounded-full backdrop-blur-xl bg-[rgba(17, 17, 17, 0.15)]"
               />
             </ShareModal>
           </div>
@@ -62,7 +60,7 @@ export function Predictions({ id }) {
             />
             <div
               style={{ zIndex: 2 }}
-              className="h-[40vw] w-screen    bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
+              className="h-[40vw] w-screen bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
             />
           </motion.div>
         </div>
@@ -123,9 +121,8 @@ export function Predictions({ id }) {
             users={users}
           >
             <div
-              style={{ zIndex: 2 }}
               onClick={openLoginModal}
-              className="flex space-x-[-1rem] mb-3 items-center"
+              className="flex space-x-[-1rem] mb-3 items-center z-[2]"
             >
               <Avatar>
                 <AvatarImage src={userImages[0]} />
@@ -140,23 +137,20 @@ export function Predictions({ id }) {
           </BettersOverviewModal>
         </div>
         <div
-          style={{ zIndex: 2 }}
-          className="h-[0.1rem] w-[89vw] mt-[0rem] bg-[#212121] mx-5 rounded-full"
+          className="h-[0.1rem] w-[89vw] mt-[0rem] bg-[#212121] mx-5 rounded-full z-[2]"
         />
 
         <div
-          style={{
-            zIndex: 2,
-            fontFamily: "Aeonik-Bold",
-            lineHeight: "1.35rem",
-          }}
-          className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1  mt-2 text-start leading-6 text-gray-300 max-w-[88vw] ml-5 "
+          className={`
+            text-[1.05rem] line-clamp-2 mb-[-1] mt-2 text-start text-gray-300 max-w-[88vw] ml-5
+            font-[Aeonik-Bold] leading-[1.35rem]
+            z-[2]
+          `}
         >
           {market?.question}
         </div>
         <div
-          style={{ zIndex: 2 }}
-          className="flex items-center w-[88vw]  mt-[-4] mx-5 justify-between mx-2"
+          className="flex items-center w-[88vw]  mt-[-4] justify-between mx-2 z-[2]"
         >
           <PredictModal
             handleOpen={() => {}}
