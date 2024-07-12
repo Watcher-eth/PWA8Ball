@@ -50,17 +50,13 @@ export const SearchOverview = () => {
           value={searchText}
           onChange={handleSearch}
           placeholder="Search for predictions..."
-          className="w-full outline-none py-2 border-0 px-4 bg-[#080808] text-[1rem] rounded-lg text-white"
-          style={{
-            "::placeholder": { color: "#707070" },
-            outline: "none",
-          }}
+          className={`
+            w-full outline-none border-0
+            py-2 px-4
+            bg-[#080808] text-white placeholder-[#707070]
+            text-[1rem] rounded-lg
+          `}
         />
-        <style jsx>{`
-          input::placeholder {
-            color: #707070;
-          }
-        `}</style>
       </div>
       <AnimatePresence>
         <div>
@@ -129,18 +125,17 @@ export const SearchOverview = () => {
           {!searchText && (
             <Section title="Trending Topics">
               <div className="flex flex-col -space-y-1">
-                {trendingMarkets?.map((market, index) => {
-                  if (index < 3)
-                    return (
-                      <TopicItem
-                        key={index}
-                        title={market?.topic_title}
-                        subtitle={market?.topic_description}
-                        members={420}
-                        type={"market.type"}
-                        image={market.topic_image}
-                      />
-                    );
+                {trendingMarkets?.slice(0, 3).map((market, index) => {
+                  return (
+                    <TopicItem
+                      key={index}
+                      title={market?.topic_title}
+                      subtitle={market?.topic_description}
+                      members={420}
+                      type={"market.type"}
+                      image={market.topic_image}
+                    />
+                  );
                 })}
               </div>
             </Section>
@@ -165,7 +160,7 @@ const Item = ({ title, subtitle, time, type, image }) => (
     exit={{ opacity: 0, y: 10 }}
     whileHover={{ scale: 1.01 }}
     whileTap={{ scale: 0.99 }}
-    className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515] transition duration-150"
+    className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515] cursor-pointer transition-all duration-150"
   >
     <div className="flex items-center space-x-3">
       <img src={image} className="w-9 h-9 object-cover rounded-[0.2rem]" />
