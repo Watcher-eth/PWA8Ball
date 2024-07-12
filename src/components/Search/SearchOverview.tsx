@@ -60,24 +60,35 @@ export const SearchOverview = () => {
       idx: displayedFriends?.length + displayedTrendingMarkets?.length + idx,
     })) ?? []; //trendingMarkets?.slice(4, 7);
 
-  let masterList
-  if (searchText) {
-    masterList = [...displayedSearchMarkets, ...displayedUsers];
-  } else {
-    masterList = [
-      ...displayedTrendingMarkets,
-      ...displayedFriends,
-      ...displayedTrendingTopics,
-    ];
-  }
+
+
 
   const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
-    useOverlaySearch(masterList?.length, () => {});
+    useOverlaySearch(
+      () => getMasterList().length,
+      () => {}
+    );
 
-    const handleSearch = (e) => {
-    setSearchText(e.target.value);
+  const handleSearch = (e) => {
+    onSearch(e.target.value);
     debouncedSearch(e.target.value);
   };
+
+  // this part is black magic fuckery that needs to be properly rewritten
+  function getMasterList() {
+    let arr;
+    if (searchStr) {
+      arr = [...displayedSearchMarkets, ...displayedUsers];
+    } else {
+      arr = [
+        ...displayedTrendingMarkets,
+        ...displayedFriends,
+        ...displayedTrendingTopics,
+      ];
+    }
+    return arr;
+  }
+  const masterList = getMasterList();
 
   const debouncedSearch = useCallback(
     debounce((text) => {
@@ -86,6 +97,7 @@ export const SearchOverview = () => {
     []
   );
 
+  let searchResult
 
   return (
     <div className="rounded-2xl p-2 w-full">
@@ -93,7 +105,7 @@ export const SearchOverview = () => {
         <Search className="h-5 w-5 text-[#707070]" strokeWidth={3} />
         <input
           type="text"
-          value={searchText}
+          value={searchStr}
           onChange={handleSearch}
           placeholder="Search for predictions..."
           className={`
@@ -105,44 +117,53 @@ export const SearchOverview = () => {
         />
       </div>
       <AnimatePresence>
-        <div>
-          {searchText && (
-            <>
-              {searchMarkets?.length > 0 && (
-                <Section title="Suggested">
-                  {displayedSearchMarkets?.map((market, index) => (
-                    <Item
-                      key={index}
-                      currentIdx={currentIdx}
-                      idx={market.idx}
-                      title={market.title}
-                      subtitle={market.question}
-                      time={3.22}
-                      type={market.type}
-                      image={market.image}
-                    />
-                  ))}
-                </Section>
-              )}
-              {users?.length > 0 && (
-                <Section title="Users">
-                  {displayedUsers?.map((user, index) => (
-                    <FriendItem
-                      key={index}
-                      currentIdx={currentIdx}
-                      idx={user.idx}
-                      name={user.name}
-                      handle={user.handle}
-                      time={user.time}
-                      image={user.pfp}
-
-                    />
-                  ))}
-                </Section>
-              )}
-            </>
-          )}
-          {!searchText && (
+        <div
+          className={`transition-all duration-300`}
+          style={{
+            height:`calc(${masterList.length * 60}px+60px)`
+          }}
+        >
+          {searchStr &&
+            (masterList.length == 0 ? (
+              <div className="text-center text-gray-400 text-sm">
+                No results found
+              </div>
+            ) : (
+              <>
+                {searchMarkets?.length > 0 && (
+                  <Section title="Suggested">
+                    {displayedSearchMarkets?.map((market, index) => (
+                      <Item
+                        key={index}
+                        currentIdx={currentIdx}
+                        idx={market.idx}
+                        title={market.title}
+                        subtitle={market.question}
+                        time={3.22}
+                        type={market.type}
+                        image={market.image}
+                      />
+                    ))}
+                  </Section>
+                )}
+                {users?.length > 0 && (
+                  <Section title="Users">
+                    {displayedUsers?.map((user, index) => (
+                      <FriendItem
+                        key={index}
+                        currentIdx={currentIdx}
+                        idx={user.idx}
+                        name={user.name}
+                        handle={user.handle}
+                        time={user.time}
+                        image={user.pfp}
+                      />
+                    ))}
+                  </Section>
+                )}
+              </>
+            ))}
+          {!searchStr && (
             <>
               <Section title="Suggested">
                 {displayedTrendingMarkets.map((market, index) => {

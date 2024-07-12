@@ -20,7 +20,7 @@ import { useCloseOutsideRef } from "@/hooks/useCloseOutsideRef";
  * - onClose: A function to close the overlay and reset the state.
  */
 export function useOverlaySearch(
-  masterListLength: number,
+  masterListLength: number | Function,
   closeOverlayDispatchFunc: Function
 ) {
   const [currentIdx, setCurrentIdx] = useState(-1);
@@ -39,7 +39,8 @@ export function useOverlaySearch(
 
   function arrowDownFunc() {
     const nextIdx = currentIdx + 1;
-    if (arrowDown && nextIdx < masterListLength) {
+    // @ts-ignore
+    if (arrowDown && nextIdx < (masterListLength?.() ?? masterListLength) ) {
       setCurrentIdx(nextIdx);
     }
   }
