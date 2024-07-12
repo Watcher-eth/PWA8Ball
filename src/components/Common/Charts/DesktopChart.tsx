@@ -48,7 +48,7 @@ export function DesktopChart(props: { question: string; id: string }) {
   );
   console.log("prices", prices, priceError);
   return (
-    <Card className="border-0 mt-[-0.5rem] border-4 rounded-[1.5rem] border-[#121212] text-white w-[28vw] h-[55vh]">
+    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white w-[28vw] h-[55vh]">
       <CardHeader>
         <CardTitle className="text-white">Question</CardTitle>
         <CardDescription className="text-[lightgray]">
