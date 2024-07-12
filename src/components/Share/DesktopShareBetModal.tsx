@@ -3,17 +3,9 @@
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { ReactNode } from "react";
-import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 import { ShareBetModal } from "./ShareBetModal";
 
-export function DesktopShareBetModal({
-  children,
-  userId,
-}: {
-  children: ReactNode;
-  userId: string;
-}) {
-
+export function DesktopShareBetModal({ children }: { children: ReactNode }) {
   return (
     <Dialog style={{ borderRadius: "1.5rem" }}>
       <DialogTrigger asChild>{children}</DialogTrigger>

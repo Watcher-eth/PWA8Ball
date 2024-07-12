@@ -1,33 +1,11 @@
 // @ts-nocheck
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Bell } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { ReactNode } from "react";
-import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
-import { NotificationCard } from "./UserNotifications";
-import { NotificationsPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { SearchOverview } from "./SearchOverview";
 
-export function DesktopSearchModal({
-  children,
-  userId,
-}: {
-  children: ReactNode;
-  userId: string;
-}) {
-  const {
-    data: notifications,
-    isLoading,
-    error,
-  } = useGetNotificationsForUser(userId);
-
+export function DesktopSearchModal({ children }: { children: ReactNode }) {
   return (
     <Dialog style={{ borderRadius: "1.5rem" }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
