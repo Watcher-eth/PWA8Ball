@@ -1,21 +1,9 @@
 // @ts-nocheck
-
-import React, { useState } from "react";
 import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
+import { TEST_TOPICS } from "@/constants/testData";
 
-const testTopics = [
-  "🔥 Trending",
-  "🇺🇸 2024 US Elections",
-  "🎤 Taylor Swift",
-  "📱 TikTok",
-  "🏜️ Dune",
-  "📈 Gamestop",
-  "🎬 Oscars 2024",
-  "🥊 Jake Paul",
-  "🎮 GTA 6",
-  "⚽ UEFA European Cup",
-];
+
 
 export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
 
@@ -28,7 +16,7 @@ export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
     >
       <Marquee speed={40} gradient={false}>
         <div className="flex flex-row">
-          {testTopics.slice(0, testTopics.length / 2).map((item, index) => (
+          {TEST_TOPICS.slice(0, TEST_TOPICS.length / 2).map((item, index) => (
             <TopicButton
               key={index}
               item={item}
@@ -41,7 +29,7 @@ export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
       </Marquee>
       <Marquee speed={20} gradient={false} className="mt-3">
         <div className="flex flex-row">
-          {testTopics.slice(testTopics.length / 2).map((item, index) => (
+          {TEST_TOPICS.slice(TEST_TOPICS.length / 2).map((item, index) => (
             <TopicButton
               key={index}
               item={item}

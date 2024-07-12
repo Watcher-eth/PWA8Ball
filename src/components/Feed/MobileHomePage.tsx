@@ -1,15 +1,12 @@
 // @ts-nocheck
+import { useState } from "react";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { Cards } from "./Cards";
-import { useGetAllTopics } from "@/supabase/queries/useGetAllTopics";
-import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
-import { TopicHeader } from "./TopicHeader";
-import { stripEmoji } from "@/utils/string/stripEmoji";
-import { parseOptions } from "@/utils/predictions/parseOption";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { LoginModal } from "../Modals/LoginModal";
+
 import { formatMarketArr } from "./formatMarketArr";
+import { Cards } from "./Cards";
+import { TopicHeader } from "./TopicHeader";
 
 export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();

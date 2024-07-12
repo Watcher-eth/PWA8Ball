@@ -1,6 +1,6 @@
 import { ActivityChartType } from "@/types/AcitivityTypes";
 
-export const BetModalPropData = {
+export const TEST_BET_MODAL_DATA = {
   question: "Will Oppenheimer win best picture at the 2024 Academy Awards",
   amount: "8,213.203",
   betId: "1234",
@@ -11,7 +11,7 @@ export const BetModalPropData = {
     "https://imgs.search.brave.com/t1L4NG0G9uVXWT5F44Tp6reSnaW1mSMVd9thDo1mwyE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dGVsZWdyYXBoLmNv/LnVrL2NvbnRlbnQv/ZGFtL2ZpbG1zLzIw/MjQvMDEvMTgvVEVM/RU1NR0xQSUNUMDAw/MzQzMjcwMDY1XzE3/MDU1OTY4MDkzMDMw/X3RyYW5zX052QlF6/UU5qdjRCcUE3TjJD/eG5KV25ZSTN0Q2JW/Qmd1OVQwYWVzdXN2/TjFURTdhMGRkZF9l/c0kuanBlZz9pbXdp/ZHRoPTQ4MA",
 };
 
-export const ActivityPropData = [
+export const TEST_ACTIVITY_DATA = [
   {
     question: "Will Oppenheimer win best picture at the 2024 Academy Awards",
     amount: "8,213",
@@ -44,7 +44,7 @@ export const ActivityPropData = [
   },
 ];
 
-export const FinishedActivityPropData = [
+export const TEST_FINISHED_ACTIVITY_DATA = [
   {
     index: 3,
 
@@ -65,7 +65,7 @@ export const FinishedActivityPropData = [
   },
 ];
 
-export const FindFriendsPropData = [
+export const TEST_FIND_FRIENDS_DATA = [
   {
     isFollowing: false,
     name: "Alec",
@@ -88,7 +88,7 @@ export const FindFriendsPropData = [
   },
 ];
 
-export const ActivityChartData: ActivityChartType[] = [
+export const TEST_ACTIVITY_CHART_DATA: ActivityChartType[] = [
   {
     amount: 3.7,
     image:
@@ -106,7 +106,7 @@ export const ActivityChartData: ActivityChartType[] = [
   },
 ];
 
-export const testTopics = [
+export const TEST_TOPICS = [
   "🔥 Trending",
   "🇺🇸 2024 US Elections",
   "🎤 Taylor Swift",
@@ -119,7 +119,7 @@ export const testTopics = [
   "⚽ UEFA European Cup",
 ];
 
-export const commentsTestData = [
+export const TEST_COMMENTS_DATA = [
   {
     id: "comment1",
     name: "0xSmallbrain.eth",
@@ -155,7 +155,7 @@ export const commentsTestData = [
   },
 ];
 
-export const testVoters = [
+export const TEST_VOTERS = [
   {
     name: "0xChristina.eth",
     address: "0xf62r7m...3567",
