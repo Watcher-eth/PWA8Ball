@@ -19,6 +19,14 @@ import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
 
+
+const DEFAULT_IMAGES = [
+  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
+  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
+  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
+];
+
+
 export function DesktopMarketPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(10);
@@ -29,24 +37,11 @@ export function DesktopMarketPage() {
     user?.external_auth_provider_user_id
   );
 
-  const defaultImages = [
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-  ];
-  let userImages;
-  if (users) {
-    userImages = users
-      ?.map((user, index) => (index < 3 ? user.pfp : null))
-      .filter((image) => image !== null);
+  const userImages = [
+    ...(users?.map((user) => user.pfp).filter(Boolean) ?? []),
+    ...DEFAULT_IMAGES,
+  ].slice(0, 3);
 
-    // Fill the remaining slots with default images if less than 3
-    while (userImages.length < 3) {
-      userImages.push(defaultImages[userImages.length]);
-    }
-  } else {
-    userImages = defaultImages;
-  }
   const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
