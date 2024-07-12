@@ -7,14 +7,12 @@ import { TopicHeader } from "@/components/Feed/TopicHeader";
 
 import { formatMarketArr } from "./formatMarketArr";
 
-
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enrichedFeedData = formatMarketArr({
     markets: trendingMarkets,
     selectedTopic,
   });
-
 
   return (
     <>
@@ -29,7 +27,7 @@ export function DesktopHomePage({ trendingMarkets }) {
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
-              <Cards {...bet}/>
+              <Cards {...bet} />
             </div>
           );
         })}
@@ -37,7 +35,7 @@ export function DesktopHomePage({ trendingMarkets }) {
       <DesktopTrendingTopics
         title="US Elections"
         imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
-        subtitle="Everathing about the US 2020 Federal Election"
+        subtitle="Everything about the US 2020 Federal Election"
         amount={"260,032"}
         topicId="1"
       />

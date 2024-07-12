@@ -36,7 +36,7 @@ export function MobileHomePage({ trendingMarkets }) {
         setSelectedTopic={setSelectedTopic}
         selectedTopic={selectedTopic}
       />
-      <div className="px-3 flex flex-col items-center no-scrollbar space-x-3">
+      <div className="px-3 flex flex-col items-center no-scrollbar mt-2 space-y-6">
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>

@@ -1,9 +1,8 @@
-
 // @ts-nocheck
 
 import { TrendingUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-
+import { motion } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -40,7 +39,7 @@ const chartConfig = {
 
 export function DesktopChart(props: { question: string }) {
   return (
-    <Card className="border-0 mt-[-0.5rem] text-white w-[28vw] h-[49vh]">
+    <Card className="border-0 mt-[-0.5rem] text-white w-[28vw] h-[55vh]">
       <CardHeader>
         <CardTitle className="text-white">Question</CardTitle>
         <CardDescription className="text-[lightgray]">
@@ -123,6 +122,16 @@ export function DesktopChart(props: { question: string }) {
           </div>
         </div>
       </CardFooter>
+      <motion.div
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.98 }}
+        className="w-[25vw] bg-[#171717] rounded-xl p-5 py-4 flex flex-row items-center self-center justify-center"
+      >
+        <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
+        <p className="text-[1.1rem] font-semibold self-center text-white">
+          Share with your friends
+        </p>
+      </motion.div>
     </Card>
   );
 }

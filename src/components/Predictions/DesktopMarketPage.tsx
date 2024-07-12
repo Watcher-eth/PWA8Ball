@@ -57,6 +57,11 @@ export function DesktopMarketPage() {
           src={market?.image}
         />
         <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
+        <img
+          style={{ zIndex: 20 }}
+          className="h-[14vh] absolute ml-10 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808]"
+          src={market?.image}
+        />
       </motion.div>
       <div className="absolute top-8 w-full px-8 z-10 self-center">
         <DesktopNavbar />
@@ -68,11 +73,7 @@ export function DesktopMarketPage() {
         <div className="relative h-full">
           <div className="grid grid-cols-10 gap-4 p-6">
             <div className="col-span-4">
-              <div className="flex flex-col mt-[-5rem] z-10">
-                <img
-                  className="h-[14vh] ml-4 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808]"
-                  src={market?.image}
-                />
+              <div className="flex flex-col mt-[2.5rem] z-10">
                 <div
                   style={{
                     fontFamily: "Benzin-Bold",
@@ -191,21 +192,8 @@ export function DesktopMarketPage() {
                 />
               </div>
             </div>
-            <div className="col-span-3 bg-[#121212] flex flex-col items-center p-4 rounded-xl">
+            <div className="col-span-3 bg-[#121212] flex flex-col items-center p-3 rounded-[1.4rem]">
               <DesktopChart question="Will Gta 6 cost more than 80 Dollars on release?" />
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-[25vw] bg-[#171717] rounded-xl p-5 py-4 flex flex-row items-center self-center justify-center"
-              >
-                <Share
-                  className="h-[1.1rem] mr-1 text-white"
-                  strokeWidth={3.4}
-                />
-                <p className="text-[1.1rem] font-semibold self-center text-white">
-                  Share with your friends
-                </p>
-              </motion.div>
             </div>
             <div className="col-span-3 bg-[#080808] p-4 pt-16 rounded-lg">
               <RelatedMarkets
@@ -231,5 +219,3 @@ export function DesktopMarketPage() {
     </div>
   );
 }
-
-
