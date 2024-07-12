@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import React from "react";
 import { motion } from "framer-motion";
 import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
 import { Plus } from "lucide-react";
-import { useRouter } from "next/router";
+
 
 export function UserPredictions({
   index,
@@ -17,7 +16,6 @@ export function UserPredictions({
   onOpenBottomSheet,
   betId,
 }) {
-  const router = useRouter();
   console.log("betId", betId);
   return (
     <motion.div
@@ -117,14 +115,12 @@ export const CreatedPrediction = ({
         <img src={image} alt={title} className="h-14 w-14 rounded-[0.5rem]" />
         <div className="flex flex-col max-w-[69%]">
           <p
-            className="text-white text-md font-bold"
-            style={{ fontFamily: "Aeonik-Bold" }}
+            className="text-white text-md font-bold font-[Aeonik-Bold]"
           >
             {title}
           </p>
           <p
-            className="text-gray-400 text-sm line-clamp-2 "
-            style={{ fontFamily: "Aeonik-Bold" }}
+            className="text-gray-400 text-sm line-clamp-2 font-[Aeonik-Bold]"
           >
             {question}
           </p>
