@@ -45,7 +45,7 @@ export function NewPlaceholder({ isUser }) {
 export function NotificationsPlaceholder({ isUser }) {
   const router = useRouter();
   return (
-    <div className="flex flex-col items-center w-[100%] p-2 mt-2 mx-auto">
+    <div className="flex flex-col align-center items-center w-[30vw] p-2 mt-2  mx-auto">
       {[...Array(3)].map((_, index) => (
         <NotificationSkelleton index={index} />
       ))}
@@ -54,12 +54,12 @@ export function NotificationsPlaceholder({ isUser }) {
           background:
             "linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.5) 50%, rgba(8, 8, 8, 0.7) 70%, #080808 100%, #080808 100%)",
           height: "230px",
-          width: "100%",
+          width: "110%",
           marginTop: "-230px",
         }}
       />
 
-      <div className="flex flex-col items-center mt-5">
+      <div className="flex flex-col items-center mt-5 self-center">
         <div className="text-white text-xl font-bold mb-2">
           No notifications yet
         </div>
@@ -68,7 +68,7 @@ export function NotificationsPlaceholder({ isUser }) {
         </div>
       </div>
       <Link href={HOME_PATH}>
-        <motion.button className="w-[30vw] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+        <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
         </motion.button>
       </Link>
@@ -224,7 +224,7 @@ export const NotificationSkelleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex items-center w-[32vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
+    className="flex mr-12 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-[1rem] bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
       <motion.div
@@ -235,13 +235,13 @@ export const NotificationSkelleton = ({ index }) => (
       />
       <div className="flex flex-col gap-2">
         <motion.div
-          className="w-[16vw] h-[20px] bg-[#252525] rounded-xl"
+          className="w-[15vw] h-[20px] bg-[#252525] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"
         />
         <motion.div
-          className="w-[15vw] h-[17px] bg-[#252525] rounded-xl"
+          className="w-[12vw] h-[17px] bg-[#252525] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"

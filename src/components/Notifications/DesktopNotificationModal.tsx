@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import {
   Card,
@@ -31,8 +30,14 @@ export function DesktopNotificationModal({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="p-0 bg-[#080808]/[0.8] rounded-2xl min-h-[50vh] border-2 border-[#181818]">
-        <Card className="shadow-none bg-[#080808]  border-0">
+      <DialogContent
+        style={{ borderRadius: "1.5rem" }}
+        className="p-0 bg-[#080808]/[0.8] w-[30vw] min-h-[50vh] border-2 border-[#181818]"
+      >
+        <Card
+          style={{ borderRadius: "1.5rem" }}
+          className="shadow-none bg-[#080808] w-[30vw] border-0"
+        >
           <CardHeader className="border-b border-[#212121]">
             <CardTitle>Notifications</CardTitle>
             <CardDescription>You have 3 unread messages.</CardDescription>

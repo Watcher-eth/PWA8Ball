@@ -49,7 +49,7 @@ export const SearchOverview = () => {
           type="text"
           value={searchText}
           onChange={handleSearch}
-          placeholder="Search or enter command..."
+          placeholder="Search for predictions..."
           className="w-full outline-none py-2 border-0 px-4 bg-[#080808] text-[1rem] rounded-lg text-white"
           style={{
             "::placeholder": { color: "#707070" },

@@ -65,9 +65,9 @@ export const CommentSection = ({
 
   return (
     <div
-      className={`${isDesktop ? "w-[65vw]" : "w-[96vw]"}  flex flex-col ${
+      className={`${isDesktop ? "w-[66vw]" : "w-[96vw]"}  flex flex-col ${
         isDesktop ? "p-3" : "p-5"
-      } p-5 pb-[78px]`}
+      } ${isDesktop ? "-ml-5" : ""} p-5 pb-[78px]`}
     >
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}

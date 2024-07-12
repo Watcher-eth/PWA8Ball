@@ -29,10 +29,16 @@ export function SearchDesktopModal({
   } = useGetNotificationsForUser(userId);
 
   return (
-    <Dialog className="rounded-2xl">
+    <Dialog style={{ borderRadius: "1.5rem" }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="p-0 bg-[#080808]/[0.8] rounded-2xl min-h-[50vh] border-2 border-[#181818]">
-        <Card className="shadow-none bg-[#080808] rounded-2xl border-0">
+      <DialogContent
+        style={{ borderRadius: "1.5rem" }}
+        className="p-0 bg-[#080808]/[0.8] min-h-[50vh] border-2 border-[#181818]"
+      >
+        <Card
+          style={{ borderRadius: "1.5rem" }}
+          className="shadow-none bg-[#080808] border-0"
+        >
           <CardContent className="p-6 rounded-2xl">
             <SearchOverview />
           </CardContent>

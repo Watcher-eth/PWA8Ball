@@ -25,7 +25,7 @@ export function DesktopMarketPage() {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: market } = useGetMarketById(
-    String(6),
+    String(4),
     user?.external_auth_provider_user_id
   );
 

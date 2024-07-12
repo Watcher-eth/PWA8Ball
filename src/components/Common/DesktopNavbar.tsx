@@ -22,7 +22,7 @@ export const DesktopNavbar: React.FC = () => {
           className="w-12 h-12 rounded-full"
         />
       </motion.div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-8">
         <SearchDesktopModal userId={user?.external_auth_provider_user_id}>
           <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
             <Search className="w-6 h-6" strokeWidth={3} />
