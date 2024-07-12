@@ -7,16 +7,15 @@ import { SearchOverview } from "./SearchOverview";
 
 export function DesktopSearchModal({ children }: { children: ReactNode }) {
   return (
-    <Dialog style={{ borderRadius: "1.5rem" }}>
+    <Dialog className="!rounded-[1.5rem]">
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        style={{ borderRadius: "1.5rem" }}
-        className="p-0 bg-[#080808]/[0.8] min-h-[50vh] border-2 border-[#181818]"
+        className={`
+          p-0 bg-[#080808]/[0.8] min-h-[50vh] border-2 border-[#181818]
+          !rounded-[1.5rem]
+        `}
       >
-        <Card
-          style={{ borderRadius: "1.5rem" }}
-          className="shadow-none bg-[#080808] border-0"
-        >
+        <Card className="shadow-none bg-[#080808] border-0 rounded-[1.5rem]">
           <CardContent className="p-6 rounded-2xl">
             <SearchOverview />
           </CardContent>
