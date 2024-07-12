@@ -210,7 +210,7 @@ function SearchItem({
       exit={{ opacity: 0, y: 10 }}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
-      className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515]  transition duration-150"
+      className="flex items-center justify-between p-2 rounded-md hover:bg-[#151515] transition-all duration-150 cursor-pointer"
     >
       <div className="flex items-center space-x-3">
         {image ? (
@@ -233,7 +233,6 @@ function SearchItem({
           </span>
         )}
       </div>
-      {/* <p className="text-gray-400 text-sm">{time}</p> */}
       <div className="flex flex-row items-center">
         <p className="text-gray-400 text-sm">{rightText}</p>
         {icon}
