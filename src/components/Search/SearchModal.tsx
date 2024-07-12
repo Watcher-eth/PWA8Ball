@@ -58,7 +58,7 @@ function SearchModal() {
       }
     },
   });
-  const [goal, setGoal] = React.useState(350);
+  const [goal, setGoal] = useState(350);
 
   function onClick(adjustment: number) {
     setGoal(Math.max(200, Math.min(400, goal + adjustment)));
@@ -116,7 +116,7 @@ function SearchModal() {
                     searchResults?.map((profile, index) => (
                       <div
                         key={index}
-                        className="flex w-[90vw] flex items-center my-2"
+                        className="flex w-[90vw] items-center my-2"
                       >
                         {profile.metadata?.picture?.optimized?.uri ? (
                           <Avatar className="h-14 w-14 rounded-full">
@@ -131,9 +131,9 @@ function SearchModal() {
                         )}
                         <div className="flex flex-col">
                           <div className="text-[1.2rem] ml-2 ">
-                            {profile?.metadata?.displayName
-                              ? profile?.metadata?.displayName
-                              : profile?.handle?.localName}
+                            {profile?.metadata?.displayName ??
+                              profile?.handle?.localName
+                            }
                           </div>
                           <div className="text-[1.2rem] text-gray-200 ml-2 ">
                             {shortenAddress(profile?.ownedBy?.address)}
