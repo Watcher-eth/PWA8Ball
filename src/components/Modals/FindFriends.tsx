@@ -15,21 +15,20 @@ export function FindFriendsModal({ children }: { children: ReactNode }) {
     <div>
       <Drawer>
         <DrawerTrigger>
-          <motion.div
-            whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
-            className="mt-[1rem]"
+          <div
+            className="mt-[1rem] active:scale-93 hover:scale-110"
           >
             {children}
-          </motion.div>
+          </div>
         </DrawerTrigger>
-        <DrawerContent className=" border-0 rounded-3xl self-center">
+        <DrawerContent className="border-0 rounded-3xl self-center">
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-[#101010] rounded-3xl
-        h-[90vh] mb-5 w-screen relative"
+            className={`
+              bg-[#101010] rounded-3xl rounded-t-[20px]
+              h-[90vh] mb-5 w-screen relative
+            `}
           >
             <FindFriends type={1} />
           </motion.div>
