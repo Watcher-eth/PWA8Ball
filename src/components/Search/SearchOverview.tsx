@@ -30,13 +30,55 @@ export const SearchOverview = () => {
     error: marketsError,
   } = useGetMarketsByQuestion(debouncedText);
 
-  const handleSearch = (e) => {
+
+
+
+  const displayedSearchMarkets =
+    searchMarkets?.slice(0, 5).map((obj, idx) => ({
+      ...obj,
+      idx,
+    })) ?? [];
+  const displayedUsers =
+    users?.slice(0, 5).map((obj, idx) => ({
+      ...obj,
+      idx: displayedSearchMarkets?.length + idx,
+    })) ?? [];
+
+  const displayedTrendingMarkets =
+    trendingMarkets?.slice(0, 4).map((obj, idx) => ({
+      ...obj,
+      idx,
+    })) ?? [];
+  const displayedFriends =
+    friends?.slice(0, 5).map((obj, idx) => ({
+      ...obj,
+      idx: displayedTrendingMarkets?.length + idx,
+    })) ?? [];
+  const displayedTrendingTopics =
+    trendingMarkets?.slice(0, 3).map((obj, idx) => ({
+      ...obj,
+      idx: displayedFriends?.length + displayedTrendingMarkets?.length + idx,
+    })) ?? []; //trendingMarkets?.slice(4, 7);
+
+  let masterList
+  if (searchText) {
+    masterList = [...displayedSearchMarkets, ...displayedUsers];
+  } else {
+    masterList = [
+      ...displayedTrendingMarkets,
+      ...displayedFriends,
+      ...displayedTrendingTopics,
+    ];
+  }
+
+  const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
+    useOverlaySearch(masterList?.length, () => {});
+
+    const handleSearch = (e) => {
     setSearchText(e.target.value);
     debouncedSearch(e.target.value);
   };
 
-  const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
-    useOverlaySearch(trendingMarkets?.length, () => {});
   const debouncedSearch = useCallback(
     debounce((text) => {
       setDebouncedText(text);
@@ -44,7 +86,7 @@ export const SearchOverview = () => {
     []
   );
 
-
+  console.log({currentIdx, masterList})
   return (
     <div className="rounded-2xl p-2 w-full">
       <div className="relative flex items-center align-center mb-4">
@@ -64,32 +106,15 @@ export const SearchOverview = () => {
       </div>
       <AnimatePresence>
         <div>
-          {!searchText && (
-            <Section title="Suggested">
-              {trendingMarkets?.map((market, index) => {
-                if (index < 4)
-                  return (
-                    <div className="flex flex-col -space-y-1">
-                      <Item
-                        key={index}
-                        title={market.title}
-                        subtitle={market.question}
-                        time={3.22}
-                        type={"market.type"}
-                        image={market.image}
-                      />
-                    </div>
-                  );
-              })}
-            </Section>
-          )}
           {searchText && (
             <>
               {searchMarkets?.length > 0 && (
                 <Section title="Suggested">
-                  {searchMarkets?.map((market, index) => (
+                  {displayedSearchMarkets?.map((market, index) => (
                     <Item
                       key={index}
+                      currentIdx={currentIdx}
+                      idx={market.idx}
                       title={market.title}
                       subtitle={market.question}
                       time={3.22}
@@ -101,13 +126,16 @@ export const SearchOverview = () => {
               )}
               {users?.length > 0 && (
                 <Section title="Users">
-                  {users?.map((user, index) => (
+                  {displayedUsers?.map((user, index) => (
                     <FriendItem
                       key={index}
+                      currentIdx={currentIdx}
+                      idx={user.idx}
                       name={user.name}
                       handle={user.handle}
                       time={user.time}
                       image={user.pfp}
+
                     />
                   ))}
                 </Section>
@@ -115,34 +143,56 @@ export const SearchOverview = () => {
             </>
           )}
           {!searchText && (
-            <Section title="Friends">
-              {friends.map((friend, index) => (
-                <FriendItem
-                  key={index}
-                  name={friend.name}
-                  handle={friend.handle}
-                  time={friend.time}
-                />
-              ))}
-            </Section>
-          )}
-          {!searchText && (
-            <Section title="Trending Topics">
-              <div className="flex flex-col -space-y-1">
-                {trendingMarkets?.slice(0, 3).map((market, index) => {
+            <>
+              <Section title="Suggested">
+                {displayedTrendingMarkets.map((market, index) => {
                   return (
-                    <TopicItem
-                      key={index}
-                      title={market?.topic_title}
-                      subtitle={market?.topic_description}
-                      members={420}
-                      type={"market.type"}
-                      image={market.topic_image}
-                    />
+                    <div className="flex flex-col -space-y-1">
+                      <Item
+                        key={index}
+                        currentIdx={currentIdx}
+                        idx={market.idx}
+                        title={market.title}
+                        subtitle={market.question}
+                        time={3.22}
+                        type={"market.type"}
+                        image={market.image}
+                      />
+                    </div>
                   );
                 })}
-              </div>
-            </Section>
+              </Section>
+              <Section title="Friends">
+                {displayedFriends.map((friend, index) => (
+                  <FriendItem
+                    key={index}
+                    currentIdx={currentIdx}
+                    idx={friend.idx}
+                    name={friend.name}
+                    handle={friend.handle}
+                    time={friend.time}
+                  />
+                ))}
+              </Section>
+              <Section title="Trending Topics">
+                <div className="flex flex-col -space-y-1">
+                  {displayedTrendingTopics?.map((market, index) => {
+                    return (
+                      <TopicItem
+                        key={index}
+                        currentIdx={currentIdx}
+                        idx={market.idx}
+                        title={market?.topic_title}
+                        subtitle={market?.topic_description}
+                        members={420}
+                        type={"market.type"}
+                        image={market.topic_image}
+                      />
+                    );
+                  })}
+                </div>
+              </Section>
+            </>
           )}
         </div>
       </AnimatePresence>
@@ -157,7 +207,7 @@ const Section = ({ title, children }) => (
   </div>
 );
 
-const Item = ({ title, subtitle, time, type, image }) => {
+const Item = ({ title, subtitle, time, type, image, idx, currentIdx }) => {
   return (
     <SearchItem
       title={title}
@@ -166,12 +216,22 @@ const Item = ({ title, subtitle, time, type, image }) => {
       image={image}
       isImgRounded={false}
       type={type}
+      idx={idx}
+      currentIdx={currentIdx}
     />
   );
 }
 
 
-const TopicItem = ({ title, subtitle, members, type, image }) => {
+const TopicItem = ({
+  title,
+  subtitle,
+  members,
+  type,
+  image,
+  idx,
+  currentIdx,
+}) => {
   return (
     <SearchItem
       title={title}
@@ -181,12 +241,14 @@ const TopicItem = ({ title, subtitle, members, type, image }) => {
       type={type}
       isImgRounded={false}
       icon={<Users className="h-[0.9rem] text-[#707070]" strokeWidth={2.7} />}
+      idx={idx}
+      currentIdx={currentIdx}
     />
   );
-}
+};
 
 
-const FriendItem = ({ name, handle, time, image }) => {
+const FriendItem = ({ name, handle, time, image, idx, currentIdx }) => {
   return (
     <SearchItem
       title={name}
@@ -194,6 +256,8 @@ const FriendItem = ({ name, handle, time, image }) => {
       rightText={time}
       image={image}
       isImgRounded={true}
+      idx={idx}
+      currentIdx={currentIdx}
     />
   );
 }
@@ -206,15 +270,26 @@ function SearchItem({
   isImgRounded,
   icon,
   rightText,
+  idx,
+  currentIdx,
 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-      className="flex items-center justify-between p-2 rounded-md hover:bg-[#151515] transition-all duration-150 cursor-pointer"
+      className={`
+        flex items-center justify-between p-2 rounded-md
+         transition-all duration-150 cursor-pointer
+        ring-1 ring-transparent
+        hover:!bg-[#151515]/100 hover:!ring-white/10 hover:!scale-[1.01]
+        active:!scale-[0.99]
+        ${
+          idx === currentIdx
+            ? "!ring-white/10 bg-[#151515]/50 !scale-[1.01]"
+            : "scale-100"
+        }
+      `}
     >
       <div className="flex items-center space-x-3">
         {image ? (
