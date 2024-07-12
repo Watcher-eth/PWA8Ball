@@ -1,10 +1,11 @@
 // @ts-nocheck
 
 import React from "react";
-import { Bell } from "lucide-react";
+import { Bell, Search } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { motion } from "framer-motion";
 import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
+import { SearchDesktopModal } from "../Search/SearchDesktopModal";
 export const DesktopNavbar: React.FC = () => {
   const { user } = useUserStore();
 
@@ -22,6 +23,11 @@ export const DesktopNavbar: React.FC = () => {
         />
       </motion.div>
       <div className="flex items-center space-x-4">
+        <SearchDesktopModal userId={user?.external_auth_provider_user_id}>
+          <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
+            <Search className="w-6 h-6" strokeWidth={3} />
+          </motion.div>
+        </SearchDesktopModal>
         <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
           <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
             <Bell className="w-6 h-6" strokeWidth={3} />

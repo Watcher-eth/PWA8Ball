@@ -32,6 +32,15 @@
   --chart-2: 340 75% 55%;
 }
 
+@layer utilities {
+  .placeholder-color::placeholder {
+    color: #505050;
+  }
+  .no-outline:focus {
+    outline: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
