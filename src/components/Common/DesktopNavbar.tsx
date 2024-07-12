@@ -1,11 +1,9 @@
 // @ts-nocheck
-
-import React from "react";
 import { Bell, Search } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { motion } from "framer-motion";
 import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "../Search/DesktopSearchModal";
+
 export function DesktopNavbar() {
   const { user } = useUserStore();
 
@@ -27,13 +25,11 @@ export function DesktopNavbar() {
           </div>
         </DesktopSearchModal>
         <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
-          <motion.div
+          <div
             className="hover:scale-105 active:scale-98 transition-all"
-            onPress={{ scale: 0.98 }}
-            whileHover={{ scale: 1.05 }}
           >
             <Bell className="size-6" strokeWidth={3} />
-          </motion.div>
+          </div>
         </DesktopNotificationModal>
         {user && (
           <div
