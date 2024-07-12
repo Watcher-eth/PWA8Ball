@@ -51,7 +51,7 @@ export function DesktopMarketPage() {
           alt="CoverImage"
           src={market?.image}
         />
-        <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
+        <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
 
         <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
         <img
