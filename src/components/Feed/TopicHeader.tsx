@@ -18,7 +18,7 @@ const testTopics = [
 ];
 
 export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
-  const handleTopicPress = (item) => {
+  function handleTopicPress(item) {
     if (selectedTopic === item) {
       setSelectedTopic("🔥 Trending");
     } else {
@@ -28,8 +28,10 @@ export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
 
   return (
     <div
-      style={{ background: isDesktop === true ? "#080808" : "#101010" }}
-      className="flex flex-col w-full pt-4 pb-4 "
+      className={`
+        flex flex-col w-full py-4
+        ${isDesktop === true ? "bg-[#080808]" : "bg-[#101010]"}
+      `}
     >
       <Marquee speed={40} gradient={false}>
         <div className="flex flex-row">

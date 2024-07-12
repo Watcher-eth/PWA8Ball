@@ -26,14 +26,14 @@ export function DesktopTrendingTopics({
   const { data: markets, error, isLoading } = useGetMarketsForTopic(topicId);
 
   return (
-    <div className="relative w-[calc(100%-64px)] flex align-center h-[49vh] mx-8 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
+    <div className="relative w-[calc(100%-64px)] flex align-center justify-between h-[49vh] mx-8 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
       <div className="absolute inset-0 bg-[#080808] opacity-30 rounded-lg"></div>
       <div className="absolute inset-0 backdrop-filter backdrop-blur-lg rounded-lg"></div>
-      <div className="flex flex-col h-ful">
+      <div className="flex flex-col h-full">
         <img
           className="min-h-[10vh] ml-6 w-[10vh] rounded-xl relative z-10"
           src={imageUrl}
@@ -82,7 +82,7 @@ export function DesktopTrendingTopics({
         </div>
       </div>
       <div className="relative w-[70vw] -mt-4">
-        <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2">
+        <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2 pr-7">
           {formatMarketArr({ markets })?.map((market, index) => {
             console.log("Rendering card for market:", market); // Log each market being rendered
             return (
