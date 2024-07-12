@@ -25,7 +25,7 @@ export function DesktopMarketPage() {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: market } = useGetMarketById(
-    String(10),
+    String(6),
     user?.external_auth_provider_user_id
   );
 
@@ -52,14 +52,16 @@ export function DesktopMarketPage() {
     <div className="w-full bg-[#080808] h-full flex flex-col">
       <motion.div className="w-full h-[28vh] relative">
         <img
-          className="w-full object-cover h-[28vh] relative"
+          className="w-full transform rotate-180 object-cover h-[28vh] relative"
           alt="CoverImage"
           src={market?.image}
         />
+        <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
+
         <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
         <img
           style={{ zIndex: 20 }}
-          className="h-[14vh] absolute ml-10 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808]"
+          className="h-[14vh] absolute ml-14 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808]"
           src={market?.image}
         />
       </motion.div>
@@ -68,7 +70,7 @@ export function DesktopMarketPage() {
       </div>
       <motion.div
         onClick={() => setIsDrawerOpen(false)}
-        className="bg-[#070707] w-full h-full overflow-y-auto flex flex-col"
+        className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col"
       >
         <div className="relative h-full">
           <div className="grid grid-cols-10 gap-4 p-6">
@@ -191,17 +193,17 @@ export function DesktopMarketPage() {
                 />
               </div>
             </div>
-            <div className="col-span-3 bg-[#121212] flex flex-col items-center p-3  pb-1 rounded-[1.4rem]">
-              <DesktopChart question={market?.question} />
+            <div className="col-span-3  flex flex-col items-center p-3 px-1 -mr-9    pb-1 rounded-[1.4rem]">
+              <DesktopChart id={market?.id} question={market?.question} />
             </div>
-            <div className="col-span-3 bg-[#080808] p-4 pt-[3.8rem] rounded-lg">
+            <div className="col-span-3 bg-[#080808] p-4  pt-[3.8rem] rounded-lg">
               <RelatedMarkets
                 isDesktop={true}
                 topicId={market?.topic_id}
                 id={market?.id}
               />
             </div>
-            <div className="col-span-4 bg-[#080808] max-w-[70vw] p-4 rounded-lg mt-4">
+            <div className="col-span-4 bg-[#080808] max-w-[70vw] p-4 rounded-lg mt-1">
               <CommentSection
                 topic_id={market?.topic_id}
                 users={users}

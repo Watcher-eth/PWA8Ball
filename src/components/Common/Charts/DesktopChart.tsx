@@ -17,6 +17,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
+import { useState } from "react";
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
@@ -37,9 +39,16 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function DesktopChart(props: { question: string }) {
+export function DesktopChart(props: { question: string; id: string }) {
+  const [timeframe, setTimeframe] = useState("1D");
+
+  const { data: prices, error: priceError } = useGetPricesForMarket(
+    "12",
+    timeframe
+  );
+  console.log("prices", prices, priceError);
   return (
-    <Card className="border-0 mt-[-0.5rem] text-white w-[28vw] h-[55vh]">
+    <Card className="border-0 mt-[-0.5rem] border-4 rounded-[1.5rem] border-[#121212] text-white w-[28vw] h-[55vh]">
       <CardHeader>
         <CardTitle className="text-white">Question</CardTitle>
         <CardDescription className="text-[lightgray]">
@@ -125,7 +134,7 @@ export function DesktopChart(props: { question: string }) {
       <motion.div
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.98 }}
-        className="w-[25vw] bg-[#171717] mt-4 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
+        className="w-[25vw] bg-[#171717] mt-2 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
       >
         <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
         <p className="text-[1.1rem] font-semibold self-center text-white">
