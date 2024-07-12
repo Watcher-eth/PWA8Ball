@@ -57,6 +57,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-smooth: always;
+  --webkit-font-smoothing: auto;
+  text-rendering: optimizeLegibility; /*geometricPrecision ;*/
 }
 
 @layer utilities {
