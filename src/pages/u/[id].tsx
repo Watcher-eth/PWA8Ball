@@ -86,27 +86,7 @@ export default function ProfilePage({ userId }: { userId: string }) {
         <p className="text-white text-xl font-bold mt-6">{userC?.name}</p>
 
         <div className="flex flex-col items-center mt-0">
-          {userC?.socials?.twitter ? (
-            <div className="flex items-center mt-0">
-              <Twitter className="h-4 text-gray-200" />
-              <p
-                style={{ fontWeight: 500 }}
-                className="text-gray-200 text-md font-bold ml-1"
-              >
-                @{userC?.socials?.twitter?.username}
-              </p>
-            </div>
-          ) : userC?.socials?.farcaster ? (
-            <div style={{ fontWeight: 500 }} className="flex items-center mt-0">
-              <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
-              <p
-                style={{ fontWeight: 500 }}
-                className="text-gray-200 text-lg font-bold ml-1"
-              >
-                @{userC?.socials?.farcaster?.name}
-              </p>
-            </div>
-          ) : null}
+          <SocialsSection {...userC?.socials} />
           <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
             {balanceLoading ? (
               <div style={{ marginRight: 7 }}>
@@ -118,14 +98,11 @@ export default function ProfilePage({ userId }: { userId: string }) {
                 />
               </div>
             ) : (
-              <p className="text-gray-100 text-sm bg-[#1B1B1E]  py-[0.5rem] px-4 rounded-2xl">
+              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl">
                 ${(userCBalance / 10 ** 6).toFixed(2)}
               </p>
             )}
-            <p
-              style={{ fontWeight: 500 }}
-              className="text-gray-100 text-sm mr-2 bg-[#1B1B1E] py-[0.5rem] px-4 rounded-2xl ml-2"
-            >
+            <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl mx-2 font-medium">
               {totalFollowers} Followers
             </p>
             <FollowButton
@@ -152,3 +129,36 @@ export default function ProfilePage({ userId }: { userId: string }) {
     </div>
   );
 }
+
+
+function SocialsSection({ twitter, farcaster }) {
+  let username
+  let icon
+  if (twitter) {
+    username = twitter?.username
+    icon = <Twitter className="h-4 text-gray-200" />
+  } else if (farcaster) {
+    username = farcaster?.name
+    icon = <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
+  }
+  return (
+    username && (
+      <SocialDisplayBlock
+        username={username}
+        icon={icon}
+      />
+    )
+  );
+}
+
+function SocialDisplayBlock({username, icon}) {
+  return (
+    <div className="flex items-center font-medium">
+      {icon}
+      <p className="text-gray-200 text-md ml-1 font-medium">
+        @{username}
+      </p>
+    </div>
+  );
+}
+
