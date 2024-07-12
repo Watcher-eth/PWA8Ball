@@ -153,79 +153,91 @@ const Section = ({ title, children }) => (
   </div>
 );
 
-const Item = ({ title, subtitle, time, type, image }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 10 }}
-    whileHover={{ scale: 1.01 }}
-    whileTap={{ scale: 0.99 }}
-    className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515] cursor-pointer transition-all duration-150"
-  >
-    <div className="flex items-center space-x-3">
-      <img src={image} className="w-9 h-9 object-cover rounded-[0.2rem]" />
-      <div>
-        <p className="text-white">{title}</p>
-        <p className="text-[#909090] text-sm line-clamp-1">{subtitle}</p>
-      </div>
-      {type === "album" && (
-        <span className="px-2 py-1 text-xs bg-gray-700 rounded text-gray-300">
-          ALBUM
-        </span>
-      )}
-    </div>
-    <p className="text-gray-400 text-sm">{time}</p>
-  </motion.div>
-);
+const Item = ({ title, subtitle, time, type, image }) => {
+  return (
+    <SearchItem
+      title={title}
+      subtitle={subtitle}
+      rightText={time}
+      image={image}
+      isImgRounded={false}
+      type={type}
+    />
+  );
+}
 
-const TopicItem = ({ title, subtitle, members, type, image }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 10 }}
-    whileHover={{ scale: 1.01 }}
-    whileTap={{ scale: 0.99 }}
-    className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515] transition duration-150"
-  >
-    <div className="flex items-center space-x-3">
-      <img src={image} className="w-9 h-9 object-cover rounded-[0.2rem]" />
-      <div>
-        <p className="text-white">{title}</p>
-        <p className="text-[#909090] text-sm line-clamp-1">{subtitle}</p>
-      </div>
-      {type === "album" && (
-        <span className="px-2 py-1 text-xs bg-gray-700 rounded text-gray-300">
-          ALBUM
-        </span>
-      )}
-    </div>
-    <div className="flex flex-row items-center">
-      <p className="text-[#707070] text-[0.9rem]">{members}</p>
-      <Users className="h-[0.9rem] text-[#707070]" strokeWidth={2.7} />{" "}
-    </div>
-  </motion.div>
-);
 
-const FriendItem = ({ name, handle, time, image }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 10 }}
-    whileHover={{ scale: 1.01 }}
-    whileTap={{ scale: 0.99 }}
-    className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515]  transition duration-150"
-  >
-    <div className="flex items-center space-x-3">
-      {image ? (
-        <img src={image} className="w-9 h-9  rounded-full" />
-      ) : (
-        <div className="w-9 h-9 bg-gradient-to-r object-cover from-purple-400 via-pink-500 to-red-500 rounded-full"></div>
-      )}
-      <div>
-        <p className="text-white">{name}</p>
-        <p className="text-gray-400 text-sm">{handle}</p>
+const TopicItem = ({ title, subtitle, members, type, image }) => {
+  return (
+    <SearchItem
+      title={title}
+      subtitle={subtitle}
+      rightText={members}
+      image={image}
+      type={type}
+      isImgRounded={false}
+      icon={<Users className="h-[0.9rem] text-[#707070]" strokeWidth={2.7} />}
+    />
+  );
+}
+
+
+const FriendItem = ({ name, handle, time, image }) => {
+  return (
+    <SearchItem
+      title={name}
+      subtitle={handle}
+      rightText={time}
+      image={image}
+      isImgRounded={true}
+    />
+  );
+}
+
+function SearchItem({
+  title,
+  subtitle,
+  image,
+  type,
+  isImgRounded,
+  icon,
+  rightText,
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
+      className="flex items-center justify-between p-2 rounded-[0.5rem] hover:bg-[#151515]  transition duration-150"
+    >
+      <div className="flex items-center space-x-3">
+        {image ? (
+          <img
+            src={image}
+            className={`w-9 h-9 ${
+              isImgRounded ? "rounded-full" : "rounded-[0.2rem]"
+            }`}
+          />
+        ) : (
+          <div className="w-9 h-9 bg-gradient-to-r object-cover from-purple-400 via-pink-500 to-red-500 rounded-full"></div>
+        )}
+        <div>
+          <p className="text-white">{title}</p>
+          <p className="text-gray-400 text-sm">{subtitle}</p>
+        </div>
+        {type === "album" && (
+          <span className="px-2 py-1 text-xs bg-gray-700 rounded text-gray-300">
+            ALBUM
+          </span>
+        )}
       </div>
-    </div>
-    <p className="text-gray-400 text-sm">{time}</p>
-  </motion.div>
-);
+      {/* <p className="text-gray-400 text-sm">{time}</p> */}
+      <div className="flex flex-row items-center">
+        <p className="text-gray-400 text-sm">{rightText}</p>
+        {icon}
+      </div>
+    </motion.div>
+  );
+}
