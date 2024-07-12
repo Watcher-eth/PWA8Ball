@@ -147,18 +147,16 @@ export const SearchOverview = () => {
               <Section title="Suggested">
                 {displayedTrendingMarkets.map((market, index) => {
                   return (
-                    <div className="flex flex-col -space-y-1">
-                      <Item
-                        key={index}
-                        currentIdx={currentIdx}
-                        idx={market.idx}
-                        title={market.title}
-                        subtitle={market.question}
-                        time={3.22}
-                        type={"market.type"}
-                        image={market.image}
-                      />
-                    </div>
+                    <Item
+                      key={index}
+                      currentIdx={currentIdx}
+                      idx={market.idx}
+                      title={market.title}
+                      subtitle={market.question}
+                      time={3.22}
+                      type={"market.type"}
+                      image={market.image}
+                    />
                   );
                 })}
               </Section>
@@ -175,22 +173,20 @@ export const SearchOverview = () => {
                 ))}
               </Section>
               <Section title="Trending Topics">
-                <div className="flex flex-col -space-y-1">
-                  {displayedTrendingTopics?.map((market, index) => {
-                    return (
-                      <TopicItem
-                        key={index}
-                        currentIdx={currentIdx}
-                        idx={market.idx}
-                        title={market?.topic_title}
-                        subtitle={market?.topic_description}
-                        members={420}
-                        type={"market.type"}
-                        image={market.topic_image}
-                      />
-                    );
-                  })}
-                </div>
+                {displayedTrendingTopics?.map((market, index) => {
+                  return (
+                    <TopicItem
+                      key={index}
+                      currentIdx={currentIdx}
+                      idx={market.idx}
+                      title={market?.topic_title}
+                      subtitle={market?.topic_description}
+                      members={420}
+                      type={"market.type"}
+                      image={market.topic_image}
+                    />
+                  );
+                })}
               </Section>
             </>
           )}
