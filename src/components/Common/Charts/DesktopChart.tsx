@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useState } from "react";
+import { DesktopShareBetModal } from "@/components/Share/DesktopShareBetModal";
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
@@ -39,7 +40,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function DesktopChart(props: { question: string; id: string }) {
+export function DesktopChart(props: {
+  question: string;
+  id: string;
+  title: string;
+  image: string;
+  options: string[];
+  topic: string;
+}) {
   const [timeframe, setTimeframe] = useState("1D");
 
   const { data: prices, error: priceError } = useGetPricesForMarket(
@@ -131,16 +139,25 @@ export function DesktopChart(props: { question: string; id: string }) {
           </div>
         </div>
       </CardFooter>
-      <motion.div
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
-        className="w-[25vw] bg-[#171717] mt-2 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
+      <DesktopShareBetModal
+        title={props?.title}
+        question={props?.question}
+        id={props?.id}
+        image={props?.image}
+        options={props?.options}
+        topic={props?.topic}
       >
-        <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
-        <p className="text-[1.1rem] font-semibold self-center text-white">
-          Share with your friends
-        </p>
-      </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-[25vw] bg-[#171717] mt-2 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
+        >
+          <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
+          <p className="text-[1.1rem] font-semibold self-center text-white">
+            Share with your friends
+          </p>
+        </motion.div>
+      </DesktopShareBetModal>
     </Card>
   );
 }
