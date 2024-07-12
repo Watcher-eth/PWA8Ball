@@ -31,7 +31,7 @@ import { shortenAddress } from "@thirdweb-dev/react";
 import YourVotes, { YourSubmission } from "../Activity/YourVotes";
 import { ACTIVITY_PATH } from "@/utils/urls";
 
-function SearchModal() {
+export function SearchModal() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const debouncedSearch = debounce((query) => {
@@ -158,7 +158,7 @@ function SearchModal() {
     </div>
   );
 }
-export default SearchModal;
+
 
 function CurrentContest() {
   return (
