@@ -82,11 +82,11 @@ export const SearchOverview = () => {
   const debouncedSearch = useCallback(
     debounce((text) => {
       setDebouncedText(text);
-    }, 500),
+    }, 300),
     []
   );
 
-  console.log({currentIdx, masterList})
+
   return (
     <div className="rounded-2xl p-2 w-full">
       <div className="relative flex items-center align-center mb-4">
@@ -271,9 +271,9 @@ function SearchItem({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
+      exit={{ opacity: 0, y: 0 }}
       className={`
         flex items-center justify-between p-2 rounded-md
          transition-all duration-150 cursor-pointer
