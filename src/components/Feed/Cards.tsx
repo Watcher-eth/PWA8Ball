@@ -23,22 +23,21 @@ import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 import { BettersOverviewModal } from "../Predictions/Betters/OverviewModal";
 import { fillUserImages } from "@/utils/fillUserImages";
 
-export function Cards(props) {
-  const {
-    image,
-    title,
-    description,
-    icon,
-    topic,
-    id,
-    stake,
-    multiplier,
-    topicId,
-    optionA,
-    optionB,
-    topicBio,
-    handleOpen,
-  } = props;
+export function Cards({
+  image,
+  title,
+  description,
+  icon,
+  topic,
+  id,
+  stake,
+  multiplier,
+  topicId,
+  optionA,
+  optionB,
+  topicBio,
+  handleOpen,
+}) {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const { data: users } = useGetUsersByMarketId(id);
   const { user } = useUserStore();
@@ -105,15 +104,14 @@ export function Cards(props) {
               </div>
             </div>
           </DrawerTrigger>
-          <DrawerContent className=" flex flex-col fixed  max-h-[103%] border-0 rounded-3xl items-center self-center">
+          <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
             <motion.div
               onClick={() => setIsDrawerOpen(false)}
               className="bg-[#070707] w-[100vw] overflow-auto flex flex-col"
             >
               <div className="relative h-[100vw]">
                 <div
-                  style={{ zIndex: 2 }}
-                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-[100vw]"
+                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-[100vw] z-[2]"
                 >
                   <DrawerClose>
                     <ArrowLeft
