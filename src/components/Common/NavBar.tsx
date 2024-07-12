@@ -30,39 +30,39 @@ export function NavBar() {
     >
       <div className="w-[65vw] max-w-[17rem] flex px-2 justify-between items-center mx-auto">
         <Link href={HOME_PATH}>
-          <motion.div whileTap={{ scale: 0.94 }}>
+          <div className="active:scale-94">
             <Home className="h-6 text-white w-6" />
-          </motion.div>
+          </div>
         </Link>
         {user?.walletaddress ? (
           <>
             <Link href={ACTIVITY_PATH}>
-              <motion.div whileTap={{ scale: 0.94 }}>
+              <div className="active:scale-94">
                 <ActivityIcon className="h-6 text-white w-6" />
-              </motion.div>
+              </div>
             </Link>
             <Link href={getProfilePath(user.external_auth_provider_user_id)}>
-              <motion.div whileTap={{ scale: 0.94 }}>
+              <div className="active:scale-94">
                 {user?.pfp ? (
                   <img className="h-6 w-6 rounded-full" src={user?.pfp} />
                 ) : (
                   <UserCircle className="h-6 text-white w-6" />
                 )}
-              </motion.div>
+              </div>
             </Link>
           </>
         ) : (
           <>
-            <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
+            <div className="active:scale-94" onClick={openLoginModal}>
               <ActivityIcon className="h-6 text-white w-6" />
-            </motion.div>
-            <motion.div onClick={openLoginModal} whileTap={{ scale: 0.94 }}>
+            </div>
+            <div className="active:scale-94" onClick={openLoginModal}>
               {user?.pfp ? (
                 <img className="h-6 w-6 rounded-full" src={user?.pfp} />
               ) : (
                 <UserCircle className="h-6 text-white w-6" />
               )}
-            </motion.div>
+            </div>
           </>
         )}
       </div>

@@ -190,7 +190,7 @@ function CurrentContest() {
       <div
         className={`
           bg-[#262626]  flex items-center justify-center mt-4 mb-2
-          transition-all rounded-[8px] active:scale-95
+          transition-all rounded-md active:scale-95
         `}
       >
         <Button className="bg-[#262626] font-bold text-white ">Join Now</Button>

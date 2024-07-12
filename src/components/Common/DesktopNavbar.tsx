@@ -27,7 +27,11 @@ export function DesktopNavbar() {
           </div>
         </DesktopSearchModal>
         <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
-          <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
+          <motion.div
+            className="hover:scale-105 active:scale-98 transition-all"
+            onPress={{ scale: 0.98 }}
+            whileHover={{ scale: 1.05 }}
+          >
             <Bell className="w-6 h-6" strokeWidth={3} />
           </motion.div>
         </DesktopNotificationModal>

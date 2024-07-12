@@ -64,13 +64,9 @@ function ProfileModal({ children, profile }: LayoutProps) {
     <div className="flex flex-col">
       <Drawer>
         <DrawerTrigger asChild>
-          <motion.div
-            whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
-            className="mt-[0.1rem]"
-          >
+          <div className="mt-[0.1rem] active:scale-93 hover:scale-110">
             {children}
-          </motion.div>
+          </div>
         </DrawerTrigger>
         {profile?.id ? (
           <DrawerContent className=" border-0 rounded-3xl self-center ">
@@ -86,27 +82,21 @@ function ProfileModal({ children, profile }: LayoutProps) {
                   >
                     <div />
                     <DrawerClose style={{ zIndex: 5 }}>
-                      <motion.div
-                        style={{ zIndex: 5 }}
-                        whileTap={{ scale: 0.9 }}
-                        className=" p-2 left-6 rounded-full bg-gray-100/[0.3]"
-                      >
+                      <div className=" p-2 left-6 rounded-full bg-gray-100/30 z-[5] active:scale-90">
                         <X
                           size={17}
                           className="  stroke-gray-500"
                           strokeWidth={5}
                         />
-                      </motion.div>
+                      </div>
                     </DrawerClose>
                   </div>
                   <img
                     className="absolute w-[92vw] rounded-t-3xl left-[0rem]  h-[18vh] top-[0rem]"
                     src={
-                      profile?.metadata?.coverPicture?.optimized?.uri
-                        ? profile?.metadata?.coverPicture?.optimized?.uri
-                        : profile?.metadata?.picture?.optimized?.uri
-                        ? profile?.metadata?.picture?.optimized?.uri
-                        : "https://github.com/shadcn.png"
+                      profile?.metadata?.coverPicture?.optimized?.uri ??
+                      profile?.metadata?.picture?.optimized?.uri ??
+                      "https://github.com/shadcn.png"
                     }
                   ></img>
                   <div className="absolute w-[92vw] left-[0rem] rounded-t-3xl backdrop-blur-xl h-[18vh] top-[0rem]"></div>
@@ -114,9 +104,8 @@ function ProfileModal({ children, profile }: LayoutProps) {
                   <Avatar className="h-28 w-28 ml-[1.45rem] mt-3 relative self-center">
                     <AvatarImage
                       src={
-                        profile?.metadata?.picture?.optimized?.uri
-                          ? profile?.metadata?.picture?.optimized?.uri
-                          : "https://github.com/shadcn.png"
+                        profile?.metadata?.picture?.optimized?.uri ??
+                        "https://github.com/shadcn.png"
                       }
                     />
                   </Avatar>
@@ -124,9 +113,8 @@ function ProfileModal({ children, profile }: LayoutProps) {
                     style={{ zIndex: 2 }}
                     className="text-[1.8rem] mr-1  "
                   >
-                    {profile?.metadata?.displayName
-                      ? profile?.metadata?.displayName
-                      : profile?.handle?.localName}
+                    {profile?.metadata?.displayName ??
+                      profile?.handle?.localName}
                   </DrawerTitle>
                   <Badge className="rounded-full text-[0.92rem] mx-[0.8rem] h-6 flex  justify-center items-center bg-gray-100">
                     <div>
@@ -161,10 +149,8 @@ function ProfileModal({ children, profile }: LayoutProps) {
               </div>
               <DrawerFooter>
                 <div className="flex items-center mt-2 w-[80vw]  mb-1 mx-6 justify-between mx-2">
-                  <motion.div
-                    style={{ zIndex: 11 }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                  <div
+                    className="active:scale-95 hover:scale-110 z-[11] cursor-pointer"
                     onClick={handleShare}
                   >
                     <Button
@@ -174,14 +160,10 @@ function ProfileModal({ children, profile }: LayoutProps) {
                       <Share size={19} className="mt-[0rem]" strokeWidth={3} />
                       <div>Share</div>
                     </Button>
-                  </motion.div>
+                  </div>
 
                   <Link href={"/dashboard"}>
-                    <motion.div
-                      style={{ zIndex: 11 }}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
+                    <div className="active:scale-95 hover:scale-110 z-[11] cursor-pointer">
                       <Button className="active:bg-gray-900 space-x-1 flex items-center hover:bg-gray-900 bg-gray-900 text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
                         {profile?.handle?.localName ===
                         Profile.handle?.localName ? (
@@ -204,7 +186,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
                           </>
                         )}
                       </Button>
-                    </motion.div>
+                    </div>
                   </Link>
                 </div>
               </DrawerFooter>
@@ -229,17 +211,13 @@ function ProfileModal({ children, profile }: LayoutProps) {
                       Sign in
                     </div>
                     <DrawerClose style={{ zIndex: 5 }}>
-                      <motion.div
-                        style={{ zIndex: 5 }}
-                        whileTap={{ scale: 0.9 }}
-                        className=" p-2 left-6 rounded-full bg-gray-100/[0.3]"
-                      >
+                      <div className=" p-2 left-6 rounded-full bg-gray-100/30 z-[5] active:scale-90">
                         <X
                           size={17}
                           className="  stroke-white"
                           strokeWidth={6}
                         />
-                      </motion.div>
+                      </div>
                     </DrawerClose>
                   </div>
                   <img
@@ -270,8 +248,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleShare}
-                  >
-                  </motion.div>
+                  ></motion.div>
                 </div>
               </DrawerFooter>
             </div>
