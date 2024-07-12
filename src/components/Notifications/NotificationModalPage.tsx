@@ -28,10 +28,11 @@ export const NotificationsModalPage = (props: { isDesktop?: boolean }) => {
   if (hasToken && notifications?.length === 0) {
     return <NotificationsPlaceholder />;
   }
-  console.log(notifications?.length, isLoadingToken, hasToken);
+  console.log(notifications?.length, props?.isDesktop);
   if (notifications?.length > 0) {
     return (
       <NotificationsPage
+        isDesktop={props?.isDesktop}
         notifications={notifications}
         userId={user.external_auth_provider_user_id}
       />
@@ -46,7 +47,7 @@ export const NotificationsModalPage = (props: { isDesktop?: boolean }) => {
           flexDirection: "column",
           alignItems: "center",
           width: props?.isDesktop ? "25vw" : "100vw",
-          height: "90vh",
+          height: props?.isDesktop ? "60vh" : "90vh",
           top: 0,
           backgroundColor: "#101010",
         }}

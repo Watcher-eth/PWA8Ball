@@ -1,11 +1,17 @@
 // @ts-nocheck
 
 import React from "react";
-import styled from "styled-components";
 import { Heart, UserPlus, MessageSquareText, Bell } from "lucide-react";
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 
-const NotificationCard = ({ type, user, message, image, comment, index }) => {
+export const NotificationCard = ({
+  type,
+  user,
+  message,
+  image,
+  comment,
+  index,
+}) => {
   let icon;
   switch (type) {
     case "follow":
@@ -29,45 +35,68 @@ const NotificationCard = ({ type, user, message, image, comment, index }) => {
   }
 
   return (
-    <NotificationCardContainer style={{ animationDelay: `${index * 150}ms` }}>
-      <Card onClick={() => {}}>
+    <div
+      className="mb-2.5 bg-[#101010] animate-fadeInUp"
+      style={{ animationDelay: `${index * 150}ms` }}
+    >
+      <div
+        className="flex items-center p-3 bg-[#191919] rounded-lg shadow-lg"
+        onClick={() => {}}
+      >
         {type === "like" && (
-          <ProfileImage src={user ? user.pfp : ""} alt="Profile" />
+          <img
+            className="w-11 h-11 rounded-full mr-2.5"
+            src={user ? user.pfp : ""}
+            alt="Profile"
+          />
         )}
-        <TextContainer>
+        <div className="flex-1">
           {type === "like" && (
             <>
-              <div className="flex flex-row items-baseline">
-                <Username>{user && user.name} </Username>
-                <Text>liked your comment</Text>
+              <div className="flex items-baseline">
+                <span className="font-bold text-white text-lg">
+                  {user && user.name}
+                </span>
+                <span className="text-white text-base">
+                  {" "}
+                  liked your comment
+                </span>
               </div>
-              <Message>{comment.content}</Message>
+              <p className="text-[#777] text-base line-clamp-2">
+                {comment.content}
+              </p>
             </>
           )}
           {type === "follow" && (
             <>
-              <Username>{message}</Username>
-              <Message>{user && user.name} started following you</Message>
+              <span className="font-bold text-white text-lg">{message}</span>
+              <p className="text-[#777] text-base">
+                {user && user.name} started following you
+              </p>
             </>
           )}
           {type === "reply" && (
             <>
-              <Username>
+              <span className="font-bold text-white text-lg">
                 {user && user.name} {message}
-              </Username>
-              <Message>{comment && comment.content}</Message>
+              </span>
+              <p className="text-[#777] text-base line-clamp-2">
+                {comment && comment.content}
+              </p>
             </>
           )}
-        </TextContainer>
-        <IconContainer>{icon}</IconContainer>
-        {type === "follow" && <FollowButton>Follow</FollowButton>}
+        </div>
+        <div className="p-2 rounded-full border-3 border-[#323232]">{icon}</div>
+        {type === "follow" && (
+          <span className="text-[#4a90e2] font-bold">Follow</span>
+        )}
         {image && <img src={image} alt="Notification" />}
-      </Card>
-    </NotificationCardContainer>
+      </div>
+    </div>
   );
 };
 
-export const NotificationsPage = ({ userId }) => {
+export const NotificationsPage = ({ userId, isDesktop }) => {
   const {
     data: notifications,
     isLoading,
@@ -75,113 +104,54 @@ export const NotificationsPage = ({ userId }) => {
   } = useGetNotificationsForUser(userId);
 
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return <span className="text-white">Loading...</span>;
   }
 
   if (error) {
-    return <Text>Error: {error.message}</Text>;
+    return <span className="text-white">Error: {error.message}</span>;
   }
 
   if (!notifications || notifications.length === 0) {
-    return <Text>No notifications found.</Text>;
+    return <span className="text-white">No notifications found.</span>;
   }
 
-  return (
-    <Container>
-      <Title>Notifications</Title>
-      <ScrollView>
-        {notifications.map((item, index) => (
-          <NotificationCard
-            key={item.id}
-            index={index}
-            type={item.type}
-            user={item.users}
-            message={item.head}
-            image={item.image}
-            comment={item.comment}
-          />
-        ))}
-      </ScrollView>
-    </Container>
-  );
+  if (!isDesktop)
+    return (
+      <div className="flex flex-col items-center w-screen p-5 pt-3.5 bg-[#101010]">
+        <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
+        <div className="w-full overflow-y-auto">
+          {notifications.map((item, index) => (
+            <NotificationCard
+              key={item.id}
+              index={index}
+              type={item.type}
+              user={item.users}
+              message={item.head}
+              image={item.image}
+              comment={item.comment}
+            />
+          ))}
+        </div>
+      </div>
+    );
+
+  if (isDesktop)
+    return (
+      <div className="flex flex-col items-center w-[22vw] p-5 pt-3.5 bg-[#171717] rounded-xl border-2 border-[#292929]">
+        <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
+        <div className="w-full overflow-y-auto">
+          {notifications.map((item, index) => (
+            <NotificationCard
+              key={item.id}
+              index={index}
+              type={item.type}
+              user={item.users}
+              message={item.head}
+              image={item.image}
+              comment={item.comment}
+            />
+          ))}
+        </div>
+      </div>
+    );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  padding: 22px;
-  padding-top: 15px;
-  background-color: #101010;
-`;
-
-const Title = styled.h1`
-  font-family: "AeonikBold";
-  color: white;
-  font-size: 24px;
-  margin: 12px 0;
-`;
-
-const ScrollView = styled.div`
-  width: 100%;
-  overflow-y: auto;
-`;
-
-const NotificationCardContainer = styled.div`
-  margin-bottom: 10px;
-  background-color: #101010;
-  animation: fadeInUp 0.3s ease-in-out forwards;
-`;
-
-const Card = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 11px;
-  background-color: #191919;
-  border-radius: 13px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const ProfileImage = styled.img`
-  width: 45px;
-  height: 45px;
-  border-radius: 24px;
-  margin-right: 10px;
-`;
-
-const TextContainer = styled.div`
-  flex: 1;
-`;
-
-const Username = styled.span`
-  font-weight: bold;
-  font-size: 16px;
-  color: white;
-`;
-
-const Text = styled.span`
-  font-size: 14px;
-  color: white;
-`;
-
-const Message = styled.p`
-  font-size: 14px;
-  color: #777;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`;
-
-const IconContainer = styled.div`
-  padding: 8px;
-  border-radius: 20px;
-  border: 3px solid #323232;
-`;
-
-const FollowButton = styled.span`
-  color: #4a90e2;
-  font-weight: bold;
-`;
-

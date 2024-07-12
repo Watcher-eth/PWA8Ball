@@ -50,11 +50,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
             config={PRIVY_CONFIG}
           >
             <AuthChecker>
-              <Layout>
-                <DrawerProvider>
+              <DrawerProvider>
+                <Layout>
                   <Component {...pageProps} />
-                </DrawerProvider>
-              </Layout>
+                </Layout>
+              </DrawerProvider>
             </AuthChecker>
           </PrivyProvider>
         </AirstackProvider>

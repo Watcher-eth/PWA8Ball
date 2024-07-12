@@ -5,14 +5,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
 
-export function NotificationsModal({
-  children,
-  isDesktop,
-}: {
-  children: ReactNode;
-  isDesktop?: boolean;
-}) {
-  console.log("notifs", isDesktop);
+export function NotificationsModal({ children }: { children: ReactNode }) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -49,9 +42,9 @@ export function NotificationsModal({
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
             className={`bg-[#171717] rounded-t-3xl
-        h-[95vh] mb-5 ${isDesktop ? "w-[25vw]" : "w-[100vw]"} relative`}
+        h-[95vh] mb-5 w-[100vw] relative`}
           >
-            <NotificationsModalPage isDesktop={isDesktop} />
+            <NotificationsModalPage />
           </motion.div>
         </DrawerContent>
       </Drawer>
