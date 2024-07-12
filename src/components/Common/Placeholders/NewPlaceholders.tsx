@@ -224,7 +224,7 @@ export const NotificationSkelleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex mr-12 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-[1rem] bg-[#171717] my-2"
+    className="flex mr-12 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
       <motion.div

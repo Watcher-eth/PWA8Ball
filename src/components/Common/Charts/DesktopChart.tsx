@@ -147,16 +147,18 @@ export function DesktopChart(props: {
         options={props?.options}
         topic={props?.topic}
       >
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-[25vw] bg-[#171717] mt-2 ml-6 rounded-xl p-5 py-4 flex flex-row items-center align-center self-center justify-center"
+        <div
+          className={`
+            w-[25vw] bg-[#171717] mt-2 ml-6 rounded-xl p-5 py-4
+            flex flex-row items-center align-center self-center justify-center
+            hover:scale-101 active:scale-98
+          `}
         >
           <Share className="h-[1.1rem] mr-1 text-white" strokeWidth={3.4} />
           <p className="text-[1.1rem] font-semibold self-center text-white">
             Share with your friends
           </p>
-        </motion.div>
+        </div>
       </DesktopShareBetModal>
     </Card>
   );

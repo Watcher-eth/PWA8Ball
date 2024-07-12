@@ -38,12 +38,11 @@ export function RedeemModal(props: {
     <div>
       <Drawer>
         <DrawerTrigger>
-          <motion.div
+          <div
             onClick={() => {
               if (!user?.walletaddress) props.handleOpen();
             }}
-            whileTap={{ scale: 0.93 }}
-            className="mt-[1rem]"
+            className="mt-[1rem] active:scale-93"
           >
             {props?.option === 0 && (
               <OutcomeButton
@@ -59,7 +58,7 @@ export function RedeemModal(props: {
                 option={props?.option}
               />
             )}
-          </motion.div>
+          </div>
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">
           <motion.div

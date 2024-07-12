@@ -54,7 +54,7 @@ export const DesktopUserActivity: React.FC<UserActivityProps> = ({
   return (
     <div className="h-screen w-full p-6 pl-14">
       <h1 className="text-white text-2xl font-semibold mb-4">Your Activity</h1>
-      <div className="grid grid-cols-2 gap-[1.5rem]">
+      <div className="grid grid-cols-2 gap-6">
         {mergedData.map((item, index) => (
           <BetModal
             key={`predicted-${item.id}-${item.option}`}
@@ -75,21 +75,22 @@ export const DesktopUserActivity: React.FC<UserActivityProps> = ({
             openCashout={() => handleOpenBottomSheet({})}
             handleReceipt={() => handleOpenBottomSheet({})}
           >
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              onPress={{ scale: 0.99 }}
+            <div
               key={index}
-              className="relative h-[20vh] w-[20vh] bg-cover bg-center rounded-[1rem] shadow-lg"
+              className={`
+                relative size-[20vh] bg-cover bg-center rounded-lg shadow-lg
+                active:scale-99 hover:scale-101
+              `}
               style={{ backgroundImage: `url(${item.image})` }}
             >
               <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
 
               <div className="absolute bottom-0   p-4 text-white">
-                <span className="bg-green-500/[0.7] backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
+                <span className="bg-green-500/70 backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
                   {item.type === "predicted" ? "Active" : "Correct"}
                 </span>
               </div>
-            </motion.div>
+            </div>
           </BetModal>
         ))}
       </div>
