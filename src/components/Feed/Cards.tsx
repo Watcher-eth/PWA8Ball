@@ -80,7 +80,7 @@ export function Cards(props) {
                 style={{
                   lineHeight: "2.3rem",
                 }}
-                className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-2"
+                className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-[2]"
               >
                 {title}{" "}
               </div>
