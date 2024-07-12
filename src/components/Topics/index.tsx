@@ -11,6 +11,8 @@ import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembers
 import { ShareTopicModal } from "@/components/Modals/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";
+
+
 export const FeaturedBet = ({
   name,
   description,
