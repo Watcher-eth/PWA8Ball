@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { TypewriterEffectSmooth } from "./Animated/TypewriterEffect";
 import { motion } from "framer-motion";
+
+import { TypewriterEffectSmooth } from "./Animated/TypewriterEffect";
 
 import { isMobile } from "@/utils/isMobile";
 import { MobileOnlyModal } from "@/components/Modals/MobileOnlyModal";
