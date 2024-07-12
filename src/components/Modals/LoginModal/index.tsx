@@ -39,7 +39,7 @@ export function LoginModal({ isOpen, onClose }) {
               </div>
             )}
             {step === 2 && (
-              <Avatar className="ml-6 h-10 w-10">
+              <Avatar className="ml-6 size-10">
                 <AvatarImage src="https://github.com/lens-protocol/brand-kit/blob/074e865b5da4b2b80133915b15e82f9ba1f02881/01%20Logo/PNG/@2x/Icon-Green_@2x.png?raw=true" />
               </Avatar>
             )}

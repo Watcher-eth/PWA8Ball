@@ -214,7 +214,7 @@ export const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) =
           style={{ borderRadius: 6 }}
           src={noValue.image}
           alt="option"
-          className="h-8 w-8 rounded-md object-cover ml-2"
+          className="size-8 rounded-md object-cover ml-2"
         />
       </motion.div>
       <div className="w-1 bg-white h-12 mx-1 rounded-full"></div>
@@ -231,7 +231,7 @@ export const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) =
           src={yesValue.image}
           style={{ borderRadius: 6 }}
           alt="option"
-          className="h-8 w-8 rounded-md object-cover mr-2"
+          className="size-8 rounded-md object-cover mr-2"
         />
         <span>
           {yesValue.name.length > MAX_LENGTH

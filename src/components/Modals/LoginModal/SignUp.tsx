@@ -126,17 +126,17 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
           </motion.div>
           <div className="w-[70vw] mx-9 justify-between flex mb-7 items-center">
             <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
-              <Avatar className="bg-black   h-12 w-12">
+              <Avatar className="bg-black   size-12">
                 <AvatarImage src="https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/ma7zd8j9hfh1rccf0yr1" />
               </Avatar>
             </motion.div>
             <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
-              <Avatar className="bg-[#171717]   h-12 w-12">
+              <Avatar className="bg-[#171717]   size-12">
                 <AvatarImage src="https://steelbluemedia.com/wp-content/uploads/2019/06/new-google-favicon-512.png" />
               </Avatar>
             </motion.div>
             <motion.div onClick={login} whileTap={{ scale: 0.9 }}>
-              <Avatar className="bg-black   h-12 w-12">
+              <Avatar className="bg-black   size-12">
                 <AvatarImage src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8ed3d547-94ff-48e1-9f20-8c14a7030a02_2000x2000.jpeg" />
               </Avatar>
             </motion.div>

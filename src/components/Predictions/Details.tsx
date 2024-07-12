@@ -107,10 +107,10 @@ export const BetDetails = ({
                   src={icon}
                   alt={topic}
                   style={{ borderRadius: 6 }}
-                  className="h-12 w-12 object-cover	 rounded-md overflow-hidden mr-2"
+                  className="size-12 object-cover	 rounded-md overflow-hidden mr-2"
                 />
               ) : (
-                <div className="h-12 w-12 rounded-md bg-gray-200 mr-2" />
+                <div className="size-12 rounded-md bg-gray-200 mr-2" />
               )}
               <div className="flex flex-col space-y-[-0.1rem]">
                 <span className="text-sm font-bold text-gray-400">

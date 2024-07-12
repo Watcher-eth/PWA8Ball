@@ -44,7 +44,7 @@ export function NavBar() {
             <Link href={getProfilePath(user.external_auth_provider_user_id)}>
               <div className="active:scale-94">
                 {user?.pfp ? (
-                  <img className="h-6 w-6 rounded-full" src={user?.pfp} />
+                  <img className="size-6 rounded-full" src={user?.pfp} />
                 ) : (
                   <UserCircle className="h-6 text-white w-6" />
                 )}
@@ -58,7 +58,7 @@ export function NavBar() {
             </div>
             <div className="active:scale-94" onClick={openLoginModal}>
               {user?.pfp ? (
-                <img className="h-6 w-6 rounded-full" src={user?.pfp} />
+                <img className="size-6 rounded-full" src={user?.pfp} />
               ) : (
                 <UserCircle className="h-6 text-white w-6" />
               )}

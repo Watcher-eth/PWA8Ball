@@ -139,7 +139,7 @@ function SocialsSection({ twitter, farcaster }) {
     icon = <Twitter className="h-4 text-gray-200" />
   } else if (farcaster) {
     username = farcaster?.name
-    icon = <img src="/farcaster.png" className="h-10 w-10" alt="Farcaster" />
+    icon = <img src="/farcaster.png" className="size-10" alt="Farcaster" />
   }
   return (
     username && (

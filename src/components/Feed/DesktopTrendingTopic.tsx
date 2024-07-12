@@ -64,7 +64,7 @@ export function DesktopTrendingTopics({
                 {membersProfiles?.map((member, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-full overflow-hidden w-8 h-8"
+                    className="bg-white rounded-full overflow-hidden size-8"
                   >
                     <img
                       src={member.pfp}

@@ -50,17 +50,17 @@ export const ShareBetModal = ({
           <img
             src="/images/Guy1Memoji.png"
             alt="Guy1 Memoji"
-            className="h-10 w-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full ml-[-10px]"
           />
           <img
             src="/images/LadyMemoji.png"
             alt="Lady Memoji"
-            className="h-10 w-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full ml-[-10px]"
           />
           <img
             src="/images/Guy2Memoji.png"
             alt="Guy2 Memoji"
-            className="h-10 w-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full ml-[-10px]"
           />
         </div>
         <h1 className="text-4xl font-semibold text-white mb-[-2]"> together</h1>

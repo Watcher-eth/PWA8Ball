@@ -167,7 +167,7 @@ export function PredictModal(props: {
                 <div className="flex flex-col p-8 w-full pt-4 bg-[#131313] rounded-[2.5rem] pb-8 z-15">
                   <div className="flex flex-row items-center bg-gray-[#212121] rounded-2xl  w-full justify-center relative">
                     <img
-                      className="h-8 w-8 rounded-full object-cover "
+                      className="size-8 rounded-full object-cover "
                       src={props?.image}
                       alt="Question"
                     />

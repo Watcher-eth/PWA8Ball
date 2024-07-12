@@ -106,7 +106,7 @@ export function BoostModal({
                     <img
                       src={image}
                       alt="Market"
-                      className="h-10 w-10 rounded-full object-cover overflow-hidden"
+                      className="size-10 rounded-full object-cover overflow-hidden"
                     />
                     <DrawerClose>
                       <motion.div

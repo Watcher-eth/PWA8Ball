@@ -58,7 +58,7 @@ export function Embed({ og, publicationId }: { og: OG; publicationId?: string })
                     <div className="flex items-center space-x-2 pt-1.5">
                       {og.favicon ? (
                         <img
-                          className="h-4 w-4 rounded-full"
+                          className="size-4 rounded-full"
                           height={16}
                           width={16}
                           src={og.favicon}
@@ -99,7 +99,7 @@ export function Embed({ og, publicationId }: { og: OG; publicationId?: string })
                       <div className="flex items-center  space-x-0 pt-1.5">
                         {og.favicon && (
                           <img
-                            className="h-4 w-4 rounded-full"
+                            className="size-4 rounded-full"
                             height={16}
                             width={16}
                             src={og.favicon}

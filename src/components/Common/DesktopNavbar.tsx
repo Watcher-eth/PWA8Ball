@@ -17,13 +17,13 @@ export function DesktopNavbar() {
         <img
           src="/images/OrbLogo.png" // Replace with your image path
           alt="Left Icon"
-          className="w-12 h-12 rounded-full"
+          className="size-12 rounded-full"
         />
       </div>
       <div className="flex items-center space-x-8">
         <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
           <div className="active:scale-98 hover:scale-105">
-            <Search className="w-6 h-6" strokeWidth={3} />
+            <Search className="size-6" strokeWidth={3} />
           </div>
         </DesktopSearchModal>
         <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
@@ -32,7 +32,7 @@ export function DesktopNavbar() {
             onPress={{ scale: 0.98 }}
             whileHover={{ scale: 1.05 }}
           >
-            <Bell className="w-6 h-6" strokeWidth={3} />
+            <Bell className="size-6" strokeWidth={3} />
           </motion.div>
         </DesktopNotificationModal>
         {user && (
@@ -42,7 +42,7 @@ export function DesktopNavbar() {
             <img
               src={user.pfp}
               alt={user.name}
-              className="w-8 h-8 rounded-full"
+              className="size-8 rounded-full"
             />
           </div>
         )}

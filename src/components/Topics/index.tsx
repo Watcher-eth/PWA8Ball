@@ -37,13 +37,13 @@ export const FeaturedBet = ({
       >
         <button
           onClick={() => router.back()}
-          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 left-4"
+          className="size-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 left-4"
         >
           <ChevronLeft color="white" size={20} strokeWidth={4} />
         </button>
         <Link
           href={"/CommunityLeaderboard"}
-          className="h-8 w-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 right-14"
+          className="size-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 right-14"
         >
           <Star color="white" size={20} strokeWidth={3} />
         </Link>
@@ -165,7 +165,7 @@ export const AvatarGroup = ({ images }) => {
           key={index}
           src={image}
           alt={`Avatar ${index}`}
-          className="w-6 h-6 rounded-full border-2 border-[#070707]"
+          className="size-6 rounded-full border-2 border-[#070707]"
         />
       ))}
     </div>

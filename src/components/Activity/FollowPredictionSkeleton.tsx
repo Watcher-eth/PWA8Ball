@@ -21,7 +21,7 @@ export const FollowPredictionSkeleton: React.FC<FollowPredictionSkeletonProps> =
       initial="initial"
       animate="pulse"
     >
-      <AltSkeleton className="h-12 w-12 !rounded-full !bg-[#212121]" />
+      <AltSkeleton className="size-12 !rounded-full !bg-[#212121]" />
       <div className="flex flex-col gap-2">
         <AltSkeleton className="h-3 w-[30vw] !bg-[#212121]" />
         <AltSkeleton className="h-3.5 w-[50vw] !bg-[#212121]" />

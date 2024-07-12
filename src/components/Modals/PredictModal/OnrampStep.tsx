@@ -214,7 +214,7 @@ function BuyWithFiat(props: { setStep: (step: number) => void }) {
         className="active:bg-[#565467] mb-5 flex items-center hover:bg-[#565467] bg-[#002244] text-[1.15rem] mx-6 font-bold text-white h-[2.9rem] rounded-xl mt-2 w-[80vw]"
         onClick="window.open('https://buy-sandbox.moonpay.com/?apiKey=pk_test_123', '_blank')"
       >
-        <Avatar className="h-8 w-8">
+        <Avatar className="size-8">
           <AvatarImage src="https://files.readme.io/e6aad6c-small-moonpay_symbol_wht.png" />
         </Avatar>
         <div> Buy with MoonPay</div>
