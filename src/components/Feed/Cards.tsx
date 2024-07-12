@@ -59,21 +59,23 @@ export function Cards(props) {
           <DrawerTrigger asChild>
             <div
               onClick={() => setIsDrawerOpen(true)}
-              style={{ borderRadius: "18px", fontFamily: "Aeonik-Bold" }}
+              style={{ fontFamily: "Aeonik-Bold" }}
               className={`
-                flex items-start flex-col rounded-xl w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
+                flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
                 shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-[1.01] active:scale-[0.96] transition-all
+                cursor-pointer
               `}
             >
               <img
                 alt="Card_Preview"
                 src={image}
-                className="w-full h-full absolute  object-cover rounded-xl"
-                style={{ zIndex: 1, borderRadius: "18px" }}
+                className="w-full h-full absolute  object-cover rounded-lg z-[2]"
               />
               <div
-                style={{ zIndex: 2 }}
-                className="h-[50vw] w-[88vw]  max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0"
+                className={`
+                  h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0
+                  z-[2]
+                `}
               />
               <div
                 style={{
@@ -88,12 +90,13 @@ export function Cards(props) {
               <div
                 className={`
                   z-[2]
-                  rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2] backdrop-blur-lg flex
+                  rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2]
+                  backdrop-blur-lg flex
+                  border-[0.5px] border-white/5
                 `}
               >
                 <img
-                  style={{ borderRadius: "8px" }}
-                  className="h-[13vw] max-w-[3.4rem] max-h-[3.4rem] object-cover w-[13vw] relative"
+                  className="h-[13vw] max-w-[3.4rem] max-h-[3.4rem] object-cover rounded-md w-[13vw] relative"
                   src={icon}
                 />
                 <div
