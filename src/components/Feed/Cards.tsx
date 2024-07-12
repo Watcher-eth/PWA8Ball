@@ -54,16 +54,15 @@ export function Cards(props) {
 
   return (
     <LayoutGroup>
-      <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>
+      <motion.div layout className="font-[Aeonik-Bold]">
         <Drawer disablePreventScroll={false}>
           <DrawerTrigger asChild>
             <div
               onClick={() => setIsDrawerOpen(true)}
-              style={{ fontFamily: "Aeonik-Bold" }}
               className={`
                 flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
                 shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-101 active:scale-96 transition-all
-                cursor-pointer
+                cursor-pointer font-[Aeonik-Bold]
               `}
             >
               <img
@@ -79,11 +78,9 @@ export function Cards(props) {
               />
               <div
                 style={{
-                  zIndex: 2,
                   lineHeight: "2.3rem",
-                  fontFamily: "Benzin-Bold",
                 }}
-                className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold"
+                className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-2"
               >
                 {title}{" "}
               </div>

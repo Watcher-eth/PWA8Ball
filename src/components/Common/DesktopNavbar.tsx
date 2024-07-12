@@ -32,17 +32,15 @@ export function DesktopNavbar() {
           </motion.div>
         </DesktopNotificationModal>
         {user && (
-          <motion.div
-            onPress={{ scale: 0.98 }}
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+          <div
+            className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all"
           >
             <img
               src={user.pfp}
               alt={user.name}
               className="w-8 h-8 rounded-full"
             />
-          </motion.div>
+          </div>
         )}
       </div>
     </div>
