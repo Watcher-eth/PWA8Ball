@@ -71,7 +71,7 @@ export function Cards({
               />
               <div
                 className={`
-                  h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/[0.85] to-transparent absolute bottom-0
+                  h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent absolute bottom-0
                   z-[2]
                 `}
               />
@@ -110,15 +110,12 @@ export function Cards({
               className="bg-[#070707] w-screen overflow-auto flex flex-col"
             >
               <div className="relative h-[100vw]">
-                <div
-                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]"
-                >
+                <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]">
                   <DrawerClose>
                     <ArrowLeft
                       strokeWidth={3.8}
                       size={33}
-                      style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-                      className="p-2 rounded-full backdrop-blur-lg"
+                      className="p-2 rounded-full backdrop-blur-lg bg-[rgba(17,17,17,0.15)]"
                     />
                   </DrawerClose>
                   <ShareModal
@@ -131,8 +128,7 @@ export function Cards({
                     <Share
                       size={33}
                       strokeWidth={3.3}
-                      style={{ backgroundColor: "rgba(17, 17, 17, 0.15)" }}
-                      className="p-2 rounded-full backdrop-blur-xl"
+                      className="p-2 rounded-full backdrop-blur-xl bg-[rgba(17,17,17,0.15)]"
                     />
                   </ShareModal>
                 </div>
@@ -164,16 +160,20 @@ export function Cards({
               <div className="flex justify-between mt-4 items-center w-[88vw] mx-5">
                 <div className="flex flex-col">
                   <div
-                    style={{ zIndex: 2, fontFamily: "Aeonik-Bold" }}
-                    className="text-[0.85rem] text-gray-200 text-bold"
+                    className={`
+                      text-[0.85rem] text-gray-200 text-bold
+                      font-[Aeonik-Bold] z-[2]
+                    `}
                   >
                     At stake
                   </div>
                   <div
-                    style={{ zIndex: 2, fontFamily: "Aeonik-Bold" }}
-                    className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center"
+                    className={`
+                      text-[1.6rem] mt-[-0.25rem] text-white flex items-center
+                      font-[Aeonik-Bold] z-[2]
+                    `}
                   >
-                    <div> ${stake ? (stake / 100000).toFixed(2) : "0.00"}</div>
+                    <div> ${((stake ?? 0) / 100000).toFixed(2)}</div>
                   </div>
                 </div>
                 <BettersOverviewModal
@@ -187,9 +187,8 @@ export function Cards({
                   users={users}
                 >
                   <div
-                    style={{ zIndex: 2 }}
                     onClick={openLoginModal}
-                    className="flex space-x-[-1rem] mb-3 items-center"
+                    className="flex space-x-[-1rem] mb-3 items-center z-[2]"
                   >
                     <Avatar>
                       <AvatarImage src={userImages[0]} />
@@ -203,18 +202,15 @@ export function Cards({
                   </div>
                 </BettersOverviewModal>
               </div>
-              <div
-                style={{ zIndex: 20 }}
-                className="h-2 w-[100%] color-gray-300 bg-[gray] mx-5 rounded-full"
-              />
+              <div className="h-2 w-full color-gray-300 bg-[gray] mx-5 rounded-full z-20" />
 
               <div
-                style={{
-                  zIndex: 2,
-                  fontFamily: "Aeonik-Bold",
-                  lineHeight: "1.35rem",
-                }}
-                className="text-[1.05rem] self-start mb-[-1] mt-2 text-start leading-6 text-[lightgray] max-w-[88vw] ml-5"
+                className={`
+                  text-[1.05rem] self-start
+                  -mb-px mt-2 ml-5
+                  text-start text-[lightgray] max-w-[88vw]
+                   z-[2] font-[Aeonik-Bold] leading-[1.35rem]
+                `}
               >
                 {description}
               </div>
