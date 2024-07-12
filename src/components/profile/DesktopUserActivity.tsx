@@ -1,22 +1,21 @@
 // @ts-nocheck
-
+import { useEffect } from "react";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import { BetModal } from "../Modals/PredictionPositionModal";
-interface UserActivityProps {
-  walletAddress: string;
-  userId: string;
-  onParentRefresh?: boolean;
-}
 
-export const DesktopUserActivity: React.FC<UserActivityProps> = ({
+import { BetModal } from "../Modals/PredictionPositionModal";
+
+
+export function DesktopUserActivity({
   walletAddress,
   userId,
   onParentRefresh,
-}) => {
+}: {
+  walletAddress: string;
+  userId: string;
+  onParentRefresh?: boolean;
+}) {
   const {
     data: ordersData,
     isLoading: isOrdersLoading,
@@ -98,7 +97,7 @@ export const DesktopUserActivity: React.FC<UserActivityProps> = ({
   );
 };
 
-const UserPredictionSkeleton: React.FC<{ index: number }> = ({ index }) => {
+function UserPredictionSkeleton({ index }: { index: number }) {
   return (
     <div className="relative bg-gray-700 rounded-lg shadow-lg h-48 animate-pulse mb-4 w-35vw">
       <div className="absolute inset-0 bg-gray-500 opacity-50 rounded-lg"></div>
