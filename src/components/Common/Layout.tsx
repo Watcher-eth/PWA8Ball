@@ -10,7 +10,7 @@ export function Layout({ children }: { children: ReactNode }) {
       {/* Content of the page */}
       {children}
       {isMobile() && (
-        <div className="flex items-center justify-center w-[100vw] fixed bottom-[25px] z-[15]">
+        <div className="flex items-center justify-center w-screen fixed bottom-[25px] z-[15]">
           <NavBar />
         </div>
       )}

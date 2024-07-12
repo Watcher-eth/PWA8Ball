@@ -32,12 +32,12 @@ export function Predictions({ id }) {
     return (
       <motion.div
         onClick={() => setIsDrawerOpen(false)}
-        className=" bg-[#070707] w-[100vw] h-[100vh] overflow-y-auto items-center  flex flex-col "
+        className=" bg-[#070707] w-screen h-screen overflow-y-auto items-center  flex flex-col "
       >
         <div className="relative h-[100vw]">
           <div
             style={{ zIndex: 2 }}
-            className="flex items-center absolute top-3  justify-between px-6 py-2  w-[100vw]"
+            className="flex items-center absolute top-3  justify-between px-6 py-2  w-screen"
           >
             <ArrowLeft
               strokeWidth={3.8}
@@ -54,15 +54,15 @@ export function Predictions({ id }) {
               />
             </ShareModal>
           </div>
-          <motion.div className="w-[100vw] h-[45vh] relative">
+          <motion.div className="w-screen h-[45vh] relative">
             <img
-              className="w-[100vw] object-cover h-[45vh] relative"
+              className="w-screen object-cover h-[45vh] relative"
               alt="CoverImage"
               src={market?.image}
             />
             <div
               style={{ zIndex: 2 }}
-              className="h-[40vw] w-[100vw]    bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
+              className="h-[40vw] w-screen    bg-gradient-to-t from-black via-transparen to-transparent absolute bottom-0"
             />
           </motion.div>
         </div>

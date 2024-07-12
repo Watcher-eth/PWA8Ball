@@ -107,11 +107,11 @@ export function Cards({
           <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
             <motion.div
               onClick={() => setIsDrawerOpen(false)}
-              className="bg-[#070707] w-[100vw] overflow-auto flex flex-col"
+              className="bg-[#070707] w-screen overflow-auto flex flex-col"
             >
               <div className="relative h-[100vw]">
                 <div
-                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-[100vw] z-[2]"
+                  className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]"
                 >
                   <DrawerClose>
                     <ArrowLeft
@@ -136,15 +136,15 @@ export function Cards({
                     />
                   </ShareModal>
                 </div>
-                <motion.div className="w-[100vw] h-[42vh] relative">
+                <motion.div className="w-screen h-[42vh] relative">
                   <img
-                    className="w-[100vw] object-cover h-[42vh] relative"
+                    className="w-screen object-cover h-[42vh] relative"
                     alt="CoverImage"
                     src={image}
                   />
                   <div
                     style={{ zIndex: 2 }}
-                    className="h-[38vw] w-[100vw] bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
+                    className="h-[38vw] w-screen bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
                   />
                 </motion.div>
               </div>

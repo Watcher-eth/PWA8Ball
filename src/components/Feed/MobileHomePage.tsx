@@ -31,7 +31,7 @@ export function MobileHomePage({ trendingMarkets }) {
   };
 
   return (
-    <div className="w-[100vw] flex flex-col  no-scrollbar py-0  bg-[#101010]">
+    <div className="w-screen flex flex-col  no-scrollbar py-0  bg-[#101010]">
       <TopicHeader
         setSelectedTopic={setSelectedTopic}
         selectedTopic={selectedTopic}

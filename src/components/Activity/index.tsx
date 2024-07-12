@@ -34,14 +34,14 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
     <div
       className={`
         no-scrollbar flex flex-col
-        ${props.isDesktop ? "w-[41vw]" : "w-full"} min-h-[100vh]
+        ${props.isDesktop ? "w-[41vw]" : "w-full"} min-h-screen
         p-[20px] pt-[30px]
         ${props.isDesktop ? "bg-[transparent]" : "bg-[#101010]"} relative
       `}
     >
       <div
         className={`
-          fixed  w-[100vw] h-[125px] bottom-0 rounded-t-lg
+          fixed w-screen h-[125px] bottom-0 rounded-t-lg
           z-[2]
         `}
         style={{

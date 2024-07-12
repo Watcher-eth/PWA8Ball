@@ -160,7 +160,7 @@ export function PredictModal(props: {
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#131313] rounded-3xl   w-[100vw] relative"
+            className="bg-[#131313] rounded-3xl   w-screen relative"
           >
             <AnimatePresence>
               {step === 1 && (

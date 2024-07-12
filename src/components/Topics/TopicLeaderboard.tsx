@@ -56,7 +56,7 @@ export const TopicLeaderboard = ({ image, name, topicId }) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col w-full p-[20px] pt-[75px] bg-[#101010] h-[100vh] relative">
+    <div className="flex flex-col w-full p-[20px] pt-[75px] bg-[#101010] h-screen relative">
       <img
         src={image}
         alt="Topic"

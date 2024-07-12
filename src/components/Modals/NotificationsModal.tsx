@@ -42,7 +42,7 @@ export function NotificationsModal({ children }: { children: ReactNode }) {
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
             className={`bg-[#171717] rounded-t-3xl
-        h-[95vh] mb-5 w-[100vw] relative`}
+        h-[95vh] mb-5 w-screen relative`}
           >
             <NotificationsModalPage />
           </motion.div>

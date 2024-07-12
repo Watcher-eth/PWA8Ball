@@ -64,13 +64,13 @@ export const FeaturedBet = ({
           />
         </ShareTopicModal>
         <motion.div
-          className="w-[100vw] h-[35vh] bg-cover bg-center"
+          className="w-screen h-[35vh] bg-cover bg-center"
           style={{ backgroundImage: `url(${image})` }}
           initial={{ scale: 1 }}
           animate={{ scale: 1.1 }}
           transition={{ duration: 0.5 }}
         />
-        <div className="absolute top-0 w-[100vw] h-[37.5vh] bg-gradient-to-b from-transparent to-[#070707]"></div>
+        <div className="absolute top-0 w-screen h-[37.5vh] bg-gradient-to-b from-transparent to-[#070707]"></div>
         <div className="flex flex-col no-scrollbar p-4 mt-[-1.5rem]">
           <h1
             className={`

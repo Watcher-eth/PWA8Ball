@@ -52,7 +52,7 @@ export function InviteFriendsPlaceholder() {
         initial={{ opacity: 0 }}
         animate={controls}
         src="/images/Friends.png"
-        className="w-[100vw]"
+        className="w-screen"
         style={{
           height: height / 3.9,
         }}

@@ -260,7 +260,7 @@ export const FindFriends = ({ type }) => {
       </div>
       <div
         className={`
-          w-[100vw] h-[30px]
+          w-screen h-[30px]
           absolute bottom-[85px]
         `}
         style={{

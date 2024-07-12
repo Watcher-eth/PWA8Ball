@@ -65,7 +65,7 @@ export function ShareTopicModal({
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
             className="bg-white rounded-3xl
-        h-[90vh] mb-5 w-[100vw] relative"
+        h-[90vh] mb-5 w-screen relative"
           >
             <ShareTopic
               id={id}
