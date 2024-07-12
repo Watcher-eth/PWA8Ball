@@ -18,12 +18,8 @@ import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
+import { fillUserImages } from "@/utils/fillUserImages";
 
-const DEFAULT_IMAGES = [
-  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-  "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-];
 
 export function DesktopMarketPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -35,10 +31,7 @@ export function DesktopMarketPage() {
     user?.external_auth_provider_user_id
   );
 
-  const userImages = [
-    ...(users?.map((user) => user.pfp).filter(Boolean) ?? []),
-    ...DEFAULT_IMAGES,
-  ].slice(0, 3);
+  const userImages = fillUserImages(users, 3);
 
   const id = 8;
   return (

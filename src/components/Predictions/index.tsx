@@ -14,6 +14,7 @@ import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
 import { BettersOverviewModal } from "./Betters/OverviewModal";
 import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "./Details";
+import { fillUserImages } from "@/utils/fillUserImages";
 
 export function Predictions({ id }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -25,24 +26,7 @@ export function Predictions({ id }) {
     user?.external_auth_provider_user_id
   );
 
-  const defaultImages = [
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-  ];
-  let userImages;
-  if (users) {
-    userImages = users
-      ?.map((user, index) => (index < 3 ? user.pfp : null))
-      .filter((image) => image !== null);
-
-    // Fill the remaining slots with default images if less than 3
-    while (userImages.length < 3) {
-      userImages.push(defaultImages[userImages.length]);
-    }
-  } else {
-    userImages = defaultImages;
-  }
+  const userImages = fillUserImages(users, 3);
   console.log("market", market);
   if (market)
     return (

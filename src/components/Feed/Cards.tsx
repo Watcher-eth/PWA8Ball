@@ -21,6 +21,7 @@ import { CommentSection } from "../Posts/Comments/CommentSection";
 import { BetDetails } from "../Predictions/Details";
 import { RelatedMarkets } from "../Predictions/RelatedMarkets";
 import { BettersOverviewModal } from "../Predictions/Betters/OverviewModal";
+import { fillUserImages } from "@/utils/fillUserImages";
 
 export function Cards(props) {
   const {
@@ -49,25 +50,8 @@ export function Cards(props) {
     refetch,
   } = useGetMarketById(String(id), user?.external_auth_provider_user_id);
 
-  const defaultImages = [
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-    "https://pbs.twimg.com/media/F5RcCF7a0AALiMO?format=jpg&name=4096x4096",
-  ];
+  const userImages = fillUserImages(users, 3);
 
-  let userImages;
-  if (users) {
-    userImages = users
-      ?.map((user, index) => (index < 3 ? user.pfp : null))
-      .filter((image) => image !== null);
-
-    // Fill the remaining slots with default images if less than 3
-    while (userImages.length < 3) {
-      userImages.push(defaultImages[userImages.length]);
-    }
-  } else {
-    userImages = defaultImages;
-  }
   return (
     <LayoutGroup>
       <motion.div layout style={{ fontFamily: "Aeonik-Bold" }}>
