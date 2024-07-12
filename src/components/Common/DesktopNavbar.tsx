@@ -6,22 +6,20 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { motion } from "framer-motion";
 import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "../Search/DesktopSearchModal";
-export const DesktopNavbar: React.FC = () => {
+export function DesktopNavbar() {
   const { user } = useUserStore();
 
   return (
     <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
-      <motion.div
-        onPress={{ scale: 0.98 }}
-        whileHover={{ scale: 1.05 }}
-        className="flex items-center"
+      <div
+        className="flex items-center active:scale-[0.98] hover:scale-[1.05] transition-all duration-300"
       >
         <img
           src="/images/OrbLogo.png" // Replace with your image path
           alt="Left Icon"
           className="w-12 h-12 rounded-full"
         />
-      </motion.div>
+      </div>
       <div className="flex items-center space-x-8">
         <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
           <motion.div onPress={{ scale: 0.98 }} whileHover={{ scale: 1.05 }}>
