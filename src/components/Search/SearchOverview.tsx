@@ -6,6 +6,7 @@ import debounce from "lodash/debounce";
 import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
 import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
+import { useOverlaySearch } from "@/hooks/useOverlaySearch";
 
 const friends = [
   { name: "James Blair", handle: "@jblair", time: "32m" },
@@ -34,12 +35,15 @@ export const SearchOverview = () => {
     debouncedSearch(e.target.value);
   };
 
+  const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
+    useOverlaySearch(trendingMarkets?.length, () => {});
   const debouncedSearch = useCallback(
     debounce((text) => {
       setDebouncedText(text);
     }, 500),
     []
   );
+
 
   return (
     <div className="rounded-2xl p-2 w-full">
@@ -233,7 +237,7 @@ function SearchItem({
           </span>
         )}
       </div>
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center  min-w-20 justify-end pr-2">
         <p className="text-gray-400 text-sm">{rightText}</p>
         {icon}
       </div>
