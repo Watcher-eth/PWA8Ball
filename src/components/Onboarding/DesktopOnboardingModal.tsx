@@ -115,7 +115,7 @@ function SocialOnboardButton({
       `}
       onClick={onClick}
     >
-      <IconComponent className="w-5 h-5" />
+      <IconComponent className="size-5" />
     </div>
   );
 }
@@ -138,7 +138,7 @@ function WalletOnboardButton({
         variant="outline"
         className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
       >
-        <img src={iconSrc} className="w-5 h-5 mr-2" />
+        <img src={iconSrc} className="size-5 mr-2" />
         {label}
       </div>
     </div>

@@ -60,7 +60,11 @@ function NavIconButton({
   iconClassName?: string
 }) {
   return (
-    <div className={`hover:scale-105 active:scale-98 transition-all ${className}`}>
+    <div
+      className={`
+        hover:scale-105 active:scale-98 transition-all
+        cursor-pointer ${className}
+      `}>
       {icon ?? <IconComponent className={`size-6 ${iconClassName}`} strokeWidth={3} />}
     </div>
   );
@@ -71,7 +75,7 @@ function ConnectButton() {
   return (
     <div
       className={`
-        bg-[#171717] font-semibold
+        bg-[#171717] font-semibold cursor-pointer
         border border-[#272727]
         px-4 py-2 rounded-md flex flex-row items-center
       `}
