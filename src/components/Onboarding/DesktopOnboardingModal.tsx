@@ -10,7 +10,9 @@ import { motion } from "framer-motion";
 export function DesktopOnboardingModal({ children }: { children: ReactNode }) {
   return (
     <Dialog className="!rounded-[1.5rem]">
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <div>{children}</div>
+      </DialogTrigger>
       <DialogContent
         className={`
           p-0 bg-[#080808]/[0.8] min-h-[50vh] min-w-[55vw] border-0 border-[#181818]
