@@ -1,9 +1,10 @@
 // @ts-nocheck
-import { Bell, Search } from "lucide-react";
+import { Bell, DoorOpen, Search } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "../Search/DesktopSearchModal";
 import { DropdownProfilePopover } from "../profile/DesktopProfilePopover";
+import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
 
 export function DesktopNavbar() {
   const { user } = useUserStore();
@@ -28,8 +29,9 @@ export function DesktopNavbar() {
             <Bell className="size-6" strokeWidth={3} />
           </div>
         </DesktopNotificationModal>
-        <DropdownProfilePopover>
-          {user && (
+
+        {user ? (
+          <DropdownProfilePopover>
             <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
               <img
                 src={user.pfp}
@@ -37,8 +39,14 @@ export function DesktopNavbar() {
                 className="size-8 rounded-full"
               />
             </div>
-          )}
-        </DropdownProfilePopover>
+          </DropdownProfilePopover>
+        ) : (
+          <DesktopOnboardingModal>
+            <div className="bg-[#171717] border-[#272727] font-semibold border-2 px-4 py-2 rounded-md flex flex-row items-center">
+              Connect
+            </div>
+          </DesktopOnboardingModal>
+        )}
       </div>
     </div>
   );
