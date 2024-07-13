@@ -7,7 +7,6 @@ import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets"
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
 import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
 import { useOverlaySearch } from "@/hooks/useOverlaySearch";
-
 const friends = [
   { name: "James Blair", handle: "@jblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
@@ -29,9 +28,6 @@ export const SearchOverview = () => {
     isLoading: marketsLoading,
     error: marketsError,
   } = useGetMarketsByQuestion(debouncedText);
-
-
-
 
   const displayedSearchMarkets =
     searchMarkets?.slice(0, 5).map((obj, idx) => ({
@@ -59,9 +55,6 @@ export const SearchOverview = () => {
       ...obj,
       idx: displayedFriends?.length + displayedTrendingMarkets?.length + idx,
     })) ?? []; //trendingMarkets?.slice(4, 7);
-
-
-
 
   const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
     useOverlaySearch(
@@ -97,10 +90,14 @@ export const SearchOverview = () => {
     []
   );
 
-  let searchResult
+  let searchResult;
 
   return (
-    <div className="rounded-2xl p-2 w-full">
+    <motion.div
+      layout
+      transition={{ duration: 0.2 }}
+      className="rounded-2xl p-2 w-full"
+    >
       <div className="relative flex items-center align-center mb-4">
         <Search className="h-5 w-5 text-[#707070]" strokeWidth={3} />
         <input
@@ -120,7 +117,7 @@ export const SearchOverview = () => {
         <div
           className={`transition-all duration-300`}
           style={{
-            height:`calc(${masterList.length * 60}px+60px)`
+            height: `calc(${masterList.length * 60}px+60px)`,
           }}
         >
           {searchStr &&
@@ -163,7 +160,7 @@ export const SearchOverview = () => {
                 )}
               </>
             ))}
-          {!searchStr && (
+          {!searchStr.length > 0 && (
             <>
               <Section title="Suggested">
                 {displayedTrendingMarkets.map((market, index) => {
@@ -213,7 +210,7 @@ export const SearchOverview = () => {
           )}
         </div>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
@@ -237,8 +234,7 @@ const Item = ({ title, subtitle, time, type, image, idx, currentIdx }) => {
       currentIdx={currentIdx}
     />
   );
-}
-
+};
 
 const TopicItem = ({
   title,
@@ -264,7 +260,6 @@ const TopicItem = ({
   );
 };
 
-
 const FriendItem = ({ name, handle, time, image, idx, currentIdx }) => {
   return (
     <SearchItem
@@ -277,7 +272,7 @@ const FriendItem = ({ name, handle, time, image, idx, currentIdx }) => {
       currentIdx={currentIdx}
     />
   );
-}
+};
 
 function SearchItem({
   title,

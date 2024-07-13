@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Cards } from "@/components/Feed/Cards";
 import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/Feed/TopicHeader";
-
+import { AnimatePresence, motion } from "framer-motion";
 import { formatMarketArr } from "./formatMarketArr";
 
 export function DesktopHomePage({ trendingMarkets }) {
@@ -23,7 +23,12 @@ export function DesktopHomePage({ trendingMarkets }) {
           selectedTopic={selectedTopic}
         />
       </div>
-      <div className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible">
+      <motion.div
+        layout
+        transition={{ duration: 0.2 }}
+        className="rounded-2xl p-2 w-full"
+        className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible"
+      >
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
@@ -31,7 +36,8 @@ export function DesktopHomePage({ trendingMarkets }) {
             </div>
           );
         })}
-      </div>
+      </motion.div>
+
       <DesktopTrendingTopics
         title="US Elections"
         imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
