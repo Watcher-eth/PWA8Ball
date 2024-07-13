@@ -111,7 +111,7 @@ function SocialOnboardButton({
         hover:scale-105 active:scale-98 transition-all
         p-3 bg-[#212121] border-2 border-[#272727]
         w-[5vw] justify-center items-center
-        flex rounded-[0.4rem] text-white
+        flex rounded-[0.4rem] text-white cursor-pointer
       `}
       onClick={onClick}
     >
@@ -132,7 +132,11 @@ function WalletOnboardButton({
   return (
     <div
       onClick={onClick}
-      className="w-full mb-4 hover:scale-101 active:scale-98 transition-all"
+      className={`
+        w-full mb-4
+        hover:scale-101 active:scale-98 transition-all
+        cursor-pointer
+      `}
     >
       <div
         variant="outline"

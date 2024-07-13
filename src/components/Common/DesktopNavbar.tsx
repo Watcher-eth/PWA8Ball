@@ -76,7 +76,7 @@ function ConnectButton() {
     <div
       className={`
         bg-[#171717] font-semibold cursor-pointer
-        border border-white/10 hover:border-white/20
+        border border-white/10 hover:border-white/20 active:border-white/30
         px-4 py-2 rounded-md flex flex-row items-center
       `}
     >
