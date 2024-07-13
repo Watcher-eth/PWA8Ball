@@ -1,31 +1,19 @@
 // @ts-nocheck
-
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
-import { Card, CardContent } from "@/components/ui/card";
-import { ReactNode } from "react";
 import { Input } from "../ui/Input";
 import { Instagram, Phone, Twitch, Twitter } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
 import { motion } from "framer-motion";
-export function DesktopOnboardingModal({ children }: { children: ReactNode }) {
+import { DesktopCardModal } from "../Modals/DesktopCardModal";
+
+export function DesktopOnboardingModal({ children }: { children: React.ReactNode }) {
   return (
-    <Dialog className="!rounded-[1.5rem]">
-      <DialogTrigger asChild>
-        <div>{children}</div>
-      </DialogTrigger>
-      <DialogContent
-        className={`
-          p-0 bg-[#080808]/[0.8] min-h-[50vh] min-w-[55vw] border-0 border-[#181818]
-          !rounded-[1.5rem]
-        `}
-      >
-        <Card className="shadow-none bg-[#080808] w-full border-2  border-[#181818] rounded-[1.5rem]">
-          <CardContent className="p-6 rounded-2xl ">
-            <DesktopOnboarding />
-          </CardContent>
-        </Card>
-      </DialogContent>
-    </Dialog>
+    <DesktopCardModal
+      dialogContentClassName="min-w-[55vw]"
+      cardClassName="w-full"
+      content={<DesktopOnboarding />}
+    >
+      {children}
+    </DesktopCardModal>
   );
 }
 
