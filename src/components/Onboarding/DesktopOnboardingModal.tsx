@@ -1,9 +1,18 @@
 // @ts-nocheck
-import { Input } from "../ui/Input";
+import { Input } from "@/components/ui/Input";
 import { Instagram, Phone, Twitch, Twitter } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
-import { motion } from "framer-motion";
+
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
+
+const METAMASK_ICON_SRC =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
+const COINBASE_ICON_SRC =
+  "https://seeklogo.com/images/C/coinbase-coin-logo-C86F46D7B8-seeklogo.com.png";
+const WALLETCONNECT_ICON_SRC =
+  "https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon";
+
+
 
 export function DesktopOnboardingModal({ children }: { children: React.ReactNode }) {
   return (
@@ -39,91 +48,26 @@ function DesktopOnboarding() {
           className="mb-4 w-full bg-[#212121] text-white"
         />
         <div className="flex justify-between w-full  rounded-[0.5rem]  mb-4">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className=" p-3 bg-[#212121] border-2 border-[#272727] w-[5vw] justify-center items-center flex rounded-[0.4rem] text-white"
-            onClick={login}
-          >
-            <Twitch className="w-5 h-5" />
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={login}
-            className=" p-3 bg-[#212121] border-2 border-[#272727] w-[5vw] justify-center items-center flex rounded-[0.4rem] text-white"
-          >
-            <Twitter className="w-5 h-5" strokeWidth={2.5} />
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={login}
-            className=" p-3 bg-[#212121] border-2 border-[#272727] w-[5vw] justify-center items-center flex rounded-[0.4rem] text-white"
-          >
-            <Instagram className="w-5 h-5" />
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={login}
-            onClick={login}
-            className=" p-3 bg-[#212121] border-2 border-[#272727] w-[5vw] justify-center items-center flex rounded-[0.4rem] text-white"
-          >
-            <Phone className="w-5 h-5" />
-          </motion.div>
+          <SocialOnboardButton IconComponent={Twitch} onClick={login} />
+          <SocialOnboardButton IconComponent={Twitter} onClick={login} />
+          <SocialOnboardButton IconComponent={Instagram} onClick={login} />
+          <SocialOnboardButton IconComponent={Phone} onClick={login} />
         </div>
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
+        <WalletOnboardButton
+          label="MetaMask"
+          iconSrc={METAMASK_ICON_SRC}
           onClick={login}
-          className="w-full mb-4"
-        >
-          <div
-            variant="outline"
-            className="w-full rounded-[0.5rem] p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
-          >
-            <img
-              src="https://seeklogo.com/images/C/coinbase-coin-logo-C86F46D7B8-seeklogo.com.png"
-              className="w-5 h-5 mr-2"
-            />
-            Coinbase
-          </div>
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
+        />
+        <WalletOnboardButton
+          label="Coinbase"
+          iconSrc={COINBASE_ICON_SRC}
           onClick={login}
-          className="w-full mb-4"
-        >
-          <div
-            variant="outline"
-            className="w-full rounded-[0.5rem] p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
-          >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png"
-              className="w-5 h-5 mr-2"
-            />
-            MetaMask
-          </div>
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
+        />
+        <WalletOnboardButton
+          label="WalletConnect"
+          iconSrc={WALLETCONNECT_ICON_SRC}
           onClick={login}
-          className="w-full mb-4"
-        >
-          <div
-            variant="outline"
-            className="w-full rounded-[0.5rem] p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
-          >
-            <img
-              src="https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon"
-              className="w-5 h-5 mr-2"
-            />
-            WalletConnect
-          </div>
-        </motion.div>
+        />
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy
@@ -154,4 +98,49 @@ function DesktopOnboarding() {
 }
 
 
-// function
+function SocialOnboardButton({
+  IconComponent,
+  onClick
+}: {
+  IconComponent: React.ReactNode
+  onClick: () => void
+}) {
+  return (
+    <div
+      className={`
+        hover:scale-105 active:scale-98 transition-all
+        p-3 bg-[#212121] border-2 border-[#272727]
+        w-[5vw] justify-center items-center
+        flex rounded-[0.4rem] text-white
+      `}
+      onClick={onClick}
+    >
+      <IconComponent className="w-5 h-5" />
+    </div>
+  );
+}
+
+function WalletOnboardButton({
+  label,
+  iconSrc,
+  onClick,
+}: {
+  label: string;
+  iconSrc: string;
+  onClick: () => void;
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className="w-full mb-4 hover:scale-101 active:scale-98 transition-all"
+    >
+      <div
+        variant="outline"
+        className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
+      >
+        <img src={iconSrc} className="w-5 h-5 mr-2" />
+        {label}
+      </div>
+    </div>
+  );
+}
