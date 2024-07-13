@@ -316,7 +316,7 @@ function SearchItem({
         )}
         <div>
           <p className="text-white">{title}</p>
-          <p className="text-gray-400 text-sm">{subtitle}</p>
+          <p className="text-[#909090] line-clamp-1 text-sm">{subtitle}</p>
         </div>
         {type === "album" && (
           <span className="px-2 py-1 text-xs bg-gray-700 rounded text-gray-300">
@@ -325,7 +325,7 @@ function SearchItem({
         )}
       </div>
       <div className="flex flex-row items-center  min-w-20 justify-end pr-2">
-        <p className="text-gray-400 text-sm">{rightText}</p>
+        <p className="text-[#909090] text-sm">{rightText}</p>
         {icon}
       </div>
     </motion.div>
