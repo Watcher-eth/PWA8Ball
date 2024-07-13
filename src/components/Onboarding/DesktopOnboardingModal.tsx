@@ -10,6 +10,7 @@ export function DesktopOnboardingModal({ children }: { children: React.ReactNode
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw]"
       cardClassName="w-full"
+      cardContentClassName="!p-0"
       content={<DesktopOnboarding />}
     >
       {children}
@@ -22,7 +23,7 @@ function DesktopOnboarding() {
 
   return (
     <div className="flex overflow-hidden rounded-lg shadow-lg w-[55vw] max-w-[55vw]">
-      <div className="flex flex-col items-center justify-center w-1/2 -ml-3 mr-4 p-8 bg-[#080808] text-white">
+      <div className="flex flex-col items-center justify-center w-1/2 p-10 pt-6 text-white">
         <img
           src={"/images/OrbLogo.png"}
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
@@ -151,3 +152,6 @@ function DesktopOnboarding() {
     </div>
   );
 }
+
+
+// function

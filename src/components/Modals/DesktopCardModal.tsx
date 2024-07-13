@@ -17,6 +17,7 @@ export function DesktopCardModal({
   subtitle,
   dialogContentClassName = "",
   cardClassName = "",
+  cardContentClassName = "",
 }: {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -24,6 +25,7 @@ export function DesktopCardModal({
   subtitle?: string;
   dialogContentClassName?: string;
   cardClassName?: string;
+  cardContentClassName?: string;
 }) {
   return (
     <Dialog className="!rounded-[1.5rem]">
@@ -45,7 +47,9 @@ export function DesktopCardModal({
               <CardDescription>{subtitle}</CardDescription>
             </CardHeader>
           )}
-          <CardContent className="p-6 rounded-2xl">{content}</CardContent>
+          <CardContent className={`p-6 rounded-2xl ${cardContentClassName}`}>
+            {content}
+          </CardContent>
         </Card>
       </DialogContent>
     </Dialog>
