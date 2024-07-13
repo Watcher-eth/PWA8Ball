@@ -11,25 +11,22 @@ export function DesktopNavbar() {
 
   return (
     <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
-      <div className="flex items-center active:scale-98 hover:scale-105 transition-all duration-300">
-        <img
-          src="/images/OrbLogo.png" // Replace with your image path
-          alt="Left Icon"
-          className="size-12 rounded-full"
-        />
-      </div>
+      <NavIconButton
+        icon={
+          <img
+            src="/images/OrbLogo.png" // Replace with your image path
+            alt="Left Icon"
+            className="size-12 rounded-full"
+          />
+        }
+      />
       <div className="flex items-center space-x-8">
         <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
-          <div className="active:scale-98 hover:scale-105">
-            <Search className="size-6" strokeWidth={3} />
-          </div>
+          <NavIconButton IconComponent={Search} />
         </DesktopSearchModal>
         <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
-          <div className="hover:scale-105 active:scale-98 transition-all">
-            <Bell className="size-6" strokeWidth={3} />
-          </div>
+          <NavIconButton IconComponent={Bell} />
         </DesktopNotificationModal>
-
         {user ? (
           <DropdownProfilePopover>
             <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
@@ -42,12 +39,44 @@ export function DesktopNavbar() {
           </DropdownProfilePopover>
         ) : (
           <DesktopOnboardingModal>
-            <div className="bg-[#171717] border-[#272727] font-semibold border-2 px-4 py-2 rounded-md flex flex-row items-center">
-              Connect
-            </div>
+            <ConnectButton />
           </DesktopOnboardingModal>
         )}
       </div>
+    </div>
+  );
+}
+
+
+function NavIconButton({
+  icon,
+  IconComponent,
+  className="",
+  iconClassName=""
+}: {
+  icon?: React.ReactNode
+  IconComponent?: any
+  className?: string
+  iconClassName?: string
+}) {
+  return (
+    <div className={`hover:scale-105 active:scale-98 transition-all ${className}`}>
+      {icon ?? <IconComponent className={`size-6 ${iconClassName}`} strokeWidth={3} />}
+    </div>
+  );
+}
+
+
+function ConnectButton() {
+  return (
+    <div
+      className={`
+        bg-[#171717] font-semibold
+        border border-[#272727]
+        px-4 py-2 rounded-md flex flex-row items-center
+      `}
+    >
+      Connect
     </div>
   );
 }
