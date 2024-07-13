@@ -31,7 +31,9 @@ export function DropdownProfilePopover({ children }: { children: ReactNode }) {
   const { user } = useUserStore();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
+        <div>{children}</div>
+      </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#080808]/[0.85] mr-2 mt-2 rounded-[1rem] backdrop-blur-lg border-2 w-56 border-[#181818]">
         <DropdownMenuLabel className="flex  flex-row items-center">
           <img className="h-6 w-6 rounded-full mr-2" src={user?.pfp} />

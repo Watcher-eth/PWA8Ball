@@ -29,7 +29,9 @@ export function DesktopNotificationModal({
 
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <div>{children}</div>
+      </DialogTrigger>
       <DialogContent
         style={{ borderRadius: "1.5rem" }}
         className="p-0 bg-[#080808]/[0.8] w-[30vw] min-h-[50vh] border-2 border-[#181818]"
