@@ -11,7 +11,6 @@ import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
 import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
-import { ArrowLeft, Share } from "lucide-react";
 
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
@@ -36,7 +35,7 @@ export function DesktopMarketPage() {
   const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
-      <motion.div className="w-full h-[28vh] relative">
+      <div className="w-full h-[28vh] relative">
         <img
           className="w-full transform rotate-180 object-cover h-[28vh] relative"
           alt="CoverImage"
@@ -46,15 +45,14 @@ export function DesktopMarketPage() {
 
         <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
         <img
-          style={{ zIndex: 20 }}
-          className="h-[14vh] absolute ml-14 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808]"
+          className="h-[14vh] absolute ml-14 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
           src={market?.image}
         />
-      </motion.div>
+      </div>
       <div className="absolute top-8 w-full px-8 z-10 self-center">
         <DesktopNavbar />
       </div>
-      <motion.div
+      <div
         onClick={() => setIsDrawerOpen(false)}
         className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col"
       >
@@ -87,10 +85,7 @@ export function DesktopMarketPage() {
                       className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center"
                     >
                       <div>
-                        $
-                        {market?.usdcstake
-                          ? (market?.usdcstake / 100000).toFixed(2)
-                          : "0.00"}
+                        ${((market?.usdcstake ?? 0) / 100000).toFixed(2)}
                       </div>
                     </div>
                   </div>
@@ -219,7 +214,7 @@ export function DesktopMarketPage() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

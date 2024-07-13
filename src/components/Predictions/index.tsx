@@ -95,10 +95,7 @@ export function Predictions({ id }) {
             >
               <div>
                 {" "}
-                $
-                {market?.usdcstake
-                  ? (market?.usdcstake / 100000).toFixed(2)
-                  : "0.00"}
+                ${((market?.usdcstake ?? 0) / 100000).toFixed(2)}
               </div>
             </div>
           </div>
