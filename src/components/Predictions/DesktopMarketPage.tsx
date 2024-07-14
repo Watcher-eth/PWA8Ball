@@ -1,20 +1,23 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
+import { fillUserImages } from "@/utils/fillUserImages";
 
-import { PredictModal } from "@/components/Modals/PredictModal";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Grid } from "@/components/ui/tailwind/Grid";
+import { Col } from "@/components/ui/tailwind/Col";
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
+
+import { PredictModal } from "@/components/Modals/PredictModal";
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
-import { fillUserImages } from "@/utils/fillUserImages";
-import { DesktopPredictComponent} from "./DesktopPredictComponent";
-import { Grid } from "../ui/tailwind/Grid";
-import { Col } from "../ui/tailwind/Col";
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
+
+import { DesktopPredictComponent } from "./DesktopPredictComponent";
+
 
 export function DesktopMarketPage({users, market, id }) {
 
@@ -95,10 +98,7 @@ export function DesktopMarketPage({users, market, id }) {
                 </div>
                 <div className="h-[0.1rem] mt-[0rem] bg-[#212121] mx-5 rounded-full" />
                 <div
-                  style={{
-                    lineHeight: "1.35rem",
-                  }}
-                  className="text-[1.05rem] line-clamp-2 mb-[-1] mt-1 mt-2 text-start leading-6 text-gray-300 max-w-full ml-5"
+                  className="text-[1.05rem] line-clamp-2 -mb-1 mt-2 text-start text-gray-300 max-w-full ml-5 leading-[1.35rem]"
                 >
                   {market?.question}
                 </div>
