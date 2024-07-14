@@ -22,22 +22,16 @@ import DesktopPredictComponent from "./DesktopPredictComponent";
 
 export function DesktopMarketPage({users, market, id }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  // const { data: users } = useGetUsersByMarketId(10);
+
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  // const { data: market } = useGetMarketById(
-  //   String(4),
-  //   user?.external_auth_provider_user_id
-  // );
 
   const userImages = fillUserImages(users, 3);
 
-  // const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
 
       <div
-        onClick={() => setIsDrawerOpen(false)}
         className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col"
       >
         <div className="relative h-full">
