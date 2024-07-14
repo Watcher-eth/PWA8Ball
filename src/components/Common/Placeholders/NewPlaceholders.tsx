@@ -1,16 +1,14 @@
 // @ts-nocheck
-
-import React from "react";
 import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+
 import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export function NewPlaceholder({ isUser }) {
-  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center w-[94%] p-2 mt-2 mx-auto">
       {[...Array(3)].map((_, index) => (
@@ -43,7 +41,6 @@ export function NewPlaceholder({ isUser }) {
 }
 
 export function NotificationsPlaceholder({ isUser }) {
-  const router = useRouter();
   return (
     <div className="flex flex-col align-center items-center w-[30vw] p-2 mt-2  mx-auto">
       {[...Array(3)].map((_, index) => (
@@ -125,7 +122,6 @@ export const UserLpSkelleton = ({ index }) => (
 );
 
 export const NewPlaceholderLp = ({ isUser }) => {
-  const router = useRouter();
   return (
     <div className="flex flex-col items-center w-full p-2 mt-2 mx-auto">
       {[...Array(2)].map((_, index) => (
