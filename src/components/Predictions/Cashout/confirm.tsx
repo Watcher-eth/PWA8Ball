@@ -9,6 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 interface RemoveLPConfirmationScreenProps {
   changeStep: () => void;
@@ -19,6 +20,7 @@ interface RemoveLPConfirmationScreenProps {
   image: string;
   option: number;
   options: [];
+  isDesktop?: boolean;
 }
 
 export const CashoutConfirmScrreen: React.FC<
@@ -28,7 +30,7 @@ export const CashoutConfirmScrreen: React.FC<
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const width = window.innerWidth;
-
+  const { user } = useUserStore();
   const shareLink = async () => {
     if (navigator.share) {
       try {
@@ -52,10 +54,10 @@ export const CashoutConfirmScrreen: React.FC<
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "#101010",
+        backgroundColor: props.isDesktop ? "transparent" : "#101010",
         marginTop: "0",
         padding: "20px",
-        borderRadius: "30px",
+        borderRadius: props.isDesktop ? "20px" : "30px",
       }}
     >
       {success ? (
@@ -66,7 +68,7 @@ export const CashoutConfirmScrreen: React.FC<
             display: "flex",
             flexDirection: "column",
             width: "100%",
-            backgroundColor: "#101010",
+            backgroundColor: props.isDesktop ? "transparent" : "#101010",
             borderRadius: "20px",
           }}
         >
@@ -112,13 +114,14 @@ export const CashoutConfirmScrreen: React.FC<
               </span>
             </div>
             <motion.div
-              onClick={() => onClose()}
+              onClick={() =>
+                props.isDesktop ? props.changeStep(4) : onClose()
+              }
               style={{
-                paddingVertical: "8.5px",
-                paddingHorizontal: "6px",
-                borderRadius: "17px",
+                paddingVertical: "14.5px",
+                paddingHorizontal: "8.5px",
+                borderRadius: "2px",
                 overflow: "hidden",
-                backgroundColor: "#1C1C1C",
                 alignSelf: "flex-start",
                 cursor: "pointer",
               }}
@@ -162,7 +165,7 @@ export const CashoutConfirmScrreen: React.FC<
               borderStyle: "dashed",
               borderRadius: "1px",
               borderColor: "lightgray",
-              marginBottom: "10px",
+              marginBottom: props.isDesktop ? "15px" : "10px",
             }}
           />
           <div
@@ -171,7 +174,7 @@ export const CashoutConfirmScrreen: React.FC<
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              margin: "10px 0",
+              margin: props.isDesktop ? "15px 0" : "10px 0",
               width: "99%",
             }}
           >
@@ -218,7 +221,7 @@ export const CashoutConfirmScrreen: React.FC<
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              margin: "10px 0",
+              margin: props.isDesktop ? "15px 0" : "10px 0",
               width: "99%",
             }}
           >
@@ -295,7 +298,7 @@ export const CashoutConfirmScrreen: React.FC<
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              margin: "10px 0",
+              margin: props.isDesktop ? "15px 0" : "10px 0",
               width: "99%",
             }}
           >
@@ -324,7 +327,7 @@ export const CashoutConfirmScrreen: React.FC<
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              margin: "10px 0",
+              margin: props.isDesktop ? "15px 0" : "10px 0",
               width: "99%",
             }}
           >
@@ -334,7 +337,7 @@ export const CashoutConfirmScrreen: React.FC<
                 color: "lightgray",
               }}
             >
-              Cred Bonus
+              Predictoor
             </span>
             <div
               style={{
@@ -346,21 +349,20 @@ export const CashoutConfirmScrreen: React.FC<
               <span
                 style={{
                   fontSize: "20px",
-                  marginRight: "5px",
+                  marginRight: "8px",
                   color: "white",
                 }}
               >
-                {(props.points * 2).toFixed(0)} $Cred
+                {user.name}
               </span>
               <img
                 style={{
-                  height: "40px",
-                  width: "40px",
+                  height: "38px",
+                  width: "38px",
                   borderRadius: "10px",
-                  marginRight: "-10px",
                   overflow: "hidden",
                 }}
-                src="/images/Pen.png"
+                src={user.pfp}
                 alt="Pen"
               />
             </div>
@@ -389,7 +391,7 @@ export const CashoutConfirmScrreen: React.FC<
             borderRadius: "24px",
             overflow: "hidden",
             backgroundColor: "#D9D9D9",
-            width: width / 1.25,
+            width: props?.isDesktop ? "24vw" : width / 1.25,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",

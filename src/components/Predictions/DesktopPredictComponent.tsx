@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,8 +17,6 @@ import {
   ScanFace,
   Share,
   ShareIcon,
-  TrendingUp,
-  User2,
 } from "lucide-react";
 import { DesktopChart } from "../Common/Charts/DesktopChart";
 import { Input } from "../ui/Input";
@@ -266,6 +263,7 @@ function DesktopPredictComponent(props: {
               odds={"20"}
               totalPot={1200}
               amount={1200}
+              isDesktop={true}
             />
           )}
           {step === 6 && (
@@ -279,6 +277,8 @@ function DesktopPredictComponent(props: {
               odds={"20"}
               totalPot={1200}
               amount={1200}
+              points={1200}
+              isDesktop={true}
             />
           )}
           {step === 7 && (
@@ -292,6 +292,7 @@ function DesktopPredictComponent(props: {
               odds={"20"}
               totalPot={1200}
               amount={1200}
+              isDesktop={true}
             />
           )}
         </AnimatePresence>

@@ -11,9 +11,12 @@ interface CashOutWarningScreenProps {
   points: number;
   id: number;
   option: number;
+  isDesktop?: boolean;
 }
 
-export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props) => {
+export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
+  props
+) => {
   const { onClose } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -36,10 +39,10 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "93%",
-        backgroundColor: "#101010",
-        marginTop: "50px",
-        padding: "20px",
+        width: props.isDesktop ? "100%" : "93%",
+        backgroundColor: props.isDesktop ? "transparent" : "#101010",
+        marginTop: props.isDesktop ? "0px" : "50px",
+        padding: props.isDesktop ? "30px" : "20px",
         borderRadius: "30px",
       }}
     >
@@ -56,7 +59,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          backgroundColor: "#131313",
+          backgroundColor: props.isDesktop ? "transparent" : "#131313",
           borderRadius: "20px",
         }}
       >
@@ -89,6 +92,8 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
             fontSize: "21px",
             color: "white",
             marginTop: "14px",
+            fontWeight: "600",
+            lineHeight: "24px",
           }}
         >
           Are you sure you want cash out prior to resolution?
@@ -98,6 +103,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
             fontSize: "15px",
             color: "lightgray",
             marginTop: "8px",
+            fontWeight: "400",
           }}
         >
           If you cash out now you will sell at the current probability and won't
@@ -108,7 +114,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            marginTop: "35px",
+            marginTop: props?.isDesktop ? "45px" : "35px",
             marginBottom: "6px",
           }}
         >
@@ -118,6 +124,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               fontSize: "18px",
               color: "white",
               marginLeft: "4px",
+              fontWeight: "600",
             }}
           >
             Hold and earn more
@@ -129,7 +136,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
             flexDirection: "column",
             padding: "16px 14px",
             borderRadius: "15px",
-            marginTop: "9px",
+            marginTop: props?.isDesktop ? "15px" : "8px",
             backgroundColor: "#1C1C1C",
           }}
         >
@@ -138,7 +145,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              marginBottom: "9px",
+              marginBottom: "7px",
               justifyContent: "space-between",
             }}
           >
@@ -146,6 +153,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               style={{
                 fontSize: "16.5px",
                 color: "lightgray",
+                fontWeight: "500",
               }}
             >
               Now
@@ -154,9 +162,10 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               style={{
                 fontSize: "16.5px",
                 color: "lightgray",
+                fontWeight: "00",
               }}
             >
-              ${props.points.toFixed(2)}
+              ${props?.points?.toFixed(2)}
             </span>
           </div>
           <div
@@ -171,6 +180,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               style={{
                 fontSize: "20px",
                 color: "white",
+                fontWeight: "600",
               }}
             >
               Possible Payout
@@ -179,6 +189,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
               style={{
                 fontSize: "20px",
                 color: "white",
+                fontWeight: "600",
               }}
             >
               ${(props.points * 3).toFixed(2)}
@@ -193,23 +204,24 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
           alignItems: "center",
           gap: "5px",
           marginBottom: "0",
-          marginTop: "25px",
+          marginTop: props?.isDesktop ? "75px" : "35px",
         }}
       >
         <motion.div
           onClick={() => {
-            props.changeStep(1);
+            props?.isDesktop ? props.changeStep(4) : props.changeStep(1);
           }}
           style={{
             marginTop: "12px",
-            padding: "13px",
+            padding: props.isDesktop ? "11px" : "13px",
             borderRadius: "24px",
             overflow: "hidden",
             backgroundColor: "#1C1C1C",
-            width: width / 2.5,
+            width: props.isDesktop ? "11vw" : width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
+            display: "flex",
           }}
         >
           <span
@@ -231,11 +243,11 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
             display: "flex",
             flexDirection: "row",
             marginLeft: "16px",
-            padding: "11px",
+            padding: props.isDesktop ? "10px" : "11px",
             borderRadius: "24px",
             overflow: "hidden",
             backgroundColor: "#D9D9D9",
-            width: width / 2.5,
+            width: props.isDesktop ? "11vw" : width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
@@ -288,5 +300,3 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (props)
     </div>
   );
 };
-
-

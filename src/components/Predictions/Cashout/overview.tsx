@@ -13,6 +13,7 @@ interface RemoveLPOverviewProps {
   amount: string;
   multiplier: string;
   totalPot: number;
+  isDesktop?: boolean;
 }
 
 export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
@@ -24,8 +25,8 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "#101010",
-        padding: "30px 20px",
+        backgroundColor: props?.isDesktop ? "transparent" : "#101010",
+        padding: props?.isDesktop ? "30px" : "30px 20px",
         borderRadius: "30px",
         alignSelf: "center",
       }}
@@ -87,10 +88,10 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "column",
           padding: "20px",
           borderRadius: "20px",
-          backgroundColor: "#1C1C1C",
+          backgroundColor: props?.isDesktop ? "#171717" : "#1C1C1C",
           alignItems: "center",
           justifyContent: "center",
-          marginVertical: "22px",
+          marginTop: props?.isDesktop ? "10px" : "0px",
           width: "101%",
         }}
       >
@@ -102,7 +103,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           style={{
             fontSize: "15px",
             color: "lightgray",
-            fontWeight: 400,
+            fontWeight: 500,
             marginTop: -11,
           }}
         >
@@ -115,21 +116,16 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "18px 0 5px 0",
+          margin: "28px 0 8px 0",
           width: "99%",
         }}
       >
-        <span
-          style={{
-            fontSize: "17px",
-            color: "lightgray",
-          }}
-        >
+        <span className="text-[17px] text-[#909090] font-semibold">
           Possible Multiplier
         </span>
         <span
           style={{
-            fontSize: "20px",
+            fontSize: "19px",
             fontWeight: 600,
             color: "white",
           }}
@@ -143,21 +139,16 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "5px 0",
+          margin: "8px 0",
           width: "99%",
         }}
       >
-        <span
-          style={{
-            fontSize: "17px",
-            color: "lightgray",
-          }}
-        >
+        <span className="text-[17px] text-[#909090] font-semibold">
           Current Payout
         </span>
         <span
           style={{
-            fontSize: "20px",
+            fontSize: "19px",
             fontWeight: 600,
             color: "white",
           }}
@@ -171,21 +162,16 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "5px 0",
+          margin: "8px 0",
           width: "99%",
         }}
       >
-        <span
-          style={{
-            fontSize: "17px",
-            color: "lightgray",
-          }}
-        >
+        <span className="text-[17px] text-[#909090] font-semibold">
           Cred earned
         </span>
         <span
           style={{
-            fontSize: "20px",
+            fontSize: "19px",
             fontWeight: 600,
             color: "white",
           }}
@@ -204,16 +190,18 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         }}
       >
         <motion.div
-          onClick={() => props?.changeStep(1)}
+          onClick={() =>
+            props?.isDesktop ? props.changeStep(4) : props?.changeStep(1)
+          }
           style={{
             marginTop: "12px",
             display: "flex",
             flexDirection: "row",
-            padding: "13px",
+            padding: props?.isDesktop ? "10px" : "13px",
             borderRadius: "24px",
             overflow: "hidden",
             backgroundColor: "#1D1D1D",
-            width: width / 2.5,
+            width: props?.isDesktop ? "11vw" : width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
@@ -231,17 +219,19 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           </span>
         </motion.div>
         <motion.div
-          onClick={() => props?.changeStep(4)}
+          onClick={() =>
+            props?.isDesktop ? props.changeStep(6) : props?.changeStep(4)
+          }
           style={{
             marginTop: "12px",
             display: "flex",
             flexDirection: "row",
             marginLeft: "16px",
-            padding: "11px",
+            padding: props?.isDesktop ? "10px" : "11px",
             borderRadius: "24px",
             overflow: "hidden",
             backgroundColor: "#D9D9D9",
-            width: width / 2.5,
+            width: props?.isDesktop ? "11vw" : width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
