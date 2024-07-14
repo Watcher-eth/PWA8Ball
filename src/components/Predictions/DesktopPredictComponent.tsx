@@ -44,7 +44,7 @@ export function DesktopPredictComponent(props: {
 
   console.log("marrket", props.options);
   return (
-    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white w-[28vw] h-[55vh]">
+    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white h-[55vh]">
       <motion.div layout transition={{ duration: 0.2 }} className="relative">
         <AnimatePresence>
           {step === 0 || step === 4 ? (

@@ -132,7 +132,7 @@ export function Col({
   }
 
   if (providedClassName ?? false) {
-    novelClassName += ' #{providedClassName} '
+    novelClassName += ` ${providedClassName} `
   }
 
   return (

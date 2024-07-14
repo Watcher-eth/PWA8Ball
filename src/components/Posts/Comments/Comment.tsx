@@ -148,7 +148,7 @@ export function Comment({
           </button>
         </div>
       </div>
-      <div className="w-[110%] self-center h-[0.35px] bg-[#303030] mt-1.5 mb-px z-20" />
+      <div className="w-[calc(100%+48px)] self-center h-[0.35px] bg-[#303030] mt-1.5 mb-px z-20" />
     </motion.div>
   );
 }
