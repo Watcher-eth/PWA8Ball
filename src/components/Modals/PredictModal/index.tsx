@@ -307,20 +307,20 @@ export function PredictModal(props: {
                   </div>
                 </div>
               )}
-              {step === 2 && user?.balance > amount ? (
-                <ConfirmPrediction
-                  option={props?.option}
-                  options={props?.options}
-                  image={props?.image}
-                  question={props?.question}
-                  title={props?.text}
-                  setStep={setStep}
-                  id={props?.marketId}
-                  odds={props.odds}
-                />
-              ) : step === 2 ? (
-                <GetGhoModal setStep={setStep} />
-              ) : null}
+              {step === 2 && (
+                user?.balance > amount ? (
+                  <ConfirmPrediction
+                    option={props?.option}
+                    options={props?.options}
+                    image={props?.image}
+                    question={props?.question}
+                    title={props?.text}
+                    setStep={setStep}
+                    id={props?.marketId}
+                    odds={props.odds}
+                  />
+                ) : <GetGhoModal setStep={setStep} />
+              )}
               {step === 3 && (
                 <ConfirmPrediction
                   option={props?.option}
