@@ -6,13 +6,14 @@ import { DesktopSearchModal } from "../Search/DesktopSearchModal";
 import { DropdownProfilePopover } from "../profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
 import Link from "next/link";
+import { HOME_PATH } from "@/utils/urls";
 
 export function DesktopNavbar() {
   const { user } = useUserStore();
 
   return (
     <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
-      <Link href="/">
+      <Link href={HOME_PATH}>
         <NavIconButton
           icon={
             <img

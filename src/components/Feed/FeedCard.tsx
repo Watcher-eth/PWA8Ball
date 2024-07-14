@@ -1,27 +1,7 @@
 // @ts-nocheck
 
-import { useState } from "react";
 import "../../styles/fonts.css";
-import { LayoutGroup, motion } from "framer-motion";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, Share } from "lucide-react";
-import { ShareModal } from "../Modals/ShareModal";
-import { PredictModal } from "../Modals/PredictModal";
-import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
-import { useModalStore } from "@/lib/stores/ModalStore";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { CommentSection } from "../Posts/Comments/CommentSection";
-import { BetDetails } from "../Predictions/Details";
-import { RelatedMarkets } from "../Predictions/RelatedMarkets";
-import { BettersOverviewModal } from "../Predictions/Betters/OverviewModal";
-import { fillUserImages } from "@/utils/fillUserImages";
+
 import { getMarketPath } from "@/utils/urls";
 import Link from "next/link";
 
@@ -30,29 +10,8 @@ export function FeedCard({
   title,
   description,
   icon,
-  topic,
   id,
-  stake,
-  multiplier,
-  topicId,
-  optionA,
-  optionB,
-  topicBio,
-  handleOpen,
 }) {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const { data: users } = useGetUsersByMarketId(id);
-  const { user } = useUserStore();
-  const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const {
-    data: market,
-    error,
-    isLoading,
-    refetch,
-  } = useGetMarketById(String(id), user?.external_auth_provider_user_id);
-
-  const userImages = fillUserImages(users, 3);
-
   return (
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>
@@ -61,7 +20,7 @@ export function FeedCard({
           title={title}
           description={description}
           icon={icon}
-          setIsDrawerOpen={setIsDrawerOpen}
+          setIsDrawerOpen={() => {}}
         />
       </Link>
     </div>
@@ -70,16 +29,14 @@ export function FeedCard({
 }
 
 
-
 function DisplayFeedCard({image, title, description, icon}) {
   return (
     <div
-
       className={`
-                flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
-                shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-101 active:scale-96 transition-all
-                cursor-pointer font-[Aeonik-Bold]
-              `}
+        flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
+        shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-101 active:scale-96 transition-all
+        cursor-pointer font-[Aeonik-Bold]
+      `}
     >
       <img
         alt="Card_Preview"
@@ -88,9 +45,10 @@ function DisplayFeedCard({image, title, description, icon}) {
       />
       <div
         className={`
-                  h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]  rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent absolute bottom-0
-                  z-[2]
-                `}
+          h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]
+          rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent
+          absolute bottom-0 z-[2]
+        `}
       />
       <div
         style={{
@@ -102,11 +60,12 @@ function DisplayFeedCard({image, title, description, icon}) {
       </div>
       <div
         className={`
-                  z-[2]
-                  rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3 bg-gray-800/[0.2]
-                  backdrop-blur-lg flex
-                  border-[0.5px] border-white/5
-                `}
+          z-[2]
+          rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3
+          bg-gray-800/20
+          backdrop-blur-lg flex
+          border-[0.5px] border-white/5
+        `}
       >
         <img
           className="h-[13vw] max-w-[3.4rem] max-h-[3.4rem] object-cover rounded-md w-[13vw] relative"

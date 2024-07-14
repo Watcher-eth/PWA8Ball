@@ -22,6 +22,7 @@ import Link from "next/link";
 
 import { ArrowLeft, Share } from "lucide-react";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
+import { HOME_PATH } from "@/utils/urls";
 
 export function MobileMarketPage({ market, users }) {
   const { user } = useUserStore();
@@ -76,7 +77,7 @@ function MobileMarketContent({
       <div className="relative h-[100vw]">
         <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]">
           <DrawerClose>
-            <Link href="/" prefetch={true}>
+            <Link href={HOME_PATH} prefetch={true}>
               <ArrowLeft
                 strokeWidth={3.8}
                 size={33}
