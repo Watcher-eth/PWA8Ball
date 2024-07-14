@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
 
-import { Cards } from "@/components/Feed/Cards";
+import { FeedCard } from "@/components/Feed/FeedCard";
 import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/Feed/TopicHeader";
 import { AnimatePresence, motion } from "framer-motion";
@@ -32,7 +32,7 @@ export function DesktopHomePage({ trendingMarkets }) {
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
-              <Cards {...bet} />
+              <FeedCard {...bet} />
             </div>
           );
         })}

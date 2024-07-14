@@ -5,7 +5,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { LoginModal } from "../Modals/LoginModal";
 
 import { formatMarketArr } from "./formatMarketArr";
-import { Cards } from "./Cards";
+import { FeedCard } from "./FeedCard";
 import { TopicHeader } from "./TopicHeader";
 
 export function MobileHomePage({ trendingMarkets }) {
@@ -37,7 +37,7 @@ export function MobileHomePage({ trendingMarkets }) {
         {enrichedFeedData?.map((bet, index) => {
           return (
             <div key={index}>
-              <Cards
+              <FeedCard
                 handleOpen={handleOpenLoginModal}
                 {...bet}
                 image={bet.image!}

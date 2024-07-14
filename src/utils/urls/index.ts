@@ -17,7 +17,7 @@ export function getProfilePath(userId: string) {
 }
 
 export function getMarketPath(id: string) {
-  return `/market/${id}` as const;
+  return `/p/${id}` as const;
 }
 
 export function getMarketPreviewUrl(id: string) {

@@ -26,7 +26,7 @@ export function formatMarketArr(
 }
 
 
-function formatMarket(market: IMarketWithTopicDetails) {
+export function formatMarket(market: IMarketWithTopicDetails) {
   return {
     ...market,
     marketId: market.id,

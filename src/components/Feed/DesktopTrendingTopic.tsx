@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
-import { Cards } from "./Cards";
+import { FeedCard } from "./FeedCard";
 import { parseOptions } from "@/utils/predictions/parseOption";
 import { formatMarketArr } from "./formatMarketArr";
 
@@ -87,7 +87,7 @@ export function DesktopTrendingTopics({
             console.log("Rendering card for market:", market); // Log each market being rendered
             return (
               <div key={index}>
-                <Cards handleOpen={() => {}} {...market} />
+                <FeedCard handleOpen={() => {}} {...market} />
               </div>
             );
           })}

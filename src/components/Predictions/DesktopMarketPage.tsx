@@ -35,23 +35,7 @@ export function DesktopMarketPage() {
   const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
-      <div className="w-full h-[28vh] relative">
-        <img
-          className="w-full transform rotate-180 object-cover h-[28vh] relative"
-          alt="CoverImage"
-          src={market?.image}
-        />
-        <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
 
-        <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
-        <img
-          className="h-[14vh] absolute ml-14 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
-          src={market?.image}
-        />
-      </div>
-      <div className="absolute top-8 w-full px-8 z-10 self-center">
-        <DesktopNavbar />
-      </div>
       <div
         onClick={() => setIsDrawerOpen(false)}
         className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col"
