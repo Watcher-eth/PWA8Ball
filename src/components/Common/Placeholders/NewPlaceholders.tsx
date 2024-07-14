@@ -177,9 +177,9 @@ const CommentSkeleton = ({ index }) => (
       </div>
     </div>
     <div className="flex flex-col gap-3 w-full mt-1">
-      <AltSkeleton className="h-[14px] w-[78vw] !bg-[#212121]" />
-      <AltSkeleton className="h-[14px] w-[75vw] !bg-[#212121]" />
-      <AltSkeleton className="h-[14px] w-[65vw] !bg-[#212121]" />
+      <AltSkeleton className="h-[14px] w-[78vw] sm:w-[78%] !bg-[#212121]" />
+      <AltSkeleton className="h-[14px] w-[75vw] sm:w-[75%] !bg-[#212121]" />
+      <AltSkeleton className="h-[14px] w-[65vw] sm:w-[65%] !bg-[#212121]" />
     </div>
   </motion.div>
 );
