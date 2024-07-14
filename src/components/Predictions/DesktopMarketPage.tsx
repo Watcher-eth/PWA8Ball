@@ -102,7 +102,7 @@ export function DesktopMarketPage({users, market, id }) {
                 >
                   {market?.question}
                 </div>
-                <div className="flex items-center mt-[-4] mx-5 justify-between">
+                <div className="flex items-center mx-5 justify-between">
                   <PredictModal
                     isDesktop={true}
                     handleOpen={() => {}}
