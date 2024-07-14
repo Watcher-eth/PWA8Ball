@@ -10,6 +10,7 @@ import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { BoostExplainerModal } from "../Modals/Tutorials/BoostExplainerModal";
 import { getTopicPath } from "@/utils/urls/index.ts";
 import { parseAndFormatDate } from "@/utils/datetime/extractEndDate";
+import { DesktopBoostModal } from "../Modals/BoostModal/DesktopBoostModal";
 
 export const BetDetails = ({
   endDate,
@@ -33,7 +34,7 @@ export const BetDetails = ({
     refetch,
   } = useGetLPForUser(user?.walletaddress);
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log("details2", image);
   function handleBooster() {
     if (positions?.length < 1) {
       setIsOpen(true);
@@ -87,13 +88,23 @@ export const BetDetails = ({
           </span>
         </div>
       </div>
-      <BoostModal image={image} id={id}>
-        <BoostMarket
-          isDesktop={isDesktop}
-          Boost={3}
-          handleBoost={handleBooster}
-        />
-      </BoostModal>
+      {isDesktop ? (
+        <DesktopBoostModal image={image} id={id}>
+          <BoostMarket
+            isDesktop={isDesktop}
+            Boost={3}
+            handleBoost={handleBooster}
+          />
+        </DesktopBoostModal>
+      ) : (
+        <BoostModal image={image} id={id}>
+          <BoostMarket
+            isDesktop={isDesktop}
+            Boost={3}
+            handleBoost={handleBooster}
+          />
+        </BoostModal>
+      )}
       <Link href={linkArgs}>
         <motion.div
           style={{ borderRadius: 12, width: isDesktop ? "36.5vw" : "90vw" }}

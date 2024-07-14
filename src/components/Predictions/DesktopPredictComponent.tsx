@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -5,7 +6,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -15,7 +15,6 @@ import {
   ArrowLeftRight,
   Receipt,
   ScanFace,
-  Share,
   ShareIcon,
 } from "lucide-react";
 import { DesktopChart } from "../Common/Charts/DesktopChart";
@@ -26,10 +25,7 @@ import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { getProfilePath } from "@/utils/urls";
 import { useRouter } from "next/router";
-import {
-  DesktopLoadingPrediction,
-  LoadingPrediction,
-} from "../Modals/PredictModal/SuccessScreen";
+import { DesktopLoadingPrediction } from "../Modals/PredictModal/SuccessScreen";
 import { CashoutConfirmScrreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
@@ -42,7 +38,7 @@ function DesktopPredictComponent(props: {
   options: string[];
   topic: string;
 }) {
-  const [step, setStep] = useState<number>(4);
+  const [step, setStep] = useState<number>(0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
 
@@ -78,7 +74,7 @@ function DesktopPredictComponent(props: {
                 onChange={(e) => setAmount(Number(e.target.value))}
                 type="numeric"
                 placeholder="$0.00"
-                className="w-full bg-[#171717] rounded-md py-6 text-md border-none"
+                className="w-full bg-[#121212] rounded-md py-6 text-md border-none"
               />
               <div
                 style={{

@@ -27,7 +27,6 @@ export function Predictions({ id }) {
   );
 
   const userImages = fillUserImages(users, 3);
-  console.log("market", market);
   if (market)
     return (
       <motion.div
