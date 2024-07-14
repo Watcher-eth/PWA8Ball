@@ -202,8 +202,7 @@ export function DisplayFeedDrawerContent({
         {description}
       </div>
       <div
-        style={{ zIndex: 2 }}
-        className="flex items-center w-[88vw] mt-[-4] mx-5 justify-between mx-2"
+        className="flex items-center w-[88vw] mt-[-4] justify-between mx-2 z-[2]"
       >
         <PredictModal
           handleOpen={handleOpen}
