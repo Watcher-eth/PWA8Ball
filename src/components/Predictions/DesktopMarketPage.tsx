@@ -2,59 +2,47 @@
 
 import React, { useState } from "react";
 
-import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
 import { PredictModal } from "@/components/Modals/PredictModal";
+<<<<<<< HEAD
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
 import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
+=======
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { useModalStore } from "@/lib/stores/ModalStore";
+import { useUserStore } from "@/lib/stores/UserStore";
+
+
+>>>>>>> main
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 import { fillUserImages } from "@/utils/fillUserImages";
 import DesktopPredictComponent from "./DesktopPredictComponent";
+import { Grid } from "../ui/tailwind/Grid";
+import { Col } from "../ui/tailwind/Col";
 
-export function DesktopMarketPage() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const { data: users } = useGetUsersByMarketId(10);
+export function DesktopMarketPage({users, market, id }) {
+
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const { data: market } = useGetMarketById(
-    String(4),
-    user?.external_auth_provider_user_id
-  );
 
   const userImages = fillUserImages(users, 3);
 
-  const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
-      <div className="w-full h-[28vh] relative">
-        <img
-          className="w-full transform rotate-180 object-cover h-[28vh] relative"
-          alt="CoverImage"
-          src={market?.image}
-        />
-        <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
-
-        <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
-        <img
-          className="h-[14vh] absolute ml-14 -bottom-16 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
-          src={market?.image}
-        />
-      </div>
-      <div className="absolute top-8 w-full px-8 z-10 self-center">
-        <DesktopNavbar />
-      </div>
-      <div
-        onClick={() => setIsDrawerOpen(false)}
-        className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col"
-      >
+      <div className="bg-[#070707] w-full pl-3 h-full overflow-y-auto flex flex-col">
         <div className="relative h-full">
-          <div className="grid grid-cols-10 gap-4 p-6">
-            <div className="col-span-4">
+          <Grid gap={4} cols={{ xs: 10 }}>
+            <Col xs={4}>
               <div className="flex flex-col mt-[2.5rem] z-10">
                 <div
                   style={{
@@ -169,34 +157,38 @@ export function DesktopMarketPage() {
                   isDesktop={true}
                 />
               </div>
-            </div>
-            <div className="col-span-3  flex flex-col items-center p-3 px-1 -mr-9    pb-1 rounded-[1.4rem]">
-              <DesktopPredictComponent
-                id={market?.id}
-                question={market?.question}
-                title={market?.title}
-                image={market?.image}
-                options={[
-                  {
-                    name: market?.options[0].name,
-                    value: market?.outcomea,
-                  },
-                  {
-                    name: market?.options[1].name,
-                    value: market?.outcomeb,
-                  },
-                ]}
-                topic={market?.topic_title}
-              />
-            </div>
-            <div className="col-span-3 bg-[#080808] p-4  pt-[3.8rem] rounded-lg">
-              <RelatedMarkets
-                isDesktop={true}
-                topicId={market?.topic_id}
-                id={market?.id}
-              />
-            </div>
-            <div className="col-span-4 bg-[#080808] max-w-[70vw] p-4 rounded-lg mt-1">
+            </Col>
+            <Col xs={3}>
+              <div className="  flex flex-col items-center p-3 px-1    pb-1 rounded-[1.4rem]">
+                <DesktopPredictComponent
+                  id={market?.id}
+                  question={market?.question}
+                  title={market?.title}
+                  image={market?.image}
+                  options={[
+                    {
+                      name: market?.options[0].name,
+                      value: market?.outcomea,
+                    },
+                    {
+                      name: market?.options[1].name,
+                      value: market?.outcomeb,
+                    },
+                  ]}
+                  topic={market?.topic_title}
+                />
+              </div>
+            </Col>
+            <Col xs={3}>
+              <div className=" rounded-lg">
+                <RelatedMarkets
+                  isDesktop={true}
+                  topicId={market?.topic_id}
+                  id={market?.id}
+                />
+              </div>
+            </Col>
+            <Col xs={4} className=" max-w-[70vw] p-4 rounded-lg mt-1">
               <CommentSection
                 topic_id={market?.topic_id}
                 users={users}
@@ -207,8 +199,8 @@ export function DesktopMarketPage() {
                 isDesktop={true}
                 handleComment={() => {}}
               />
-            </div>
-          </div>
+            </Col>
+          </Grid>
         </div>
       </div>
     </div>
