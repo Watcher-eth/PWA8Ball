@@ -107,7 +107,7 @@ export const BetDetails = ({
       )}
       <Link href={linkArgs}>
         <motion.div
-          style={{ borderRadius: 12, width: isDesktop ? "36.5vw" : "90vw" }}
+          style={{ borderRadius: 12, width: isDesktop ? "100%" : "90vw" }}
           className="flex flex-row  mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
           whileTap={{ scale: 0.95 }}
         >
@@ -171,7 +171,7 @@ export const BetDetails = ({
 const BoostMarket = ({ Boost, handleBoost, isDesktop }) => {
   return (
     <motion.div
-      style={{ borderRadius: 12, width: isDesktop ? "36.5vw" : "90vw" }}
+      style={{ borderRadius: 12, width: isDesktop ? "100%" : "90vw" }}
       className="flex flex-row  items-center p-2 border border-[#212121]   mt-3 justify-between"
       whileTap={{ scale: 0.95 }}
       onClick={handleBoost}

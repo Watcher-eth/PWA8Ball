@@ -6,6 +6,7 @@ import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/Feed/TopicHeader";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatMarketArr } from "./formatMarketArr";
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
@@ -37,14 +38,15 @@ export function DesktopHomePage({ trendingMarkets }) {
           );
         })}
       </motion.div>
-
-      <DesktopTrendingTopics
-        title="US Elections"
-        imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
-        subtitle="Everything about the US 2020 Federal Election"
-        amount={"260,032"}
-        topicId="1"
-      />
+      <StandardPageWrapper>
+        <DesktopTrendingTopics
+          title="US Elections"
+          imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
+          subtitle="Everything about the US 2020 Federal Election"
+          amount={"260,032"}
+          topicId="1"
+        />
+      </StandardPageWrapper>
     </>
   );
 }

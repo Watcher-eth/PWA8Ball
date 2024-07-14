@@ -22,7 +22,7 @@ export function OutcomeButton({
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all
             text-[1.3rem] text-white font-bold h-[2.8rem] rounded-lg
-            ${isDesktop ? "w-[18vw]" : "w-[42vw]"}
+            ${isDesktop ? "w-[18vw] max-w-[100%]" : "w-[42vw]"}
             ${className}
         `}
     >

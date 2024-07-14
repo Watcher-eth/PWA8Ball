@@ -26,7 +26,7 @@ export function DesktopTrendingTopics({
   const { data: markets, error, isLoading } = useGetMarketsForTopic(topicId);
 
   return (
-    <div className="relative w-[calc(100%-64px)] flex align-center justify-between h-[49vh] mx-8 py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
+    <div className="relative w-[calc(100%)] flex align-center justify-between h-[49vh] py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}

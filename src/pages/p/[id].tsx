@@ -1,8 +1,7 @@
 // @ts-nocheck
-import { Predictions } from "@/components/Predictions";
 import { DesktopMarketPage } from "@/components/Predictions/DesktopMarketPage";
 import { MobiTop } from "@/components/ui/MobiTop";
-import { useRouter } from "next/router";
+
 import { MobileMarketPage } from "@/components/Predictions/MobileMarketPage";
 import { GetServerSideProps } from "next";
 import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";

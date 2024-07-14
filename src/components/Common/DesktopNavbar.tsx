@@ -5,21 +5,24 @@ import { DesktopNotificationModal } from "../Notifications/DesktopNotificationMo
 import { DesktopSearchModal } from "../Search/DesktopSearchModal";
 import { DropdownProfilePopover } from "../profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
+import Link from "next/link";
 
 export function DesktopNavbar() {
   const { user } = useUserStore();
 
   return (
     <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
-      <NavIconButton
-        icon={
-          <img
-            src="/images/OrbLogo.png" // Replace with your image path
-            alt="Left Icon"
-            className="size-12 rounded-full"
-          />
-        }
-      />
+      <Link href="/">
+        <NavIconButton
+          icon={
+            <img
+              src="/images/OrbLogo.png" // Replace with your image path
+              alt="Left Icon"
+              className="size-12 rounded-full"
+            />
+          }
+        />
+      </Link>
       <div className="flex items-center space-x-8">
         <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
           <NavIconButton IconComponent={Search} />
