@@ -6,5 +6,5 @@ export function useIsMobile() {
     initializeWithValue: false,
   });
 
-  return isMobile ?? false;
+  return isMobile //?? false;
 }

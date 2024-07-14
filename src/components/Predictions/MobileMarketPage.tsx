@@ -31,12 +31,11 @@ export function MobileMarketPage({ market, users }) {
   const isMobile = useIsMobile();
 
   return (
-    <div suppressHydrationWarning={true} /*this is unfortunately req'd*/>
+    <div suppressHydrationWarning={true}>
       <LayoutGroup>
         <motion.div layout className="font-[Aeonik-Bold] sm:hidden">
           <Drawer open={isMobile}>
             <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
-              {market && (
                 <DisplayFeedDrawerContent
                   setIsDrawerOpen={() => {}}
                   users={users}
@@ -46,7 +45,7 @@ export function MobileMarketPage({ market, users }) {
                   handleOpen={() => {}}
                   {...formatMarket(market)}
                 />
-              )}
+
             </DrawerContent>
           </Drawer>
         </motion.div>

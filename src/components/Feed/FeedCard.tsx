@@ -54,10 +54,6 @@ export function FeedCard({
   const userImages = fillUserImages(users, 3);
 
   return (
-    // <LayoutGroup>
-    //   <motion.div layout className="font-[Aeonik-Bold]">
-    //     <Drawer disablePreventScroll={false}>
-    //       <DrawerTrigger asChild>
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>
         <DisplayFeedCard
@@ -69,32 +65,7 @@ export function FeedCard({
         />
       </Link>
     </div>
-    // </DrawerTrigger>
-    /* <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
-            <DisplayFeedDrawerContent
-              image={image}
-              title={title}
-              description={description}
-              icon={icon}
-              setIsDrawerOpen={setIsDrawerOpen}
-              users={users}
-              market={market}
-              userImages={userImages}
-              openLoginModal={openLoginModal}
-              id={id}
-              stake={stake}
-              multiplier={multiplier}
-              topicId={topicId}
-              optionA={optionA}
-              optionB={optionB}
-              topicBio={topicBio}
-              handleOpen={handleOpen}
-              topic={topic}
-            />
-          </DrawerContent> */
-    // </Drawer>
-    // </motion.div>
-    // </LayoutGroup>
+
   );
 }
 
@@ -127,7 +98,7 @@ export function DisplayFeedDrawerContent({
       <div className="relative h-[100vw]">
         <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]">
           <DrawerClose>
-            <Link href="/">
+            <Link href="/" prefetch={true}>
               <ArrowLeft
                 strokeWidth={3.8}
                 size={33}
