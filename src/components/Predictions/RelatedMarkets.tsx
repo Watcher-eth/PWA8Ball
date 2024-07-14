@@ -23,7 +23,6 @@ export const RelatedMarkets = (props: {
           display: "flex",
           flexDirection: "column",
           padding: 20,
-          marginTop: -80,
           backgroundColor: props?.isDesktop ? "transparent" : "#121212",
         }}
       >

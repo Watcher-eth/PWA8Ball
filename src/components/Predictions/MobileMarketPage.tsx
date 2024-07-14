@@ -230,7 +230,9 @@ function MobileMarketContent({
           handleComment={() => {}}
         />
       </div>
-      <RelatedMarkets topicId={topicId} id={id} />
+      <div className="-mt-20">
+        <RelatedMarkets topicId={topicId} id={id} />
+      </div>
     </motion.div>
   );
 }
