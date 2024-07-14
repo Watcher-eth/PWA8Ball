@@ -19,23 +19,27 @@ export function DesktopBoostContent(props: {
         Boost this market to earn extra cred and trading fees. The more popular
         a prediction gets the more fees you receive.
       </div>
-      <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-8" />
+      <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-5" />
       <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] font-[500] text-[1rem]">
+        <div className="text-[#909090] font-[500] text-[1.1rem]">
           Minimum Boost
         </div>
-        <div className="text-white font-[500] text-[1rem]">$10.00</div>
+        <div className="text-white font-[500] text-[1.1rem]">$10.00</div>
       </div>
       <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] text-[1rem]">Fee Rewards Rate</div>
-        <div className="text-white font-[500] text-[1rem]">0.05%</div>
+        <div className="text-[#909090] text-[1.1rem]">Fee Rewards Rate</div>
+        <div className="text-white font-[500] text-[1.05rem] px-2 py-1 rounded-md bg-[#0050FF]">
+          0.5%
+        </div>
       </div>
       <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] font-[500] text-[1rem]">Cred Bonus</div>
-        <div className="text-white font-[500] text-[1rem]">150 Cred</div>
+        <div className="text-[#909090] font-[500] text-[1.1rem]">
+          Cred Bonus
+        </div>
+        <div className="text-white font-[500] text-[1.1rem]">150 Cred</div>
       </div>
       <Input
-        className="border-0 my-8 mb-5 rounded-md p-6 bg-[#171717] px-3 text-[1rem]"
+        className="border-0 my-5 border-[0.1rem] border-[#212121] rounded-md p-6 bg-[#151515] font-[500] px-3 text-[1rem]"
         placeholder="Amount"
       />
       <ConfirmButton id={props?.id} onComplete={props?.onComplete} />
@@ -56,6 +60,10 @@ export function DesktopBoostModal({
 
   return (
     <DesktopCardModal
+      cardClassName="w-[85%]"
+      dialogContentClassName="w-[30vw]"
+      cardContentClassName="w-[30vw]"
+      dialogClassName="w-[85%]"
       content={
         <DesktopBoostContent image={image} id={id} onComplete={() => {}} />
       }

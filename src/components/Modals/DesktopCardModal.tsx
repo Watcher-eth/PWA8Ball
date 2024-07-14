@@ -9,7 +9,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
-
 export function DesktopCardModal({
   children,
   content,
@@ -18,6 +17,7 @@ export function DesktopCardModal({
   dialogContentClassName = "",
   cardClassName = "",
   cardContentClassName = "",
+  dialogClassName = "",
 }: {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -26,15 +26,16 @@ export function DesktopCardModal({
   dialogContentClassName?: string;
   cardClassName?: string;
   cardContentClassName?: string;
+  dialogClassName?: string;
 }) {
   return (
-    <Dialog className="!rounded-[1.5rem]">
+    <Dialog className={`!rounded-[1.5rem] ${dialogClassName}`}>
       <DialogTrigger asChild>
         <div>{children}</div>
       </DialogTrigger>
       <DialogContent
         className={`
-          p-0 bg-[#080808]/80 min-h-[50vh] border-2 border-[#181818]
+          p-0 bg-[#080808]/80 smin-h-[50vh] border-2 border-[#181818]
           !rounded-[1.5rem] ${dialogContentClassName}
         `}
       >
@@ -55,4 +56,3 @@ export function DesktopCardModal({
     </Dialog>
   );
 }
-

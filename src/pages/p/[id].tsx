@@ -8,12 +8,15 @@ import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMa
 import { fetchMarketById } from "@/supabase/queries/useGetMarketById";
 import { DEFAULT_USER_ID } from "@/constants/testData";
 
-export default function MarketPage({ users, market, id }: {
+export default function MarketPage({
+  users,
+  market,
+  id,
+}: {
   users: IUserWithBet[];
   market: IMarketWithTopic;
   id: string;
 }) {
-
   return (
     <>
       <MobiTop
@@ -29,9 +32,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const [market, users] = await Promise.all([
     fetchMarketById(id, DEFAULT_USER_ID),
-    fetchUsersByMarketId(id)
+    fetchUsersByMarketId(id),
   ]);
-
 
   return {
     props: {

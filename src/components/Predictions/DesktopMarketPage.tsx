@@ -17,18 +17,33 @@ import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
+import { DesktopNavbar } from "../Common/DesktopNavbar";
+import { AlignLeft } from "lucide-react";
 
-
-export function DesktopMarketPage({users, market, id }) {
-
+export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
 
   const userImages = fillUserImages(users, 3);
-
+  console.log(market);
   return (
     <StandardPageWrapper className="h-full flex flex-col">
-      <div className="w-full pl-3 h-full overflow-y-auto flex flex-col">
+      <div className="w-[100%] pl-3 h-full overflow-y-auto flex flex-col">
+        <div className="w-full h-[28vh] relative">
+          <img
+            className="w-full transform rotate-180 object-cover h-[28vh] relative"
+            alt="CoverImage"
+            src={market?.image}
+          />
+          <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
+
+          <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
+          <img
+            className="h-[14vh] ml-3 absolute -bottom-12 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
+            src={market?.image}
+          />
+        </div>
+
         <div className="relative h-full">
           <Grid gap={4} cols={{ xs: 8 }}>
             <Col xs={5}>
@@ -96,37 +111,13 @@ export function DesktopMarketPage({users, market, id }) {
                     </div>
                   </BettersOverviewModal>
                 </div>
-                <div className="h-[0.1rem] mt-[0rem] bg-[#212121] mx-5 rounded-full" />
-                <div
-                  className="text-[1.05rem] line-clamp-2 -mb-1 mt-2 text-start text-gray-300 max-w-full ml-5 leading-[1.35rem]"
-                >
-                  {market?.question}
+                <div className="h-[0.1rem] mt-[0.55rem] bg-[#212121] mx-5  rounded-full" />
+                <div className="text-[1.1rem] font-[500] line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-gray-300 max-w-full ml-4 leading-[1.35rem]">
+                  <AlignLeft className="h-[1.1rem]" strokeWidth={2.5} />
+                  <div> Question</div>
                 </div>
-                <div className="flex items-center mx-5 justify-between">
-                  <PredictModal
-                    isDesktop={true}
-                    handleOpen={() => {}}
-                    image={market?.image}
-                    multiplier={market?.outcomeb / 100 || 50}
-                    option={0}
-                    text={market?.options[1].name}
-                    question={market?.question}
-                    odds={market?.outcomea / 100}
-                    marketId={id}
-                    options={[market?.options[0].name, market?.options[1].name]}
-                  />
-                  <PredictModal
-                    isDesktop={true}
-                    handleOpen={() => {}}
-                    image={market?.image}
-                    multiplier={market?.outcomea / 100 || 50}
-                    option={1}
-                    text={market?.options[0].name}
-                    question={market?.question}
-                    odds={market?.outcomea / 100}
-                    marketId={id}
-                    options={[market?.options[0].name, market?.options[1].name]}
-                  />
+                <div className="text-[1.2rem] font-[500] line-clamp-2 mb-0 mt-1 text-start text-[#fefefe] max-w-full ml-5 leading-[1.35rem]">
+                  {market?.question}
                 </div>
                 <BetDetails
                   endDate={"12th September, 2024"}

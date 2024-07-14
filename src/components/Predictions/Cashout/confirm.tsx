@@ -1,13 +1,7 @@
 // @ts-nocheck
 
 import React, { useState } from "react";
-import {
-  ArrowDown,
-  CheckCircle,
-  Clock,
-  Share as ShareIcon,
-  X,
-} from "lucide-react";
+import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -23,14 +17,13 @@ interface RemoveLPConfirmationScreenProps {
   isDesktop?: boolean;
 }
 
-export const CashoutConfirmScrreen: React.FC<
-  RemoveLPConfirmationScreenProps
-> = (props) => {
+export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
+  props
+) => {
   const { onClose } = props;
-  const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const width = window.innerWidth;
   const { user } = useUserStore();
+
   const shareLink = async () => {
     if (navigator.share) {
       try {
@@ -50,66 +43,25 @@ export const CashoutConfirmScrreen: React.FC<
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: props.isDesktop ? "transparent" : "#101010",
-        marginTop: "0",
-        padding: "20px",
-        borderRadius: props.isDesktop ? "20px" : "30px",
-      }}
+      className={`flex flex-col items-center ${
+        props.isDesktop ? "bg-transparent" : "bg-[#101010]"
+      } mt-0 p-5 ${props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"}`}
     >
       {success ? (
         <div />
       ) : (
         <motion.div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            backgroundColor: props.isDesktop ? "transparent" : "#101010",
-            borderRadius: "20px",
-          }}
+          className={`flex flex-col w-full ${
+            props.isDesktop ? "bg-transparent" : "bg-[#101010]"
+          } rounded-[20px]`}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <div style={{ width: "37px" }}></div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                padding: "5px",
-                borderRadius: "15px",
-                backgroundColor: "#212121",
-              }}
-            >
-              <div
-                style={{
-                  padding: "5px",
-                  borderRadius: "10px",
-                  backgroundColor: "green",
-                }}
-              >
+          <div className="flex flex-row items-center justify-between w-full">
+            <div className="w-[37px]"></div>
+            <div className="flex flex-row items-center p-[5px] rounded-[15px] bg-[#212121]">
+              <div className="p-[5px] rounded-[10px] bg-green-500">
                 <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
               </div>
-              <span
-                style={{
-                  fontSize: "17px",
-                  color: "white",
-                  margin: "0 6px",
-                  alignSelf: "center",
-                  fontWeight: 600,
-                }}
-              >
+              <span className="text-[17px] text-white mx-[6px] font-semibold">
                 Yes
               </span>
             </div>
@@ -117,251 +69,57 @@ export const CashoutConfirmScrreen: React.FC<
               onClick={() =>
                 props.isDesktop ? props.changeStep(4) : onClose()
               }
-              style={{
-                paddingVertical: "14.5px",
-                paddingHorizontal: "8.5px",
-                borderRadius: "2px",
-                overflow: "hidden",
-                alignSelf: "flex-start",
-                cursor: "pointer",
-              }}
+              className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
             >
               <X color={"#585858"} strokeWidth={5} height={18} />
             </motion.div>
           </div>
-          <div
-            style={{
-              alignSelf: "center",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "3em",
-                fontWeight: "bold",
-                background:
-                  "linear-gradient(90deg,#dcedc1, white, #dcedc1, #a8e6cf, #dcedc1)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                textFillColor: "transparent",
-                margin: "10px 0",
-              }}
-            >
+          <div className="flex flex-row items-center justify-center">
+            <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
               {props.points?.toFixed(2)} $12,392
             </div>
-            {/* <GradientText
-              text={`${props.points?.toFixed(2)}`}
-              fontSize={45}
-              colors={["green", "lightgreen"]} // Define your gradient colors here
-            /> */}
           </div>
-          <div
-            style={{
-              borderWidth: "0.3px",
-              borderStyle: "dashed",
-              borderRadius: "1px",
-              borderColor: "lightgray",
-              marginBottom: props.isDesktop ? "15px" : "10px",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: props.isDesktop ? "15px 0" : "10px 0",
-              width: "99%",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "17.5px",
-                color: "lightgray",
-              }}
-            >
-              Market
-            </span>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "white",
-                  marginRight: "9px",
-                }}
-              >
+          <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>
+          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+            <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
+            <div className="flex flex-row items-center">
+              <span className="text-[20px] text-white mr-[9px]">
                 {props.title}
               </span>
               <img
-                style={{
-                  height: "38px",
-                  width: "38px",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                }}
+                className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
                 src={props?.image}
                 alt="Market"
               />
             </div>
           </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: props.isDesktop ? "15px 0" : "10px 0",
-              width: "99%",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "17.5px",
-                color: "lightgray",
-              }}
-            >
-              Predicted on
-            </span>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "19px",
-                  color: "lightgray",
-                  marginRight: "4px",
-                }}
-              >
-                2024
-              </span>
-              <span
-                style={{
-                  fontSize: "19px",
-                  color: "white",
-                  marginRight: "7px",
-                }}
-              >
-                Thursday
-              </span>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "7px",
-                  paddingVertical: "1px",
-                  width: "41px",
-                  height: "42px",
-                  borderRadius: "10px",
-                  backgroundColor: "#181818",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "8px",
-                    color: "#FF0050",
-                    marginBottom: -10,
-                  }}
-                >
+          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+            <span className="text-[17.5px] text-[#D3D3D3]">Predicted on</span>
+            <div className="flex flex-row items-center">
+              <span className="text-[19px] text-[#D3D3D3] mr-[4px]">2024</span>
+              <span className="text-[19px] text-white mr-[7px]">Thursday</span>
+              <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[10px] bg-[#181818] items-center justify-center">
+                <span className="text-[8px] text-[#FF0050] mb-[-10px]">
                   Sept
                 </span>
-                <span
-                  style={{
-                    fontSize: "25px",
-                    color: "white",
-                  }}
-                >
-                  21
-                </span>
+                <span className="text-[25px] text-white">21</span>
               </div>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: props.isDesktop ? "15px 0" : "10px 0",
-              width: "99%",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "17.5px",
-                color: "lightgray",
-              }}
-            >
-              Tx Receipt
-            </span>
-
-            <span
-              style={{
-                fontSize: "20px",
-                color: "white",
-                textDecoration: "underline",
-              }}
-            >
+          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+            <span className="text-[17.5px] text-[#D3D3D3]">Tx Receipt</span>
+            <span className="text-[20px] text-white underline">
               0xrf724sda3...kja3
             </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: props.isDesktop ? "15px 0" : "10px 0",
-              width: "99%",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "17.5px",
-                color: "lightgray",
-              }}
-            >
-              Predictoor
-            </span>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "20px",
-                  marginRight: "8px",
-                  color: "white",
-                }}
-              >
+          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+            <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
+            <div className="flex flex-row items-center">
+              <span className="text-[20px] mr-[8px] text-white">
                 {user.name}
               </span>
               <img
-                style={{
-                  height: "38px",
-                  width: "38px",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                }}
+                className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
                 src={user.pfp}
                 alt="Pen"
               />
@@ -369,52 +127,16 @@ export const CashoutConfirmScrreen: React.FC<
           </div>
         </motion.div>
       )}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5px",
-          marginBottom: "0",
-          marginTop: "5px",
-        }}
-      >
+      <div className="flex flex-row items-center gap-[5px] my-[5px]">
         <motion.div
-          onClick={() => {
-            shareLink();
-          }}
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            flexDirection: "row",
-            padding: "11px",
-            borderRadius: "24px",
-            overflow: "hidden",
-            backgroundColor: "#D9D9D9",
-            width: props?.isDesktop ? "24vw" : width / 1.25,
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
+          onClick={shareLink}
+          className={`mt-[12px] flex flex-row p-[11px] rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
+            props?.isDesktop ? "w-[24vw]" : `w-[${window.innerWidth / 1.25}px]`
+          } items-center justify-center cursor-pointer`}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <div className="flex flex-row items-center justify-center">
             <ShareIcon color="black" strokeWidth={3} height={23} />
-
-            <motion.span
-              style={{
-                fontSize: "20px",
-                color: "#1D1D1D",
-                fontWeight: "800",
-                marginLeft: "3px",
-              }}
-            >
+            <motion.span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
               Share
             </motion.span>
           </div>
