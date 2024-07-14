@@ -6,9 +6,9 @@ import { IUserWithBet } from "@/supabase/types";
 // types.ts
 
 
-const fetchUsersByMarketId = async (
+export async function fetchUsersByMarketId(
   marketId: number
-): Promise<IUserWithBet[]> => {
+): Promise<IUserWithBet[]> {
   const { data, error } = await supabase
     .from("predictions")
     .select(

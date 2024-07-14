@@ -21,43 +21,40 @@ import { fillUserImages } from "@/utils/fillUserImages";
 import { DisplayFeedDrawerContent } from "../Feed/FeedCard";
 import { formatMarket } from "../Feed/formatMarketArr";
 import { Drawer, DrawerContent } from '@/components/ui/drawer';
+import { useRouter } from "next/router";
 
-export function MobileMarketPage() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const { data: users } = useGetUsersByMarketId(10);
+
+export function MobileMarketPage({ market, users }) {
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true);
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const { data: market } = useGetMarketById(
-    "3",
-    undefined// user?.external_auth_provider_user_id
-  );
-
   const userImages = fillUserImages(users, 3);
 
-  const id = 8;
 
-  console.log("ran")
-  console.log({ market })
+  const router = useRouter();
+
   return (
-    market && (
-        <LayoutGroup>
+    <LayoutGroup>
       <motion.div layout className="font-[Aeonik-Bold]">
-        <Drawer disablePreventScroll={false}>
-
-    <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
-    <DisplayFeedDrawerContent
-      setIsDrawerOpen={() => {}}
-      users={users}
-      market={market}
-      userImages={userImages}
-      openLoginModal={openLoginModal}
-      handleOpen={() => {}}
-      {...(formatMarket(market))}
-    />
-    </DrawerContent>
-    </Drawer>
-    </motion.div>
+        <Drawer open={isDrawerOpen} disablePreventScroll={false}>
+          <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
+            {market && (
+              <DisplayFeedDrawerContent
+                setIsDrawerOpen={() => {
+                  router.push("/");
+                  setIsDrawerOpen(false);
+                }}
+                users={users}
+                market={market}
+                userImages={userImages}
+                openLoginModal={openLoginModal}
+                handleOpen={() => {}}
+                {...formatMarket(market)}
+              />
+            )}
+          </DrawerContent>
+        </Drawer>
+      </motion.div>
     </LayoutGroup>
-    )
   );
 }

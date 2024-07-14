@@ -1,5 +1,7 @@
 import { ActivityChartType } from "@/types/AcitivityTypes";
 
+export const DEFAULT_USER_ID = "did:privy:clutganzs01rz2oqk4vvlwtih";
+
 export const TEST_BET_MODAL_DATA = {
   question: "Will Oppenheimer win best picture at the 2024 Academy Awards",
   amount: "8,213.203",

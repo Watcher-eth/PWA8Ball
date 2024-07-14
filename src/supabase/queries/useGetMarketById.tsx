@@ -16,10 +16,10 @@ interface IMarketWithTopic extends IMarket {
   liquidityUSDC: number;
 }
 
-const fetchMarketById = async (
+export async function fetchMarketById(
   marketId: string,
   userId: string
-): Promise<IMarketWithTopic | null> => {
+): Promise<IMarketWithTopic | null> {
   // Execute the stored function using a raw SQL query
   const { data, error } = await supabase.rpc("get_market_with_details", {
     market_id: marketId,
