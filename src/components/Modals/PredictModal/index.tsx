@@ -138,22 +138,12 @@ export function PredictModal(props: {
             whileTap={{ scale: 0.93 }}
             className="mt-[1rem]"
           >
-            {props?.option === 0 && (
-              <OutcomeButton
-                isDesktop={props?.isDesktop}
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
-            {props?.option === 1 && (
-              <OutcomeButton
-                isDesktop={props?.isDesktop}
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
+            <OutcomeButton
+              isDesktop={props?.isDesktop}
+              text={props?.text}
+              multiplier={props?.multiplier}
+              option={props?.option}
+            />
           </motion.div>
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">

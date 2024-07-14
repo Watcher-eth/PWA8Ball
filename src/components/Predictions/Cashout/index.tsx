@@ -40,20 +40,11 @@ export function CashoutModal(props: {
             whileTap={{ scale: 0.93 }}
             className="mt-[1rem]"
           >
-            {props?.option === 0 && (
-              <OutcomeButton
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
-            {props?.option === 1 && (
-              <OutcomeButton
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
+            <OutcomeButton
+              text={props?.text}
+              multiplier={props?.multiplier}
+              option={props?.option}
+            />
           </motion.div>
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">

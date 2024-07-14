@@ -44,20 +44,11 @@ export function RedeemModal(props: {
             }}
             className="mt-[1rem] active:scale-93"
           >
-            {props?.option === 0 && (
-              <OutcomeButton
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
-            {props?.option === 1 && (
-              <OutcomeButton
-                text={props?.text}
-                multiplier={props?.multiplier}
-                option={props?.option}
-              />
-            )}
+            <OutcomeButton
+              text={props?.text}
+              multiplier={props?.multiplier}
+              option={props?.option}
+            />
           </div>
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">
