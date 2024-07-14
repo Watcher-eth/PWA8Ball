@@ -18,7 +18,7 @@ import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
 import { fillUserImages } from "@/utils/fillUserImages";
-
+import DesktopPredictComponent from "./DesktopPredictComponent";
 
 export function DesktopMarketPage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -175,7 +175,7 @@ export function DesktopMarketPage() {
               </div>
             </div>
             <div className="col-span-3  flex flex-col items-center p-3 px-1 -mr-9    pb-1 rounded-[1.4rem]">
-              <DesktopChart
+              <DesktopPredictComponent
                 id={market?.id}
                 question={market?.question}
                 title={market?.title}

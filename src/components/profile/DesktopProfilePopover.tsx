@@ -64,7 +64,7 @@ export function DropdownProfilePopover({ children }: { children: ReactNode }) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent className="bg-[#080808] border-2 border-[#181818]">
+              <DropdownMenuSubContent className="bg-[#080808]/[0.8] rounded-[0.85rem] backdrop-blur-md border-2 border-[#181818]">
                 <DropdownMenuItem className="flex  flex-row justify-between items-center">
                   Twitter
                   <img
