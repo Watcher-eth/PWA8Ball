@@ -93,10 +93,8 @@ export const SearchOverview = () => {
   let searchResult;
 
   return (
-    <motion.div
-      layout
-      transition={{ duration: 0.2 }}
-      className="rounded-2xl p-2 w-full"
+    <div
+      className="rounded-2xl p-2 w-full transition-all duration-300"
     >
       <div className="relative flex items-center align-center mb-4">
         <Search className="h-5 w-5 text-[#707070]" strokeWidth={3} />
@@ -210,7 +208,7 @@ export const SearchOverview = () => {
           )}
         </div>
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 
