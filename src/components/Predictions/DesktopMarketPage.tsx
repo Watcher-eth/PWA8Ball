@@ -27,7 +27,7 @@ export function DesktopMarketPage({ users, market, id }) {
   const userImages = fillUserImages(users, 3);
   console.log(market);
   return (
-    <StandardPageWrapper className="h-full flex flex-col">
+    <StandardPageWrapper className="h-full  flex flex-col">
       <div className="w-[100%] pl-3 h-full overflow-y-auto flex flex-col">
         <div className="w-full h-[28vh] relative">
           <img
@@ -65,7 +65,7 @@ export function DesktopMarketPage({ users, market, id }) {
                 </div>
                 <div className="flex justify-between mt-4 items-center mx-5">
                   <div className="flex flex-col">
-                    <div className="text-[0.85rem] text-gray-200 font-bold">
+                    <div className="text-[0.85rem] text-[lightgray] font-semibold">
                       At stake
                     </div>
                     <div
@@ -112,8 +112,8 @@ export function DesktopMarketPage({ users, market, id }) {
                   </BettersOverviewModal>
                 </div>
                 <div className="h-[0.1rem] mt-[0.55rem] bg-[#212121] mx-5  rounded-full" />
-                <div className="text-[1.1rem] font-[500] line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-gray-300 max-w-full ml-4 leading-[1.35rem]">
-                  <AlignLeft className="h-[1.1rem]" strokeWidth={2.5} />
+                <div className="text-[1rem] font-[500] line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">
+                  <AlignLeft className="h-[1rem]" strokeWidth={2.5} />
                   <div> Question</div>
                 </div>
                 <div className="text-[1.2rem] font-[500] line-clamp-2 mb-0 mt-1 text-start text-[#fefefe] max-w-full ml-5 leading-[1.35rem]">

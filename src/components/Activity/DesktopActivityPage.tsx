@@ -7,14 +7,9 @@ import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-
-export const DesktopUserSideProfile: React.FC = () => {
+export const DesktopActivityPage: React.FC = () => {
   const { user } = useUserStore();
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-  const { user } = useUserStore();
   return (
     <div className="flex flex-col bg-[#080808]">
       <DesktopNavbar />
@@ -35,4 +30,3 @@ export const DesktopUserSideProfile: React.FC = () => {
     </div>
   );
 };
-

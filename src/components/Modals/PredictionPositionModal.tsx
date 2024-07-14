@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import MyBetModal from "../Common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
-import { CashoutConfirmScrreen } from "../Predictions/Cashout/confirm.tsx";
+import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm.tsx";
 
 export function BetModal({
   children,
@@ -150,7 +150,7 @@ export function BetModal({
                 />
               )}
               {step === 4 && (
-                <CashoutConfirmScrreen
+                <CashoutConfirmScreen
                   option={option}
                   options={options}
                   image={image}

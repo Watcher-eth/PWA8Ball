@@ -6,22 +6,26 @@ export function YourStats() {
   const { data: count } = useGetOrderCountForUser(user?.walletaddress!);
 
   return (
-    <div className="flex flex-row items-center justify-between p-3 px-8 rounded-xl border border-[#212121] my-3">
-      <StatSection label="$Cred" value={user?.liquiditypoints} divider={false}/>
+    <div className="flex flex-row items-center justify-between p-3 px-8 rounded-lg border border-[#212121] my-3">
+      <StatSection
+        label="$Cred"
+        value={user?.liquiditypoints}
+        divider={false}
+      />
       <StatSection label="Total" value={count ? count : 0} />
       <StatSection label="Accuracy" value="0%" />
     </div>
   );
-};
+}
 
 function StatSection({
   label,
   value,
-  divider = true
+  divider = true,
 }: {
-  label: string
-  value?: string | number
-  divider?: boolean
+  label: string;
+  value?: string | number;
+  divider?: boolean;
 }) {
   return (
     <>
@@ -37,4 +41,3 @@ function StatSection({
     </>
   );
 }
-
