@@ -58,19 +58,19 @@ export function FeedCard({
     //   <motion.div layout className="font-[Aeonik-Bold]">
     //     <Drawer disablePreventScroll={false}>
     //       <DrawerTrigger asChild>
-            <div>
-              <Link href={getMarketPath(id)}>
-                <DisplayFeedCard
-                  image={image}
-                  title={title}
-                  description={description}
-                  icon={icon}
-                  setIsDrawerOpen={setIsDrawerOpen}
-                />
-              </Link>
-            </div>
-          // </DrawerTrigger>
-          /* <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
+    <div>
+      <Link href={getMarketPath(id)} prefetch={true}>
+        <DisplayFeedCard
+          image={image}
+          title={title}
+          description={description}
+          icon={icon}
+          setIsDrawerOpen={setIsDrawerOpen}
+        />
+      </Link>
+    </div>
+    // </DrawerTrigger>
+    /* <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
             <DisplayFeedDrawerContent
               image={image}
               title={title}
@@ -92,8 +92,8 @@ export function FeedCard({
               topic={topic}
             />
           </DrawerContent> */
-        // </Drawer>
-      // </motion.div>
+    // </Drawer>
+    // </motion.div>
     // </LayoutGroup>
   );
 }

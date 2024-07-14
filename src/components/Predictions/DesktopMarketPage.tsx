@@ -20,19 +20,19 @@ import { DesktopChart } from "@/components/Common/Charts/DesktopChart";
 import { fillUserImages } from "@/utils/fillUserImages";
 import DesktopPredictComponent from "./DesktopPredictComponent";
 
-export function DesktopMarketPage() {
+export function DesktopMarketPage({users, market, id }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const { data: users } = useGetUsersByMarketId(10);
+  // const { data: users } = useGetUsersByMarketId(10);
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const { data: market } = useGetMarketById(
-    String(4),
-    user?.external_auth_provider_user_id
-  );
+  // const { data: market } = useGetMarketById(
+  //   String(4),
+  //   user?.external_auth_provider_user_id
+  // );
 
   const userImages = fillUserImages(users, 3);
 
-  const id = 8;
+  // const id = 8;
   return (
     <div className="w-full bg-[#080808] h-full flex flex-col">
 

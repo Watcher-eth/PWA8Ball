@@ -19,7 +19,7 @@ export default function MarketPage({ users, market, id }: {
     <>
       <MobiTop
         mobile={<MobileMarketPage users={users} market={market} id={id} />}
-        desktop={<DesktopMarketPage id={id} />}
+        desktop={<DesktopMarketPage users={users} market={market} id={id} />}
       />
     </>
   );
