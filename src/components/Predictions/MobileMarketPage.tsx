@@ -29,8 +29,7 @@ export function MobileMarketPage({ market, users }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
   const isMobile = useMediaQuery("(max-width: 640px)");
-  //const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-  // const hasMounted = useHasMounted();
+
 
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {

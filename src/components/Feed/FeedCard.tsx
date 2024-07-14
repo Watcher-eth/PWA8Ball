@@ -54,10 +54,10 @@ export function FeedCard({
   const userImages = fillUserImages(users, 3);
 
   return (
-    <LayoutGroup>
-      <motion.div layout className="font-[Aeonik-Bold]">
-        <Drawer disablePreventScroll={false}>
-          <DrawerTrigger asChild>
+    // <LayoutGroup>
+    //   <motion.div layout className="font-[Aeonik-Bold]">
+    //     <Drawer disablePreventScroll={false}>
+    //       <DrawerTrigger asChild>
             <div>
               <Link href={getMarketPath(id)}>
                 <DisplayFeedCard
@@ -69,8 +69,8 @@ export function FeedCard({
                 />
               </Link>
             </div>
-          </DrawerTrigger>
-          {/* <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
+          // </DrawerTrigger>
+          /* <DrawerContent className=" flex flex-col fixed max-h-[103%] border-0 rounded-3xl items-center self-center">
             <DisplayFeedDrawerContent
               image={image}
               title={title}
@@ -91,10 +91,10 @@ export function FeedCard({
               handleOpen={handleOpen}
               topic={topic}
             />
-          </DrawerContent> */}
-        </Drawer>
-      </motion.div>
-    </LayoutGroup>
+          </DrawerContent> */
+        // </Drawer>
+      // </motion.div>
+    // </LayoutGroup>
   );
 }
 
