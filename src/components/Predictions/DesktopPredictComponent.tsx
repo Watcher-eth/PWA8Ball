@@ -30,7 +30,7 @@ import { CashoutConfirmScrreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 
-function DesktopPredictComponent(props: {
+export function DesktopPredictComponent(props: {
   question: string;
   title: string;
   image: string;
@@ -297,7 +297,6 @@ function DesktopPredictComponent(props: {
   );
 }
 
-export default DesktopPredictComponent;
 
 function DesktopConfirmPrediction(props: {
   setStep: (step: number) => void;

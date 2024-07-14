@@ -3,30 +3,15 @@
 import React, { useState } from "react";
 
 import { PredictModal } from "@/components/Modals/PredictModal";
-<<<<<<< HEAD
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
-import { useGetMarketById } from "@/supabase/queries/useGetMarketById";
-=======
-
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { useModalStore } from "@/lib/stores/ModalStore";
-import { useUserStore } from "@/lib/stores/UserStore";
-
-
->>>>>>> main
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 import { fillUserImages } from "@/utils/fillUserImages";
-import DesktopPredictComponent from "./DesktopPredictComponent";
+import { DesktopPredictComponent} from "./DesktopPredictComponent";
 import { Grid } from "../ui/tailwind/Grid";
 import { Col } from "../ui/tailwind/Col";
 
