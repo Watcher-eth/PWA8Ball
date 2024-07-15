@@ -77,7 +77,7 @@ export function BetModal({
         <DrawerOverlay className="fixed inset-0 bg-black/40" />
 
         <DrawerTrigger>
-          <motion.div className="mt-4 hover:scale-110 active:scale-93">
+          <motion.div className="mt-4 hover:scale-110 active:scale-93 transition-all">
             {children}
           </motion.div>
         </DrawerTrigger>

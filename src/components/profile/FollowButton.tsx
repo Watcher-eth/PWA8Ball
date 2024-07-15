@@ -51,62 +51,61 @@ export const FollowButton = ({
   const isUser = user?.external_auth_provider_user_id === profileId;
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
-      <motion.button
+      <DisplayFollowButton
         onClick={handleFollow}
-        className={`
-          flex flex-row
-          mt-2 mb-2.5 p-2 !px-3
-          rounded-lg overflow-hidden items-center
-          hover:scale-105 active:scale-95
-          bg-[#1B1B1E]
-        `}
-      >
-        <UserPlus color={"lightgray"} strokeWidth={3} height={15} />
-        <div className="text-[14px] font-bold text-[lightgray] self-center">
-          Follow
-        </div>
-      </motion.button>
+        IconComponent={UserPlus}
+        label="Follow"
+      />
     );
   }
 
   if ((!isUser && isFollowing) || (isFollowing2 && !temporaryUnfollow)) {
     return (
-      <motion.button
+      <DisplayFollowButton
         onClick={handleUnfollow}
-        className={`
-          flex flex-row
-          mt-2 mb-2.5 p-2 !px-3
-          rounded-lg overflow-hidden items-center
-          hover:scale-105 active:scale-95
-          bg-white
-        `}
-      >
-        <div className="text-[14px] font-bold text-[#1B1B1E] self-center">
-          Following
-        </div>
-      </motion.button>
+        IconComponent={UserMinus}
+        label="Following"
+        isDark={false}
+      />
     );
   }
 
   if (isUser) {
     return (
-      <motion.button
+      <DisplayFollowButton
         onClick={setEdit}
-        className={`
-          flex flex-row
-          mt-2 mb-2.5 p-2 !px-3
-          rounded-lg overflow-hidden items-center
-          hover:scale-105 active:scale-95
-          bg-[#1B1B1E]
-        `}
-      >
-        <PenBox color={"lightgray"} strokeWidth={3} height={14} />
-        <div className="text-[14px] font-bold text-[lightgray] self-center">
-          Edit
-        </div>
-      </motion.button>
+        IconComponent={PenBox}
+        label="Edit"
+      />
     );
   }
 
   return null;
 };
+
+
+function DisplayFollowButton({ onClick, IconComponent, label, isDark=true }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        flex flex-row
+        mt-2 mb-2.5 p-2 !px-3
+        rounded-lg overflow-hidden items-center
+        hover:scale-105 active:scale-95 transition-all
+        ${isDark ? "bg-[#1B1B1E]" : "bg-white"}
+      `}
+    >
+      {IconComponent &&
+        <IconComponent color={"lightgray"} strokeWidth={3} height={15} />
+      }
+      <div
+        className={`
+        text-[14px] font-bold
+        ${isDark ? "text-[lightgray]" : "text-[#1B1B1E]"} self-center`}
+      >
+        {label}
+      </div>
+    </button>
+  );
+}

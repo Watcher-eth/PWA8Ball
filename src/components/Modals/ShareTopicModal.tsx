@@ -51,7 +51,7 @@ export function ShareTopicModal({
     <div>
       <Drawer>
         <DrawerTrigger>
-          <motion.div className="mt-4 hover:scale-110 active:scale-93">
+          <motion.div className="mt-4 hover:scale-110 active:scale-93 transition-all">
             {children}
           </motion.div>
         </DrawerTrigger>

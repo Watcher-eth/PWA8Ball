@@ -37,7 +37,7 @@ export function CashoutModal(props: {
             onClick={() => {
               if (!user?.walletaddress) props.handleOpen();
             }}
-            className="mt-4 hover:scale-110 active:scale-93"
+            className="mt-4 hover:scale-110 active:scale-93 transition-all"
           >
             <OutcomeButton
               text={props?.text}

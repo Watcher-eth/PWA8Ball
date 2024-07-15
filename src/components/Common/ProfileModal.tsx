@@ -64,7 +64,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
     <div className="flex flex-col">
       <Drawer>
         <DrawerTrigger asChild>
-          <div className="mt-[0.1rem] active:scale-93 hover:scale-110">
+          <div className="mt-[0.1rem] active:scale-93 hover:scale-110 transition-all">
             {children}
           </div>
         </DrawerTrigger>
@@ -148,9 +148,9 @@ function ProfileModal({ children, profile }: LayoutProps) {
                 </div>
               </div>
               <DrawerFooter>
-                <div className="flex items-center mt-2 w-[80vw]  mb-1 mx-6 justify-between mx-2">
+                <div className="flex items-center mt-2 w-[80vw]  mb-1 justify-between mx-2">
                   <div
-                    className="active:scale-95 hover:scale-110 z-[11] cursor-pointer"
+                    className="active:scale-95 hover:scale-110 z-[11] cursor-pointer transition-all"
                     onClick={handleShare}
                   >
                     <Button
@@ -163,7 +163,7 @@ function ProfileModal({ children, profile }: LayoutProps) {
                   </div>
 
                   <Link href={"/dashboard"}>
-                    <div className="active:scale-95 hover:scale-110 z-[11] cursor-pointer">
+                    <div className="active:scale-95 hover:scale-110 transition-all z-[11] cursor-pointer">
                       <Button className="active:bg-gray-900 space-x-1 flex items-center hover:bg-gray-900 bg-gray-900 text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
                         {profile?.handle?.localName ===
                         Profile.handle?.localName ? (
