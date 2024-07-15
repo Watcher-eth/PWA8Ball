@@ -15,31 +15,23 @@ export function DesktopBoostContent(props: {
       <div className="text-white text-[1.5rem] font-semibold mt-4 ">
         Boost and earn rewards
       </div>
-      <div className="text-[lightgray] text-[0.95rem] font-[500] mb-3  ">
+      <div className="text-[lightgray] text-[0.95rem] font-medium mb-3  ">
         Boost this market to earn extra cred and trading fees. The more popular
         a prediction gets the more fees you receive.
       </div>
       <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-5" />
-      <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] font-[500] text-[1.1rem]">
-          Minimum Boost
-        </div>
-        <div className="text-white font-[500] text-[1.1rem]">$10.00</div>
-      </div>
-      <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] text-[1.1rem]">Fee Rewards Rate</div>
-        <div className="text-white font-[500] text-[1.05rem] px-2 py-1 rounded-md bg-[#0050FF]">
-          0.5%
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-between my-3">
-        <div className="text-[#909090] font-[500] text-[1.1rem]">
-          Cred Bonus
-        </div>
-        <div className="text-white font-[500] text-[1.1rem]">150 Cred</div>
-      </div>
+      <InfoRow label="Minimum Boost" content="$10.00" />
+      <InfoRow
+        label="Fee Rewards Rate"
+        content={
+          <div className="text-white font-medium text-[1.05rem] px-2 py-1 rounded-md bg-[#0050FF]">
+            0.5%
+          </div>
+        }
+      />
+      <InfoRow label="Cred Bonus" content="150 Cred" />
       <Input
-        className="border-0 my-5 border-[0.1rem] border-[#212121] rounded-md p-6 bg-[#151515] font-[500] px-3 text-[1rem]"
+        className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-[1rem]"
         placeholder="Amount"
       />
       <ConfirmButton id={props?.id} onComplete={props?.onComplete} />
@@ -47,6 +39,24 @@ export function DesktopBoostContent(props: {
   );
 }
 
+function InfoRow({
+  label,
+  content,
+  children,
+}: {
+  label: string;
+  content?: React.ReactNode;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-row items-center justify-between my-3">
+      <div className="text-[#909090] font-medium text-[1.1rem]">{label}</div>
+
+        <div className="text-white font-medium text-[1.1rem]">{content}</div>
+      {children}
+    </div>
+  );
+}
 export function DesktopBoostModal({
   children,
   image,

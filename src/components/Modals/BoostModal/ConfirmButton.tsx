@@ -69,11 +69,7 @@ export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
 
   return (
     <motion.button
-      className="relative w-full rounded-full h-[3.2rem] bg-[#151515] border-[0.1rem] border-[#212121] shadow-md overflow-hidden flex items-center justify-center"
-      style={{
-        padding: "1px",
-        cursor: "pointer",
-      }}
+      className="relative w-full rounded-full h-[3.2rem] bg-[#151515] border border-[#212121] shadow-md overflow-hidden flex items-center justify-center p-px cursor-pointer"
       onClick={handleClick}
     >
       <motion.div

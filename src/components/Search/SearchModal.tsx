@@ -222,7 +222,7 @@ function LeaderboardButton() {
           <Avatar>
             <AvatarImage src="https://ik.imagekit.io/buttrfly/tr:n-avatar/https://cdn.stamp.fyi/avatar/0x1A4b0923B0F150b5Fa8CdFb2138D0D78b1EC85fC?s=140" />
           </Avatar>
-          <Avatar className="border-1 border-white">
+          <Avatar className="border border-white">
             <AvatarImage src="https://ik.imagekit.io/buttrfly/tr:n-avatar/https://cdn.stamp.fyi/avatar/0xAf153E755F59BB62ba8A5b7e5FfDB71c0aC43305?s=140" />
           </Avatar>
         </div>

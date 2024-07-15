@@ -17,7 +17,7 @@ import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
-import { DesktopNavbar } from "../Common/DesktopNavbar";
+
 import { AlignLeft } from "lucide-react";
 
 export function DesktopMarketPage({ users, market, id }) {
@@ -27,8 +27,8 @@ export function DesktopMarketPage({ users, market, id }) {
   const userImages = fillUserImages(users, 3);
   console.log(market);
   return (
-    <StandardPageWrapper className="h-full  flex flex-col">
-      <div className="w-[100%] pl-3 h-full overflow-y-auto flex flex-col">
+    <StandardPageWrapper className="h-full flex flex-col">
+      <div className="w-full h-full overflow-y-auto flex flex-col">
         <div className="w-full h-[28vh] relative">
           <img
             className="w-full transform rotate-180 object-cover h-[28vh] relative"
@@ -69,8 +69,7 @@ export function DesktopMarketPage({ users, market, id }) {
                       At stake
                     </div>
                     <div
-                      style={{ fontWeight: 600 }}
-                      className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center"
+                      className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center font-semibold"
                     >
                       <div>
                         ${((market?.usdcstake ?? 0) / 100000).toFixed(2)}
@@ -105,18 +104,18 @@ export function DesktopMarketPage({ users, market, id }) {
                       <Avatar>
                         <AvatarImage src={userImages[1]} />
                       </Avatar>
-                      <Avatar className="border-1 border-white">
+                      <Avatar className="border border-white">
                         <AvatarImage src={userImages[2]} />
                       </Avatar>
                     </div>
                   </BettersOverviewModal>
                 </div>
                 <div className="h-[0.1rem] mt-[0.55rem] bg-[#212121] mx-5  rounded-full" />
-                <div className="text-[1rem] font-[500] line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">
+                <div className="text-[1rem] font-medium line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">
                   <AlignLeft className="h-[1rem]" strokeWidth={2.5} />
                   <div> Question</div>
                 </div>
-                <div className="text-[1.2rem] font-[500] line-clamp-2 mb-0 mt-1 text-start text-[#fefefe] max-w-full ml-5 leading-[1.35rem]">
+                <div className="text-[1.2rem] font-medium line-clamp-2 mb-0 mt-1 text-start text-[#fefefe] max-w-full ml-5 leading-[1.35rem]">
                   {market?.question}
                 </div>
                 <BetDetails

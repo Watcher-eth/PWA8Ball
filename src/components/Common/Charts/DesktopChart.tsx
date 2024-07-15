@@ -57,7 +57,7 @@ export function DesktopChart(props: {
   console.log("prices", prices, priceError);
   return (
     <div>
-      <ChartContainer className="h-[25vh] w-[100%]" config={chartConfig}>
+      <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
         <AreaChart
           accessibilityLayer
           data={chartData}

@@ -29,7 +29,7 @@ export const BetBigView = ({
     >
       <motion.div
         style={{ borderRadius: 12 }}
-        className="flex flex-col w-[100%] mx-auto my-2 relative cursor-pointer"
+        className="flex flex-col w-full mx-auto my-2 relative cursor-pointer"
         onClick={() =>
           router.push({
             pathname: "/[id]",
@@ -51,7 +51,7 @@ export const BetBigView = ({
           className="w-full h-[30vh] rounded-lg object-cover"
         />
         <div
-          className="absolute top-[22.5vh] w-[100%] h-16 bg-gradient-to-t from-black via-[rgba(7, 7, 7, 0.9)] to-transparent rounded-b-lg"
+          className="absolute top-[22.5vh] w-full h-16 bg-gradient-to-t from-black via-[rgba(7, 7, 7, 0.9)] to-transparent rounded-b-lg"
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
         <div

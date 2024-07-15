@@ -35,7 +35,7 @@ export function DesktopCardModal({
       </DialogTrigger>
       <DialogContent
         className={`
-          p-0 bg-[#080808]/80 smin-h-[50vh] border-2 border-[#181818]
+          p-0 bg-[#080808]/80 min-h-[50vh] border-2 border-[#181818]
           !rounded-[1.5rem] ${dialogContentClassName}
         `}
       >

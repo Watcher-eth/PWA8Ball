@@ -14,12 +14,10 @@ export function NewPlaceholder({ isUser }) {
         <UserPredictionSkeleton index={index} />
       ))}
       <div
+        className="w-full -mt-[230px] h-[225px]"
         style={{
           background:
             "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.5) 50%, rgba(10, 10, 10, 0.7) 70%, #101010 100%)",
-          height: "225px",
-          width: "100%",
-          marginTop: "-230px",
         }}
       />
       <div className="flex flex-col items-center mt-10">
@@ -41,17 +39,15 @@ export function NewPlaceholder({ isUser }) {
 
 export function NotificationsPlaceholder({ isUser }) {
   return (
-    <div className="flex flex-col align-center items-center w-[30vw] p-2 mt-2  ">
+    <div className="flex flex-col align-center items-center w-full p-2 mt-2  ">
       {[...Array(3)].map((_, index) => (
         <NotificationSkelleton index={index} />
       ))}
       <div
+        className="w-full -mt-[230px] h-[225px]"
         style={{
           background:
             "linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.5) 50%, rgba(8, 8, 8, 0.7) 70%, #080808 100%, #080808 100%)",
-          height: "230px",
-          width: "110%",
-          marginTop: "-230px",
         }}
       />
 
@@ -90,7 +86,7 @@ export const UserPredictionSkelleton = ({ index }) => (
       </div>
     </div>
     <div className="flex flex-row items-center justify-between mt-2">
-      <Skeleton className="h-[35px] w-[50%]" />
+      <Skeleton className="h-[35px] w-1/2" />
       <Skeleton className="h-[25px] rounded-full w-[52%]" />
     </div>
   </motion.div>
@@ -114,7 +110,7 @@ export const UserLpSkelleton = ({ index }) => (
       </div>
     </div>
     <div className="flex flex-row items-center justify-between mt-2">
-      <AltSkeleton className="h-[35px] w-[50%]" />
+      <AltSkeleton className="h-[35px] w-1/2" />
       <AltSkeleton className="h-[25px] w-[22%]" />
     </div>
   </motion.div>

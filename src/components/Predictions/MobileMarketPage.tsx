@@ -162,7 +162,7 @@ function MobileMarketContent({
             <Avatar>
               <AvatarImage src={userImages[1]} />
             </Avatar>
-            <Avatar className="border-1 border-white">
+            <Avatar className="border border-white">
               <AvatarImage src={userImages[2]} />
             </Avatar>
           </div>
