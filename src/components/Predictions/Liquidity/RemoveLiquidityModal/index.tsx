@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -34,8 +34,8 @@ function RemoveLiquidityModal({
   id,
   children,
 }) {
-  const [goal, setGoal] = React.useState(1);
-  const [step, setStep] = React.useState(1);
+  const [goal, setGoal] = useState(1);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     if (isOpen) {
