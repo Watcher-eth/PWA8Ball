@@ -1,8 +1,8 @@
-import { DesktopMarketPage } from "@/components/Predictions/DesktopMarketPage";
+import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import React from "react";
 
 function test() {
-  return <DesktopMarketPage />;
+  return <DesktopActivityPage />;
 }
 
 export default test;

@@ -8,7 +8,6 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 
-
 export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,12 +69,10 @@ export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
 
   return (
     <motion.button
-      className="relative w-full h-12 bg-[#212121] overflow-hidden flex items-center justify-center"
+      className="relative w-full rounded-full h-[3.2rem] bg-[#151515] border-[0.1rem] border-[#212121] shadow-md overflow-hidden flex items-center justify-center"
       style={{
-        borderRadius: "24px",
         padding: "1px",
         cursor: "pointer",
-        border: "none",
       }}
       onClick={handleClick}
     >
@@ -99,5 +96,3 @@ export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
     </motion.button>
   );
 };
-
-

@@ -26,7 +26,7 @@ import { useVotingStore } from "@/lib/stores/VotingStore";
 import { getProfilePath } from "@/utils/urls";
 import { useRouter } from "next/router";
 import { DesktopLoadingPrediction } from "../Modals/PredictModal/SuccessScreen";
-import { CashoutConfirmScrreen } from "./Cashout/confirm";
+import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 
@@ -42,9 +42,8 @@ export function DesktopPredictComponent(props: {
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
 
-  console.log("marrket", props.options);
   return (
-    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white h-[55vh]">
+    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] w-[90%] border-[#121212] text-white h-auto">
       <motion.div layout transition={{ duration: 0.2 }} className="relative">
         <AnimatePresence>
           {step === 0 || step === 4 ? (
@@ -174,6 +173,7 @@ export function DesktopPredictComponent(props: {
               options={props?.options}
               topic={props?.topic}
               odds={props.options[0].value / 100}
+              setStep={setStep}
             />
           )}
           {step === 4 && (
@@ -183,7 +183,7 @@ export function DesktopPredictComponent(props: {
                 flexDirection: "row",
                 alignItems: "center",
                 marginTop: 8,
-                marginBottom: 10,
+                marginBottom: 35,
                 alignSelf: "center",
                 justifyContent: "space-around",
                 width: "100%",
@@ -278,7 +278,7 @@ export function DesktopPredictComponent(props: {
             />
           )}
           {step === 7 && (
-            <CashoutConfirmScrreen
+            <CashoutConfirmScreen
               options={props.options}
               image={props.image}
               question={props.question}
@@ -296,7 +296,6 @@ export function DesktopPredictComponent(props: {
     </Card>
   );
 }
-
 
 function DesktopConfirmPrediction(props: {
   setStep: (step: number) => void;
@@ -324,7 +323,6 @@ function DesktopConfirmPrediction(props: {
     const desired = Number(amount.toFixed(4));
 
     const hasBalance = Number(userBalance) > desired;
-    console.log("clck", hasBalance, smartAccountReady, smartAccountClient);
     if (!hasBalance) {
       // router.navigate({ pathname: "/GetFundsModal" });
     }
@@ -383,9 +381,7 @@ function DesktopConfirmPrediction(props: {
           image={props.image}
           question={props.question}
           answer={
-            Number(props.option) === 1
-              ? props.options[1].name
-              : props.options[0].name
+            Number(option) === 1 ? props.options[1].name : props.options[0].name
           }
           option={props.option}
           loading={loading}
@@ -414,15 +410,15 @@ function DesktopConfirmPrediction(props: {
               <div
                 style={{ borderRadius: 10 }}
                 className={`flex items-center px-2 py-1 rounded-lg ${
-                  option === 0 ? "bg-[#75171D]" : "bg-[#013145]"
+                  option === 1 ? "bg-[#75171D]" : "bg-[#013145]"
                 }`}
               >
                 <span
                   className={`text-[0.95rem] font-semibold ${
-                    option === 0 ? "text-[#E23B3B]" : "text-[#0596FF]"
+                    option === 1 ? "text-[#E23B3B]" : "text-[#0596FF]"
                   }`}
                 >
-                  {Number(props.option) === 1
+                  {Number(option) === 1
                     ? props.options[1].name
                     : props.options[0].name}
                 </span>
@@ -469,7 +465,7 @@ function DesktopConfirmPrediction(props: {
             <p className="text-[0.95rem] text-white font-medium mb-4 self-start">
               {props.question}
             </p>
-            <p className="text-[0.75rem] text-[#424242] mt-3 font-medium text-center px-3">
+            <p className="text-[0.75rem] text-[#424242] mt-1 font-medium text-center px-3">
               Review the above carefully before confirming. Once made, your
               prediction is irreversible.
             </p>
@@ -478,10 +474,10 @@ function DesktopConfirmPrediction(props: {
       )}
       <div
         style={{ marginTop: loading || success ? "3.8rem" : 0 }}
-        className="flex items-center gap-2 mb-4"
+        className="flex items-center gap-2 mb-2"
       >
         <motion.button
-          onClick={() => props.setStep(1)}
+          onClick={() => props.setStep(0)}
           className="mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold"
           initial={{ width: "12vw" }}
           animate={{

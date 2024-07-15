@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { parseOption, parseOptionJSON } from "@/utils/predictions/parseOption";
 import { motion } from "framer-motion";
 
 export const ActivityField = ({
@@ -24,6 +25,7 @@ export const ActivityField = ({
   option: { name: string; value: number };
   onOpenBottomSheet: () => void;
 }) => {
+  console.log("sdas", parseOption(option));
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -36,8 +38,8 @@ export const ActivityField = ({
         justifyContent: "space-between",
         margin: isDesktop ? "13.5px 0" : "13.5px 10px",
         background: isDesktop ? "#121212" : "transparent",
-        padding: isDesktop ? "12px 10px" : "0",
-        borderRadius: isDesktop ? "10px" : "0",
+        padding: isDesktop ? "11px 11px" : "0",
+        borderRadius: isDesktop ? "13px" : "0",
       }}
       onClick={onOpenBottomSheet}
     >
@@ -56,7 +58,7 @@ export const ActivityField = ({
             height: "50px",
             width: "50px",
             objectFit: "cover",
-            borderRadius: "30px",
+            borderRadius: isDesktop ? "7px" : "30px",
             overflow: "hidden",
           }}
         />
@@ -83,7 +85,7 @@ export const ActivityField = ({
             gap: "0px",
             marginLeft: "12.5px",
             marginRight: "-36px",
-            maxWidth: "73.5%",
+            maxWidth: "100%",
           }}
         >
           <h3
@@ -128,9 +130,9 @@ export const ActivityField = ({
           ${(amount / 10).toFixed(2)}
         </p>
         <p style={{ fontSize: "14px", color: "#C7C7C7", fontWeight: "700" }}>
-          {option?.name?.length < 8
-            ? option.name
-            : option?.name?.substring(0, 3)}
+          {parseOption(option)?.length < 8
+            ? parseOption(option)
+            : parseOption(option)?.substring(0, 3)}
         </p>
       </div>
     </motion.div>

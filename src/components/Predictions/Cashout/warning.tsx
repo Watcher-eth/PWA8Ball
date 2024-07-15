@@ -1,8 +1,9 @@
 // @ts-nocheck
 
 import React, { useState } from "react";
-import { AlertTriangle, Clock, Share as ShareIcon, X } from "lucide-react";
+import { AlertTriangle, Clock, X } from "lucide-react";
 import { motion } from "framer-motion";
+
 interface CashOutWarningScreenProps {
   changeStep: () => void;
   onClose: () => void;
@@ -35,202 +36,74 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: props.isDesktop ? "100%" : "93%",
-        backgroundColor: props.isDesktop ? "transparent" : "#101010",
-        marginTop: props.isDesktop ? "0px" : "50px",
-        padding: props.isDesktop ? "30px" : "20px",
-        borderRadius: "30px",
-      }}
+      className={`flex flex-col items-center ${
+        props.isDesktop
+          ? "w-full bg-transparent mt-0 p-8 rounded-none"
+          : "w-[93%] bg-[#101010] mt-[50px] p-5 rounded-[30px]"
+      }`}
     >
-      {/* <CustomToastSuccess
-        visible={toastVisible}
-        message="Your withdrawal was successful!"
-        icon={CheckCircle}
-        position="top-center"
-        color="#5ACE5A"
-      /> */}
-
       <motion.div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          backgroundColor: props.isDesktop ? "transparent" : "#131313",
-          borderRadius: "20px",
-        }}
+        className={`flex flex-col w-full ${
+          props.isDesktop ? "bg-transparent" : "bg-[#131313]"
+        } rounded-[20px]`}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
+        <div className="flex flex-row items-center justify-between w-full">
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
           <motion.div
             onClick={() => onClose()}
-            style={{
-              padding: "8.5px 6px",
-              borderRadius: "17px",
-              overflow: "hidden",
-              backgroundColor: "#1C1C1C",
-              alignSelf: "flex-start",
-              cursor: "pointer",
-            }}
+            className="p-[8.5px] rounded-[17px] overflow-hidden bg-[#1C1C1C] cursor-pointer"
           >
             <X color={"#585858"} strokeWidth={5} height={18} />
           </motion.div>
         </div>
-        <span
-          style={{
-            fontSize: "21px",
-            color: "white",
-            marginTop: "14px",
-            fontWeight: "600",
-            lineHeight: "24px",
-          }}
-        >
-          Are you sure you want cash out prior to resolution?
+        <span className="text-[21px] text-white mt-[14px] font-semibold leading-[24px]">
+          Are you sure you want to cash out prior to resolution?
         </span>
-        <span
-          style={{
-            fontSize: "15px",
-            color: "lightgray",
-            marginTop: "8px",
-            fontWeight: "400",
-          }}
-        >
+        <span className="text-[15px] text-[#D3D3D3] mt-[8px] font-normal">
           If you cash out now you will sell at the current probability and won't
           get any multiplier
         </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: props?.isDesktop ? "45px" : "35px",
-            marginBottom: "6px",
-          }}
-        >
+        <div className="flex flex-row items-center mt-[35px] mb-[6px]">
           <Clock color={"white"} strokeWidth={3.5} height={19} />
-          <span
-            style={{
-              fontSize: "18px",
-              color: "white",
-              marginLeft: "4px",
-              fontWeight: "600",
-            }}
-          >
+          <span className="text-[18px] text-white ml-[4px] font-semibold">
             Hold and earn more
           </span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "16px 14px",
-            borderRadius: "15px",
-            marginTop: props?.isDesktop ? "15px" : "8px",
-            backgroundColor: "#1C1C1C",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: "7px",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "16.5px",
-                color: "lightgray",
-                fontWeight: "500",
-              }}
-            >
+        <div className="flex flex-col p-[16px] rounded-[15px] mt-[8px] bg-[#1C1C1C]">
+          <div className="flex flex-row items-center mb-[7px] justify-between">
+            <span className="text-[16.5px] text-[#D3D3D3] font-medium">
               Now
             </span>
-            <span
-              style={{
-                fontSize: "16.5px",
-                color: "lightgray",
-                fontWeight: "00",
-              }}
-            >
+            <span className="text-[16.5px] text-[#D3D3D3] font-normal">
               ${props?.points?.toFixed(2)}
             </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "20px",
-                color: "white",
-                fontWeight: "600",
-              }}
-            >
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-[20px] text-white font-semibold">
               Possible Payout
             </span>
-            <span
-              style={{
-                fontSize: "20px",
-                color: "white",
-                fontWeight: "600",
-              }}
-            >
+            <span className="text-[20px] text-white font-semibold">
               ${(props.points * 3).toFixed(2)}
             </span>
           </div>
         </div>
       </motion.div>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5px",
-          marginBottom: "0",
-          marginTop: props?.isDesktop ? "75px" : "35px",
-        }}
+        className={`flex flex-row items-center gap-[5px] mb-0 ${
+          props?.isDesktop ? "mt-[45px]" : "mt-[35px]"
+        }`}
       >
         <motion.div
           onClick={() => {
             props?.isDesktop ? props.changeStep(4) : props.changeStep(1);
           }}
-          style={{
-            marginTop: "12px",
-            padding: props.isDesktop ? "11px" : "13px",
-            borderRadius: "24px",
-            overflow: "hidden",
-            backgroundColor: "#1C1C1C",
-            width: props.isDesktop ? "11vw" : width / 2.5,
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            display: "flex",
-          }}
+          className={`mt-[12px] ${
+            props.isDesktop ? "py-[11px]" : "py-[13px]"
+          } rounded-[24px] overflow-hidden bg-[#1C1C1C] ${
+            props.isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`
+          } flex items-center justify-center cursor-pointer`}
         >
-          <span
-            style={{
-              fontSize: "20px",
-              color: "#D9D9D9",
-              fontWeight: "800",
-            }}
-          >
+          <span className="text-[20px] text-[#D9D9D9] font-extrabold">
             Hold
           </span>
         </motion.div>
@@ -238,59 +111,22 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
           onClick={() => {
             cashOutPrediction();
           }}
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            flexDirection: "row",
-            marginLeft: "16px",
-            padding: props.isDesktop ? "10px" : "11px",
-            borderRadius: "24px",
-            overflow: "hidden",
-            backgroundColor: "#D9D9D9",
-            width: props.isDesktop ? "11vw" : width / 2.5,
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
+          className={`mt-[12px] flex flex-row ml-[16px] ${
+            props.isDesktop ? "py-[10px]" : "py-[11px]"
+          } rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
+            props.isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`
+          } items-center justify-center cursor-pointer`}
         >
           {loading ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className="flex flex-row items-center justify-center">
               <div className="loader"></div>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: "800",
-                  marginLeft: "3px",
-                }}
-              >
+              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
                 Cashing out
               </span>
             </div>
           ) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <motion.span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: "800",
-                  marginLeft: "3px",
-                }}
-              >
+            <div className="flex flex-row items-center justify-center">
+              <motion.span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
                 Confirm
               </motion.span>
             </div>

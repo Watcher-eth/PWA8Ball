@@ -8,7 +8,6 @@ import { HOME_PATH } from "@/utils/urls";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export function NewPlaceholder({ isUser }) {
-
   return (
     <div className="flex flex-col items-center w-[94%] p-2 mt-2 mx-auto">
       {[...Array(3)].map((_, index) => (
@@ -42,7 +41,7 @@ export function NewPlaceholder({ isUser }) {
 
 export function NotificationsPlaceholder({ isUser }) {
   return (
-    <div className="flex flex-col align-center items-center w-[30vw] p-2 mt-2  mx-auto">
+    <div className="flex flex-col align-center items-center w-[30vw] p-2 mt-2  ">
       {[...Array(3)].map((_, index) => (
         <NotificationSkelleton index={index} />
       ))}
