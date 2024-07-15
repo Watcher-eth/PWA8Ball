@@ -5,13 +5,11 @@ import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
-export const RelatedMarkets = (props: {
+export const RelatedMarkets = ({topicId, id, isDesktop}: {
   topicId: string;
   id: number;
   isDesktop?: boolean;
 }) => {
-  const router = useRouter();
-  const { topicId, id } = props;
 
   // Get Markets from topic
   const { data: markets, error, isLoading } = useGetRelatedMarkets(topicId);
@@ -19,60 +17,27 @@ export const RelatedMarkets = (props: {
   if (markets && markets?.length >= 2)
     return (
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: 20,
-          backgroundColor: props?.isDesktop ? "transparent" : "#121212",
-        }}
+        className={`
+          flex flex-col p-4
+          ${isDesktop ? "bg-transparent" : "bg-[#121212]"}
+        `}
       >
         <div style={styles.header}>
           <StarHalf color={"white"} strokeWidth={3} />
           <span style={styles.headerText}>Related Predictions</span>
         </div>
-        {markets?.map((item, index) => {
-          if (index < 4 && item.id !== id)
+        {markets?.filter((item) => item.id !== id)
+          ?.slice(0, 4)
+          ?.map((item, index) => {
             return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  padding: 7,
-                  borderRadius: 10,
-                  marginTop: 11,
-                  backgroundColor: props?.isDesktop ? "#121212" : "#1A1A1A",
-                  cursor: "pointer",
-                }}
+              <RelatedMarketQuestion
+                {...item}
                 key={index}
-                onClick={() =>
-                  router.push({
-                    pathname: `/p/${item.id}`,
-                    query: {
-                      id: item.id,
-                    },
-                  })
-                }
-              >
-                <img
-                  style={styles.marketImage}
-                  src={item?.image}
-                  alt={item?.title}
-                />
-                <div style={styles.marketDetails} className="space-y-[-4px]">
-                  <span className="line-clamp-1	" style={styles.marketQuestion}>
-                    {item?.question}
-                  </span>
-                  <span style={styles.marketProbability}>
-                    {item?.currentprob ? item?.currentprob : item?.initialprob}%{" "}
-                    {item?.option === 0
-                      ? item?.options[item?.option + 1].name
-                      : item.options[item?.option - 1].name}
-                  </span>
-                </div>
-              </div>
+                isDesktop={isDesktop}
+              />
             );
-        })}
+          })
+        }
 
         <div style={styles.spacer} />
       </div>
@@ -80,6 +45,44 @@ export const RelatedMarkets = (props: {
 
   return null;
 };
+
+function RelatedMarketQuestion({
+  id,
+  option,
+  currentprob,
+  initialprob,
+  image,
+  question,
+  options,
+  title,
+  isDesktop
+}) {
+  return (
+    <Link href={`/p/${id}`} prefetch={true}>
+      <div
+        className={`
+                  flex flex-row items-center
+                  p-2 rounded-[10px] mt-2.5 cursor-pointer
+                  ${isDesktop ? "bg-transparent" : "bg-[#1A1A1A]"}
+                `}
+      >
+        <img style={styles.marketImage} src={image} alt={title} />
+        <div style={styles.marketDetails} className="space-y-[-4px]">
+          <span className="line-clamp-1	" style={styles.marketQuestion}>
+            {question}
+          </span>
+          <span style={styles.marketProbability}>
+            {currentprob ?? initialprob}%{" "}
+            {option === 0
+              ? options[option + 1].name
+              : options[option - 1].name
+            }
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 const styles = {
   header: {
