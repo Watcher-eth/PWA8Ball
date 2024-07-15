@@ -9,7 +9,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Grid } from "@/components/ui/tailwind/Grid";
 import { Col } from "@/components/ui/tailwind/Col";
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
-
+import { InverseBleedOverlay, InverseVerticalBleedOverlay, StandardBleedOverlay } from "../layouts/StandardBleedOverlay";
 import { PredictModal } from "@/components/Modals/PredictModal";
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
@@ -20,6 +20,7 @@ import { DesktopPredictComponent } from "./DesktopPredictComponent";
 
 import { AlignLeft } from "lucide-react";
 
+
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
@@ -28,22 +29,26 @@ export function DesktopMarketPage({ users, market, id }) {
   console.log(market);
   return (
     <StandardPageWrapper className="h-full flex flex-col">
+      <StandardBleedOverlay>
+        <InverseVerticalBleedOverlay>
+          <div className="w-full h-80 relative">
+            <img
+              className="w-full transform rotate-180 object-cover h-80 relative -mt-24"
+              alt="CoverImage"
+              src={market?.image}
+            />
+            <div className="h-80 w-full bg-gradient-to-b from-transparent via-transparent to-transparent backdrop-blur-lg  absolute bottom-0" />
+            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
+            <InverseBleedOverlay>
+              <img
+                className="h-[14vh] ml-3 absolute -bottom-12 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
+                src={market?.image}
+              />
+            </InverseBleedOverlay>
+          </div>
+        </InverseVerticalBleedOverlay>
+      </StandardBleedOverlay>
       <div className="w-full h-full overflow-y-auto flex flex-col">
-        <div className="w-full h-[28vh] relative">
-          <img
-            className="w-full transform rotate-180 object-cover h-[28vh] relative"
-            alt="CoverImage"
-            src={market?.image}
-          />
-          <div className="h-[40vw] w-full  bg-gradient-to-b from-[#080808] via-transparent to-transparent backdrop-blur-xl -contrast-200 absolute bottom-0" />
-
-          <div className="h-[40vw] w-full bg-gradient-to-t from-[#080808] via-transparent to-transparent absolute bottom-0" />
-          <img
-            className="h-[14vh] ml-3 absolute -bottom-12 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
-            src={market?.image}
-          />
-        </div>
-
         <div className="relative h-full">
           <Grid gap={4} cols={{ xs: 8 }}>
             <Col xs={5}>
@@ -68,9 +73,7 @@ export function DesktopMarketPage({ users, market, id }) {
                     <div className="text-[0.85rem] text-[lightgray] font-semibold">
                       At stake
                     </div>
-                    <div
-                      className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center font-semibold"
-                    >
+                    <div className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center font-semibold">
                       <div>
                         ${((market?.usdcstake ?? 0) / 100000).toFixed(2)}
                       </div>
@@ -135,7 +138,7 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
             <Col xs={3}>
-              <div className="  flex flex-col items-center py-3    pb-1 rounded-[1.4rem]">
+              <div className="flex flex-col items-center pt-3 pb-1 rounded-[1.5rem]">
                 <DesktopPredictComponent
                   id={market?.id}
                   question={market?.question}

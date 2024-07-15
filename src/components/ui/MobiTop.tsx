@@ -9,8 +9,11 @@ export function MobiTop({ mobile, desktop }) {
   return (
     <>
       <div className="hidden sm:block">
-        <div className="w-screen bg-[#080808] h-full flex flex-col pt-3 py-8">
+        <div className="w-screen bg-[#080808] h-full flex flex-col pt-24 py-8">
           <DesktopNavbar />
+          {/* <div>
+
+          </div> */}
           {desktop}
         </div>
       </div>

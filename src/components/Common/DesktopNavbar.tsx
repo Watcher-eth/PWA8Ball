@@ -12,40 +12,55 @@ export function DesktopNavbar() {
   const { user } = useUserStore();
 
   return (
-    <div className="flex justify-between items-center p-0 pb-8 pt-3 px-8 text-white">
-      <Link href={HOME_PATH}>
-        <NavIconButton
-          icon={
-            <img
-              src="/images/OrbLogo.png" // Replace with your image path
-              alt="Left Icon"
-              className="size-12 rounded-full"
+    <div className="w-full absolute z-50 top-0">
+      <div
+        className={`
+            pb-8 pt-3 px-8 text-white z-50 fixed w-full
+        `}
+      >
+        <div
+          className={`
+            flex justify-between items-center w-full p-2 ring-1 rounded-lg
+            ring-white/20 backdrop-blur bg-slate-400/10
+          `}
+        >
+          <Link href={HOME_PATH}>
+            <NavIconButton
+              icon={
+                <img
+                  src="/images/OrbLogo.png" // Replace with your image path
+                  alt="Left Icon"
+                  className="size-10 rounded-full ml-1"
+                />
+              }
             />
-          }
-        />
-      </Link>
-      <div className="flex items-center space-x-8">
-        <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
-          <NavIconButton IconComponent={Search} />
-        </DesktopSearchModal>
-        <DesktopNotificationModal userId={user?.external_auth_provider_user_id}>
-          <NavIconButton IconComponent={Bell} />
-        </DesktopNotificationModal>
-        {user ? (
-          <DesktopProfilePopover>
-            <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
-              <img
-                src={user.pfp}
-                alt={user.name}
-                className="size-8 rounded-full"
-              />
-            </div>
-          </DesktopProfilePopover>
-        ) : (
-          <DesktopOnboardingModal>
-            <ConnectButton />
-          </DesktopOnboardingModal>
-        )}
+          </Link>
+          <div className="flex items-center space-x-8">
+            <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
+              <NavIconButton IconComponent={Search} />
+            </DesktopSearchModal>
+            <DesktopNotificationModal
+              userId={user?.external_auth_provider_user_id}
+            >
+              <NavIconButton IconComponent={Bell} />
+            </DesktopNotificationModal>
+            {user ? (
+              <DesktopProfilePopover>
+                <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
+                  <img
+                    src={user.pfp}
+                    alt={user.name}
+                    className="size-8 rounded-full"
+                  />
+                </div>
+              </DesktopProfilePopover>
+            ) : (
+              <DesktopOnboardingModal>
+                <ConnectButton />
+              </DesktopOnboardingModal>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -80,7 +95,9 @@ function ConnectButton() {
   return (
     <div
       className={`
-        bg-[#171717] font-semibold cursor-pointer
+        bg-[#171717]/80 hover:bg-[#171717]/90
+        hover:scale-105 active:scale-95 transition-all
+        font-semibold cursor-pointer
         border border-white/10 hover:border-white/20 active:border-white/30
         px-4 py-2 rounded-md flex flex-row items-center
       `}
