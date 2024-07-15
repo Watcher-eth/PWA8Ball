@@ -40,7 +40,11 @@ export function DesktopCardModal({
         `}
       >
         <Card
-          className={`shadow-none bg-[#080808] border-2 border-[#181818] rounded-[1.5rem] ${cardClassName}`}
+          className={`
+            shadow-none bg-[#080808]
+            border-2 border-[#181818]
+            rounded-[1.5rem] ${cardClassName}
+          `}
         >
           {(title || subtitle) && (
             <CardHeader className="border-b border-[#212121]">
