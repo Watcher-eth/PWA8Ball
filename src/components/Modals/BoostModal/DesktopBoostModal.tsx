@@ -70,10 +70,10 @@ export function DesktopBoostModal({
 
   return (
     <DesktopCardModal
-      cardClassName="w-[99%]"
-      dialogContentClassName="w-[30vw]"
-      cardContentClassName="w-[30vw]"
-      dialogClassName="w-[99%]"
+      cardClassName="w-full"
+      dialogContentClassName="w-[30vw] min-w-[400px]"
+      cardContentClassName="w-[30vw] min-w-[400px]"
+      dialogClassName="w-full"
       content={
         <DesktopBoostContent image={image} id={id} onComplete={() => {}} />
       }

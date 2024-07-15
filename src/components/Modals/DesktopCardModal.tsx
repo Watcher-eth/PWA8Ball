@@ -35,12 +35,12 @@ export function DesktopCardModal({
       </DialogTrigger>
       <DialogContent
         className={`
-          p-0 bg-[#080808]/80 min-h-[50vh] border-2 border-[#181818]
+          p-0 bg-transparent min-h-[50vh] border-0
           !rounded-[1.5rem] ${dialogContentClassName}
         `}
       >
         <Card
-          className={`shadow-none bg-[#080808] border-0 rounded-[1.5rem] ${cardClassName}`}
+          className={`shadow-none bg-[#080808] border-2 border-[#181818] rounded-[1.5rem] ${cardClassName}`}
         >
           {(title || subtitle) && (
             <CardHeader className="border-b border-[#212121]">
