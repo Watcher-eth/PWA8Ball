@@ -43,7 +43,7 @@ export function DesktopPredictComponent(props: {
   const setStake = useVotingStore((state) => state.setState);
 
   return (
-    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] w-[90%] border-[#121212] text-white h-auto">
+    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white h-auto">
       <motion.div layout transition={{ duration: 0.2 }} className="relative">
         <AnimatePresence>
           {step === 0 || step === 4 ? (
