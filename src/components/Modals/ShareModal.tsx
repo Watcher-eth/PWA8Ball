@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-import React, { ReactNode } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { ShareBetModal } from "../Share/ShareBetModal.tsx";
@@ -14,7 +12,7 @@ export function ShareModal({
   question,
   options,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   title: string;
   image: string;
@@ -45,9 +43,7 @@ export function ShareModal({
       <Drawer>
         <DrawerTrigger>
           <motion.div
-            whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
-            className="mt-[1rem]"
+            className="mt-[1rem] hover:scale-110 active:scale-93"
           >
             {children}
           </motion.div>
@@ -56,9 +52,11 @@ export function ShareModal({
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className="bg-white rounded-3xl
-        h-[90vh] mb-5 w-screen relative"
+            className={`
+              bg-white rounded-3xl rounded-t-[20px]
+              h-[90vh] mb-5 w-screen relative
+              ${isDesktop ? "border-0" : "border-t-[1px] border-[#262626]"}
+            `}
           >
             <ShareBetModal
               id={id}
