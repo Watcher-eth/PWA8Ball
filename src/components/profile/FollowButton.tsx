@@ -53,31 +53,15 @@ export const FollowButton = ({
     return (
       <motion.button
         onClick={handleFollow}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          paddingLeft: 12,
-          backgroundColor: "#1B1B1E",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 7,
-          marginBottom: 10,
-        }}
+        className={`
+          flex flex-row
+          mt-2 mb-2.5 p-2 !px-3
+          bg-[#1B1B1E] rounded-lg overflow-hidden items-center
+          hover:scale-105 active:scale-95
+        `}
       >
         <UserPlus color={"lightgray"} strokeWidth={3} height={15} />
-        <div
-          style={{
-            fontSize: 14,
-            color: "lightgray",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
+        <div className="text-[14px] font-bold text-[lightgray] self-center">
           Follow
         </div>
       </motion.button>
@@ -88,30 +72,15 @@ export const FollowButton = ({
     return (
       <motion.button
         onClick={handleUnfollow}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          paddingLeft: 12,
-          backgroundColor: "white",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 8,
-          marginBottom: 10,
-        }}
+        className={`
+          flex flex-row
+          mt-2 mb-2.5 p-2 !px-3
+          bg-white rounded-lg overflow-hidden items-center
+          hover:scale-105 active:scale-95
+        `}
+
       >
-        <div
-          style={{
-            fontSize: 14,
-            color: "#1B1B1E",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
+        <div className="text-[14px] font-bold text-[#1B1B1E] self-center">
           Following
         </div>
       </motion.button>
@@ -122,31 +91,15 @@ export const FollowButton = ({
     return (
       <motion.button
         onClick={setEdit}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: 8,
-          paddingRight: 12,
-          backgroundColor: "#1B1B1E",
-          borderRadius: 15,
-          overflow: "hidden",
-          alignItems: "center",
-          padding: 8,
-          paddingLeft: 6,
-          marginBottom: 10,
-        }}
+        className={`
+          flex flex-row
+          mt-2 mb-2.5 p-2 !pl-3 !pr-3
+          bg-[#1B1B1E] rounded-lg overflow-hidden items-center
+          hover:scale-105 active:scale-95
+        `}
       >
         <PenBox color={"lightgray"} strokeWidth={3} height={14} />
-        <div
-          style={{
-            fontSize: 14,
-            color: "lightgray",
-            fontWeight: "700",
-            alignSelf: "center",
-          }}
-        >
+        <div className="text-[14px] font-bold text-[lightgray] self-center">
           Edit
         </div>
       </motion.button>

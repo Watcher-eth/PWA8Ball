@@ -25,16 +25,16 @@ import {
   User,
   Wallet,
 } from "lucide-react";
-import { ReactNode } from "react";
 
-export function DropdownProfilePopover({ children }: { children: ReactNode }) {
+
+export function DropdownProfilePopover({ children }: { children: React.ReactNode }) {
   const { user } = useUserStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div>{children}</div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#080808]/[0.85] mr-2 mt-2 rounded-[1rem] backdrop-blur-lg border-2 w-56 border-[#181818]">
+      <DropdownMenuContent className="bg-[#080808]/85 mr-2 mt-2 rounded-[1rem] backdrop-blur-lg border-2 w-56 border-[#181818]">
         <DropdownMenuLabel className="flex  flex-row items-center">
           <img className="h-6 w-6 rounded-full mr-2" src={user?.pfp} />
           <div>{user.name}</div>
@@ -64,7 +64,7 @@ export function DropdownProfilePopover({ children }: { children: ReactNode }) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent className="bg-[#080808]/[0.8] rounded-[0.85rem] backdrop-blur-md border-2 border-[#181818]">
+              <DropdownMenuSubContent className="bg-[#080808]/80 rounded-[0.85rem] backdrop-blur-md border-2 border-[#181818]">
                 <DropdownMenuItem className="flex  flex-row justify-between items-center">
                   Twitter
                   <img

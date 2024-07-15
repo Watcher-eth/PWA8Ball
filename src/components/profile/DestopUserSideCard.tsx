@@ -13,50 +13,61 @@ export const DesktopUserSideProfile: React.FC = () => {
 
   return (
     <div className="h-[90vh] w-full p-12 bg-[#121212] flex flex-col text-white">
-      <div className="flex flex-col  mb-6">
+      <div className="flex flex-col mb-6">
         <img
           src={user.pfp}
           alt={user.name}
-          className="rounded-full w-24 h-24 mb-4"
+          className="rounded-full size-24 mb-4"
         />
         <h1 className="text-[1.8rem] font-bold">{user.name}</h1>
         <p className="text-lg">@{user.name}</p>
       </div>
       <div className=" mb-8 mr-4">
         <div className="flex justify-between text-lg mb-10">
-          <div className="flex flex-col">
-            <p className="font-semibold">Rank</p>
-            <p className="text-[1.45rem] font-semibold text-[lightgray]">
-              #1276{user.rank}
-            </p>
-          </div>
-          <div className="flex flex-col">
-            <p className="font-semibold">Cred</p>
-            <p className="text-[1.45rem] font-semibold text-[lightgray]">
-              {user.cred}345 $Cred
-            </p>
-          </div>
+          <InfoParaStack
+            className="flex flex-col"
+            label="Rank"
+            content={`#1276${user.rank}`}
+          />
+          <InfoParaStack
+            className="flex flex-col"
+            label="Cred"
+            content={`${user.cred}345 $Cred`}
+          />
         </div>
-        <div className="mb-6">
-          <p className="font-semibold">Predictions made</p>
-          <p className="text-[1.45rem] font-semibold text-[lightgray]">
-            {user.predictionsMade}15 Predictions
-          </p>
-        </div>
-        <div>
-          <p className="font-semibold">Correct Predictions</p>
-          <p className="text-[1.45rem] font-semibold text-[lightgray]">
-            {user.correctPredictions}4 Correct
-          </p>
-        </div>
+        <InfoParaStack
+          className="mb-6"
+          label="Predictions made"
+          content={`${user.predictionsMade} Predictions`}
+        />
+        <InfoParaStack
+          label="Correct Predictions"
+          content={`${user.correctPredictions} Correct`}
+        />
       </div>
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        className="flex items-center self-center w-full justify-center px-5 py-3 bg-[#151515] font-semibold rounded-full mt-auto"
-      >
+      <motion.button className="hover:scale-102 flex items-center self-center w-full justify-center px-5 py-3 bg-[#151515] font-semibold rounded-full mt-auto">
         <Share className="w-5 h-5 mr-2" strokeWidth={3} size={20} />
         Share your score
       </motion.button>
     </div>
   );
 };
+
+function InfoParaStack({
+  label,
+  content,
+  className=""
+}: {
+  label: string
+  content: string
+  className?: string
+}) {
+  return (
+    <div className={className}>
+      <p className="font-semibold">{label}</p>
+      <p className="text-[1.45rem] font-semibold text-[lightgray]">
+        {content}
+      </p>
+    </div>
+  );
+}
