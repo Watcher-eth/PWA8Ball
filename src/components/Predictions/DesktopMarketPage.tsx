@@ -137,7 +137,7 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
             <Col xs={3}>
-              <div className="flex flex-col items-center pt-3 pb-1 rounded-[1.5rem]">
+              <div className="flex flex-col items-center pt-3 px-4 pb-1 rounded-[1.5rem] ">
                 <DesktopPredictComponent
                   id={market?.id}
                   question={market?.question}
