@@ -48,7 +48,7 @@ export function DesktopMarketPage({ users, market, id }) {
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
       <div className="w-full h-full overflow-y-auto flex flex-col">
-        <div className="relative h-full">
+        <div className="">
           <Grid gap={4} cols={{ xs: 8 }}>
             <Col xs={5}>
               <div className="flex flex-col mt-[2.5rem] z-10">
