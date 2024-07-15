@@ -43,7 +43,7 @@ export function ShareModal({
       <Drawer>
         <DrawerTrigger>
           <motion.div
-            className="mt-[1rem] hover:scale-110 active:scale-93"
+            className="mt-4 hover:scale-110 active:scale-93"
           >
             {children}
           </motion.div>

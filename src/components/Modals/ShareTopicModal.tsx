@@ -51,11 +51,7 @@ export function ShareTopicModal({
     <div>
       <Drawer>
         <DrawerTrigger>
-          <motion.div
-            whileTap={{ scale: 0.93 }}
-            whileHover={{ scale: 1.1 }}
-            className="mt-[1rem]"
-          >
+          <motion.div className="mt-4 hover:scale-110 active:scale-93">
             {children}
           </motion.div>
         </DrawerTrigger>

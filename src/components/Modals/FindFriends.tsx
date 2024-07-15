@@ -16,7 +16,7 @@ export function FindFriendsModal({ children }: { children: ReactNode }) {
       <Drawer>
         <DrawerTrigger>
           <div
-            className="mt-[1rem] active:scale-93 hover:scale-110"
+            className="mt-4 active:scale-93 hover:scale-110"
           >
             {children}
           </div>

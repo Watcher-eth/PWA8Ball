@@ -135,8 +135,7 @@ export function PredictModal(props: {
             onClick={() => {
               if (!user?.walletaddress) props.handleOpen();
             }}
-            whileTap={{ scale: 0.93 }}
-            className="mt-[1rem]"
+            className="mt-4 hover:scale-110 active:scale-93"
           >
             <OutcomeButton
               isDesktop={props?.isDesktop}
@@ -307,8 +306,8 @@ export function PredictModal(props: {
                   </div>
                 </div>
               )}
-              {step === 2 && (
-                user?.balance > amount ? (
+              {step === 2 &&
+                (user?.balance > amount ? (
                   <ConfirmPrediction
                     option={props?.option}
                     options={props?.options}
@@ -319,8 +318,9 @@ export function PredictModal(props: {
                     id={props?.marketId}
                     odds={props.odds}
                   />
-                ) : <GetGhoModal setStep={setStep} />
-              )}
+                ) : (
+                  <GetGhoModal setStep={setStep} />
+                ))}
               {step === 3 && (
                 <ConfirmPrediction
                   option={props?.option}

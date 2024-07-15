@@ -42,7 +42,7 @@ export function RedeemModal(props: {
             onClick={() => {
               if (!user?.walletaddress) props.handleOpen();
             }}
-            className="mt-[1rem] active:scale-93"
+            className="mt-4 active:scale-93"
           >
             <OutcomeButton
               text={props?.text}
