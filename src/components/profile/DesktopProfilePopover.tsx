@@ -24,6 +24,7 @@ import {
   Settings,
   User,
   Wallet,
+  UserCircle
 } from "lucide-react";
 
 
@@ -34,29 +35,21 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
       <DropdownMenuTrigger asChild>
         <div>{children}</div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#080808]/85 mr-2 mt-2 rounded-[1rem] backdrop-blur-lg border-2 w-56 border-[#181818]">
+      <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-md backdrop-blur-lg border-2 w-56 border-[#181818]">
         <DropdownMenuLabel className="flex  flex-row items-center">
-          <img className="h-6 w-6 rounded-full mr-2" src={user?.pfp} />
-          <div>{user.name}</div>
+          {user?.pfp ? (
+            <img className="h-6 w-6 rounded-full mr-2" src={user?.pfp} />
+          ) : (
+            <UserCircle className="h-6 w-6 text-white" strokeWidth={2.2} />
+          )}
+          <div>{user?.name}</div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem className="flex  flex-row justify-between items-center">
-            <div>Profile</div>
-            <User className="h-4 w-4 text-white " strokeWidth={2.2} />
-          </DropdownMenuItem>
-          <DropdownMenuItem className="flex  flex-row justify-between items-center">
-            Fund your account
-            <Wallet className="h-4 w-4 text-white " strokeWidth={2.2} />
-          </DropdownMenuItem>
-          <DropdownMenuItem className="flex  flex-row justify-between items-center">
-            Settings
-            <Settings className="h-4 w-4 text-white " strokeWidth={2.2} />
-          </DropdownMenuItem>
-          <DropdownMenuItem className="flex  flex-row justify-between items-center">
-            Your Boosts
-            <Rocket className="h-4 w-4 text-white " strokeWidth={2.2} />
-          </DropdownMenuItem>
+          <DropdownItem label="Profile" IconComponent={User} />
+          <DropdownItem label="Fund your account" IconComponent={Wallet} />
+          <DropdownItem label="Settings" IconComponent={Settings} />
+          <DropdownItem label="Your Boosts" IconComponent={Rocket} />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -64,35 +57,23 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent className="bg-[#080808]/80 rounded-[0.85rem] backdrop-blur-md border-2 border-[#181818]">
-                <DropdownMenuItem className="flex  flex-row justify-between items-center">
-                  Twitter
-                  <img
-                    className="h-4  w-4 rounded-full"
-                    src="https://img.freepik.com/vektoren-kostenlos/neues-twitter-logo-x-icon-design-2023_1017-45418.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1720742400&semt=ais_user"
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex  flex-row justify-between items-center">
-                  Telegram
-                  <img
-                    className="h-4  w-4 rounded-full"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1200px-Telegram_2019_Logo.svg.png"
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex  flex-row justify-between items-center">
-                  Instagram
-                  <img
-                    className="h-4  w-4 rounded-full"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex  flex-row justify-between items-center">
-                  TikTok
-                  <img
-                    className="h-4  w-4 rounded-full"
-                    src="https://cdn.pixabay.com/photo/2021/01/30/06/42/tiktok-5962992_1280.png"
-                  />
-                </DropdownMenuItem>
+              <DropdownMenuSubContent className="bg-[#080808]/80 rounded-md backdrop-blur-md border-2 border-[#181818]">
+                <DropdownItem
+                  label="Twitter"
+                  iconSrc="https://img.freepik.com/vektoren-kostenlos/neues-twitter-logo-x-icon-design-2023_1017-45418.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1720742400&semt=ais_user"
+                />
+                <DropdownItem
+                  label="Telegram"
+                  iconSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Telegram_2019_Logo.svg/1200px-Telegram_2019_Logo.svg.png"
+                />
+                <DropdownItem
+                  label="Instagram"
+                  iconSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"
+                />
+                <DropdownItem
+                  label="TikTok"
+                  iconSrc="https://cdn.pixabay.com/photo/2021/01/30/06/42/tiktok-5962992_1280.png"
+                />
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>More...</DropdownMenuItem>
               </DropdownMenuSubContent>
@@ -108,19 +89,33 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
           Terms of Service
           <FileText className="h-4 w-4 text-white " strokeWidth={2.2} />
         </DropdownMenuItem>
-        <DropdownMenuItem
-          className="flex  flex-row justify-between items-center"
-          disabled
-        >
-          Privacy
-          <GlobeLock className="h-4 w-4 text-white " strokeWidth={2.2} />
-        </DropdownMenuItem>
+        <DropdownItem label="Privacy" IconComponent={GlobeLock} disabled={true} />
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex  flex-row justify-between items-center">
-          Log out
-          <DoorOpen className="h-4 w-4 text-white " strokeWidth={2.2} />
-        </DropdownMenuItem>
+        <DropdownItem label="Log out" IconComponent={DoorOpen} />
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+
+function DropdownItem({
+  label,
+  IconComponent,
+  iconSrc,
+  disabled = false
+}: {
+  label: string,
+  IconComponent?: React.FC,
+  iconSrc?: string,
+  disabled?: boolean
+}) {
+  return (
+    <DropdownMenuItem className="flex flex-row justify-between items-center hover:!bg-slate-400/20" disabled={disabled}>
+      {label}
+      {IconComponent && (
+        <IconComponent className="h-4 w-4 text-white" strokeWidth={2.2} />
+      )}
+      {(iconSrc?.length > 0) && <img className="h-4 w-4 rounded-full" src={iconSrc} />}
+    </DropdownMenuItem>
   );
 }
