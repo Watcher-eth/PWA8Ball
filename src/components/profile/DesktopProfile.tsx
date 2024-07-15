@@ -1,6 +1,12 @@
 // @ts-nocheck
 
-import { BarChart, Stars, TrendingUp } from "lucide-react";
+import {
+  BarChart,
+  Filter,
+  SlidersHorizontal,
+  Stars,
+  TrendingUp,
+} from "lucide-react";
 import {
   Label,
   PolarGrid,
@@ -67,7 +73,7 @@ export function ProfileDashboard() {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808]">
-      <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 relative ">
+      <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
         <img
           src={userC?.pfp}
           alt="Profile Header"
@@ -94,7 +100,7 @@ export function ProfileDashboard() {
             <p className="text-[#909090]">Following</p>
           </div>
           <div className="text-center">
-            <p className="font-bold">555</p>
+            <p className="font-bold">{mergedData.length}</p>
             <p className="text-[#909090]">Predictions</p>
           </div>
         </div>
@@ -198,9 +204,44 @@ export function ProfileDashboard() {
       </div>
 
       <div className="flex flex-col md:w-2/4 bg-[#131313] rounded-[1.5rem] p-8">
-        <h2 className="text-white text-xl font-semibold">Active Predictions</h2>
-        <h2 className="text-[#909090] text-md font-[500] mb-3">15th, June </h2>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="w-full flex flex-row justify-between ">
+          <div>
+            <h2 className="text-white text-2xl font-semibold">
+              {user?.name}'s Predictions
+            </h2>
+            <h2 className="text-[#909090] text-md font-[500] mb-3">
+              Active Predictions{" "}
+            </h2>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="px-2 p-4 h-8 bg-[#181818] flex justify-center items-center rounded-full">
+                <SlidersHorizontal
+                  className="h-5 w-5"
+                  color="white"
+                  strokeWidth={2.8}
+                />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-[#303030]/60 mr-2 mt-2 text-white z-20 rounded-md backdrop-blur-lg border-2 w-full border-[#323232]">
+              <DropdownMenuGroup className="p-1">
+                <DropdownMenuItem className="p-1">
+                  All Predictions
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-[#404040]" />
+                <DropdownMenuItem className="p-1">
+                  Correct Predictions
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-[#404040]" />
+                <DropdownMenuItem className="p-1">
+                  Created Predictions
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        <div className="grid grid-cols-3 gap-0">
           {mergedData.map((item, index) => (
             <BetModal
               key={`predicted-${item.id}-${item.option}`}
@@ -280,6 +321,15 @@ export function ProfileDashboard() {
 
 import React, { useMemo } from "react";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
+import {
+  DropdownMenu,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
@@ -296,20 +346,20 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
     <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
       <div className="mb-4">
         <div className="flex items-center mb-4">
-          <div className="bg-gray-600 h-24 w-24 rounded-lg"></div>
+          <div className="bg-[#171717] h-24 w-24 rounded-lg"></div>
           <div className="text-white">
             <div className="ml-4 -space-y-1">
-              <p className="text-[#909090] text-[0.7rem]">Total Boost</p>
-              <h2 className="text-2xl font-bold ">$17.56</h2>
+              <p className="text-[#909090] text-[0.7rem]">Total locked</p>
+              <h2 className="text-xl font-bold ">$17.56</h2>
             </div>
             <div className="flex justify-between space-x-3 ml-4 text-sm mt-1">
-              <div className="-space-y-1">
-                <p className="text-[#909090] text-[0.7rem]">Fees earned</p>
-                <p className="font-bold">$00.00</p>
+              <div className="-space-y-1 mr-2">
+                <p className="text-[#909090] text-[0.7rem] ">Fees earned</p>
+                <p className="font-bold text-[1rem]">$00.00</p>
               </div>
-              <div className="text-right -space-y-1">
+              <div className=" -space-y-1">
                 <p className="text-[#909090] text-[0.7rem]">Cred earned</p>
-                <p className="font-bold">230 Cred</p>
+                <p className="font-bold text-[1rem]">230 Cred</p>
               </div>
             </div>
           </div>
