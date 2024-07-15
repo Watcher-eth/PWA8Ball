@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
+  AlignLeft,
   ArrowLeftRight,
   Clock,
   Lightbulb,
@@ -13,8 +14,27 @@ import {
 import { AnimatedChart } from "./AnimatedChart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
+import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { chartConfig } from "./DesktopChart";
+import { CashoutOverview } from "@/components/Predictions/Cashout/overview";
+import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution";
+import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
 const timeframes = ["1H", "1D", "1W", "1M"];
-
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
 const MyBetModal = (props: {
   title: string;
   image: string;
@@ -31,6 +51,7 @@ const MyBetModal = (props: {
   option?: number;
   optionNumber?: number;
   isExternal?: boolean;
+  isDesktop?: boolean;
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
@@ -74,16 +95,16 @@ const MyBetModal = (props: {
       style={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "rgba(12,12,12, 1)",
-        width: "100vw",
+        backgroundColor: props?.isDesktop ? "transparent" : "rgba(12,12,12, 1)",
         alignSelf: "center",
         paddingBottom: 30,
         gap: 2,
-        padding: 15,
+        padding: props?.isDesktop ? 5 : 15,
         paddingTop: 10,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
       }}
+      className="w-full"
     >
       <div
         style={{
@@ -123,18 +144,6 @@ const MyBetModal = (props: {
             alt="Market image"
           />
         </motion.div>
-        <motion.div
-          onClick={() => props.onClose()}
-          style={{
-            padding: "8.5px 6px",
-            borderRadius: 17,
-            overflow: "hidden",
-            backgroundColor: "#1C1C1C",
-            alignSelf: "flex-start",
-          }}
-        >
-          <X color={"#585858"} strokeWidth={5} height={18} />
-        </motion.div>
       </div>
       <div
         style={{
@@ -159,7 +168,7 @@ const MyBetModal = (props: {
               ? prices[prices.length - 1].value / 10000
               : 100 - props.price
             : props.price / 10000}
-          % {props.options[props?.option === 1 ? 0 : 1].name}
+          % {props.options[props?.option === 1 ? 0 : 1]?.name}
         </span>
         <span
           style={{
@@ -209,11 +218,135 @@ const MyBetModal = (props: {
         </span>
       </div>
       {prices ? (
-        <div style={{ height: "34.2vh" }}>
-          <AnimatedChart prices={currentPrices} option={props.optionNumber} />
+        <div>
+          <ChartContainer className="h-[23vh] w-full my-4" config={chartConfig}>
+            <AreaChart
+              accessibilityLayer
+              data={chartData}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <defs>
+                <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-desktop)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-desktop)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-mobile)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-mobile)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
+              <Area
+                dataKey="mobile"
+                type="natural"
+                fill="url(#fillMobile)"
+                fillOpacity={0.4}
+                stroke="var(--color-mobile)"
+                stackId="a"
+              />
+              <Area
+                dataKey="desktop"
+                type="natural"
+                fill="url(#fillDesktop)"
+                fillOpacity={0.4}
+                stroke="var(--color-desktop)"
+                stackId="a"
+              />
+            </AreaChart>
+          </ChartContainer>
         </div>
       ) : (
-        <div style={{ padding: 10 }}></div>
+        <div>
+          <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
+            <AreaChart
+              accessibilityLayer
+              data={chartData}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <defs>
+                <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-desktop)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-desktop)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-mobile)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-mobile)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
+              <Area
+                dataKey="mobile"
+                type="natural"
+                fill="url(#fillMobile)"
+                fillOpacity={0.4}
+                stroke="var(--color-mobile)"
+                stackId="a"
+              />
+              <Area
+                dataKey="desktop"
+                type="natural"
+                fill="url(#fillDesktop)"
+                fillOpacity={0.4}
+                stroke="var(--color-desktop)"
+                stackId="a"
+              />
+            </AreaChart>
+          </ChartContainer>
+        </div>
       )}
       <div
         style={{
@@ -375,7 +508,7 @@ const MyBetModal = (props: {
                 fontWeight: 600,
               }}
             >
-              {props.options[props?.option === 1 ? 0 : 1].name}
+              {props.options[props?.option === 1 ? 0 : 1]?.name}
             </span>
           </div>
           <div
@@ -420,8 +553,8 @@ const MyBetModal = (props: {
           marginBottom: 10,
           alignSelf: "center",
           justifyContent: "space-between",
-          width: "100%",
         }}
+        className="w-full space-x-4"
       >
         <motion.div
           onClick={() => {
@@ -437,13 +570,13 @@ const MyBetModal = (props: {
             padding: "10px 10px",
             overflow: "hidden",
             backgroundColor: "#1D1D1D",
-            width: "44vw",
             alignItems: "center",
             justifyContent: "center",
             display: "flex",
             flexDirection: "row",
             gap: 3,
           }}
+          className="w-1/2"
         >
           {props.name ? (
             <User2 height={20} color={"#D9D9D9"} strokeWidth={3.3} />
@@ -482,10 +615,10 @@ const MyBetModal = (props: {
             borderRadius: 25,
             overflow: "hidden",
             backgroundColor: "#D9D9D9",
-            width: "44vw",
             alignItems: "center",
             justifyContent: "center",
           }}
+          className="w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
           <span
@@ -517,7 +650,7 @@ const MyBetModal = (props: {
           gap: "4px",
         }}
       >
-        <Lightbulb color="white" strokeWidth={3} size={17} />
+        <AlignLeft color="white" strokeWidth={3} size={17} />
         <span
           style={{
             color: "white",
@@ -575,3 +708,117 @@ const MyBetModal = (props: {
 };
 
 export default MyBetModal;
+
+export function DesktopMyBetModal({
+  children,
+  title,
+  image,
+  price,
+  ownedAmount,
+  options,
+  percentage,
+  betId,
+  topic,
+  icon,
+  question,
+  name,
+  userId,
+  option,
+  optionNumber,
+  isExternal,
+}: {
+  children: React.ReactNode;
+  title: string;
+  image: string;
+  price: number;
+  ownedAmount: number;
+  options: string[];
+  percentage: number;
+  betId: string;
+  topic: string;
+  icon: string;
+  question: string;
+  name?: string;
+  userId?: string;
+  option?: number;
+  optionNumber?: number;
+  isExternal?: boolean;
+}) {
+  const [step, setStep] = useState(1);
+
+  return (
+    <DesktopCardModal
+      cardClassName="w-full"
+      dialogContentClassName="w-[30vw]  min-w-[400px]"
+      cardContentClassName="w-[30vw] self-center  h-full min-w-[400px]"
+      dialogClassName="w-full"
+      content={
+        step === 1 ? (
+          <MyBetModal
+            title={title}
+            image={image}
+            price={price}
+            ownedAmount={ownedAmount}
+            options={options}
+            percentage={percentage}
+            betId={betId}
+            topic={topic}
+            icon={icon}
+            question={question}
+            name={name}
+            userId={userId}
+            option={option}
+            optionNumber={optionNumber}
+            isExternal={isExternal}
+            isDesktop={true}
+            setStep={setStep}
+          />
+        ) : step === 2 ? (
+          <CashoutOverview
+            option={option}
+            options={options}
+            image={image}
+            question={question}
+            title={title}
+            changeStep={setStep}
+            id={betId}
+            odds={"20"}
+            totalPot={ownedAmount}
+            amount={ownedAmount}
+            isDesktop={true}
+          />
+        ) : step === 3 ? (
+          <CashOutWarningScreen
+            option={option}
+            options={options}
+            image={image}
+            question={question}
+            title={title}
+            changeStep={setStep}
+            id={betId}
+            multiplier={"2"}
+            points={ownedAmount}
+            amount={ownedAmount}
+            isDesktop={true}
+          />
+        ) : step === 4 ? (
+          <CashoutConfirmScreen
+            isDesktop={true}
+            option={option}
+            options={options}
+            image={image}
+            question={question}
+            title={title}
+            changeStep={setStep}
+            id={betId}
+            odds={"20"}
+            totalPot={ownedAmount}
+            amount={ownedAmount}
+          />
+        ) : null
+      }
+    >
+      {children}
+    </DesktopCardModal>
+  );
+}

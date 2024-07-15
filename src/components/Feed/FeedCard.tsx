@@ -5,13 +5,7 @@ import "../../styles/fonts.css";
 import { getMarketPath } from "@/utils/urls";
 import Link from "next/link";
 
-export function FeedCard({
-  image,
-  title,
-  description,
-  icon,
-  id,
-}) {
+export function FeedCard({ image, title, description, icon, id }) {
   return (
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>
@@ -24,17 +18,15 @@ export function FeedCard({
         />
       </Link>
     </div>
-
   );
 }
 
-
-function DisplayFeedCard({image, title, description, icon}) {
+function DisplayFeedCard({ image, title, description, icon }) {
   return (
     <div
       className={`
         flex items-start flex-col rounded-lg w-[88vw] max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
-        shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-101 active:scale-96 transition-all
+        shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-10 active:scale-98 transition-all
         cursor-pointer font-[Aeonik-Bold]
       `}
     >

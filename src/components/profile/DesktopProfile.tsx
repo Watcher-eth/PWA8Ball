@@ -66,6 +66,7 @@ export function ProfileDashboard() {
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
+  console.log("mergedData", mergedData);
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808]">
@@ -247,7 +248,22 @@ export function ProfileDashboard() {
 
         <div className="grid grid-cols-3 gap-0">
           {mergedData.map((item, index) => (
-            <Link href={`/p/${item.id}`}>
+            <DesktopMyBetModal
+              key={`predicted-${item.id}-${item.option}`}
+              title={item.title}
+              image={item.image}
+              price={item.amount}
+              ownedAmount={item.amount / 100000}
+              options={item.options}
+              percentage={item.percentage}
+              betId={item.market_id}
+              topic={item.market_id}
+              icon={item.icon}
+              question={item.question}
+              option={item.option}
+              optionNumber={item.optionNumber}
+              isExternal={item.isExternal}
+            >
               <div
                 key={index}
                 className={`
@@ -264,7 +280,7 @@ export function ProfileDashboard() {
                   </span>
                 </div>
               </div>
-            </Link>
+            </DesktopMyBetModal>
           ))}
         </div>
       </div>
@@ -282,7 +298,7 @@ export function ProfileDashboard() {
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
-                <Link href={`/p/${item.id}`}>
+                <Link href={`/p/${item.market_id}`}>
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
@@ -327,6 +343,7 @@ import {
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
 import Link from "next/link";
+import { DesktopMyBetModal } from "../Common/Charts/MyBetModal";
 
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
