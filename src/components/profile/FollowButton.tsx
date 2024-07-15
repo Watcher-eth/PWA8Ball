@@ -56,8 +56,9 @@ export const FollowButton = ({
         className={`
           flex flex-row
           mt-2 mb-2.5 p-2 !px-3
-          bg-[#1B1B1E] rounded-lg overflow-hidden items-center
+          rounded-lg overflow-hidden items-center
           hover:scale-105 active:scale-95
+          bg-[#1B1B1E]
         `}
       >
         <UserPlus color={"lightgray"} strokeWidth={3} height={15} />
@@ -75,10 +76,10 @@ export const FollowButton = ({
         className={`
           flex flex-row
           mt-2 mb-2.5 p-2 !px-3
-          bg-white rounded-lg overflow-hidden items-center
+          rounded-lg overflow-hidden items-center
           hover:scale-105 active:scale-95
+          bg-white
         `}
-
       >
         <div className="text-[14px] font-bold text-[#1B1B1E] self-center">
           Following
@@ -93,9 +94,10 @@ export const FollowButton = ({
         onClick={setEdit}
         className={`
           flex flex-row
-          mt-2 mb-2.5 p-2 !pl-3 !pr-3
-          bg-[#1B1B1E] rounded-lg overflow-hidden items-center
+          mt-2 mb-2.5 p-2 !px-3
+          rounded-lg overflow-hidden items-center
           hover:scale-105 active:scale-95
+          bg-[#1B1B1E]
         `}
       >
         <PenBox color={"lightgray"} strokeWidth={3} height={14} />
