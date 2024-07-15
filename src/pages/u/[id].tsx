@@ -131,7 +131,7 @@ export default function ProfilePage({ userId }: { userId: string }) {
 }
 
 
-function SocialsSection({ twitter, farcaster }) {
+export function SocialsSection({ twitter, farcaster }) {
   let username
   let icon
   if (twitter) {

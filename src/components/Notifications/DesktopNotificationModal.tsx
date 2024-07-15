@@ -4,6 +4,7 @@ import { useGetNotificationsForUser } from "@/supabase/queries/notifications/use
 import { NotificationCard } from "./UserNotifications";
 import { NotificationsPlaceholder } from "../Common/Placeholders/NewPlaceholders";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 export function DesktopNotificationModal({
   children,
@@ -17,7 +18,8 @@ export function DesktopNotificationModal({
     isLoading,
     error,
   } = useGetNotificationsForUser(userId);
-
+  const { user } = useUserStore();
+  console.log("notifs", notifications);
   return (
     <DesktopCardModal
       title="Notifications"
@@ -34,7 +36,7 @@ export function DesktopNotificationModal({
                 key={item.id}
                 index={index}
                 type={item.type}
-                user={item.users}
+                user={item?.users}
                 message={item.head}
                 image={item.image}
                 comment={item.comment}

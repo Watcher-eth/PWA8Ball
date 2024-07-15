@@ -54,16 +54,16 @@ export const NotificationCard = ({
           {type === "like" && (
             <>
               <div className="flex items-baseline">
-                <span className="font-bold text-white text-lg">
-                  {user && user.name}
+                <span className="font-semibold text-white  mr-[0.3rem]">
+                  {user && user.name}{" "}
                 </span>
                 <span className="text-white text-base">
                   {" "}
                   liked your comment
                 </span>
               </div>
-              <p className="text-[#777] text-base line-clamp-2">
-                {comment.content}
+              <p className="text-[#909090] text-base line-clamp-1">
+                {comment?.content}
               </p>
             </>
           )}

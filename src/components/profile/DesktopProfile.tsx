@@ -1,0 +1,345 @@
+// @ts-nocheck
+
+import { BarChart, Stars, TrendingUp } from "lucide-react";
+import {
+  Label,
+  PolarGrid,
+  PolarRadiusAxis,
+  RadialBar,
+  RadialBarChart,
+} from "recharts";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { SocialsSection } from "@/pages/u/[id]";
+import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
+import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
+import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
+import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
+import { BetModal } from "../Modals/PredictionPositionModal";
+
+const chartData = [
+  { category: "GTA 6", percentage: 28, fill: "#FF6600" },
+  { category: "US Elections", percentage: 42, fill: "#1E90FF" },
+];
+
+const chartConfig = {
+  percentage: {
+    label: "Percentage",
+  },
+  GTA6: {
+    label: "GTA 6",
+    color: "#FF6600",
+  },
+  TaylorSwift: {
+    label: "Taylor Swift",
+    color: "#FF1493",
+  },
+} satisfies ChartConfig;
+
+export function ProfileDashboard() {
+  const { user } = useUserStore();
+  const id = "did:privy:clxs70vmm00nffbmgbdew6h27";
+  const { data: totalFollowers } = useGetTotalFollowers(id);
+  const { data: userC, isLoading } = useGetUserByExternalAuthId(id);
+  const {
+    data: ordersData,
+    isLoading: isOrdersLoading,
+    refetch: refetchOrders,
+  } = useGetOrdersForUser(userC?.walletaddress);
+
+  const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
+  const mergedData = [
+    ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
+  ];
+
+  return (
+    <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808]">
+      <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 relative ">
+        <img
+          src={userC?.pfp}
+          alt="Profile Header"
+          className="w-full h-10 absolute top-0 left-0 rounded-t-[1.5rem] right-0 object-cover"
+        />
+        <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] bg-gradient-to-b from-transparent via-[#131313]/80 to-[#131313]" />
+        <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] backdrop-blur-lg bg-opacity-50" />
+        <div className="flex flex-col items-center mb-4 mt-6 relative">
+          <img
+            src={userC?.pfp}
+            alt="Profile"
+            className="rounded-full h-24 w-24 mb-2"
+          />
+          <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+          <SocialsSection {...userC?.socials} />
+        </div>
+        <div className="flex justify-between text-white mb-4 px-2">
+          <div className="text-center">
+            <p className="font-bold">{totalFollowers}</p>
+            <p className="text-[#909090]">Followers</p>
+          </div>
+          <div className="text-center">
+            <p className="font-bold">555</p>
+            <p className="text-[#909090]">Following</p>
+          </div>
+          <div className="text-center">
+            <p className="font-bold">555</p>
+            <p className="text-[#909090]">Predictions</p>
+          </div>
+        </div>
+        <div className="flex justify-between mb-4">
+          <div className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md">
+            Follow
+          </div>
+          <div className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md">
+            Edit
+          </div>
+        </div>
+        <div>
+          <Card className="bg-[transparent]  border-1 border-[#212121]">
+            <CardHeader className="items-center pb-0">
+              <CardTitle className="text-white">
+                {userC?.name}'s Accuracy
+              </CardTitle>
+              <CardDescription className="text-gray-400">
+                15th July
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1  pb-0">
+              <ChartContainer
+                config={chartConfig}
+                className="mx-auto aspect-square  max-h-[250px]"
+              >
+                <RadialBarChart
+                  data={chartData}
+                  startAngle={0}
+                  endAngle={360}
+                  innerRadius={83}
+                  outerRadius={110}
+                >
+                  <PolarGrid
+                    gridType="circle"
+                    radialLines={false}
+                    stroke="none"
+                    className="first:fill-muted last:fill-[#151515]"
+                    polarRadius={[50, 70, 90]}
+                  />
+                  <RadialBar
+                    dataKey="percentage"
+                    background
+                    cornerRadius={10}
+                  />
+                  <PolarRadiusAxis
+                    className="bg-[transparent]"
+                    tick={false}
+                    tickLine={false}
+                    axisLine={false}
+                  >
+                    <Label
+                      className="bg-[transparent]"
+                      content={({ viewBox }) => {
+                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                          const totalPercentage = chartData.reduce(
+                            (sum, entry) => sum + entry.percentage,
+                            0
+                          );
+                          return (
+                            <text
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              textAnchor="middle"
+                              dominantBaseline="middle"
+                            >
+                              <tspan
+                                x={viewBox.cx}
+                                y={viewBox.cy}
+                                className="fill-white text-4xl font-bold"
+                              >
+                                {totalPercentage}%
+                              </tspan>
+                              <tspan
+                                x={viewBox.cx}
+                                y={(viewBox.cy || 0) + 24}
+                                className="fill-gray-400"
+                              >
+                                Accuracy
+                              </tspan>
+                            </text>
+                          );
+                        }
+                      }}
+                    />
+                  </PolarRadiusAxis>
+                </RadialBarChart>
+              </ChartContainer>
+            </CardContent>
+            <CardFooter className="flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                Trending up by 5.2% this month{" "}
+                <TrendingUp className="h-4 w-4 text-white" />
+              </div>
+              <div className="leading-none text-gray-400">
+                Showing accuracy for the last 6 months
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:w-2/4 bg-[#131313] rounded-[1.5rem] p-8">
+        <h2 className="text-white text-xl font-semibold">Active Predictions</h2>
+        <h2 className="text-[#909090] text-md font-[500] mb-3">15th, June </h2>
+        <div className="grid grid-cols-3 gap-2">
+          {mergedData.map((item, index) => (
+            <BetModal
+              key={`predicted-${item.id}-${item.option}`}
+              title={item.title}
+              image={item.image}
+              price={item.amount}
+              ownedAmount={item.amount / 100000}
+              options={item.options}
+              percentage={item.percentage}
+              betId={item.market_id}
+              topic={item.market_id}
+              icon={item.icon}
+              question={item.question}
+              option={item.option}
+              optionNumber={item.optionNumber}
+              isExternal={item.isExternal}
+            >
+              <div
+                key={index}
+                className={`
+                relative size-[20vh] bg-cover bg-center rounded-lg shadow-lg
+                active:scale-99 hover:scale-101
+              `}
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
+
+                <div className="absolute bottom-0   p-4 text-white">
+                  <span className="bg-green-500/70 backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
+                    {item.type === "predicted" ? "Active" : "Correct"}
+                  </span>
+                </div>
+              </div>
+            </BetModal>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col md:w-1/4  ">
+        <div className="mb-4 bg-[#131313] rounded-lg p-5 pb-4 ">
+          <h2 className="text-white text-xl font-bold">Resolved Predictions</h2>
+          <h2 className="text-[#909090] text-sm">
+            2 Predictions ready to redeem
+          </h2>
+          <Stars
+            className="absolute top-10 right-10 transform rotate-12	 text-white"
+            strokeWidth={3}
+          />
+          {mergedData?.map((item, index) => {
+            if (index < 3)
+              return (
+                <div className="rounded-lg h-14 mt-1 flex flex-row items-center">
+                  <img
+                    className="h-11 object-cover w-11 rounded-md "
+                    src={item?.image}
+                  />
+                  <div className="flex flex-col ml-3 -space-y-[0.1rem]">
+                    <div className="text-[0.85rem] text-[#909090]">
+                      You predicted{" "}
+                      {item?.option === 1
+                        ? item.options[0].name
+                        : item.options[1].name}
+                    </div>
+                    <div className="text-[1rem] line-clamp-1 text-white text-semibold">
+                      {item?.question}
+                    </div>
+                  </div>
+                </div>
+              );
+          })}
+        </div>
+        <DesktopUserBoostOverview address={userC?.walletaddress} />
+      </div>
+    </div>
+  );
+}
+
+import React, { useMemo } from "react";
+import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
+
+const DesktopUserBoostOverview = (props: { address: string }) => {
+  const {
+    data: positions,
+    isLoading,
+    refetch,
+  } = useGetLPForUser(props?.address);
+
+  const filteredPositions = useMemo(
+    () => positions?.filter((item) => item.amount > 0) || [],
+    [positions]
+  );
+  return (
+    <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
+      <div className="mb-4">
+        <div className="flex items-center mb-4">
+          <div className="bg-gray-600 h-24 w-24 rounded-lg"></div>
+          <div className="text-white">
+            <div className="ml-4 -space-y-1">
+              <p className="text-[#909090] text-[0.7rem]">Total Boost</p>
+              <h2 className="text-2xl font-bold ">$17.56</h2>
+            </div>
+            <div className="flex justify-between space-x-3 ml-4 text-sm mt-1">
+              <div className="-space-y-1">
+                <p className="text-[#909090] text-[0.7rem]">Fees earned</p>
+                <p className="font-bold">$00.00</p>
+              </div>
+              <div className="text-right -space-y-1">
+                <p className="text-[#909090] text-[0.7rem]">Cred earned</p>
+                <p className="font-bold">230 Cred</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 className="text-white flex flex-row items-center text-lg font-semibold mb-4">
+          <BarChart strokeWidth={2.8} className="h-[1.13rem] " color="white" />{" "}
+          Your active Boosts
+        </h3>
+        <div className="space-y-4">
+          {filteredPositions?.map((item, index) => {
+            return (
+              <div className="rounded-lg mt-2 flex items-center">
+                <img
+                  src={item?.image}
+                  className="h-11 object-cover w-11 rounded-md mr-3"
+                />
+
+                <div>
+                  <p className="text-[#909090] text-[0.84rem]">
+                    Boost amount ${(item.amount / 10 ** 6).toFixed(2)}
+                  </p>
+                  <p className="text-white text-[1rem] font-[500] line-clamp-1">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
