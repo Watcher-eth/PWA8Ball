@@ -46,7 +46,7 @@ export const NotificationCard = ({
         {type === "like" && (
           <img
             className="size-11 rounded-full mr-2.5"
-            src={user ? user.pfp : ""}
+            src={user?.pfp}
             alt="Profile"
           />
         )}
@@ -55,7 +55,7 @@ export const NotificationCard = ({
             <>
               <div className="flex items-baseline">
                 <span className="font-semibold text-white mr-1">
-                  {user && user.name}{" "}
+                  {user?.name}{" "}
                 </span>
                 <span className="text-white text-base">
                   {" "}
@@ -71,14 +71,14 @@ export const NotificationCard = ({
             <>
               <span className="font-bold text-white text-lg">{message}</span>
               <p className="text-[#777] text-base">
-                {user && user.name} started following you
+                {user?.name} started following you
               </p>
             </>
           )}
           {type === "reply" && (
             <>
               <span className="font-bold text-white text-lg">
-                {user && user.name} {message}
+                {user?.name} {message}
               </span>
               <p className="text-[#777] text-base line-clamp-2">
                 {comment && comment.content}
