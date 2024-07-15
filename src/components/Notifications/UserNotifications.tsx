@@ -45,7 +45,7 @@ export const NotificationCard = ({
       >
         {type === "like" && (
           <img
-            className="w-11 h-11 rounded-full mr-2.5"
+            className="size-11 rounded-full mr-2.5"
             src={user ? user.pfp : ""}
             alt="Profile"
           />
@@ -54,7 +54,7 @@ export const NotificationCard = ({
           {type === "like" && (
             <>
               <div className="flex items-baseline">
-                <span className="font-semibold text-white  mr-[0.3rem]">
+                <span className="font-semibold text-white mr-1">
                   {user && user.name}{" "}
                 </span>
                 <span className="text-white text-base">
@@ -116,26 +116,9 @@ export const NotificationsPage = ({ userId, isDesktop }) => {
   }
 
   if (!isDesktop)
-    return (
-      <div className="flex flex-col items-center w-screen p-5 pt-3.5 bg-[#101010]">
-        <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
-        <div className="w-full overflow-y-auto">
-          {notifications.map((item, index) => (
-            <NotificationCard
-              key={item.id}
-              index={index}
-              type={item.type}
-              user={item.users}
-              message={item.head}
-              image={item.image}
-              comment={item.comment}
-            />
-          ))}
-        </div>
-      </div>
-    );
 
-  if (isDesktop)
+
+  if (isDesktop) {
     return (
       <div className="flex flex-col items-center w-[22vw] p-5 pt-3.5 bg-[#171717] rounded-xl border-2 border-[#292929]">
         <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
@@ -154,4 +137,24 @@ export const NotificationsPage = ({ userId, isDesktop }) => {
         </div>
       </div>
     );
+  } else {
+    return (
+      <div className="flex flex-col items-center w-screen p-5 pt-3.5 bg-[#101010]">
+        <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
+        <div className="w-full overflow-y-auto">
+          {notifications.map((item, index) => (
+            <NotificationCard
+              key={item.id}
+              index={index}
+              type={item.type}
+              user={item.users}
+              message={item.head}
+              image={item.image}
+              comment={item.comment}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 };
