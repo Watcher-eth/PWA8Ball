@@ -37,11 +37,10 @@ export function DesktopMarketPage({ users, market, id }) {
               alt="CoverImage"
               src={market?.image}
             />
-            <div className="h-80 w-full bg-gradient-to-b from-transparent via-transparent to-transparent backdrop-blur-lg  absolute bottom-0" />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
+            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
             <InverseBleedOverlay>
               <img
-                className="h-[14vh] ml-3 absolute -bottom-12 object-cover w-[14vh] rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
+                className="size-28 md:size-32 lg:size-36 xl:size-40 ml-3 absolute -bottom-12 object-cover  rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
                 src={market?.image}
               />
             </InverseBleedOverlay>
