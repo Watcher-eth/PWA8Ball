@@ -3,7 +3,7 @@ import { Bell, DoorOpen, Search } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "../Search/DesktopSearchModal";
-import { DropdownProfilePopover } from "../profile/DesktopProfilePopover";
+import { DesktopProfilePopover } from "../profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
@@ -32,7 +32,7 @@ export function DesktopNavbar() {
           <NavIconButton IconComponent={Bell} />
         </DesktopNotificationModal>
         {user ? (
-          <DropdownProfilePopover>
+          <DesktopProfilePopover>
             <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
               <img
                 src={user.pfp}
@@ -40,7 +40,7 @@ export function DesktopNavbar() {
                 className="size-8 rounded-full"
               />
             </div>
-          </DropdownProfilePopover>
+          </DesktopProfilePopover>
         ) : (
           <DesktopOnboardingModal>
             <ConnectButton />

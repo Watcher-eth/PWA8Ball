@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 
-export function DropdownProfilePopover({ children }: { children: React.ReactNode }) {
+export function DesktopProfilePopover({ children }: { children: React.ReactNode }) {
   const { user } = useUserStore();
   return (
     <DropdownMenu>
