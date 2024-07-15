@@ -74,7 +74,7 @@ function RemoveLiquidityModal({
               <RemoveLPConfirmationScreen
                 title={title}
                 image={image}
-                amount={amount}
+                points={amount}
                 multiplier={multiplier}
                 setStep={setStep}
                 id={id}

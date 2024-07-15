@@ -22,12 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/pages/u/[id]";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
@@ -36,6 +31,7 @@ import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { BetModal } from "../Modals/PredictionPositionModal";
 
+import { motion } from "framer-motion";
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
   { category: "US Elections", percentage: 42, fill: "#1E90FF" },
@@ -105,12 +101,20 @@ export function ProfileDashboard() {
           </div>
         </div>
         <div className="flex justify-between mb-4">
-          <div className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md"
+          >
             Follow
-          </div>
-          <div className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md">
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md"
+          >
             Edit
-          </div>
+          </motion.div>
         </div>
         <div>
           <Card className="bg-[transparent]  border-1 border-[#212121]">
@@ -243,22 +247,7 @@ export function ProfileDashboard() {
 
         <div className="grid grid-cols-3 gap-0">
           {mergedData.map((item, index) => (
-            <BetModal
-              key={`predicted-${item.id}-${item.option}`}
-              title={item.title}
-              image={item.image}
-              price={item.amount}
-              ownedAmount={item.amount / 100000}
-              options={item.options}
-              percentage={item.percentage}
-              betId={item.market_id}
-              topic={item.market_id}
-              icon={item.icon}
-              question={item.question}
-              option={item.option}
-              optionNumber={item.optionNumber}
-              isExternal={item.isExternal}
-            >
+            <Link href={`/p/${item.id}`}>
               <div
                 key={index}
                 className={`
@@ -275,7 +264,7 @@ export function ProfileDashboard() {
                   </span>
                 </div>
               </div>
-            </BetModal>
+            </Link>
           ))}
         </div>
       </div>
@@ -293,23 +282,29 @@ export function ProfileDashboard() {
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
-                <div className="rounded-lg h-14 mt-1 flex flex-row items-center">
-                  <img
-                    className="h-11 object-cover w-11 rounded-md "
-                    src={item?.image}
-                  />
-                  <div className="flex flex-col ml-3 -space-y-[0.1rem]">
-                    <div className="text-[0.85rem] text-[#909090]">
-                      You predicted{" "}
-                      {item?.option === 1
-                        ? item.options[0].name
-                        : item.options[1].name}
+                <Link href={`/p/${item.id}`}>
+                  <motion.div
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="rounded-lg h-14 mt-1 flex flex-row items-center"
+                  >
+                    <img
+                      className="h-11 object-cover w-11 rounded-md "
+                      src={item?.image}
+                    />
+                    <div className="flex flex-col ml-3 -space-y-[0.1rem]">
+                      <div className="text-[0.85rem] text-[#909090]">
+                        You predicted{" "}
+                        {item?.option === 1
+                          ? item.options[0].name
+                          : item.options[1].name}
+                      </div>
+                      <div className="text-[1rem] line-clamp-1 text-white text-semibold">
+                        {item?.question}
+                      </div>
                     </div>
-                    <div className="text-[1rem] line-clamp-1 text-white text-semibold">
-                      {item?.question}
-                    </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </Link>
               );
           })}
         </div>
@@ -330,6 +325,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
+import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
+import Link from "next/link";
 
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
@@ -371,21 +368,32 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
         <div className="space-y-4">
           {filteredPositions?.map((item, index) => {
             return (
-              <div className="rounded-lg mt-2 flex items-center">
-                <img
-                  src={item?.image}
-                  className="h-11 object-cover w-11 rounded-md mr-3"
-                />
+              <DesktopLPModal
+                image={item?.image}
+                title={item?.title}
+                amount={item?.amount}
+                id={item?.id}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="rounded-lg mt-2 flex items-center"
+                >
+                  <img
+                    src={item?.image}
+                    className="h-11 object-cover w-11 rounded-md mr-3"
+                  />
 
-                <div>
-                  <p className="text-[#909090] text-[0.84rem]">
-                    Boost amount ${(item.amount / 10 ** 6).toFixed(2)}
-                  </p>
-                  <p className="text-white text-[1rem] font-[500] line-clamp-1">
-                    {item.title}
-                  </p>
-                </div>
-              </div>
+                  <div>
+                    <p className="text-[#909090] text-[0.84rem]">
+                      Boost amount ${(item.amount / 10 ** 6).toFixed(2)}
+                    </p>
+                    <p className="text-white text-[1rem] font-[500] line-clamp-1">
+                      {item.title}
+                    </p>
+                  </div>
+                </motion.div>
+              </DesktopLPModal>
             );
           })}
         </div>

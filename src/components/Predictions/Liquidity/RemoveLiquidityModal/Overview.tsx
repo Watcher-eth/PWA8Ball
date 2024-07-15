@@ -11,6 +11,7 @@ interface RemoveLPOverviewProps {
   amount: string;
   multiplier: string;
   totalPot: number;
+  isDesktop?: boolean;
 }
 
 export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
@@ -22,13 +23,13 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "93%",
-        backgroundColor: "#131313",
-        padding: "20px",
-        marginTop: "50px",
+        backgroundColor: props?.isDesktop ? "#080808" : "#131313",
+        padding: props?.isDesktop ? "10px" : "20px",
+        marginTop: props?.isDesktop ? "0px" : "50px",
         borderRadius: "30px",
         alignSelf: "center",
       }}
+      className="w-full "
     >
       <div
         style={{
@@ -36,8 +37,8 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          width: "100%",
         }}
+        className="w-full"
       >
         <div
           style={{
@@ -54,15 +55,17 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
               overflow: "hidden",
               marginRight: "5px",
             }}
+            className="oject-cover"
             src={props?.image}
             alt="Profile"
           />
           <span
             style={{
-              fontFamily: "AeonikBold",
+              fontWeight: "600",
               fontSize: "20px",
               color: "white",
             }}
+            className="ml-2"
           >
             {props?.title}
           </span>
@@ -82,24 +85,21 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
       </div>
       <div
         style={{
-          display: "flex",
           padding: "22px",
           borderRadius: "20px",
           backgroundColor: "#1C1C1C",
           alignItems: "center",
           justifyContent: "center",
           margin: "22px 0",
-          width: "101%",
         }}
+        className="w-full flex flex-col"
       >
-        <span
-          style={{ fontFamily: "AeonikBold", fontSize: "52px", color: "white" }}
-        >
+        <span style={{ fontWeight: "700", fontSize: "52px", color: "white" }}>
           ${(props?.totalPot * 1.09).toFixed(2)}
         </span>
         <span
           style={{
-            fontFamily: "AeonikBold",
+            fontWeight: "400",
             fontSize: "15px",
             color: "lightgray",
           }}
@@ -126,12 +126,12 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
             alignItems: "center",
             justifyContent: "space-between",
             margin: "5px 0",
-            width: "99%",
           }}
+          className="w-full"
         >
           <span
             style={{
-              fontFamily: "AeonikBold",
+              fontWeight: "400",
               fontSize: "17.5px",
               color: "lightgray",
             }}
@@ -140,7 +140,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           </span>
           <span
             style={{
-              fontFamily: "AeonikBold",
+              fontWeight: "400",
               fontSize: "20px",
               color: "white",
             }}
@@ -158,22 +158,21 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           marginBottom: "5px",
           marginTop: "10px",
         }}
+        className="w-full "
       >
         <motion.button
-          onClick={props.onClose}
           whileTap={{ scale: 0.95 }}
           style={{
             marginTop: "12px",
             display: "flex",
             flexDirection: "row",
             padding: "13px",
-            borderRadius: "24px",
             backgroundColor: "#1D1D1D",
-            width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             border: "none",
           }}
+          className="w-1/2 rounded-full"
         >
           <WalletCards color="#D9D9D9" strokeWidth={3} height={20} />
           <span
@@ -196,13 +195,12 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
             flexDirection: "row",
             marginLeft: "16px",
             padding: "11px",
-            borderRadius: "24px",
             backgroundColor: "#D9D9D9",
-            width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             border: "none",
           }}
+          className="w-1/2 rounded-full"
         >
           <ArrowDown color="black" strokeWidth={3} height={23} />
           <span

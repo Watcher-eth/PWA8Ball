@@ -8,7 +8,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-
+import { AnimatePresence, motion } from "framer-motion";
 export function DesktopCardModal({
   children,
   content,
@@ -53,7 +53,9 @@ export function DesktopCardModal({
             </CardHeader>
           )}
           <CardContent className={`p-6 rounded-2xl ${cardContentClassName}`}>
-            {content}
+            <motion.div layout transition={{ duration: 0.2 }}>
+              <AnimatePresence>{content}</AnimatePresence>
+            </motion.div>
           </CardContent>
         </Card>
       </DialogContent>

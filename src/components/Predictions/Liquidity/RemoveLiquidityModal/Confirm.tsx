@@ -21,11 +21,12 @@ interface RemoveLPConfirmationScreenProps {
   multiplier: number;
   points: number;
   id: number;
+  isDesktop?: boolean;
 }
 
-export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProps> = (
-  props
-) => {
+export const RemoveLPConfirmationScreen: React.FC<
+  RemoveLPConfirmationScreenProps
+> = (props) => {
   const { onClose } = props;
   const { smartAccountReady, smartAccountClient, smartAccountAddress } =
     useSmartAccount();
@@ -33,8 +34,6 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
 
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-
-  const width = window.innerWidth;
 
   const { mutate: removeLP, isSuccess } = useRemoveLp();
 
@@ -79,19 +78,19 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "93%",
-        backgroundColor: "#131313",
-        marginTop: "50px",
-        padding: "20px",
+        backgroundColor: props?.isDesktop ? "#080808" : "#131313",
+        marginTop: props?.isDesktop ? "0px" : "50px",
+        padding: props?.isDesktop ? "10px" : "20px",
         borderRadius: "30px",
       }}
+      className="w-full"
     >
       <motion.div
         style={{
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          backgroundColor: "#131313",
+          backgroundColor: props?.isDesktop ? "#080808" : "#131313",
           borderRadius: "20px",
         }}
       >
@@ -106,7 +105,9 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
         >
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
           <motion.button
-            onClick={onClose}
+            onClick={() => {
+              props?.isDesktop ? props?.setStep(1) : onClose();
+            }}
             whileTap={{ scale: 0.95 }}
             style={{
               padding: "8.5px 6px",
@@ -121,9 +122,10 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
         <span
           style={{
             fontSize: "21px",
-            fontFamily: "AeonikBold",
+            lineHeight: "23px",
             color: "white",
             marginTop: "14px",
+            fontWeight: "600",
           }}
         >
           Are you sure you want to withdraw your Boost?
@@ -131,9 +133,9 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
         <span
           style={{
             fontSize: "15px",
-            fontFamily: "AeonikBold",
             color: "lightgray",
             marginTop: "8px",
+            fontWeight: 400,
           }}
         >
           If you keep your boost till after the market resolves you earn 3x
@@ -152,7 +154,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
           <span
             style={{
               fontSize: "18px",
-              fontFamily: "AeonikBold",
+              fontWeight: "600",
               color: "white",
               marginLeft: "4px",
             }}
@@ -182,8 +184,8 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             <span
               style={{
                 fontSize: "16.5px",
-                fontFamily: "AeonikBold",
                 color: "lightgray",
+                fontWeight: "400",
               }}
             >
               Now
@@ -191,11 +193,11 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             <span
               style={{
                 fontSize: "16.5px",
-                fontFamily: "AeonikBold",
                 color: "lightgray",
+                fontWeight: "400",
               }}
             >
-              {props.points.toFixed(0)} $Cred
+              {(props.points / 10 ** 5).toFixed(0)} $Cred
             </span>
           </div>
           <div
@@ -209,8 +211,8 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             <span
               style={{
                 fontSize: "20px",
-                fontFamily: "AeonikBold",
                 color: "white",
+                fontWeight: "500",
               }}
             >
               After Resolution
@@ -218,11 +220,11 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             <span
               style={{
                 fontSize: "20px",
-                fontFamily: "AeonikBold",
                 color: "white",
+                fontWeight: "500",
               }}
             >
-              {(props.points * 3).toFixed(0)} $Cred
+              {(props.points / 10 ** 5).toFixed(0)} $Cred
             </span>
           </div>
         </div>
@@ -236,6 +238,7 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
           marginBottom: "0",
           marginTop: "22px",
         }}
+        className="w-full"
       >
         <motion.button
           onClick={() => {
@@ -247,11 +250,11 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             padding: "13px",
             borderRadius: "24px",
             backgroundColor: "#1C1C1C",
-            width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             border: "none",
           }}
+          className="w-1/2"
         >
           <span
             style={{
@@ -276,11 +279,11 @@ export const RemoveLPConfirmationScreen: React.FC<RemoveLPConfirmationScreenProp
             padding: "11px",
             borderRadius: "24px",
             backgroundColor: "#D9D9D9",
-            width: width / 2.5,
             alignItems: "center",
             justifyContent: "center",
             border: "none",
           }}
+          className="w-1/2"
         >
           {loading ? (
             <motion.div

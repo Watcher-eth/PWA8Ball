@@ -1,28 +1,48 @@
 // @ts-nocheck
 
-import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
-import { NotificationCard } from "./UserNotifications";
-import { NotificationsPlaceholder } from "../Common/Placeholders/NewPlaceholders";
-import { DesktopCardModal } from "../Modals/DesktopCardModal";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { useState } from "react";
+import { DesktopCardModal } from "../DesktopCardModal";
+import { Overview } from "@/components/Predictions/Liquidity/RemoveLiquidityModal/Overview";
+import { RemoveLPConfirmationScreen } from "@/components/Predictions/Liquidity/RemoveLiquidityModal/Confirm";
 
 export function DesktopLPModal({
   children,
-  userId,
+  id,
+  title,
+  image,
+  amount,
 }: {
   children: React.ReactNode;
-  userId: string;
+  id: string;
+  image: string;
+  title: string;
+  amount: string;
 }) {
+  const [step, setStep] = useState<number>(2);
   return (
     <DesktopCardModal
-      title="Notifications"
-      subtitle="You have 3 unread messages."
-      cardClassName="w-[99%]"
-      dialogContentClassName="w-full"
-      cardContentClassName="w-full min-h-[50vh]"
-      dialogClassName="w-[99%]"
+      dialogContentClassName="w-[25vw]"
+      cardContentClassName="w-[25vw] min-h-[50vh]"
       content={
-    
+        step === 1 ? (
+          <Overview
+            title={title}
+            image={image}
+            amount={amount}
+            setStep={setStep}
+            isDesktop={true}
+            totalPot={amount / 10 ** 6}
+          />
+        ) : (
+          <RemoveLPConfirmationScreen
+            title={title}
+            image={image}
+            points={amount}
+            setStep={setStep}
+            id={id}
+            isDesktop={true}
+          />
+        )
       }
     >
       {children}
