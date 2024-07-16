@@ -91,6 +91,7 @@ function MobileMarketContent({
             question={description}
             topic={topic}
             options={[optionB, optionA]}
+            isDesktop={false}
           >
             <Share
               size={33}
@@ -168,7 +169,7 @@ function MobileMarketContent({
           </div>
         </BettersOverviewModal>
       </div>
-      <div className="h-2 w-full color-gray-300 bg-[gray] mx-5 rounded-full z-20" />
+      <div className="h-2 w-full text-gray-300 bg-[gray] mx-5 rounded-full z-20" />
 
       <div
         className={`
@@ -180,7 +181,7 @@ function MobileMarketContent({
       >
         {description}
       </div>
-      <div className="flex items-center w-[88vw] mt-[-4] justify-between mx-2 z-[2]">
+      <div className="flex items-center justify-around mx-2 z-[2] gap-2">
         <PredictModal
           handleOpen={handleOpen}
           image={image}

@@ -128,14 +128,14 @@ export function PredictModal(props: {
   const amount = useVotingStore((state) => state.amount);
   const { user } = useUserStore();
   return (
-    <div>
+    <div className="w-full flex-grow ">
       <Drawer>
-        <DrawerTrigger>
+        <DrawerTrigger className="w-full">
           <motion.div
             onClick={() => {
               if (!user?.walletaddress) props.handleOpen();
             }}
-            className="mt-4 hover:scale-110 active:scale-93 transition-all"
+            className="mt-4 hover:scale-110 active:scale-93 transition-all w-full"
           >
             <OutcomeButton
               isDesktop={props?.isDesktop}

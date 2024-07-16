@@ -11,6 +11,7 @@ export function ShareModal({
   topic,
   question,
   options,
+  isDesktop
 }: {
   children: React.ReactNode;
   id: string;
@@ -19,6 +20,7 @@ export function ShareModal({
   topic: string;
   question: string;
   options: string;
+  isDesktop: boolean;
 }) {
   const handleShare = async () => {
     if (navigator.share) {

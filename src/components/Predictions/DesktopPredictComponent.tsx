@@ -29,6 +29,7 @@ import { DesktopLoadingPrediction } from "../Modals/PredictModal/SuccessScreen";
 import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
+import { OutcomeButton } from "../buttons/OutcomeButton";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -43,8 +44,12 @@ export function DesktopPredictComponent(props: {
   const setStake = useVotingStore((state) => state.setState);
 
   return (
-    <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white h-auto">
-      <motion.div layout transition={{ duration: 0.2 }} className="relative">
+    <div className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-white/10 text-white h-auto !bg-transparent ">
+      <motion.div
+        layout
+        transition={{ duration: 0.2 }}
+        className="relative bg-transparent"
+      >
         <AnimatePresence>
           {(step === 0 || step === 4) && (
             <div>
@@ -68,27 +73,37 @@ export function DesktopPredictComponent(props: {
           )}
 
           {step === 0 && (
-            <div className="flex flex-col w-full p-4 px-6">
+            <div className="flex flex-col w-full py-4 md:px-4 px-6 gap-4">
               <Input
                 onChange={(e) => setAmount(Number(e.target.value))}
                 type="numeric"
                 placeholder="$0.00"
-                className="w-full bg-[#121212] rounded-md py-6 text-md border-none"
+                className={`
+                    w-full  rounded-md py-6 text-md border-none
+                    bg-slate-400/10 hover:bg-slate-400/20
+                    focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
+                  `}
               />
-              <div className="flex flex-row items-center justify-around gap-3 mb-1 mt-2.5">
-                <OutcomeSelectButton
-                  amount={amount}
-                  optionNum={1}
-                  name={props.options[1].name}
-                  value={props.options[1].value}
-                  className="bg-rose-600 hover:!bg-rose-700 active:bg-rose-800"
+              <div className="flex items-center justify-between z-[2] gap-3 mt-2.5">
+                <OutcomeButton
+                  isDesktop={true}
+                  text={props?.options[1].name}
+                  multiplier={props?.options[1].value / 100}
+                  option={0}
+                  onClick={() => {
+                    setStake({ amount, option: 1 });
+                    setStep(2);
+                  }}
                 />
-                <OutcomeSelectButton
-                  amount={amount}
-                  optionNum={2}
-                  name={props.options[0].name}
-                  value={props.options[0].value}
-                  className="bg-blue-600 hover:!bg-blue-700 active:bg-blue-800"
+                <OutcomeButton
+                  isDesktop={true}
+                  text={props?.options[0].name}
+                  multiplier={props?.options[0].value / 100}
+                  option={1}
+                  onClick={() => {
+                    setStake({ amount, option: 2 });
+                    setStep(2);
+                  }}
                 />
               </div>
             </div>
@@ -222,43 +237,10 @@ export function DesktopPredictComponent(props: {
           )}
         </AnimatePresence>
       </motion.div>
-    </Card>
+    </div>
   );
 }
 
-function OutcomeSelectButton({ amount, optionNum, name, value, className }) {
-  return (
-    <motion.div
-      onClick={() => {
-        setStake({ amount, option: optionNum });
-        setStep(2);
-      }}
-      className={`
-        mt-3 p-2 w-1/2
-        flex flex-row rounded-[28px]
-        overflow-hidden ${className}
-        items-center justify-center cursor-pointer
-      `}
-    >
-      <div
-        className={`
-          font-semibold"
-          ${name?.length < 6 ? "text-[20px]" : "text-[18px]" }
-        `}
-      >
-        {name}
-      </div>
-      <div
-        className={`
-          text-[0.81rem] font-medium text-white/80
-          self-end mb-0.5 ml-1
-        `}
-      >
-        {value / 100}%
-      </div>
-    </motion.div>
-  );
-}
 
 function DesktopConfirmPrediction(props: {
   setStep: (step: number) => void;

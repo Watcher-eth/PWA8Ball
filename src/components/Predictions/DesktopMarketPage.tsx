@@ -50,7 +50,7 @@ export function DesktopMarketPage({ users, market, id }) {
       <div className="w-full h-full overflow-y-auto flex flex-col">
         <div className="">
           <Grid gap={4} cols={{ xs: 8 }}>
-            <Col xs={5}>
+            <Col xs={4} lg={5}>
               <div className="flex flex-col mt-[2.5rem] z-10">
                 <div
                   style={{
@@ -136,8 +136,8 @@ export function DesktopMarketPage({ users, market, id }) {
                 />
               </div>
             </Col>
-            <Col xs={3}>
-              <div className="flex flex-col items-center pt-3 px-4 pb-1 rounded-[1.5rem] ">
+            <Col xs={4} lg={3}>
+              <div className="pt-3 xl:px-4 pb-1 rounded-[1.5rem] ">
                 <DesktopPredictComponent
                   id={market?.id}
                   question={market?.question}
