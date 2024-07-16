@@ -1,151 +1,58 @@
 // @ts-nocheck
-
-import React from "react";
 import { motion } from "framer-motion";
-import RemoveLiquidityModal from "./RemoveLiquidityModal/index";
-interface LiquidityPositionProps {
-  image: string;
-  title: string;
-  amount: number;
-  id: number;
-  onChange: () => void;
-}
+import { RemoveLiquidityModal } from "./RemoveLiquidityModal";
 
-export const LiquidityPosition: React.FC<LiquidityPositionProps> = ({
+export function LiquidityPosition({
   image,
   title,
   amount,
   id,
   onChange,
-}) => {
+}:{
+  image: string;
+  title: string;
+  amount: number;
+  id: number;
+  onChange: () => void;
+}) {
   return (
     <RemoveLiquidityModal title={title} id={id} image={image} amount={amount}>
-      <motion.div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "14px",
-          paddingTop: "12px",
-          paddingBottom: "12px",
-          borderRadius: "15px",
-          backgroundColor: "rgba(49, 49, 49, 0.78)",
-          marginBottom: "15px",
-          position: "relative",
-          cursor: "pointer",
-          overflow: "hidden", // Ensure no overflow beyond the parent container
-        }}
-      >
+      <motion.div className="flex flex-col p-3.5 pt-3 pb-3 rounded-[15px] bg-[rgba(49,49,49,0.78)] mb-[15px] relative cursor-pointer overflow-hidden">
         <img
-          style={{
-            height: "100%",
-            width: "100%",
-            borderRadius: "15px",
-            objectFit: "cover",
-            position: "absolute",
-            zIndex: 0,
-            filter: "blur(35px)",
-            transform: "scale(1.2)",
-          }}
+          className="h-full w-full rounded-[15px] object-cover absolute z-0 filter blur-[35px] scale-[1.2]"
           src={image}
           alt="background"
         />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "25px",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              style={{
-                fontSize: "18.5px",
-                color: "rgba(250, 250, 250, 0.9)",
-                fontFamily: "Aeonik-Bold",
-              }}
-            >
+        <div className="flex flex-row justify-between items-center mb-[25px] relative z-2">
+          <div className="flex flex-col">
+            <span className="text-[18.5px] text-[rgba(250,250,250,0.9)] font-['Aeonik-Bold']">
               {title}
             </span>
-            <span
-              style={{
-                fontSize: "14.5px",
-                color: "white",
-                fontFamily: "Aeonik-Regular",
-                marginTop: "0px",
-              }}
-            >
+            <span className="text-[14.5px] text-white font-['Aeonik-Regular'] mt-0">
               +{(amount / 11).toFixed(2)}$ Fees earned
             </span>
           </div>
           <img
-            style={{
-              height: "43px",
-              width: "43px",
-              borderRadius: "10px",
-              overflow: "hidden",
-              objectFit: "cover",
-            }}
+            className="h-[43px] w-[43px] rounded-[10px] overflow-hidden object-cover"
             src={image}
             alt="icon"
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <span
-              style={{
-                fontSize: "15px",
-                color: "white",
-                fontFamily: "Aeonik-Bold",
-                alignSelf: "flex-start",
-                marginTop: "5px",
-              }}
-            >
+        <div className="flex flex-row justify-between items-center relative z-2">
+          <div className="flex flex-row">
+            <span className="text-[15px] text-white font-['Aeonik-Bold'] self-start mt-[5px]">
               $
             </span>
-            <span
-              style={{
-                fontSize: "30px",
-                color: "white",
-                fontFamily: "Aeonik-Bold",
-              }}
-            >
+            <span className="text-[30px] text-white font-['Aeonik-Bold']">
               {(amount + amount / 11).toFixed(2)}
             </span>
           </div>
           <motion.button
             onClick={() => {}}
-            style={{
-              padding: "5.5px 10px",
-
-              borderRadius: "17px",
-              overflow: "hidden",
-              backgroundColor: "rgba(20, 20, 20, 0.2)",
-              border: "none",
-              cursor: "pointer",
-            }}
+            className="py-[5.5px] px-[10px] rounded-[17px] overflow-hidden bg-[rgba(20,20,20,0.2)] border-none cursor-pointer"
           >
-            <span
-              style={{
-                fontSize: "14px",
-                color: "white",
-                fontFamily: "Aeonik-Bold",
-                fontWeight: 400,
-              }}
-            >
+            <span className="text-[14px] text-white font-['Aeonik-Bold'] font-normal">
               Withdraw Boost
             </span>
           </motion.button>

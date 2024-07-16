@@ -17,7 +17,7 @@ export function UserLiquidityPage() {
   } = useGetLPForUser(user?.walletaddress);
 
 
-  const filteredPositions = positions?.filter((item) => item.amount > 0);
+  const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
 
   return (
     <div className="pt-16 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">

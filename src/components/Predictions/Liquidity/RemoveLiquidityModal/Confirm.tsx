@@ -13,7 +13,8 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { toast } from "sonner";
 
-interface RemoveLPConfirmationScreenProps {
+
+export function RemoveLPConfirmationScreen(props:{
   setStep: (num: number) => void;
   onClose: () => void;
   refetch: () => void;
@@ -22,18 +23,14 @@ interface RemoveLPConfirmationScreenProps {
   points: number;
   id: number;
   isDesktop?: boolean;
-}
-
-export const RemoveLPConfirmationScreen: React.FC<
-  RemoveLPConfirmationScreenProps
-> = (props) => {
+}) {
   const { onClose } = props;
   const { smartAccountReady, smartAccountClient, smartAccountAddress } =
     useSmartAccount();
   const { user: userCon } = useUserStore();
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const { mutate: removeLP, isSuccess } = useRemoveLp();
 

@@ -15,7 +15,6 @@ interface RemoveLPOverviewProps {
 }
 
 export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
-  const width = window.innerWidth;
 
   return (
     <div

@@ -15,7 +15,7 @@ import { Overview } from "./Overview";
 import { RemoveLPConfirmationScreen } from "./Confirm";
 
 
-function RemoveLiquidityModal({
+export function RemoveLiquidityModal({
   isOpen,
   onClose,
   image,
@@ -75,4 +75,4 @@ function RemoveLiquidityModal({
   );
 }
 
-export default RemoveLiquidityModal;
+
