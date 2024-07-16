@@ -14,15 +14,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Overview } from "./Overview";
 import { RemoveLPConfirmationScreen } from "./Confirm";
 
-interface RemoveLPProps {
-  children: ReactNode;
-  onClose;
-  image: string;
-  title: string;
-  amount;
-  multiplier;
-  id;
-}
 
 function RemoveLiquidityModal({
   isOpen,
