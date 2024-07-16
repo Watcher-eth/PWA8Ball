@@ -172,7 +172,7 @@ export const BetDetails = ({
   );
 };
 
-const BoostMarket = ({ Boost, handleBoost, isDesktop }) => {
+const BoostMarket = ({ handleBoost, isDesktop }) => {
   return (
     <div
       style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
