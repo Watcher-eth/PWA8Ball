@@ -1,18 +1,21 @@
-// useUserStore.ts
 import { create } from "zustand";
 import { IUser } from "@/supabase/types";
 
-
 interface ExtendedUser extends IUser {
   balance?: string;
+  walletType?: "smartwallet" | "eoa";
 }
 
 interface UserState {
-  user: ExtendedUser | null; // Add balance to User type
+  user: ExtendedUser | null;
   setUser: (user: ExtendedUser | null) => void;
+  setWalletType: (walletType: "smartwallet" | "eoa") => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({
-  user: null, // Initial user state is null
+  user: null,
   setUser: (user) => set({ user }),
+  setWalletType: (walletType) => set((state) => ({
+    user: state.user ? { ...state.user, walletType } : null,
+  })),
 }));

@@ -2,6 +2,8 @@
 import { Input } from "@/components/ui/Input";
 import { Instagram, Phone, Twitch, Twitter } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
+import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
@@ -12,9 +14,11 @@ const COINBASE_ICON_SRC =
 const WALLETCONNECT_ICON_SRC =
   "https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon";
 
-
-
-export function DesktopOnboardingModal({ children }: { children: React.ReactNode }) {
+export function DesktopOnboardingModal({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw]"
@@ -59,11 +63,11 @@ function DesktopOnboarding() {
           onClick={login}
         />
         <WalletOnboardButton
-          label="Coinbase"
+          label="coinbase"
           iconSrc={COINBASE_ICON_SRC}
           onClick={login}
         />
-        <WalletOnboardButton
+        <CustomConnectButton
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
           onClick={login}
@@ -97,13 +101,12 @@ function DesktopOnboarding() {
   );
 }
 
-
 function SocialOnboardButton({
   IconComponent,
-  onClick
+  onClick,
 }: {
-  IconComponent: React.ReactNode
-  onClick: () => void
+  IconComponent: React.ReactNode;
+  onClick: () => void;
 }) {
   return (
     <div
@@ -130,21 +133,99 @@ function WalletOnboardButton({
   onClick: () => void;
 }) {
   return (
-    <div
-      onClick={onClick}
-      className={`
-        w-full mb-4
-        hover:scale-101 active:scale-98 transition-all
-        cursor-pointer
-      `}
-    >
-      <div
-        variant="outline"
-        className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
-      >
-        <img src={iconSrc} className="size-5 mr-2" />
-        {label}
-      </div>
-    </div>
+    <WalletButton.Custom  wallet={label}>
+      {({ ready, connect }) => {
+        return (
+          <button
+            type="button"
+            disabled={!ready}
+            onClick={connect}
+            className={`
+         w-full mb-4
+          hover:scale-101 active:scale-98 transition-all
+         cursor-pointer 
+       `}
+          >
+            <div
+              variant="outline"
+              className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
+            >
+              <img src={iconSrc} className="size-5 mr-2" />
+              {label === "coinbase" ? "Coinbase Smart Wallet" : label}
+            </div>
+          </button>
+        );
+      }}
+    </WalletButton.Custom>
   );
 }
+
+export const CustomConnectButton = ({
+  label,
+  iconSrc,
+}: {
+  label: string;
+  iconSrc: string;
+}) => {
+  const { openConnectModal } = useConnectModal();
+
+  return (
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        authenticationStatus,
+        mounted,
+      }) => {
+        // Note: If your app doesn't use authentication, you
+        // can remove all 'authenticationStatus' checks
+        const ready = mounted && authenticationStatus !== "loading";
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus || authenticationStatus === "authenticated");
+        return (
+          <div
+            onClick={openConnectModal}
+            {...(!ready && {
+              "aria-hidden": true,
+              style: {
+                opacity: 0,
+                pointerEvents: "none",
+                userSelect: "none",
+              },
+            })}
+            className="w-full"
+          >
+            {(() => {
+              if (!connected) {
+                return (
+                  <button
+                    type="button"
+                    disabled={!ready}
+                    className={`
+                     w-full mb-4
+                     hover:scale-101 active:scale-98 transition-all
+                     cursor-pointer w-full
+                    `}
+                  >
+                    <div
+                      variant="outline"
+                      className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
+                    >
+                      <img src={iconSrc} className="size-5 mr-2" />
+                      All Wallets
+                    </div>
+                  </button>
+                );
+              }
+            })()}
+          </div>
+        );
+      }}
+    </ConnectButton.Custom>
+  );
+};

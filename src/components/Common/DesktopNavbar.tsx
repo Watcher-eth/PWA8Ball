@@ -10,7 +10,7 @@ import { HOME_PATH } from "@/utils/urls";
 
 export function DesktopNavbar() {
   const { user } = useUserStore();
-
+  console.log("user", user);
   return (
     <div className="w-full absolute z-50 top-0">
       <div
