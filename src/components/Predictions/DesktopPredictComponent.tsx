@@ -46,7 +46,7 @@ export function DesktopPredictComponent(props: {
     <Card className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-[#121212] text-white h-auto">
       <motion.div layout transition={{ duration: 0.2 }} className="relative">
         <AnimatePresence>
-          {step === 0 || step === 4 ? (
+          {(step === 0 || step === 4) && (
             <div>
               <CardHeader>
                 <CardTitle className="text-white">Question</CardTitle>
@@ -65,7 +65,7 @@ export function DesktopPredictComponent(props: {
                 />
               </CardContent>
             </div>
-          ) : null}
+          )}
 
           {step === 0 && (
             <div className="flex flex-col w-full p-4 px-6">
@@ -75,92 +75,19 @@ export function DesktopPredictComponent(props: {
                 placeholder="$0.00"
                 className="w-full bg-[#121212] rounded-md py-6 text-md border-none"
               />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: "5px",
-                  marginBottom: "5px",
-                  marginTop: "10px",
-                }}
-              >
-                <motion.div
-                  onClick={() => {
-                    setStake({ amount: amount, option: 1 });
-
-                    setStep(2);
-                  }}
-                  style={{
-                    marginTop: "12px",
-                    display: "flex",
-                    flexDirection: "row",
-                    padding: "9px",
-                    borderRadius: "28px",
-                    overflow: "hidden",
-                    backgroundColor: "#FF0050",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                  }}
-                  className="w-1/2"
-                >
-                  <div
-                    className={
-                      props.options[1].name?.length < 6
-                        ? "text-[20px] font-semibold"
-                        : "text-[18px] font-semibold"
-                    }
-                  >
-                    {props.options[1]?.name}
-                  </div>
-                  <div
-                    className={`
-          text-[0.81rem] font-medium text-white/80
-          self-end mb-0.5 ml-1
-        `}
-                  >
-                    {props.options[1]?.value / 100}%
-                  </div>
-                </motion.div>
-                <motion.div
-                  onClick={() => {
-                    setStake({ amount: amount, option: 2 });
-                    setStep(2);
-                  }}
-                  style={{
-                    marginTop: "12px",
-                    display: "flex",
-                    flexDirection: "row",
-                    marginLeft: "16px",
-                    padding: "9px",
-                    borderRadius: "28px",
-                    overflow: "hidden",
-                    backgroundColor: "#0050FF",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                  }}
-                  className="w-1/2"
-                >
-                  <div
-                    className={
-                      props.options[0].name?.length < 6
-                        ? "text-[20px] font-semibold"
-                        : "text-[18px] font-semibold"
-                    }
-                  >
-                    {props.options[0]?.name}
-                  </div>
-                  <div
-                    className={`
-          text-[0.81rem] font-medium text-white/80
-          self-end mb-0.5 ml-1
-        `}
-                  >
-                    {props.options[0]?.value / 100}%
-                  </div>
-                </motion.div>
+              <div className="flex flex-row items-center justify-around gap-3 mb-1 mt-2.5">
+                <OutcomeSelectButton
+                  amount={amount}
+                  optionNum={1}
+                  name={props.options[1].name}
+                  value={props.options[1].value}
+                />
+                <OutcomeSelectButton
+                  amount={amount}
+                  optionNum={2}
+                  name={props.options[0].name}
+                  value={props.options[0].value}
+                />
               </div>
             </div>
           )}
@@ -294,6 +221,40 @@ export function DesktopPredictComponent(props: {
         </AnimatePresence>
       </motion.div>
     </Card>
+  );
+}
+
+function OutcomeSelectButton({ amount, optionNum, name, value }) {
+  return (
+    <motion.div
+      onClick={() => {
+        setStake({ amount, option: optionNum });
+        setStep(2);
+      }}
+      className={`
+        mt-3 p-2 w-1/2
+        flex flex-row rounded-[28px]
+        overflow-hidden bg-[#0050FF]
+        items-center justify-center cursor-pointer
+      `}
+    >
+      <div
+        className={`
+          font-semibold"
+          ${name?.length < 6 ? "text-[20px]" : "text-[18px]" }
+        `}
+      >
+        {name}
+      </div>
+      <div
+        className={`
+          text-[0.81rem] font-medium text-white/80
+          self-end mb-0.5 ml-1
+        `}
+      >
+        {value / 100}%
+      </div>
+    </motion.div>
   );
 }
 
@@ -473,8 +434,10 @@ function DesktopConfirmPrediction(props: {
         </motion.div>
       )}
       <div
-        style={{ marginTop: loading || success ? "3.8rem" : 0 }}
-        className="flex items-center gap-2 mb-2"
+        className={`
+          flex items-center gap-2 mb-2
+          ${ (loading || success) && "mt-[3.8rem]"}
+        `}
       >
         <motion.button
           onClick={() => props.setStep(0)}
@@ -520,10 +483,11 @@ function DesktopConfirmPrediction(props: {
             onClick={() => {
               executePrediction();
             }}
-            className="mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
+            className={`
+              mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1
+              hover:scale-101 active:scale-98 transition-all
+            `}
             initial={{ width: "12vw" }}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.98 }}
             animate={{
               width: success ? "24vw" : "12vw",
               marginLeft: success ? "-3.3rem" : "1rem",
@@ -538,26 +502,35 @@ function DesktopConfirmPrediction(props: {
             ) : (
               <div className="flex items-center gap-2">
                 {success ? (
-                  <ShareIcon className="text-black" strokeWidth={3} size={23} />
+                  <>
+                    <ShareIcon
+                      className="text-black"
+                      strokeWidth={3}
+                      size={23}
+                    />
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: success ? 1 : 0 }}
+                      className="transition-opacity duration-500"
+                    >
+                      Share your Prediction
+                    </motion.span>
+                  </>
                 ) : (
-                  <ScanFace className="text-black" strokeWidth={3} size={23} />
-                )}
-                {!success ? (
-                  <motion.span
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: success ? 0 : 1 }}
-                    className="transition-opacity duration-500"
-                  >
-                    Predict
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: success ? 1 : 0 }}
-                    className="transition-opacity duration-500"
-                  >
-                    Share your Prediction
-                  </motion.span>
+                  <>
+                    <ScanFace
+                      className="text-black"
+                      strokeWidth={3}
+                      size={23}
+                    />
+                    <motion.span
+                      initial={{ opacity: 1 }}
+                      animate={{ opacity: success ? 0 : 1 }}
+                      className="transition-opacity duration-500"
+                    >
+                      Predict
+                    </motion.span>
+                  </>
                 )}
               </div>
             )}
