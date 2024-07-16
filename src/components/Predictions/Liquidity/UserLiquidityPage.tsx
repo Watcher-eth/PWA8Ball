@@ -20,8 +20,8 @@ export function UserLiquidityPage() {
   const filteredPositions = positions?.filter((item) => item.amount > 0);
 
   return (
-    <div className="pt-[60px] flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
-      <div className="flex flex-row items-center my-[18px] justify-between">
+    <div className="pt-16 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
+      <div className="flex flex-row items-center my-4 justify-between">
         <motion.button
           onClick={() => {
             router.back();
