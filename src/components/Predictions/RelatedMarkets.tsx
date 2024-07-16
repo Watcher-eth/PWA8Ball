@@ -24,22 +24,18 @@ export const RelatedMarkets = ({topicId, id, isDesktop}: {
           ${isDesktop ? "bg-transparent" : "bg-[#121212]"}
         `}
       >
-        <div style={styles.header}>
+        <div className="pb-4" style={styles.header}>
           <StarHalf color={"white"} strokeWidth={3} />
           <span style={styles.headerText}>Related Predictions</span>
         </div>
-        {markets?.filter((item) => item.id !== id)
-          ?.slice(0, 4)
-          ?.map((item, index) => {
-            return (
-              <RelatedMarketQuestion
-                {...item}
-                key={index}
-                isDesktop={isDesktop}
-              />
-            );
-          })
-        }
+        <div className="flex flex-col gap-2">
+          {markets
+            ?.filter((item) => item.id !== id)
+            ?.slice(0, 4)
+            ?.map((item, index) => {
+              return <RelatedMarketQuestion {...item} key={index} />;
+            })}
+        </div>
 
         <div style={styles.spacer} />
       </div>
@@ -57,15 +53,15 @@ function RelatedMarketQuestion({
   question,
   options,
   title,
-  isDesktop
 }) {
   return (
     <Link href={`/p/${id}`} prefetch={true}>
       <div
         className={`
                   flex flex-row items-center
-                  p-2 rounded-[10px] mt-2.5 cursor-pointer
-                  ${isDesktop ? "bg-transparent" : "bg-[#1A1A1A]"}
+                  p-2 rounded-[10px] cursor-pointer
+                  bg-transparent ring-1 ring-white/10 hover:ring-white/20
+                  transition-all
                 `}
       >
         <img style={styles.marketImage} src={image} alt={title} />
@@ -75,10 +71,7 @@ function RelatedMarketQuestion({
           </span>
           <span style={styles.marketProbability}>
             {currentprob ?? initialprob}%{" "}
-            {option === 0
-              ? options[option + 1].name
-              : options[option - 1].name
-            }
+            {option === 0 ? options[option + 1].name : options[option - 1].name}
           </span>
         </div>
       </div>

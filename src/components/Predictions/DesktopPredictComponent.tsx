@@ -122,35 +122,22 @@ export function DesktopPredictComponent(props: {
           )}
           {step === 4 && (
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 8,
-                marginBottom: 35,
-                alignSelf: "center",
-                justifyContent: "space-around",
-                width: "100%",
-                padding: "0 10px",
-              }}
+              className={`
+                flex flex-row items-center justify-around
+                self-center w-full
+                mt-2 mb-9 px-2.5
+              `}
             >
               <motion.div
                 onClick={() => {
                   setStep(5);
                 }}
-                style={{
-                  marginTop: 11,
-                  borderRadius: 25,
-                  padding: "10px 10px",
-                  overflow: "hidden",
-                  backgroundColor: "#1D1D1D",
-                  width: "12vw",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 3,
-                }}
+                className={`
+                  mt-3 rounded-lg p-2.5 overflow-hidden
+                  bg-[#1D1D1D] w-[12vw]
+                  flex flex-row items-center justify-center
+                  gap-1
+                `}
               >
                 <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
 
@@ -164,18 +151,12 @@ export function DesktopPredictComponent(props: {
                 onClick={() => {
                   setStep(7);
                 }}
-                style={{
-                  marginTop: 11,
-                  display: "flex",
-                  padding: "10px 8px",
-                  flexDirection: "row",
-                  borderRadius: 25,
-                  overflow: "hidden",
-                  backgroundColor: "#D9D9D9",
-                  width: "12vw",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                className={`
+                  mt-3 rounded-lg p-2.5 overflow-hidden
+                  bg-[#D9D9D9] w-[12vw]
+                  flex flex-row items-center justify-center
+                  gap-1
+                `}
               >
                 <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
                 <span

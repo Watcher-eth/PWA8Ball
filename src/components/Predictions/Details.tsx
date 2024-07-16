@@ -106,10 +106,14 @@ export const BetDetails = ({
         </BoostModal>
       )}
       <Link href={linkArgs}>
-        <motion.div
-          style={{ borderRadius: 12, width: isDesktop ? "100%" : "90vw" }}
-          className="flex flex-row  mt-3 items-center border border-[#212121] rounded-md p-2 justify-between"
-          whileTap={{ scale: 0.95 }}
+        <div
+          style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
+          className={`
+            flex flex-row w-full items-center justify-between
+            p-2 border border-white/10 hover:border-white/20
+            mt-3
+            hover:scale-101 active:scale-98 transition-all
+          `}
         >
           <Link href={linkArgs}>
             <div className="flex flex-row items-center">
@@ -137,25 +141,25 @@ export const BetDetails = ({
             </div>
           </Link>
           <Link href={linkArgs}>
-            <motion.div
-              className={`flex items-center justify-center px-5 py-2 border  border-[#212121] rounded-md ${
-                joined ? "bg-white" : "bg-transparent"
-              }`}
-              whileTap={{ scale: 0.95 }}
+            <div
+              className={`
+                flex flex-row w-full items-center justify-between
+                p-2 border border-white/10 hover:border-white/20
+                hover:scale-101 active:scale-98 transition-all
+                ${joined ? "bg-white" : "bg-transparent"}
+              `}
               style={{ borderRadius: 20 }}
             >
-              <Link href={linkArgs}>
-                <span
-                  className={`text-md font-bold ${
-                    joined ? "text-gray-200" : "text-white"
-                  }`}
-                >
-                  {joined ? "Joined" : "Join"}
-                </span>
-              </Link>
-            </motion.div>
+              <span
+                className={`text-md font-bold ${
+                  joined ? "text-gray-200" : "text-white"
+                }`}
+              >
+                {joined ? "Joined" : "Join"}
+              </span>
+            </div>
           </Link>
-        </motion.div>
+        </div>
       </Link>
       <BoostExplainerModal
         onClose={() => {
@@ -170,10 +174,14 @@ export const BetDetails = ({
 
 const BoostMarket = ({ Boost, handleBoost, isDesktop }) => {
   return (
-    <motion.div
-      style={{ borderRadius: 12, width: isDesktop ? "100%" : "90vw" }}
-      className="flex flex-row  items-center p-2 border border-[#212121]   mt-3 justify-between"
-      whileTap={{ scale: 0.95 }}
+    <div
+      style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
+      className={`
+        flex flex-row w-full items-center justify-between
+        p-2 border border-white/10 hover:border-white/20
+        mt-3
+        hover:scale-101 active:scale-98 transition-all
+      `}
       onClick={handleBoost}
     >
       <div className="flex flex-row space-x-4 items-center">
@@ -192,6 +200,6 @@ const BoostMarket = ({ Boost, handleBoost, isDesktop }) => {
       >
         <span className="text-md font-bold text-white">Boost</span>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
