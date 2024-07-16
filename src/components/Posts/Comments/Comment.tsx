@@ -103,7 +103,7 @@ export function Comment({
         </Link>
       </div>
 
-      <p className="my-2 text-[17px] text-white">{content}</p>
+      <p className="my-2 text-base text-white">{content}</p>
       <div className="flex flex-row items-center justify-between mb-2">
         <button
           onClick={() => {

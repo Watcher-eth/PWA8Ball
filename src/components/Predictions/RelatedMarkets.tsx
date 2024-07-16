@@ -1,8 +1,6 @@
 // @ts-nocheck
-
-import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
@@ -58,18 +56,18 @@ function RelatedMarketQuestion({
     <Link href={`/p/${id}`} prefetch={true}>
       <div
         className={`
-                  flex flex-row items-center
-                  p-2 rounded-[10px] cursor-pointer
-                  bg-transparent ring-1 ring-white/10 hover:ring-white/20
-                  transition-all
-                `}
+          flex flex-row items-center
+          p-2 rounded-[10px] cursor-pointer
+          bg-transparent ring-1 ring-white/10 hover:ring-white/20
+          transition-all
+        `}
       >
         <img style={styles.marketImage} src={image} alt={title} />
-        <div style={styles.marketDetails} className="space-y-[-4px]">
+        <div style={styles.marketDetails} className="">
           <span className="line-clamp-1	" style={styles.marketQuestion}>
             {question}
           </span>
-          <span style={styles.marketProbability}>
+          <span  className="text-lg" style={styles.marketProbability}>
             {currentprob ?? initialprob}%{" "}
             {option === 0 ? options[option + 1].name : options[option - 1].name}
           </span>
@@ -121,7 +119,6 @@ const styles = {
     overflow: "hidden",
   },
   marketProbability: {
-    fontSize: 19,
     color: "white",
   },
   spacer: {

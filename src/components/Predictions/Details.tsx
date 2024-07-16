@@ -57,12 +57,14 @@ export const BetDetails = ({
     },
   };
 
+
+  const BoostModalComponent = isDesktop ? DesktopBoostModal : BoostModal;
   return (
     <div className="flex flex-col w-full p-4 pb-2 mb-2">
       <div className="flex flex-row w-full items-center">
         <div
           style={{ borderRadius: 8 }}
-          className="flex flex-col p-2.5 space-y-[-0.2rem] w-14 h-14 rounded-lg bg-[#131313] items-center mr-3 justify-center"
+          className="flex flex-col p-2.5  w-14 h-14 rounded-lg bg-[#131313] items-center mr-3 justify-center"
         >
           <span className="text-xs font-bold text-[#FF0050]">{month}</span>
           <span className="text-3xl font-bold mt-[-2] text-white">{day}</span>
@@ -74,7 +76,7 @@ export const BetDetails = ({
           </span>
         </div>
       </div>
-      <div className="flex flex-row w-full mt-3 items-center">
+      <div className="flex flex-row w-full items-center  mt-3">
         <div
           style={{ borderRadius: 8 }}
           className="flex flex-col p-2.5 rounded-md bg-[#131313] items-center mr-3"
@@ -88,23 +90,15 @@ export const BetDetails = ({
           </span>
         </div>
       </div>
-      {isDesktop ? (
-        <DesktopBoostModal image={image} id={id}>
-          <BoostMarket
-            isDesktop={isDesktop}
-            Boost={3}
-            handleBoost={handleBooster}
-          />
-        </DesktopBoostModal>
-      ) : (
-        <BoostModal image={image} id={id}>
-          <BoostMarket
-            isDesktop={isDesktop}
-            Boost={3}
-            handleBoost={handleBooster}
-          />
-        </BoostModal>
-      )}
+
+      <BoostModalComponent image={image} id={id}>
+        <BoostMarket
+          isDesktop={isDesktop}
+          Boost={3}
+          handleBoost={handleBooster}
+        />
+      </BoostModalComponent>
+
       <Link href={linkArgs}>
         <div
           style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
@@ -175,17 +169,16 @@ export const BetDetails = ({
 const BoostMarket = ({ handleBoost, isDesktop }) => {
   return (
     <div
-      style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
       className={`
-        flex flex-row w-full items-center justify-between
+        flex flex-row ${isDesktop ? "w-full" : "w-[90vw]"} items-center justify-between
         p-2 border border-white/10 hover:border-white/20
-        mt-3
+        mt-3 rounded-[12px]
         hover:scale-101 active:scale-98 transition-all
       `}
       onClick={handleBoost}
     >
-      <div className="flex flex-row space-x-4 items-center">
-        <Rocket className="ml-2 " size={30} color="white" />
+      <div className="flex flex-row space-x-4 items-center pl-2">
+        <Rocket size={30} color="white" />
         <div className="flex flex-col ml-[-28px] space-y-[-0.1rem] items-start">
           <span className="text-lg font-bold text-white">
             Boost this market
@@ -193,13 +186,11 @@ const BoostMarket = ({ handleBoost, isDesktop }) => {
           <span className="text-sm text-white">Earn fees & $Cred</span>
         </div>
       </div>
-      <motion.div
-        style={{ borderRadius: 20 }}
-        className="flex items-center justify-center px-4 py-2 border border-[#212121] rounded-md"
-        whileTap={{ scale: 0.95 }}
+      <div
+        className="flex items-center justify-center px-4 py-2 border border-[#212121] rounded-full"
       >
         <span className="text-md font-bold text-white">Boost</span>
-      </motion.div>
+      </div>
     </div>
   );
 };

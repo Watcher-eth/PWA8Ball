@@ -44,7 +44,11 @@ export function DesktopPredictComponent(props: {
   const setStake = useVotingStore((state) => state.setState);
 
   return (
-    <div className="border-2 mt-[-0.5rem] rounded-[1.5rem] border-white/10 text-white h-auto !bg-transparent ">
+    <div
+      className={`
+        border-2 mt-[-0.5rem] rounded-[1.5rem] border-white/10 text-white h-auto
+      `}
+    >
       <motion.div
         layout
         transition={{ duration: 0.2 }}
