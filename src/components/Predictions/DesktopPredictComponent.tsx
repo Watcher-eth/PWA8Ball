@@ -81,12 +81,14 @@ export function DesktopPredictComponent(props: {
                   optionNum={1}
                   name={props.options[1].name}
                   value={props.options[1].value}
+                  className="bg-rose-600 hover:!bg-rose-700 active:bg-rose-800"
                 />
                 <OutcomeSelectButton
                   amount={amount}
                   optionNum={2}
                   name={props.options[0].name}
                   value={props.options[0].value}
+                  className="bg-blue-600 hover:!bg-blue-700 active:bg-blue-800"
                 />
               </div>
             </div>
@@ -224,7 +226,7 @@ export function DesktopPredictComponent(props: {
   );
 }
 
-function OutcomeSelectButton({ amount, optionNum, name, value }) {
+function OutcomeSelectButton({ amount, optionNum, name, value, className }) {
   return (
     <motion.div
       onClick={() => {
@@ -234,7 +236,7 @@ function OutcomeSelectButton({ amount, optionNum, name, value }) {
       className={`
         mt-3 p-2 w-1/2
         flex flex-row rounded-[28px]
-        overflow-hidden bg-[#0050FF]
+        overflow-hidden ${className}
         items-center justify-center cursor-pointer
       `}
     >
