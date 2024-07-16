@@ -1,9 +1,11 @@
 // @ts-nocheck
 
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
+
 
 export const RelatedMarkets = ({topicId, id, isDesktop}: {
   topicId: string;
