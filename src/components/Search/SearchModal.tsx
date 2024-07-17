@@ -1,29 +1,26 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import debounce from "lodash/debounce";
 import { useQuery } from "@tanstack/react-query";
 import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
-  DrawerHeader,
   DrawerTitle,
   DrawerClose,
 } from "@/components/ui/drawer";
 import {
   Calendar,
-  MinusIcon,
-  PlusIcon,
   Search,
   User,
-  WalletCards,
   X,
 } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
+
 import { Button } from "@/components/ui/Button";
 
 import { RandomMemoji } from "../Common/MemojiAvatar";
@@ -86,13 +83,14 @@ export function SearchModal() {
                 Search
               </DrawerTitle>
               <DrawerClose style={{ zIndex: 5 }}>
-                <motion.div
-                  style={{ zIndex: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className=" p-2 mr-8  rounded-full bg-gray-100"
+                <div
+                  className={`
+                    z-[5] p-2 mr-8  rounded-full bg-gray-100
+                    active:scale-90 transition-all
+                  `}
                 >
-                  <X size={17} className="  stroke-gray-400" strokeWidth={5} />
-                </motion.div>
+                  <X size={17} className="stroke-gray-400" strokeWidth={5} />
+                </div>
               </DrawerClose>
             </div>
             <div className="mx-auto flex flex-col bg-white text-black w-full   max-w-sm">
@@ -104,10 +102,11 @@ export function SearchModal() {
                 />
                 <Input
                   onChange={handleChange}
-                  style={{ border: "1px solid lightgray" }}
                   placeholder="Who are you looking for..."
-                  className="text-[1.25rem]  ml-5 mt-5 pl-9 w-[83vw]   py-6  rounded-xl
-                 self-start"
+                  className={`
+                    text-[1.25rem] ml-5 mt-5 pl-9 w-[83vw] py-6 rounded-xl
+                    self-start border border-[lightgray]
+                  `}
                 ></Input>
               </div>
               <div className=" self-center">
@@ -123,7 +122,7 @@ export function SearchModal() {
                             <AvatarImage
                               src={profile.metadata?.picture?.optimized?.uri}
                               alt={`Avatar for ${profile.metadata?.displayName}`}
-                              className="h-14 w-14 rounded-full"
+                              className="size-14 rounded-full"
                             />
                           </Avatar>
                         ) : (
@@ -162,28 +161,22 @@ export function SearchModal() {
 
 function CurrentContest() {
   return (
-    <div
-      className="w-[86vw] bg-gray-100 self-center mt-5 flex flex-col mx-3  py-2 px-3 rounded-[14px]"
-    >
+    <div className="w-[86vw] bg-gray-100 self-center mt-5 flex flex-col mx-3  py-2 px-3 rounded-[14px]">
       <div className="flex justify-between items-center">
         <div className="flex items-start flex-col">
           <div className="text-[1.25rem] ml-1 font-bold text-[#262626]">
             Lens Frens Challenge
           </div>
-          <div className="text-[1.1rem] my-1 items-center flex text-gray-500">
-            <User className="h-[1.2rem] mr-1  w-[1.2rem]" />
+          <div className="text-[1.1rem] flex  items-center text-gray-500 my-1">
+            <User className="size-[1.2rem] mr-1" />
             <div>86 Participants</div>
           </div>
           <div className="text-[1.1rem] flex items-center text-gray-500">
-            <Calendar className="h-[1.2rem] mr-1  w-[1.2rem]" />
-
+            <Calendar className="size-[1.2rem] mr-1" />
             <div>3 days left</div>
           </div>
         </div>
-        <div
-          style={{ borderRadius: "10px" }}
-          className="h-[27vw] w-[27vw] mt-2 rounded-md bg-[#262626] relative"
-        >
+        <div className="size-[27vw] mt-2 rounded-md bg-[#262626] relative">
           <img objectFit="fill" src="" />
         </div>
       </div>
@@ -202,10 +195,13 @@ function CurrentContest() {
 function LeaderboardButton() {
   return (
     <Link href={ACTIVITY_PATH}>
-      <motion.div
-        whileTap={{ scale: 0.95 }}
-        style={{ borderRadius: "14px" }}
-        className="w-[86vw] bg-gray-100 self-center mt-4  items-center justify-between flex mx-3  py-2 px-3"
+      <div
+        className={`
+          w-[86vw] bg-gray-100 rounded-lg
+          flex self-center items-center justify-between
+          mx-3 mt-4 py-2 px-3
+          active:scale-95 hover:scale-101 transition-all
+        `}
       >
         <div className="flex-col space-y-[-0.3rem]">
           <div className="text-[1.20rem] ml-1 font-bold text-[#262626]">
@@ -226,7 +222,7 @@ function LeaderboardButton() {
             <AvatarImage src="https://ik.imagekit.io/buttrfly/tr:n-avatar/https://cdn.stamp.fyi/avatar/0xAf153E755F59BB62ba8A5b7e5FfDB71c0aC43305?s=140" />
           </Avatar>
         </div>
-      </motion.div>{" "}
+      </div>{" "}
     </Link>
   );
 }
