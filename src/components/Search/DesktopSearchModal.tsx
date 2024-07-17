@@ -9,7 +9,7 @@ export function DesktopSearchModal({
 }) {
   return (
     <DesktopCardModal
-      cardContentClassName="bg-[#080808]/[0.35] backdrop-blur-lg"
+      cardContentClassName="bg-[#080808]/30 backdrop-blur-lg"
       content={<SearchOverview />}
     >
       {children}

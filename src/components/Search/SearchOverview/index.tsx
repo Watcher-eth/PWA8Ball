@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { useState, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Search, Users } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import debounce from "lodash/debounce";
 import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
@@ -12,6 +11,7 @@ import {
   TopicItem,
   FriendItem,
 } from "./SearchItem";
+import { SearchInputSection } from "./SearchInputSection";
 
 const friends = [
   { name: "James Blair", handle: "@jblair", time: "32m" },
