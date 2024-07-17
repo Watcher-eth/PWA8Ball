@@ -1,12 +1,15 @@
 // @ts-nocheck
-import { GetServerSideProps } from "next";
 import { DesktopHomePage } from "@/components/Feed/DesktopHomePage";
 import { MobileHomePage } from "@/components/Feed/MobileHomePage";
 import { MobiTop } from "@/components/ui/MobiTop";
 import { fetchTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=20, stale-while-revalidate=59"
+  ); // s-maxage=20 means 20 seconds considered fresh
   const trendingMarkets = await fetchTrendingMarkets();
 
   return {
