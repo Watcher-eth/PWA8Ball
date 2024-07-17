@@ -222,16 +222,14 @@ export function PredictModal(props: {
                   <div className="flex flex-row items-center justify-between px-2">
                     {["10", "25", "50", "100", userBalance.toFixed(2)].map(
                       (amount) => (
-                        <motion.button
+                        <KeypadAmountButton
                           key={amount}
                           onClick={() => setSliderValue(String(amount))}
-                          className="text-sm font-bold p-1 px-3 rounded-xl bg-[#212121] text-white mr-2 mb-1"
-                          whileTap={{ scale: 0.95 }}
                         >
                           {amount === userBalance.toFixed(2)
                             ? "Max"
                             : `$${amount}`}
-                        </motion.button>
+                        </KeypadAmountButton>
                       )
                     )}
                   </div>
@@ -319,6 +317,27 @@ export function PredictModal(props: {
         </DrawerContent>
       </Drawer>
     </div>
+  );
+}
+
+function KeypadAmountButton({
+  children,
+  onClick
+}: {
+  children: React.ReactNode
+  onClick: () => void
+}) {
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`
+        text-sm font-bold rounded-xl bg-[#212121] text-white
+        mr-2 mb-1 p-1 px-3
+        active:scale-95 hover:scale-101 transition-all
+      `}
+    >
+      {children}
+    </motion.button>
   );
 }
 
