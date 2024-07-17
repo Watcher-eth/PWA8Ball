@@ -331,66 +331,54 @@ function DesktopConfirmPrediction(props: {
           </h2>
 
           <div className="flex flex-col items-center w-full">
-            <div className="flex items-center justify-between my-2 w-full">
-              <span className="text-lg text-[#424242] font-semibold">
-                Your Prediction
-              </span>
-              <div
-                style={{ borderRadius: 10 }}
-                className={`flex items-center px-2 py-1 rounded-lg ${
-                  option === 1 ? "bg-[#75171D]" : "bg-[#013145]"
-                }`}
-              >
-                <span
-                  className={`text-[0.95rem] font-semibold ${
-                    option === 1 ? "text-[#E23B3B]" : "text-[#0596FF]"
-                  }`}
+            <PredictInfoRow
+              label="Your Prediction"
+              content={
+                <div
+                  className={`
+                    flex items-center px-2 py-1 rounded-lg
+                    text-[0.95rem] font-semibold
+                    ${
+                      option === 1
+                        ? "bg-[#75171D] text-[#E23B3B]"
+                        : "bg-[#013145] text-[#0596FF]"
+                    }
+                  `}
                 >
-                  {Number(option) === 1
-                    ? props.options[1].name
-                    : props.options[0].name}
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between my-2 w-full">
-              <span className="text-lg  text-[#424242] font-semibold">
-                Your Stake
-              </span>
-              <span className="text-lg text-white font-bold">
-                ${amount.toPrecision(3)}
-              </span>
-            </div>
-            <div className="flex items-center justify-between my-2 w-full">
-              <span className="text-lg  text-[#424242] font-semibold">
-                Market fees
-              </span>
-              <span className="text-lg text-white font-bold">
-                ${(amount * 0.025).toPrecision(2)}
-              </span>
-            </div>
-            <div className="flex items-center justify-between my-2 mb-2 w-full">
-              <span className="text-lg  text-[#424242] font-semibold">
-                Potential Payout
-              </span>
-              <span className="text-lg text-white font-bold">
-                $
-                {option === 2
-                  ? ((100 / props.odds) * amount).toFixed(2)
-                  : ((100 / (100 - props.odds)) * amount).toFixed(2)}
-              </span>
-            </div>
-            <div className="w-full  bg-[#424242] h-px my-3"></div>
+                  <span className={``}>
+                    {props.options[option === 1 ? 1 : 0].name}
+                  </span>
+                </div>
+              }
+            />
+            <PredictInfoRow
+              label="Your Stake"
+              contentStr={amount.toPrecision(3)}
+            />
+            <PredictInfoRow
+              label="Market Fees"
+              contentStr={(amount * 0.025).toPrecision(2)}
+            />
+            <PredictInfoRow
+              label="Potential Payout"
+              contentStr={(option === 2
+                ? (100 / props.odds) * amount
+                : (100 / (100 - props.odds)) * amount
+              ).toFixed(2)}
+            />
+
+            <div className="w-full  bg-white/20 h-px my-3"></div>
             <div className="flex items-center self-start mb-0 gap-1">
               <AlignLeft
                 className="text-[#626262]"
                 strokeWidth={3.3}
                 size={16}
               />
-              <span className="text-[1.1rem] text-[#626262] font-bold">
+              <span className="text-[1.1rem] text-white/40 font-bold">
                 Question
               </span>
             </div>
-            <p className="text-[0.95rem] text-white font-medium mb-4 self-start">
+            <p className="text-[0.95rem] text-white/80 font-medium py-1 mb-3 self-start">
               {props.question}
             </p>
             <p className="text-[0.75rem] text-[#424242] mt-1 font-medium text-center px-3">
@@ -407,19 +395,19 @@ function DesktopConfirmPrediction(props: {
         `}
       >
         {!success && (
-        <motion.button
-          onClick={() => props.setStep(0)}
-          className={`
+          <motion.button
+            onClick={() => props.setStep(0)}
+            className={`
             mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
             ${success ? "w-[0vw]" : "w-[12vw]"}
           `}
-          initial={{ width: "12vw" }}
-          animate={{
-            width: success ? "0vw" : "12vw",
-            opacity: success ? 0 : 1,
-          }}
-        >
-          Back
+            initial={{ width: "12vw" }}
+            animate={{
+              width: success ? "0vw" : "12vw",
+              opacity: success ? 0 : 1,
+            }}
+          >
+            Back
           </motion.button>
         )}
         {success ? (
@@ -471,6 +459,28 @@ function DesktopConfirmPrediction(props: {
           </motion.button>
         )}
       </div>
+    </div>
+  );
+}
+
+
+function PredictInfoRow({
+  label,
+  contentStr,
+  content
+}: {
+  label: string;
+  contentStr?: string,
+  content?: React.ReactNode
+}) {
+  return (
+    <div className="flex items-center justify-between my-2 w-full">
+      <span className="text-lg  text-white/40 font-medium">{label}</span>
+      {content ?? (
+        <span className="text-lg text-white font-bold">
+          ${contentStr}
+        </span>
+      )}
     </div>
   );
 }
