@@ -230,26 +230,27 @@ export function ConfirmPrediction(props: {
           ) : (
             <div className="flex items-center gap-2">
               {success ? (
-                <ShareIcon className="text-black" strokeWidth={3} size={23} />
+                <>
+                  <ShareIcon className="text-black" strokeWidth={3} size={23} />
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: success ? 1 : 0 }}
+                    className="transition-opacity duration-500"
+                  >
+                    Share your Prediction
+                  </motion.span>
+                </>
               ) : (
-                <ScanFace className="text-black" strokeWidth={3} size={23} />
-              )}
-              {!success ? (
-                <motion.span
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: success ? 0 : 1 }}
-                  className="transition-opacity duration-500"
-                >
-                  Predict
-                </motion.span>
-              ) : (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: success ? 1 : 0 }}
-                  className="transition-opacity duration-500"
-                >
-                  Share your Prediction
-                </motion.span>
+                <>
+                  <motion.span
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: success ? 0 : 1 }}
+                    className="transition-opacity duration-500"
+                  >
+                    Predict
+                  </motion.span>
+                  <ScanFace className="text-black" strokeWidth={3} size={23} />
+                </>
               )}
             </div>
           )}
