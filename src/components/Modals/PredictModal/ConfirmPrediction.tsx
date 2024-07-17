@@ -11,6 +11,7 @@ import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { LoadingPrediction } from "./SuccessScreen";
 import { useRouter } from "next/router";
 import { getProfilePath } from "@/utils/urls";
+import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void;
@@ -199,17 +200,21 @@ export function ConfirmPrediction(props: {
         style={{ marginTop: loading || success ? "3.8rem" : 0 }}
         className="flex items-center gap-2 mb-4"
       >
-        <motion.button
+        {!success && (
+          <motion.button
           onClick={() => props.setStep(1)}
-          className="mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold"
+          className={`
+            mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
+            ${success ? "w-[0vw]" : "w-[40vw]"}
+          `}
           initial={{ width: "40vw" }}
           animate={{
-            width: success ? "0vw" : "40vw",
             opacity: success ? 0 : 1,
           }}
         >
           Back
-        </motion.button>
+          </motion.button>
+        )}
         <motion.button
           onClick={() => {
             success ? shareLink() : executePrediction();
@@ -229,29 +234,7 @@ export function ConfirmPrediction(props: {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              {success ? (
-                <>
-                  <ShareIcon className="text-black" strokeWidth={3} size={23} />
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: success ? 1 : 0 }}
-                    className="transition-opacity duration-500"
-                  >
-                    Share your Prediction
-                  </motion.span>
-                </>
-              ) : (
-                <>
-                  <ScanFace className="text-black" strokeWidth={3} size={23} />
-                  <motion.span
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: success ? 0 : 1 }}
-                    className="transition-opacity duration-500"
-                  >
-                    Predict
-                  </motion.span>
-                </>
-              )}
+              <SharePredictButton success={success} />
             </div>
           )}
         </motion.button>

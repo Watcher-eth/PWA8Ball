@@ -230,67 +230,69 @@ export const DesktopLoadingPrediction: React.FC<LoadingPredictionProps> = ({
   }, [controls]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
-      <motion.img
-        src={image}
-        alt="Prediction"
-        className="absolute top-[-15px] object-cover w-full h-full rounded-t-lg mb-6"
-        style={{
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
-        }}
-      />
-      <motion.div
-        className="absolute top-[-15px] w-full h-full backdrop-blur-xl rounded-t-lg mb-6"
-        style={{
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
-        }}
-      />
-      <motion.div
-        className="absolute top-[-15px] w-full h-full rounded-t-lg mb-6"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, rgba(8, 8, 8, 0.8), #080808)",
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
-        }}
-      />
-      <motion.img
-        src={image}
-        alt="Prediction"
-        className="rounded-md mb-6 object-cover mt-16"
-        animate={controls}
-        initial={{ height: 0, width: 0 }}
-        style={{ zIndex: 10 }}
-      />
-      <motion.p
-        className="text-lg font-bold text-white"
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
-      >
-        Submitting your Prediction
-      </motion.p>
-      <motion.p
-        className="text-md mt-1 text-[#858585] text-center px-7 font-normal"
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
-      >
-        {question}
-      </motion.p>
-      <motion.p
-        className="text-5xl mt-9 text-white mb-8  font-bold"
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
-      >
-        {answer}
-      </motion.p>
-      <div className="absolute bottom-[8rem]">
-        <Spinner success={success} loading={loading} />
-      </div>
+    <div className="flex flex-col items-center justify-center w-full h-full rounded-lg overflow-hidden">
+      {/* <div className=""> */}
+        <motion.img
+          src={image}
+          alt="Prediction"
+          className="absolute  object-cover w-full h-full rounded-t-lg"
+          style={{
+            borderTopLeftRadius: "30px",
+            borderTopRightRadius: "30px",
+          }}
+        />
+        <motion.div
+          className="absolute  w-full h-full backdrop-blur-xl rounded-t-lg"
+          style={{
+            borderTopLeftRadius: "30px",
+            borderTopRightRadius: "30px",
+          }}
+        />
+        <motion.div
+          className="absolute  w-full h-full rounded-t-lg"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, rgba(8, 8, 8, 0.8), #080808)",
+            borderTopLeftRadius: "30px",
+            borderTopRightRadius: "30px",
+          }}
+        />
+        <motion.img
+          src={image}
+          alt="Prediction"
+          className="rounded-md mb-6 object-cover mt-16"
+          animate={controls}
+          initial={{ height: 0, width: 0 }}
+          style={{ zIndex: 10 }}
+        />
+        <motion.p
+          className="text-lg font-bold text-white"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          style={{ zIndex: 10 }}
+        >
+          Submitting your Prediction
+        </motion.p>
+        <motion.p
+          className="text-md mt-1 text-[#858585] text-center px-7 font-normal"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          style={{ zIndex: 10 }}
+        >
+          {question}
+        </motion.p>
+        <motion.p
+          className="text-5xl mt-9 text-white mb-8  font-bold"
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          style={{ zIndex: 10 }}
+        >
+          {answer}
+        </motion.p>
+        <div className="absolute bottom-[8rem]">
+          <Spinner success={success} loading={loading} />
+        </div>
+      {/* </div> */}
     </div>
   );
 };

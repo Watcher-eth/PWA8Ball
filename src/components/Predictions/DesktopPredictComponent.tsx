@@ -30,6 +30,7 @@ import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 import { OutcomeButton } from "../buttons/OutcomeButton";
+import { SharePredictButton } from "../buttons/SharePredictButton";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -46,7 +47,7 @@ export function DesktopPredictComponent(props: {
   return (
     <div
       className={`
-        border-2 mt-[-0.5rem] rounded-[1.5rem] border-white/10 text-white h-auto
+        border-2  rounded-[1.5rem] border-white/10 text-white h-auto overflow-hidden
       `}
     >
       <motion.div
@@ -405,9 +406,13 @@ function DesktopConfirmPrediction(props: {
           ${(loading || success) && "mt-[3.8rem]"}
         `}
       >
+        {!success && (
         <motion.button
           onClick={() => props.setStep(0)}
-          className="mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold"
+          className={`
+            mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
+            ${success ? "w-[0vw]" : "w-[12vw]"}
+          `}
           initial={{ width: "12vw" }}
           animate={{
             width: success ? "0vw" : "12vw",
@@ -415,7 +420,8 @@ function DesktopConfirmPrediction(props: {
           }}
         >
           Back
-        </motion.button>
+          </motion.button>
+        )}
         {success ? (
           <div className=" z-10">
             <DesktopShareBetModal
@@ -427,19 +433,15 @@ function DesktopConfirmPrediction(props: {
               topic={props?.topic}
             >
               <motion.button
-                className="mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] self-center text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
+                className={`
+                  mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
+                  font-bold flex items-center justify-center gap-1 self-center
+                  hover:scale-101 active:scale-98 transition-all
+                `}
                 initial={{ width: "24vw" }}
               >
                 <div className="flex items-center gap-2">
-                  <ShareIcon className="text-black" strokeWidth={3} size={23} />
-
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: success ? 1 : 0 }}
-                    className="transition-opacity duration-500"
-                  >
-                    Share your Prediction
-                  </motion.span>
+                  <SharePredictButton success={success} />
                 </div>
               </motion.button>
             </DesktopShareBetModal>
@@ -450,56 +452,22 @@ function DesktopConfirmPrediction(props: {
               executePrediction();
             }}
             className={`
-              mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1
+              ml-4 mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
+              font-bold flex items-center justify-center gap-1 self-center
               hover:scale-101 active:scale-98 transition-all
             `}
             initial={{ width: "12vw" }}
-            animate={{
-              width: success ? "24vw" : "12vw",
-              marginLeft: success ? "-3.3rem" : "1rem",
-              alignSelf: success ? "center" : "",
-            }}
           >
-            {loading ? (
-              <div className="flex items-center gap-2">
-                <span className="loader"></span>
-                <span>Predicting</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                {success ? (
-                  <>
-                    <ShareIcon
-                      className="text-black"
-                      strokeWidth={3}
-                      size={23}
-                    />
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: success ? 1 : 0 }}
-                      className="transition-opacity duration-500"
-                    >
-                      Share your Prediction
-                    </motion.span>
-                  </>
-                ) : (
-                  <>
-                    <ScanFace
-                      className="text-black"
-                      strokeWidth={3}
-                      size={23}
-                    />
-                    <motion.span
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: success ? 0 : 1 }}
-                      className="transition-opacity duration-500"
-                    >
-                      Predict
-                    </motion.span>
-                  </>
-                )}
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              {loading ? (
+                <>
+                  <span className="loader"></span>
+                  <span>Predicting</span>
+                </>
+              ) : (
+                <SharePredictButton success={success} />
+              )}
+            </div>
           </motion.button>
         )}
       </div>
