@@ -49,8 +49,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // amplitude.getInstance().init("YOUR_API_KEY");
   useServiceWorker(); // Use the custom hook
 
-
-
   return (
     <>
       <CustomHead {...pageProps} router={router} />
@@ -80,7 +78,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <SonnerToaster
         position="top-center"
         style={{ zIndex: 100 }}
-        className="bg-gray-200 rounded-xl"
+        className="bg-[#121212] rounded-xl"
       />
     </>
   );

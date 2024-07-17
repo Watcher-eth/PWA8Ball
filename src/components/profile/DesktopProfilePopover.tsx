@@ -14,6 +14,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useDisconnectUser from "@/hooks/useDisconnectUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import {
   DoorOpen,
@@ -34,6 +35,8 @@ export function DesktopProfilePopover({
   children: React.ReactNode;
 }) {
   const { user } = useUserStore();
+  const { disconnectUser } = useDisconnectUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -102,7 +105,11 @@ export function DesktopProfilePopover({
           disabled={true}
         />
         <DropdownMenuSeparator />
-        <DropdownItem label="Log out" IconComponent={DoorOpen} />
+        <DropdownItem
+          onClick={disconnectUser}
+          label="Log out"
+          IconComponent={DoorOpen}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -113,14 +120,17 @@ function DropdownItem({
   IconComponent,
   iconSrc,
   disabled = false,
+  onClick,
 }: {
   label: string;
   IconComponent?: React.FC;
   iconSrc?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }) {
   return (
     <DropdownMenuItem
+      onClick={onClick}
       className="flex flex-row justify-between items-center hover:!bg-slate-400/20"
       disabled={disabled}
     >
