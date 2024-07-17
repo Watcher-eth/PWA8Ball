@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ArrowDown, CreditCard, Repeat } from "lucide-react";
 
-function GetGhoModal(props: { setStep: (step: number) => void }) {
+export function GetGhoModal(props: { setStep: (step: number) => void }) {
   // Get gho onchain (decent / uniswap)
   // Get gho with fiat (mount Pelering)
   // Before continue check that enough balance

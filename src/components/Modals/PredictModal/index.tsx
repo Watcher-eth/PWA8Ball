@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { Vote } from "lucide-react";
-import GetGhoModal from "./GetGhoModal_";
+import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
