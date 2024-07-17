@@ -242,6 +242,7 @@ export function ConfirmPrediction(props: {
                 </>
               ) : (
                 <>
+                  <ScanFace className="text-black" strokeWidth={3} size={23} />
                   <motion.span
                     initial={{ opacity: 1 }}
                     animate={{ opacity: success ? 0 : 1 }}
@@ -249,7 +250,6 @@ export function ConfirmPrediction(props: {
                   >
                     Predict
                   </motion.span>
-                  <ScanFace className="text-black" strokeWidth={3} size={23} />
                 </>
               )}
             </div>
