@@ -1,6 +1,6 @@
-// @ts-nocheck
 import { parseOption, parseOptionJSON } from "@/utils/predictions/parseOption";
 import { motion } from "framer-motion";
+import MyBetModal, { DesktopMyBetModal } from "../Common/Charts/MyBetModal";
 
 export const ActivityField = ({
   index,
@@ -25,116 +25,92 @@ export const ActivityField = ({
   option: { name: string; value: number };
   onOpenBottomSheet: () => void;
 }) => {
-  console.log("sdas", parseOption(option));
-  return (
+  const MotionDivContent = () => (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.15 }}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        margin: isDesktop ? "13.5px 0" : "13.5px 10px",
-        background: isDesktop ? "#121212" : "transparent",
-        padding: isDesktop ? "11px 11px" : "0",
-        borderRadius: isDesktop ? "13px" : "0",
-      }}
+      className={`flex flex-row items-center justify-between ${
+        isDesktop
+          ? "bg-[#121212] p-[11px] rounded-[13px] my-[13.5px]"
+          : "mx-[10px] my-[13.5px]"
+      } `}
       onClick={onOpenBottomSheet}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
+      <div className="flex flex-row items-center relative">
         <img
           src={image}
           alt="Prediction"
-          style={{
-            height: "50px",
-            width: "50px",
-            objectFit: "cover",
-            borderRadius: isDesktop ? "7px" : "30px",
-            overflow: "hidden",
-          }}
+          className={`h-[50px] w-[50px] object-cover ${
+            isDesktop ? "rounded-[7px]" : "rounded-[30px]"
+          }`}
         />
         <img
           src={pfp}
           alt="Profile"
-          style={{
-            height: "25px",
-            width: "25px",
-            objectFit: "cover",
-            borderRadius: "15px",
-            overflow: "hidden",
-            position: "absolute",
-            bottom: "-6px",
-            left: "32px",
-            borderWidth: "2.4px",
-            borderColor: "#1B1B1E",
-          }}
+          className="h-[25px] w-[25px] object-cover rounded-[15px] absolute bottom-[-6px] left-[32px] border-[2.4px] border-[#1B1B1E]"
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0px",
-            marginLeft: "12.5px",
-            marginRight: "-36px",
-            maxWidth: "100%",
-          }}
-        >
-          <h3
-            style={{
-              fontSize: "17px",
-              color: "white",
-              fontWeight: "700",
-            }}
-          >
-            {name}
-          </h3>
-          <p
-            style={{
-              fontSize: "14.5px",
-              color: "lightgray",
-              fontWeight: "400",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              maxWidth: "78vw",
-              textOverflow: "ellipsis",
-            }}
-          >
+        <div className="flex flex-col gap-0 ml-[12.5px] mr-[-36px] max-w-full">
+          <h3 className="text-[17px] text-white font-bold">{name}</h3>
+          <p className="text-[14.5px] text-lightgray font-normal overflow-hidden whitespace-nowrap max-w-[78vw] text-ellipsis">
             {title}
           </p>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-          gap: "3px",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "18px",
-            color: "white",
-            fontWeight: "700",
-          }}
-        >
+      <div className="flex flex-col items-end gap-[3px]">
+        <p className="text-[18px] text-white font-bold">
           ${(amount / 10).toFixed(2)}
         </p>
-        <p style={{ fontSize: "14px", color: "#C7C7C7", fontWeight: "700" }}>
+        <p className="text-[14px] text-[#C7C7C7] font-bold">
           {parseOption(option)?.length < 8
             ? parseOption(option)
             : parseOption(option)?.substring(0, 3)}
         </p>
       </div>
     </motion.div>
+  );
+
+  return (
+    <div>
+      {isDesktop ? (
+        <DesktopMyBetModal
+          key={`predicted-${id}-${option}`}
+          title={title}
+          image={image}
+          price={amount}
+          ownedAmount={amount / 100000}
+          options={options}
+          percentage={percentage}
+          betId={id}
+          topic={id}
+          icon={icon}
+          question={question}
+          option={option}
+          optionNumber={optionNumber}
+          isExternal={isExternal}
+        >
+          <MotionDivContent />
+        </DesktopMyBetModal>
+      ) : (
+        <MyBetModal
+          key={`predicted-${id}-${option}`}
+          title={title}
+          image={image}
+          price={amount}
+          ownedAmount={amount / 100000}
+          options={options}
+          percentage={percentage}
+          betId={market_id}
+          topic={market_id}
+          icon={icon}
+          question={question}
+          option={option}
+          optionNumber={optionNumber}
+          isExternal={isExternal}
+        >
+          <MotionDivContent />
+        </MyBetModal>
+      )}
+    </div>
   );
 };
