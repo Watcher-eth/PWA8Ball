@@ -63,7 +63,7 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
           animate={controls}
           className={`
             flex flex-row items-center justify-center
-            py-[7px] px-[22px]  rounded-[20px] overflow-hidden
+            py-[7px] px-[22px] rounded-[20px] overflow-hidden
             bg-white border-none cursor-pointer
           `}
         >

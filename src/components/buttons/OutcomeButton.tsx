@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
 export function OutcomeButton({
@@ -27,7 +26,7 @@ export function OutcomeButton({
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all
             text-[1.3rem] text-white font-bold h-[2.8rem] rounded-lg items-center
-            ${"w-full" /*isDesktop ? "w-[18vw] max-w-full" : "w-[42vw]"*/}
+            w-full
             ${className}
         `}
     >
