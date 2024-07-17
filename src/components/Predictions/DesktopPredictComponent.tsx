@@ -17,20 +17,21 @@ import {
   ScanFace,
   ShareIcon,
 } from "lucide-react";
-import { DesktopChart } from "../common/Charts/DesktopChart";
-import { Input } from "../ui/Input";
+import { useRouter } from "next/router";
+import { DesktopChart } from "@/components/common/Charts/DesktopChart";
+import { Input } from "@/components/ui/Input";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { getProfilePath } from "@/utils/urls";
-import { useRouter } from "next/router";
-import { DesktopLoadingPrediction } from "../Modals/PredictModal/SuccessScreen";
+
+import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/SuccessScreen";
 import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
-import { OutcomeButton } from "../buttons/OutcomeButton";
-import { SharePredictButton } from "../buttons/SharePredictButton";
+import { OutcomeButton } from "@/components/buttons/OutcomeButton";
+import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
 export function DesktopPredictComponent(props: {
   question: string;
