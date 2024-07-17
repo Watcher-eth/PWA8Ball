@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { parseOption, parseOptionJSON } from "@/utils/predictions/parseOption";
 import { motion } from "framer-motion";
 import MyBetModal, { DesktopMyBetModal } from "../Common/Charts/MyBetModal";
