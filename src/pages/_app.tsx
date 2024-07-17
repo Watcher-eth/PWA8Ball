@@ -35,6 +35,13 @@ const PRIVY_CONFIG = {
   },
 };
 
+export const wagmiConfig = getDefaultConfig({
+  appName: "8Ball",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+  chains: [baseSepolia, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
+
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
   // console.log({pageProps})
@@ -42,17 +49,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // amplitude.getInstance().init("YOUR_API_KEY");
   useServiceWorker(); // Use the custom hook
 
-  const config = getDefaultConfig({
-    appName: "8Ball",
-    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-    chains: [baseSepolia, base],
-    ssr: true, // If your dApp uses server side rendering (SSR)
-  });
+
 
   return (
     <>
       <CustomHead {...pageProps} router={router} />
-      <WagmiProvider config={config}>
+      <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
           <AirstackProvider
             apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}

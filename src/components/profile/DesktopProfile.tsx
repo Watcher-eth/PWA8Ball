@@ -53,7 +53,7 @@ const chartConfig = {
 
 export function ProfileDashboard() {
   const { user } = useUserStore();
-  const id = "did:privy:clxs70vmm00nffbmgbdew6h27";
+  const id = "b82fc163-413f-5060-87b1-27b26208e987";
   const { data: totalFollowers } = useGetTotalFollowers(id);
   const { data: userC, isLoading } = useGetUserByExternalAuthId(id);
   const {

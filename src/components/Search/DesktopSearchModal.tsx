@@ -3,12 +3,13 @@ import { SearchOverview } from "./SearchOverview";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
 export function DesktopSearchModal({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <DesktopCardModal
+      cardContentClassName="bg-[#080808]/[0.35] backdrop-blur-lg"
       content={<SearchOverview />}
     >
       {children}

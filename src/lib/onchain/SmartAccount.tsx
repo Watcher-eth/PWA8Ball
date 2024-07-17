@@ -6,17 +6,14 @@ import {
   createPublicClient,
   createWalletClient,
   custom,
-  encodeFunctionData,
   getContract,
   http,
-  parseAbiItem,
 } from "viem";
-import { baseGoerli, baseSepolia } from "viem/chains";
+import { baseSepolia } from "viem/chains";
 import {
   type SmartAccountClient,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
-  ENTRYPOINT_ADDRESS_V06,
   ENTRYPOINT_ADDRESS_V07,
 } from "permissionless";
 import { signerToSimpleSmartAccount } from "permissionless/accounts";
@@ -29,6 +26,10 @@ import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
 import { EightBallAddress } from "./contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
+import { useAccount } from "wagmi";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { getWalletClient } from "@wagmi/core";
+import { wagmiConfig } from "@/pages/_app";
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";
@@ -41,6 +42,8 @@ interface SmartAccountInterface {
   eoa: ConnectedWallet | undefined;
   /** Smart account client to send signature/transaction requests to the smart account */
   smartAccountClient: SmartAccountClient | undefined;
+  /** EOA client for regular EOAs */
+  eoaClient: any | undefined;
   /** Smart account address */
   smartAccountAddress?: Address;
   /** Boolean to indicate whether the smart account state has initialized */
@@ -50,6 +53,7 @@ interface SmartAccountInterface {
 const SmartAccountContext = React.createContext<SmartAccountInterface>({
   eoa: undefined,
   smartAccountClient: undefined,
+  eoaClient: undefined,
   smartAccountAddress: undefined,
   smartAccountReady: false,
 });
@@ -64,6 +68,9 @@ export const SmartAccountProvider = ({
   children: React.ReactNode;
 }) => {
   const { wallets } = useWallets();
+  const { address: eoaAddress, isConnected } = useAccount();
+  const { user } = useUserStore();
+  const { walletType } = user || {};
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   );
@@ -73,6 +80,7 @@ export const SmartAccountProvider = ({
   const [smartAccountClient, setSmartAccountClient] = useState<
     SmartAccountClient | undefined
   >();
+  const [eoaClient, setEoaClient] = useState<any | undefined>();
   const [smartAccountAddress, setSmartAccountAddress] = useState<Address>();
   const [smartAccountReady, setSmartAccountReady] = useState(false);
 
@@ -166,13 +174,34 @@ export const SmartAccountProvider = ({
     setSmartAccountClient(smartAccountClient);
     setSmartAccountAddress(account);
     setSmartAccountReady(true);
-  };
+  }
+
+  async function createEOAWallet() {
+    const walletClient = getWalletClient(wagmiConfig, {
+      account: eoa?.address,
+      chain: baseSepolia,
+    });
+
+    console.log("Creating eoa client", walletClient);
+
+    setEoaClient(walletClient);
+    setSmartAccountAddress(eoaAddress);
+    setSmartAccountReady(true);
+  }
 
   useEffect(() => {
-    if (embeddedWallet) {
+    if (walletType === "smartwallet" && embeddedWallet) {
       createSmartWallet(embeddedWallet);
+    } else if (walletType === "eoa" && isConnected && eoaAddress) {
+      createEOAWallet();
     }
-  }, [embeddedWallet?.address, embeddedWallet]);
+  }, [
+    walletType,
+    embeddedWallet?.address,
+    embeddedWallet,
+    eoaAddress,
+    isConnected,
+  ]);
 
   return (
     <SmartAccountContext.Provider
@@ -180,6 +209,7 @@ export const SmartAccountProvider = ({
         smartAccountReady: smartAccountReady,
         smartAccountClient: smartAccountClient,
         smartAccountAddress: smartAccountAddress,
+        eoaClient: eoaClient,
         eoa: eoa,
       }}
     >

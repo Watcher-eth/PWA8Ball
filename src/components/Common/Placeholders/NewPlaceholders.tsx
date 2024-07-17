@@ -43,13 +43,6 @@ export function NotificationsPlaceholder({ isUser }) {
       {[...Array(3)].map((_, index) => (
         <NotificationSkelleton index={index} />
       ))}
-      <div
-        className="w-full -mt-[230px] h-[225px]"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(8, 8, 8, 0) 0%, rgba(8, 8, 8, 0.5) 50%, rgba(8, 8, 8, 0.7) 70%, #080808 100%, #080808 100%)",
-        }}
-      />
 
       <div className="flex flex-col items-center mt-5 self-center">
         <div className="text-white text-xl font-bold mb-2">
@@ -60,7 +53,7 @@ export function NotificationsPlaceholder({ isUser }) {
         </div>
       </div>
       <Link href={HOME_PATH}>
-        <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+        <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#080808] border-[0.1rem] border-[#212121] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
         </motion.button>
       </Link>
@@ -215,7 +208,7 @@ export const NotificationSkelleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex mx-6 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#171717] my-2"
+    className="flex mx-6 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#080808] my-2"
   >
     <div className="flex items-center gap-2">
       <motion.div

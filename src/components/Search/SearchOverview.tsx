@@ -105,8 +105,8 @@ export const SearchOverview = () => {
           placeholder="Search for predictions..."
           className={`
             w-full outline-none border-0
-            py-2 px-4
-            bg-[#080808] text-white placeholder-[#707070]
+            py-2 px-4 
+            bg-[transparent] text-white placeholder-[#707070]
             text-[1rem] rounded-lg
           `}
         />
@@ -305,7 +305,7 @@ function SearchItem({
         {image ? (
           <img
             src={image}
-            className={`w-9 h-9 ${
+            className={`w-9 h-9 object-cover ${
               isImgRounded ? "rounded-full" : "rounded-[0.2rem]"
             }`}
           />

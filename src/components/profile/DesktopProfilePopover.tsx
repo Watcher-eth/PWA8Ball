@@ -24,11 +24,15 @@ import {
   Settings,
   User,
   Wallet,
-  UserCircle
+  UserCircle,
 } from "lucide-react";
+import Link from "next/link";
 
-
-export function DesktopProfilePopover({ children }: { children: React.ReactNode }) {
+export function DesktopProfilePopover({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { user } = useUserStore();
   return (
     <DropdownMenu>
@@ -46,7 +50,9 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownItem label="Profile" IconComponent={User} />
+          <Link href={`/u/${user?.external_auth_provider_user_id}`}>
+            <DropdownItem label="Profile" IconComponent={User} />
+          </Link>
           <DropdownItem label="Fund your account" IconComponent={Wallet} />
           <DropdownItem label="Settings" IconComponent={Settings} />
           <DropdownItem label="Your Boosts" IconComponent={Rocket} />
@@ -82,7 +88,7 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
                   iconSrc="https://cdn.pixabay.com/photo/2021/01/30/06/42/tiktok-5962992_1280.png"
                 />
                 <DropdownMenuSeparator />
-                <DropdownItem label="More..."/>
+                <DropdownItem label="More..." />
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
@@ -102,25 +108,29 @@ export function DesktopProfilePopover({ children }: { children: React.ReactNode 
   );
 }
 
-
 function DropdownItem({
   label,
   IconComponent,
   iconSrc,
-  disabled = false
+  disabled = false,
 }: {
-  label: string,
-  IconComponent?: React.FC,
-  iconSrc?: string,
-  disabled?: boolean
+  label: string;
+  IconComponent?: React.FC;
+  iconSrc?: string;
+  disabled?: boolean;
 }) {
   return (
-    <DropdownMenuItem className="flex flex-row justify-between items-center hover:!bg-slate-400/20" disabled={disabled}>
+    <DropdownMenuItem
+      className="flex flex-row justify-between items-center hover:!bg-slate-400/20"
+      disabled={disabled}
+    >
       {label}
       {IconComponent && (
         <IconComponent className="size-4 text-white" strokeWidth={2.2} />
       )}
-      {(iconSrc?.length > 0) && <img className="size-4 rounded-full" src={iconSrc} />}
+      {iconSrc?.length > 0 && (
+        <img className="size-4 rounded-full" src={iconSrc} />
+      )}
     </DropdownMenuItem>
   );
 }
