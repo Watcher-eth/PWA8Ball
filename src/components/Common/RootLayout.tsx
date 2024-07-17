@@ -3,7 +3,8 @@ import { NavBar } from "@/components/Common/NavBar"; // Assuming NavBar is in th
 import { isMobile } from "@/utils/isMobile";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 
-export function Layout({ children }: { children: ReactNode }) {
+export function RootLayout({ children }: { children: ReactNode }) {
+  
   return (
     <SmartAccountProvider>
       <div className="relative pb-20 items-center justify-center">

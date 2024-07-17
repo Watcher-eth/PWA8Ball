@@ -8,7 +8,6 @@ import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
 
-import { Layout } from "@/components/Common/Layout";
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { AuthChecker } from "@/lib/providers/AuthProvider";
@@ -19,6 +18,7 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
 import { base, baseSepolia } from "viem/chains";
+import { RootLayout } from "@/components/Common/RootLayout";
 
 export const queryClient = new QueryClient();
 
@@ -45,7 +45,6 @@ export const wagmiConfig = getDefaultConfig({
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
   // console.log({pageProps})
-
   // amplitude.getInstance().init("YOUR_API_KEY");
   useServiceWorker(); // Use the custom hook
 
@@ -64,9 +63,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
               <AuthChecker>
                 <DrawerProvider>
                   <RainbowKitProvider coolMode>
-                    <Layout>
+                    <RootLayout>
                       <Component {...pageProps} />
-                    </Layout>
+                    </RootLayout>
                   </RainbowKitProvider>
                 </DrawerProvider>
               </AuthChecker>

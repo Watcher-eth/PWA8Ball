@@ -226,7 +226,6 @@ export function DesktopPredictComponent(props: {
   );
 }
 
-
 function DesktopConfirmPrediction(props: {
   setStep: (step: number) => void;
   image: string;
@@ -239,14 +238,20 @@ function DesktopConfirmPrediction(props: {
 }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const { smartAccountReady, smartAccountClient, smartAccountAddress, eoa } =
-    useSmartAccount();
+  const {
+    smartAccountReady,
+    smartAccountClient,
+    smartAccountAddress,
+    eoa,
+    eoaClient,
+  } = useSmartAccount();
   const { user: userCon } = useUserStore();
   const { mutate: predictV2 } = usePredictV2();
   const router = useRouter();
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
 
+  
   async function executePrediction() {
     //TODO: Check Balance of user
     const userBalance = Number(userCon?.balance) / 1000000;
@@ -405,7 +410,7 @@ function DesktopConfirmPrediction(props: {
       <div
         className={`
           flex items-center gap-2 mb-2
-          ${ (loading || success) && "mt-[3.8rem]"}
+          ${(loading || success) && "mt-[3.8rem]"}
         `}
       >
         <motion.button

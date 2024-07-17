@@ -25,12 +25,15 @@ export function ConfirmPrediction(props: {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const { smartAccountReady, smartAccountClient, smartAccountAddress, eoa } =
-    useSmartAccount();
+  const {
+    smartAccountReady,
+    smartAccountClient,
+    smartAccountAddress,
+    eoa,
+    eoaClient,
+  } = useSmartAccount();
   const { user: userCon } = useUserStore();
   const { mutate: predictV2 } = usePredictV2();
-
-
 
   const amount = useVotingStore((state) => state.amount);
   async function executePrediction() {

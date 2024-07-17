@@ -23,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function ProfilePage({ userId }: { userId: string }) {
-
   const [edit, setEdit] = useState(false);
   const { data: totalFollowers } = useGetTotalFollowers(userId);
   const { data: userC, isLoading } = useGetUserByExternalAuthId(userId);
@@ -41,6 +40,7 @@ export default function ProfilePage({ userId }: { userId: string }) {
   useEffect(() => {
     const balance = getUserBalances();
   }, []);
+
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
@@ -130,35 +130,24 @@ export default function ProfilePage({ userId }: { userId: string }) {
   );
 }
 
-
 export function SocialsSection({ twitter, farcaster }) {
-  let username
-  let icon
+  let username;
+  let icon;
   if (twitter) {
-    username = twitter?.username
-    icon = <Twitter className="h-4 text-gray-200" />
+    username = twitter?.username;
+    icon = <Twitter className="h-4 text-gray-200" />;
   } else if (farcaster) {
-    username = farcaster?.name
-    icon = <img src="/farcaster.png" className="size-10" alt="Farcaster" />
+    username = farcaster?.name;
+    icon = <img src="/farcaster.png" className="size-10" alt="Farcaster" />;
   }
-  return (
-    username && (
-      <SocialDisplayBlock
-        username={username}
-        icon={icon}
-      />
-    )
-  );
+  return username && <SocialDisplayBlock username={username} icon={icon} />;
 }
 
-function SocialDisplayBlock({username, icon}) {
+function SocialDisplayBlock({ username, icon }) {
   return (
     <div className="flex items-center font-medium">
       {icon}
-      <p className="text-gray-200 text-md ml-1 font-medium">
-        @{username}
-      </p>
+      <p className="text-gray-200 text-md ml-1 font-medium">@{username}</p>
     </div>
   );
 }
-
