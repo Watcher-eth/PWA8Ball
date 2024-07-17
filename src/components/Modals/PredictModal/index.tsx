@@ -246,62 +246,42 @@ export function PredictModal(props: {
                         className="flex flex-row justify-between items-center px-2 py-4"
                       >
                         {row.map((num) => (
-                          <motion.button
+                          <KeypadButton
                             key={num}
-                            onClick={() => handleButtonPress(num)}
-                            className="text-xl font-bold text-white px-5"
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {num}
-                          </motion.button>
+                            value={num}
+                            handleButtonPress={handleButtonPress}
+                          />
                         ))}
                       </div>
                     ))}
                     <div className="flex flex-row justify-between items-center px-2 py-4 pb-0">
-                      <motion.button
-                        onClick={() => handleButtonPress(".")}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        .
-                      </motion.button>
-                      <motion.button
-                        onClick={() => handleButtonPress("0")}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        0
-                      </motion.button>
-                      <motion.button
+                      <KeypadButton
+                        value={"."}
+                        handleButtonPress={handleButtonPress}
+                      />
+                      <KeypadButton
+                        value={"0"}
+                        handleButtonPress={handleButtonPress}
+                      />
+                      <KeypadButton
+                        value="<"
                         onClick={handleDelete}
-                        className="text-xl font-bold text-white px-5"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {`<`}
-                      </motion.button>
+                      />
                     </div>
                   </div>
                   <div className="flex flex-row items-center w-full mt-4 justify-center">
                     {sliderValue === "" ? (
                       <DrawerClose>
-                        <motion.button
-                          className="mt-5 p-2 rounded-full bg-white w-[80vw] text-[1rem] text-center text-[#131313] font-extrabold"
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          Cancel
-                        </motion.button>
+                        <KeypadActionButton label="Cancel" />
                       </DrawerClose>
                     ) : (
-                      <motion.button
+                      <KeypadActionButton
+                        label="Continue"
                         onClick={() => {
                           confirmSelection(2);
                           setStep(2);
                         }} // Assuming the next step index is 1
-                        className="mt-5 p-2 rounded-full bg-white w-[80vw] text-[1rem] text-center text-[#131313] font-extrabold"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Continue
-                      </motion.button>
+                      />
                     )}
                   </div>
                 </div>
@@ -339,5 +319,50 @@ export function PredictModal(props: {
         </DrawerContent>
       </Drawer>
     </div>
+  );
+}
+
+
+function KeypadButton({
+  value,
+  handleButtonPress,
+  onClick
+}: {
+  value: string
+  handleButtonPress?: (value: string) => void
+  onClick?: () => void
+}) {
+  return (
+    <motion.button
+      onClick={() => {
+        handleButtonPress?.(value) ?? onClick?.();
+      }}
+      className={`
+        text-xl font-bold text-white px-5
+        active:scale-95 hover:scale-101 transition-all
+      `}
+    >
+      {value}
+    </motion.button>
+  );
+}
+
+function KeypadActionButton({
+  label,
+  onClick
+}: {
+  label: string
+  onClick?: () => void
+}) {
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`
+        mt-5 p-2 rounded-full bg-white w-[80vw] text-[1rem] text-center text-[#131313]
+        font-extrabold active:scale-95 hover:scale-101 transition-all
+      `}
+    >
+      {label}
+    </motion.button>
   );
 }
