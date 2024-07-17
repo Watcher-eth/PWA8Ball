@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import {
   Drawer,
   DrawerClose,
@@ -18,6 +20,8 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
+import { NumericKeypad } from "@/components/NumericKeypad";
+
 export function PredictModal(props: {
   text: string;
   option: number;
@@ -30,8 +34,7 @@ export function PredictModal(props: {
   isDesktop?: boolean;
   handleOpen: () => void;
 }) {
-  const [goal, setGoal] = React.useState(1);
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
 
   const stepVariants = {
     initial: { opacity: 0 },
@@ -43,27 +46,6 @@ export function PredictModal(props: {
   const setVotingState = useVotingStore((state) => state.setState);
 
   const userBalance = 40;
-
-  const formatWithCommas = (value) => {
-    // Remove all commas
-    let newValue = value.replace(/,/g, "");
-
-    // Split the value into integer and decimal parts
-    const parts = newValue.split(".");
-    let integerPart = parts[0] || "";
-    let decimalPart = parts[1] || "";
-
-    // Limit the decimal part to two digits
-    decimalPart = decimalPart.slice(0, 2);
-
-    // Add commas for thousands, millions, etc. to the integer part
-    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    // Combine the integer and decimal parts with a decimal point
-    newValue = integerPart + (decimalPart ? "." + decimalPart : "");
-
-    return newValue;
-  };
 
   const baseFontSize = "4rem";
   const lengthAdjustmentThreshold = 3;
@@ -111,10 +93,13 @@ export function PredictModal(props: {
     }
   };
 
-  const handleDelete = () => {
+  function handleDelete() {
     setSliderValue((prev) => formatWithCommas(prev.slice(0, -1)));
   };
-
+  function handleContinue() {
+    confirmSelection(2);
+    setStep(2);
+  }
   const confirmSelection = (option) => {
     if (parseFloat(sliderValue.replace(/,/g, "")) >= userBalance) {
       // showToast();
@@ -219,69 +204,14 @@ export function PredictModal(props: {
                       ).toFixed(2) || "0.00"}
                     </span>
                   </div>
-                  <div className="flex flex-row items-center justify-between px-2">
-                    {["10", "25", "50", "100", userBalance.toFixed(2)].map(
-                      (amount) => (
-                        <KeypadAmountButton
-                          key={amount}
-                          onClick={() => setSliderValue(String(amount))}
-                        >
-                          {amount === userBalance.toFixed(2)
-                            ? "Max"
-                            : `$${amount}`}
-                        </KeypadAmountButton>
-                      )
-                    )}
-                  </div>
-                  <div className="flex flex-col -mx-5">
-                    {[
-                      ["1", "2", "3"],
-                      ["4", "5", "6"],
-                      ["7", "8", "9"],
-                    ].map((row) => (
-                      <div
-                        key={row.join()}
-                        className="flex flex-row justify-between items-center px-2 py-4"
-                      >
-                        {row.map((num) => (
-                          <KeypadButton
-                            key={num}
-                            value={num}
-                            handleButtonPress={handleButtonPress}
-                          />
-                        ))}
-                      </div>
-                    ))}
-                    <div className="flex flex-row justify-between items-center px-2 py-4 pb-0">
-                      <KeypadButton
-                        value={"."}
-                        handleButtonPress={handleButtonPress}
-                      />
-                      <KeypadButton
-                        value={"0"}
-                        handleButtonPress={handleButtonPress}
-                      />
-                      <KeypadButton
-                        value="<"
-                        onClick={handleDelete}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-center w-full mt-4 justify-center">
-                    {sliderValue === "" ? (
-                      <DrawerClose>
-                        <KeypadActionButton label="Cancel" />
-                      </DrawerClose>
-                    ) : (
-                      <KeypadActionButton
-                        label="Continue"
-                        onClick={() => {
-                          confirmSelection(2);
-                          setStep(2);
-                        }} // Assuming the next step index is 1
-                      />
-                    )}
-                  </div>
+                  <NumericKeypad
+                    sliderValue={sliderValue}
+                    setSliderValue={setSliderValue}
+                    userBalance={userBalance}
+                    handleButtonPress={handleButtonPress}
+                    handleDelete={handleDelete}
+                    handleContinue={handleContinue}
+                  />
                 </div>
               )}
               {step === 2 &&
@@ -320,68 +250,3 @@ export function PredictModal(props: {
   );
 }
 
-function KeypadAmountButton({
-  children,
-  onClick
-}: {
-  children: React.ReactNode
-  onClick: () => void
-}) {
-  return (
-    <motion.button
-      onClick={onClick}
-      className={`
-        text-sm font-bold rounded-xl bg-[#212121] text-white
-        mr-2 mb-1 p-1 px-3
-        active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {children}
-    </motion.button>
-  );
-}
-
-
-function KeypadButton({
-  value,
-  handleButtonPress,
-  onClick
-}: {
-  value: string
-  handleButtonPress?: (value: string) => void
-  onClick?: () => void
-}) {
-  return (
-    <motion.button
-      onClick={() => {
-        handleButtonPress?.(value) ?? onClick?.();
-      }}
-      className={`
-        text-xl font-bold text-white px-5
-        active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {value}
-    </motion.button>
-  );
-}
-
-function KeypadActionButton({
-  label,
-  onClick
-}: {
-  label: string
-  onClick?: () => void
-}) {
-  return (
-    <motion.button
-      onClick={onClick}
-      className={`
-        mt-5 p-2 rounded-full bg-white w-[80vw] text-[1rem] text-center text-[#131313]
-        font-extrabold active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {label}
-    </motion.button>
-  );
-}
