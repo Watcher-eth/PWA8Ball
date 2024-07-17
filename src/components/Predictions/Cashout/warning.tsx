@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { AlertTriangle, Clock, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCashout } from "@/lib/onchain/mutations/Cashout";
+import { toast } from "sonner";
 
 interface CashOutWarningScreenProps {
   changeStep: () => void;
@@ -23,15 +25,75 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
   const [success, setSuccess] = useState<boolean>(false);
   const width = window.innerWidth;
 
+  const {
+    smartAccountReady,
+    smartAccountClient,
+    smartAccountAddress,
+    eoa,
+    eoaClient,
+    eoaAddress,
+  } = useSmartAccount();
+  const { user: userCon } = useUserStore();
+  const { mutate: cashOut } = useCashout();
+
   async function cashOutPrediction() {
-    try {
-      setLoading(true);
-      // Cash out logic here
-      setSuccess(true);
-    } catch (error) {
-      console.error("Failed to cash out:", error);
-      alert("Failed to cash out!");
+    //TODO: Check Balance of user
+    const userBalance = Number(userCon?.balance) / 1000000;
+    const desired = Number(amount.toFixed(4));
+
+    const hasBalance = Number(userBalance) > desired;
+
+    if (!hasBalance) {
+      // router.navigate({ pathname: "/GetFundsModal" });
     }
+
+    if (hasBalance && smartAccountReady)
+      try {
+        console.log("client", smartAccountClient);
+        setLoading(true);
+        if (userCon?.walletType === "smartwallet")
+          cashOut({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(props.points.toFixed(4)) * 1000000,
+            client: smartAccountClient,
+            address: smartAccountAddress,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
+
+        if (userCon?.walletType === "eoa")
+          cashOut({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(props.points.toFixed(4)) * 1000000,
+            client: eoaClient,
+            address: eoaAddress,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
+
+        setTimeout(() => {
+          setLoading(false);
+
+          setSuccess(true);
+          toast.success("Cashed out successfully!", {
+            icon: <CheckCircle />,
+            style: { backgroundColor: "#5ACE5A", color: "white" },
+          });
+        }, 3500);
+
+        setTimeout(() => {
+          router.push({
+            pathname: getProfilePath(userCon?.external_auth_provider_user_id),
+          });
+        }, 6500);
+      } catch (error) {
+        console.error("Failed to make prediction:", error);
+        alert("Failed to make prediction!");
+      }
   }
 
   return (

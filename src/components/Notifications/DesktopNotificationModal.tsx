@@ -25,7 +25,7 @@ export function DesktopNotificationModal({
       title="Notifications"
       subtitle="You have 3 unread messages."
       cardClassName="w-[99%]"
-      dialogContentClassName="bg-[#080808]/[0.55] backdrop-blur-lg w-full"
+      dialogContentClassName="bg-[#080808]/[0.85] backdrop-blur-lg w-full"
       cardContentClassName=" w-full min-h-[50vh] "
       dialogClassName="w-[99%]"
       content={

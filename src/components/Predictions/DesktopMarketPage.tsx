@@ -9,9 +9,12 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Grid } from "@/components/ui/tailwind/Grid";
 import { Col } from "@/components/ui/tailwind/Col";
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
-import { InverseBleedOverlay, InverseVerticalBleedOverlay, StandardBleedOverlay } from "../layouts/StandardBleedOverlay";
+import {
+  InverseBleedOverlay,
+  InverseVerticalBleedOverlay,
+  StandardBleedOverlay,
+} from "../layouts/StandardBleedOverlay";
 import { PredictModal } from "@/components/Modals/PredictModal";
-import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/Details";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
@@ -19,7 +22,7 @@ import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
 
 import { AlignLeft } from "lucide-react";
-
+import { DesktopBettersModal } from "./Betters/OverviewModal";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
@@ -78,7 +81,7 @@ export function DesktopMarketPage({ users, market, id }) {
                       </div>
                     </div>
                   </div>
-                  <BettersOverviewModal
+                  <DesktopBettersModal
                     title={market?.title}
                     question={market?.description}
                     image={market?.image}
@@ -110,7 +113,7 @@ export function DesktopMarketPage({ users, market, id }) {
                         <AvatarImage src={userImages[2]} />
                       </Avatar>
                     </div>
-                  </BettersOverviewModal>
+                  </DesktopBettersModal>
                 </div>
                 <div className="h-[0.1rem] mt-[0.55rem] bg-[#212121] mx-5  rounded-full" />
                 <div className="text-[1rem] font-medium line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">

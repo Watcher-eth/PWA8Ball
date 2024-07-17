@@ -1,9 +1,5 @@
 // @ts-nocheck
 
-import "fast-text-encoding";
-import "react-native-get-random-values";
-import "@ethersproject/shims";
-
 import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,

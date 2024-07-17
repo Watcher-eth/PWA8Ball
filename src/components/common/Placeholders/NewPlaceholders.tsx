@@ -53,7 +53,7 @@ export function NotificationsPlaceholder({ isUser }) {
         </div>
       </div>
       <Link href={HOME_PATH}>
-        <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#080808] border-[0.1rem] border-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+        <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#090909] border-[0.1rem] border-[#171717] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
         </motion.button>
       </Link>
@@ -208,24 +208,24 @@ export const NotificationSkelleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex mx-6 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#080808] my-2"
+    className="flex mx-6 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#080808]/[0.9] my-2"
   >
     <div className="flex items-center gap-2">
       <motion.div
-        className="w-14 h-14 bg-[#252525] rounded-xl"
+        className="w-14 h-14 bg-[#212121] rounded-xl"
         variants={skeletonVariants}
         initial="initial"
         animate="pulse"
       />
       <div className="flex flex-col gap-2">
         <motion.div
-          className="w-[15vw] h-[20px] bg-[#252525] rounded-xl"
+          className="w-[15vw] h-[20px] bg-[#212121] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"
         />
         <motion.div
-          className="w-[12vw] h-[17px] bg-[#252525] rounded-xl"
+          className="w-[12vw] h-[17px] bg-[#212121] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"

@@ -36,7 +36,7 @@ export const NotificationCard = ({
 
   return (
     <div
-      className="mb-2.5 bg-[#101010] animate-fadeInUp"
+      className="mb-2.5 bg-[#101010]/[0.9] animate-fadeInUp"
       style={{ animationDelay: `${index * 150}ms` }}
     >
       <div
@@ -124,7 +124,8 @@ export function NotificationsPage({ userId, isDesktop }) {
             ? "bg-[#171717] rounded-xl border-2 border-[#292929]"
             : "bg-[#101010]"
         }
-      `}>
+      `}
+    >
       <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
       <div className="w-full overflow-y-auto">
         {notifications.map((item, index) => (
@@ -141,4 +142,4 @@ export function NotificationsPage({ userId, isDesktop }) {
       </div>
     </div>
   );
-};
+}

@@ -12,6 +12,7 @@ import { LoadingPrediction } from "./SuccessScreen";
 import { useRouter } from "next/router";
 import { getProfilePath } from "@/utils/urls";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
+import { toast } from "sonner";
 
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void;
@@ -52,22 +53,38 @@ export function ConfirmPrediction(props: {
       try {
         console.log("client", smartAccountClient);
         setLoading(true);
-        predictV2({
-          userId: userCon.external_auth_provider_user_id!,
-          marketId: Number(props.id),
-          amount: Number(amount.toFixed(4)) * 1000000,
-          client: smartAccountClient,
-          address: smartAccountAddress,
-          preferYes: Number(props.option) === 1 ? false : true,
-          option: props.options[Number(props.option) - 1],
-          isBuy: true,
-        });
+        if (userCon?.walletType === "smartwallet")
+          predictV2({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(amount.toFixed(4)) * 1000000,
+            client: smartAccountClient,
+            address: smartAccountAddress,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
 
-        // showToast();
+        if (userCon?.walletType === "eoa")
+          predictV2({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(amount.toFixed(4)) * 1000000,
+            client: eoaClient,
+            address: eoa,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
+
         setTimeout(() => {
           setLoading(false);
 
           setSuccess(true);
+          toast.success("Prediction successful!", {
+            icon: <CheckCircle />,
+            style: { backgroundColor: "#5ACE5A", color: "white" },
+          });
         }, 3500);
 
         setTimeout(() => {
@@ -202,17 +219,17 @@ export function ConfirmPrediction(props: {
       >
         {!success && (
           <motion.button
-          onClick={() => props.setStep(1)}
-          className={`
+            onClick={() => props.setStep(1)}
+            className={`
             mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
             ${success ? "w-[0vw]" : "w-[40vw]"}
           `}
-          initial={{ width: "40vw" }}
-          animate={{
-            opacity: success ? 0 : 1,
-          }}
-        >
-          Back
+            initial={{ width: "40vw" }}
+            animate={{
+              opacity: success ? 0 : 1,
+            }}
+          >
+            Back
           </motion.button>
         )}
         <motion.button

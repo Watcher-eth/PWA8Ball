@@ -13,8 +13,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { toast } from "sonner";
 
-
-export function RemoveLPConfirmationScreen(props:{
+export function RemoveLPConfirmationScreen(props: {
   setStep: (num: number) => void;
   onClose: () => void;
   refetch: () => void;
@@ -25,8 +24,13 @@ export function RemoveLPConfirmationScreen(props:{
   isDesktop?: boolean;
 }) {
   const { onClose } = props;
-  const { smartAccountReady, smartAccountClient, smartAccountAddress } =
-    useSmartAccount();
+  const {
+    smartAccountReady,
+    smartAccountClient,
+    smartAccountAddress,
+    eoaClient,
+    eoa,
+  } = useSmartAccount();
   const { user: userCon } = useUserStore();
 
   const [loading, setLoading] = useState(false);
@@ -45,12 +49,22 @@ export function RemoveLPConfirmationScreen(props:{
     if (smartAccountReady) {
       try {
         setLoading(true);
-        removeLP({
-          userId: userCon?.external_auth_provider_user_id!,
-          marketId: props.id,
-          client: smartAccountClient,
-          address: smartAccountAddress!,
-        });
+
+        if (userCon?.walletType === "smartwallet")
+          removeLP({
+            userId: userCon?.external_auth_provider_user_id!,
+            marketId: props.id,
+            client: smartAccountClient,
+            address: smartAccountAddress!,
+          });
+
+        if (userCon?.walletType === "eoa")
+          removeLP({
+            userId: userCon?.external_auth_provider_user_id!,
+            marketId: props.id,
+            client: eoaClient,
+            address: eoa?.address!,
+          });
 
         setTimeout(() => setLoading(false), 500);
 
@@ -368,4 +382,4 @@ export function RemoveLPConfirmationScreen(props:{
       </div>
     </div>
   );
-};
+}

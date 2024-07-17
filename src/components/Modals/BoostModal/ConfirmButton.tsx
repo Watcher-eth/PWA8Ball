@@ -7,13 +7,19 @@ import { Check, Loader } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
+import { toast } from "sonner";
 
 export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const controls = useAnimation();
-  const { smartAccountReady, smartAccountClient, smartAccountAddress, eoa } =
-    useSmartAccount();
+  const {
+    smartAccountReady,
+    smartAccountClient,
+    smartAccountAddress,
+    eoa,
+    eoaClient,
+  } = useSmartAccount();
   const router = useRouter();
   const { mutate: boostV2, isSuccess } = useBoostMarket2();
   const { user: userCon } = useUserStore();
@@ -28,16 +34,29 @@ export const ConfirmButton = ({ onComplete, buttonText = "Confirm", id }) => {
       return;
     }
     if (hasBalance && smartAccountAddress) {
-      console.log("User id", userCon);
       try {
-        boostV2({
-          userId: userCon?.external_auth_provider_user_id!,
-          marketId: id,
-          amount: 1000000,
-          client: smartAccountClient,
-          address: smartAccountAddress,
-        });
+        if (userCon?.walletType === "smartwallet")
+          boostV2({
+            userId: userCon?.external_auth_provider_user_id!,
+            marketId: id,
+            amount: 1000000,
+            client: smartAccountClient,
+            address: smartAccountAddress,
+          });
 
+        if (userCon?.walletType === "eoa")
+          boostV2({
+            userId: userCon?.external_auth_provider_user_id!,
+            marketId: id,
+            amount: 1000000,
+            client: eoaClient,
+            address: eoa,
+          });
+
+        toast.success("Boosted successfully!", {
+          icon: <CheckCircle />,
+          style: { backgroundColor: "#5ACE5A", color: "white" },
+        });
         setTimeout(() => {
           router.push({
             pathname: `/lp`,

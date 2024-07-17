@@ -8,7 +8,6 @@ export function DesktopBoostContent(props: {
   id: string;
   onComplete: () => void;
 }) {
-  console.log("image", props.image);
   return (
     <div className="flex flex-col p-2 ">
       <img className="h-14 w-14 object-cover rounded-full" src={props?.image} />
@@ -52,7 +51,7 @@ function InfoRow({
     <div className="flex flex-row items-center justify-between my-3">
       <div className="text-[#909090] font-medium text-[1.1rem]">{label}</div>
 
-        <div className="text-white font-medium text-[1.1rem]">{content}</div>
+      <div className="text-white font-medium text-[1.1rem]">{content}</div>
       {children}
     </div>
   );
