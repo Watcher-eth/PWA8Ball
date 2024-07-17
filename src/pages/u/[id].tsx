@@ -2,7 +2,7 @@
 
 import { GetServerSideProps } from "next";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PieChart, Twitter, CircleEllipsis } from "lucide-react";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
@@ -11,6 +11,7 @@ import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowe
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 import { skeletonVariants } from "@/components/ui/Skeleton";
+import { SocialsSection } from "@/components/common/SocialsSection";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
@@ -56,25 +57,9 @@ export default function ProfilePage({ userId }: { userId: string }) {
 
       <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
         <Link href="/lp">
-          <div
-            className={`
-              absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
-              top-6 left-6
-            `}
-          >
-            <PieChart size={19} color="white" strokeWidth={3} />
-          </div>
+          <AbsoluteBlurIcon IconComponent={PieChart} className="top-6 left-6"/>
         </Link>
-
-        <div
-          className={`
-              absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
-              top-5 right-6
-            `}
-        >
-          <CircleEllipsis size={19} color="white" strokeWidth={3} />
-        </div>
-
+        <AbsoluteBlurIcon IconComponent={CircleEllipsis} className="top-5 right-6"/>
         <img
           src={userC?.pfp}
           className="size-[5rem] rounded-full border-4 border-[#202020] "
@@ -87,7 +72,7 @@ export default function ProfilePage({ userId }: { userId: string }) {
 
         <div className="flex flex-col items-center mt-0">
           <SocialsSection {...userC?.socials} />
-          <div style={{ fontWeight: 500 }} className="flex items-center mt-2">
+          <div className="flex items-center mt-2 font-medium">
             {balanceLoading ? (
               <div style={{ marginRight: 7 }}>
                 <motion.div
@@ -114,7 +99,7 @@ export default function ProfilePage({ userId }: { userId: string }) {
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-center mt-[-12.5rem]">
+      <div className="w-full flex flex-col items-center -mt-[200px]">
         <GeneralFeed
           handleOpenBottomSheet={(props) => console.log(props)}
           walletAddy={userC?.walletaddress}
@@ -130,24 +115,21 @@ export default function ProfilePage({ userId }: { userId: string }) {
   );
 }
 
-export function SocialsSection({ twitter, farcaster }) {
-  let username;
-  let icon;
-  if (twitter) {
-    username = twitter?.username;
-    icon = <Twitter className="h-4 text-gray-200" />;
-  } else if (farcaster) {
-    username = farcaster?.name;
-    icon = <img src="/farcaster.png" className="size-10" alt="Farcaster" />;
-  }
-  return username && <SocialDisplayBlock username={username} icon={icon} />;
-}
-
-function SocialDisplayBlock({ username, icon }) {
+function AbsoluteBlurIcon({
+  IconComponent,
+  className=""
+}: {
+  IconComponent: React.FC,
+  className?: string
+}) {
   return (
-    <div className="flex items-center font-medium">
-      {icon}
-      <p className="text-gray-200 text-md ml-1 font-medium">@{username}</p>
+    <div
+      className={`
+        absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
+        ${className}
+      `}
+    >
+      <IconComponent size={19} color="white" strokeWidth={3} />
     </div>
-  );
+  )
 }

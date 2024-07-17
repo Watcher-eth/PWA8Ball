@@ -1,5 +1,20 @@
 // @ts-nocheck
-
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
+import {
+  DropdownMenu,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
+import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
+import Link from "next/link";
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
+import { User } from "@/types/UserTypes";
 import {
   BarChart,
   Filter,
@@ -24,14 +39,14 @@ import {
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { SocialsSection } from "@/pages/u/[id]";
+import { SocialsSection } from "@/components/common/SocialsSection";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import { BetModal } from "../Modals/PredictionPositionModal";
+import { BetModal } from "@/components/Modals/PredictionPositionModal";
 
-import { motion } from "framer-motion";
+
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
   { category: "US Elections", percentage: 42, fill: "#1E90FF" },
@@ -88,34 +103,13 @@ export function ProfileDashboard() {
           <SocialsSection {...userC?.socials} />
         </div>
         <div className="flex justify-between text-white mb-4 px-2">
-          <div className="text-center">
-            <p className="font-bold">{totalFollowers}</p>
-            <p className="text-[#909090]">Followers</p>
-          </div>
-          <div className="text-center">
-            <p className="font-bold">555</p>
-            <p className="text-[#909090]">Following</p>
-          </div>
-          <div className="text-center">
-            <p className="font-bold">{mergedData.length}</p>
-            <p className="text-[#909090]">Predictions</p>
-          </div>
+          <TextWithSuffix value={totalFollowers} suffix="Followers" />
+          <TextWithSuffix value={"555"} suffix="Following" />
+          <TextWithSuffix value={"12"} suffix="Predictions" />
         </div>
-        <div className="flex justify-between mb-4">
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md"
-          >
-            Follow
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md"
-          >
-            Edit
-          </motion.div>
+        <div className="flex justify-between mb-4 space-x-4">
+          <ContrastButton label="Follow" />
+          <ContrastButton label="Edit" />
         </div>
         <div>
           <Card className="bg-[transparent]  border-1 border-[#212121]">
@@ -330,21 +324,7 @@ export function ProfileDashboard() {
   );
 }
 
-import React, { useMemo } from "react";
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
-import {
-  DropdownMenu,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
-import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
-import Link from "next/link";
-import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
-import { User } from "@/types/UserTypes";
+
 
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
@@ -445,34 +425,13 @@ export function DesktopProfileSide(props: {
         <SocialsSection {...userC?.socials} />
       </div>
       <div className="flex justify-between text-white mb-4 px-2">
-        <div className="text-center">
-          <p className="font-bold">{totalFollowers}</p>
-          <p className="text-[#909090]">Followers</p>
-        </div>
-        <div className="text-center">
-          <p className="font-bold">555</p>
-          <p className="text-[#909090]">Following</p>
-        </div>
-        <div className="text-center">
-          <p className="font-bold">12</p>
-          <p className="text-[#909090]">Predictions</p>
-        </div>
+        <TextWithSuffix value={totalFollowers} suffix="Followers" />
+        <TextWithSuffix value={"555"} suffix="Following" />
+        <TextWithSuffix value={"12"} suffix="Predictions" />
       </div>
-      <div className="flex justify-between mb-4">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md"
-        >
-          Follow
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md"
-        >
-          Edit
-        </motion.div>
+      <div className="flex justify-between mb-4 space-x-4">
+        <ContrastButton label="Follow" />
+        <ContrastButton label="Edit" />
       </div>
       <div>
         <Card className="bg-[transparent]  border-1 border-[#212121]">
@@ -559,6 +518,44 @@ export function DesktopProfileSide(props: {
           </CardFooter>
         </Card>
       </div>
+    </div>
+  );
+}
+
+
+function TextWithSuffix({
+  value,
+  suffix,
+}: {
+  value: number;
+  suffix: string;
+}) {
+  return (
+    <div className="text-center">
+      <p className="font-bold">{value}</p>
+      <p className="text-[#909090]">{suffix}</p>
+    </div>
+  );
+}
+
+
+function ContrastButton({
+  label,
+  className=""
+}: {
+  label: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`
+        w-1/2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121]
+        flex justify-center items-center rounded-md
+        hover:scale-102 active:scale-98
+        ${className}
+      `}
+    >
+      {label}
     </div>
   );
 }
