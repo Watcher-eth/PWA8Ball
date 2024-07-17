@@ -251,7 +251,7 @@ function DesktopConfirmPrediction(props: {
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
 
-  
+
   async function executePrediction() {
     //TODO: Check Balance of user
     const userBalance = Number(userCon?.balance) / 1000000;
@@ -304,14 +304,6 @@ function DesktopConfirmPrediction(props: {
   return (
     <div className="flex flex-col items-center w-full py-4 pt-0 rounded-lg ">
       {loading || success ? (
-        // <LoadingPrediction
-        //   image={image}
-        //   loading={loading}
-        //   question={question}
-        //   option={Option}
-        //   success={success && !loading}
-        //   answer={options[Option - 1].name}
-        // />
         <DesktopLoadingPrediction
           image={props.image}
           question={props.question}

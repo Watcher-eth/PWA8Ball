@@ -47,10 +47,8 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
       } mt-0 p-5 ${props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"}`}
     >
-      {success ? (
-        <div />
-      ) : (
-        <motion.div
+      {success && (
+        <div
           className={`flex flex-col w-full ${
             props.isDesktop ? "bg-transparent" : "bg-[#101010]"
           } rounded-[20px]`}
@@ -125,10 +123,10 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
               />
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
       <div className="flex flex-row items-center gap-[5px] my-[5px]">
-        <motion.div
+        <div
           onClick={shareLink}
           className={`mt-[12px] flex flex-row p-[11px] rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
             props?.isDesktop ? "w-[24vw]" : `w-[${window.innerWidth / 1.25}px]`
@@ -136,11 +134,11 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
         >
           <div className="flex flex-row items-center justify-center">
             <ShareIcon color="black" strokeWidth={3} height={23} />
-            <motion.span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
+            <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
               Share
-            </motion.span>
+            </span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
