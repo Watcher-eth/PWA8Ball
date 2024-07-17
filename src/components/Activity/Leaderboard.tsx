@@ -6,16 +6,8 @@ import { AltSkeleton } from "@/components/ui/Skeleton";
 import { PredictorInfo } from "./PredictorInfo";
 
 
-export const Leaderboard: React.FC = () => {
-  const { data: topPredictors, error, isLoading } = useGetTopPredictors();
-
-  if (error) {
-    return (
-      <p className="text-white">
-        An error occurred: {error.message}
-      </p>
-    );
-  }
+export function Leaderboard() {
+  const { data: topPredictors, isLoading } = useGetTopPredictors();
 
   return (
     <motion.div
@@ -29,13 +21,17 @@ export const Leaderboard: React.FC = () => {
           <h2 className="text-white text-[15px] font-bold">Name</h2>
           <h2 className="text-white text-[15px] font-bold">At stake</h2>
         </div>
-        {isLoading ? (
-          <LoadingSkeleton />
-        ) : (
+        {
           topPredictors?.map((predictor, index) => (
             <PredictorInfo key={index} {...predictor} index={index} />
-          ))
-        )}
+          )) ?? (
+            isLoading ? (
+              <LoadingSkeleton />
+            ) : (
+              <p className="text-white">No predictors found</p>
+            )
+          )
+        }
       </div>
     </motion.div>
   );
@@ -43,7 +39,7 @@ export const Leaderboard: React.FC = () => {
 
 
 
-const LoadingSkeleton = () => {
+function LoadingSkeleton() {
   return ( [1, 2, 3, 4].map((index) => (
     <motion.div
       key={index}

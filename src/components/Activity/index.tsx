@@ -2,16 +2,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Bell, Users, Globe } from "lucide-react";
-import { ActivityField } from "./ActivityField";
-import { Leaderboard } from "./Leaderboard";
-import { YourStats } from "./YourStats";
+
 import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
-import { InviteFriendsPlaceholder } from "../common/Placeholders/InviteFriendsPlaceholder";
-import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
-import { NotificationsModal } from "../Modals/NotificationsModal";
+
+import { InviteFriendsPlaceholder } from "@/components/common/Placeholders/InviteFriendsPlaceholder";
+import { NotificationsModal } from "@/components/Modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
+
+import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
+import { ActivityField } from "./ActivityField";
+import { Leaderboard } from "./Leaderboard";
+import { YourStats } from "./YourStats";
+
 
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
