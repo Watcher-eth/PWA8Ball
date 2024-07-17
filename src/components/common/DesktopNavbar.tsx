@@ -50,7 +50,7 @@ export function DesktopNavbar() {
                   <img
                     src={user.pfp}
                     alt={user.name}
-                    className="size-8 rounded-full"
+                    className="size-8 rounded-full mr-1"
                   />
                 </div>
               </DesktopProfilePopover>

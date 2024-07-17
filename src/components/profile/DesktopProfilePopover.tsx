@@ -42,7 +42,7 @@ export function DesktopProfilePopover({
       <DropdownMenuTrigger asChild>
         <div>{children}</div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-lg backdrop-blur-lg border-2 w-56 border-[#181818]">
+      <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-lg backdrop-blur-lg border w-56 border-white/10">
         <DropdownMenuLabel className="flex  flex-row items-center">
           {user?.pfp ? (
             <img className="size-6 rounded-full mr-2" src={user?.pfp} />
@@ -64,14 +64,14 @@ export function DesktopProfilePopover({
         <DropdownMenuGroup>
           <DropdownItem label="Your Friends" />
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="hover:!bg-slate-400/20">
+            <DropdownMenuSubTrigger className="hover:!bg-slate-400/20 rounded-md active:!bg-slate-400/30">
               Invite users
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent
                 className={`
                   bg-[#080808]/80 rounded-md
-                  backdrop-blur-md border-2 border-[#181818]
+                  backdrop-blur-md border border-white/10
                 `}
               >
                 <DropdownItem
@@ -131,7 +131,7 @@ function DropdownItem({
   return (
     <DropdownMenuItem
       onClick={onClick}
-      className="flex flex-row justify-between items-center hover:!bg-slate-400/20"
+      className="flex flex-row justify-between items-center hover:!bg-slate-400/20 rounded-md"
       disabled={disabled}
     >
       {label}
