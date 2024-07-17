@@ -36,12 +36,6 @@ export function PredictModal(props: {
 }) {
   const [step, setStep] = useState(1);
 
-  const stepVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
-
   const [sliderValue, setSliderValue] = useState(""); // Use a string to hold the value
   const setVotingState = useVotingStore((state) => state.setState);
 

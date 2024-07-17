@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { ArrowDown, CreditCard, Repeat } from "lucide-react";
 
 export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
-  // Get gho onchain (decent / uniswap)
-  // Get gho with fiat (mount Pelering)
-  // Before continue check that enough balance
   const stepVariants = {
     initial: { opacity: 0, y: 10 },
     animate: { opacity: 1, y: 0 },
@@ -28,27 +25,27 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       <div className="text-[#686868] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1.65rem]">
         You don't have enough funds. Please fund your wallet to continue.
       </div>
-      <div className="h-[0.05rem] w-[80vw] my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
+      <div className="h-px w-[80vw] my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
       <LabeledSectionWithIcon
+        title="Buy"
+        description="Fund your wallet using your credit card or Apple/Google Pay"
         IconComponent={CreditCard}
         className="bg-orange-400"
         onClick={() => setStep(5)}
-        title="Buy"
-        description="Fund your wallet using your credit card or Apple/Google Pay"
       />
       <LabeledSectionWithIcon
+        title="Swap"
+        description="Swap ETH, Stablecoins or Matic for USDC using Uniswap"
         IconComponent={Repeat}
         className="bg-pink-400"
         onClick={() => setStep(4)}
-        title="Swap"
-        description="Swap ETH, Stablecoins or Matic for USDC using Uniswap"
       />
       <LabeledSectionWithIcon
+        title="Receive"
+        description="Receive USDC from one of your wallets to your Blitz address"
         IconComponent={ArrowDown}
         className="bg-green-400"
         onClick={() => setStep(6)}
-        title="Receive"
-        description="Receive USDC from one of your wallets to your Blitz address"
       />
       <div className="flex items-center mt-2 w-[85vw] space-x-4 mb-7  m-4 mx-6 justify-between mx-2">
         <Button
@@ -95,13 +92,15 @@ function LabeledSectionWithIcon({
         active:scale-96 hover:scale-101 transition-all
       `}
     >
-      <div className={`rounded-full mt-3  p-2 max-h-[2.65rem] ml-3 my-2 ${className}`}>
+      <div
+        className={`rounded-full mt-3  p-2 max-h-[2.65rem] ml-3 my-2 ${className}`}
+      >
         <IconComponent size={25} strokeWidth={3} className="stroke-white  " />
       </div>
       <div className=" flex flex-col space-y-[-0.15rem] font-bold mb-3 mt-2 mr-1 ml-3">
-        <div className="text-white text-[1.1rem] font-bold ">Buy</div>
+        <div className="text-white text-[1.1rem] font-bold">{title}</div>
         <div className="text-[#989898]  text-base/4 text-[0.9rem]">
-          Fund your wallet using your credit card or Apple/Google Pay
+          {description}
         </div>
       </div>
     </div>
