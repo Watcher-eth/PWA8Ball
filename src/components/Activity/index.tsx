@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useState } from "react";
-
 import { motion } from "framer-motion";
 import { Bell, Users, Globe } from "lucide-react";
 import { ActivityField } from "./ActivityField";
@@ -14,7 +13,7 @@ import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
-export function ActivityPage(props: { isDesktop?: boolean }) {
+export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
   const { user } = useUserStore();
   const {
@@ -34,9 +33,9 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
     <div
       className={`
         no-scrollbar flex flex-col
-        ${props.isDesktop ? "w-[41vw]" : "w-full"} min-h-screen
+         min-h-screen
         p-[20px] pt-[30px]
-        ${props.isDesktop ? "bg-[transparent]" : "bg-[#101010]"} relative
+        ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
       `}
     >
       <div
@@ -52,15 +51,13 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
       <div
         className={`
           flex flex-row w-full justify-between items-center
-          mb-2.5 ${props?.isDesktop ? "bg-[transparent]" : "bg-[#101010]"}
+          mb-2.5 ${isDesktop ? "bg-[transparent]" : "bg-[#101010]"}
         `}
       >
         <motion.button
-          style={{
-            padding: "7px",
-            borderRadius: "20px",
-            backgroundColor: page ? "#FF0050" : "#1C1C1E",
-          }}
+          className={`p-2 rounded-[20px] ${
+            page ? "bg-[#FF0050]" : "bg-[#1C1C1E]"
+          }`}
           onClick={() => setPage(!page)}
         >
           {page ? (
@@ -72,7 +69,7 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
         <h1 className="text-[20px] text-white font-bold">
           {page ? "Global" : "Your Friends"}
         </h1>
-        <NotificationsModal isDesktop={props?.isDesktop}>
+        <NotificationsModal isDesktop={isDesktop}>
           <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
             <Bell color="white" strokeWidth={3} size={20} />
           </motion.button>
@@ -88,37 +85,39 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
               <YourStats />
               {predictions?.length > 0 ? (
                 <div>
-                  {Object.keys(groupedPredictions).map((dateKey, index) => (
-                    <div key={dateKey}>
-                      <h2
-                        className={`
-                          font-extrabold text-[20px] text-white mb-[1px]
-                          ${index === 0 ? "mt-[15px]" : "mt-[22px]"}
+                  {Object.entries(groupedPredictions).map(
+                    ([dateKey, predictions], index) => (
+                      <div key={dateKey}>
+                        <h2
+                          className={`
+                          font-extrabold text-[20px] text-white -mb-px
+                          ${index === 0 ? "mt-4" : "mt-[22px]"}
                         `}
-                      >
-                        {dateKey}
-                      </h2>
-                      {groupedPredictions[dateKey].map((item, idx) => (
-                        <ActivityField
-                          isDesktop={props?.isDesktop}
-                          key={idx}
-                          index={idx}
-                          question={item.markets.question}
-                          name={item.users.name}
-                          pfp={item.users.pfp}
-                          amount={item.amount / 10 ** 5}
-                          title={item.markets.question}
-                          image={item.markets.image}
-                          option={item.option}
-                          onOpenBottomSheet={() => {}}
-                        />
-                      ))}
-                    </div>
-                  ))}
+                        >
+                          {dateKey}
+                        </h2>
+                        {predictions.map((item, idx) => (
+                          <ActivityField
+                            isDesktop={isDesktop}
+                            key={idx}
+                            index={idx}
+                            question={item.markets.question}
+                            name={item.users.name}
+                            pfp={item.users.pfp}
+                            amount={item.amount / 10 ** 5}
+                            title={item.markets.question}
+                            image={item.markets.image}
+                            option={item.option}
+                            onOpenBottomSheet={() => {}}
+                          />
+                        ))}
+                      </div>
+                    )
+                  )}
                   <div className="h-[110px]" />
                 </div>
               ) : (
-                <InviteFriendsPlaceholder isDesktop={props?.isDesktop} />
+                <InviteFriendsPlaceholder isDesktop={isDesktop} />
               )}
             </div>
           )}
