@@ -343,7 +343,7 @@ import {
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
 import Link from "next/link";
-import { DesktopMyBetModal } from "../Common/Charts/MyBetModal";
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 import { User } from "@/types/UserTypes";
 
 const DesktopUserBoostOverview = (props: { address: string }) => {

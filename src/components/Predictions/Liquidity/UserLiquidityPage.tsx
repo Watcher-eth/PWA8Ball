@@ -5,7 +5,7 @@ import { LiquidityPosition } from "./LiquidityPosition";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP";
-import { NewPlaceholderLp } from "@/components/Common/Placeholders/NewPlaceholders";
+import { NewPlaceholderLp } from "@/components/common/Placeholders/NewPlaceholders";
 
 export function UserLiquidityPage() {
   const router = useRouter();

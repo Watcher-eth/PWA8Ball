@@ -9,7 +9,7 @@ import { YourStats } from "./YourStats";
 import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
-import { InviteFriendsPlaceholder } from "../Common/Placeholders/InviteFriendsPlaceholder";
+import { InviteFriendsPlaceholder } from "../common/Placeholders/InviteFriendsPlaceholder";
 import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { NotificationsModal } from "../Modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";

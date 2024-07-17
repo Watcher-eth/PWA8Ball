@@ -9,7 +9,7 @@ import {
   NestedDrawer,
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
-import MyBetModal from "../Common/Charts/MyBetModal.tsx";
+import MyBetModal from "../common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm.tsx";

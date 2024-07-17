@@ -18,7 +18,7 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
 import { base, baseSepolia } from "viem/chains";
-import { RootLayout } from "@/components/Common/RootLayout";
+import { RootLayout } from "@/components/common/RootLayout";
 
 export const queryClient = new QueryClient();
 

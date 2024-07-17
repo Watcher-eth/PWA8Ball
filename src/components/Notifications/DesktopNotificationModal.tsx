@@ -2,7 +2,7 @@
 
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 import { NotificationCard } from "./UserNotifications";
-import { NotificationsPlaceholder } from "../Common/Placeholders/NewPlaceholders";
+import { NotificationsPlaceholder } from "../common/Placeholders/NewPlaceholders";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 import { useUserStore } from "@/lib/stores/UserStore";
 

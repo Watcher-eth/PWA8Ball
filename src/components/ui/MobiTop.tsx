@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { DesktopNavbar } from "../Common/DesktopNavbar";
+import { DesktopNavbar } from "../common/DesktopNavbar";
 /**
  * Need to properly do this, this is more an interim solution to get the mobile and desktop
  * components to work together for prototyping

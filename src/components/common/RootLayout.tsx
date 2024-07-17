@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { NavBar } from "@/components/Common/NavBar"; // Assuming NavBar is in the same directory
+import { NavBar } from "@/components/common/NavBar"; // Assuming NavBar is in the same directory
 import { isMobile } from "@/utils/isMobile";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 
 export function RootLayout({ children }: { children: ReactNode }) {
-  
+
   return (
     <SmartAccountProvider>
       <div className="relative pb-20 items-center justify-center">

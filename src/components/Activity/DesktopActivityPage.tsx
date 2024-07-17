@@ -2,7 +2,7 @@
 import React from "react";
 
 import { ActivityPage } from "@/components/Activity";
-import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
+import { DesktopNavbar } from "@/components/common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
 import { useUserStore } from "@/lib/stores/UserStore";

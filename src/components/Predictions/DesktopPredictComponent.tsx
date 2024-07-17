@@ -17,7 +17,7 @@ import {
   ScanFace,
   ShareIcon,
 } from "lucide-react";
-import { DesktopChart } from "../Common/Charts/DesktopChart";
+import { DesktopChart } from "../common/Charts/DesktopChart";
 import { Input } from "../ui/Input";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";

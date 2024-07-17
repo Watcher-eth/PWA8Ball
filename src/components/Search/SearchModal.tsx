@@ -23,7 +23,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/Button";
 
-import { RandomMemoji } from "../Common/MemojiAvatar";
+import { RandomMemoji } from "../common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
 import YourVotes, { YourSubmission } from "../Activity/YourVotes";
 import { ACTIVITY_PATH } from "@/utils/urls";
