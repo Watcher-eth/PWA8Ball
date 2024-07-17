@@ -3,7 +3,7 @@ import { ProfileDashboard } from "@/components/profile/DesktopProfile";
 import React from "react";
 
 function test() {
-  return <ProfileDashboard />;
+  return <DesktopActivityPage />;
 }
 
 export default test;

@@ -118,7 +118,7 @@ export function ActivityPage(props: { isDesktop?: boolean }) {
                   <div className="h-[110px]" />
                 </div>
               ) : (
-                <InviteFriendsPlaceholder />
+                <InviteFriendsPlaceholder isDesktop={props?.isDesktop} />
               )}
             </div>
           )}

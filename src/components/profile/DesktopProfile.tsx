@@ -344,6 +344,7 @@ import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { DesktopLPModal } from "../Modals/Desktop/DesktopLPModal";
 import Link from "next/link";
 import { DesktopMyBetModal } from "../Common/Charts/MyBetModal";
+import { User } from "@/types/UserTypes";
 
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
@@ -358,6 +359,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
   );
   return (
     <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
+      <DesktopProfileSide totalFollowers={totalFollowers} userC={userC} />
       <div className="mb-4">
         <div className="flex items-center mb-4">
           <div className="bg-[#171717] h-24 w-24 rounded-lg"></div>
@@ -418,3 +420,145 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
     </div>
   );
 };
+
+export function DesktopProfileSide(props: {
+  userC: User;
+  totalFollowers: number;
+}) {
+  const { userC, totalFollowers } = props;
+  return (
+    <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
+      <img
+        src={userC?.pfp}
+        alt="Profile Header"
+        className="w-full h-10 absolute top-0 left-0 rounded-t-[1.5rem] right-0 object-cover"
+      />
+      <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] bg-gradient-to-b from-transparent via-[#131313]/80 to-[#131313]" />
+      <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] backdrop-blur-lg bg-opacity-50" />
+      <div className="flex flex-col items-center mb-4 mt-6 relative">
+        <img
+          src={userC?.pfp}
+          alt="Profile"
+          className="rounded-full h-24 w-24 mb-2"
+        />
+        <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+        <SocialsSection {...userC?.socials} />
+      </div>
+      <div className="flex justify-between text-white mb-4 px-2">
+        <div className="text-center">
+          <p className="font-bold">{totalFollowers}</p>
+          <p className="text-[#909090]">Followers</p>
+        </div>
+        <div className="text-center">
+          <p className="font-bold">555</p>
+          <p className="text-[#909090]">Following</p>
+        </div>
+        <div className="text-center">
+          <p className="font-bold">12</p>
+          <p className="text-[#909090]">Predictions</p>
+        </div>
+      </div>
+      <div className="flex justify-between mb-4">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-1/2 mr-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] justify-center items-center flex rounded-md"
+        >
+          Follow
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-1/2 ml-2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121] flex justify-center items-center rounded-md"
+        >
+          Edit
+        </motion.div>
+      </div>
+      <div>
+        <Card className="bg-[transparent]  border-1 border-[#212121]">
+          <CardHeader className="items-center pb-0">
+            <CardTitle className="text-white">
+              {userC?.name}'s Accuracy
+            </CardTitle>
+            <CardDescription className="text-gray-400">
+              15th July
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex-1  pb-0">
+            <ChartContainer
+              config={chartConfig}
+              className="mx-auto aspect-square  max-h-[250px]"
+            >
+              <RadialBarChart
+                data={chartData}
+                startAngle={0}
+                endAngle={360}
+                innerRadius={83}
+                outerRadius={110}
+              >
+                <PolarGrid
+                  gridType="circle"
+                  radialLines={false}
+                  stroke="none"
+                  className="first:fill-muted last:fill-[#151515]"
+                  polarRadius={[50, 70, 90]}
+                />
+                <RadialBar dataKey="percentage" background cornerRadius={10} />
+                <PolarRadiusAxis
+                  className="bg-[transparent]"
+                  tick={false}
+                  tickLine={false}
+                  axisLine={false}
+                >
+                  <Label
+                    className="bg-[transparent]"
+                    content={({ viewBox }) => {
+                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                        const totalPercentage = chartData.reduce(
+                          (sum, entry) => sum + entry.percentage,
+                          0
+                        );
+                        return (
+                          <text
+                            x={viewBox.cx}
+                            y={viewBox.cy}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                          >
+                            <tspan
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              className="fill-white text-4xl font-bold"
+                            >
+                              {totalPercentage}%
+                            </tspan>
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) + 24}
+                              className="fill-gray-400"
+                            >
+                              Accuracy
+                            </tspan>
+                          </text>
+                        );
+                      }
+                    }}
+                  />
+                </PolarRadiusAxis>
+              </RadialBarChart>
+            </ChartContainer>
+          </CardContent>
+          <CardFooter className="flex-col gap-2 text-sm">
+            <div className="flex items-center gap-2 font-medium leading-none">
+              Trending up by 5.2% this month{" "}
+              <TrendingUp className="h-4 w-4 text-white" />
+            </div>
+            <div className="leading-none text-gray-400">
+              Showing accuracy for the last 6 months
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  );
+}

@@ -39,7 +39,7 @@ export function DesktopProfilePopover({
       <DropdownMenuTrigger asChild>
         <div>{children}</div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-md backdrop-blur-lg border-2 w-56 border-[#181818]">
+      <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-lg backdrop-blur-lg border-2 w-56 border-[#181818]">
         <DropdownMenuLabel className="flex  flex-row items-center">
           {user?.pfp ? (
             <img className="size-6 rounded-full mr-2" src={user?.pfp} />

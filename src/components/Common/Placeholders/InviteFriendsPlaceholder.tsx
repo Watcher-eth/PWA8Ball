@@ -5,7 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 import { MailCheck } from "lucide-react";
 import { FindFriendsModal } from "@/components/Modals/FindFriends";
 
-export function InviteFriendsPlaceholder() {
+export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
   const controls = useAnimation();
   const { height, width } = {
     height: window.innerHeight,
@@ -26,7 +26,9 @@ export function InviteFriendsPlaceholder() {
 
   return (
     <div
-      className="flex flex-col items-center bg-[#101010] pt-[50px]"
+      className={`flex flex-col items-center ${
+        props?.isDesktop ? "rounded-[1.5rem]" : "pt-[50px]"
+      } bg-[#101010]`}
       style={{
         height: height,
       }}
@@ -35,7 +37,7 @@ export function InviteFriendsPlaceholder() {
         custom={1}
         initial={{ opacity: 0 }}
         animate={controls}
-        className="text-[24px] my-[10px] z-10 text-white font-bold"
+        className="text-[24px] my-[10px] mb-1 z-10 text-white font-bold"
       >
         More fun together
       </motion.h1>
@@ -43,7 +45,7 @@ export function InviteFriendsPlaceholder() {
         custom={2}
         initial={{ opacity: 0 }}
         animate={controls}
-        className="text-[15px] text-center px-[10px] text-[lightgray] -mb-5 z-10"
+        className="text-[15px] text-center px-[10px] text-[lightgray] -mb-3 z-10"
       >
         Invite your friends and see what they believe in
       </motion.p>
@@ -52,10 +54,7 @@ export function InviteFriendsPlaceholder() {
         initial={{ opacity: 0 }}
         animate={controls}
         src="/images/Friends.png"
-        className="w-screen"
-        style={{
-          height: height / 3.9,
-        }}
+        className="w-full object-cover h-[30%]"
       />
       <FindFriendsModal>
         <motion.button
@@ -74,14 +73,11 @@ export function InviteFriendsPlaceholder() {
             size={17}
             strokeWidth={3.4}
           />
-          <span
-            className="text-[16.5px] text-center font-bold text-black ml-[3px]"
-          >
+          <span className="text-[16.5px] text-center font-bold text-black ml-[3px]">
             Invite
           </span>
         </motion.button>
       </FindFriendsModal>
     </div>
   );
-};
-
+}

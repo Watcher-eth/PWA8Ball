@@ -6,6 +6,7 @@ import { DesktopNavbar } from "@/components/Common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { DesktopProfileSide } from "../profile/DesktopProfile";
 
 export const DesktopActivityPage: React.FC = () => {
   const { user } = useUserStore();
@@ -13,19 +14,15 @@ export const DesktopActivityPage: React.FC = () => {
   return (
     <div className="flex flex-col bg-[#080808]">
       <DesktopNavbar />
-      <div className="grid grid-cols-10 gap-4 px-8 bg-[#080808] flex-grow">
-        <div className="col-span-3">
-          <DesktopUserSideProfile />
-        </div>
-        <div className="col-span-4">
+      <div className="flex flex-row py-20 px-8 bg-[#080808] flex-grow">
+        <DesktopProfileSide totalFollowers={128} userC={user} />
+        <div className="-mt-8  ml-3">
           <ActivityPage isDesktop={true} />
         </div>
-        <div className="col-span-3">
-          <DesktopUserActivity
-            walletAddress={user?.walletaddress}
-            userId={user?.external_auth_provider_user_id}
-          />
-        </div>
+        <DesktopUserActivity
+          walletAddress={user?.walletaddress}
+          userId={user?.external_auth_provider_user_id}
+        />
       </div>
     </div>
   );
