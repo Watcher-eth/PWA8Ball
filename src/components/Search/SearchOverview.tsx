@@ -15,7 +15,7 @@ const friends = [
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
 ];
 
-export const SearchOverview = () => {
+export function SearchOverview() {
   const {
     data: trendingMarkets,
     isLoading: trendingLoading,
