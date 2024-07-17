@@ -7,6 +7,9 @@ import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets"
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
 import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
 import { useOverlaySearch } from "@/hooks/useOverlaySearch";
+import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls";
+import Link from "next/link";
+
 const friends = [
   { name: "James Blair", handle: "@jblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
@@ -18,7 +21,6 @@ export const SearchOverview = () => {
     isLoading: trendingLoading,
     error: trendingError,
   } = useGetTrendingMarkets();
-  const [searchText, setSearchText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
 
   const { data: users, isLoading: usersLoading } =
@@ -105,7 +107,7 @@ export const SearchOverview = () => {
           placeholder="Search for predictions..."
           className={`
             w-full outline-none border-0
-            py-2 px-4 
+            py-2 px-4
             bg-[transparent] text-white placeholder-[#707070]
             text-[1rem] rounded-lg
           `}
@@ -164,6 +166,7 @@ export const SearchOverview = () => {
                 {displayedTrendingMarkets.map((market, index) => {
                   return (
                     <Item
+                      id={market.id}
                       key={index}
                       currentIdx={currentIdx}
                       idx={market.idx}
@@ -192,6 +195,7 @@ export const SearchOverview = () => {
                 {displayedTrendingTopics?.map((market, index) => {
                   return (
                     <TopicItem
+                      topidId={market.topic_id}
                       key={index}
                       currentIdx={currentIdx}
                       idx={market.idx}
@@ -219,22 +223,25 @@ const Section = ({ title, children }) => (
   </div>
 );
 
-const Item = ({ title, subtitle, time, type, image, idx, currentIdx }) => {
+const Item = ({ id, title, subtitle, time, type, image, idx, currentIdx }) => {
   return (
-    <SearchItem
-      title={title}
-      subtitle={subtitle}
-      rightText={time}
-      image={image}
-      isImgRounded={false}
-      type={type}
-      idx={idx}
-      currentIdx={currentIdx}
-    />
+    <Link href={getMarketPath(id)} prefetch={true}>
+      <SearchItem
+        title={title}
+        subtitle={subtitle}
+        rightText={time}
+        image={image}
+        isImgRounded={false}
+        type={type}
+        idx={idx}
+        currentIdx={currentIdx}
+      />
+    </Link>
   );
 };
 
 const TopicItem = ({
+  topidId,
   title,
   subtitle,
   members,
@@ -244,31 +251,35 @@ const TopicItem = ({
   currentIdx,
 }) => {
   return (
-    <SearchItem
-      title={title}
-      subtitle={subtitle}
-      rightText={members}
-      image={image}
-      type={type}
-      isImgRounded={false}
-      icon={<Users className="h-[0.9rem] text-[#707070]" strokeWidth={2.7} />}
-      idx={idx}
-      currentIdx={currentIdx}
-    />
+    <Link href={getTopicPath(topidId)} prefetch={true}>
+      <SearchItem
+        title={title}
+        subtitle={subtitle}
+        rightText={members}
+        image={image}
+        type={type}
+        isImgRounded={false}
+        icon={<Users className="h-[0.9rem] text-[#707070]" strokeWidth={2.7} />}
+        idx={idx}
+        currentIdx={currentIdx}
+      />
+    </Link>
   );
 };
 
 const FriendItem = ({ name, handle, time, image, idx, currentIdx }) => {
   return (
-    <SearchItem
-      title={name}
-      subtitle={handle}
-      rightText={time}
-      image={image}
-      isImgRounded={true}
-      idx={idx}
-      currentIdx={currentIdx}
-    />
+    <Link href={getProfilePath(handle)} prefetch={true}>
+      <SearchItem
+        title={name}
+        subtitle={handle}
+        rightText={time}
+        image={image}
+        isImgRounded={true}
+        idx={idx}
+        currentIdx={currentIdx}
+      />
+    </Link>
   );
 };
 
@@ -292,7 +303,7 @@ function SearchItem({
         flex items-center justify-between p-2 rounded-md
          transition-all duration-150 cursor-pointer
         ring-1 ring-transparent
-        hover:!bg-[#151515]/100 hover:!ring-white/10 hover:!scale-101
+        hover:!bg-[#151515]/80 hover:!ring-white/10 hover:!scale-101
         active:!scale-99
         ${
           idx === currentIdx
