@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap");
 @font-face {
   font-family: "Aeonik-Bold"; /* Specify your preferred font name */
-  src: url("../../public/fonts/AeonikTRIAL-Bold.otf") format("opentype");
+  src: url("../../public/fonts/AeonikTRIAL-Bold.woff2") format("woff2");
   /* Adjust the path to your font file as needed */
   font-weight: bold;
   font-style: normal;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Aeonik"; /* Specify your preferred font name */
-  src: url("../../public/fonts/AeonikTRIAL-Regular.otf") format("opentype");
+  src: url("../../public/fonts/AeonikTRIAL-Regular.woff2") format("woff2");
   /* Adjust the path to your font file as needed */
   font-weight: bold;
   font-style: normal;
@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: "Benzin-Bold"; /* Specify your preferred font name */
-  src: url("../../public/fonts/Benzin-ExtraBold.ttf") format("opentype");
+  src: url("../../public/fonts/Benzin-ExtraBold.woff2") format("woff2");
   /* Adjust the path to your font file as needed */
   font-weight: bold;
   font-style: normal;
