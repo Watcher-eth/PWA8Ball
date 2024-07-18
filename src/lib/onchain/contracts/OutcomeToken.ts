@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import { createPublicClient, custom, getContract, http } from "viem";
-import { baseGoerli } from "viem/chains";
-import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
+// import { createPublicClient, custom, getContract, http } from "viem";
+// import { baseGoerli } from "viem/chains";
+// import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 
-const contractAddress = "0xYOUR_CONTRACT_ADDRESS"; // Replace with your contract's address
+// const contractAddress = "0xYOUR_CONTRACT_ADDRESS"; // Replace with your contract's address
 
 export const OutcomeTokenABI = [
   {
@@ -242,15 +242,15 @@ export const OutcomeTokenABI = [
   },
 ] as const;
 
-export async function getOutcomeTokenContract() {
-  const walletClient = await getWalletClient();
+// export async function getOutcomeTokenContract() {
+//   const walletClient = await getWalletClient();
 
-  // Use walletClient for write operations and rpcClient for read operations
-  const contract = getContract({
-    abi: OutcomeTokenABI,
-    address: contractAddress,
-    client: { public: rpcClient, wallet: walletClient },
-  });
+//   // Use walletClient for write operations and rpcClient for read operations
+//   const contract = getContract({
+//     abi: OutcomeTokenABI,
+//     address: contractAddress,
+//     client: { public: rpcClient, wallet: walletClient },
+//   });
 
-  return contract;
-}
+//   return contract;
+// }

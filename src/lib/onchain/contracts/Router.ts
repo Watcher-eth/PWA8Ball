@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import { createPublicClient, custom, getContract, http } from "viem";
+// import { createPublicClient, custom, getContract, http } from "viem";
 
-import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
+// import { getWalletClient, rpcClient } from "@/lib/onchain/rpcClient";
 
-const ROUTER_V1_ADDRESS = "0x2D5ed3c261FEdbe544DcB63b75c5F306ba35dFEA"; // Replace with your contract's address
+export const ROUTER_V1_ADDRESS = "0x2D5ed3c261FEdbe544DcB63b75c5F306ba35dFEA"; // Replace with your contract's address
 
 export const ROUTER_V1_ABI = [
   {
@@ -347,15 +347,15 @@ export const ROUTER_V1_ABI = [
 
 export const RouterV1Bytecode = "";
 
-export async function getRouterContract() {
-  const walletClient = await getWalletClient();
+// export async function getRouterContract() {
+//   const walletClient = await getWalletClient();
 
-  // Use walletClient for write operations and rpcClient for read operations
-  const contract = getContract({
-    abi: ROUTER_V1_ABI,
-    address: ROUTER_V1_ADDRESS,
-    client: { public: rpcClient, wallet: walletClient },
-  });
+//   // Use walletClient for write operations and rpcClient for read operations
+//   const contract = getContract({
+//     abi: ROUTER_V1_ABI,
+//     address: ROUTER_V1_ADDRESS,
+//     client: { public: rpcClient, wallet: walletClient },
+//   });
 
-  return contract;
-}
+//   return contract;
+// }
