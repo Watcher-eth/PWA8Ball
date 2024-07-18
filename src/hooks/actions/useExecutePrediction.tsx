@@ -1,21 +1,19 @@
 import { useState } from "react";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
+
 import { useUserStore } from "@/lib/stores/UserStore";
 import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 
 import { toast } from "sonner";
-import { baseSepolia } from "viem/chains";
-import { createWalletClient, custom } from "viem";
 import { CheckCircle } from "lucide-react";
-import type { WalletClient, Address } from "viem";
+
+import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const { smartAccountReady, smartAccountClient, smartAccountAddress } =
-    useSmartAccount();
   const { user: userCon } = useUserStore();
   const { mutate: predictV2 } = usePredictV2();
+  const { client, address } = useClientAddress();
 
   async function executePrediction({
     amount,
@@ -32,31 +30,13 @@ export function useExecutePrediction() {
 
     try {
       //   if (smartAccountReady) { you dont need smart account ready in order to use EoA
-      let client;
-      let address;
-      if (userCon?.walletType === "smartwallet") {
-        client = smartAccountClient;
-        address = smartAccountAddress;
-      } else if (userCon?.walletType === "eoa") {
-        client = await createWalletClient({
-          chain: baseSepolia,
-          transport: custom(window.ethereum!),
-          account: userCon?.walletaddress,
-        });
-
-        address = client?.account?.address;
-      }
-
-      const clientAddressOpts = {
-        client,
-        address,
-      } as { client: WalletClient; address: Address };
       if (!address) {
         throw new Error("Address is required");
       }
 
       predictV2({
-        ...clientAddressOpts,
+        client,
+        address,
         userId: userCon?.external_auth_provider_user_id!,
         marketId,
         amount: Number(amount.toFixed(4)) * 1000000,

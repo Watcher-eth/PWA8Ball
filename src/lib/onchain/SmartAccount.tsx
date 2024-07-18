@@ -39,15 +39,16 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
 /** Interface returned by custom `useSmartAccount` hook */
 interface SmartAccountInterface {
   /** Privy embedded wallet, used as a signer for the smart account */
-  eoa: ConnectedWallet | undefined;
+  eoa?: ConnectedWallet;
   /** Smart account client to send signature/transaction requests to the smart account */
-  smartAccountClient: SmartAccountClient | undefined;
+  smartAccountClient?: SmartAccountClient;
   /** EOA client for regular EOAs */
-  eoaClient: any | undefined;
+  eoaClient?: any ;
   /** Smart account address */
   smartAccountAddress?: Address;
   /** Boolean to indicate whether the smart account state has initialized */
   smartAccountReady: boolean;
+  eoaAddress?: Address;
 }
 
 const SmartAccountContext = React.createContext<SmartAccountInterface>({
@@ -56,6 +57,7 @@ const SmartAccountContext = React.createContext<SmartAccountInterface>({
   eoaClient: undefined,
   smartAccountAddress: undefined,
   smartAccountReady: false,
+  eoaAddress: undefined,
 });
 
 export const useSmartAccount = () => {
