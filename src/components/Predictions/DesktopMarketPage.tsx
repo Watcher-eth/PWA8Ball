@@ -22,7 +22,7 @@ import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
 
 import { AlignLeft } from "lucide-react";
-import { DesktopBettersModal } from "./Betters/OverviewModal";
+import { DesktopBettersModal } from "./Betters/DesktopBettersModal";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();

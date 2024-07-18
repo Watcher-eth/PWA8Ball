@@ -8,7 +8,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
+import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBettersModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
@@ -143,7 +143,7 @@ function MobileMarketContent({
             <div> ${((stake ?? 0) / 100000).toFixed(2)}</div>
           </div>
         </div>
-        <BettersOverviewModal
+        <MobileBettersModal
           title={title}
           question={description}
           image={image}
@@ -167,7 +167,7 @@ function MobileMarketContent({
               <AvatarImage src={userImages[2]} />
             </Avatar>
           </div>
-        </BettersOverviewModal>
+        </MobileBettersModal>
       </div>
       <div className="h-2 w-full text-gray-300 bg-[gray] mx-5 rounded-full z-20" />
 
