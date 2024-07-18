@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { motion, useAnimation } from "framer-motion";
 import { Check, Loader } from "lucide-react";
-
+import { useExecuteBoost } from "@/hooks/actions/useExecuteBoost";
 
 export function ConfirmButton({ onComplete, buttonText = "Confirm", id }) {
   const controls = useAnimation();

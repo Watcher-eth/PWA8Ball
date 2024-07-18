@@ -77,6 +77,7 @@ export function DesktopBoostModal({
         <DesktopBoostContent image={image} id={id} onComplete={() => {}} />
       }
     >
+
       {children}
     </DesktopCardModal>
   );

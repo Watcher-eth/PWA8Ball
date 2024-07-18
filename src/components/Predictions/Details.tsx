@@ -34,37 +34,16 @@ export const BetDetails = ({
   } = useGetLPForUser(user?.walletaddress);
   const [isOpen, setIsOpen] = useState(false);
   console.log("details2", image);
-  function handleBooster() {
-    if (positions?.length < 1) {
-      setIsOpen(true);
-    }
-    console.log("s", positions?.length < 1);
-    if (positions?.length >= 1) {
-      handleBoost();
-    }
-  }
 
-  const linkArgs = {
-    pathname: getTopicPath(topicId),
-    query: {
-      id: topicId,
-      name: topic,
-      description: question,
-      image: icon,
-      topic,
-      members,
-    },
-  };
+
 
 
   const BoostModalComponent = isDesktop ? DesktopBoostModal : BoostModal;
+
   return (
     <div className="flex flex-col w-full p-4 pb-2 mb-2">
       <div className="flex flex-row w-full items-center">
-        <div
-          style={{ borderRadius: 8 }}
-          className="flex flex-col p-2.5  w-14 h-14 rounded-lg bg-[#131313] items-center mr-3 justify-center"
-        >
+        <div className="flex flex-col p-2.5  w-14 h-14 rounded-md bg-[#131313] items-center mr-3 justify-center">
           <span className="text-xs font-bold text-[#FF0050]">{month}</span>
           <span className="text-3xl font-bold mt-[-2] text-white">{day}</span>
         </div>
@@ -76,10 +55,7 @@ export const BetDetails = ({
         </div>
       </div>
       <div className="flex flex-row w-full items-center  mt-3">
-        <div
-          style={{ borderRadius: 8 }}
-          className="flex flex-col p-2.5 rounded-md bg-[#131313] items-center mr-3"
-        >
+        <div className="flex flex-col p-2.5 rounded-md bg-[#131313] items-center mr-3">
           <Gift color="white" strokeWidth={2.5} size={34} />
         </div>
         <div className="flex flex-col space-y-[-0.1rem]">
@@ -91,31 +67,38 @@ export const BetDetails = ({
       </div>
 
       <BoostModalComponent image={image} id={id}>
-        <BoostMarket
-          isDesktop={isDesktop}
-          Boost={3}
-          handleBoost={handleBooster}
-        />
+        <BoostMarket handleBoost={isDesktop ? () => {} : handleBoost} />
       </BoostModalComponent>
 
-      <Link href={linkArgs}>
+      <Link
+        href={{
+          pathname: getTopicPath(topicId),
+          query: {
+            id: topicId,
+            name: topic,
+            description: question,
+            image: icon,
+            topic,
+            members,
+          },
+        }}
+      >
         <div
-          style={{ borderRadius: 12, width: !isDesktop && "90vw" }}
           className={`
             flex flex-row w-full items-center justify-between
             p-2 border border-white/10 hover:border-white/20
-            mt-3
+            mt-3 rounded-[12px]
             hover:scale-101 active:scale-98 transition-all
           `}
         >
-          <Link href={linkArgs}>
+          <>
             <div className="flex flex-row items-center">
               {icon ? (
                 <img
                   src={icon}
                   alt={topic}
                   style={{ borderRadius: 6 }}
-                  className="size-12 object-cover	 rounded-md overflow-hidden mr-2"
+                  className="size-12 object-cover rounded-md overflow-hidden mr-2"
                 />
               ) : (
                 <div className="size-12 rounded-md bg-gray-200 mr-2" />
@@ -132,8 +115,8 @@ export const BetDetails = ({
                 </div>
               </div>
             </div>
-          </Link>
-          <Link href={linkArgs}>
+          </>
+          <div>
             <div
               className={`
                 flex flex-row w-full items-center justify-between
@@ -151,7 +134,7 @@ export const BetDetails = ({
                 {joined ? "Joined" : "Join"}
               </span>
             </div>
-          </Link>
+          </div>
         </div>
       </Link>
       <BoostExplainerModal
@@ -165,11 +148,11 @@ export const BetDetails = ({
   );
 };
 
-const BoostMarket = ({ handleBoost, isDesktop }) => {
+const BoostMarket = ({ handleBoost }) => {
   return (
     <div
       className={`
-        flex flex-row ${isDesktop ? "w-full" : "w-[90vw]"} items-center justify-between
+        flex flex-row w-full items-center justify-between flex-grow
         p-2 border border-white/10 hover:border-white/20
         mt-3 rounded-[12px]
         hover:scale-101 active:scale-98 transition-all

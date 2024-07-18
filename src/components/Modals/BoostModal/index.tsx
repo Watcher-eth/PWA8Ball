@@ -92,7 +92,7 @@ export function BoostModal({
   return (
     <div>
       <Drawer>
-        <DrawerTrigger>{children}</DrawerTrigger>
+        <DrawerTrigger className="w-full">{children}</DrawerTrigger>
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div
             layout

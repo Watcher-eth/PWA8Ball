@@ -27,7 +27,12 @@ export function useExecutePrediction() {
     options: any[];
   }) {
     setLoading(true);
-
+    console.log({
+      amount,
+      option,
+      marketId,
+      options,
+    });
     try {
       //   if (smartAccountReady) { you dont need smart account ready in order to use EoA
       if (!address) {
