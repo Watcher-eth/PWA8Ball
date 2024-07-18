@@ -20,7 +20,17 @@ import { RedeemOverview } from "./RedeemOverview";
 import { CashoutConfirmScrreen } from "../Cashout/confirm";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
-export function RedeemModal(props: {
+export function RedeemModal({
+  text,
+  option,
+  multiplier,
+  image,
+  question,
+  options,
+  marketId,
+  odds,
+  handleOpen,
+}: {
   text: string;
   option: number;
   multiplier: number;
@@ -34,20 +44,23 @@ export function RedeemModal(props: {
   const [step, setStep] = useState(1);
 
   const { user } = useUserStore();
+
   return (
     <div>
       <Drawer>
         <DrawerTrigger>
           <div
             onClick={() => {
-              if (!user?.walletaddress) props.handleOpen();
+              if (!user?.walletaddress) {
+                handleOpen()
+              }
             }}
             className="mt-4 active:scale-93"
           >
             <OutcomeButton
-              text={props?.text}
-              multiplier={props?.multiplier}
-              option={props?.option}
+              text={text}
+              multiplier={multiplier}
+              option={option}
             />
           </div>
         </DrawerTrigger>

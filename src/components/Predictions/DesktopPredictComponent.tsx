@@ -11,12 +11,8 @@ import {
 } from "@/components/ui/card";
 import { DesktopShareBetModal } from "../Share/DesktopShareBetModal";
 import { AlignLeft, ArrowLeftRight, CheckCircle, Receipt } from "lucide-react";
-import { useRouter } from "next/router";
 import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { Input } from "@/components/ui/Input";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 
 import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/SuccessScreen";
@@ -25,11 +21,9 @@ import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
-import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
-import { toast } from "sonner";
-import { baseSepolia } from "viem/chains";
-import { createWalletClient, custom } from "viem";
+
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
+
 export function DesktopPredictComponent(props: {
   question: string;
   title: string;
@@ -38,6 +32,14 @@ export function DesktopPredictComponent(props: {
   options: string[];
   topic: string;
 }) {
+  const {
+    question,
+    title,
+    image,
+    id,
+    options,
+    topic,
+  } = props
   const [step, setStep] = useState<number>(0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
@@ -63,14 +65,7 @@ export function DesktopPredictComponent(props: {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <DesktopChart
-                  topic={props?.topic}
-                  image={props?.image}
-                  question={props?.question}
-                  title={props.title}
-                  options={props?.options}
-                  id={props?.id}
-                />
+                <DesktopChart {...props} />
               </CardContent>
             </div>
           )}
@@ -90,8 +85,8 @@ export function DesktopPredictComponent(props: {
               <div className="flex items-center justify-between z-[2] gap-3 mt-2.5">
                 <OutcomeButton
                   isDesktop={true}
-                  text={props?.options[1].name}
-                  multiplier={props?.options[1].value / 100}
+                  text={options[1].name}
+                  multiplier={options[1].value / 100}
                   option={0}
                   onClick={() => {
                     setStake({ amount, option: 1 });
@@ -100,8 +95,8 @@ export function DesktopPredictComponent(props: {
                 />
                 <OutcomeButton
                   isDesktop={true}
-                  text={props?.options[0].name}
-                  multiplier={props?.options[0].value / 100}
+                  text={options[0].name}
+                  multiplier={options[0].value / 100}
                   option={1}
                   onClick={() => {
                     setStake({ amount, option: 2 });
@@ -113,13 +108,8 @@ export function DesktopPredictComponent(props: {
           )}
           {step === 2 && (
             <DesktopConfirmPrediction
-              title={props?.title}
-              question={props?.question}
-              id={props?.id}
-              image={props?.image}
-              options={props?.options}
-              topic={props?.topic}
-              odds={props.options[0].value / 100}
+              {...props}
+              odds={options[0].value / 100}
               setStep={setStep}
             />
           )}
@@ -178,12 +168,8 @@ export function DesktopPredictComponent(props: {
 
           {step === 5 && (
             <CashoutOverview
-              options={props.options}
-              image={props.image}
-              question={props.question}
-              title={props.title}
+              {...props}
               changeStep={setStep}
-              id={props.id}
               odds={"20"}
               totalPot={1200}
               amount={1200}
@@ -192,12 +178,8 @@ export function DesktopPredictComponent(props: {
           )}
           {step === 6 && (
             <CashOutWarningScreen
-              options={props.options}
-              image={props.image}
-              question={props.question}
-              title={props.title}
+              {...props}
               changeStep={setStep}
-              id={props.id}
               odds={"20"}
               totalPot={1200}
               amount={1200}
@@ -207,12 +189,8 @@ export function DesktopPredictComponent(props: {
           )}
           {step === 7 && (
             <CashoutConfirmScreen
-              options={props.options}
-              image={props.image}
-              question={props.question}
-              title={props.title}
+              {...props}
               changeStep={setStep}
-              id={props.id}
               odds={"20"}
               totalPot={1200}
               amount={1200}
@@ -225,7 +203,16 @@ export function DesktopPredictComponent(props: {
   );
 }
 
-function DesktopConfirmPrediction(props: {
+function DesktopConfirmPrediction({
+  setStep,
+  image,
+  option,
+  options,
+  question,
+  title,
+  id,
+  odds,
+} : {
   setStep: (step: number) => void;
   image: string;
   option: string;
@@ -240,33 +227,31 @@ function DesktopConfirmPrediction(props: {
 
   const { executePrediction, loading, success } = useExecutePrediction();
 
-
   return (
     <div className="flex flex-col items-center w-full py-4 pt-0 rounded-lg ">
       {loading || success ? (
         <DesktopLoadingPrediction
-          image={props.image}
-          question={props.question}
+          image={image}
+          question={question}
           answer={
-            Number(option) === 1 ? props.options[1].name : props.options[0].name
+            Number(option) === 1 ? options[1].name : options[0].name
           }
-          option={props.option}
           loading={loading}
           success={success}
         />
       ) : (
-        <motion.div className="flex flex-col items-center w-full px-6  rounded-lg">
+        <div className="flex flex-col items-center w-full px-6  rounded-lg">
           <div className="flex flex-col w-full my-2 mt-7">
             <img
-              src={props.image}
-              alt={props.title}
+              src={image}
+              alt={title}
               className="h-14 w-14 object-cover rounded-full"
             />
           </div>
           <h2 className="text-[1.2rem] text-white font-bold mb-2 self-start">
             {success
               ? "Prediction Successful"
-              : `Confirm your prediction for: ${props.title}`}
+              : `Confirm your prediction for: ${title}`}
           </h2>
 
           <div className="flex flex-col items-center w-full">
@@ -284,8 +269,8 @@ function DesktopConfirmPrediction(props: {
                     }
                   `}
                 >
-                  <span className={``}>
-                    {props.options[option === 1 ? 1 : 0].name}
+                  <span>
+                    {options[option === 1 ? 1 : 0].name}
                   </span>
                 </div>
               }
@@ -301,8 +286,8 @@ function DesktopConfirmPrediction(props: {
             <PredictInfoRow
               label="Potential Payout"
               contentStr={(option === 2
-                ? (100 / props.odds) * amount
-                : (100 / (100 - props.odds)) * amount
+                ? (100 / odds) * amount
+                : (100 / (100 - odds)) * amount
               ).toFixed(2)}
             />
 
@@ -318,14 +303,14 @@ function DesktopConfirmPrediction(props: {
               </span>
             </div>
             <p className="text-[0.95rem] text-white/80 font-medium py-1 mb-3 self-start">
-              {props.question}
+              {question}
             </p>
             <p className="text-[0.75rem] text-[#424242] mt-1 font-medium text-center px-3">
               Review the above carefully before confirming. Once made, your
               prediction is irreversible.
             </p>
           </div>
-        </motion.div>
+        </div>
       )}
       <div
         className={`
@@ -333,32 +318,9 @@ function DesktopConfirmPrediction(props: {
           ${(loading || success) && "mt-[3.8rem]"}
         `}
       >
-        {!success && (
-          <motion.button
-            onClick={() => props.setStep(0)}
-            className={`
-            mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
-            ${success ? "w-[0vw]" : "w-[12vw]"}
-          `}
-            initial={{ width: "12vw" }}
-            animate={{
-              width: success ? "0vw" : "12vw",
-              opacity: success ? 0 : 1,
-            }}
-          >
-            Back
-          </motion.button>
-        )}
         {success ? (
-          <div className=" z-10">
-            <DesktopShareBetModal
-              title={props?.title}
-              question={props?.question}
-              id={props?.id}
-              image={props?.image}
-              options={props?.options}
-              topic={props?.topic}
-            >
+          <div className="z-10">
+            <DesktopShareBetModal {...props}>
               <motion.button
                 className={`
                   mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
@@ -374,33 +336,50 @@ function DesktopConfirmPrediction(props: {
             </DesktopShareBetModal>
           </div>
         ) : (
-          <motion.button
-            onClick={() => {
-              executePrediction({
-                amount,
-                option,
-                marketId,
-                options,
-              });
-            }}
-            className={`
-              ml-4 mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
-              font-bold flex items-center justify-center gap-1 self-center
-              hover:scale-101 active:scale-98 transition-all
-            `}
-            initial={{ width: "12vw" }}
-          >
-            <div className="flex items-center gap-2">
-              {loading ? (
-                <>
-                  <span className="loader"></span>
-                  <span>Predicting</span>
-                </>
-              ) : (
-                <SharePredictButton success={success} />
-              )}
-            </div>
-          </motion.button>
+          <>
+            <motion.button
+              onClick={() => setStep(0)}
+              className={`
+                mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
+                w-[12vw]
+              `}
+              initial={{ width: "12vw" }}
+              animate={{
+                width: "12vw",
+                opacity: 1,
+              }}
+            >
+              Back
+            </motion.button>
+            <motion.button
+              onClick={() => {
+                executePrediction({
+                  amount,
+                  option,
+                  marketId: id,
+                  options,
+                });
+              }}
+              className={`
+                ml-4 mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
+                font-bold flex items-center justify-center gap-1 self-center
+                hover:scale-101 active:scale-98 transition-all
+              `}
+              initial={{ width: "12vw" }}
+            >
+              <div className="flex items-center gap-2">
+                {loading ? (
+                  <>
+                    <span className="loader"></span>
+                    <span>Predicting</span>
+                  </>
+                ) : (
+                  <SharePredictButton success={success} />
+                )}
+              </div>
+            </motion.button>
+          </>
+
         )}
       </div>
     </div>
