@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
+import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
 
 interface Option {
   name: string;
@@ -72,45 +73,63 @@ export const ShareBetModal = ({
         Invite your friends and earn points when they make their first
         prediction
       </p>
-      <div
-        className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
-      >
-        <div className="flex flex-row items-center mb-4 mt-2">
-          <img
-            src={image}
-            alt={title}
-            className="h-11 w-11 rounded-[4px] mr-2.5 object-cover"
-          />
-          <div>
-            <h2 className="text-lg text-white">{title}</h2>
-            <p className="text-base -mt-1 text-[lightgrey]">/{topic}</p>
+      <AnimatedPresence>
+        {!isDesktop ? (
+          <div
+            className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
+          >
+            <div className="flex flex-row items-center mb-4 mt-2">
+              <img
+                src={image}
+                alt={title}
+                className="h-11 w-11 rounded-[4px] mr-2.5 object-cover"
+              />
+              <div>
+                <h2 className="text-lg text-white">{title}</h2>
+                <p className="text-base -mt-1 text-[lightgrey]">/{topic}</p>
+              </div>
+            </div>
+            <h2
+              style={{ lineHeight: "1.8rem" }}
+              className="text-[1.4rem] text-white leading-none"
+            >
+              {question}
+            </h2>
+            <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
+              <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
+                <span className="text-xl text-white font-medium">
+                  {options[0]?.name}
+                </span>
+                <span className="text-sm text-lightgrey">
+                  /{options[0]?.value / 100}%
+                </span>
+              </button>
+              <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
+                <span className="text-xl text-white font-medium">
+                  {options[1].name}
+                </span>
+                <span className="text-sm text-lightgrey">
+                  /{options[1].value / 100}%
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
-        <h2
-          style={{ lineHeight: "1.8rem" }}
-          className="text-[1.4rem] text-white leading-none"
-        >
-          {question}
-        </h2>
-        <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
-          <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
-            <span className="text-xl text-white font-medium">
-              {options[0]?.name}
-            </span>
-            <span className="text-sm text-lightgrey">
-              /{options[0]?.value / 100}%
-            </span>
-          </button>
-          <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
-            <span className="text-xl text-white font-medium">
-              {options[1].name}
-            </span>
-            <span className="text-sm text-lightgrey">
-              /{options[1].value / 100}%
-            </span>
-          </button>
-        </div>
-      </div>
+        ) : (
+          <CashoutConfirmScreen
+            option={1}
+            options={options}
+            image={image}
+            question={question}
+            title={title}
+            setStep={() => {}}
+            id={id}
+            isDesktop={true}
+            multiplier={3}
+            points={2}
+            odds={options[0]?.value / 100}
+          />
+        )}
+      </AnimatedPresence>
       <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
         <button
           className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1"

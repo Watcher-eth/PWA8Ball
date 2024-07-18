@@ -177,14 +177,15 @@ export const SmartAccountProvider = ({
   }
 
   async function createEOAWallet() {
-    const walletClient = getWalletClient(wagmiConfig, {
-      account: eoa?.address,
+    const walletClient = await getWalletClient(wagmiConfig, {
+      account: eoaAddress,
       chain: baseSepolia,
     });
 
     console.log("Creating eoa client", walletClient);
 
     setEoaClient(walletClient);
+    setEoa(eoaAddress);
     setSmartAccountAddress(eoaAddress);
     setSmartAccountReady(true);
   }

@@ -247,6 +247,7 @@ function DesktopConfirmPrediction(props: {
   const router = useRouter();
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
+  console.log("smart acount client", smartAccountAddress, eoaClient);
 
   async function executePrediction() {
     const balance = await getUSDCBalance(userCon?.walletaddress);

@@ -31,8 +31,6 @@ export function useInitializeUser() {
         console.log({ dbUser });
         const balance = await getUSDCBalance(dbUser?.walletaddress);
 
-        dbUser.pfp = DEFAULT_PFP;
-
         setUser({
           ...dbUser,
           balance,
@@ -40,6 +38,8 @@ export function useInitializeUser() {
         });
       } else {
         const newUser = await createUserInDB(privyUser.id);
+        newUser.pfp = DEFAULT_PFP;
+
         setUser({ ...newUser, balance: "0", walletType: "smartwallet" });
       }
     } else if (isConnected && eoaAddress) {
