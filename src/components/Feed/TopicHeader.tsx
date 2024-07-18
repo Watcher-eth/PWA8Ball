@@ -63,11 +63,17 @@ function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
     >
       <button
         onClick={onTopicPress}
-        className={`px-4 py-2 text-base font-semibold rounded-full mr-4 ${
+        className={`px-4 py-2 text-base font-semibold rounded-full mr-4
+        border-[0.5px] border-transparent
+        ${
           selectedTopic === item
-            ? "bg-white text-[#1B1B1E]"
-            : "bg-[#1B1B1E] text-white"
-        }`}
+            ? "bg-white hover:bg-white/90 active:bg-white/80 text-[#1B1B1E]"
+            : `
+              bg-[#1B1B1E]/70 hover:bg-[#1B1B1E]/90 active:bg-[#1B1B1E]/100 text-white
+               border-white/5 hover:border-white/10 active:border-white/20
+              `
+        }
+        `}
       >
         {item}
       </button>
