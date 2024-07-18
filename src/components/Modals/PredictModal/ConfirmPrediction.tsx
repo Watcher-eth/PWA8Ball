@@ -14,6 +14,8 @@ import { getProfilePath } from "@/utils/urls";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 import { toast } from "sonner";
 
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
+
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void;
   image: string;
@@ -25,79 +27,12 @@ export function ConfirmPrediction(props: {
   odds: number;
 }) {
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const {
-    smartAccountReady,
-    smartAccountClient,
-    smartAccountAddress,
-    eoa,
-    eoaClient,
-  } = useSmartAccount();
-  const { user: userCon } = useUserStore();
-  const { mutate: predictV2 } = usePredictV2();
+  const { executePrediction, loading, success } = useExecutePrediction();
+
+
 
   const amount = useVotingStore((state) => state.amount);
-  console.log("option23", props.options[Number(props.option) - 1]);
 
-  async function executePrediction() {
-    //TODO: Check Balance of user
-    const userBalance = Number(userCon?.balance) / 1000000;
-    const desired = Number(amount.toFixed(4));
-
-    const hasBalance = Number(userBalance) > desired;
-
-    if (!hasBalance) {
-      // router.navigate({ pathname: "/GetFundsModal" });
-    }
-    if (hasBalance && smartAccountReady)
-      try {
-        console.log("client", smartAccountClient);
-        setLoading(true);
-        if (userCon?.walletType === "smartwallet")
-          predictV2({
-            userId: userCon.external_auth_provider_user_id!,
-            marketId: Number(props.id),
-            amount: Number(amount.toFixed(4)) * 1000000,
-            client: smartAccountClient,
-            address: smartAccountAddress,
-            preferYes: Number(props.option) === 1 ? false : true,
-            option: props.options[Number(props.option) - 1],
-            isBuy: true,
-          });
-
-        if (userCon?.walletType === "eoa")
-          predictV2({
-            userId: userCon.external_auth_provider_user_id!,
-            marketId: Number(props.id),
-            amount: Number(amount.toFixed(4)) * 1000000,
-            client: eoaClient,
-            address: eoa,
-            preferYes: Number(props.option) === 1 ? false : true,
-            option: props.options[Number(props.option) - 1],
-            isBuy: true,
-          });
-
-        setTimeout(() => {
-          setLoading(false);
-
-          setSuccess(true);
-          toast.success("Prediction successful!", {
-            icon: <CheckCircle />,
-            style: { backgroundColor: "#5ACE5A", color: "white" },
-          });
-        }, 3500);
-
-        setTimeout(() => {
-          router.push({
-            pathname: getProfilePath(userCon?.external_auth_provider_user_id),
-          });
-        }, 6500);
-      } catch (error) {
-        console.error("Failed to make prediction:", error);
-        alert("Failed to make prediction!");
-      }
-  }
   const shareLink = async () => {
     try {
       // await navigator.share({
@@ -235,7 +170,14 @@ export function ConfirmPrediction(props: {
         )}
         <motion.button
           onClick={() => {
-            success ? shareLink() : executePrediction();
+            success
+              ? shareLink()
+              : executePrediction({
+                  amount,
+                  option,
+                  marketId,
+                  options,
+                });
           }}
           className="mt-3 py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
           initial={{ width: "40vw" }}

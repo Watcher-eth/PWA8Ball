@@ -29,7 +29,7 @@ import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { toast } from "sonner";
 import { baseSepolia } from "viem/chains";
 import { createWalletClient, custom } from "viem";
-
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 export function DesktopPredictComponent(props: {
   question: string;
   title: string;
@@ -235,90 +235,11 @@ function DesktopConfirmPrediction(props: {
   id: string;
   odds: number;
 }) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const {
-    smartAccountReady,
-    smartAccountClient,
-    smartAccountAddress,
-    eoa,
-    eoaClient,
-  } = useSmartAccount();
-  const { user: userCon } = useUserStore();
-  const { mutate: predictV2 } = usePredictV2();
-  const router = useRouter();
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
-  console.log("smart acount client", smartAccountAddress, eoaClient);
 
-  async function executePrediction() {
-    const balance = await getUSDCBalance(userCon?.walletaddress);
-    const desired = Number(amount.toFixed(4));
-    setLoading(true);
+  const { executePrediction, loading, success } = useExecutePrediction();
 
-    // const hasBalance = Number(balance) > desired;
-    // if (!hasBalance) {
-    //   console.log("not enough baalnce", balance);
-    // }
-
-    if (smartAccountReady)
-      try {
-        if (userCon?.walletType === "smartwallet")
-          predictV2({
-            userId: userCon.external_auth_provider_user_id!,
-            marketId: Number(props.id),
-            amount: Number(amount.toFixed(4)) * 1000000,
-            client: smartAccountClient,
-            address: smartAccountAddress,
-            preferYes: Number(option) === 1 ? false : true,
-            option: props.options[Number(option) - 1],
-            isBuy: true,
-          });
-
-        const walletClient = await createWalletClient({
-          chain: baseSepolia,
-          transport: custom(window.ethereum!),
-          account: userCon?.walletaddress,
-        });
-        console.log("wallet", walletClient);
-        if (userCon?.walletType === "eoa") {
-          predictV2({
-            userId: userCon.external_auth_provider_user_id!,
-            marketId: Number(props.id),
-            amount: Number(amount.toFixed(4)) * 1000000,
-            client: walletClient,
-            address: walletClient?.account.address,
-            preferYes: Number(option) === 0 ? false : true,
-            option: props.options[Number(option) - 1],
-            isBuy: true,
-          });
-        }
-        console.log("after");
-        setTimeout(() => {
-          setLoading(false);
-
-          setSuccess(true);
-          toast.success("Prediction successful!", {
-            icon: <CheckCircle height={"15px"} />,
-            style: {
-              backgroundColor: "rgba(21, 21, 21, 0.75)",
-              backdropFilter: "blur(20px)",
-              color: "white",
-              border: "0px",
-            },
-          });
-        }, 3500);
-        // setTimeout(() => {
-        //   router.push({
-        //     pathname: getProfilePath(userCon?.external_auth_provider_user_id),
-        //   });
-        //   props.setStep(4);
-        // }, 6500);
-      } catch (error) {
-        console.error("Failed to make prediction:", error);
-        toast.error("Failed to make prediction!");
-      }
-  }
 
   return (
     <div className="flex flex-col items-center w-full py-4 pt-0 rounded-lg ">
@@ -455,7 +376,12 @@ function DesktopConfirmPrediction(props: {
         ) : (
           <motion.button
             onClick={() => {
-              executePrediction();
+              executePrediction({
+                amount,
+                option,
+                marketId,
+                options,
+              });
             }}
             className={`
               ml-4 mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
