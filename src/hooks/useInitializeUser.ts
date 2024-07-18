@@ -12,25 +12,26 @@ import {
 } from "@/supabase/userApi";
 import { useAccount } from "wagmi";
 import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
-import { zorbImageDataURI } from "@zoralabs/zorb";
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7"; // Define a static namespace for generating UUIDs
-const DEFAULT_PFP = "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZvMmZsZGVreHZ5dXFiYWczbHZjNjdpZTZxNXZmdnRmcGo1bm5zcmdyYWdrNTVxcHcyMmk";
+const DEFAULT_PFP =
+  "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZvMmZsZGVreHZ5dXFiYWczbHZjNjdpZTZxNXZmdnRmcGo1bm5zcmdyYWdrNTVxcHcyMmk";
+
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy();
   const { user, setUser, setWalletType } = useUserStore();
   const { smartAccountAddress } = useSmartAccount();
   const { address: eoaAddress, isConnected } = useAccount();
-  console.log("isConnec", isConnected, eoaAddress);
+
   async function fetchUser() {
     if (ready && authenticated && privyUser) {
       // Handle Privy smart wallet user
       const dbUser = await getUserFromDB(privyUser?.id);
       if (dbUser) {
-        console.log({dbUser })
+        console.log({ dbUser });
         const balance = await getUSDCBalance(dbUser?.walletaddress);
 
-        dbUser.pfp = DEFAULT_PFP
+        dbUser.pfp = DEFAULT_PFP;
 
         setUser({
           ...dbUser,
@@ -47,7 +48,7 @@ export function useInitializeUser() {
       const dbUser = await getUserFromDB(eoaUUID);
       if (dbUser) {
         const balance = await getUSDCBalance(dbUser?.walletaddress);
-        dbUser.pfp = DEFAULT_PFP
+        dbUser.pfp = DEFAULT_PFP;
 
         setUser({
           ...dbUser,
@@ -56,7 +57,7 @@ export function useInitializeUser() {
         });
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
-        newUser.pfp = newUser.pfp ?? DEFAULT_PFP
+        newUser.pfp = newUser.pfp ?? DEFAULT_PFP;
 
         const balance = await getUSDCBalance(eoaAddress);
 

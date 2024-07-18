@@ -59,6 +59,7 @@ async function predict(props: PredictParams) {
       ],
       account,
     });
+
     console.log("simulate", request);
     const hash = await contract.write.predict([
       BigInt(props.amount / 10),

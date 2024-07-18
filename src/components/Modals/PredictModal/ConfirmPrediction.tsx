@@ -38,6 +38,8 @@ export function ConfirmPrediction(props: {
   const { mutate: predictV2 } = usePredictV2();
 
   const amount = useVotingStore((state) => state.amount);
+  console.log("option23", props.options[Number(props.option) - 1]);
+
   async function executePrediction() {
     //TODO: Check Balance of user
     const userBalance = Number(userCon?.balance) / 1000000;
@@ -48,7 +50,6 @@ export function ConfirmPrediction(props: {
     if (!hasBalance) {
       // router.navigate({ pathname: "/GetFundsModal" });
     }
-
     if (hasBalance && smartAccountReady)
       try {
         console.log("client", smartAccountClient);

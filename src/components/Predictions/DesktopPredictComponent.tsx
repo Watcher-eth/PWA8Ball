@@ -10,13 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DesktopShareBetModal } from "../Share/DesktopShareBetModal";
-import {
-  AlignLeft,
-  ArrowLeftRight,
-  Receipt,
-  ScanFace,
-  ShareIcon,
-} from "lucide-react";
+import { AlignLeft, ArrowLeftRight, CheckCircle, Receipt } from "lucide-react";
 import { useRouter } from "next/router";
 import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { Input } from "@/components/ui/Input";
@@ -24,7 +18,6 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
 import { useVotingStore } from "@/lib/stores/VotingStore";
-import { getProfilePath } from "@/utils/urls";
 
 import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/SuccessScreen";
 import { CashoutConfirmScreen } from "./Cashout/confirm";
@@ -32,8 +25,8 @@ import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
-import { useAccount } from "wagmi";
-import { useUserBalance } from "@/hooks/useUserBalance";
+import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
+import { toast } from "sonner";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -254,10 +247,10 @@ function DesktopConfirmPrediction(props: {
   const router = useRouter();
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
-  const { balance, isLoading } = useUserBalance(userCon.walletaddress);
+
   async function executePrediction() {
+    const balance = await getUSDCBalance(userCon?.walletaddress);
     const desired = Number(amount.toFixed(4));
-    console.log(" baalnce", isLoading, userCon?.walletaddress, eoa?.address);
     setLoading(true);
 
     // const hasBalance = Number(balance) > desired;
@@ -267,8 +260,6 @@ function DesktopConfirmPrediction(props: {
 
     if (smartAccountReady)
       try {
-        console.log("client", userCon?.walletType === "eoa");
-
         if (userCon?.walletType === "smartwallet")
           predictV2({
             userId: userCon.external_auth_provider_user_id!,
@@ -276,8 +267,8 @@ function DesktopConfirmPrediction(props: {
             amount: Number(amount.toFixed(4)) * 1000000,
             client: smartAccountClient,
             address: smartAccountAddress,
-            preferYes: Number(props.option) === 1 ? false : true,
-            option: props.options[Number(props.option) - 1],
+            preferYes: Number(option) === 1 ? false : true,
+            option: props.options[Number(option) - 1],
             isBuy: true,
           });
 
@@ -288,8 +279,8 @@ function DesktopConfirmPrediction(props: {
             amount: Number(amount.toFixed(4)) * 1000000,
             client: eoaClient,
             address: userCon?.walletaddress,
-            preferYes: Number(props.option) === 1 ? false : true,
-            option: props.options[Number(props.option) - 1],
+            preferYes: Number(option) === 1 ? false : true,
+            option: props.options[Number(option) - 1],
             isBuy: true,
           });
         }
@@ -299,16 +290,21 @@ function DesktopConfirmPrediction(props: {
 
           setSuccess(true);
           toast.success("Prediction successful!", {
-            icon: <CheckCircle />,
-            style: { backgroundColor: "#5ACE5A", color: "white" },
+            icon: <CheckCircle height={"15px"} />,
+            style: {
+              backgroundColor: "rgba(21, 21, 21, 0.75)",
+              backdropFilter: "blur(20px)",
+              color: "white",
+              border: "0px",
+            },
           });
         }, 3500);
-        setTimeout(() => {
-          router.push({
-            pathname: getProfilePath(userCon?.external_auth_provider_user_id),
-          });
-          props.setStep(4);
-        }, 6500);
+        // setTimeout(() => {
+        //   router.push({
+        //     pathname: getProfilePath(userCon?.external_auth_provider_user_id),
+        //   });
+        //   props.setStep(4);
+        // }, 6500);
       } catch (error) {
         console.error("Failed to make prediction:", error);
         alert("Failed to make prediction!");

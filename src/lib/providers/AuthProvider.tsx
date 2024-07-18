@@ -18,16 +18,13 @@ export function AuthChecker({
   const router = useRouter();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
 
-  useInitializeUser(
-    user?.external_auth_provider_user_id,
-    user?.hasTwitterLinked
-  ); // Assuming these parameters
+  useInitializeUser(); // Assuming these parameters
 
   useEffect(() => {
     if (ready && requireAuth && !authenticated) {
       openLoginModal(); // Open the login modal instead of redirecting
     }
-  }, [ready, authenticated, requireAuth, router, openLoginModal]);
+  }, [ready, authenticated, requireAuth, router, openLoginModal, user]);
 
   if (!ready) {
     console.log("isLoading");
@@ -44,6 +41,6 @@ export function AuthChecker({
     console.log("need auth");
     return null; // Return null while showing modal
   }
-
+  console.log("isAuth", user);
   return <>{children}</>;
 }
