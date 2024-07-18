@@ -9,7 +9,6 @@ import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 
-
 import { createPrediction } from "@/supabase/mutations/createPrediction";
 import { supabase } from "@/supabase/supabaseClient";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
@@ -35,7 +34,7 @@ async function predict(props: PredictParams) {
     const account = props.address;
 
     const preferYesNum = props.preferYes ? 1 : 0;
-    console.log("props2", props.address, props.client  )
+    console.log("props2", props.address, props.client);
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
@@ -46,6 +45,21 @@ async function predict(props: PredictParams) {
 
     //TODO: Custom slippage
     // Execute User Prediction
+
+    const { request } = await rpcClient.simulateContract({
+      abi: EightballV1ABI,
+      address: EightBallAddress,
+      functionName: "predict",
+      args: [
+        BigInt(props.amount / 10),
+        preferYesNum,
+        BigInt(props.marketId),
+        ROOT_OPERATOR_ADDRESS,
+        990,
+      ],
+      account,
+    });
+    console.log("simulate", request);
     const hash = await contract.write.predict([
       BigInt(props.amount / 10),
       preferYesNum,

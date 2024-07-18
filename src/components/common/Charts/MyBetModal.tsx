@@ -11,7 +11,6 @@ import {
   User2,
   X,
 } from "lucide-react";
-import { AnimatedChart } from "./AnimatedChart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
@@ -26,7 +25,9 @@ import { chartConfig } from "./DesktopChart";
 import { CashoutOverview } from "@/components/Predictions/Cashout/overview";
 import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution";
 import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
+
 const timeframes = ["1H", "1D", "1W", "1M"];
+
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
@@ -35,6 +36,7 @@ const chartData = [
   { month: "May", desktop: 209, mobile: 130 },
   { month: "June", desktop: 214, mobile: 140 },
 ];
+
 const MyBetModal = (props: {
   title: string;
   image: string;

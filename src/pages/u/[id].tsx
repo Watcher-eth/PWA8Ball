@@ -30,17 +30,8 @@ export default function ProfilePage({ userId }: { userId: string }) {
   const [balanceLoading, setBalanceLoading] = useState(true);
   const [userCBalance, setUserBalance] = useState(0);
 
-  async function getUserBalances() {
-    const balance = await getUSDCBalance(userC?.walletaddress);
-    setBalanceLoading(false);
-    setUserBalance(Number(balance));
 
-    return balance;
-  }
-
-  useEffect(() => {
-    const balance = getUserBalances();
-  }, []);
+  
 
 
   return (

@@ -32,6 +32,8 @@ import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
+import { useAccount } from "wagmi";
+import { useUserBalance } from "@/hooks/useUserBalance";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -252,45 +254,55 @@ function DesktopConfirmPrediction(props: {
   const router = useRouter();
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
-
-
+  const { balance, isLoading } = useUserBalance(userCon.walletaddress);
   async function executePrediction() {
-    //TODO: Check Balance of user
-    const userBalance = Number(userCon?.balance) / 1000000;
     const desired = Number(amount.toFixed(4));
+    console.log(" baalnce", isLoading, userCon?.walletaddress, eoa?.address);
+    setLoading(true);
 
-    const hasBalance = Number(userBalance) > desired;
-    if (!hasBalance) {
-      // router.navigate({ pathname: "/GetFundsModal" });
-    }
+    // const hasBalance = Number(balance) > desired;
+    // if (!hasBalance) {
+    //   console.log("not enough baalnce", balance);
+    // }
 
-    setTimeout(() => {
-      setLoading(false);
-
-      setSuccess(true);
-    }, 3500);
-    if (hasBalance && smartAccountReady)
+    if (smartAccountReady)
       try {
-        console.log("client", smartAccountClient);
-        setLoading(true);
-        predictV2({
-          userId: userCon.external_auth_provider_user_id!,
-          marketId: Number(props.id),
-          amount: Number(amount.toFixed(4)) * 1000000,
-          client: smartAccountClient,
-          address: smartAccountAddress,
-          preferYes: Number(props.option) === 1 ? false : true,
-          option: option,
-          isBuy: true,
-        });
+        console.log("client", userCon?.walletType === "eoa");
 
-        // showToast();
+        if (userCon?.walletType === "smartwallet")
+          predictV2({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(amount.toFixed(4)) * 1000000,
+            client: smartAccountClient,
+            address: smartAccountAddress,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
+
+        if (userCon?.walletType === "eoa") {
+          predictV2({
+            userId: userCon.external_auth_provider_user_id!,
+            marketId: Number(props.id),
+            amount: Number(amount.toFixed(4)) * 1000000,
+            client: eoaClient,
+            address: userCon?.walletaddress,
+            preferYes: Number(props.option) === 1 ? false : true,
+            option: props.options[Number(props.option) - 1],
+            isBuy: true,
+          });
+        }
+        console.log("after");
         setTimeout(() => {
           setLoading(false);
 
           setSuccess(true);
+          toast.success("Prediction successful!", {
+            icon: <CheckCircle />,
+            style: { backgroundColor: "#5ACE5A", color: "white" },
+          });
         }, 3500);
-
         setTimeout(() => {
           router.push({
             pathname: getProfilePath(userCon?.external_auth_provider_user_id),
@@ -464,23 +476,20 @@ function DesktopConfirmPrediction(props: {
   );
 }
 
-
 function PredictInfoRow({
   label,
   contentStr,
-  content
+  content,
 }: {
   label: string;
-  contentStr?: string,
-  content?: React.ReactNode
+  contentStr?: string;
+  content?: React.ReactNode;
 }) {
   return (
     <div className="flex items-center justify-between my-2 w-full">
       <span className="text-lg  text-white/40 font-medium">{label}</span>
       {content ?? (
-        <span className="text-lg text-white font-bold">
-          ${contentStr}
-        </span>
+        <span className="text-lg text-white font-bold">${contentStr}</span>
       )}
     </div>
   );
