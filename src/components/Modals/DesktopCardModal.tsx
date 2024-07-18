@@ -43,7 +43,7 @@ export function DesktopCardModal({
           className={`
             shadow-none bg-[#080808]
             border-2 border-[#181818]
-            rounded-[1.5rem] ${cardClassName}
+            rounded-2xl ${cardClassName}
           `}
         >
           {(title || subtitle) && (
