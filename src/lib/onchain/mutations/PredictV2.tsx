@@ -31,8 +31,6 @@ async function predict(props: PredictParams) {
   }
   try {
     // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-    const account = props.address;
-
     const preferYesNum = props.preferYes ? 1 : 0;
     console.log("props2", props.address, props.client);
     const contract = getContract({
@@ -46,19 +44,13 @@ async function predict(props: PredictParams) {
     //TODO: Custom slippage
     // Execute User Prediction
 
-    const { request } = await rpcClient.simulateContract({
-      abi: EightballV1ABI,
-      address: EightBallAddress,
-      functionName: "predict",
-      args: [
-        BigInt(props.amount / 10),
-        preferYesNum,
-        BigInt(props.marketId),
-        ROOT_OPERATOR_ADDRESS,
-        990,
-      ],
-      account,
-    });
+    const { request } = await contract.simulate.predict([
+      BigInt(props.amount / 10),
+      preferYesNum,
+      BigInt(props.marketId),
+      ROOT_OPERATOR_ADDRESS,
+      990,
+    ]);
 
     console.log("simulate", request);
     const hash = await contract.write.predict([
@@ -93,7 +85,7 @@ async function predict(props: PredictParams) {
     const points = (props.amount / 10 ** 6) * 2;
     const newLiquidityPoints = (user?.liquiditypoints || 0) + points;
 
-    // Update the liquidity points
+    // Update the users cred (points)
     const { data, error: updateError } = await supabase
       .from("users")
       .update({ liquiditypoints: newLiquidityPoints })

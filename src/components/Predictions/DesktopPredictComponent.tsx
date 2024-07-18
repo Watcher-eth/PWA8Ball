@@ -27,6 +27,8 @@ import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { toast } from "sonner";
+import { baseSepolia } from "viem/chains";
+import { createWalletClient, custom } from "viem";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -273,14 +275,20 @@ function DesktopConfirmPrediction(props: {
             isBuy: true,
           });
 
+        const walletClient = await createWalletClient({
+          chain: baseSepolia,
+          transport: custom(window.ethereum!),
+          account: userCon?.walletaddress,
+        });
+        console.log("wallet", walletClient);
         if (userCon?.walletType === "eoa") {
           predictV2({
             userId: userCon.external_auth_provider_user_id!,
             marketId: Number(props.id),
             amount: Number(amount.toFixed(4)) * 1000000,
-            client: eoaClient,
-            address: userCon?.walletaddress,
-            preferYes: Number(option) === 1 ? false : true,
+            client: walletClient,
+            address: walletClient?.account.address,
+            preferYes: Number(option) === 0 ? false : true,
             option: props.options[Number(option) - 1],
             isBuy: true,
           });
@@ -308,7 +316,7 @@ function DesktopConfirmPrediction(props: {
         // }, 6500);
       } catch (error) {
         console.error("Failed to make prediction:", error);
-        alert("Failed to make prediction!");
+        toast.error("Failed to make prediction!");
       }
   }
 
