@@ -141,10 +141,10 @@ function WalletOnboardButton({
             disabled={!ready}
             onClick={connect}
             className={`
-         w-full mb-4
-          hover:scale-101 active:scale-98 transition-all
-         cursor-pointer
-       `}
+              w-full mb-4
+              hover:scale-101 active:scale-98 transition-all
+              cursor-pointer
+            `}
           >
             <div
               variant="outline"

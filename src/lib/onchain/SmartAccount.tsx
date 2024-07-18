@@ -71,6 +71,7 @@ export const SmartAccountProvider = ({
   const { address: eoaAddress, isConnected } = useAccount();
   const { user } = useUserStore();
   const { walletType } = user || {};
+  console.log("wallets", wallets);
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   );
