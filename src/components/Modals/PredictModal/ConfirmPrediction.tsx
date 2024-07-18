@@ -1,20 +1,13 @@
 // @ts-nocheck
 
-import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { AlignLeft, ScanFace, ShareIcon, Vote } from "lucide-react";
+import { AlignLeft } from "lucide-react";
 import { useVotingStore } from "@/lib/stores/VotingStore";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { usePredictV2 } from "@/lib/onchain/mutations/PredictV2";
-import { LoadingPrediction } from "./SuccessScreen";
-import { useRouter } from "next/router";
-import { getProfilePath } from "@/utils/urls";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
-import { toast } from "sonner";
 
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
+
+import { MobileLoadingPrediction } from "./LoadingPrediction";
 
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void;
@@ -26,10 +19,7 @@ export function ConfirmPrediction(props: {
   id: string;
   odds: number;
 }) {
-  const router = useRouter();
   const { executePrediction, loading, success } = useExecutePrediction();
-
-
 
   const amount = useVotingStore((state) => state.amount);
 
@@ -50,15 +40,7 @@ export function ConfirmPrediction(props: {
   return (
     <div className="flex flex-col items-center w-full bg-[#131313] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
       {loading || success ? (
-        // <LoadingPrediction
-        //   image={image}
-        //   loading={loading}
-        //   question={question}
-        //   option={Option}
-        //   success={success && !loading}
-        //   answer={options[Option - 1].name}
-        // />
-        <LoadingPrediction
+        <MobileLoadingPrediction
           image={props.image}
           question={props.question}
           answer={props.options[props.option]}

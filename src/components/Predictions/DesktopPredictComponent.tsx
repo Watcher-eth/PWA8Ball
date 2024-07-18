@@ -15,7 +15,7 @@ import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { Input } from "@/components/ui/Input";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 
-import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/SuccessScreen";
+import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/LoadingPrediction";
 import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";
 import { CashoutOverview } from "./Cashout/overview";

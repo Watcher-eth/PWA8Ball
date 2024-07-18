@@ -124,7 +124,7 @@ interface LoadingPredictionProps {
   success: boolean;
 }
 
-export const LoadingPrediction: React.FC<LoadingPredictionProps> = ({
+export const MobileLoadingPrediction: React.FC<LoadingPredictionProps> = ({
   image,
   question,
   answer,
