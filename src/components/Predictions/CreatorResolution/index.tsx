@@ -1,10 +1,19 @@
 // @ts-nocheck
-
-import React, { useState } from "react";
 import { AlertTriangle, Clock, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
 
-interface CashOutWarningScreenProps {
+
+export function CashOutWarningScreen({
+  changeStep,
+  onClose,
+  title,
+  multiplier,
+  points,
+  id,
+  option,
+  isDesktop,
+}: {
   changeStep: () => void;
   onClose: () => void;
   title: string;
@@ -13,33 +22,18 @@ interface CashOutWarningScreenProps {
   id: number;
   option: number;
   isDesktop?: boolean;
-}
+}) {
+  const { cashOutPrediction, loading, success } = useCashOutPrediction();
 
-export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
-  props
-) => {
-  const { onClose } = props;
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
   const width = window.innerWidth;
 
-  async function cashOutPrediction() {
-    try {
-      setLoading(true);
-      // Cash out logic here
-      setSuccess(true);
-    } catch (error) {
-      console.error("Failed to cash out:", error);
-      alert("Failed to cash out!");
-    }
-  }
 
   return (
     <div
-      className={`flex flex-col items-center ${props.isDesktop ? 'w-full bg-transparent mt-0 p-8 rounded-none' : 'w-[93%] bg-[#101010] mt-[50px] p-5 rounded-[30px]'}`}
+      className={`flex flex-col items-center ${isDesktop ? 'w-full bg-transparent mt-0 p-8 rounded-none' : 'w-[93%] bg-[#101010] mt-[50px] p-5 rounded-[30px]'}`}
     >
       <motion.div
-        className={`flex flex-col w-full ${props.isDesktop ? 'bg-transparent' : 'bg-[#131313]'} rounded-[20px]`}
+        className={`flex flex-col w-full ${isDesktop ? 'bg-transparent' : 'bg-[#131313]'} rounded-[20px]`}
       >
         <div className="flex flex-row items-center justify-between w-full">
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
@@ -68,7 +62,7 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
               Now
             </span>
             <span className="text-[16.5px] text-[#D3D3D3] font-normal">
-              ${props?.points?.toFixed(2)}
+              ${points?.toFixed(2)}
             </span>
           </div>
           <div className="flex flex-row items-center justify-between">
@@ -76,17 +70,17 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
               Possible Payout
             </span>
             <span className="text-[20px] text-white font-semibold">
-              ${(props.points * 3).toFixed(2)}
+              ${(points * 3).toFixed(2)}
             </span>
           </div>
         </div>
       </motion.div>
-      <div className={`flex flex-row items-center gap-[5px] mb-0 ${props?.isDesktop ? 'mt-[45px]' : 'mt-[35px]'}`}>
+      <div className={`flex flex-row items-center gap-[5px] mb-0 ${isDesktop ? 'mt-[45px]' : 'mt-[35px]'}`}>
         <motion.div
           onClick={() => {
-            props?.isDesktop ? props.changeStep(4) : props.changeStep(1);
+            isDesktop ? changeStep(4) : changeStep(1);
           }}
-          className={`mt-[12px] ${props.isDesktop ? 'py-[11px]' : 'py-[13px]'} rounded-[24px] overflow-hidden bg-[#1C1C1C] ${props.isDesktop ? 'w-[11vw]' : `w-[${width / 2.5}px]`} flex items-center justify-center cursor-pointer`}
+          className={`mt-[12px] ${isDesktop ? 'py-[11px]' : 'py-[13px]'} rounded-[24px] overflow-hidden bg-[#1C1C1C] ${isDesktop ? 'w-[11vw]' : `w-[${width / 2.5}px]`} flex items-center justify-center cursor-pointer`}
         >
           <span className="text-[20px] text-[#D9D9D9] font-extrabold">
             Hold
@@ -94,9 +88,15 @@ export const CashOutWarningScreen: React.FC<CashOutWarningScreenProps> = (
         </motion.div>
         <motion.div
           onClick={() => {
-            cashOutPrediction();
+            console.log("Clicked Cash Out Warning button ")
+            // cashOutPrediction({
+            //   points,
+            //   option,
+            //   marketId,
+            //   options,
+            // });
           }}
-          className={`mt-[12px] flex flex-row ml-[16px] ${props.isDesktop ? 'py-[10px]' : 'py-[11px]'} rounded-[24px] overflow-hidden bg-[#D9D9D9] ${props.isDesktop ? 'w-[11vw]' : `w-[${width / 2.5}px]`} items-center justify-center cursor-pointer`}
+          className={`mt-[12px] flex flex-row ml-[16px] ${isDesktop ? 'py-[10px]' : 'py-[11px]'} rounded-[24px] overflow-hidden bg-[#D9D9D9] ${isDesktop ? 'w-[11vw]' : `w-[${width / 2.5}px]`} items-center justify-center cursor-pointer`}
         >
           {loading ? (
             <div className="flex flex-row items-center justify-center">

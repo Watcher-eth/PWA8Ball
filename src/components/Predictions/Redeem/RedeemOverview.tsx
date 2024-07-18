@@ -1,14 +1,22 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
-import { ArrowDown, Check, Gift, Wallet, WalletCards, X } from "lucide-react";
-import { motion } from "framer-motion";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useRedeem } from "@/lib/onchain/mutations/Redeem";
-import { useRouter } from "next/router";
 
-interface ProposeOutcomeProps {
+import { Check, Gift, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { useExecuteRedeem } from "@/hooks/actions/useExecuteRedeem";
+
+
+export function RedeemOverview({
+  setIsOpen,
+  onClose,
+  changeStep,
+  image,
+  title,
+  amount,
+  multiplier,
+  option,
+  totalPot,
+}: {
   setIsOpen: () => void;
   onClose: () => void;
   changeStep: (step: number) => void;
@@ -18,47 +26,8 @@ interface ProposeOutcomeProps {
   multiplier: string;
   option: any;
   totalPot: number;
-}
-
-export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
-  const { changeStep, onClose } = props;
-  const { smartAccountReady, smartAccountClient, smartAccountAddress } =
-    useSmartAccount();
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const router = useRouter();
-
-  const { user: userCon } = useUserStore();
-
-  const { mutate: redeem } = useRedeem();
-
-  async function cashOutPrediction() {
-    const userBalance = Number(userCon.balance) / 1000000;
-    const desired = Number(props.amount);
-
-    const hasBalance = Number(userBalance) > desired;
-
-    if (!hasBalance) {
-      router.push("/GetFundsModal");
-    }
-    const preferYes = props.option === 1 ? true : false;
-    if (hasBalance && smartAccountReady)
-      try {
-        setLoading(true);
-        redeem({
-          marketId: props.id,
-          preferYes: preferYes,
-          client: smartAccountClient,
-          address: smartAccountAddress!,
-        });
-
-        setSuccess(true);
-      } catch (error) {
-        console.error("Failed to make prediction:", error);
-        alert("Failed to make prediction!");
-      }
-  }
+}) {
+  const { executeRedeem } = useExecuteRedeem();
 
   const width = window.innerWidth;
 
@@ -93,7 +62,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
           }}
         >
           <img
-            src={props.image}
+            src={image}
             alt="Prediction"
             style={{
               height: "35px",
@@ -104,7 +73,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
           />
         </div>
         <motion.div
-          onClick={props.onClose}
+          onClick={onClose}
           style={{
             padding: "8.5px 6px",
             borderRadius: "17px",
@@ -157,11 +126,11 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
             color: "white",
           }}
         >
-          ${props?.totalPot.toFixed(2)}
+          ${totalPot.toFixed(2)}
         </div>
 
         <div style={{ fontSize: "15px", color: "lightgray" }}>
-          Predicted '{props.option}'
+          Predicted '{option}'
         </div>
       </div>
       <div
@@ -224,7 +193,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
             color: "white",
           }}
         >
-          ${(props?.totalPot * 3).toFixed(2)}
+          ${(totalPot * 3).toFixed(2)}
         </div>
       </div>
       <div
@@ -253,7 +222,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
             color: "white",
           }}
         >
-          {(props?.totalPot * 2).toFixed(0)} $Cred
+          {(totalPot * 2).toFixed(0)} $Cred
         </div>
       </div>
       <div
@@ -267,7 +236,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
         }}
       >
         <motion.div
-          onClick={props.onClose}
+          onClick={onClose}
           style={{
             marginTop: "12px",
             display: "flex",
@@ -294,7 +263,7 @@ export const RedeemOverview: React.FC<ProposeOutcomeProps> = (props) => {
           </div>
         </motion.div>
         <motion.div
-          onClick={() => props.changeStep(1)}
+          onClick={() => changeStep(1)}
           style={{
             marginTop: "12px",
             display: "flex",
