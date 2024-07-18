@@ -6,7 +6,7 @@ import { DesktopNavbar } from "@/components/common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopProfileSide } from "../profile/DesktopProfile";
+import { DesktopProfileSide } from "@/components/profile/DesktopProfile";
 
 export const DesktopActivityPage: React.FC = () => {
   const { user } = useUserStore();

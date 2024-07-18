@@ -32,10 +32,12 @@ export const ActivityField = ({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.15 }}
-      className={`flex flex-row items-center justify-between ${
+      className={`flex flex-row items-center justify-between
+      my-[13.5px]
+      ${
         isDesktop
-          ? "bg-[#121212] p-[11px] rounded-[13px] my-[13.5px]"
-          : "mx-[10px] my-[13.5px]"
+          ? "bg-[#121212] p-[11px] rounded-[13px]"
+          : "mx-[10px]"
       } `}
       onClick={onOpenBottomSheet}
     >

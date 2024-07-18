@@ -38,7 +38,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
       className={`
         no-scrollbar flex flex-col
          min-h-screen
-        p-[20px] pt-[30px]
+        p-5 pt-[30px]
         ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
       `}
     >
