@@ -12,7 +12,7 @@ import { SmartAccountClient } from "permissionless";
 import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
 import { supabase } from "@/supabase/supabaseClient";
 
-interface boostMarket {
+interface BoostMarket {
   amount: number;
   userId: string;
   marketId: number;
@@ -20,7 +20,7 @@ interface boostMarket {
   address: Address;
 }
 
-async function boostV2(props: boostMarket) {
+async function boostV2(props: BoostMarket) {
   console.log("Amount", props.amount, props.userId);
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");

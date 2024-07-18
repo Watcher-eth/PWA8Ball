@@ -206,7 +206,7 @@ export function DesktopPredictComponent(props: {
 function DesktopConfirmPrediction({
   setStep,
   image,
-  option,
+  // option,
   options,
   question,
   title,
@@ -215,7 +215,7 @@ function DesktopConfirmPrediction({
 } : {
   setStep: (step: number) => void;
   image: string;
-  option: string;
+  // option: string;
   options: string[];
   question: string;
   title: string;
@@ -224,6 +224,7 @@ function DesktopConfirmPrediction({
 }) {
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
+  // console.log({option, option2})
 
   const { executePrediction, loading, success } = useExecutePrediction();
 
@@ -320,7 +321,16 @@ function DesktopConfirmPrediction({
       >
         {success ? (
           <div className="z-10">
-            <DesktopShareBetModal {...props}>
+            <DesktopShareBetModal
+              setStep={setStep}
+              image={image}
+              // option,
+              options={options}
+              question={question}
+              title={title}
+              id={id}
+              odds={odds}
+            >
               <motion.button
                 className={`
                   mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
