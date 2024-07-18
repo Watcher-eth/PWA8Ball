@@ -207,11 +207,12 @@ export const SmartAccountProvider = ({
   return (
     <SmartAccountContext.Provider
       value={{
-        smartAccountReady: smartAccountReady,
-        smartAccountClient: smartAccountClient,
-        smartAccountAddress: smartAccountAddress,
-        eoaClient: eoaClient,
-        eoa: eoa,
+        smartAccountReady,
+        smartAccountClient,
+        smartAccountAddress,
+        eoaClient,
+        eoaAddress,
+        eoa,
       }}
     >
       {children}
