@@ -109,16 +109,15 @@ export function BoostModal({
                       className="size-10 rounded-full object-cover overflow-hidden"
                     />
                     <DrawerClose>
-                      <motion.div
-                        whileTap={{ scale: 0.9 }}
-                        className=" p-2 left-6 rounded-full bg-[#282828]"
+                      <div
+                        className="active:scale-90 transition-all p-2 left-6 rounded-full bg-[#282828]"
                       >
                         <X
                           size={17}
                           className="  stroke-gray-300"
                           strokeWidth={5}
                         />
-                      </motion.div>
+                      </div>
                     </DrawerClose>
                   </div>
                   <div className="text-xl text-white mt-1 font-bold">

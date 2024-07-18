@@ -10,7 +10,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 
 import { BettersOverviewModal } from "@/components/Predictions/Betters/OverviewModal";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
-import { BetDetails } from "@/components/Predictions/Details";
+import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { fillUserImages } from "@/utils/fillUserImages";
 

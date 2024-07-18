@@ -18,7 +18,7 @@ export const RelatedMarkets = ({topicId, id, isDesktop}: {
     return (
       <div
         className={`
-          flex flex-col p-4
+          flex flex-col p-t
           ${isDesktop ? "bg-transparent" : "bg-[#121212]"}
         `}
       >
@@ -58,7 +58,7 @@ function RelatedMarketQuestion({
         className={`
           flex flex-row items-center
           p-2 rounded-[10px] cursor-pointer
-          bg-transparent ring-1 ring-white/10 hover:ring-white/20
+          bg-transparent border border-white/10 hover:border-white/20
           transition-all
         `}
       >
