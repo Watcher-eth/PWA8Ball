@@ -17,9 +17,8 @@ export function DesktopHomePage({ trendingMarkets }) {
 
   return (
     <>
-      <div className="mt-[-1rem]">
+      <div className="-mt-4">
         <TopicHeader
-          isDesktop={true}
           setSelectedTopic={setSelectedTopic}
           selectedTopic={selectedTopic}
         />
@@ -27,7 +26,6 @@ export function DesktopHomePage({ trendingMarkets }) {
       <motion.div
         layout
         transition={{ duration: 0.2 }}
-        className="rounded-2xl p-2 w-full"
         className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible"
       >
         {enrichedFeedData?.map((bet, index) => {

@@ -5,13 +5,12 @@ import { TEST_TOPICS } from "@/constants/testData";
 
 
 
-export const TopicHeader = ({ setSelectedTopic, selectedTopic, isDesktop }) => {
+export function TopicHeader({ setSelectedTopic, selectedTopic }) {
 
   return (
     <div
       className={`
-        flex flex-col w-full py-4
-        ${isDesktop === true ? "bg-[#080808]" : "bg-[#101010]"}
+        flex flex-col w-full py-4 bg-[#080808]
       `}
     >
       <Marquee speed={40} gradient={false}>
