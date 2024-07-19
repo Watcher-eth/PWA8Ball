@@ -88,7 +88,7 @@ export function DesktopProfile() {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808]">
-      <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
+      <div className="flex flex-col md:w-1/3 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
         <img
           src={userC?.pfp}
           alt="Profile Header"
@@ -205,7 +205,7 @@ export function DesktopProfile() {
         </div>
       </div>
 
-      <div className="flex flex-col md:w-2/4 bg-[#131313] rounded-[1.5rem] p-8">
+      <div className="flex flex-col md:w-1/3 bg-[#131313] rounded-[1.5rem] p-8">
         <div className="w-full flex flex-row justify-between ">
           <div>
             <h2 className="text-white text-2xl font-semibold">
@@ -283,7 +283,7 @@ export function DesktopProfile() {
         </div>
       </div>
 
-      <div className="flex flex-col md:w-1/4  ">
+      <div className="flex flex-col md:w-1/3  ">
         <div className="mb-4 bg-[#131313] rounded-lg p-5 pb-4 ">
           <div className="inline-block">
             <h2 className="text-white text-xl font-bold">
@@ -413,7 +413,7 @@ export function DesktopProfileSide(props: {
 }) {
   const { userC, totalFollowers } = props;
   return (
-    <div className="flex flex-col md:w-1/4 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
+    <div className="flex flex-col md:w-1/3 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
       <img
         src={userC?.pfp}
         alt="Profile Header"
