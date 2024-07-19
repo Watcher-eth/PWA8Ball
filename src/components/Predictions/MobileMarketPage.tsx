@@ -23,6 +23,8 @@ import Link from "next/link";
 import { ArrowLeft, Share } from "lucide-react";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 import { HOME_PATH } from "@/utils/urls";
+import { OutcomeButton } from "@/components/buttons/OutcomeButton";
+
 
 export function MobileMarketPage({ market, users }) {
   const { user } = useUserStore();
@@ -107,19 +109,27 @@ function MobileMarketContent({
             src={image}
           />
           <div
-            style={{ zIndex: 2 }}
-            className="h-[38vw] w-screen bg-gradient-to-t from-black via-transparent to-transparent absolute bottom-0"
+            className={`
+              h-[38vw] w-screen
+              bg-gradient-to-t from-black via-transparent to-transparent
+              absolute bottom-0 z-[2]
+            `}
           />
         </motion.div>
       </div>
       <div
-        style={{
-          zIndex: 2,
-          fontFamily: "Benzin-Bold",
-          lineHeight: "2.4rem",
-          fontSize: title?.length < 14 ? 35 : title?.length < 21 ? 32 : 26.5,
-        }}
-        className="pr-10 mt-[-3.8rem] self-start text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white text-bold"
+        className={`
+          pr-10 mt-[-3.8rem]  mb-[-0.7rem] pl-5 pb-0 p-3
+          text-white text-bold leading-[2.4rem]
+          self-start text-start z-[2] font-[Benzin-Bold]
+          ${
+            title?.length < 14
+              ? "text-[35px]"
+              : title?.length < 21
+              ? "text-[32px]"
+              : "text-[26.5px]"
+          }
+        `}
       >
         {title}
       </div>
@@ -128,17 +138,17 @@ function MobileMarketContent({
         <div className="flex flex-col">
           <div
             className={`
-                      text-[0.85rem] text-gray-200 text-bold
-                      font-[Aeonik-Bold] z-[2]
-                    `}
+              text-[0.85rem] text-gray-200 text-bold
+              font-[Aeonik-Bold] z-[2]
+            `}
           >
             At stake
           </div>
           <div
             className={`
-                      text-[1.6rem] mt-[-0.25rem] text-white flex items-center
-                      font-[Aeonik-Bold] z-[2]
-                    `}
+              text-[1.6rem] mt-[-0.25rem] text-white flex items-center
+              font-[Aeonik-Bold] z-[2]
+            `}
           >
             <div> ${((stake ?? 0) / 100000).toFixed(2)}</div>
           </div>
@@ -173,11 +183,11 @@ function MobileMarketContent({
 
       <div
         className={`
-                  text-[1.05rem] self-start
-                  -mb-px mt-2 ml-5
-                  text-start text-[lightgray] max-w-[88vw]
-                   z-[2] font-[Aeonik-Bold] leading-[1.35rem]
-                `}
+          text-[1.05rem] self-start
+          -mb-px mt-2 ml-5
+          text-start text-[lightgray] max-w-[88vw]
+           z-[2] font-[Aeonik-Bold] leading-[1.35rem]
+        `}
       >
         {description}
       </div>
@@ -192,7 +202,15 @@ function MobileMarketContent({
           odds={market?.outcomea / 100}
           marketId={id}
           options={[optionB.name, optionA.name]}
-        />
+        >
+          <div className="mt-4 hover:scale-110 active:scale-93 transition-all w-full">
+            <OutcomeButton
+              text={optionB?.name}
+              multiplier={optionB.odds / 100}
+              option={0}
+            />
+          </div>
+        </PredictModal>
         <PredictModal
           handleOpen={handleOpen}
           image={image}
@@ -203,9 +221,17 @@ function MobileMarketContent({
           odds={market?.outcomea / 100}
           marketId={id}
           options={[optionB.name, optionA.name]}
-        />
+        >
+          <div className="mt-4 hover:scale-110 active:scale-93 transition-all w-full">
+            <OutcomeButton
+              text={optionA?.name}
+              multiplier={optionA.odds / 100}
+              option={1}
+            />
+          </div>
+        </PredictModal>
       </div>
-      <div style={{ zIndex: 2 }}>
+      <div className="z-[2]">
         <BetDetails
           endDate={"12th September, 2024"}
           icon={icon}

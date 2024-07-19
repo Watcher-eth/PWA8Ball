@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/Button";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { Vote } from "lucide-react";
 import { GetGhoModal } from "./GetGhoModal";
@@ -18,11 +18,22 @@ import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { ConfirmPrediction } from "./ConfirmPrediction";
-import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 import { NumericKeypad } from "@/components/NumericKeypad";
 
-export function PredictModal(props: {
+export function PredictModal({
+  text,
+  option,
+  multiplier,
+  image,
+  question,
+  options,
+  marketId,
+  odds,
+  isDesktop,
+  handleOpen,
+  children,
+}: {
   text: string;
   option: number;
   multiplier: number;
@@ -33,6 +44,7 @@ export function PredictModal(props: {
   odds: number;
   isDesktop?: boolean;
   handleOpen: () => void;
+  children: React.ReactNode;
 }) {
   const [step, setStep] = useState(1);
 
@@ -89,7 +101,7 @@ export function PredictModal(props: {
 
   function handleDelete() {
     setSliderValue((prev) => formatWithCommas(prev.slice(0, -1)));
-  };
+  }
   function handleContinue() {
     confirmSelection(2);
     setStep(2);
@@ -106,29 +118,18 @@ export function PredictModal(props: {
 
   const amount = useVotingStore((state) => state.amount);
   const { user } = useUserStore();
+  console.log({ user });
   return (
     <div className="w-full flex-grow ">
       <Drawer>
         <DrawerTrigger className="w-full">
-          <motion.div
-            onClick={() => {
-              if (!user?.walletaddress) props.handleOpen();
-            }}
-            className="mt-4 hover:scale-110 active:scale-93 transition-all w-full"
-          >
-            <OutcomeButton
-              isDesktop={props?.isDesktop}
-              text={props?.text}
-              multiplier={props?.multiplier}
-              option={props?.option}
-            />
-          </motion.div>
+          {children}
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#131313] rounded-3xl   w-screen relative"
+            className="bg-[#131313] rounded-3xl w-screen relative"
           >
             <AnimatePresence>
               {step === 1 && (
@@ -136,12 +137,12 @@ export function PredictModal(props: {
                   <div className="flex flex-row items-center bg-gray-[#212121] rounded-2xl  w-full justify-center relative">
                     <img
                       className="size-8 rounded-full object-cover "
-                      src={props?.image}
+                      src={image}
                       alt="Question"
                     />
                     <Marquee className="ml-2">
                       <span className="text-lg font-bold text-gray-400 whitespace-nowrap">
-                        {props.question}
+                        {question}
                         {"   "}
                       </span>
                     </Marquee>
@@ -170,13 +171,13 @@ export function PredictModal(props: {
                           className="p-1 bg-red-500 rounded-full"
                           style={{
                             backgroundColor:
-                              props.option === 0 ? "#FF0050" : "#0050FF",
+                              option === 0 ? "#FF0050" : "#0050FF",
                           }}
                         >
                           <Vote color="white" strokeWidth={3} size={16} />
                         </div>
                         <span className="text-lg font-bold text-gray-200 ml-2">
-                          {props.options[props.option]}
+                          {options[option]}
                         </span>
                       </div>
                     ) : (
@@ -192,9 +193,9 @@ export function PredictModal(props: {
                       Possible Payout: $
                       {(
                         parseFloat(sliderValue.replace(/,/g, "")) *
-                        (props.option === 0
-                          ? 100 / props.multiplier
-                          : 100 / (99 - props.multiplier))
+                        (option === 0
+                          ? 100 / multiplier
+                          : 100 / (99 - multiplier))
                       ).toFixed(2) || "0.00"}
                     </span>
                   </div>
@@ -211,28 +212,28 @@ export function PredictModal(props: {
               {step === 2 &&
                 (user?.balance > amount ? (
                   <ConfirmPrediction
-                    option={props?.option}
-                    options={props?.options}
-                    image={props?.image}
-                    question={props?.question}
-                    title={props?.text}
+                    option={option}
+                    options={options}
+                    image={image}
+                    question={question}
+                    title={text}
                     setStep={setStep}
-                    id={props?.marketId}
-                    odds={props.odds}
+                    id={marketId}
+                    odds={odds}
                   />
                 ) : (
                   <GetGhoModal setStep={setStep} />
                 ))}
               {step === 3 && (
                 <ConfirmPrediction
-                  option={props?.option}
-                  options={props?.options}
-                  image={props?.image}
-                  question={props?.question}
-                  title={props?.text}
+                  option={option}
+                  options={options}
+                  image={image}
+                  question={question}
+                  title={text}
                   setStep={setStep}
-                  id={props?.marketId}
-                  odds={props.odds}
+                  id={marketId}
+                  odds={odds}
                 />
               )}
               {step === 4 && <OnrampStep setStep={setStep} method={1} />}

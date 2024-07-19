@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { motion, useAnimation, useAnimationControls } from "framer-motion";
-import { Check } from "lucide-react";
+import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 
 import { Spinner } from "./Spinner";
 
