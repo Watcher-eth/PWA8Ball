@@ -347,17 +347,17 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
   return (
     <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
       <div className="mb-4">
-        <div className="flex items-center mb-4">
-          <div className="bg-[#171717] h-24 w-24 rounded-lg"></div>
+        <div className="flex items-between mb-4">
+          {/* <div className="bg-[#171717] h-24 w-24 rounded-lg"></div> */}
           <div className="text-white">
-            <div className="ml-4 -space-y-1">
+            <div className="-space-y-1">
               <p className="text-[#909090] text-[0.7rem]">Total locked</p>
               <h2 className="text-xl font-bold ">$17.56</h2>
             </div>
-            <div className="flex justify-between space-x-3 ml-4 text-sm mt-1">
+            <div className="flex justify-between space-x-3 text-sm mt-1">
               <div className="-space-y-1 mr-2">
                 <p className="text-[#909090] text-[0.7rem] ">Fees earned</p>
-                <p className="font-bold text-[1rem]">$00.00</p>
+                <p className="font-bold text-[1rem]">$0.00</p>
               </div>
               <div className=" -space-y-1">
                 <p className="text-[#909090] text-[0.7rem]">Cred earned</p>
