@@ -65,7 +65,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ProfileDashboard() {
+export function DesktopProfile() {
   const { user } = useUserStore();
   const id = "b82fc163-413f-5060-87b1-27b26208e987";
   const { data: totalFollowers } = useGetTotalFollowers(
