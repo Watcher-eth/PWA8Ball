@@ -34,12 +34,12 @@ export function DesktopPredictComponent(props: {
   options: string[];
   topic: string;
   initialProb: number;
+  userOwns?: { highest_amount: number; highest_option: number };
 }) {
-  const { question, title, image, id, options, topic } = props;
-  const [step, setStep] = useState<number>(0);
+  const { question, title, image, id, options, topic, userOwns } = props;
+  const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
-
   return (
     <div
       className={`
@@ -54,14 +54,8 @@ export function DesktopPredictComponent(props: {
         <AnimatePresence>
           {(step === 0 || step === 4) && (
             <div>
-              <CardHeader>
-                <CardTitle className="text-white">Question</CardTitle>
-                <CardDescription className="text-[lightgray]">
-                  {question}
-                </CardDescription>
-              </CardHeader>
               <CardContent>
-                <DesktopChart {...props} />
+                <DesktopChart userOwns={userOwns} {...props} />
               </CardContent>
             </div>
           )}

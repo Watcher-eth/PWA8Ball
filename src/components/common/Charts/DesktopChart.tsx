@@ -49,6 +49,7 @@ export function DesktopChart(props: {
   options: string[];
   topic: string;
   initialProb: number;
+  userOwns?: { highest_amount: number; highest_option: number };
 }) {
   const [timeframe, setTimeframe] = useState("1M");
 
@@ -73,6 +74,117 @@ export function DesktopChart(props: {
   }));
   return (
     <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "30px 0 0 0",
+        }}
+      >
+        <motion.div
+          onClick={() => {
+            props.onClose();
+            router.push({
+              pathname: "[id]",
+              query: {
+                id: props.betId,
+                name: props.title,
+                description: props.question,
+                icon: props.icon,
+                image: props.image,
+                topic: props.topic,
+                option: props.option,
+              },
+            });
+          }}
+        >
+          <img
+            src={props.image}
+            style={{
+              height: 38,
+              width: 38,
+              borderRadius: "50%",
+              overflow: "hidden",
+              objectFit: "cover",
+            }}
+            alt="Market image"
+          />
+        </motion.div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: "5px",
+        }}
+      >
+        <span
+          style={{
+            fontSize: 19,
+            color: "white",
+            fontWeight: 700,
+          }}
+        >
+          {prices
+            ? props.optionNumber === 1
+              ? currentPrices[currentPrices.length - 1].value
+              : currentPrices.length > 0
+              ? currentPrices[currentPrices.length - 1].value
+              : 100 - props.price
+            : props.price / 10000}
+          % {props.options[props?.option === 1 ? 0 : 1]?.name}
+        </span>
+        <span
+          style={{
+            color: props.optionNumber === 0 ? "#FF0050" : "#0050FF",
+            fontSize: 20,
+            fontWeight: 700,
+          }}
+        >
+          {percentageDifference && percentageDifference >= 0
+            ? `+${percentageDifference}`
+            : `${percentageDifference}`}
+          %
+        </span>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: -3,
+        }}
+      >
+        <span
+          style={{
+            fontSize: 17,
+            color: "lightgray",
+            fontWeight: 600,
+          }}
+        >
+          {props.title}
+        </span>
+        <span
+          style={{
+            color: "lightgray",
+            fontSize: 17,
+            fontWeight: 600,
+          }}
+        >
+          {timeframe === "1D"
+            ? "Today"
+            : timeframe === "1W"
+            ? "This Week"
+            : timeframe === "1H"
+            ? "This Hour"
+            : "This Month"}
+        </span>
+      </div>
       <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
         <AreaChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
@@ -128,6 +240,71 @@ export function DesktopChart(props: {
           />
         </AreaChart>
       </ChartContainer>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <span
+            style={{
+              fontSize: 12,
+              color: "lightgray",
+            }}
+          >
+            You voted
+          </span>
+          <span
+            style={{
+              color: "white",
+              fontSize: 19,
+              fontWeight: 600,
+            }}
+          >
+            {props.options[props?.userOwns.highest_option === 1 ? 0 : 1]?.name}
+          </span>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <span
+            style={{
+              fontSize: 12,
+              color: "lightgray",
+            }}
+          >
+            Prediction Value
+          </span>
+          {prices && (
+            <span
+              style={{
+                color: "white",
+                fontSize: 19,
+                fontWeight: 600,
+              }}
+            >
+              $
+              {(
+                props?.userOwns?.highest_amount *
+                (currentPrices[currentPrices.length - 1]?.value / 1000000)
+              ).toFixed(2)}
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

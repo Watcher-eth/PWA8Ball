@@ -21,7 +21,6 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
   props
 ) => {
   const { onClose } = props;
-  const [success, setSuccess] = useState<boolean>(false);
   const { user } = useUserStore();
 
   const shareLink = async () => {
@@ -45,86 +44,80 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
     <div
       className={`flex flex-col items-center ${
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-      } mt-0 p-5 ${props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"}`}
+      } mt-0 ${props.isDesktop ? "px-10 py-8" : "p-5"}  ${
+        props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"
+      }`}
     >
-      {success && (
-        <div
-          className={`flex flex-col w-full ${
-            props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-          } rounded-[20px]`}
-        >
-          <div className="flex flex-row items-center justify-between w-full">
-            <div className="w-[37px]"></div>
-            <div className="flex flex-row items-center p-[5px] rounded-[15px] bg-[#212121]">
-              <div className="p-[5px] rounded-[10px] bg-green-500">
-                <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
-              </div>
-              <span className="text-[17px] text-white mx-[6px] font-semibold">
-                Yes
-              </span>
+      <div
+        className={`flex flex-col w-full ${
+          props.isDesktop ? "bg-transparent" : "bg-[#101010]"
+        } rounded-[20px]`}
+      >
+        <div className="flex flex-row items-center justify-between w-full">
+          <div className="w-[37px]"></div>
+          <div className="flex flex-row items-center p-[5px] rounded-[15px] bg-[#212121]">
+            <div className="p-[5px] rounded-[10px] bg-green-500">
+              <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
             </div>
-            <motion.div
-              onClick={() =>
-                props.isDesktop ? props.changeStep(4) : onClose()
-              }
-              className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
-            >
-              <X color={"#585858"} strokeWidth={5} height={18} />
-            </motion.div>
-          </div>
-          <div className="flex flex-row items-center justify-center">
-            <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
-              {props.points?.toFixed(2)} $12,392
-            </div>
-          </div>
-          <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>
-          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
-            <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
-            <div className="flex flex-row items-center">
-              <span className="text-[20px] text-white mr-[9px]">
-                {props.title}
-              </span>
-              <img
-                className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
-                src={props?.image}
-                alt="Market"
-              />
-            </div>
-          </div>
-          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
-            <span className="text-[17.5px] text-[#D3D3D3]">Predicted on</span>
-            <div className="flex flex-row items-center">
-              <span className="text-[19px] text-[#D3D3D3] mr-[4px]">2024</span>
-              <span className="text-[19px] text-white mr-[7px]">Thursday</span>
-              <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[10px] bg-[#181818] items-center justify-center">
-                <span className="text-[8px] text-[#FF0050] mb-[-10px]">
-                  Sept
-                </span>
-                <span className="text-[25px] text-white">21</span>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
-            <span className="text-[17.5px] text-[#D3D3D3]">Tx Receipt</span>
-            <span className="text-[20px] text-white underline">
-              0xrf724sda3...kja3
+            <span className="text-[17px] text-white mx-[6px] font-semibold">
+              Yes
             </span>
           </div>
-          <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
-            <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
-            <div className="flex flex-row items-center">
-              <span className="text-[20px] mr-[8px] text-white">
-                {user.name}
-              </span>
-              <img
-                className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
-                src={user.pfp}
-                alt="Pen"
-              />
+          <motion.div
+            onClick={() => (props.isDesktop ? props.changeStep(4) : onClose())}
+            className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
+          >
+            <X color={"#585858"} strokeWidth={5} height={18} />
+          </motion.div>
+        </div>
+        <div className="flex flex-row items-center justify-center">
+          <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
+            {props.points?.toFixed(2)} $12,392
+          </div>
+        </div>
+        <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>
+        <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+          <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
+          <div className="flex flex-row items-center">
+            <span className="text-[20px] text-white mr-[9px]">
+              {props.title}
+            </span>
+            <img
+              className="h-[38px] object-cover w-[38px] rounded-[10px] overflow-hidden"
+              src={props?.image}
+              alt="Market"
+            />
+          </div>
+        </div>
+        <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+          <span className="text-[17.5px] text-[#D3D3D3]">Predicted on</span>
+          <div className="flex flex-row items-center">
+            <span className="text-[19px] text-[#D3D3D3] mr-[4px]">2024</span>
+            <span className="text-[19px] text-white mr-[7px]">Thursday</span>
+            <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[10px] bg-[#181818] items-center justify-center">
+              <span className="text-[8px] text-[#FF0050] mb-[-10px]">Sept</span>
+              <span className="text-[25px] text-white">21</span>
             </div>
           </div>
         </div>
-      )}
+        <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+          <span className="text-[17.5px] text-[#D3D3D3]">Tx Receipt</span>
+          <span className="text-[20px] text-white underline">
+            0xrf724sda3...kja3
+          </span>
+        </div>
+        <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
+          <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
+          <div className="flex flex-row items-center">
+            <span className="text-[20px] mr-[8px] text-white">{user.name}</span>
+            <img
+              className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
+              src={user.pfp}
+              alt="Pen"
+            />
+          </div>
+        </div>
+      </div>
       <div className="flex flex-row items-center gap-[5px] my-[5px]">
         <div
           onClick={shareLink}
