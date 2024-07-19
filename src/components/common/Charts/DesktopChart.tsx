@@ -270,7 +270,7 @@ export function DesktopChart(props: {
               fontWeight: 600,
             }}
           >
-            {props.options[props?.userOwns.highest_option === 1 ? 0 : 1]?.name}
+            {props.options[props?.userOwns?.highest_option === 1 ? 0 : 1]?.name}
           </span>
         </div>
         <div

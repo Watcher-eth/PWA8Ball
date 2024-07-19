@@ -28,7 +28,7 @@ import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighe
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const { data: userOwns } = useGetHighestOrderOption(user.walletaddress, id);
+  const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
 
   const userImages = fillUserImages(users, 3);
   console.log("user owns", userOwns);
