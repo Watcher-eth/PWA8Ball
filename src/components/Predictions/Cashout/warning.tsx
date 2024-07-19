@@ -90,11 +90,11 @@ export function CashOutWarningScreen({
           onClick={() => {
             isDesktop ? changeStep(4) : changeStep(1);
           }}
-          className={`mt-[12px] ${
-            isDesktop ? "py-[11px]" : "py-[13px]"
-          } rounded-[24px] overflow-hidden bg-[#1C1C1C] ${
-            isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`
-          } flex items-center justify-center cursor-pointer`}
+          className={`
+            mt-[12px] py-2.5 rounded-[24px] overflow-hidden bg-[#1C1C1C]
+            ${isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
+            flex items-center justify-center cursor-pointer
+          `}
         >
           <span className="text-[20px] text-[#D9D9D9] font-extrabold">
             Hold
@@ -109,26 +109,19 @@ export function CashOutWarningScreen({
               options,
             });
           }}
-          className={`mt-[12px] flex flex-row ml-[16px] ${
-            isDesktop ? "py-[10px]" : "py-[11px]"
-          } rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
-            isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`
-          } items-center justify-center cursor-pointer`}
+          className={`
+            mt-[12px] flex flex-row ml-[16px]
+            py-2.5 rounded-[24px] overflow-hidden bg-[#D9D9D9]
+            ${ isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
+            items-center justify-center cursor-pointer
+          `}
         >
-          {loading ? (
-            <div className="flex flex-row items-center justify-center">
-              <div className="loader"></div>
-              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
-                Cashing out
-              </span>
-            </div>
-          ) : (
-            <div className="flex flex-row items-center justify-center">
-              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
-                Confirm
-              </span>
-            </div>
-          )}
+          <div className="flex flex-row items-center justify-center">
+            {loading && <div className="loader"></div>}
+            <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
+              {loading ? "Cashing out" : "Confirm"}
+            </span>
+          </div>
         </motion.div>
       </div>
     </div>

@@ -61,7 +61,7 @@ export function DesktopPredictComponent(props: {
               <CardHeader>
                 <CardTitle className="text-white">Question</CardTitle>
                 <CardDescription className="text-[lightgray]">
-                  {props?.question}
+                  {question}
                 </CardDescription>
               </CardHeader>
               <CardContent>
