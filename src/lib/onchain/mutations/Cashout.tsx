@@ -1,13 +1,8 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import {
-  EightBallAddress,
-  EightballV1ABI,
-} from "../contracts/Eightball";
+import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
 import { type Address, getContract } from "viem";
-import { rpcClient } from "@/lib/onchain/rpcClient";
-import { USDC_ABI } from "../contracts/Usdc";
 import { SmartAccountClient } from "permissionless";
 import {
   EightBallStorageAddress,
@@ -35,7 +30,7 @@ async function cashoutPrediction(props: CashoutParams) {
     const account = props.address;
     const currentPairId = BigInt(props?.marketId);
 
-    const marketPair = await rpcClient.readContract({
+    const marketPair = await props.client.readContract({
       address: EightBallStorageAddress,
       abi: EightballStorageV1ABI,
       args: [currentPairId],
@@ -46,13 +41,13 @@ async function cashoutPrediction(props: CashoutParams) {
       ? marketPair.yesToken
       : marketPair.noToken;
 
-    const ownedTokens = await rpcClient.readContract({
+    const ownedTokens = await props.client.readContract({
       address: tokenAddy,
       abi: OutcomeTokenABI,
       args: [account],
       functionName: "balanceOf",
     });
-    console.log("owned", ownedTokens);
+
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,

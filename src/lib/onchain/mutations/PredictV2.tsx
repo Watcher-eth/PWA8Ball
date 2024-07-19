@@ -36,8 +36,6 @@ async function predict(props: PredictParams) {
       client: { public: props.client, wallet: props.client },
     });
 
-    console.log("Contract", contract);
-
     //TODO: Custom slippage
     // Execute User Prediction
 

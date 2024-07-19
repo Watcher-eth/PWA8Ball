@@ -3,7 +3,6 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
-import { rpcClient } from "@/lib/onchain/rpcClient";
 import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { V2_PAIR_ABI } from "../contracts/V2Pair";
@@ -26,14 +25,14 @@ async function removeLp(props: {
     const account = props.address;
     const currentPairId = BigInt(props.marketId);
 
-    const marketPair = await rpcClient.readContract({
+    const marketPair = await props.client.readContract({
       address: EightBallStorageAddress,
       abi: EightballStorageV1ABI,
       args: [currentPairId],
       functionName: "getMarketPair",
     });
 
-    const liquidityTokens = await rpcClient.readContract({
+    const liquidityTokens = await props.client.readContract({
       address: marketPair.liquidityPool,
       abi: V2_PAIR_ABI,
       args: [account],

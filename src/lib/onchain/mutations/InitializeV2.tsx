@@ -63,7 +63,7 @@ async function initialize(props: {
         created_by: props.created_by,
       };
 
-      const send = await createMarket(marketData);
+      const send = await createMarket(marketData, props.client);
     }, 2000);
   } catch (error) {
     console.error("Error during market initialization", error);
