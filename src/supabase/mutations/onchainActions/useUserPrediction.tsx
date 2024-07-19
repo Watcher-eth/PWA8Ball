@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { supabase } from "@/supabase/supabaseClient";
-import { useUpdateLiquidityPoints } from "@/hooks/useUpdateLiquidityPoints";
+import { useUpdateLiquidityPoints } from "../user/useUpdateUserLiquidityPoints";
 
 interface User {
   liquiditypoints: number;
