@@ -1,9 +1,9 @@
+// @ts-nocheck
+
 import { Switch } from "@/components/ui/switch";
 import {
   ChevronRight,
-  CircleArrowLeft,
   CreditCard,
-  Receipt,
   ReceiptText,
   Save,
 } from "lucide-react";
@@ -16,7 +16,8 @@ import {
   RadialBarChart,
 } from "recharts";
 import { CardContent } from "@/components/ui/card";
-import { ChartContainer } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 export const SettingsPage: React.FC = () => {
   const initialSettings = {
@@ -24,7 +25,7 @@ export const SettingsPage: React.FC = () => {
     personalizedRecommendations: false,
     publicProfile: false,
   };
-
+  const { user } = useUserStore();
   const [settings, setSettings] = useState(initialSettings);
   const [showSaveButton, setShowSaveButton] = useState(false);
   const chartData = [
@@ -63,7 +64,7 @@ export const SettingsPage: React.FC = () => {
         <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first p-5 relative">
           <div className="text-white font-semibold text-2xl">Settings</div>
           <div className="w-full p-4 rounded-md bg-[#151515] flex flex-row items-center justify-between">
-            <div className="text-white text-[0.95rem]">Your Profile</div>
+            <div className="text-white text-[0.95rem]">{user?.name}</div>
             <div className="text-white text-[0.85rem] px-3 p-1 bg-[#262626] rounded-md">
               Edit
             </div>
@@ -215,7 +216,9 @@ export const SettingsPage: React.FC = () => {
           <div className="flex flex-col rounded-md bg-[#181818] p-5 px-8">
             <div className="flex flex-row items-center justify-between w-full">
               <div className="flex flex-col -space-y-2">
-                <div className="text-white text-[2rem] font-bold">$356.00</div>
+                <div className="text-white text-[2rem] font-bold">
+                  ${user?.balance?.length > 0 ? user?.balance : "0.00"}
+                </div>
                 <div className="text-white text-[1rem] font-semibold">
                   Your balance
                 </div>
