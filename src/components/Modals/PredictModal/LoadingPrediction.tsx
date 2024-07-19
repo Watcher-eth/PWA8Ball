@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useAnimationControls } from "framer-motion";
 import { Check } from "lucide-react";
 
 import { Spinner } from "./Spinner";
@@ -19,23 +19,8 @@ export function MobileLoadingPrediction({
   answer,
   loading,
   success,
-}:LoadingPredictionProps) {
-  const controls = useAnimation();
-
-  useEffect(() => {
-    const sequence = async () => {
-      await controls.start({
-        height: 100,
-        width: 100,
-        transition: { type: "spring", damping: 20, stiffness: 100 },
-      });
-      await controls.start({ opacity: 1, transition: { delay: 0.3 } });
-      await controls.start({ opacity: 1, transition: { delay: 0.6 } });
-    };
-
-    sequence();
-  }, [controls]);
-
+}: LoadingPredictionProps) {
+  const controls = useLoadingAnimationControls();
   return (
     <div className="flex flex-col items-center justify-center w-full h-[430px]">
       <motion.img
