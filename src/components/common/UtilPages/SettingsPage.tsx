@@ -1,12 +1,7 @@
 // @ts-nocheck
 
 import { Switch } from "@/components/ui/switch";
-import {
-  ChevronRight,
-  CreditCard,
-  ReceiptText,
-  Save,
-} from "lucide-react";
+import { ChevronRight, CreditCard, ReceiptText, Save } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import {
   Label,
@@ -18,6 +13,7 @@ import {
 import { CardContent } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
 
 export const SettingsPage: React.FC = () => {
   const initialSettings = {
@@ -135,9 +131,11 @@ export const SettingsPage: React.FC = () => {
               </div>
               <div className="h-[0.1rem] mt-2 my-3 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
-                <button className="px-3 text-white text-md flex items-center justify-center py-1 rounded-full bg-[#262626]">
-                  Invite Friends
-                </button>
+                <DesktopInviteFriends>
+                  <button className="px-3 text-white text-md flex items-center justify-center py-1 rounded-full bg-[#262626]">
+                    Invite Friends
+                  </button>
+                </DesktopInviteFriends>
                 <div className="text-md text-[#909090]">0 referrals</div>
               </div>
             </div>

@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
+import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
 export const FindFriends = ({ type }) => {
-  const address = "0x8512B8f41a6D1f2Aa0D09ae710b705498735F265";
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
   const { width, height } = { width: 800, height: 600 }; // Example dimensions
@@ -124,7 +124,7 @@ export const FindFriends = ({ type }) => {
   return (
     <div
       className={`
-        flex flex-col items-center w-full p-2 rounded-t-[20px] bg-[#101010]
+        flex flex-col items-center w-full  rounded-t-[20px] bg-[#080808]
       `}
     >
       <p
@@ -171,7 +171,7 @@ export const FindFriends = ({ type }) => {
         >
           <button onClick={() => {}}>
             <img
-              className="size-[55px] rounded-[10px] overflow-hidden"
+              className="size-[55px] object-cover rounded-[10px] overflow-hidden"
               src="https://avatars.githubusercontent.com/u/108458858?s=200&v=4"
               alt="social"
             />
@@ -183,7 +183,7 @@ export const FindFriends = ({ type }) => {
         >
           <button onClick={() => linkTwitter()}>
             <img
-              className="size-[55px] rounded-[10px] overflow-hidden bg-black"
+              className="size-[55px] object-cover rounded-[10px] overflow-hidden bg-black"
               src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png"
               alt="twitter"
             />
@@ -199,7 +199,7 @@ export const FindFriends = ({ type }) => {
             }
           >
             <img
-              className="size-[55px] rounded-[10px] overflow-hidden"
+              className="size-[55px] object-cover rounded-[10px] overflow-hidden"
               src="https://s3-alpha.figma.com/hub/file/2654611074/ce2996c3-aa3d-470f-9cd1-ad5d8ddd72c1-cover.png"
               alt="farcaster"
             />
@@ -215,7 +215,7 @@ export const FindFriends = ({ type }) => {
             }}
           >
             <img
-              className="size-[55px] rounded-[10px] overflow-hidden"
+              className="size-[55px] object-cover rounded-[10px] overflow-hidden"
               src="https://publish.one37pm.net/wp-content/uploads/2023/11/Screenshot-2023-11-29-at-2.41.58-PM-e1701286954195.png?resize=630%2C682"
               alt="another social"
             />
@@ -260,37 +260,34 @@ export const FindFriends = ({ type }) => {
       </div>
       <div
         className={`
-          w-screen h-[30px]
-          absolute bottom-[85px]
+          w-full h-[30px]
+          absolute bottom-[80px]
         `}
         style={{
           backgroundImage:
-            "linear-gradient(rgba(10 ,10 ,10 , 0.6),#101010, #101010)",
+            "linear-gradient(rgba(10 ,10 ,10 , 0), rgba(10 ,10 ,10 , 0.6), #080808)",
         }}
       />
       <div
         className={`
           h-[80px] absolute bottom-0
           flex items-center justify-center
-          p-2.5 pb-[45px] bg-[#101010]
+          p-2.5 pb-[45px] bg-[#080808]
+          w-full
+          rounded-b-lg
         `}
-        style={{
-          width: width,
-        }}
       >
         <button
           onClick={() => {
             router.back();
           }}
           className={`
-            w-[90vw] h-[50px] rounded-[28px]
+           w-[90%] h-[50px] rounded-[28px]
             overflow-hidden flex items-center justify-center
-            bg-[rgb(24,24,24)] mt-[15px]
+            bg-[rgb(17,17,17)] mt-[15px]
           `}
         >
-          <p className="text-[16px] text-white font-semibold">
-            Done
-          </p>
+          <p className="text-[16px] text-white font-semibold">Done</p>
         </button>
       </div>
     </div>
@@ -298,7 +295,6 @@ export const FindFriends = ({ type }) => {
 };
 
 function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
-
   const { user } = useUserStore();
 
   const shareLink = async () => {
@@ -314,9 +310,7 @@ function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
   };
 
   return (
-    <div
-      className="flex flex-row items-center justify-between w-full my-2"
-    >
+    <div className="flex flex-row items-center justify-between w-full my-2">
       <button
         onClick={() => {
           type === 1 ? console.log("follow") : shareLink();
@@ -324,17 +318,13 @@ function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
         className="flex flex-row items-center bg-none border-none cursor-pointer"
       >
         <img
-          className="size-10 rounded-[19px] overflow-hidden"
+          className="size-10 rounded-[19px] object-cover overflow-hidden"
           src={convertIpfsUrl(pfp)}
           alt="profile"
         />
         <div className="flex flex-col ml-2">
-          <p className="text-[17px] text-white font-bold">
-            {name}
-          </p>
-          <p className="text-[14px] text-[lightgray] font-semibold">
-            {handle}
-          </p>
+          <p className="text-[17px] text-white font-bold">{name}</p>
+          <p className="text-[14px] text-[lightgray] font-semibold">{handle}</p>
         </div>
       </button>
       <button
@@ -378,3 +368,19 @@ export const onchainFollowingQuery2 = `query MyQuery {
       }
     }
   }`;
+
+export function DesktopInviteFriends({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <DesktopCardModal
+      dialogContentClassName="rounded-lg"
+      cardContentClassName="bg-[#080808]/75 rounded-lg p-0 h-[75vh] backdrop-blur-lg"
+      content={<FindFriends type={2} />}
+    >
+      {children}
+    </DesktopCardModal>
+  );
+}
