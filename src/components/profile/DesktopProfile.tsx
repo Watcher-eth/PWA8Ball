@@ -46,7 +46,6 @@ import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { BetModal } from "@/components/Modals/PredictionPositionModal";
 
-
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
   { category: "US Elections", percentage: 42, fill: "#1E90FF" },
@@ -69,8 +68,12 @@ const chartConfig = {
 export function ProfileDashboard() {
   const { user } = useUserStore();
   const id = "b82fc163-413f-5060-87b1-27b26208e987";
-  const { data: totalFollowers } = useGetTotalFollowers(id);
-  const { data: userC, isLoading } = useGetUserByExternalAuthId(id);
+  const { data: totalFollowers } = useGetTotalFollowers(
+    user?.external_auth_provider_user_id
+  );
+  const { data: userC, isLoading } = useGetUserByExternalAuthId(
+    user?.external_auth_provider_user_id
+  );
   const {
     data: ordersData,
     isLoading: isOrdersLoading,
@@ -81,7 +84,7 @@ export function ProfileDashboard() {
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
-  console.log("mergedData", mergedData);
+  console.log("mergedData", mergedData[0]);
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808]">
@@ -257,6 +260,7 @@ export function ProfileDashboard() {
               option={item.option}
               optionNumber={item.optionNumber}
               isExternal={item.isExternal}
+              initialProb={item.initialprob}
             >
               <div
                 key={index}
@@ -324,8 +328,6 @@ export function ProfileDashboard() {
   );
 }
 
-
-
 const DesktopUserBoostOverview = (props: { address: string }) => {
   const {
     data: positions,
@@ -339,7 +341,6 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
   );
   return (
     <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
-      <DesktopProfileSide totalFollowers={totalFollowers} userC={userC} />
       <div className="mb-4">
         <div className="flex items-center mb-4">
           <div className="bg-[#171717] h-24 w-24 rounded-lg"></div>
@@ -522,14 +523,7 @@ export function DesktopProfileSide(props: {
   );
 }
 
-
-function TextWithSuffix({
-  value,
-  suffix,
-}: {
-  value: number;
-  suffix: string;
-}) {
+function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
   return (
     <div className="text-center">
       <p className="font-bold">{value}</p>
@@ -538,10 +532,9 @@ function TextWithSuffix({
   );
 }
 
-
 function ContrastButton({
   label,
-  className=""
+  className = "",
 }: {
   label: React.ReactNode;
   className?: string;

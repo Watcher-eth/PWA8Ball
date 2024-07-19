@@ -20,6 +20,7 @@ import {
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useState } from "react";
 import { DesktopShareBetModal } from "@/components/Share/DesktopShareBetModal";
+import { processPrices } from "@/utils/chartUtils";
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
@@ -47,25 +48,33 @@ export function DesktopChart(props: {
   image: string;
   options: string[];
   topic: string;
+  initialProb: number;
 }) {
-  const [timeframe, setTimeframe] = useState("1D");
+  const [timeframe, setTimeframe] = useState("1M");
 
   const { data: prices, error: priceError } = useGetPricesForMarket(
-    "12",
+    props?.id,
     timeframe
   );
-  console.log("prices", prices, priceError);
+
+  const userOutcome = props?.optionNumber;
+  const { currentPrices, percentageDifference } = processPrices(
+    prices,
+    userOutcome,
+    props?.initialProb,
+    timeframe
+  );
+
+  // Format data for AreaChart
+  const chartData = currentPrices?.map((price) => ({
+    month: price.date.toLocaleString(), // Format the date as needed
+    desktop: price.value,
+    mobile: 100 - price.value,
+  }));
   return (
     <div>
       <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
-        <AreaChart
-          accessibilityLayer
-          data={chartData}
-          margin={{
-            left: 12,
-            right: 12,
-          }}
-        >
+        <AreaChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey="month"

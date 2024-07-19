@@ -25,17 +25,18 @@ import { chartConfig } from "./DesktopChart";
 import { CashoutOverview } from "@/components/Predictions/Cashout/overview";
 import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution";
 import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
+import { processPrices } from "@/utils/chartUtils";
 
 const timeframes = ["1H", "1D", "1W", "1M"];
 
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
+// const chartData = [
+//   { month: "January", desktop: 186, mobile: 80 },
+//   { month: "February", desktop: 305, mobile: 200 },
+//   { month: "March", desktop: 237, mobile: 120 },
+//   { month: "April", desktop: 73, mobile: 190 },
+//   { month: "May", desktop: 209, mobile: 130 },
+//   { month: "June", desktop: 214, mobile: 140 },
+// ];
 
 const MyBetModal = (props: {
   title: string;
@@ -54,12 +55,13 @@ const MyBetModal = (props: {
   optionNumber?: number;
   isExternal?: boolean;
   isDesktop?: boolean;
+  initialProb?: number;
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
   setStep: () => void;
 }) => {
-  const [timeframe, setTimeframe] = useState("1D");
+  const [timeframe, setTimeframe] = useState("1M");
 
   const { data: prices, error: priceError } = useGetPricesForMarket(
     props.betId,
@@ -68,29 +70,19 @@ const MyBetModal = (props: {
 
   const router = useRouter();
   const userOutcome = props?.optionNumber;
-  const currentPrices = prices?.map((price) => ({
-    value:
-      userOutcome === 1
-        ? Number(parseFloat(price.price.toFixed(2)))
-        : 10000 - Number(price.price),
-    date: new Date(price.timestamp * 1000),
-    outcome: price.outcome,
+  const { currentPrices, percentageDifference } = processPrices(
+    prices,
+    userOutcome,
+    props?.initialProb,
+    timeframe
+  );
+
+  // Format data for AreaChart
+  const chartData = currentPrices?.map((price) => ({
+    month: price.date.toLocaleString(), // Format the date as needed
+    desktop: price.value,
+    mobile: 100 - price.value,
   }));
-
-  let percentageDifference = null;
-  if (currentPrices && currentPrices?.length > 1) {
-    const firstPrice = currentPrices[0]?.value;
-    const lastPrice = currentPrices[currentPrices.length - 1].value;
-    percentageDifference = ((lastPrice - firstPrice) / firstPrice) * 100;
-  }
-  if (currentPrices && currentPrices?.length <= 1) {
-    const now = new Date();
-    const oneMinuteLater = new Date(now.getTime() + 60000);
-    currentPrices.push({ value: 50, date: now });
-    currentPrices.push({ value: 50, date: oneMinuteLater });
-
-    percentageDifference = 0;
-  }
 
   return (
     <div
@@ -165,9 +157,9 @@ const MyBetModal = (props: {
         >
           {prices
             ? props.optionNumber === 1
-              ? prices[prices.length - 1].value / 10000
-              : prices.length > 0
-              ? prices[prices.length - 1].value / 10000
+              ? currentPrices[currentPrices.length - 1].value
+              : currentPrices.length > 0
+              ? currentPrices[currentPrices.length - 1].value
               : 100 - props.price
             : props.price / 10000}
           % {props.options[props?.option === 1 ? 0 : 1]?.name}
@@ -226,8 +218,8 @@ const MyBetModal = (props: {
               accessibilityLayer
               data={chartData}
               margin={{
-                left: 12,
-                right: 12,
+                left: 0,
+                right: 0,
               }}
             >
               <CartesianGrid vertical={false} />
@@ -728,6 +720,7 @@ export function DesktopMyBetModal({
   option,
   optionNumber,
   isExternal,
+  initialProb,
 }: {
   children: React.ReactNode;
   title: string;
@@ -744,16 +737,17 @@ export function DesktopMyBetModal({
   userId?: string;
   option?: number;
   optionNumber?: number;
+  initialProb?: number;
   isExternal?: boolean;
 }) {
   const [step, setStep] = useState(1);
 
   return (
     <DesktopCardModal
-      cardClassName="w-full"
-      dialogContentClassName="w-[30vw]  min-w-[400px]"
-      cardContentClassName="w-[30vw] self-center  h-full min-w-[400px]"
-      dialogClassName="w-full"
+      cardClassName="w-full rounded-[1.5rem]"
+      dialogContentClassName="w-[30vw] bg-[#080808] rounded-[1.5rem]  min-w-[400px]"
+      cardContentClassName="w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[400px]"
+      dialogClassName="w-full bg-[#080808] rounded-[1.5rem]"
       content={
         step === 1 ? (
           <MyBetModal
@@ -774,6 +768,7 @@ export function DesktopMyBetModal({
             isExternal={isExternal}
             isDesktop={true}
             setStep={setStep}
+            initialProb={initialProb}
           />
         ) : step === 2 ? (
           <CashoutOverview

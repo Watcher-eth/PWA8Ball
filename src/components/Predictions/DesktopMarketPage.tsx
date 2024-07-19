@@ -146,6 +146,7 @@ export function DesktopMarketPage({ users, market, id }) {
                   question={market?.question}
                   title={market?.title}
                   image={market?.image}
+                  initialProb={market?.initialprob}
                   options={[
                     {
                       name: market?.options[0].name,

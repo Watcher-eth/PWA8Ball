@@ -3,8 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 import { IUserWithBet } from "@/supabase/types";
+import { toast } from "sonner";
 // types.ts
-
 
 export async function fetchUsersByMarketId(
   marketId: number
@@ -27,7 +27,7 @@ export async function fetchUsersByMarketId(
     )
     .eq("market_id", marketId);
 
-  if (error) throw new Error(error.message);
+  if (error) toast.error(error);
 
   // Create a Map to aggregate the amounts for each user
   const userMap = new Map<string, IUserWithBet>();
@@ -58,7 +58,7 @@ export async function fetchUsersByMarketId(
 
   // Convert the Map values to an array and limit the results to 10
   return Array.from(userMap.values()).slice(0, 10);
-};
+}
 // React Query hook to fetch and store the state of users by market id
 export const useGetUsersByMarketId = (marketId: number) => {
   return useQuery({

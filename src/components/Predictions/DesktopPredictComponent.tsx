@@ -23,6 +23,8 @@ import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
+import { processPrices } from "@/utils/chartUtils";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -31,15 +33,9 @@ export function DesktopPredictComponent(props: {
   id: string;
   options: string[];
   topic: string;
+  initialProb: number;
 }) {
-  const {
-    question,
-    title,
-    image,
-    id,
-    options,
-    topic,
-  } = props
+  const { question, title, image, id, options, topic } = props;
   const [step, setStep] = useState<number>(0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
@@ -212,7 +208,7 @@ function DesktopConfirmPrediction({
   title,
   id,
   odds,
-} : {
+}: {
   setStep: (step: number) => void;
   image: string;
   // option: string;
@@ -234,9 +230,7 @@ function DesktopConfirmPrediction({
         <DesktopLoadingPrediction
           image={image}
           question={question}
-          answer={
-            Number(option) === 1 ? options[1].name : options[0].name
-          }
+          answer={Number(option) === 1 ? options[1].name : options[0].name}
           loading={loading}
           success={success}
         />
@@ -270,9 +264,7 @@ function DesktopConfirmPrediction({
                     }
                   `}
                 >
-                  <span>
-                    {options[option === 1 ? 1 : 0].name}
-                  </span>
+                  <span>{options[option === 1 ? 1 : 0].name}</span>
                 </div>
               }
             />
@@ -384,7 +376,6 @@ function DesktopConfirmPrediction({
               </div>
             </motion.button>
           </div>
-
         )}
       </div>
     </div>

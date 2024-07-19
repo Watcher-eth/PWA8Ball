@@ -34,11 +34,7 @@ export const ActivityField = ({
       transition={{ duration: 0.5, delay: index * 0.15 }}
       className={`flex flex-row items-center justify-between
       my-[13.5px]
-      ${
-        isDesktop
-          ? "bg-[#121212] p-[11px] rounded-[13px]"
-          : "mx-[10px]"
-      } `}
+      ${isDesktop ? "bg-[#121212] p-[11px] rounded-[13px]" : "mx-[10px]"} `}
       onClick={onOpenBottomSheet}
     >
       <div className="flex flex-row items-center relative">
@@ -83,8 +79,7 @@ export const ActivityField = ({
           image={image}
           price={amount}
           ownedAmount={amount / 100000}
-          options={options}
-          percentage={percentage}
+          // percentage={percentage}
           betId={id}
           topic={id}
           icon={icon}

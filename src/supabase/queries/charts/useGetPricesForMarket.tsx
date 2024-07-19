@@ -1,26 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/supabase/supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 const fetchPricesForMarket = async (
   marketId: string,
   timespan: string
 ): Promise<any[]> => {
   const now = new Date();
-
   let startTime = new Date(now); // Clone the date to avoid mutating the original `now` date
 
   switch (timespan) {
-    case "1hr":
-      startTime.setHours(startTime.getHours() - 1);
-      break;
-    case "24hrs":
+    case "1D":
       startTime.setDate(startTime.getDate() - 1);
       break;
-    case "1week":
+    case "1W":
       startTime.setDate(startTime.getDate() - 7);
       break;
-    case "1Month":
+    case "1M":
       startTime.setMonth(startTime.getMonth() - 1);
+      break;
+    case "1Y":
+      startTime.setFullYear(startTime.getFullYear() - 1);
       break;
     default:
       throw new Error("Unsupported timespan");
@@ -42,7 +40,9 @@ const fetchPricesForMarket = async (
   return data;
 };
 
-export function useGetPricesForMarket(marketId: string, timespan: string) {
+import { useQuery } from "@tanstack/react-query";
+
+export const useGetPricesForMarket = (marketId: string, timespan: string) => {
   return useQuery({
     queryKey: ["marketPrices", marketId, timespan],
     queryFn: () => fetchPricesForMarket(marketId, timespan),
