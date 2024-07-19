@@ -40,7 +40,7 @@ function BuyWithUniswap(props: { setStep: (step: number) => void }) {
       <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
         Swap for GHO
       </div>
-      <div className="text-[lightgray] flex   text-base/[1rem]  items-center px-1 text-[0.899rem] mb-4 mt-1 font-bold mx-6">
+      <div className="text-[lightgray] flex text-base/[1rem] items-center px-1 text-[0.899rem] mb-4 mt-1 font-bold mx-6">
         Use Uniswap to swap ETH, Matic or any other crypto currencies for GHO.
         {""} We reccommend to get at least 15 GHO.
       </div>
