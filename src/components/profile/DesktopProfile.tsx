@@ -285,14 +285,19 @@ export function DesktopProfile() {
 
       <div className="flex flex-col md:w-1/4  ">
         <div className="mb-4 bg-[#131313] rounded-lg p-5 pb-4 ">
-          <h2 className="text-white text-xl font-bold">Resolved Predictions</h2>
-          <h2 className="text-[#909090] text-sm">
-            2 Predictions ready to redeem
-          </h2>
+          <div className="inline-block">
+            <h2 className="text-white text-xl font-bold">
+              Resolved Predictions
+            </h2>
+            <h2 className="text-[#909090] text-sm">
+              2 Predictions ready to redeem
+            </h2>
+          </div>
           <Stars
-            className="absolute top-10 right-10 transform rotate-12	 text-white"
+            className="inline-block -mt-8 ml-2 -mr-2 transform rotate-12	 text-white"
             strokeWidth={3}
           />
+
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
