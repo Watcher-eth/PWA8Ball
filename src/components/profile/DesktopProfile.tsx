@@ -44,7 +44,7 @@ import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowe
 import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import { BetModal } from "@/components/Modals/PredictionPositionModal";
+
 
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
