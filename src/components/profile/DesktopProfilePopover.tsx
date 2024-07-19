@@ -28,6 +28,8 @@ import {
   UserCircle,
 } from "lucide-react";
 import Link from "next/link";
+import { DesktopOnrampModal } from "../Onboarding/Onramp/DesktopOnramp";
+import { DesktopInviteFriends } from "../Share/InviteFriendsModal";
 
 export function DesktopProfilePopover({
   children,
@@ -56,13 +58,22 @@ export function DesktopProfilePopover({
           <Link href={`/u/${user?.external_auth_provider_user_id}`}>
             <DropdownItem label="Profile" IconComponent={User} />
           </Link>
-          <DropdownItem label="Fund your account" IconComponent={Wallet} />
-          <DropdownItem label="Settings" IconComponent={Settings} />
-          <DropdownItem label="Your Boosts" IconComponent={Rocket} />
+          <DesktopOnrampModal>
+            <DropdownItem label="Fund your account" IconComponent={Wallet} />
+          </DesktopOnrampModal>
+          <Link href={`/settings`}>
+            <DropdownItem label="Settings" IconComponent={Settings} />
+          </Link>
+          <Link href={`/u/${user?.external_auth_provider_user_id}`}>
+            <DropdownItem label="Your Boosts" IconComponent={Rocket} />
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownItem label="Your Friends" />
+          <DesktopInviteFriends>
+            <DropdownItem label="Your Friends" />
+          </DesktopInviteFriends>
+
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="hover:!bg-slate-400/20 rounded-md active:!bg-slate-400/30">
               Invite users
