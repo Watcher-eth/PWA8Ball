@@ -8,6 +8,7 @@ import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { shortenAddress } from "@/utils/address/shortenAddress";
+
 const stepVariants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
@@ -28,11 +29,6 @@ export function OnrampStep(props: {
 }
 
 function BuyWithUniswap(props: { setStep: (step: number) => void }) {
-  const jsonRpcUrlMap = {
-    1: [
-      `https://polygon-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
-    ],
-  };
   return (
     <motion.div
       key="step4"
