@@ -29,6 +29,7 @@ export function useClientAddress() {
     address = eoaAddress;
   }
 
+  console.log({client, address})
   return {
     client,
     address,

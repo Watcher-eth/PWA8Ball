@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import {
   createPrediction,

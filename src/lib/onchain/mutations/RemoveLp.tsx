@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { type Address, getContract } from "viem";
@@ -49,7 +48,7 @@ async function removeLp(props: {
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
-      client: { public: rpcClient, wallet: props.client },
+      client: { public: props.client, wallet: props.client },
     });
 
     // Boost the market

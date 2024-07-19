@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import { type Address, getContract } from "viem";
 import { rpcClient } from "@/lib/onchain/rpcClient";
@@ -57,7 +56,7 @@ async function cashoutPrediction(props: CashoutParams) {
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
-      client: { public: rpcClient, wallet: props.client },
+      client: { public: props.client, wallet: props.client },
     });
 
     const preferYesNum = props.preferYes ? 1 : 0;

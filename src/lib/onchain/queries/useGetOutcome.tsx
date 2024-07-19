@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { getEightBallContract } from "../contracts/Eightball";
 import { useUpdateMarketOutcome } from "@/supabase/mutations/useUpdateMarketOutcome";
 

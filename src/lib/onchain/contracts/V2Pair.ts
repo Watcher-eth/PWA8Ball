@@ -16,14 +16,3 @@ export const V2_PAIR_ABI = [{"type":"constructor","inputs":[],"stateMutability":
 
 
 // Correcting getWalletClient to return walletClient
-
-export async function getEightBallContract(walletClient: WalletClient) {
-  // Use walletClient for write operations and rpcClient for read operations
-  const contract = getContract({
-    abi: V2_PAIR_ABI,
-    address: V2_PAIR_ADDRESS,
-    client: { public: rpcClient, wallet: walletClient },
-  });
-
-  return contract;
-}

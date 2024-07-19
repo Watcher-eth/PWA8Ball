@@ -3,11 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "@/lib/onchain/contracts/Eightball";
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
-import { rpcClient } from "@/lib/onchain/rpcClient";
 
 import { createPrediction } from "@/supabase/mutations/createPrediction";
 import { supabase } from "@/supabase/supabaseClient";
@@ -32,11 +30,11 @@ async function predict(props: PredictParams) {
   try {
     // Convert the _Amount to USDC's correct unit (typically 6 decimals)
     const preferYesNum = props.preferYes ? 1 : 0;
-    console.log("props2", props.address, props.client);
+    console.log("props2", props);
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
-      client: { public: rpcClient, wallet: props.client },
+      client: { public: props.client, wallet: props.client },
     });
 
     console.log("Contract", contract);
@@ -44,22 +42,17 @@ async function predict(props: PredictParams) {
     //TODO: Custom slippage
     // Execute User Prediction
 
-    const { request } = await contract.simulate.predict([
+    const contractArgs = [
       BigInt(props.amount / 10),
       preferYesNum,
       BigInt(props.marketId),
       ROOT_OPERATOR_ADDRESS,
       990,
-    ]);
+    ];
+    const { request } = await contract.simulate.predict(contractArgs);
 
     console.log("simulate", request);
-    const hash = await contract.write.predict([
-      BigInt(props.amount / 10),
-      preferYesNum,
-      BigInt(props.marketId),
-      ROOT_OPERATOR_ADDRESS,
-      990,
-    ]);
+    const hash = await contract.write.predict(contractArgs);
 
     console.log("Prediction hash", hash);
 

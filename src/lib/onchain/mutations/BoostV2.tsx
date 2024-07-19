@@ -34,7 +34,7 @@ async function boostV2(props: BoostMarket) {
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
-      client: { public: rpcClient, wallet: props.client },
+      client: { public: props.client, wallet: props.client },
     });
     console.log("Contract", contract, props);
     // Boost the market

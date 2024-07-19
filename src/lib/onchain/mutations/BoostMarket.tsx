@@ -5,7 +5,6 @@ import { USDC_ADDRESS, USDC_ABI, getUSDCContract } from "../contracts/Usdc";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, Address } from "viem";

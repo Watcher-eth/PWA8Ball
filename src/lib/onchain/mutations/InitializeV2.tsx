@@ -47,7 +47,7 @@ async function initialize(props: {
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
-      client: { public: rpcClient, wallet: props.client },
+      client: { public: props.client, wallet: props.client },
     });
     // Boost the market
     const hash = await contract.write.initializeMarket([

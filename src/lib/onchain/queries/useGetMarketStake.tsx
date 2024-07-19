@@ -4,7 +4,6 @@ import { queryOptions, useQuery } from "@tanstack/react-query";
 import {
   EightBallAddress,
   EightballV1ABI,
-  getEightBallContract,
 } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { useUpdateUSDCBalance } from "@/supabase/mutations/useUpdateUSDCBalance";
