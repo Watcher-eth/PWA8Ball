@@ -19,39 +19,39 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       animate="animate"
       exit="exit"
     >
-      <div className="text-white text-[1.5rem] font-bold mt-7 mx-[1.65rem]">
+      <div className="text-white text-[1.5rem] font-bold mt-7 mx-[1rem]">
         Prop up your account
       </div>
-      <div className="text-[#686868] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1.65rem]">
+      <div className="text-[#686868] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1rem]">
         You don't have enough funds. Please fund your wallet to continue.
       </div>
-      <div className="h-px w-[80vw] my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
+      <div className="h-px w-full my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
       <LabeledSectionWithIcon
         title="Buy"
         description="Fund your wallet using your credit card or Apple/Google Pay"
         IconComponent={CreditCard}
         className="bg-orange-400"
-        onClick={() => setStep(5)}
+        onClick={() => setStep(3)}
       />
       <LabeledSectionWithIcon
         title="Swap"
         description="Swap ETH, Stablecoins or Matic for USDC using Uniswap"
         IconComponent={Repeat}
         className="bg-pink-400"
-        onClick={() => setStep(4)}
+        onClick={() => setStep(2)}
       />
       <LabeledSectionWithIcon
         title="Receive"
         description="Receive USDC from one of your wallets to your Blitz address"
         IconComponent={ArrowDown}
         className="bg-green-400"
-        onClick={() => setStep(6)}
+        onClick={() => setStep(4)}
       />
-      <div className="flex items-center mt-2 w-[85vw] space-x-4 mb-7  m-4 mx-6 justify-between mx-2">
+      <div className="flex items-center mt-2 w-full space-x-4 mb-7  m-4 mx-6 justify-between mx-2">
         <Button
-          onClick={() => setStep(2 - 1) /* dafuq */}
+          onClick={() => setStep(1)}
           className={`
-            active:bg-[#D9D9D9] hover:bg-[#D9D9D9] text-[#1D1D1D] bg-[#D9D9D9] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-[40vw]
+            active:bg-[#D9D9D9] hover:bg-[#D9D9D9] text-[#1D1D1D] bg-[#D9D9D9] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-1/2
             hover:scale-110 active:scale-95 transition-all
           `}
         >
@@ -60,7 +60,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         <Button
           onClick={() => setStep(2 + 1)}
           className={`
-            active:bg-[#1D1D1D] hover:bg-[#1D1D1D] text-[#D9D9D9] bg-[#1D1D1D] text-[1.15rem] font-bold h-[2.85rem] rounded-full w-[40vw]
+            active:bg-[#1D1D1D] hover:bg-[#1D1D1D] text-[#D9D9D9] bg-[#1D1D1D] text-[1.15rem] font-bold h-[2.85rem] rounded-full w-1/2
             hover:scale-110 active:scale-95 transition-all
           `}
         >
@@ -77,18 +77,18 @@ function LabeledSectionWithIcon({
   IconComponent,
   className,
   onClick,
-}:{
-  title: string
-  description: string
-  IconComponent: React.FC
-  className: string
-  onClick: () => void
+}: {
+  title: string;
+  description: string;
+  IconComponent: React.FC;
+  className: string;
+  onClick: () => void;
 }) {
   return (
     <div
       onClick={onClick}
       className={`
-        flex mt-5 mb-2 bg-[#1D1D1D] mx-6 rounded-xl
+        flex mt-5 mb-2 w-full bg-[#1D1D1D] mx-6 rounded-md
         active:scale-96 hover:scale-101 transition-all
       `}
     >
@@ -106,5 +106,3 @@ function LabeledSectionWithIcon({
     </div>
   );
 }
-
-

@@ -1,7 +1,13 @@
 // @ts-nocheck
 
 import { Switch } from "@/components/ui/switch";
-import { ChevronRight, CreditCard, ReceiptText, Save } from "lucide-react";
+import {
+  ChevronRight,
+  CreditCard,
+  ReceiptText,
+  Save,
+  UserPlus,
+} from "lucide-react";
 import React, { useState, useEffect } from "react";
 import {
   Label,
@@ -14,6 +20,7 @@ import { CardContent } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
+import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnramp";
 
 export const SettingsPage: React.FC = () => {
   const initialSettings = {
@@ -57,10 +64,18 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="container p-4 bg-[#181818] w-full h-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first p-5 relative">
-          <div className="text-white font-semibold text-2xl">Settings</div>
+        <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first rounded-md p-5 relative">
+          <div className="text-white font-semibold text-2xl -mb-5">
+            Settings
+          </div>
           <div className="w-full p-4 rounded-md bg-[#151515] flex flex-row items-center justify-between">
-            <div className="text-white text-[0.95rem]">{user?.name}</div>
+            <div className="text-white font-semibold text-[0.95rem] flex flex-row items-center">
+              <img
+                className="h-[1.5rem] w-[1.5rem] oject-cover rounded-full mr-2"
+                src={user?.pfp}
+              />
+              {user?.name}
+            </div>
             <div className="text-white text-[0.85rem] px-3 p-1 bg-[#262626] rounded-md">
               Edit
             </div>
@@ -132,7 +147,11 @@ export const SettingsPage: React.FC = () => {
               <div className="h-[0.1rem] mt-2 my-3 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
                 <DesktopInviteFriends>
-                  <button className="px-3 text-white text-md flex items-center justify-center py-1 rounded-full bg-[#262626]">
+                  <button className="px-3 text-white text-md flex items-center flex-row py-1 rounded-md bg-[#262626]">
+                    <UserPlus
+                      className="text-white mr-1 h-[1rem]"
+                      strokeWidth={2.5}
+                    />{" "}
                     Invite Friends
                   </button>
                 </DesktopInviteFriends>
@@ -210,7 +229,7 @@ export const SettingsPage: React.FC = () => {
             </button>
           )}
         </div>
-        <div className="order-first md:order-last bg-[#080808] p-4">
+        <div className="order-first md:order-last rounded-md bg-[#080808] p-4">
           <div className="flex flex-col rounded-md bg-[#181818] p-5 px-8">
             <div className="flex flex-row items-center justify-between w-full">
               <div className="flex flex-col -space-y-2">
@@ -261,13 +280,15 @@ export const SettingsPage: React.FC = () => {
                   />
                   Prediction History
                 </button>
-                <button className="px-3 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
-                  <CreditCard
-                    className="h-[0.9rem] text-white"
-                    strokeWidth={2.5}
-                  />
-                  Payment Method
-                </button>
+                <DesktopOnrampModal>
+                  <button className="px-3 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+                    <CreditCard
+                      className="h-[0.9rem] text-white"
+                      strokeWidth={2.5}
+                    />
+                    Payment Method
+                  </button>
+                </DesktopOnrampModal>
               </div>
             </div>
           </div>

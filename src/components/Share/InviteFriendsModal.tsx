@@ -9,6 +9,7 @@ import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
+import { Spinner } from "../Modals/PredictModal/Spinner";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");
@@ -109,8 +110,10 @@ export const FindFriends = ({ type }) => {
 
   if (loading) {
     return (
-      <div style={{ width: width, backgroundColor: "#070707", height: height }}>
-        Loading...
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="top-20">
+          <Spinner loading={true} />
+        </div>
       </div>
     );
   }
