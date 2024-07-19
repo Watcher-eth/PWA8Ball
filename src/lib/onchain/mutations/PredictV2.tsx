@@ -10,6 +10,7 @@ import { type Address, getContract } from "viem";
 import { createPrediction } from "@/supabase/mutations/createPrediction";
 import { supabase } from "@/supabase/supabaseClient";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
+import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
 
 interface PredictParams {
   amount: number;
@@ -23,14 +24,12 @@ interface PredictParams {
 }
 
 async function predict(props: PredictParams) {
-  console.log("Props", props.amount, props.marketId);
+  const { managePrediction } = useUserPrediction();
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");
   }
   try {
-    // Convert the _Amount to USDC's correct unit (typically 6 decimals)
     const preferYesNum = props.preferYes ? 1 : 0;
-    console.log("props2", props);
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
@@ -51,44 +50,19 @@ async function predict(props: PredictParams) {
     ];
     const { request } = await contract.simulate.predict(contractArgs);
 
-    console.log("simulate", request);
     const hash = await contract.write.predict(contractArgs);
 
     console.log("Prediction hash", hash);
 
-    //TODO: Integrate Multiplier
-    const send = await createPrediction({
-      user_id: props.userId,
-      market_id: props.marketId,
-      amount: props.amount,
-      option: props.option,
-      multiplier: 2.2,
-    });
-
-    const { data: user, error: fetchError } = await supabase
-      .from("users")
-      .select("liquiditypoints")
-      .eq("external_auth_provider_user_id", props.userId)
-      .single();
-
-    if (fetchError) {
-      throw new Error(fetchError.message);
-    }
-
-    const points = (props.amount / 10 ** 6) * 2;
-    const newLiquidityPoints = (user?.liquiditypoints || 0) + points;
-
-    // Update the users cred (points)
-    const { data, error: updateError } = await supabase
-      .from("users")
-      .update({ liquiditypoints: newLiquidityPoints })
-      .match({ external_auth_provider_user_id: props?.userId })
-      .single();
-
-    console.log("Added Prediction to DB", send);
+    const { prediction, updatedUser } = await managePrediction(
+      props.userId,
+      props.marketId,
+      props.amount,
+      props.option
+    );
   } catch (error) {
     console.error("Error during prediction", error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 }
 

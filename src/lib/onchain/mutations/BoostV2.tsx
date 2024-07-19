@@ -2,10 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 
-import {
-  EightBallAddress,
-  EightballV1ABI,
-} from "../contracts/Eightball";
+import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
@@ -21,55 +18,29 @@ interface BoostMarket {
 }
 
 async function boostV2(props: BoostMarket) {
-  console.log("Amount", props.amount, props.userId);
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");
   }
-  console.log("Props", props);
   try {
-    // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-
-    const account = props.address;
-
     const contract = getContract({
       abi: EightballV1ABI,
       address: EightBallAddress,
       client: { public: props.client, wallet: props.client },
     });
-    console.log("Contract", contract, props);
+    
     // Boost the market
     const hash = await contract.write.boostMarket([
       BigInt(props.amount),
       BigInt(props.marketId),
     ]);
-    console.log("hash", hash);
+    // console.log("hash", hash);
 
-    const send = await addLiquidityBoost({
+    //Update DB
+    await addLiquidityBoost({
       user_id: props.userId,
       market_id: props.marketId,
       amount_added: props.amount,
     });
-
-    const { data: user, error: fetchError } = await supabase
-      .from("users")
-      .select("liquiditypoints")
-      .eq("external_auth_provider_user_id", props.userId)
-      .single();
-
-    if (fetchError) {
-      throw new Error(fetchError.message);
-    }
-
-    const points = (props.amount / 10 ** 6) * 2;
-    const newLiquidityPoints = (user?.liquiditypoints || 0) + points;
-
-    // Update the liquidity points
-    const { data, error: updateError } = await supabase
-      .from("users")
-      .update({ liquiditypoints: newLiquidityPoints })
-      .match({ external_auth_provider_user_id: props?.userId })
-      .single();
-    console.log("after boost", hash);
   } catch (error) {
     console.error("Error during market boost", error);
     throw error; // Rethrow the error after logging it

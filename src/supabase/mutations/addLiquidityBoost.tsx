@@ -1,6 +1,6 @@
 // @ts-nocheck
-
 import { supabase } from "@/supabase/supabaseClient";
+import { useUpdateLiquidityPoints } from "@/hooks/useUpdateLiquidityPoints";
 
 interface UserBoost {
   user_id: string;
@@ -8,14 +8,23 @@ interface UserBoost {
   amount_added: number;
 }
 
-export async function addLiquidityBoost(newBoost: UserBoost): Promise<UserBoost> {
-  const { data, error } = await supabase
+export async function addLiquidityBoost(
+  newBoost: UserBoost
+): Promise<UserBoost> {
+  const { updateLiquidityPoints } = useUpdateLiquidityPoints();
+
+  const { data: boostData, error: boostError } = await supabase
     .from<UserBoost>("user_boosts")
     .insert([newBoost])
-    .single(); // Ensures that you're dealing with just one record (the newly created one)
+    .single();
 
-  if (error) {
-    throw new Error(error.message);
+  if (boostError) {
+    throw new Error(boostError.message);
   }
-  return data;
-};
+
+  const pointsToAdd = (newBoost.amount_added / 10 ** 6) * 2;
+
+  await updateLiquidityPoints(newBoost.user_id, pointsToAdd);
+
+  return boostData;
+}
