@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { CheckCircle } from "lucide-react";
 
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ export function useExecutePrediction() {
   const { user: userCon } = useUserStore();
   const { mutate: predictV2 } = usePredictV2();
   const { client, address } = useClientAddress();
+  const { approveToken } = useEightBallApproval();
 
   async function executePrediction({
     amount,
