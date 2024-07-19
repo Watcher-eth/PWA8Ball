@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { AnimatedPresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
@@ -74,7 +74,7 @@ export const ShareBetModal = ({
         Invite your friends and earn points when they make their first
         prediction
       </p>
-      <AnimatedPresence>
+      <AnimatePresence>
         {!isDesktop ? (
           <div
             className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
@@ -130,7 +130,7 @@ export const ShareBetModal = ({
             odds={options[0]?.value / 100}
           />
         )}
-      </AnimatedPresence>
+      </AnimatePresence>
       <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
         <button
           className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1"
