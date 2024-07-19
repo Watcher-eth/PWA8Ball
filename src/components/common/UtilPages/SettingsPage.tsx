@@ -144,7 +144,7 @@ export const SettingsPage: React.FC = () => {
                 Invite your friends to 8Ball and receive cred every time they
                 make a prediction. For life!
               </div>
-              <div className="h-[0.1rem] mt-2 my-3 w-full  bg-[#212121]" />
+              <div className="h-[0.1rem] mt-4 my-5 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
                 <DesktopInviteFriends>
                   <button className="px-3 text-white text-md flex items-center flex-row py-1 rounded-md bg-[#262626]">
