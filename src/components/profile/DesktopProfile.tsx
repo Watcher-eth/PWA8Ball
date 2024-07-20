@@ -242,7 +242,7 @@ export function DesktopProfile() {
           </DropdownMenu>
         </div>
 
-        <div className="grid grid-cols-3 gap-0">
+        <div className="flex flex-col w-full gap-1">
           {mergedData.map((item, index) => (
             <DesktopMyBetModal
               key={`predicted-${item.id}-${item.option}`}
@@ -261,22 +261,36 @@ export function DesktopProfile() {
               isExternal={item.isExternal}
               initialProb={item.initialprob}
             >
-              <div
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
                 key={index}
-                className={`
-                relative size-[20vh] bg-cover bg-center rounded-lg shadow-lg
-                active:scale-99 hover:scale-101
-              `}
-                style={{ backgroundImage: `url(${item.image})` }}
+                className="rounded-lg h-14 mt-1 flex flex-row justify-between items-center"
               >
-                <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
-
-                <div className="absolute bottom-0   p-4 text-white">
-                  <span className="bg-green-500/70 backdrop-blur-lg text-xs font-semibold uppercase px-2 py-1 rounded-full">
-                    {item.type === "predicted" ? "Active" : "Correct"}
-                  </span>
+                <div className="  flex flex-row items-center">
+                  <img
+                    className="h-12 object-cover w-12 rounded-md "
+                    src={item?.image}
+                  />
+                  <div className="flex flex-col ml-3 -space-y-[0.1rem]">
+                    <div className="text-[0.85rem] text-[#909090]">
+                      You predicted{" "}
+                      {item?.option === 1
+                        ? item.options[0].name
+                        : item.options[1].name}
+                    </div>
+                    <div className="text-[1rem] line-clamp-1 text-white text-semibold">
+                      {item?.question}
+                    </div>
+                  </div>
                 </div>
-              </div>
+                <div className="flex flex-col -space-y-[0.1rem] -mt-[0.3rem]">
+                  <div className="text-[1rem]  text-white text-semibold">
+                    ${(item?.amount / 100000).toFixed(2)}
+                  </div>
+                  <div className="text-[0.85rem] text-[#909090]">+0.0%</div>
+                </div>
+              </motion.div>
             </DesktopMyBetModal>
           ))}
         </div>
