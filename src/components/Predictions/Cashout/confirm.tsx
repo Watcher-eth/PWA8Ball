@@ -44,7 +44,7 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
     <div
       className={`flex flex-col items-center ${
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-      } mt-0 ${props.isDesktop ? "px-10 py-8" : "p-5"}  ${
+      } mt-0 ${props.isDesktop ? "p-1" : "p-5"}  ${
         props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"
       }`}
     >

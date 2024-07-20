@@ -26,7 +26,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         flexDirection: "column",
         alignItems: "center",
         backgroundColor: props?.isDesktop ? "transparent" : "#101010",
-        padding: props?.isDesktop ? "30px" : "30px 20px",
+        padding: props?.isDesktop ? "10px" : "30px 20px",
         borderRadius: "30px",
         alignSelf: "center",
       }}
@@ -220,7 +220,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </motion.div>
         <motion.div
           onClick={() =>
-            props?.isDesktop ? props.changeStep(6) : props?.changeStep(4)
+            props?.isDesktop ? props.changeStep(3) : props?.changeStep(4)
           }
           style={{
             marginTop: "12px",

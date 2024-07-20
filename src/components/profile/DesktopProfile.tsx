@@ -45,7 +45,6 @@ import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserBy
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
   { category: "US Elections", percentage: 42, fill: "#1E90FF" },
@@ -211,21 +210,21 @@ export function DesktopProfile() {
             <h2 className="text-white text-2xl font-semibold">
               {user?.name}'s Predictions
             </h2>
-            <h2 className="text-[#909090] text-md font-[500] mb-3">
+            <h2 className="text-[#999999] text-md font-[500] mb-3">
               Active Predictions{" "}
             </h2>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="px-2 p-4 h-8 bg-[#181818] flex justify-center items-center rounded-full">
+              <div className="px-2 p-4 h-8 bg-[#212121] flex justify-center items-center rounded-full">
                 <SlidersHorizontal
-                  className="h-5 w-5"
+                  className="h-[1rem] w-[1rem]"
                   color="white"
                   strokeWidth={2.8}
                 />
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-[#303030]/60 mr-2 mt-2 text-white z-20 rounded-md backdrop-blur-lg border-2 w-full border-[#323232]">
+            <DropdownMenuContent className="bg-[#181818]/60 mr-2 mt-2 text-white z-20 rounded-md backdrop-blur-lg border-2 w-full border-[#212121]">
               <DropdownMenuGroup className="p-1">
                 <DropdownMenuItem className="p-1">
                   All Predictions
@@ -285,19 +284,20 @@ export function DesktopProfile() {
 
       <div className="flex flex-col md:w-1/3  ">
         <div className="mb-4 bg-[#131313] rounded-lg p-5 pb-4 ">
-          <div className="inline-block">
-            <h2 className="text-white text-xl font-bold">
-              Resolved Predictions
-            </h2>
-            <h2 className="text-[#909090] text-sm">
-              2 Predictions ready to redeem
-            </h2>
+          <div className="flex flex-row justify-between">
+            <div className="inline-block">
+              <h2 className="text-white text-xl font-bold">
+                Resolved Predictions
+              </h2>
+              <h2 className="text-[#999999] text-sm">
+                2 Predictions ready to redeem
+              </h2>
+            </div>
+            <Stars
+              className="inline-block mt-2 transform rotate-12	 text-white"
+              strokeWidth={3}
+            />
           </div>
-          <Stars
-            className="inline-block -mt-8 ml-2 -mr-2 transform rotate-12	 text-white"
-            strokeWidth={3}
-          />
-
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
@@ -344,29 +344,35 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
     () => positions?.filter((item) => item.amount > 0) || [],
     [positions]
   );
+
+  const totalValue = useMemo(() => {
+    return filteredPositions.reduce((acc, item) => acc + item.amount, 0);
+  }, [filteredPositions]);
   return (
     <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
       <div className="mb-4">
-        <div className="flex items-between mb-4">
-          {/* <div className="bg-[#171717] h-24 w-24 rounded-lg"></div> */}
+        <div className="flex items-center mb-4">
+          <div className="bg-[#171717] h-24 w-24 mr-3 rounded-lg"></div>
           <div className="text-white">
             <div className="-space-y-1">
-              <p className="text-[#909090] text-[0.7rem]">Total locked</p>
-              <h2 className="text-xl font-bold ">$17.56</h2>
+              <p className="text-[#999999] text-[0.7rem]">Total locked</p>
+              <h2 className="text-xl font-bold ">
+                ${(totalValue / 1000000).toFixed(2)}
+              </h2>
             </div>
             <div className="flex justify-between space-x-3 text-sm mt-1">
               <div className="-space-y-1 mr-2">
-                <p className="text-[#909090] text-[0.7rem] ">Fees earned</p>
+                <p className="text-[#999999] text-[0.7rem] ">Fees earned</p>
                 <p className="font-bold text-[1rem]">$0.00</p>
               </div>
               <div className=" -space-y-1">
-                <p className="text-[#909090] text-[0.7rem]">Cred earned</p>
+                <p className="text-[#999999] text-[0.7rem]">Cred earned</p>
                 <p className="font-bold text-[1rem]">230 Cred</p>
               </div>
             </div>
           </div>
         </div>
-        <h3 className="text-white flex flex-row items-center text-lg font-semibold mb-4">
+        <h3 className="text-white -ml-1 flex flex-row items-center text-lg font-semibold mb-4">
           <BarChart strokeWidth={2.8} className="h-[1.13rem] " color="white" />{" "}
           Your active Boosts
         </h3>
@@ -390,7 +396,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
                   />
 
                   <div>
-                    <p className="text-[#909090] text-[0.84rem]">
+                    <p className="text-[#999999] text-[0.84rem]">
                       Boost amount ${(item.amount / 10 ** 6).toFixed(2)}
                     </p>
                     <p className="text-white text-[1rem] font-[500] line-clamp-1">

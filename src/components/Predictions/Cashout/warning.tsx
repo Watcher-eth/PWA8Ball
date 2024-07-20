@@ -22,7 +22,6 @@ export function CashOutWarningScreen({
   option: number;
   isDesktop?: boolean;
 }) {
-
   const { cashOutPrediction, loading, success } = useCashOutPrediction();
 
   const width = window.innerWidth;
@@ -31,7 +30,7 @@ export function CashOutWarningScreen({
     <div
       className={`flex flex-col items-center ${
         isDesktop
-          ? "w-full bg-transparent mt-0 p-8 rounded-none"
+          ? "w-full bg-transparent mt-0 p-1 rounded-none"
           : "w-[93%] bg-[#101010] mt-[50px] p-5 rounded-[30px]"
       }`}
     >
@@ -112,7 +111,7 @@ export function CashOutWarningScreen({
           className={`
             mt-[12px] flex flex-row ml-[16px]
             py-2.5 rounded-[24px] overflow-hidden bg-[#D9D9D9]
-            ${ isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
+            ${isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
             items-center justify-center cursor-pointer
           `}
         >
@@ -126,4 +125,4 @@ export function CashOutWarningScreen({
       </div>
     </div>
   );
-};
+}
