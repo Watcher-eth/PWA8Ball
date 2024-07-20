@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   AlertTriangle,
@@ -87,195 +87,68 @@ export function RemoveLPConfirmationScreen(props: {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: props?.isDesktop ? "#080808" : "#131313",
-        marginTop: props?.isDesktop ? "0px" : "50px",
-        padding: props?.isDesktop ? "10px" : "20px",
-        borderRadius: "30px",
-      }}
-      className="w-full"
+      className={`flex flex-col items-center ${
+        props?.isDesktop
+          ? "bg-[#080808] p-4 mt-3 rounded-[15px]"
+          : "bg-[#131313] p-5 mt-[50px] rounded-[30px]"
+      } w-full`}
     >
       <motion.div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          backgroundColor: props?.isDesktop ? "#080808" : "#131313",
-          borderRadius: "20px",
-        }}
+        className={`flex flex-col ${
+          props?.isDesktop ? "bg-[#080808]" : "bg-[#131313]"
+        } rounded-[20px] w-full`}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
+        <div className="flex flex-row items-center justify-between w-full">
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
           <motion.button
             onClick={() => {
               props?.isDesktop ? props?.setStep(1) : onClose();
             }}
             whileTap={{ scale: 0.95 }}
-            style={{
-              padding: "8.5px 6px",
-              borderRadius: "17px",
-              backgroundColor: "#1C1C1C",
-              border: "none",
-            }}
+            className="p-2.5 px-1.5 rounded-[17px] bg-[#1C1C1C] border-none"
           >
             <X color={"#585858"} strokeWidth={5} height={18} />
           </motion.button>
         </div>
-        <span
-          style={{
-            fontSize: "21px",
-            lineHeight: "23px",
-            color: "white",
-            marginTop: "14px",
-            fontWeight: "600",
-          }}
-        >
+        <span className="text-[21px] leading-[23px] text-white mt-3.5 font-semibold">
           Are you sure you want to withdraw your Boost?
         </span>
-        <span
-          style={{
-            fontSize: "15px",
-            color: "lightgray",
-            marginTop: "8px",
-            fontWeight: 400,
-          }}
-        >
+        <span className="text-[15px] text-lightgray mt-2 font-normal">
           If you keep your boost till after the market resolves you earn 3x
           Points
         </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: "27px",
-            marginBottom: "6px",
-          }}
-        >
+        <div className="flex flex-row items-center mt-7 mb-1.5">
           <Clock color={"white"} strokeWidth={3.5} height={19} />
-          <span
-            style={{
-              fontSize: "18px",
-              fontWeight: "600",
-              color: "white",
-              marginLeft: "4px",
-            }}
-          >
+          <span className="text-[18px] font-semibold text-white ml-1">
             Hold and earn 3x
           </span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "14px 16px",
-            borderRadius: "15px",
-            marginTop: "9px",
-            backgroundColor: "#1C1C1C",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: "9px",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "16.5px",
-                color: "lightgray",
-                fontWeight: "400",
-              }}
-            >
+        <div className="flex flex-col p-3.5 rounded-[15px] mt-2.5 bg-[#1C1C1C]">
+          <div className="flex flex-row items-center mb-2.5 justify-between">
+            <span className="text-[16.5px] text-lightgray font-normal">
               Now
             </span>
-            <span
-              style={{
-                fontSize: "16.5px",
-                color: "lightgray",
-                fontWeight: "400",
-              }}
-            >
+            <span className="text-[16.5px] text-lightgray font-normal">
               {(props.points / 10 ** 5).toFixed(0)} $Cred
             </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "20px",
-                color: "white",
-                fontWeight: "500",
-              }}
-            >
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-[20px] text-white font-medium">
               After Resolution
             </span>
-            <span
-              style={{
-                fontSize: "20px",
-                color: "white",
-                fontWeight: "500",
-              }}
-            >
+            <span className="text-[20px] text-white font-medium">
               {(props.points / 10 ** 5).toFixed(0)} $Cred
             </span>
           </div>
         </div>
       </motion.div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5px",
-          marginBottom: "0",
-          marginTop: "22px",
-        }}
-        className="w-full"
-      >
+      <div className="flex flex-row items-center gap-1.5  mt-5 w-full">
         <motion.button
-          onClick={() => {
-            onClose();
-          }}
+          onClick={onClose}
           whileTap={{ scale: 0.95 }}
-          style={{
-            marginTop: "12px",
-            padding: "13px",
-            borderRadius: "24px",
-            backgroundColor: "#1C1C1C",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "none",
-          }}
-          className="w-1/2"
+          className="mt-3 p-2.5 rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none"
         >
-          <span
-            style={{
-              fontSize: "20px",
-              color: "#D9D9D9",
-              fontWeight: 800,
-            }}
-          >
+          <span className="text-[20px] text-[#D9D9D9] font-extrabold">
             Hold
           </span>
         </motion.button>
@@ -284,41 +157,17 @@ export function RemoveLPConfirmationScreen(props: {
             success ? () => {} : executePrediction();
           }}
           whileTap={{ scale: 0.95 }}
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            flexDirection: "row",
-            marginLeft: "16px",
-            padding: "11px",
-            borderRadius: "24px",
-            backgroundColor: "#D9D9D9",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "none",
-          }}
-          className="w-1/2"
+          className="mt-3 flex flex-row ml-4 p-2 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
         >
           {loading ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex flex-row items-center justify-center"
             >
               <span className="loader" />
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: 800,
-                  marginLeft: "3px",
-                }}
-              >
+              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
                 Withdrawing
               </span>
             </motion.div>
@@ -327,31 +176,12 @@ export function RemoveLPConfirmationScreen(props: {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex flex-row items-center justify-center"
             >
-              <div
-                style={{
-                  padding: "4px",
-                  borderRadius: "19px",
-                  marginRight: "4px",
-                  backgroundColor: "#5ACE5A",
-                }}
-              >
+              <div className="p-1 rounded-[19px] mr-1 bg-[#5ACE5A]">
                 <Check strokeWidth={5} color="white" size={15} />
               </div>
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: 800,
-                  marginLeft: "3px",
-                }}
-              >
+              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
                 Success
               </span>
             </motion.div>
@@ -360,22 +190,10 @@ export function RemoveLPConfirmationScreen(props: {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex flex-row items-center justify-center"
             >
               <ArrowDown color="black" strokeWidth={3} height={23} />
-              <span
-                style={{
-                  fontSize: "20px",
-                  color: "#1D1D1D",
-                  fontWeight: 800,
-                  marginLeft: "3px",
-                }}
-              >
+              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
                 Withdraw
               </span>
             </motion.div>

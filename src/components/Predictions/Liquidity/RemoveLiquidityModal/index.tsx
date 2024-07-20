@@ -14,7 +14,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Overview } from "./Overview";
 import { RemoveLPConfirmationScreen } from "./Confirm";
 
-
 export function RemoveLiquidityModal({
   isOpen,
   onClose,
@@ -45,7 +44,7 @@ export function RemoveLiquidityModal({
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-[#171717] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
+          className="bg-[#171717] rounded-3xl  mb-5 w-full relative"
         >
           <AnimatePresence>
             {step === 1 && (
@@ -74,5 +73,3 @@ export function RemoveLiquidityModal({
     </Drawer>
   );
 }
-
-

@@ -18,11 +18,12 @@ export function DesktopLPModal({
   title: string;
   amount: string;
 }) {
-  const [step, setStep] = useState<number>(2);
+  const [step, setStep] = useState<number>(1);
   return (
     <DesktopCardModal
-      dialogContentClassName="w-[25vw]"
-      cardContentClassName="w-[25vw] min-h-[50vh]"
+      cardClassName="rounded-[1.5rem]"
+      dialogContentClassName="w-full rounded-[1.5rem] xl:w-[30vw] p-2 "
+      cardContentClassName=" min-h-[50vh] rounded-[1.5rem] p-2 bg-[#080808]"
       content={
         step === 1 ? (
           <Overview
@@ -31,6 +32,7 @@ export function DesktopLPModal({
             amount={amount}
             setStep={setStep}
             isDesktop={true}
+            onClose={() => {}}
             totalPot={amount / 10 ** 6}
           />
         ) : (
@@ -40,6 +42,7 @@ export function DesktopLPModal({
             points={amount}
             setStep={setStep}
             id={id}
+            onClose={() => {}}
             isDesktop={true}
           />
         )
