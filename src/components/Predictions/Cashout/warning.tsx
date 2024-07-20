@@ -81,7 +81,7 @@ export function CashOutWarningScreen({
         </div>
       </motion.div>
       <div
-        className={`flex flex-row items-center gap-[5px] mb-0 ${
+        className={`flex flex-row w-full items-center gap-[5px] mb-0 ${
           isDesktop ? "mt-[45px]" : "mt-[35px]"
         }`}
       >
@@ -91,7 +91,7 @@ export function CashOutWarningScreen({
           }}
           className={`
             mt-[12px] py-2.5 rounded-[24px] overflow-hidden bg-[#1C1C1C]
-            ${isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
+            ${isDesktop ? "w-1/2" : `w-[${width / 2.5}px]`}
             flex items-center justify-center cursor-pointer
           `}
         >
@@ -111,7 +111,7 @@ export function CashOutWarningScreen({
           className={`
             mt-[12px] flex flex-row ml-[16px]
             py-2.5 rounded-[24px] overflow-hidden bg-[#D9D9D9]
-            ${isDesktop ? "w-[11vw]" : `w-[${width / 2.5}px]`}
+            ${isDesktop ? "w-1/2" : `w-[${width / 2.5}px]`}
             items-center justify-center cursor-pointer
           `}
         >

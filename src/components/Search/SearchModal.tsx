@@ -11,12 +11,7 @@ import {
   DrawerTitle,
   DrawerClose,
 } from "@/components/ui/drawer";
-import {
-  Calendar,
-  Search,
-  User,
-  X,
-} from "lucide-react";
+import { Calendar, Search, User, X } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -25,7 +20,6 @@ import { Button } from "@/components/ui/Button";
 
 import { RandomMemoji } from "../common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
-import YourVotes, { YourSubmission } from "../Activity/YourVotes";
 import { ACTIVITY_PATH } from "@/utils/urls";
 
 export function SearchModal() {
@@ -49,7 +43,6 @@ export function SearchModal() {
     enabled: !!debouncedSearchQuery,
     queryFn: async () => {
       try {
-
       } catch (error) {
         throw new Error("Error fetching search results");
       }
@@ -131,8 +124,7 @@ export function SearchModal() {
                         <div className="flex flex-col">
                           <div className="text-[1.2rem] ml-2 ">
                             {profile?.metadata?.displayName ??
-                              profile?.handle?.localName
-                            }
+                              profile?.handle?.localName}
                           </div>
                           <div className="text-[1.2rem] text-gray-200 ml-2 ">
                             {shortenAddress(profile?.ownedBy?.address)}
@@ -157,7 +149,6 @@ export function SearchModal() {
     </div>
   );
 }
-
 
 function CurrentContest() {
   return (

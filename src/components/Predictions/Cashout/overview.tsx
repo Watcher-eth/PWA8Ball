@@ -21,200 +21,72 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: props?.isDesktop ? "transparent" : "#101010",
-        padding: props?.isDesktop ? "10px" : "30px 20px",
-        borderRadius: "30px",
-        alignSelf: "center",
-      }}
+      className={`flex flex-col items-center ${
+        props?.isDesktop
+          ? "bg-transparent p-2.5 mt-2.5"
+          : "bg-[#101010] p-[30px_20px] mt-[50px]"
+      } rounded-[30px] self-center`}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-          marginBottom: "18px",
-          fontWeight: 600,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              padding: "8px",
-              backgroundColor: "#1C1C1C",
-              borderRadius: "20px",
-            }}
-          >
+      <div className="flex flex-row items-center justify-between w-full mb-[18px] font-semibold">
+        <div className="flex flex-row items-center">
+          <div className="p-2 bg-[#1C1C1C] rounded-[20px]">
             <Clock strokeWidth={4} color={"lightgray"} size={17} />
           </div>
-          <span
-            style={{
-              marginLeft: "8px",
-              fontSize: "22px",
-              color: "white",
-            }}
-          >
-            {props.title}
-          </span>
+          <span className="ml-2 text-[22px] text-white">{props.title}</span>
         </div>
         <motion.div
           onClick={() => props.onClose()}
-          style={{
-            padding: "8.5px 6px",
-            borderRadius: "17px",
-            overflow: "hidden",
-            backgroundColor: "#1C1C1C",
-            alignSelf: "flex-start",
-            cursor: "pointer",
-          }}
+          className="p-[8.5px_6px] rounded-[17px] overflow-hidden bg-[#1C1C1C] self-start cursor-pointer"
         >
           <X color={"#585858"} strokeWidth={5.5} height={18} />
         </motion.div>
       </div>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "20px",
-          borderRadius: "20px",
-          backgroundColor: props?.isDesktop ? "#171717" : "#1C1C1C",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: props?.isDesktop ? "10px" : "0px",
-          width: "101%",
-        }}
+        className={`flex flex-col p-5 rounded-[20px] items-center justify-center w-full ${
+          props?.isDesktop ? "bg-[#171717]" : "bg-[#1C1C1C]"
+        } mt-2.5`}
       >
-        <span style={{ fontSize: "50px", color: "white", fontWeight: 800 }}>
+        <span className="text-[50px] text-white font-extrabold">
           ${props?.totalPot?.toFixed(2)}
         </span>
-
-        <span
-          style={{
-            fontSize: "15px",
-            color: "lightgray",
-            fontWeight: 500,
-            marginTop: -11,
-          }}
-        >
+        <span className="text-[15px] text-lightgray font-medium mt-[-11px]">
           Unresolved
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "28px 0 8px 0",
-          width: "99%",
-        }}
-      >
+      <div className="flex flex-row items-center justify-between w-full my-2 mt-7">
         <span className="text-[17px] text-[#909090] font-semibold">
           Possible Multiplier
         </span>
-        <span
-          style={{
-            fontSize: "19px",
-            fontWeight: 600,
-            color: "white",
-          }}
-        >
-          3x
-        </span>
+        <span className="text-[19px] font-semibold text-white">3x</span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "8px 0",
-          width: "99%",
-        }}
-      >
+      <div className="flex flex-row items-center justify-between w-full my-2">
         <span className="text-[17px] text-[#909090] font-semibold">
           Current Payout
         </span>
-        <span
-          style={{
-            fontSize: "19px",
-            fontWeight: 600,
-            color: "white",
-          }}
-        >
+        <span className="text-[19px] font-semibold text-white">
           ${props?.totalPot.toFixed(2)}
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "8px 0",
-          width: "99%",
-        }}
-      >
+      <div className="flex flex-row items-center justify-between w-full my-2">
         <span className="text-[17px] text-[#909090] font-semibold">
           Cred earned
         </span>
-        <span
-          style={{
-            fontSize: "19px",
-            fontWeight: 600,
-            color: "white",
-          }}
-        >
+        <span className="text-[19px] font-semibold text-white">
           {(props?.totalPot * 2).toFixed(0)} $Cred
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5px",
-          marginBottom: "5px",
-          marginTop: "10px",
-        }}
-      >
+      <div className="flex flex-row items-center gap-1 w-full mb-1 mt-2.5">
         <motion.div
           onClick={() =>
             props?.isDesktop ? props.changeStep(4) : props?.changeStep(1)
           }
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            flexDirection: "row",
-            padding: props?.isDesktop ? "10px" : "13px",
-            borderRadius: "24px",
-            overflow: "hidden",
-            backgroundColor: "#1D1D1D",
-            width: props?.isDesktop ? "11vw" : width / 2.5,
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
+          className={`mt-3 flex flex-row p-${
+            props?.isDesktop ? "2.5" : "3.5"
+          } rounded-full overflow-hidden bg-[#1D1D1D] w-${
+            props?.isDesktop ? "1/2" : "1/2"
+          } items-center justify-center cursor-pointer`}
         >
-          <span
-            style={{
-              fontSize: "20px",
-              color: "#D9D9D9",
-              fontWeight: "800",
-              marginLeft: "5px",
-            }}
-          >
+          <span className="text-[20px] text-[#D9D9D9] font-extrabold ml-1.5">
             Cancel
           </span>
         </motion.div>
@@ -222,29 +94,13 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           onClick={() =>
             props?.isDesktop ? props.changeStep(3) : props?.changeStep(4)
           }
-          style={{
-            marginTop: "12px",
-            display: "flex",
-            flexDirection: "row",
-            marginLeft: "16px",
-            padding: props?.isDesktop ? "10px" : "11px",
-            borderRadius: "24px",
-            overflow: "hidden",
-            backgroundColor: "#D9D9D9",
-            width: props?.isDesktop ? "11vw" : width / 2.5,
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-          }}
+          className={`mt-3 flex flex-row ml-4 p-${
+            props?.isDesktop ? "2.5" : "2.75"
+          } rounded-full overflow-hidden bg-[#D9D9D9] w-${
+            props?.isDesktop ? "1/2" : "1/2"
+          } items-center justify-center cursor-pointer`}
         >
-          <span
-            style={{
-              fontSize: "20px",
-              color: "#1D1D1D",
-              fontWeight: "800",
-              marginLeft: "3px",
-            }}
-          >
+          <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
             Cashout
           </span>
         </motion.div>

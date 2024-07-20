@@ -2,21 +2,12 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  AlignLeft,
-  ArrowLeftRight,
-  Clock,
-  Lightbulb,
-  Receipt,
-  User2,
-  X,
-} from "lucide-react";
+import { AlignLeft, ArrowLeftRight, Clock, Receipt, User2 } from "lucide-react";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -28,15 +19,6 @@ import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
 
 const timeframes = ["1H", "1D", "1W", "1M"];
-
-// const chartData = [
-//   { month: "January", desktop: 186, mobile: 80 },
-//   { month: "February", desktop: 305, mobile: 200 },
-//   { month: "March", desktop: 237, mobile: 120 },
-//   { month: "April", desktop: 73, mobile: 190 },
-//   { month: "May", desktop: 209, mobile: 130 },
-//   { month: "June", desktop: 214, mobile: 140 },
-// ];
 
 const MyBetModal = (props: {
   title: string;
@@ -780,6 +762,7 @@ export function DesktopMyBetModal({
             changeStep={setStep}
             id={betId}
             odds={"20"}
+            onClose={() => {}}
             totalPot={ownedAmount}
             amount={ownedAmount}
             isDesktop={true}
@@ -796,6 +779,7 @@ export function DesktopMyBetModal({
             multiplier={"2"}
             points={ownedAmount}
             amount={ownedAmount}
+            onClose={() => {}}
             isDesktop={true}
           />
         ) : step === 4 ? (
@@ -809,6 +793,7 @@ export function DesktopMyBetModal({
             changeStep={setStep}
             id={betId}
             odds={"20"}
+            onClose={() => {}}
             totalPot={ownedAmount}
             amount={ownedAmount}
           />

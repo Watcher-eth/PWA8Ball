@@ -2,14 +2,8 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { DesktopShareBetModal } from "../Share/DesktopShareBetModal";
+import { CardContent } from "@/components/ui/card";
+import { DesktopShareBetModal } from "../Share/ShareBetModal";
 import { AlignLeft, ArrowLeftRight, CheckCircle, Receipt } from "lucide-react";
 import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { Input } from "@/components/ui/Input";

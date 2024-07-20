@@ -47,7 +47,7 @@ export function RemoveLPConfirmationScreen(props: {
     });
   };
 
-  async function executePrediction() {
+  async function userRemoveLP() {
     if (smartAccountReady) {
       try {
         setLoading(true);
@@ -154,7 +154,7 @@ export function RemoveLPConfirmationScreen(props: {
         </motion.button>
         <motion.button
           onClick={() => {
-            success ? () => {} : executePrediction();
+            success ? () => {} : userRemoveLP();
           }}
           whileTap={{ scale: 0.95 }}
           className="mt-3 flex flex-row ml-4 p-2 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
