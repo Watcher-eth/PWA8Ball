@@ -14,7 +14,7 @@ import {
 import { SearchInputSection } from "./SearchInputSection";
 
 const friends = [
-  { name: "James Blair", handle: "@jblair", time: "32m" },
+  { name: "Tony Blair", handle: "@tblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
 ];
 
