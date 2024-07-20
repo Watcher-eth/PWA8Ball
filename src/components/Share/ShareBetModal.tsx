@@ -40,36 +40,39 @@ export const ShareBetModal = ({
 
   return (
     <div
-      className={`${
-        isDesktop ? "h-[65vh]" : "h-[110%]"
-      } w-full flex flex-col p-5 ${
-        isDesktop ? "bg-[#080808]" : "bg-[#121212]"
-      } ${isDesktop ? "pt-5" : "pt-10"}  rounded-t-[20px]`}
+      className={`
+        w-full flex flex-col p-5
+        rounded-t-[20px]
+        ${
+          isDesktop
+            ? "h-[65vh] bg-[#080808] pt-5"
+            : "h-[110%] bg-[#121212] pt-10"
+        }
+      `}
     >
       <h1 className="text-4xl font-semibold text-white mb-[-2]">More fun</h1>
       <div className="flex flex-row items-center mt-2">
-        <div className="flex flex-row items-center mx-[10px]">
+        <div className="flex flex-row items-center mx-2.5">
           <img
             src="/images/Guy1Memoji.png"
             alt="Guy1 Memoji"
-            className="size-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full -ml-2.5"
           />
           <img
             src="/images/LadyMemoji.png"
             alt="Lady Memoji"
-            className="size-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full -ml-2.5"
           />
           <img
             src="/images/Guy2Memoji.png"
             alt="Guy2 Memoji"
-            className="size-10 rounded-full ml-[-10px]"
+            className="size-10 rounded-full -ml-2.5"
           />
         </div>
-        <h1 className="text-4xl font-semibold text-white mb-[-2]"> together</h1>
+        <h1 className="text-4xl font-semibold text-white "> together</h1>
       </div>
       <p
-        style={{ lineHeight: "1.4rem" }}
-        className="text-[1.1rem] mb-2 mt-4 text-lightgrey mt-2"
+        className="text-[1.1rem] leading-5 mb-2 text-lightgrey mt-2"
       >
         Invite your friends and earn points when they make their first
         prediction
@@ -97,7 +100,7 @@ export const ShareBetModal = ({
               {question}
             </h2>
             <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
-              <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
+              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
                 <span className="text-xl text-white font-medium">
                   {options[0]?.name}
                 </span>
@@ -105,7 +108,7 @@ export const ShareBetModal = ({
                   /{options[0]?.value / 100}%
                 </span>
               </button>
-              <button className="w-[50.5%] p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
+              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
                 <span className="text-xl text-white font-medium">
                   {options[1].name}
                 </span>
