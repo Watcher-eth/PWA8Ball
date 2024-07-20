@@ -49,8 +49,8 @@ function BuyWithUniswap(props: { setStep: (step: number) => void }) {
       </div>
       <div className="flex items-center mt-2 w-full  m-4 mx-6  mx-2">
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
           className="w-1/2"
         >
           <Button
@@ -62,8 +62,8 @@ function BuyWithUniswap(props: { setStep: (step: number) => void }) {
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => props.setStep(2 + 1)}
           className="w-1/2"
         >
@@ -110,8 +110,8 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
         <div className="text-white flex items-center space-x-[0.35rem] w-full  text-[1.25rem] font-bold  mx-[1.65rem]">
           <div>{shortenAddress(user?.walletaddress, false)} </div>
           <motion.div
-            whileHover={{ scale: 1.4 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => {
               copyToClipboard(user?.walletaddress);
             }}
@@ -143,30 +143,29 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
           <div>$15.00</div>
         </div>
       </div>
-      <div className="flex flex-col items-end"></div>
-      <div className="flex items-center self-center mt-2 w-full mr-3  my-4 space-x-5 ">
+      <div className="flex items-center self-center mt-2 w-full ml-[3rem] my-4 space-x-1 ">
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-1/2"
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full"
         >
           <Button
-            onClick={() => props.setStep(2)}
-            className="active:bg-[#D9D9D9] hover:bg-[#D9D9D9] bg-[#D9D9D9] text-[#1D1D1D] text-[1.15rem] font-bold h-[2.8rem] rounded-full "
+            onClick={() => props.setStep(1)}
+            className="active:bg-[#D9D9D9] w-1/2 hover:bg-[#D9D9D9] bg-[#D9D9D9] text-[#1D1D1D] text-[1.15rem] font-bold h-[2.8rem] rounded-full "
           >
             Back
           </Button>
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-1/2"
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full"
           onClick={() => {
             copyToClipboard(user?.walletaddress);
           }}
         >
-          <Button className="active:bg-[#1D1D1D] space-x-1 flex items-center text-[#D9D9D9] hover:bg-[#1D1D1D] bg-[#1D1D1D] text-[1.15rem] text-white font-bold  h-[2.9rem] rounded-full ">
+          <Button className="active:bg-[#1D1D1D] w-1/2 space-x-1 flex items-center text-[#D9D9D9] hover:bg-[#1D1D1D] bg-[#1D1D1D] text-[1.15rem] text-white font-bold  h-[2.9rem] rounded-full ">
             <Copy size={17} className="mt-[0.05rem]" strokeWidth={3} />
             <div>Copy</div>
           </Button>
@@ -228,12 +227,12 @@ function BuyWithFiat(props: { setStep: (step: number) => void }) {
 
       <div className="flex items-center mt-2 w-full m-4 mx-6 justify-between mx-2">
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
           className="w-1/2"
         >
           <Button
-            onClick={() => props.setStep(2)}
+            onClick={() => props.setStep(1)}
             className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[1.15rem] font-bold h-[2.8rem] rounded-full"
           >
             Back
@@ -241,8 +240,8 @@ function BuyWithFiat(props: { setStep: (step: number) => void }) {
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => props.setStep(2 + 1)}
           className="w-1/2"
         >

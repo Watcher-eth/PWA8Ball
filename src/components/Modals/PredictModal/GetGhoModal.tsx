@@ -19,11 +19,11 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       animate="animate"
       exit="exit"
     >
-      <div className="text-white text-[1.5rem] font-bold mt-7 mx-[1rem]">
+      <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.3rem]">
         Prop up your account
       </div>
-      <div className="text-[#686868] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1rem]">
-        You don't have enough funds. Please fund your wallet to continue.
+      <div className="text-[#999999] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1.3rem]">
+        You don't have enough funds. Please fund your account to continue.
       </div>
       <div className="h-px w-full my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
       <LabeledSectionWithIcon
@@ -47,7 +47,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         className="bg-green-400"
         onClick={() => setStep(4)}
       />
-      <div className="flex items-center mt-2 w-full space-x-4 mb-7  m-4 mx-6 justify-between mx-2">
+      <div className="flex items-center mt-8 w-full space-x-4 mb-3  m-4 mx-6 justify-between mx-2">
         <Button
           onClick={() => setStep(1)}
           className={`
