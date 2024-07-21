@@ -18,7 +18,7 @@ import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution
 import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
 
-const timeframes = ["1H", "1D", "1W", "1M"];
+export const timeframes = ["1H", "1D", "1W", "1M"];
 
 const MyBetModal = (props: {
   title: string;

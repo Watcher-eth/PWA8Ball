@@ -11,6 +11,7 @@ import {
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useState } from "react";
 import { processPrices } from "@/utils/chartUtils";
+import { timeframes } from "./MyBetModal";
 
 export const chartConfig = {
   desktop: {
@@ -54,6 +55,17 @@ export function DesktopChart(props: {
     desktop: price.value,
     mobile: 100 - price.value,
   }));
+
+  const chartConfig2 = {
+    desktop: {
+      label: props.options[1].name,
+      color: "hsl(var(--chart-1))",
+    },
+    mobile: {
+      label: props.options[0].name,
+      color: "hsl(var(--chart-2))",
+    },
+  } satisfies ChartConfig;
   return (
     <div>
       <div
@@ -106,7 +118,7 @@ export function DesktopChart(props: {
       >
         <span
           style={{
-            fontSize: 19,
+            fontSize: 17,
             color: "white",
             fontWeight: 700,
           }}
@@ -123,7 +135,7 @@ export function DesktopChart(props: {
         <span
           style={{
             color: props.optionNumber === 0 ? "#FF0050" : "#0050FF",
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 700,
           }}
         >
@@ -140,6 +152,7 @@ export function DesktopChart(props: {
           alignItems: "center",
           justifyContent: "space-between",
           marginTop: -3,
+          marginBottom: 3,
         }}
       >
         <span
@@ -167,7 +180,7 @@ export function DesktopChart(props: {
             : "This Month"}
         </span>
       </div>
-      <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
+      <ChartContainer className="h-[25vh] w-full" config={chartConfig2}>
         <AreaChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis
@@ -224,10 +237,47 @@ export function DesktopChart(props: {
       </ChartContainer>
       <div
         style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "center",
+          justifyContent: "space-between",
+          marginBottom: 10,
+          marginTop: 0,
+          padding: "0 3rem",
+        }}
+      >
+        {timeframes.map((item, index) => (
+          <motion.div
+            key={index}
+            onClick={() => setTimeframe(item)}
+            style={{
+              padding: "4px 7px",
+
+              backgroundColor: timeframe === item ? "lightgray" : "transparent",
+              borderRadius: 15,
+            }}
+          >
+            <span
+              style={{
+                color: timeframe === item ? "black" : "gray",
+                fontSize: 14,
+                fontWeight: 700,
+              }}
+            >
+              {item}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+      <div
+        style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          marginBottom: -24,
         }}
       >
         <div

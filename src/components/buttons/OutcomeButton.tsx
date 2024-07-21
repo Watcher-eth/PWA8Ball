@@ -25,7 +25,7 @@ export function OutcomeButton({
       className={`
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all
-            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-lg items-center
+            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-md items-center
             w-full
             ${className}
         `}

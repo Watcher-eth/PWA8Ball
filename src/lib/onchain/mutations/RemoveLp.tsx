@@ -45,11 +45,11 @@ async function removeLp(props: {
       client: { public: props.client, wallet: props.client },
     });
 
-    // Remove liquidity
     const hash = await contract.write.removeLiquidity([
       liquidityTokens,
       currentPairId,
     ]);
+    
     console.log("hash", hash);
   } catch (error) {
     console.error("Error during market boost", error);

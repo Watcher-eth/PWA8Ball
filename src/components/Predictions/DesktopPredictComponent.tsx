@@ -19,6 +19,7 @@ import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { processPrices } from "@/utils/chartUtils";
+import { timeframes } from "../common/Charts/MyBetModal";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -66,7 +67,7 @@ export function DesktopPredictComponent(props: {
                     focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
                   `}
               />
-              <div className="flex items-center justify-between z-[2] gap-3 mt-2.5">
+              <div className="flex items-center justify-between z-[2] gap-3 mt-0">
                 <OutcomeButton
                   isDesktop={true}
                   text={options[1].name}
