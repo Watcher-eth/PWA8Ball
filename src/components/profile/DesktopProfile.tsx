@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import {
@@ -49,6 +49,8 @@ import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserBy
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { toast } from "sonner";
+import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
+import { Input } from "../ui/Input";
 
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
@@ -73,7 +75,15 @@ export function DesktopProfile() {
   const { user } = useUserStore();
   const [edit, setEdit] = useState(false);
   const [userName, setUsername] = useState<string>();
-  const [pfp, setPFP] = useState<string>();
+  const [PFP, setPFP] = useState<string>();
+  const { mutate: updateUserProfile } = useUpdateUserProfile();
+  const fileInputRef = useRef(null);
+
+  const handleImageClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const { data: totalFollowers } = useGetTotalFollowers(
     user?.external_auth_provider_user_id
@@ -107,10 +117,21 @@ export function DesktopProfile() {
           <img
             src={userC?.pfp}
             alt="Profile"
-            className="rounded-full h-24 w-24 mb-2"
+            className="rounded-full h-24 w-24 mb-2 cursor-pointer"
+            onClick={edit ? handleImageClick : () => {}}
           />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            // onChange={handleFileChange}
+          />
+
           {edit === true && (
-            <div className="p-0.5 py-1.5 absolute bottom-14 border-[0.2rem] border-[#121212]  right-1/3  rounded-full bg-[white] mr-7 flex justify-center items-center">
+            <div
+              onClick={handleImageClick}
+              className="p-0.5 hover:scale-103 active:scale-98 py-1.5 absolute bottom-14 border-[0.2rem] border-[#121212]  right-1/3  rounded-full bg-[white] mr-7 flex justify-center items-center"
+            >
               <Pencil className="text-black h-[0.9rem]" strokeWidth={2.7} />
             </div>
           )}
@@ -239,8 +260,22 @@ export function DesktopProfile() {
               </div>
             </CardFooter>
           </Card>
-          {userName?.length > 0 || pfp?.length > 0 ? (
-            <div className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center">
+          {userName?.length > 0 || PFP?.length > 0 ? (
+            <div
+              onClick={() => {
+                const name = userName?.length > 0 ? userName : user?.name;
+                const pfp = PFP?.length > 0 ? PFP : user?.pfp;
+                const userId = user?.external_auth_provider_user_id;
+                updateUserProfile({
+                  userId,
+                  updates: {
+                    name,
+                    pfp,
+                  },
+                });
+              }}
+              className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"
+            >
               Save changes
             </div>
           ) : null}
