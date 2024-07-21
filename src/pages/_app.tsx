@@ -23,7 +23,7 @@ import { RootLayout } from "@/components/common/RootLayout";
 export const queryClient = new QueryClient();
 
 const PRIVY_CONFIG = {
-  loginMethods: ["email", "wallet", "google", "farcaster"],
+  loginMethods: ["email", "wallet", "google", "farcaster", "apple", "twitter"],
   appearance: {
     theme: "dark",
     accentColor: "#0050FF",

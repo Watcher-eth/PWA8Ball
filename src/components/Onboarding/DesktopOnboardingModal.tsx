@@ -1,11 +1,12 @@
 // @ts-nocheck
 import { Input } from "@/components/ui/Input";
-import { Instagram, Phone, Twitch, Twitter } from "lucide-react";
+import { Phone } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
 import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
+import { AppleIcon, GoogleIcon, XIcon } from "../common/Icons/AuthIcons";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
@@ -21,7 +22,7 @@ export function DesktopOnboardingModal({
 }) {
   return (
     <DesktopCardModal
-      dialogContentClassName="min-w-[55vw]"
+      dialogContentClassName="min-w-[55vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
       content={<DesktopOnboarding />}
@@ -52,10 +53,14 @@ function DesktopOnboarding() {
           className="mb-4 w-full bg-[#212121] text-white"
         />
         <div className="flex justify-between w-full  rounded-[0.5rem]  mb-4">
-          <SocialOnboardButton IconComponent={Twitch} onClick={login} />
-          <SocialOnboardButton IconComponent={Twitter} onClick={login} />
-          <SocialOnboardButton IconComponent={Instagram} onClick={login} />
-          <SocialOnboardButton IconComponent={Phone} onClick={login} />
+          <SocialOnboardButton IconComponent={GoogleIcon} onClick={login} />
+          <SocialOnboardButton IconComponent={XIcon} onClick={login} />
+          <SocialOnboardButton IconComponent={AppleIcon} onClick={login} />
+          <SocialOnboardButton
+            label={"Farcaster"}
+            IconComponent={Phone}
+            onClick={login}
+          />
         </div>
         <WalletOnboardButton
           label="MetaMask"
@@ -104,9 +109,11 @@ function DesktopOnboarding() {
 function SocialOnboardButton({
   IconComponent,
   onClick,
+  label,
 }: {
   IconComponent: React.ReactNode;
   onClick: () => void;
+  label?: string;
 }) {
   return (
     <div
@@ -118,7 +125,7 @@ function SocialOnboardButton({
       `}
       onClick={onClick}
     >
-      <IconComponent className="size-5" />
+      <IconComponent className="" />
     </div>
   );
 }
@@ -133,7 +140,7 @@ function WalletOnboardButton({
   onClick: () => void;
 }) {
   return (
-    <WalletButton.Custom  wallet={label}>
+    <WalletButton.Custom wallet={label}>
       {({ ready, connect }) => {
         return (
           <button
@@ -141,10 +148,10 @@ function WalletOnboardButton({
             disabled={!ready}
             onClick={connect}
             className={`
-              w-full mb-4
-              hover:scale-101 active:scale-98 transition-all
-              cursor-pointer
-            `}
+         w-full mb-4
+          hover:scale-101 active:scale-98 transition-all
+         cursor-pointer 
+       `}
           >
             <div
               variant="outline"
@@ -209,7 +216,7 @@ export const CustomConnectButton = ({
                     className={`
                      w-full mb-4
                      hover:scale-101 active:scale-98 transition-all
-                     cursor-pointer
+                     cursor-pointer w-full
                     `}
                   >
                     <div

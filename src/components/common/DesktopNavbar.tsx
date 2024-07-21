@@ -48,8 +48,8 @@ export function DesktopNavbar() {
               <DesktopProfilePopover>
                 <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
                   <img
-                    src={user.pfp}
-                    alt={user.name}
+                    src={user?.pfp}
+                    alt={user?.name}
                     className="size-8 rounded-full mr-1"
                   />
                 </div>
