@@ -248,9 +248,9 @@ export const FindFriends = ({ type }) => {
             <FindFriendsItem
               type={type}
               isFollowing={item.isFollowing}
-              pfp={item.followingAddress.socials[0].profileImage}
-              handle={item.followingAddress.socials[0].profileHandle}
-              name={item.followingAddress.socials[0].profileName}
+              pfp={item.followingAddress.socials[0]?.profileImage}
+              handle={item.followingAddress.socials[0]?.profileHandle}
+              name={item.followingAddress.socials[0]?.profileName}
             />
             <div
               className="h-[1px] bg-[rgb(50,50,50)] self-end my-[1px] "
@@ -379,8 +379,10 @@ export function DesktopInviteFriends({
 }) {
   return (
     <DesktopCardModal
-      dialogContentClassName="rounded-lg"
-      cardContentClassName="bg-[#080808]/75 rounded-lg p-0 h-[75vh] backdrop-blur-lg"
+      dialogContentClassName="rounded-lg "
+      dialogClassName="xl:max-w-[25%]"
+      cardClassName="xl:max-w-[32vw] md:max-w-[45vw] sm:max-w-[65vw] "
+      cardContentClassName="bg-[#080808]/75  rounded-lg p-0 h-[75vh] backdrop-blur-lg"
       content={<FindFriends type={2} />}
     >
       {children}
