@@ -28,13 +28,6 @@ export const SubmitProof: React.FC<SubmitProofProps> = (props) => {
         borderRadius: "30px",
       }}
     >
-      {/* <CustomToastSuccess
-        visible={toastVisible}
-        message="Prediction successful!"
-        icon={CheckCircle}
-        position="top-center"
-        color="#5ACE5A"
-      /> */}
       <div
         style={{
           display: "flex",
@@ -175,4 +168,3 @@ export const SubmitProof: React.FC<SubmitProofProps> = (props) => {
     </div>
   );
 };
-

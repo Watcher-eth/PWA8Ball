@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import {
@@ -17,10 +17,14 @@ import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 import { User } from "@/types/UserTypes";
 import {
   BarChart,
+  ClipboardList,
   Filter,
+  Pencil,
+  Share,
   SlidersHorizontal,
   Stars,
   TrendingUp,
+  UserPlus,
 } from "lucide-react";
 import {
   Label,
@@ -44,6 +48,7 @@ import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowe
 import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
+import { toast } from "sonner";
 
 const chartData = [
   { category: "GTA 6", percentage: 28, fill: "#FF6600" },
@@ -66,10 +71,14 @@ const chartConfig = {
 
 export function DesktopProfile() {
   const { user } = useUserStore();
-  const id = "b82fc163-413f-5060-87b1-27b26208e987";
+  const [edit, setEdit] = useState(false);
+  const [userName, setUsername] = useState<string>();
+  const [pfp, setPFP] = useState<string>();
+
   const { data: totalFollowers } = useGetTotalFollowers(
     user?.external_auth_provider_user_id
   );
+
   const { data: userC, isLoading } = useGetUserByExternalAuthId(
     user?.external_auth_provider_user_id
   );
@@ -83,7 +92,6 @@ export function DesktopProfile() {
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
-  console.log("mergedData", mergedData[0]);
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808] px-8">
@@ -101,7 +109,21 @@ export function DesktopProfile() {
             alt="Profile"
             className="rounded-full h-24 w-24 mb-2"
           />
-          <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+          {edit === true && (
+            <div className="p-0.5 py-1.5 absolute bottom-14 border-[0.2rem] border-[#121212]  right-1/3  rounded-full bg-[white] mr-7 flex justify-center items-center">
+              <Pencil className="text-black h-[0.9rem]" strokeWidth={2.7} />
+            </div>
+          )}
+          {edit === true ? (
+            <input
+              value={userName}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder={userC?.name}
+              className="text-white border-0 active:border-0 rounded-md text-xl w-1/8 text-center bg-[transparent] font-bold"
+            ></input>
+          ) : (
+            <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+          )}
           <SocialsSection {...userC?.socials} />
         </div>
         <div className="flex justify-between text-white mb-4 px-2">
@@ -110,8 +132,24 @@ export function DesktopProfile() {
           <TextWithSuffix value={"12"} suffix="Predictions" />
         </div>
         <div className="flex justify-between mb-4 space-x-4">
-          <ContrastButton label="Follow" />
-          <ContrastButton label="Edit" />
+          <ContrastButton
+            label={
+              userC?.external_auth_provider_user_id ===
+              user?.external_auth_provider_user_id
+                ? "Share"
+                : "Follow"
+            }
+          />
+          <ContrastButton
+            setEdit={setEdit}
+            edit={edit}
+            label={
+              userC?.external_auth_provider_user_id ===
+              user?.external_auth_provider_user_id
+                ? "Edit"
+                : "Share"
+            }
+          />
         </div>
         <div>
           <Card className="bg-[transparent]  border-1 border-[#212121]">
@@ -201,6 +239,11 @@ export function DesktopProfile() {
               </div>
             </CardFooter>
           </Card>
+          {userName?.length > 0 || pfp?.length > 0 ? (
+            <div className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center">
+              Save changes
+            </div>
+          ) : null}
         </div>
       </div>
 
@@ -447,6 +490,7 @@ export function DesktopProfileSide(props: {
           alt="Profile"
           className="rounded-full h-24 w-24 mb-2"
         />
+
         <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
         <SocialsSection {...userC?.socials} />
       </div>
@@ -560,12 +604,43 @@ function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
 function ContrastButton({
   label,
   className = "",
+  setEdit,
+  edit,
 }: {
   label: React.ReactNode;
   className?: string;
+  setEdit: () => void;
+  edit: boolean;
 }) {
   return (
     <div
+      onClick={() => {
+        if (label === "Edit") {
+          setEdit(!edit);
+        }
+        if (label === "Follow") {
+        }
+        if (label === "Share") {
+          toast(
+            <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+              <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
+                <ClipboardList className="text-white h-[0.95rem]" />
+              </div>
+              Copied to Clipboard
+            </div>,
+            {
+              unstyled: true,
+              classNames: {
+                title: "text-red-400 text-2xl",
+                description: "text-red-400",
+                actionButton: "bg-zinc-400",
+                cancelButton: "bg-orange-400",
+                closeButton: "bg-lime-400",
+              },
+            }
+          );
+        }
+      }}
       className={`
         w-1/2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121]
         flex justify-center items-center rounded-md
@@ -573,6 +648,13 @@ function ContrastButton({
         ${className}
       `}
     >
+      {label === "Share" ? (
+        <Share className="h-[1rem] mr-1" strokeWidth={3} />
+      ) : label === "Edit" ? (
+        <Pencil className="h-[0.9rem] mr-1" strokeWidth={3} />
+      ) : (
+        <UserPlus className="h-[1rem] mr-1" strokeWidth={3} />
+      )}{" "}
       {label}
     </div>
   );
