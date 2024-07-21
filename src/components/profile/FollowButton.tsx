@@ -83,8 +83,7 @@ export const FollowButton = ({
   return null;
 };
 
-
-function DisplayFollowButton({ onClick, IconComponent, label, isDark=true }) {
+function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
   return (
     <button
       onClick={onClick}
@@ -96,9 +95,13 @@ function DisplayFollowButton({ onClick, IconComponent, label, isDark=true }) {
         ${isDark ? "bg-[#1B1B1E]" : "bg-white"}
       `}
     >
-      {IconComponent &&
-        <IconComponent color={"lightgray"} strokeWidth={3} height={15} />
-      }
+      {IconComponent && (
+        <IconComponent
+          color={isDark ? "lightgray" : "#1B1B1E"}
+          strokeWidth={3}
+          height={15}
+        />
+      )}
       <div
         className={`
         text-[14px] font-bold

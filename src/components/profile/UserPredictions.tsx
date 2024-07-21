@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
 import { Plus } from "lucide-react";
 
-
 export function UserPredictions({
   index,
   image,
@@ -48,7 +47,7 @@ export function UserPredictions({
         }`}
       >
         <p className="text-white font-bold">
-          {option.length < 8 ? option : option.substring(0, 3)}
+          {option?.length < 8 ? option : option?.substring(0, 3)}
         </p>
       </div>
     </motion.div>
@@ -112,16 +111,12 @@ export const CreatedPrediction = ({
       onClick={onOpenBottomSheet}
     >
       <div className="flex items-center gap-2">
-        <img src={image} alt={title} className="h-14 w-14 rounded-[0.5rem]" />
+        <img src={image} alt={title} className="h-14 w-14 object-cover rounded-[0.5rem]" />
         <div className="flex flex-col max-w-[69%]">
-          <p
-            className="text-white text-md font-bold font-[Aeonik-Bold]"
-          >
+          <p className="text-white text-md font-bold font-[Aeonik-Bold]">
             {title}
           </p>
-          <p
-            className="text-gray-400 text-sm line-clamp-2 font-[Aeonik-Bold]"
-          >
+          <p className="text-gray-400 text-sm line-clamp-2 font-[Aeonik-Bold]">
             {question}
           </p>
         </div>

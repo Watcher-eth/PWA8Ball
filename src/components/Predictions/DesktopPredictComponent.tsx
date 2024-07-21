@@ -331,7 +331,7 @@ function DesktopConfirmPrediction({
               onClick={() => setStep(0)}
               className={`
                 mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
-                min-w-20 flex-shrink
+                min-w-1/2 flex-shrink
               `}
             >
               Back

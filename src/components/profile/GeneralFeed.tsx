@@ -13,7 +13,6 @@ import { NewPlaceholder } from "../common/Placeholders/NewPlaceholders";
 import { BetModal } from "../Modals/PredictionPositionModal";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-
 export const GeneralFeed = ({
   handleOpenBottomSheet,
   walletAddy,
@@ -100,22 +99,22 @@ export const GeneralFeed = ({
                     topic: item.market_id,
                     option:
                       item.option === 0
-                        ? item.options[item.option + 1].name
-                        : item.options[item.option - 1].name,
+                        ? item.options[item.option + 1]?.name
+                        : item.options[item.option - 1]?.name,
                   })
                 }
                 option={
                   item.option === 0
-                    ? item.options[item.option + 1].name
-                    : item.options[item.option - 1].name
+                    ? item.options[item.option + 1]?.name
+                    : item.options[item.option - 1]?.name
                 }
-                betId={item.market_id}
-                optional={item.option}
+                betId={item?.market_id}
+                optional={item?.option}
                 index={index}
-                title={item.title}
-                question={item.question}
-                image={item.image}
-                amount={String(item.amount / 100000)}
+                title={item?.title}
+                question={item?.question}
+                image={item?.image}
+                amount={String(item?.amount / 100000)}
               />
             </BetModal>
           ) : (

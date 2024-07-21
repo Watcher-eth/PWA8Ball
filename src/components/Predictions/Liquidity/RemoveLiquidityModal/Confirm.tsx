@@ -51,7 +51,7 @@ export function RemoveLPConfirmationScreen(props: {
     if (smartAccountReady) {
       try {
         setLoading(true);
-
+        console.log("marketd", props.id);
         if (userCon?.walletType === "smartwallet")
           removeLP({
             userId: userCon?.external_auth_provider_user_id!,
@@ -73,10 +73,7 @@ export function RemoveLPConfirmationScreen(props: {
         setSuccess(true);
         showToast();
 
-        setTimeout(() => {
-          onClose();
-          props.refetch();
-        }, 7000);
+        setTimeout(() => {}, 7000);
       } catch (error) {
         console.error("Failed to withdraw boost:", error);
         alert("Failed to withdraw boost!");

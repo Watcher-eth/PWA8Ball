@@ -20,7 +20,7 @@ async function removeLp(props: {
   if (!props.marketId) {
     throw new Error("All fields must be provided");
   }
-  console.log("Props", props.client);
+  console.log("Props", props);
   try {
     const account = props.address;
     const currentPairId = BigInt(props.marketId);

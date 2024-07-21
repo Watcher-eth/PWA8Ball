@@ -57,7 +57,7 @@ export function useInitializeUser() {
         });
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
-        newUser.pfp = newUser.pfp ?? DEFAULT_PFP;
+        newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
 
         const balance = await getUSDCBalance(eoaAddress);
 

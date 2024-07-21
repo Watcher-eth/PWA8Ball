@@ -436,7 +436,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
     () => positions?.filter((item) => item.amount > 0) || [],
     [positions]
   );
-
+  console.log("posit", filteredPositions);
   const totalValue = useMemo(() => {
     return filteredPositions.reduce((acc, item) => acc + item.amount, 0);
   }, [filteredPositions]);
@@ -475,7 +475,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
                 image={item?.image}
                 title={item?.title}
                 amount={item?.amount}
-                id={item?.id}
+                id={item?.marketid}
               >
                 <motion.div
                   whileHover={{ scale: 1.01 }}

@@ -11,6 +11,7 @@ export function CashOutWarningScreen({
   points,
   id,
   option,
+  options,
   isDesktop,
 }: {
   changeStep: () => void;
@@ -20,6 +21,7 @@ export function CashOutWarningScreen({
   points: number;
   id: number;
   option: number;
+  options: string[];
   isDesktop?: boolean;
 }) {
   const { cashOutPrediction, loading, success } = useCashOutPrediction();
@@ -101,13 +103,12 @@ export function CashOutWarningScreen({
         </motion.div>
         <motion.div
           onClick={() => {
-            console.log("Clicked Cash Out Warning button ");
-            // cashOutPrediction({
-            //   points,
-            //   option,
-            //   marketId,
-            //   options,
-            // });
+            cashOutPrediction({
+              points,
+              option,
+              id,
+              options,
+            });
           }}
           className={`mt-[12px] flex flex-row ml-[16px] ${
             isDesktop ? "py-[10px]" : "py-[11px]"
