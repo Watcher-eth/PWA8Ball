@@ -41,6 +41,7 @@ export function useExecutePrediction() {
         throw new Error("Address is required");
       }
 
+      approveToken();
       predictV2({
         client,
         address,
