@@ -1,8 +1,15 @@
 // @ts-nocheck
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+import { copyToClipboard } from "@/utils/copyToClipboard.tsx";
 
-export const ShareTopic = ({ id, title, image, question, members, markets }: {
+export const ShareTopic = ({
+  id,
+  title,
+  image,
+  question,
+  members,
+  markets,
+}: {
   id: string;
   title: string;
   image: string;
@@ -11,7 +18,6 @@ export const ShareTopic = ({ id, title, image, question, members, markets }: {
   members: number;
   markets: number;
 }) => {
-
   const shareLink = async () => {
     try {
       await navigator.share({
@@ -77,7 +83,10 @@ export const ShareTopic = ({ id, title, image, question, members, markets }: {
         </div>
       </div>
       <div className={CLASSNAMES.actionGroup}>
-        <button className={CLASSNAMES.copyButton} onClick={() => copyToClipboard("share copy")}>
+        <button
+          className={CLASSNAMES.copyButton}
+          onClick={() => copyToClipboard("share copy")}
+        >
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
           <span className={CLASSNAMES.actionText}>Copy</span>
         </button>
@@ -97,7 +106,8 @@ export const ShareTopic = ({ id, title, image, question, members, markets }: {
 };
 
 const CLASSNAMES = {
-  modal: "h-[110%] w-full flex flex-col p-5 bg-[#131316] pt-10 rounded-t-[20px]",
+  modal:
+    "h-[110%] w-full flex flex-col p-5 bg-[#131316] pt-10 rounded-t-[20px]",
   header: "text-4xl text-white -mb-2",
   subHeader: "flex flex-row items-center mt-0.5",
   imageGroup: "flex flex-row items-center mx-2.5",
@@ -299,4 +309,3 @@ const styles = {
     color: "lightgrey",
   },
 };
-
