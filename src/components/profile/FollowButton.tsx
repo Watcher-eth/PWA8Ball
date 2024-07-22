@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+
 import { PenBox, UserMinus, UserPlus, UserRoundPlus } from "lucide-react";
 import { useFollowUser } from "@/supabase/mutations/follow/useFollowUser";
 import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
@@ -49,6 +49,7 @@ export const FollowButton = ({
   };
 
   const isUser = user?.external_auth_provider_user_id === profileId;
+
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <DisplayFollowButton

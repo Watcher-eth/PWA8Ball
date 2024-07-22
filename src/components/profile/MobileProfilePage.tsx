@@ -1,14 +1,12 @@
 // @ts-nocheck
 
-import { GetServerSideProps } from "next";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { PieChart, Twitter, CircleEllipsis } from "lucide-react";
 import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
-import { skeletonVariants } from "@/components/ui/Skeleton";
+
 import { SocialsSection } from "@/components/common/SocialsSection";
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
 
 
 export function MobileProfilePage({
@@ -20,8 +18,10 @@ export function MobileProfilePage({
   totalFollowers: number
   userC: User
 }) {
-  const [balanceLoading, setBalanceLoading] = useState(true);
-  const [userCBalance, setUserBalance] = useState(0);
+
+  const balance = useUsdcBalance({
+    address: userC?.walletaddress
+  });
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
@@ -56,20 +56,9 @@ export function MobileProfilePage({
         <div className="flex flex-col items-center mt-0">
           <SocialsSection {...userC?.socials} />
           <div className="flex items-center mt-2 font-medium">
-            {balanceLoading ? (
-              <div style={{ marginRight: 7 }}>
-                <motion.div
-                  className="h-[33px] w-[75px] bg-[#252525] rounded-xl"
-                  variants={skeletonVariants}
-                  initial="initial"
-                  animate="pulse"
-                />
-              </div>
-            ) : (
-              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl">
-                ${(userCBalance / 10 ** 6).toFixed(2)}
-              </p>
-            )}
+            <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl">
+              ${(Number(balance) / (10 ** 6)).toFixed(2)}
+            </p>
             <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl mx-2 font-medium">
               {totalFollowers} Followers
             </p>
