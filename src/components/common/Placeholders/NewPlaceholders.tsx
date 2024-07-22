@@ -28,8 +28,8 @@ export function NewPlaceholder({ isUser }) {
           Start by making predictions for the future and they will show up here
         </div>
       </div>
-      <Link href={HOME_PATH}>
-        <motion.button className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+      <Link href={HOME_PATH} className="w-[85%]">
+        <motion.button className="w-full mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
         </motion.button>
       </Link>
@@ -133,8 +133,8 @@ export const NewPlaceholderLp = ({ isUser }) => {
           efficient
         </div>
       </div>
-      <Link href={HOME_PATH}>
-        <motion.button className="w-[85%] mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+      <Link href={HOME_PATH} className="w-full">
+        <motion.button className="w-full mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Boost a market" : "Boost a market"}
         </motion.button>
       </Link>

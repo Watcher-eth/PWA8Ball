@@ -3,17 +3,22 @@ import { motion, useAnimation } from "framer-motion";
 import { Check, Loader } from "lucide-react";
 import { useExecuteBoost } from "@/hooks/actions/useExecuteBoost";
 
-export function ConfirmButton({ onComplete, buttonText = "Confirm", id }) {
+export function ConfirmButton({
+  onComplete,
+  buttonText = "Confirm",
+  id,
+  amount,
+}) {
   const controls = useAnimation();
   const { executeBoost, loading, success } = useExecuteBoost();
 
   function handleClick() {
-    executeBoost({ id });
+    executeBoost({ id, amount });
     controls.start({
       width: "100%",
       transition: { duration: 0.5 },
     });
-  };
+  }
 
   return (
     <motion.button
@@ -39,4 +44,4 @@ export function ConfirmButton({ onComplete, buttonText = "Confirm", id }) {
       </span>
     </motion.button>
   );
-};
+}

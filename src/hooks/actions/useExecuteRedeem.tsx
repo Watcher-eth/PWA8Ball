@@ -6,6 +6,7 @@ import { useRedeem } from "@/lib/onchain/mutations/Redeem";
 import { toast } from "sonner";
 import { CheckCircle } from "lucide-react";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 
 export function useExecuteRedeem() {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ export function useExecuteRedeem() {
   const { user: userCon } = useUserStore();
   const { mutate: redeem } = useRedeem();
   const { client, address } = useClientAddress();
+  const { approveToken } = useEightBallApproval();
 
   async function executeRedeem({
     amount,
@@ -39,6 +41,8 @@ export function useExecuteRedeem() {
         setLoading(false);
         return;
       }
+
+      approveToken();
 
       const preferYes = option === 1;
 

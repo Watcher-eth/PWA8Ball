@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/Input";
-import React from "react";
+import React, { useState } from "react";
 import { ConfirmButton } from "./ConfirmButton";
 import { DesktopCardModal } from "../DesktopCardModal";
 
@@ -8,6 +8,7 @@ export function DesktopBoostContent(props: {
   id: string;
   onComplete: () => void;
 }) {
+  const [amount, setAmount] = useState<number>();
   return (
     <div className="flex flex-col p-2 ">
       <img className="h-14 w-14 object-cover rounded-full" src={props?.image} />
@@ -23,17 +24,23 @@ export function DesktopBoostContent(props: {
       <InfoRow
         label="Fee Rewards Rate"
         content={
-          <div className="text-white font-medium text-[1.05rem] px-2 py-1 rounded-md bg-[#0050FF]">
+          <div className="text-white font-medium text-[1.05rem] px-2 py-1 rounded-md bg-[#FF0050]">
             0.5%
           </div>
         }
       />
       <InfoRow label="Cred Bonus" content="150 Cred" />
       <Input
+        onChange={(e) => setAmount(e.target.value)}
         className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-[1rem]"
         placeholder="Amount"
+        type="number"
       />
-      <ConfirmButton id={props?.id} onComplete={props?.onComplete} />
+      <ConfirmButton
+        id={props?.id}
+        onComplete={props?.onComplete}
+        amount={amount}
+      />
     </div>
   );
 }
@@ -77,7 +84,6 @@ export function DesktopBoostModal({
         <DesktopBoostContent image={image} id={id} onComplete={() => {}} />
       }
     >
-
       {children}
     </DesktopCardModal>
   );

@@ -4,18 +4,18 @@ import { useRouter } from "next/router";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useCashout } from "@/lib/onchain/mutations/Cashout";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 
 import { toast } from "sonner";
 
 import { CheckCircle } from "lucide-react";
 import { getProfilePath } from "@/utils/urls";
 
-
-
 export function useCashOutPrediction() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { approveToken } = useEightBallApproval();
 
   const { user: userCon } = useUserStore();
   const { mutate: cashOut } = useCashout();
@@ -38,6 +38,8 @@ export function useCashOutPrediction() {
       if (!address) {
         throw new Error("Address is required");
       }
+
+      approveToken()
 
       cashOut({
         client,

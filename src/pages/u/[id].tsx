@@ -6,17 +6,18 @@ import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollower
 
 import { MobiTop } from "@/components/ui/MobiTop";
 import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
+import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
+import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
 
 export default function ProfilePage({
   userId,
   totalFollowers,
-  userC
+  userC,
 }: {
-  userId: string
-  totalFollowers: number
-  userC: User
+  userId: string;
+  totalFollowers: number;
+  userC: User;
 }) {
-
   return (
     <MobiTop
       mobile={
@@ -32,7 +33,7 @@ export default function ProfilePage({
          * naming is confuzzling as fuck
          */
         // <DesktopProfilePage/>
-        <DesktopActivityPage
+        <DesktopProfilePage
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}

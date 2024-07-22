@@ -53,7 +53,7 @@ export function useInitializeUser() {
         setUser({
           ...dbUser,
           walletType: "eoa",
-          balance: "0",
+          balance: balance,
         });
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);

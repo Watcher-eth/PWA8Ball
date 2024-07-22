@@ -6,6 +6,7 @@ import { CheckCircle } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
@@ -14,14 +15,16 @@ export function useExecuteBoost() {
   const { user: userCon } = useUserStore();
   const { mutate: boostV2 } = useBoostMarket2();
   const { client, address } = useClientAddress();
+  const { approveToken } = useEightBallApproval();
 
-  async function executeBoost({ id }: { id: number }) {
+  
+  async function executeBoost({ id, amount }: { id: number; amount: number }) {
     setLoading(true);
 
     try {
       const userBalance = Number(userCon?.balance) / 1000000;
-      const hasBalance = userBalance > 15;
-
+      const hasBalance = userBalance > amount;
+      console.log("Compare", userBalance, amount);
       if (!hasBalance) {
         throw new Error("Insufficient balance to boost the market.");
       }
@@ -30,10 +33,12 @@ export function useExecuteBoost() {
         throw new Error("Address is required");
       }
 
+      approveToken();
+
       boostV2({
         userId: userCon?.external_auth_provider_user_id!,
         marketId: id,
-        amount: 1000000,
+        amount: amount * 1000000,
         client,
         address,
       });

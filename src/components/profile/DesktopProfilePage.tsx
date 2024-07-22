@@ -7,7 +7,6 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
@@ -57,46 +56,13 @@ const chartData = [
   { category: "US Elections", percentage: 42, fill: "#1E90FF" },
 ];
 
-const chartConfig = {
-  percentage: {
-    label: "Percentage",
-  },
-  GTA6: {
-    label: "GTA 6",
-    color: "#FF6600",
-  },
-  TaylorSwift: {
-    label: "Taylor Swift",
-    color: "#FF1493",
-  },
-} satisfies ChartConfig;
-
 export function DesktopProfilePage() {
   const { user } = useUserStore();
-  const [edit, setEdit] = useState(false);
-  const [userName, setUsername] = useState<string>();
-  const [PFP, setPFP] = useState<string>();
-  const { mutate: updateUserProfile } = useUpdateUserProfile();
-  const fileInputRef = useRef(null);
 
-  const handleImageClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const { data: totalFollowers } = useGetTotalFollowers(
+  const { data: userC } = useGetUserByExternalAuthId(
     user?.external_auth_provider_user_id
   );
-
-  const { data: userC, isLoading } = useGetUserByExternalAuthId(
-    user?.external_auth_provider_user_id
-  );
-  const {
-    data: ordersData,
-    isLoading: isOrdersLoading,
-    refetch: refetchOrders,
-  } = useGetOrdersForUser(userC?.walletaddress);
+  const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
 
   const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
   const mergedData = [
@@ -105,182 +71,7 @@ export function DesktopProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808] px-8">
-      <div className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem]   p-4 px-8 relative ">
-        <img
-          src={userC?.pfp}
-          alt="Profile Header"
-          className="w-full h-10 absolute top-0 left-0 rounded-t-[1.5rem] right-0 object-cover"
-        />
-        <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] bg-gradient-to-b from-transparent via-[#131313]/80 to-[#131313]" />
-        <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] backdrop-blur-lg bg-opacity-50" />
-        <div className="flex flex-col items-center mb-4 mt-6 relative">
-          <img
-            src={userC?.pfp}
-            alt="Profile"
-            className="rounded-full h-24 w-24 mb-2 cursor-pointer"
-            onClick={edit ? handleImageClick : () => {}}
-          />
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            // onChange={handleFileChange}
-          />
-
-          {edit === true && (
-            <div
-              onClick={handleImageClick}
-              className="p-0.5 hover:scale-103 active:scale-98 py-1.5 absolute bottom-14 border-[0.2rem] border-[#121212]  right-1/3  rounded-full bg-[white] mr-7 flex justify-center items-center"
-            >
-              <Pencil className="text-black h-[0.9rem]" strokeWidth={2.7} />
-            </div>
-          )}
-          {edit === true ? (
-            <input
-              value={userName}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder={userC?.name}
-              className="text-white border-0 active:border-0 rounded-md text-xl w-1/8 text-center bg-[transparent] font-bold"
-            ></input>
-          ) : (
-            <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
-          )}
-          <SocialsSection {...userC?.socials} />
-        </div>
-        <div className="flex justify-between text-white mb-4 px-2">
-          <TextWithSuffix value={totalFollowers} suffix="Followers" />
-          <TextWithSuffix value={"555"} suffix="Following" />
-          <TextWithSuffix value={"12"} suffix="Predictions" />
-        </div>
-        <div className="flex justify-between mb-4 space-x-4">
-          <ContrastButton
-            label={
-              userC?.external_auth_provider_user_id ===
-              user?.external_auth_provider_user_id
-                ? "Share"
-                : "Follow"
-            }
-          />
-          <ContrastButton
-            setEdit={setEdit}
-            edit={edit}
-            label={
-              userC?.external_auth_provider_user_id ===
-              user?.external_auth_provider_user_id
-                ? "Edit"
-                : "Share"
-            }
-          />
-        </div>
-        <div>
-          <Card className="bg-[transparent]  border-1 border-[#212121]">
-            <CardHeader className="items-center pb-0">
-              <CardTitle className="text-white">
-                {userC?.name}'s Accuracy
-              </CardTitle>
-              <CardDescription className="text-gray-400">
-                15th July
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-1  pb-0">
-              <ChartContainer
-                config={chartConfig}
-                className="mx-auto aspect-square  max-h-[250px]"
-              >
-                <RadialBarChart
-                  data={chartData}
-                  startAngle={0}
-                  endAngle={360}
-                  innerRadius={83}
-                  outerRadius={110}
-                >
-                  <PolarGrid
-                    gridType="circle"
-                    radialLines={false}
-                    stroke="none"
-                    className="first:fill-muted last:fill-[#151515]"
-                    polarRadius={[50, 70, 90]}
-                  />
-                  <RadialBar
-                    dataKey="percentage"
-                    background
-                    cornerRadius={10}
-                  />
-                  <PolarRadiusAxis
-                    className="bg-[transparent]"
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                  >
-                    <Label
-                      className="bg-[transparent]"
-                      content={({ viewBox }) => {
-                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                          const totalPercentage = chartData.reduce(
-                            (sum, entry) => sum + entry.percentage,
-                            0
-                          );
-                          return (
-                            <text
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              textAnchor="middle"
-                              dominantBaseline="middle"
-                            >
-                              <tspan
-                                x={viewBox.cx}
-                                y={viewBox.cy}
-                                className="fill-white text-4xl font-bold"
-                              >
-                                {totalPercentage}%
-                              </tspan>
-                              <tspan
-                                x={viewBox.cx}
-                                y={(viewBox.cy || 0) + 24}
-                                className="fill-gray-400"
-                              >
-                                Accuracy
-                              </tspan>
-                            </text>
-                          );
-                        }
-                      }}
-                    />
-                  </PolarRadiusAxis>
-                </RadialBarChart>
-              </ChartContainer>
-            </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Trending up by 5.2% this month{" "}
-                <TrendingUp className="h-4 w-4 text-white" />
-              </div>
-              <div className="leading-none text-gray-400">
-                Showing accuracy for the last 6 months
-              </div>
-            </CardFooter>
-          </Card>
-          {userName?.length > 0 || PFP?.length > 0 ? (
-            <div
-              onClick={() => {
-                const name = userName?.length > 0 ? userName : user?.name;
-                const pfp = PFP?.length > 0 ? PFP : user?.pfp;
-                const userId = user?.external_auth_provider_user_id;
-                updateUserProfile({
-                  userId,
-                  updates: {
-                    name,
-                    pfp,
-                  },
-                });
-              }}
-              className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"
-            >
-              Save changes
-            </div>
-          ) : null}
-        </div>
-      </div>
+      <ProfileSection userC={userC} user={user} />
 
       <div className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-8">
         <div className="w-full flex flex-row justify-between ">
@@ -505,13 +296,111 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
   );
 };
 
-export function DesktopProfileSide(props: {
-  userC: User;
-  totalFollowers: number;
-}) {
-  const { userC, totalFollowers } = props;
+function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
   return (
-    <div className="flex flex-col md:w-1/3 bg-[#131313] rounded-[1.5rem]   p-4 px-8 relative ">
+    <div className="text-center">
+      <p className="font-bold">{value}</p>
+      <p className="text-[#909090]">{suffix}</p>
+    </div>
+  );
+}
+
+function ContrastButton({
+  label,
+  className = "",
+  setEdit,
+  edit,
+}: {
+  label: React.ReactNode;
+  className?: string;
+  setEdit: () => void;
+  edit: boolean;
+}) {
+  return (
+    <div
+      onClick={() => {
+        if (label === "Edit") {
+          setEdit(!edit);
+        }
+        if (label === "Follow") {
+        }
+        if (label === "Share") {
+          toast(
+            <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+              <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
+                <ClipboardList className="text-white h-[0.95rem]" />
+              </div>
+              Copied to Clipboard
+            </div>,
+            {
+              unstyled: true,
+              classNames: {
+                title: "text-red-400 text-2xl",
+                description: "text-red-400",
+                actionButton: "bg-zinc-400",
+                cancelButton: "bg-orange-400",
+                closeButton: "bg-lime-400",
+              },
+            }
+          );
+        }
+      }}
+      className={`
+        w-1/2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121]
+        flex justify-center items-center rounded-md
+        hover:scale-102 active:scale-98
+        ${className}
+      `}
+    >
+      {label === "Share" ? (
+        <Share className="h-[1rem] mr-1" strokeWidth={3} />
+      ) : label === "Edit" ? (
+        <Pencil className="h-[0.9rem] mr-1" strokeWidth={3} />
+      ) : (
+        <UserPlus className="h-[1rem] mr-1" strokeWidth={3} />
+      )}{" "}
+      {label}
+    </div>
+  );
+}
+
+export const ProfileSection = ({ userC, user }) => {
+  const [edit, setEdit] = useState(false);
+  const [userName, setUsername] = useState<string>();
+  const [PFP, setPFP] = useState<string>();
+  const fileInputRef = useRef(null);
+  const { mutate: updateUserProfile } = useUpdateUserProfile();
+  const { data: totalFollowers } = useGetTotalFollowers(
+    userC?.external_auth_provider_user_id
+  );
+
+  const handleImageClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const chartData = [
+    { category: "GTA 6", percentage: 28, fill: "#FF6600" },
+    { category: "US Elections", percentage: 42, fill: "#1E90FF" },
+  ];
+
+  const chartConfig = {
+    percentage: {
+      label: "Percentage",
+    },
+    GTA6: {
+      label: "GTA 6",
+      color: "#FF6600",
+    },
+    TaylorSwift: {
+      label: "Taylor Swift",
+      color: "#FF1493",
+    },
+  } satisfies ChartConfig;
+
+  return (
+    <div className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-4 px-8 relative">
       <img
         src={userC?.pfp}
         alt="Profile Header"
@@ -523,10 +412,34 @@ export function DesktopProfileSide(props: {
         <img
           src={userC?.pfp}
           alt="Profile"
-          className="rounded-full h-24 w-24 mb-2"
+          className="rounded-full h-24 w-24 mb-2 cursor-pointer"
+          onClick={edit ? handleImageClick : () => {}}
+        />
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          // onChange={handleFileChange}
         />
 
-        <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+        {edit === true && (
+          <div
+            onClick={handleImageClick}
+            className="p-0.5 hover:scale-103 active:scale-98 py-1.5 absolute bottom-14 border-[0.2rem] border-[#121212]  right-1/3  rounded-full bg-[white] mr-7 flex justify-center items-center"
+          >
+            <Pencil className="text-black h-[0.9rem]" strokeWidth={2.7} />
+          </div>
+        )}
+        {edit === true ? (
+          <input
+            value={userName}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder={userC?.name}
+            className="text-white border-0 active:border-0 rounded-md text-xl w-1/8 text-center bg-[transparent] font-bold"
+          ></input>
+        ) : (
+          <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
+        )}
         <SocialsSection {...userC?.socials} />
       </div>
       <div className="flex justify-between text-white mb-4 px-2">
@@ -535,8 +448,24 @@ export function DesktopProfileSide(props: {
         <TextWithSuffix value={"12"} suffix="Predictions" />
       </div>
       <div className="flex justify-between mb-4 space-x-4">
-        <ContrastButton label="Follow" />
-        <ContrastButton label="Edit" />
+        <ContrastButton
+          label={
+            userC?.external_auth_provider_user_id ===
+            user?.external_auth_provider_user_id
+              ? "Share"
+              : "Follow"
+          }
+        />
+        <ContrastButton
+          setEdit={setEdit}
+          edit={edit}
+          label={
+            userC?.external_auth_provider_user_id ===
+            user?.external_auth_provider_user_id
+              ? "Edit"
+              : "Share"
+          }
+        />
       </div>
       <div>
         <Card className="bg-[transparent]  border-1 border-[#212121]">
@@ -622,75 +551,26 @@ export function DesktopProfileSide(props: {
             </div>
           </CardFooter>
         </Card>
+        {userName?.length > 0 || PFP?.length > 0 ? (
+          <div
+            onClick={() => {
+              const name = userName?.length > 0 ? userName : user?.name;
+              const pfp = PFP?.length > 0 ? PFP : user?.pfp;
+              const userId = user?.external_auth_provider_user_id;
+              updateUserProfile({
+                userId,
+                updates: {
+                  name,
+                  pfp,
+                },
+              });
+            }}
+            className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"
+          >
+            Save changes
+          </div>
+        ) : null}
       </div>
     </div>
   );
-}
-
-function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
-  return (
-    <div className="text-center">
-      <p className="font-bold">{value}</p>
-      <p className="text-[#909090]">{suffix}</p>
-    </div>
-  );
-}
-
-function ContrastButton({
-  label,
-  className = "",
-  setEdit,
-  edit,
-}: {
-  label: React.ReactNode;
-  className?: string;
-  setEdit: () => void;
-  edit: boolean;
-}) {
-  return (
-    <div
-      onClick={() => {
-        if (label === "Edit") {
-          setEdit(!edit);
-        }
-        if (label === "Follow") {
-        }
-        if (label === "Share") {
-          toast(
-            <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
-              <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
-                <ClipboardList className="text-white h-[0.95rem]" />
-              </div>
-              Copied to Clipboard
-            </div>,
-            {
-              unstyled: true,
-              classNames: {
-                title: "text-red-400 text-2xl",
-                description: "text-red-400",
-                actionButton: "bg-zinc-400",
-                cancelButton: "bg-orange-400",
-                closeButton: "bg-lime-400",
-              },
-            }
-          );
-        }
-      }}
-      className={`
-        w-1/2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121]
-        flex justify-center items-center rounded-md
-        hover:scale-102 active:scale-98
-        ${className}
-      `}
-    >
-      {label === "Share" ? (
-        <Share className="h-[1rem] mr-1" strokeWidth={3} />
-      ) : label === "Edit" ? (
-        <Pencil className="h-[0.9rem] mr-1" strokeWidth={3} />
-      ) : (
-        <UserPlus className="h-[1rem] mr-1" strokeWidth={3} />
-      )}{" "}
-      {label}
-    </div>
-  );
-}
+};

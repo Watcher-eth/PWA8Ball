@@ -16,7 +16,6 @@ import { ActivityField } from "./ActivityField";
 import { Leaderboard } from "./Leaderboard";
 import { YourStats } from "./YourStats";
 
-
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
   const { user } = useUserStore();
@@ -37,7 +36,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     <div
       className={`
         no-scrollbar flex flex-col
-         min-h-screen
+         
         p-5 pt-[30px]
         ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
       `}
