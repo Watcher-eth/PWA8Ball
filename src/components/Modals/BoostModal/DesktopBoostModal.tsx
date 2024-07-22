@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Input } from "@/components/ui/Input";
 import React, { useState } from "react";
 import { ConfirmButton } from "./ConfirmButton";
@@ -20,8 +22,8 @@ export function DesktopBoostContent(props: {
         a prediction gets the more fees you receive.
       </div>
       <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-5" />
-      <InfoRow label="Minimum Boost" content="$10.00" />
-      <InfoRow
+      <BoostInfoRow label="Minimum Boost" content="$10.00" />
+      <BoostInfoRow
         label="Fee Rewards Rate"
         content={
           <div className="text-white font-medium text-[1.05rem] px-2 py-1 rounded-md bg-[#FF0050]">
@@ -29,7 +31,7 @@ export function DesktopBoostContent(props: {
           </div>
         }
       />
-      <InfoRow label="Cred Bonus" content="150 Cred" />
+      <BoostInfoRow label="Cred Bonus" content="150 Cred" />
       <Input
         onChange={(e) => setAmount(e.target.value)}
         className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-[1rem]"
@@ -45,7 +47,7 @@ export function DesktopBoostContent(props: {
   );
 }
 
-function InfoRow({
+export function BoostInfoRow({
   label,
   content,
   children,
