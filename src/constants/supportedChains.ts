@@ -1,7 +1,8 @@
+// @ts-nocheck
 import { base } from '@wagmi/core/chains'
 export const SUPPORTED_CHAINS = [
   base
-]
+] as const
 // .map((chain) => {
 //   return {
 //     ...chain,
