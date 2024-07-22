@@ -14,7 +14,7 @@ import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm.tsx";
 
-export function BetModal({
+export function PredictionPositionModal({
   children,
   title,
   image,

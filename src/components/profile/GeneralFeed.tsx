@@ -10,7 +10,7 @@ import {
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { NewPlaceholder } from "../common/Placeholders/NewPlaceholders";
-import { BetModal } from "../Modals/PredictionPositionModal";
+import { PredictionPositionModal } from "../Modals/PredictionPositionModal";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 export const GeneralFeed = ({
@@ -67,7 +67,7 @@ export const GeneralFeed = ({
       ) : (
         mergedData.map((item, index) =>
           item.type === "predicted" ? (
-            <BetModal
+            <PredictionPositionModal
               key={`predicted-${item.id}-${item.option}`}
               title={item.title}
               image={item.image}
@@ -116,7 +116,7 @@ export const GeneralFeed = ({
                 image={item?.image}
                 amount={String(item?.amount / 100000)}
               />
-            </BetModal>
+            </PredictionPositionModal>
           ) : (
             <CreatedPrediction
               key={`created-${item.id}`}

@@ -4,7 +4,7 @@ import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCrea
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-import { BetModal } from "../Modals/PredictionPositionModal";
+import { PredictionPositionModal } from "../Modals/PredictionPositionModal";
 
 export function DesktopUserActivity({
   walletAddress,
@@ -55,7 +55,7 @@ export function DesktopUserActivity({
       <div className="grid grid-cols-2 gap-1">
         {mergedData?.length > 0
           ? mergedData.map((item, index) => (
-              <BetModal
+              <PredictionPositionModal
                 key={`predicted-${item.id}-${item.option}`}
                 title={item.title}
                 image={item.image}
@@ -77,9 +77,9 @@ export function DesktopUserActivity({
                 <div
                   key={index}
                   className={`
-                relative size-[20vh] bg-cover bg-center rounded-lg shadow-lg
-                active:scale-99 hover:scale-101
-              `}
+                    relative size-[20vh] bg-cover bg-center rounded-lg shadow-lg
+                    active:scale-99 hover:scale-101
+                  `}
                   style={{ backgroundImage: `url(${item.image})` }}
                 >
                   <div className="absolute inset-0 bg-black opacity-30 rounded-[1.5rem]"></div>
@@ -90,7 +90,7 @@ export function DesktopUserActivity({
                     </span>
                   </div>
                 </div>
-              </BetModal>
+              </PredictionPositionModal>
             ))
           : [1, 2, 3].map((item, index) => {
               return <UserPredictionSkeleton index={index} />;
