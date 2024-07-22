@@ -4,9 +4,9 @@ import { supabase } from "@/supabase/supabaseClient";
 import { IUser } from "@/supabase/types";
 
 
-const fetchUserByExternalAuthId = async (
+export async function fetchUserByExternalAuthId(
   externalAuthId: string
-): Promise<IUser | null> => {
+): Promise<IUser | null> {
   const { data, error } = await supabase
     .from("users")
     .select("*")

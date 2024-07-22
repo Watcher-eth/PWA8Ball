@@ -71,7 +71,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function DesktopProfile() {
+export function DesktopProfilePage() {
   const { user } = useUserStore();
   const [edit, setEdit] = useState(false);
   const [userName, setUsername] = useState<string>();

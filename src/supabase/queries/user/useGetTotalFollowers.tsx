@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 
-const fetchTotalFollowers = async (userId: string) => {
+export async function fetchTotalFollowers(userId: string) {
   const { data, error, count } = await supabase
     .from("user_follows")
     .select("*", { count: "exact" })

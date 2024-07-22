@@ -1,6 +1,4 @@
 // @ts-nocheck
-import React from "react";
-
 import { ActivityPage } from "@/components/Activity";
 import { DesktopNavbar } from "@/components/common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
@@ -8,8 +6,9 @@ import { DesktopUserSideProfile } from "@/components/profile/DestopUserSideCard"
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopProfileSide } from "@/components/profile/DesktopProfile";
 
-export const DesktopActivityPage: React.FC = () => {
-  const { user } = useUserStore();
+export function DesktopActivityPage({ userC }: { userC: IUser }) {
+  const user = userC
+  // const { user } = useUserStore();
 
   return (
     <div className="flex flex-col bg-[#080808]">
