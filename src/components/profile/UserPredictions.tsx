@@ -29,7 +29,7 @@ export function UserPredictions({
           <img
             src={image}
             alt={title}
-            className="h-14 object-cover w-14 rounded-[0.5rem]"
+            className="h-14 w-14 object-cover rounded-[0.5rem]"
           />
         ) : (
           <Skeleton className="w-14 h-14 rounded-lg" />
