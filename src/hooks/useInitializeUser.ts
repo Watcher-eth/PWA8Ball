@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
@@ -11,7 +11,7 @@ import {
   createUserFromEOAInDB,
 } from "@/supabase/userApi";
 import { useAccount } from "wagmi";
-import { v4 as uuidv4, v5 as uuidv5 } from "uuid";
+import { v5 as uuidv5 } from "uuid";
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7"; // Define a static namespace for generating UUIDs
 const DEFAULT_PFP =

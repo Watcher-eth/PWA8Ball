@@ -107,7 +107,7 @@ export const CreatedPrediction = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="flex items-center justify-between p-2 py-1 rounded-xl bg-[#171717] my-1 w-[90vw]"
+      className="flex items-center justify-between p-2 py-1 rounded-lg bg-[#171717] my-1 w-[90vw]"
       onClick={onOpenBottomSheet}
     >
       <div className="flex items-center gap-2">
