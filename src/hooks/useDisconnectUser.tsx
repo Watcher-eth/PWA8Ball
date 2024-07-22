@@ -3,7 +3,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { toast } from "sonner";
 import { useDisconnect } from "wagmi";
 
-function useDisconnectUser() {
+export function useDisconnectUser() {
   const { user, setUser } = useUserStore();
   const { disconnect } = useDisconnect();
   const { logout } = usePrivy();
@@ -35,4 +35,3 @@ function useDisconnectUser() {
   return { disconnectUser };
 }
 
-export default useDisconnectUser;
