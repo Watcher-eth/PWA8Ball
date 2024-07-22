@@ -2,7 +2,10 @@
 
 import { parseOption, parseOptionJSON } from "@/utils/predictions/parseOption";
 import { motion } from "framer-motion";
-import MyBetModal, { DesktopMyBetModal } from "../common/Charts/MyBetModal";
+import {
+  MobileMyBetModal,
+  DesktopMyBetModal,
+} from "../common/Charts/MyBetModal";
 
 export const ActivityField = ({
   index,
@@ -70,16 +73,16 @@ export const ActivityField = ({
     </motion.div>
   );
 
+  const MyBetModalComponent = isDesktop ? DesktopMyBetModal : MobileMyBetModal;
   return (
     <div>
-      {isDesktop ? (
-        <DesktopMyBetModal
+        <MyBetModalComponent
           key={`predicted-${id}-${option}`}
           title={title}
           image={image}
           price={amount}
           ownedAmount={amount / 100000}
-          // percentage={percentage}
+          percentage={percentage}
           betId={id}
           topic={id}
           icon={icon}
@@ -89,27 +92,7 @@ export const ActivityField = ({
           isExternal={isExternal}
         >
           <MotionDivContent />
-        </DesktopMyBetModal>
-      ) : (
-        <MyBetModal
-          key={`predicted-${id}-${option}`}
-          title={title}
-          image={image}
-          price={amount}
-          ownedAmount={amount / 100000}
-          options={options}
-          percentage={percentage}
-          betId={market_id}
-          topic={market_id}
-          icon={icon}
-          question={question}
-          option={option}
-          optionNumber={optionNumber}
-          isExternal={isExternal}
-        >
-          <MotionDivContent />
-        </MyBetModal>
-      )}
+        </MyBetModalComponent>
     </div>
   );
 };

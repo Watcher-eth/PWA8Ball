@@ -20,7 +20,7 @@ import { processPrices } from "@/utils/chartUtils";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
-const MyBetModal = (props: {
+export const MobileMyBetModal = (props: {
   title: string;
   image: string;
   price: number;
@@ -683,8 +683,6 @@ const MyBetModal = (props: {
   );
 };
 
-export default MyBetModal;
-
 export function DesktopMyBetModal({
   children,
   title,
@@ -732,7 +730,7 @@ export function DesktopMyBetModal({
       dialogClassName="w-full bg-[#080808] rounded-[1.5rem]"
       content={
         step === 1 ? (
-          <MyBetModal
+          <MobileMyBetModal
             title={title}
             image={image}
             price={price}

@@ -9,7 +9,7 @@ import {
   NestedDrawer,
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
-import MyBetModal from "../common/Charts/MyBetModal.tsx";
+import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../Predictions/Cashout/overview.tsx";
 import { CashOutWarningScreen } from "../Predictions/Cashout/warning.tsx";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm.tsx";
@@ -94,7 +94,7 @@ export function BetModal({
           >
             <AnimatePresence>
               {step === 1 && (
-                <MyBetModal
+                <MobileMyBetModal
                   title={title}
                   image={image}
                   price={price}
