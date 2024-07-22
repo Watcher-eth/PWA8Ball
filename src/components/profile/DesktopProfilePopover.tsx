@@ -14,7 +14,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDisconnectUser } from "@/hooks/useDisconnectUser";
+import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import {
   DoorOpen,
