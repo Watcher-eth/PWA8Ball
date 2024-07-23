@@ -10,6 +10,9 @@ export const HOME_PATH = "/"
 export const ACTIVITY_PATH = "/activity"
 
 export const LEADERBOARD_PATH = "/CommunityLeaderboard"
+
+export const SETTINGS_PATH = "/settings"
+
 export function getTopicPath(topicId: string) {
   return `/t/${topicId}` as const;
 }

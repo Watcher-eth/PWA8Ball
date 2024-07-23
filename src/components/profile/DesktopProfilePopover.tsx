@@ -28,9 +28,11 @@ import {
   UserCircle,
 } from "lucide-react";
 import Link from "next/link";
-import { DesktopOnrampModal } from "../Onboarding/Onramp/DesktopOnramp";
-import { DesktopInviteFriends } from "../Share/InviteFriendsModal";
-import { Dialog } from "../ui/dialog";
+import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
+import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
+import { Dialog } from "@/components/ui/dialog";
+import { useMyEns } from "@/hooks/wallet/useMyEns";
+import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
 
 export function DesktopProfilePopover({
   children,
@@ -39,7 +41,11 @@ export function DesktopProfilePopover({
 }) {
   const { user } = useUserStore();
   const { disconnectUser } = useDisconnectUser();
-
+  const { displayName } = useMyEns();
+  const displayUsername =
+    user?.name?.slice(0, 2) == "0x"
+      ? displayName
+      : user?.name;
   return (
     <Dialog>
       <DropdownMenu>
@@ -53,20 +59,20 @@ export function DesktopProfilePopover({
             ) : (
               <UserCircle className="size-6 text-white" strokeWidth={2.2} />
             )}
-            <div>{user?.name}</div>
+            <div>{displayUsername}</div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link href={`/u/${user?.external_auth_provider_user_id}`}>
+            <Link href={getProfilePath(user?.external_auth_provider_user_id)}>
               <DropdownItem label="Profile" IconComponent={User} />
             </Link>
             <DesktopOnrampModal>
               <DropdownItem label="Fund your account" IconComponent={Wallet} />
             </DesktopOnrampModal>
-            <Link href={`/settings`}>
+            <Link href={SETTINGS_PATH}>
               <DropdownItem label="Settings" IconComponent={Settings} />
             </Link>
-            <Link href={`/u/${user?.external_auth_provider_user_id}`}>
+            <Link href={getProfilePath(user?.external_auth_provider_user_id)}>
               <DropdownItem label="Your Boosts" IconComponent={Rocket} />
             </Link>
           </DropdownMenuGroup>

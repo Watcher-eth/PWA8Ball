@@ -17,7 +17,7 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
-import { base, baseSepolia } from "viem/chains";
+import { base, baseSepolia, mainnet  } from "viem/chains";
 import { RootLayout } from "@/components/common/RootLayout";
 
 export const queryClient = new QueryClient();
@@ -38,7 +38,7 @@ const PRIVY_CONFIG = {
 export const wagmiConfig = getDefaultConfig({
   appName: "8Ball",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-  chains: [baseSepolia, base],
+  chains: [baseSepolia, base, mainnet],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

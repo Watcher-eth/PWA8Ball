@@ -7,6 +7,8 @@ import { DesktopProfilePopover } from "../profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
+import { ConnectButton } from "@/components/buttons/ConnectButton";
+import { NavIconButton } from "@/components/buttons/NavIconButton";
 
 export function DesktopNavbar() {
   const { user } = useUserStore();
@@ -44,21 +46,17 @@ export function DesktopNavbar() {
             >
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
+            <div className="flex items-center space-x-2 ">
             {user ? (
               <DesktopProfilePopover>
-                <div className="flex items-center space-x-2 hover:scale-105 active:scale-95 transition-all">
-                  <img
-                    src={user?.pfp}
-                    alt={user?.name}
-                    className="size-8 rounded-full mr-1"
-                  />
-                </div>
+                <ConnectButton user={user}/>
               </DesktopProfilePopover>
             ) : (
               <DesktopOnboardingModal>
                 <ConnectButton />
               </DesktopOnboardingModal>
             )}
+            </div>
           </div>
         </div>
       </div>
@@ -66,43 +64,5 @@ export function DesktopNavbar() {
   );
 }
 
-function NavIconButton({
-  icon,
-  IconComponent,
-  className = "",
-  iconClassName = "",
-}: {
-  icon?: React.ReactNode;
-  IconComponent?: any;
-  className?: string;
-  iconClassName?: string;
-}) {
-  return (
-    <div
-      className={`
-        hover:scale-105 active:scale-98 transition-all
-        cursor-pointer ${className}
-      `}
-    >
-      {icon ?? (
-        <IconComponent className={`size-6 ${iconClassName}`} strokeWidth={3} />
-      )}
-    </div>
-  );
-}
 
-function ConnectButton() {
-  return (
-    <div
-      className={`
-        bg-[#171717]/80 hover:bg-[#171717]/90
-        hover:scale-105 active:scale-95 transition-all
-        font-semibold cursor-pointer
-        border border-white/10 hover:border-white/20 active:border-white/30
-        px-4 py-2 rounded-md flex flex-row items-center
-      `}
-    >
-      Connect
-    </div>
-  );
-}
+

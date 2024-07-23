@@ -20,7 +20,7 @@ import { CardContent } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
-import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnramp";
+import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
 
 export const SettingsPage: React.FC = () => {
   const initialSettings = {
