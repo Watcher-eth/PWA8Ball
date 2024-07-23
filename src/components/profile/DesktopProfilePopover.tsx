@@ -27,12 +27,15 @@ import {
   Wallet,
   UserCircle,
 } from "lucide-react";
-import Link from "next/link";
+
 import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
 import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
 import { Dialog } from "@/components/ui/dialog";
+import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
+
+
 
 export function DesktopProfilePopover({
   children,
@@ -46,6 +49,8 @@ export function DesktopProfilePopover({
     user?.name?.slice(0, 2) == "0x"
       ? displayName
       : user?.name;
+
+
   return (
     <Dialog>
       <DropdownMenu>
@@ -63,18 +68,24 @@ export function DesktopProfilePopover({
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link href={getProfilePath(user?.external_auth_provider_user_id)}>
-              <DropdownItem label="Profile" IconComponent={User} />
-            </Link>
+            <DropdownItem
+              label="Profile"
+              IconComponent={User}
+              href={getProfilePath(user?.external_auth_provider_user_id)}
+            />
             <DesktopOnrampModal>
               <DropdownItem label="Fund your account" IconComponent={Wallet} />
             </DesktopOnrampModal>
-            <Link href={SETTINGS_PATH}>
-              <DropdownItem label="Settings" IconComponent={Settings} />
-            </Link>
-            <Link href={getProfilePath(user?.external_auth_provider_user_id)}>
-              <DropdownItem label="Your Boosts" IconComponent={Rocket} />
-            </Link>
+            <DropdownItem
+              label="Settings"
+              IconComponent={Settings}
+              href={SETTINGS_PATH}
+            />
+            <DropdownItem
+              label="Your Boosts"
+              IconComponent={Rocket}
+              href={getProfilePath(user?.external_auth_provider_user_id)}
+            />
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
@@ -132,35 +143,5 @@ export function DesktopProfilePopover({
         </DropdownMenuContent>
       </DropdownMenu>
     </Dialog>
-  );
-}
-
-function DropdownItem({
-  label,
-  IconComponent,
-  iconSrc,
-  disabled = false,
-  onClick,
-}: {
-  label: string;
-  IconComponent?: React.FC;
-  iconSrc?: string;
-  disabled?: boolean;
-  onClick?: () => void;
-}) {
-  return (
-    <DropdownMenuItem
-      onClick={onClick}
-      className="flex flex-row justify-between items-center hover:!bg-slate-400/20 rounded-md"
-      disabled={disabled}
-    >
-      {label}
-      {IconComponent && (
-        <IconComponent className="size-4 text-white" strokeWidth={2.2} />
-      )}
-      {iconSrc?.length > 0 && (
-        <img className="size-4 rounded-full" src={iconSrc} />
-      )}
-    </DropdownMenuItem>
   );
 }
