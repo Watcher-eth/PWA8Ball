@@ -13,6 +13,11 @@ import { ShareTopicModal } from "@/components/Modals/ShareTopicModal";
 import { BetBigView, BetSmallView } from "./BetViews";
 import { LEADERBOARD_PATH } from "@/utils/urls";
 
+const ICON_BUTTON_CLASSNAME = `
+  bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl
+  rounded-full flex justify-center items-center
+  absolute top-12 z-10
+  `
 
 export const FeaturedBet = ({
   name,
@@ -39,13 +44,13 @@ export const FeaturedBet = ({
     >
       <a
         onClick={() => router.back()}
-        className="size-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 left-4"
+        className={`${ICON_BUTTON_CLASSNAME} size-8 left-4`}
       >
         <ChevronLeft color="white" size={20} strokeWidth={4} />
       </a>
       <Link
         href={LEADERBOARD_PATH}
-        className="size-8 bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 z-10 right-14"
+        className={`${ICON_BUTTON_CLASSNAME} size-8 right-14`}
       >
         <Star color="white" size={20} strokeWidth={3} />
       </Link>
@@ -60,7 +65,7 @@ export const FeaturedBet = ({
         <Share
           size={33}
           strokeWidth={3.3}
-          className=" bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl rounded-full flex justify-center items-center absolute top-12 right-4 z-10 bg-[rgba(17, 17, 17, 0.15)]"
+          className={`${ICON_BUTTON_CLASSNAME} right-4 bg-[rgba(17, 17, 17, 0.15)]`}
         />
       </ShareTopicModal>
       <motion.div
@@ -99,23 +104,21 @@ export const FeaturedBet = ({
             Trending Bets
           </span>
         </div>
-        {
-          markets?.slice(0, 4)?.map((market, idx) => {
-            const BetViewComponent = ((idx % 2) == 0) ? BetBigView : BetSmallView
-            return (
-              <BetViewComponent
-                key={idx}
-                marketId={market.id}
-                title={market.title}
-                question={market.question}
-                image={market.image}
-                topic={name}
-                option1={market.options[0]}
-                option2={market.options[1]}
-              />
-            )
-          })
-        }
+        {markets?.slice(0, 4)?.map((market, idx) => {
+          const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView;
+          return (
+            <BetViewComponent
+              key={idx}
+              marketId={market.id}
+              title={market.title}
+              question={market.question}
+              image={market.image}
+              topic={name}
+              option1={market.options[0]}
+              option2={market.options[1]}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -136,3 +139,5 @@ export const AvatarGroup = ({ images }) => {
     </div>
   );
 };
+
+
