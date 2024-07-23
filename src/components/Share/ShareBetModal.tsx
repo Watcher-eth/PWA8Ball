@@ -4,7 +4,7 @@ import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard.tsx";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
-import { ReactNode } from "react";
+
 
 interface Option {
   name: string;
@@ -171,7 +171,7 @@ export function DesktopShareBetModal({
   question,
   options,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   title: string;
   image: string;

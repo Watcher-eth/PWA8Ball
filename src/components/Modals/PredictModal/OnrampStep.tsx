@@ -75,15 +75,9 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{
-        display: "flex",
-        alignSelf: "center",
-        flexDirection: "column",
-        marginLeft: 0,
-        padding: 8,
-        paddingBottom: 12,
-        paddingTop: 12,
-      }}
+      className={`
+        flex flex-col self-center  px-2 py-3
+      `}
     >
       <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
         Receive USDC
@@ -243,7 +237,6 @@ function StepButton({ onClick, children, isDark, label, className="" }) {
       "active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-white";
   } else {
     styleClassName = "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121]"
-
   }
 
   return (

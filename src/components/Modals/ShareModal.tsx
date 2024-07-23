@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { ShareBetModal } from "../Share/ShareBetModal.tsx";
+import { ShareBetModal } from "../Share/ShareBetModal";
 
 export function ShareModal({
   children,
