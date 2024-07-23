@@ -16,7 +16,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/Button";
 
 import { RandomMemoji } from "../common/MemojiAvatar";
-import { shortenAddress } from "@thirdweb-dev/react";
+import { shortenAddress } from "@/utils/address/shortenAddress";
 import { ACTIVITY_PATH } from "@/utils/urls";
 import { useDebounceValue } from "usehooks-ts";
 

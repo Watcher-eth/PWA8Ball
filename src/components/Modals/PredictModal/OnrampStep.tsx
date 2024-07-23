@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Copy } from "lucide-react";
@@ -15,20 +14,23 @@ const stepVariants = {
   exit: { opacity: 0, y: -10 },
 };
 
-export function OnrampStep(props: {
+export function OnrampStep({
+  setStep,
+  method
+}: {
   setStep: (step: number) => void;
   method: number;
 }) {
   return (
     <div>
-      {props?.method === 2 && <BuyWithUniswap setStep={props?.setStep} />}
-      {props?.method === 3 && <BuyWithFiat setStep={props?.setStep} />}
-      {props?.method === 4 && <ReceiveGHO setStep={props?.setStep} />}
+      {method === 2 && <BuyWithUniswap setStep={setStep} />}
+      {method === 3 && <BuyWithFiat setStep={setStep} />}
+      {method === 4 && <ReceiveGHO setStep={setStep} />}
     </div>
   );
 }
 
-function BuyWithUniswap(props: { setStep: (step: number) => void }) {
+function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
   return (
     <motion.div
       key="step4"
@@ -49,23 +51,24 @@ function BuyWithUniswap(props: { setStep: (step: number) => void }) {
         <div className="Uniswap"></div>
       </div>
       <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between">
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-grow"
+        <div
+          className={`
+            flex-grow
+            active:scale-98 hover:scale-101 transition-all
+          `}
         >
           <Button
-            onClick={() => props.setStep(1)}
+            onClick={() => setStep(1)}
             className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] w-full text-[1.15rem] font-bold h-[2.8rem] rounded-full "
           >
             Back
           </Button>
-        </motion.div>
+        </div>
 
         <motion.div
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => props.setStep(2 + 1)}
+          onClick={() => setStep(3)}
           className="flex-grow"
         >
           <Button className="active:bg-[#181818] w-full ml-3 hover:bg-[#232323] bg-[#212121] text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full ">
@@ -77,7 +80,7 @@ function BuyWithUniswap(props: { setStep: (step: number) => void }) {
   );
 }
 
-function ReceiveGHO(props: { setStep: (step: number) => void }) {
+function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
   const { user } = useUserStore();
   return (
     <motion.div
@@ -151,7 +154,7 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
           className="flex-grow"
         >
           <Button
-            onClick={() => props.setStep(1)}
+            onClick={() => setStep(1)}
             className="active:bg-[#D9D9D9] w-full mr-1 hover:bg-[#D9D9D9] bg-[#D9D9D9] text-[#1D1D1D] text-[1.15rem] font-bold h-[2.8rem] rounded-full "
           >
             Back
@@ -176,7 +179,7 @@ function ReceiveGHO(props: { setStep: (step: number) => void }) {
   );
 }
 
-const BuyWithFiat = (props: { setStep: (step: number) => void }) => {
+const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
   return (
     <motion.div
       key="step5"
@@ -253,7 +256,7 @@ const BuyWithFiat = (props: { setStep: (step: number) => void }) => {
           className="flex-grow mr-2"
         >
           <Button
-            onClick={() => props.setStep(1)}
+            onClick={() => setStep(1)}
             className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-full"
           >
             Back
@@ -263,7 +266,7 @@ const BuyWithFiat = (props: { setStep: (step: number) => void }) => {
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
           className="flex-grow ml-2"
-          onClick={() => props.setStep(3)}
+          onClick={() => setStep(3)}
         >
           <Button className="active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-[1.15rem] text-white font-bold h-[2.8rem] rounded-full w-full">
             Continue
