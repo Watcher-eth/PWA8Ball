@@ -3,22 +3,20 @@ import { motion, useAnimation } from "framer-motion";
 
 import { Spinner } from "./Spinner";
 
-interface LoadingPredictionProps {
-  image: string;
-  question: string;
-  answer: string;
-  option: string;
-  loading: boolean;
-  success: boolean;
-}
-
 export function MobileLoadingPrediction({
   image,
   question,
   answer,
   loading,
   success,
-}: LoadingPredictionProps) {
+}: {
+  image: string;
+  question: string;
+  answer: string;
+  option: string;
+  loading: boolean;
+  success: boolean;
+}) {
   const controls = useLoadingAnimationControls();
   return (
     <div className="flex flex-col items-center justify-center w-full h-[430px]">

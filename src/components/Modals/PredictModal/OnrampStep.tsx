@@ -51,30 +51,16 @@ function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
         <div className="Uniswap"></div>
       </div>
       <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between">
-        <div
-          className={`
-            flex-grow
-            active:scale-98 hover:scale-101 transition-all
-          `}
-        >
-          <Button
-            onClick={() => setStep(1)}
-            className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] w-full text-[1.15rem] font-bold h-[2.8rem] rounded-full "
-          >
-            Back
-          </Button>
-        </div>
-
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
+        <StepButton
+          onClick={() => setStep(1)}
+          isDark={false}
+          label="Back"
+        />
+        <StepButton
           onClick={() => setStep(3)}
-          className="flex-grow"
-        >
-          <Button className="active:bg-[#181818] w-full ml-3 hover:bg-[#232323] bg-[#212121] text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full ">
-            Continue
-          </Button>
-        </motion.div>
+          isDark={true}
+          label="Continue"
+        />
       </div>
     </motion.div>
   );
@@ -148,32 +134,15 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         </div>
       </div>
       <div className="flex items-center self-center  mt-2 w-full ml-[3rem] my-4 space-x-3 ">
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-grow"
-        >
-          <Button
-            onClick={() => setStep(1)}
-            className="active:bg-[#D9D9D9] w-full mr-1 hover:bg-[#D9D9D9] bg-[#D9D9D9] text-[#1D1D1D] text-[1.15rem] font-bold h-[2.8rem] rounded-full "
-          >
-            Back
-          </Button>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-grow"
+        <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
+        <StepButton
           onClick={() => {
             copyToClipboard(user?.walletaddress);
           }}
         >
-          <Button className="active:bg-[#1D1D1D] ml-1 w-full space-x-1 flex items-center text-[#D9D9D9] hover:bg-[#1D1D1D] bg-[#1D1D1D] text-[1.15rem] text-white font-bold  h-[2.9rem] rounded-full ">
-            <Copy size={17} className="mt-[0.05rem]" strokeWidth={3} />
-            <div>Copy</div>
-          </Button>
-        </motion.div>
+          <Copy size={17} className="mt-[0.05rem]" strokeWidth={3} />
+          <div>Copy</div>
+        </StepButton>
       </div>
     </motion.div>
   );
@@ -249,30 +218,47 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
         </Avatar>
         <div> Buy through MoonPay</div>
       </Button>
-      <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between">
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-grow mr-2"
-        >
-          <Button
-            onClick={() => setStep(1)}
-            className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-full"
-          >
-            Back
-          </Button>
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex-grow ml-2"
+      <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between space-x-4">
+        <StepButton
+          onClick={() => setStep(1)}
+          isDark={false}
+          label="Back"
+        />
+        <StepButton
           onClick={() => setStep(3)}
-        >
-          <Button className="active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-[1.15rem] text-white font-bold h-[2.8rem] rounded-full w-full">
-            Continue
-          </Button>
-        </motion.div>
+          isDark={true}
+          label="Continue"
+        />
       </div>
     </motion.div>
   );
 };
+
+
+
+function StepButton({ onClick, children, isDark, label, className="" }) {
+  let styleClassName
+  if (isDark) {
+    styleClassName =
+      "active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-white";
+  } else {
+    styleClassName = "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121]"
+
+  }
+
+  return (
+    <div
+      className={`
+        flex-grow
+        active:scale-98 hover:scale-101 transition-all
+      `}
+    >
+      <Button
+        onClick={onClick}
+        className={`w-full flex items-center text-[1.15rem] font-bold h-[2.8rem] rounded-full ${styleClassName} ${className}`}
+      >
+        {label ?? children}
+      </Button>
+    </div>
+  );
+}
