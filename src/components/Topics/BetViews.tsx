@@ -7,7 +7,6 @@ import { Users } from "lucide-react";
 import Link from "next/link";
 
 export const BetBigView = ({
-  index,
   marketId,
   title,
   question,
@@ -20,7 +19,6 @@ export const BetBigView = ({
 
   return (
     <motion.div
-      key={index}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
@@ -62,15 +60,11 @@ export const BetBigView = ({
           <Users className="text-[#212121]" strokeWidth={3.5} height={13} />
         </div>
         <h2
-          style={{ zIndex: 10, fontFamily: "Aeonik-Bold" }}
-          className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2"
+          className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]"
         >
           {title}
         </h2>
-        <p
-          style={{ zIndex: 10, lineHeight: 1.2 }}
-          className="text-[1rem] text-white mt-2 ml-1 mb-[-0.1rem]"
-        >
+        <p className="text-[1rem] text-white mt-2 ml-1 mb-[-0.1rem] z-10 leading-[1.2]">
           {question}
         </p>
         {option1.image ? (
@@ -96,7 +90,6 @@ export const BetBigView = ({
 
 
 export const BetSmallView = ({
-  index,
   marketId,
   title,
   question,
@@ -109,7 +102,6 @@ export const BetSmallView = ({
 
   return (
     <motion.div
-      key={index}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
