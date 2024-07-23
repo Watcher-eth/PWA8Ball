@@ -1,8 +1,6 @@
 // @ts-nocheck
-
-import { useState } from "react";
 import Link from "next/link";
-import debounce from "lodash/debounce";
+
 import { useQuery } from "@tanstack/react-query";
 import {
   Drawer,
@@ -13,7 +11,6 @@ import {
 } from "@/components/ui/drawer";
 import { Calendar, Search, User, X } from "lucide-react";
 import { Input } from "@/components/ui/Input";
-import { motion } from "framer-motion";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/Button";
@@ -21,23 +18,18 @@ import { Button } from "@/components/ui/Button";
 import { RandomMemoji } from "../common/MemojiAvatar";
 import { shortenAddress } from "@thirdweb-dev/react";
 import { ACTIVITY_PATH } from "@/utils/urls";
+import { useDebounceValue } from "usehooks-ts";
 
 export function SearchModal() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-  const debouncedSearch = debounce((query) => {
-    setDebouncedSearchQuery(query);
-  }, 500); // Adjust the debounce time as needed
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useDebounceValue("", 300)
 
-  const handleChange = (event) => {
-    setSearchQuery(event.target.value);
-    debouncedSearch(event.target.value);
+
+  function handleChange(event) {
+    setDebouncedSearchQuery(event.target.value);
   };
 
   const {
     data: searchResults,
-    isLoading,
-    isError,
   } = useQuery({
     queryKey: ["searchResults", debouncedSearchQuery],
     enabled: !!debouncedSearchQuery,
@@ -48,34 +40,25 @@ export function SearchModal() {
       }
     },
   });
-  const [goal, setGoal] = useState(350);
 
-  function onClick(adjustment: number) {
-    setGoal(Math.max(200, Math.min(400, goal + adjustment)));
-  }
-
-  //Modal State
-  //Search State
-  //Search Profiles Query
 
   return (
     <div className="flex flex-col">
       <Drawer>
         <DrawerTrigger asChild>
-          <motion.div whileTap={{ scale: 0.96 }} className="mt-[0.1rem]">
+          <div className="mt-[0.1rem] active:scale-96 transition-all">
             <Search strokeWidth={3} className="h-7 text-white w-7" />
-          </motion.div>
+          </div>
         </DrawerTrigger>
         <DrawerContent className="border-0 items-start ">
           <div className="flex flex-col bg-white rounded-3xl p-3  mx-[3vw] mb-5 w-[92vw] relative">
             <div
-              style={{ zIndex: 5 }}
-              className=" flex mx-2  pt-3  w-[90vw] items-center justify-between"
+              className=" flex mx-2 pt-3 w-[90vw] items-center justify-between z-[5]"
             >
               <DrawerTitle className="text-[1.9rem]  text-black">
                 Search
               </DrawerTitle>
-              <DrawerClose style={{ zIndex: 5 }}>
+              <DrawerClose className="z-[5]">
                 <div
                   className={`
                     z-[5] p-2 mr-8  rounded-full bg-gray-100

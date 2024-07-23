@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { SearchOverview } from "./SearchOverview";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
