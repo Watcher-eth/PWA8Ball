@@ -30,6 +30,8 @@ export function CustomHead({ topicData, userId, router, ...rest }) {
 function SplashSeo() {
   return (
     <NextSeo
+      title="Blitz"
+      description="Blitz prediction market"
       openGraph={{
         title: "TryBlitz",
         description: "Try Blitz",

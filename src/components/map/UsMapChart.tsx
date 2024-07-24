@@ -5,10 +5,10 @@ import { scaleLinear } from "d3-scale";
 
 import { TEST_STATE_DATA } from "./testStateData";
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 
-const colorScale = {
+const COLOR_SCALE = {
   red: scaleLinear().domain([0, 2]).range(["#FFCCCB", "#FF0000"]),
   blue: scaleLinear().domain([0, 2]).range(["#CCE5FF", "#0000FF"]),
 };
@@ -33,15 +33,17 @@ export function UsMapChart() {
   return (
       <div ref={containerRef} className=" relative overflow-visible">
         <ComposableMap projection="geoAlbersUsa" height={500} width={800}>
-          <Geographies geography={geoUrl}>
+          <Geographies geography={GEO_URL}>
             {({ geographies, outline, borders }) =>
               geographies.map((geo) => {
                 const stateName = geo.properties.name;
                 const stateInfo = stateData[stateName];
-                let fillColor = "#D6D6DA"; // Default color
+                let fillColor; // Default color
 
                 if (stateInfo) {
-                  fillColor = colorScale[stateInfo.party](stateInfo.value);
+                  fillColor = COLOR_SCALE[stateInfo.party](stateInfo.value);
+                } else {
+                  fillColor = "#D6D6DA";
                 }
 
                 return (
