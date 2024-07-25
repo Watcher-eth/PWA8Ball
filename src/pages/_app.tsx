@@ -17,7 +17,7 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 import { CustomHead } from "@/components/CustomHead";
 import { DrawerProvider } from "@/lib/stores/DrawerContext";
-import { base, baseSepolia, mainnet  } from "viem/chains";
+import { base, baseSepolia, mainnet } from "viem/chains";
 import { RootLayout } from "@/components/common/RootLayout";
 
 export const queryClient = new QueryClient();
@@ -76,8 +76,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       {/**Need to check if this is valid*/}
       <SonnerToaster
         position="top-center"
-        style={{ zIndex: 100 }}
-        className="bg-[#121212] rounded-xl"
+        className="bg-[#121212] rounded-xl z-[100]"
       />
     </>
   );

@@ -52,16 +52,11 @@ export const BetBigView = ({
           className="absolute top-[22.5vh] w-full h-16 bg-gradient-to-t from-black via-[rgba(7, 7, 7, 0.9)] to-transparent rounded-b-lg"
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
-        <div
-          style={{ zIndex: 10, borderRadius: "15px" }}
-          className="absolute top-3 right-3 flex items-center bg-white px-[0.5rem] pr-1 p-1 rounded-lg"
-        >
+        <div className="absolute top-3 right-3 flex items-center bg-white px-2 pr-1 p-1 rounded-lg z-10">
           <span className="text-[#212121] font-bold text-12 mr-0">223</span>
           <Users className="text-[#212121]" strokeWidth={3.5} height={13} />
         </div>
-        <h2
-          className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]"
-        >
+        <h2 className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]">
           {title}
         </h2>
         <p className="text-[1rem] text-white mt-2 ml-1 mb-[-0.1rem] z-10 leading-[1.2]">
@@ -86,8 +81,6 @@ export const BetBigView = ({
     </motion.div>
   );
 };
-
-
 
 export const BetSmallView = ({
   marketId,
@@ -180,7 +173,12 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
 
 const MAX_LENGTH = 11;
 
-export const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) => {
+export const PollingComponentImage = ({
+  yesValue,
+  noValue,
+  option1,
+  option2,
+}) => {
   const total = yesValue.amount + noValue.amount;
   const yesPercentage = (yesValue.amount / total) * 100;
   const noPercentage = (noValue.amount / total) * 100;
@@ -235,4 +233,3 @@ export const PollingComponentImage = ({ yesValue, noValue, option1, option2 }) =
     </div>
   );
 };
-
