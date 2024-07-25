@@ -10,12 +10,13 @@ import { timeAgo } from "@/utils/datetime/timeAgo";
 import { parseOption } from "@/utils/predictions/parseOption";
 import { getProfilePath } from "@/utils/urls";
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
+import { User } from "@/types/UserTypes";
 
 interface CommentProps extends BetComment {
   setReply: (name: string) => void;
   handleComment: () => void;
   hasPosition: boolean;
-  user2: any; // Define the proper type for user2 if possible
+  user2: User;
 }
 
 export function Comment({

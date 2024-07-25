@@ -8,6 +8,7 @@ import { BetComment } from "@/types/PostTypes";
 import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 import { IUserWithBet } from "@/supabase/types";
 import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlaceholders";
+import AddComment from "./AddComment";
 
 export const CommentSection = ({
   marketId,
@@ -72,6 +73,7 @@ export const CommentSection = ({
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
+      <AddComment user={user} />
       <div>
         {allComments.map((item) => {
           let commentUser;
