@@ -2,11 +2,9 @@
 import { useState } from "react";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerOverlay,
   DrawerTrigger,
-  NestedDrawer,
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";

@@ -13,7 +13,7 @@ export function DesktopOnrampModal({
 }) {
   return (
     <DesktopCardModal
-      cardContentClassName="bg-[#080808]/75  w-full backdrop-blur-lg"
+      cardContentClassName="bg-[#080808]/75 w-full backdrop-blur-lg"
       content={<DesktopOnramp />}
     >
       {children}
