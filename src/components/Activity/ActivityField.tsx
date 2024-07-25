@@ -16,7 +16,9 @@ export const ActivityField = ({
   image,
   question,
   option,
+  options,
   isDesktop,
+  id,
   onOpenBottomSheet,
 }: {
   index: number;
@@ -27,9 +29,13 @@ export const ActivityField = ({
   image: string;
   question: string;
   isDesktop?: boolean;
-  option: { name: string; value: number };
+  options: string[];
+  option: { name: string; value: number; index: number };
+  id: string;
   onOpenBottomSheet: () => void;
 }) => {
+  console.log("options", option, options);
+
   const MotionDivContent = () => (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -55,7 +61,7 @@ export const ActivityField = ({
         />
         <div className="flex flex-col gap-0 ml-[12.5px] mr-[-36px] max-w-full">
           <h3 className="text-[17px] text-white font-bold">{name}</h3>
-          <p className="text-[14.5px] text-lightgray font-normal overflow-hidden whitespace-nowrap max-w-[78vw] text-ellipsis">
+          <p className="text-[14.5px] text-[lightgray] font-normal overflow-hidden whitespace-nowrap text-ellipsis">
             {title}
           </p>
         </div>
@@ -65,9 +71,7 @@ export const ActivityField = ({
           ${(amount / 10).toFixed(2)}
         </p>
         <p className="text-[14px] text-[#C7C7C7] font-bold">
-          {parseOption(option)?.length < 8
-            ? parseOption(option)
-            : parseOption(option)?.substring(0, 3)}
+          {option.name?.length < 8 ? option.name : option.name?.substring(0, 3)}
         </p>
       </div>
     </motion.div>
@@ -76,23 +80,21 @@ export const ActivityField = ({
   const MyBetModalComponent = isDesktop ? DesktopMyBetModal : MobileMyBetModal;
   return (
     <div>
-        <MyBetModalComponent
-          key={`predicted-${id}-${option}`}
-          title={title}
-          image={image}
-          price={amount}
-          ownedAmount={amount / 100000}
-          percentage={percentage}
-          betId={id}
-          topic={id}
-          icon={icon}
-          question={question}
-          option={option}
-          optionNumber={optionNumber}
-          isExternal={isExternal}
-        >
-          <MotionDivContent />
-        </MyBetModalComponent>
+      <MyBetModalComponent
+        key={`predicted-${id}-${option}`}
+        title={title}
+        image={image}
+        price={amount}
+        ownedAmount={amount / 100000}
+        betId={id}
+        topic={id}
+        question={question}
+        options={option}
+        option={0}
+        optionNumber={0}
+      >
+        <MotionDivContent />
+      </MyBetModalComponent>
     </div>
   );
 };

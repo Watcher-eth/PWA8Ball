@@ -144,7 +144,10 @@ export const MobileMyBetModal = (props: {
               ? currentPrices[currentPrices.length - 1].value
               : 100 - props.price
             : props.price / 10000}
-          % {props.options[props?.option === 1 ? 0 : 1]?.name}
+          %{" "}
+          {props.options[props?.option === 1 ? 0 : 1]?.name
+            ? props.options[props?.option === 1 ? 0 : 1]?.name
+            : props.options?.name}
         </span>
         <span
           style={{

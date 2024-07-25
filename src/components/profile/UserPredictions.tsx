@@ -60,7 +60,7 @@ export const UserPredictionSkeleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex items-center w-[90vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
+    className="flex items-center w-9/10 justify-between p-2 rounded-2xl bg-[#171717] my-2"
   >
     <div className="flex items-center gap-2">
       <motion.div
@@ -71,13 +71,13 @@ export const UserPredictionSkeleton = ({ index }) => (
       />
       <div className="flex flex-col gap-2">
         <motion.div
-          className="w-[50vw] h-[20px] bg-[#252525] rounded-xl"
+          className="w-[60%] h-[20px] bg-[#252525] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"
         />
         <motion.div
-          className="w-[45vw] h-[17px] bg-[#252525] rounded-xl"
+          className="w-[55%] h-[17px] bg-[#252525] rounded-xl"
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"
@@ -111,7 +111,11 @@ export const CreatedPrediction = ({
       onClick={onOpenBottomSheet}
     >
       <div className="flex items-center gap-2">
-        <img src={image} alt={title} className="h-14 w-14 object-cover rounded-[0.5rem]" />
+        <img
+          src={image}
+          alt={title}
+          className="h-14 w-14 object-cover rounded-[0.5rem]"
+        />
         <div className="flex flex-col max-w-[69%]">
           <p className="text-white text-md font-bold font-[Aeonik-Bold]">
             {title}

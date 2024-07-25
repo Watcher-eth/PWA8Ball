@@ -15,6 +15,7 @@ import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { ActivityField } from "./ActivityField";
 import { Leaderboard } from "./Leaderboard";
 import { YourStats } from "./YourStats";
+import { parseOptionJSON } from "@/utils/predictions/parseOption";
 
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
@@ -36,6 +37,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     <div
       className={`
         no-scrollbar flex flex-col
+         
         p-5 pt-[30px]
         ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
       `}
@@ -88,33 +90,43 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
               {predictions?.length > 0 ? (
                 <div>
                   {Object.entries(groupedPredictions).map(
-                    ([dateKey, predictions], index) => (
-                      <div key={dateKey}>
-                        <h2
-                          className={`
+                    ([dateKey, predictions], index) => {
+                      return (
+                        <div key={dateKey}>
+                          <h2
+                            className={`
                           font-extrabold text-[20px] text-white -mb-px
                           ${index === 0 ? "mt-4" : "mt-[22px]"}
                         `}
-                        >
-                          {dateKey}
-                        </h2>
-                        {predictions.map((item, idx) => (
-                          <ActivityField
-                            isDesktop={isDesktop}
-                            key={idx}
-                            index={idx}
-                            question={item.markets.question}
-                            name={item.users.name}
-                            pfp={item.users.pfp}
-                            amount={item.amount / 10 ** 5}
-                            title={item.markets.question}
-                            image={item.markets.image}
-                            option={item.option}
-                            onOpenBottomSheet={() => {}}
-                          />
-                        ))}
-                      </div>
-                    )
+                          >
+                            {dateKey}
+                          </h2>
+                          {predictions.map((item, idx) => {
+                            const option = parseOptionJSON(item.option);
+                            console.log("item", item);
+
+                            return (
+                              <ActivityField
+                                isDesktop={isDesktop}
+                                key={idx}
+                                index={idx}
+                                options={item.markets.options}
+                                question={item.markets.question}
+                                name={item.users.name}
+                                pfp={item.users.pfp}
+                                amount={item.amount / 10 ** 5}
+                                title={item.markets.question}
+                                image={item.markets.image}
+                                option={option}
+                                id={item?.market_id}
+                                odds={12}
+                                onOpenBottomSheet={() => {}}
+                              />
+                            );
+                          })}
+                        </div>
+                      );
+                    }
                   )}
                   <div className="h-[110px]" />
                 </div>
@@ -131,15 +143,15 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
 
 function ActivitySkeleton() {
   return (
-    <div className="flex flex-col items-center w-[99%] h-[333px] p-4">
-      <div className="my-3">
-        <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121] " />
+    <div className="flex flex-col items-center  w-full h-[333px] p-4">
+      <div className="my-3 max-w-full">
+        <AltSkeleton className="h-4.5 !bg-[#212121] " />
       </div>
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <FollowPredictionSkeleton key={index} index={index} />
       ))}
-      <div className="my-5">
-        <AltSkeleton className="h-4.5 w-[40%] !bg-[#212121]" />
+      <div className="my-5 max-w-full">
+        <AltSkeleton className="h-4.5  !bg-[#212121]" />
       </div>
     </div>
   );

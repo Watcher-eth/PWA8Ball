@@ -12,7 +12,7 @@ export function DesktopActivityPage({ userC }: { userC: IUser }) {
       <DesktopNavbar />
       <div className="flex flex-row  pt-3 px-8 bg-[#080808] ">
         <ProfileSection user={user} userC={user} />
-        <div className="-mt-8  ml-3">
+        <div className="-mt-8   ml-3">
           <ActivityPage isDesktop={true} />
         </div>
         <DesktopUserActivity
