@@ -12,7 +12,7 @@ export function YourStats() {
         value={user?.liquiditypoints}
         divider={false}
       />
-      <StatSection label="Total" value={count ? count : 0} />
+      <StatSection label="Total" value={count ?? 0} />
       <StatSection label="Accuracy" value="0%" />
     </div>
   );
