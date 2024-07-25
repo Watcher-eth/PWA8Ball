@@ -1,10 +1,18 @@
 // @ts-nocheck
 import "../../styles/fonts.css";
+
 import { motion } from 'framer-motion';
+import Link from "next/link";
+
+import { HOME_PATH } from "@/utils/urls";
+import { fillUserImages } from "@/utils/fillUserImages";
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { DrawerClose } from "@/components/ui/drawer";
 
 import { PredictModal } from "@/components/Modals/PredictModal";
 import { ShareModal } from "@/components/Modals/ShareModal";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -12,17 +20,17 @@ import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBette
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
-import { fillUserImages } from "@/utils/fillUserImages";
 
-import { formatMarket } from "../Feed/formatMarketArr";
-import { DrawerClose } from '@/components/ui/drawer';
 
-import Link from "next/link";
+import { formatMarket } from "@/utils/markets/formatMarketArr";
+
+
+
 
 
 import { ArrowLeft, Share } from "lucide-react";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
-import { HOME_PATH } from "@/utils/urls";
+
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 

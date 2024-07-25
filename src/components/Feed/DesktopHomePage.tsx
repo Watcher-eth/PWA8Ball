@@ -1,12 +1,15 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+import { formatMarketArr } from "@/utils/markets/formatMarketArr";
+
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 
 import { FeedCard } from "@/components/Feed/FeedCard";
 import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/Feed/TopicHeader";
-import { AnimatePresence, motion } from "framer-motion";
-import { formatMarketArr } from "./formatMarketArr";
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
+
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic

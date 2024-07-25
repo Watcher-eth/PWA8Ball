@@ -12,7 +12,7 @@ export const RelatedMarkets = ({topicId, id, isDesktop}: {
 }) => {
 
   // Get Markets from topic
-  const { data: markets, error, isLoading } = useGetRelatedMarkets(topicId);
+  const { data: markets } = useGetRelatedMarkets(topicId);
 
   if (markets && markets?.length >= 2)
     return (
