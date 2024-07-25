@@ -1,5 +1,9 @@
 import { DrawerClose } from "@/components/ui/drawer";
 
+import { KeypadActionButton } from "./KeypadActionButton";
+import { KeypadButton } from "./KeypadButton";
+import { KeypadAmountButton } from "./KeypadAmountButton";
+
 export function NumericKeypad({
   sliderValue,
   setSliderValue,
@@ -68,67 +72,6 @@ export function NumericKeypad({
   );
 }
 
-function KeypadAmountButton({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`
-        text-sm font-bold rounded-xl bg-[#212121] text-white
-        mr-2 mb-1 p-1 px-3
-        active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {children}
-    </button>
-  );
-}
 
-function KeypadButton({
-  value,
-  handleButtonPress,
-  onClick,
-}: {
-  value: string;
-  handleButtonPress?: (value: string) => void;
-  onClick?: () => void;
-}) {
-  return (
-    <button
-      onClick={() => {
-        handleButtonPress?.(value) ?? onClick?.();
-      }}
-      className={`
-        text-xl font-bold text-white px-5
-        active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {value}
-    </button>
-  );
-}
 
-function KeypadActionButton({
-  label,
-  onClick,
-}: {
-  label: string;
-  onClick?: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`
-        mt-5 p-2 rounded-full bg-white w-[80vw] text-[1rem] text-center text-[#131313]
-        font-extrabold active:scale-95 hover:scale-101 transition-all
-      `}
-    >
-      {label}
-    </button>
-  );
-}
+
