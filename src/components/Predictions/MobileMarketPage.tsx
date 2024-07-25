@@ -1,10 +1,18 @@
 // @ts-nocheck
 import "../../styles/fonts.css";
+
 import { motion } from 'framer-motion';
+import Link from "next/link";
+
+import { HOME_PATH } from "@/utils/urls";
+import { fillUserImages } from "@/utils/fillUserImages";
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { DrawerClose } from "@/components/ui/drawer";
 
 import { PredictModal } from "@/components/Modals/PredictModal";
 import { ShareModal } from "@/components/Modals/ShareModal";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -12,17 +20,17 @@ import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBette
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
-import { fillUserImages } from "@/utils/fillUserImages";
 
-import { formatMarket } from "../Feed/formatMarketArr";
-import { Drawer, DrawerClose, DrawerContent } from '@/components/ui/drawer';
 
-import Link from "next/link";
+import { formatMarket } from "@/utils/markets/formatMarketArr";
+
+
+
 
 
 import { ArrowLeft, Share } from "lucide-react";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
-import { HOME_PATH } from "@/utils/urls";
+
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 
@@ -77,7 +85,7 @@ function MobileMarketContent({
       className="bg-[#070707] w-screen overflow-auto flex flex-col"
     >
       <div className="relative h-[100vw]">
-        <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-[2]">
+        <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-2">
           <DrawerClose>
             <Link href={HOME_PATH} prefetch={true}>
               <ArrowLeft
@@ -112,7 +120,7 @@ function MobileMarketContent({
             className={`
               h-[38vw] w-screen
               bg-gradient-to-t from-black via-transparent to-transparent
-              absolute bottom-0 z-[2]
+              absolute bottom-0 z-2
             `}
           />
         </motion.div>
@@ -121,7 +129,7 @@ function MobileMarketContent({
         className={`
           pr-10 mt-[-3.8rem]  mb-[-0.7rem] pl-5 pb-0 p-3
           text-white text-bold leading-[2.4rem]
-          self-start text-start z-[2] font-[Benzin-Bold]
+          self-start text-start z-2 font-[Benzin-Bold]
           ${
             title?.length < 14
               ? "text-[35px]"
@@ -139,7 +147,7 @@ function MobileMarketContent({
           <div
             className={`
               text-[0.85rem] text-gray-200 text-bold
-              font-[Aeonik-Bold] z-[2]
+              font-[Aeonik-Bold] z-2
             `}
           >
             At stake
@@ -147,7 +155,7 @@ function MobileMarketContent({
           <div
             className={`
               text-[1.6rem] mt-[-0.25rem] text-white flex items-center
-              font-[Aeonik-Bold] z-[2]
+              font-[Aeonik-Bold] z-2
             `}
           >
             <div> ${((stake ?? 0) / 100000).toFixed(2)}</div>
@@ -165,7 +173,7 @@ function MobileMarketContent({
         >
           <div
             onClick={openLoginModal}
-            className="flex space-x-[-1rem] mb-3 items-center z-[2]"
+            className="flex space-x-[-1rem] mb-3 items-center z-2"
           >
             <Avatar>
               <AvatarImage src={userImages[0]} />
@@ -186,12 +194,12 @@ function MobileMarketContent({
           text-[1.05rem] self-start
           -mb-px mt-2 ml-5
           text-start text-[lightgray] max-w-[88vw]
-           z-[2] font-[Aeonik-Bold] leading-[1.35rem]
+           z-2 font-[Aeonik-Bold] leading-[1.35rem]
         `}
       >
         {description}
       </div>
-      <div className="flex items-center justify-around mx-2 z-[2] gap-2">
+      <div className="flex items-center justify-around mx-2 z-2 gap-2">
         <PredictModal
           handleOpen={handleOpen}
           image={image}
@@ -231,7 +239,7 @@ function MobileMarketContent({
           </div>
         </PredictModal>
       </div>
-      <div className="z-[2]">
+      <div className="z-2">
         <BetDetails
           endDate={"12th September, 2024"}
           icon={icon}
@@ -247,7 +255,7 @@ function MobileMarketContent({
           id={id}
         />
       </div>
-      <div className="z-[2]">
+      <div className="z-2">
         <CommentSection
           topicId={topicId}
           users={users}

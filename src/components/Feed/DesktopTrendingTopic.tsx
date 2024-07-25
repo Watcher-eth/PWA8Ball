@@ -1,9 +1,9 @@
 // @ts-nocheck
+import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { FeedCard } from "./FeedCard";
-import { parseOptions } from "@/utils/predictions/parseOption";
-import { formatMarketArr } from "./formatMarketArr";
+
 
 export function DesktopTrendingTopics({
   title,

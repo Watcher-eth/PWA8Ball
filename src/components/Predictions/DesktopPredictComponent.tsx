@@ -2,24 +2,24 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CardContent } from "@/components/ui/card";
-import { DesktopShareBetModal } from "../Share/ShareBetModal";
-import { AlignLeft, ArrowLeftRight, CheckCircle, Receipt } from "lucide-react";
-import { DesktopChart } from "@/components/common/Charts/DesktopChart";
-import { Input } from "@/components/ui/Input";
+import { AlignLeft, ArrowLeftRight, Receipt } from "lucide-react";
+
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 
-import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/LoadingPrediction";
-import { CashoutConfirmScreen } from "./Cashout/confirm";
-import { CashOutWarningScreen } from "./Cashout/warning";
-import { CashoutOverview } from "./Cashout/overview";
+import { CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/Input";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
-import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
-import { processPrices } from "@/utils/chartUtils";
-import { timeframes } from "../common/Charts/MyBetModal";
+import { DesktopChart } from "@/components/common/Charts/DesktopChart";
+import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/LoadingPrediction";
+import { DesktopShareBetModal } from "@/components/Share/ShareBetModal";
+
+import { CashoutConfirmScreen } from "./Cashout/confirm";
+import { CashOutWarningScreen } from "./Cashout/warning";
+import { CashoutOverview } from "./Cashout/overview";
+
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -67,7 +67,7 @@ export function DesktopPredictComponent(props: {
                     focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
                   `}
               />
-              <div className="flex items-center justify-between z-[2] gap-3 mt-0">
+              <div className="flex items-center justify-between z-2 gap-3 mt-0">
                 <OutcomeButton
                   isDesktop={true}
                   text={options[1].name}

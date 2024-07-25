@@ -46,7 +46,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
       <div
         className={`
           fixed w-screen h-[125px] bottom-0 rounded-t-lg
-          z-[2]
+          z-2
         `}
         style={{
           background:

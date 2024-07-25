@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { IUser } from "@/supabase/types";
 
 interface ExtendedUser extends IUser {
-  balance?: string;
   walletType?: "smartwallet" | "eoa";
 }
 

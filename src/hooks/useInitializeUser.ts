@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { getUSDCBalance } from "@/lib/onchain/contracts/Usdc";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import {
   getUserFromDB,
@@ -29,41 +28,34 @@ export function useInitializeUser() {
       const dbUser = await getUserFromDB(privyUser?.id);
       if (dbUser) {
         console.log({ dbUser });
-        const balance = await getUSDCBalance(dbUser?.walletaddress);
-
         setUser({
           ...dbUser,
-          balance,
           walletType: "smartwallet",
         });
       } else {
         const newUser = await createUserInDB(privyUser.id);
         newUser.pfp = DEFAULT_PFP;
 
-        setUser({ ...newUser, balance: "0", walletType: "smartwallet" });
+        setUser({ ...newUser, walletType: "smartwallet" });
       }
     } else if (isConnected && eoaAddress) {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaUUID);
       if (dbUser) {
-        const balance = await getUSDCBalance(dbUser?.walletaddress);
         dbUser.pfp = DEFAULT_PFP;
 
         setUser({
           ...dbUser,
           walletType: "eoa",
-          balance: balance,
         });
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
 
-        const balance = await getUSDCBalance(eoaAddress);
 
         setUser({
           ...newUser,
-          balance: "0",
           walletType: "eoa",
           name: eoaAddress,
         });

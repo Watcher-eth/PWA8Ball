@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { ActivityPage } from "@/components/Activity";
-import { DesktopNavbar } from "@/components/common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
 import { ProfileSection } from "@/components/profile/DesktopProfilePage";
 
@@ -9,7 +8,6 @@ export function DesktopActivityPage({ userC }: { userC: IUser }) {
 
   return (
     <div className="flex flex-col bg-[#080808]">
-      <DesktopNavbar />
       <div className="flex flex-row  pt-3 px-8 bg-[#080808] ">
         <ProfileSection user={user} userC={user} />
         <div className="-mt-8 ml-3">

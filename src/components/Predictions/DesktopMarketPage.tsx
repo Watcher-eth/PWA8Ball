@@ -13,8 +13,7 @@ import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay";
-import { PredictModal } from "@/components/Modals/PredictModal";
+} from "@/components/layouts/StandardBleedOverlay";
 import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";

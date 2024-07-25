@@ -43,18 +43,18 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       <img
         alt="Card_Preview"
         src={image}
-        className="w-full h-full absolute  object-cover rounded-lg z-[2]"
+        className="w-full h-full absolute  object-cover rounded-lg z-2"
       />
       <div
         className={`
           h-[50vw] w-[88vw] max-w-[21.5rem] max-h-[21.5rem]
           rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent
-          absolute bottom-0 z-[2]
+          absolute bottom-0 z-2
         `}
       />
       <div
         style={{ fontFamily: "Aeonik-Bold" }}
-        className="absolute top-4 z-[3] right-4 text-[0.95rem] bg-[#181818]/[0.1] text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
+        className="absolute top-3 z-3 right-3 text-[0.95rem] bg-[#181818]/[0.1] text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
       >
         {(odds / 100).toFixed(0)}% {optionA !== "Yes" ? optionA : null}
       </div>
@@ -64,13 +64,13 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         }}
         className={`${
           title?.length < 13 ? "text-[2.3rem]" : "text-[2.1rem]"
-        } text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-[2]`}
+        } text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-2`}
       >
         {title}
       </div>
       <div
         className={`
-          z-[2]
+          z-2
           rounded-b-lg w-[88vw] max-w-[21.5rem] items-center p-3 px-3
           bg-gray-800/20
           backdrop-blur-lg flex

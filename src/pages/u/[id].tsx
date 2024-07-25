@@ -4,7 +4,7 @@ import { GetServerSideProps } from "next";
 import { fetchUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
 import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 
-import { MobiTop } from "@/components/ui/MobiTop";
+import { MobiTop } from "@/components/layouts/MobiTop";
 import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
 import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";

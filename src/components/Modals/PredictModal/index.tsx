@@ -5,21 +5,24 @@ import { useEffect, useState } from "react";
 import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Vote } from "lucide-react";
-import { GetGhoModal } from "./GetGhoModal";
-import { OnrampStep } from "./OnrampStep";
-import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
+import { Vote } from "lucide-react";
+
+import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { ConfirmPrediction } from "./ConfirmPrediction";
 
 import { NumericKeypad } from "@/components/NumericKeypad";
+
+import { ConfirmPrediction } from "./ConfirmPrediction";
+import { GetGhoModal } from "./GetGhoModal";
+import { OnrampStep } from "./OnrampStep";
+
+
 
 export function PredictModal({
   text,
@@ -30,7 +33,6 @@ export function PredictModal({
   options,
   marketId,
   odds,
-  isDesktop,
   handleOpen,
   children,
 }: {
@@ -42,7 +44,6 @@ export function PredictModal({
   options: string[];
   marketId: string;
   odds: number;
-  isDesktop?: boolean;
   handleOpen: () => void;
   children: React.ReactNode;
 }) {
@@ -50,8 +51,10 @@ export function PredictModal({
 
   const [sliderValue, setSliderValue] = useState(""); // Use a string to hold the value
   const setVotingState = useVotingStore((state) => state.setState);
+  const amount = useVotingStore((state) => state.amount);
+  const { user } = useUserStore();
+  const userBalance = useUserUsdcBalance()
 
-  const userBalance = 40;
 
   const baseFontSize = "4rem";
   const lengthAdjustmentThreshold = 3;
@@ -116,15 +119,12 @@ export function PredictModal({
     });
   };
 
-  const amount = useVotingStore((state) => state.amount);
-  const { user } = useUserStore();
+
   console.log({ user });
   return (
     <div className="w-full flex-grow ">
       <Drawer>
-        <DrawerTrigger className="w-full">
-          {children}
-        </DrawerTrigger>
+        <DrawerTrigger className="w-full">{children}</DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">
           <motion.div
             layout
@@ -210,7 +210,7 @@ export function PredictModal({
                 </div>
               )}
               {step === 2 &&
-                (user?.balance > amount ? (
+                (userBalance > amount ? (
                   <ConfirmPrediction
                     option={option}
                     options={options}
