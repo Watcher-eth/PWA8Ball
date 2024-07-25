@@ -36,12 +36,12 @@ export function DesktopCardModal({
       <DialogContent
         className={`
           p-0 bg-transparent min-h-[50vh] border-0
-          !rounded-[1.5rem] ${dialogContentClassName}
+          rounded-2xl ${dialogContentClassName}
         `}
       >
         <Card
           className={`
-            shadow-none bg-[#080808]
+            shadow-none
             border-2 border-[#181818]
             rounded-2xl ${cardClassName}
           `}

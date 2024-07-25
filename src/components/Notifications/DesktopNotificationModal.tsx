@@ -24,12 +24,12 @@ export function DesktopNotificationModal({
     <DesktopCardModal
       title="Notifications"
       subtitle="You have 3 unread messages."
-      cardClassName="w-[99%]"
-      dialogContentClassName="bg-[#080808]/[0.85] backdrop-blur-lg w-full"
-      cardContentClassName=" w-full min-h-[50vh] "
-      dialogClassName="w-[99%]"
+      cardClassName=""
+      dialogContentClassName="bg-[#080808]/85 backdrop-blur-lg "
+      cardContentClassName=" min-h-[50vh] "
+      dialogClassName=""
       content={
-        <div className="w-full overflow-y-auto">
+        <div className="overflow-y-auto">
           {notifications?.length > 0 ? (
             notifications?.map((item, index) => (
               <NotificationCard
