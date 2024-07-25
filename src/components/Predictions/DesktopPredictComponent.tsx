@@ -67,7 +67,7 @@ export function DesktopPredictComponent(props: {
                     focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
                   `}
               />
-              <div className="flex items-center justify-between z-[2] gap-3 mt-0">
+              <div className="flex items-center justify-between z-2 gap-3 mt-0">
                 <OutcomeButton
                   isDesktop={true}
                   text={options[1].name}

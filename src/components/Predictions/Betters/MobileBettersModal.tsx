@@ -25,7 +25,7 @@ export function MobileBettersModal({
 
 
   return (
-    <div className="z-[2]">
+    <div className="z-2">
       <Drawer>
         <DrawerTrigger>{children}</DrawerTrigger>
         <DrawerContent className="border-0 rounded-3xl self-center">

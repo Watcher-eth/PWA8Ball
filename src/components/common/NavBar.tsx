@@ -22,7 +22,7 @@ export function NavBar() {
     <div
       className={`
         bg-black/20 items-center justify-center p-[0.9rem] rounded-full backdrop-blur-sm
-        z-[3] self-center border-[0.5px] border-[rgba(255,255,255,0.4)] filter-[saturate(100%)_blur(35px)]
+        z-3 self-center border-[0.5px] border-[rgba(255,255,255,0.4)] filter-[saturate(100%)_blur(35px)]
       `}
     >
       <div className="w-[65vw] max-w-[17rem] flex px-2 justify-between items-center mx-auto">

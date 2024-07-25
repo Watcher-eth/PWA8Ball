@@ -28,7 +28,7 @@ export function UserLiquidityPage() {
           }}
           className={`
             size-[30px] bg-[rgba(100,100,100,0.4)] rounded-full
-            flex justify-center items-center z-[4] border-none cursor-pointer
+            flex justify-center items-center z-4 border-none cursor-pointer
           `}
         >
           <ChevronLeft height={21} color={"white"} strokeWidth={4} />

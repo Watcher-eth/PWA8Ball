@@ -53,15 +53,15 @@ export function SearchModal() {
         <DrawerContent className="border-0 items-start ">
           <div className="flex flex-col bg-white rounded-3xl p-3  mx-[3vw] mb-5 w-[92vw] relative">
             <div
-              className=" flex mx-2 pt-3 w-[90vw] items-center justify-between z-[5]"
+              className=" flex mx-2 pt-3 w-[90vw] items-center justify-between z-5"
             >
               <DrawerTitle className="text-[1.9rem]  text-black">
                 Search
               </DrawerTitle>
-              <DrawerClose className="z-[5]">
+              <DrawerClose className="z-5">
                 <div
                   className={`
-                    z-[5] p-2 mr-8  rounded-full bg-gray-100
+                    z-5 p-2 mr-8  rounded-full bg-gray-100
                     active:scale-90 transition-all
                   `}
                 >
