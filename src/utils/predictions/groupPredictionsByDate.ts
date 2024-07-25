@@ -2,13 +2,9 @@ import { formatDate } from "@/utils/datetime/formatDate";
 import { isToday, isYesterday } from "@/utils/datetime/isDay";
 
 export function groupPredictionsByDate(predictions: any[]) {
-  if (!predictions) {
-    return {};
-  }
-
   const groupedPredictions: { [key: string]: any[] } = {};
 
-  predictions.forEach((prediction) => {
+  predictions?.forEach((prediction) => {
     const createdAt = new Date(prediction.created_at);
     const dateKey = isToday(createdAt)
       ? "Today"
