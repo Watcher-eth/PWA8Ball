@@ -28,11 +28,8 @@ export function useInitializeUser() {
       const dbUser = await getUserFromDB(privyUser?.id);
       if (dbUser) {
         console.log({ dbUser });
-        // const balance = await getUSDCBalance(dbUser?.walletaddress);
-
         setUser({
           ...dbUser,
-          // balance,
           walletType: "smartwallet",
         });
       } else {
@@ -46,23 +43,19 @@ export function useInitializeUser() {
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaUUID);
       if (dbUser) {
-        // const balance = await getUSDCBalance(dbUser?.walletaddress);
         dbUser.pfp = DEFAULT_PFP;
 
         setUser({
           ...dbUser,
           walletType: "eoa",
-          // balance: balance,
         });
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
 
-        // const balance = await getUSDCBalance(eoaAddress);
 
         setUser({
           ...newUser,
-          // balance: "0",
           walletType: "eoa",
           name: eoaAddress,
         });

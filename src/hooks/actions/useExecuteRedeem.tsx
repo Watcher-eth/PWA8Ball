@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useUserStore } from "@/lib/stores/UserStore";
 import { useRedeem } from "@/lib/onchain/mutations/Redeem";
 import { toast } from "sonner";
 import { CheckCircle } from "lucide-react";
@@ -13,7 +12,6 @@ export function useExecuteRedeem() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const { user: userCon } = useUserStore();
   const { mutate: redeem } = useRedeem();
   const { client, address } = useClientAddress();
   const { approveToken } = useEightBallApproval();

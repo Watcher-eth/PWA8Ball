@@ -5,21 +5,24 @@ import { useEffect, useState } from "react";
 import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Vote } from "lucide-react";
-import { GetGhoModal } from "./GetGhoModal";
-import { OnrampStep } from "./OnrampStep";
-import { useVotingStore } from "@/lib/stores/VotingStore";
 import Marquee from "react-fast-marquee";
+import { Vote } from "lucide-react";
+
+import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { ConfirmPrediction } from "./ConfirmPrediction";
 
 import { NumericKeypad } from "@/components/NumericKeypad";
+
+import { ConfirmPrediction } from "./ConfirmPrediction";
+import { GetGhoModal } from "./GetGhoModal";
+import { OnrampStep } from "./OnrampStep";
+
+
 
 export function PredictModal({
   text,
@@ -30,7 +33,6 @@ export function PredictModal({
   options,
   marketId,
   odds,
-  isDesktop,
   handleOpen,
   children,
 }: {
@@ -42,7 +44,6 @@ export function PredictModal({
   options: string[];
   marketId: string;
   odds: number;
-  isDesktop?: boolean;
   handleOpen: () => void;
   children: React.ReactNode;
 }) {

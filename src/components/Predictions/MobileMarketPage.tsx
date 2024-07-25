@@ -15,7 +15,7 @@ import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 import { fillUserImages } from "@/utils/fillUserImages";
 
 import { formatMarket } from "../Feed/formatMarketArr";
-import { Drawer, DrawerClose, DrawerContent } from '@/components/ui/drawer';
+import { DrawerClose } from '@/components/ui/drawer';
 
 import Link from "next/link";
 

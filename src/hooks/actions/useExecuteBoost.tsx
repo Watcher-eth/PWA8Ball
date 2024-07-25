@@ -7,7 +7,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
-import { useUserUsdcBalance } from "../wallet/useUserUsdcBalance";
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
