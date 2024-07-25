@@ -1,8 +1,4 @@
 // @ts-nocheck
-
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
-import { Card, CardContent } from "@/components/ui/card";
-import { ReactNode } from "react";
 import { ShareBetModal } from "./ShareBetModal";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
@@ -15,7 +11,7 @@ export function DesktopShareBetModal({
   question,
   options,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   title: string;
   image: string;

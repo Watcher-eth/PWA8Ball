@@ -1,12 +1,9 @@
 // @ts-nocheck
-
-
-import { GetServerSideProps } from "next";
 import { supabase } from "@/supabase/supabaseClient";
 import { FeaturedBet } from "@/components/Topics";
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getServerSideProps(context) {
   const { id } = context.params as { id: string };
 
   const { data: topicData, error } = await supabase

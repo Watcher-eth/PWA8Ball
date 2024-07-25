@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-import React, { ReactNode } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -20,7 +18,7 @@ export function ShareTopicModal({
   members,
   markets,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   id: string;
   title: string;
   image: string;

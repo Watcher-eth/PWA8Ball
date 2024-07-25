@@ -1,13 +1,9 @@
+import { MobiTop } from "@/components/layouts/MobiTop";
 import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
-import { MobiTop } from "@/components/layouts/MobiTop";
-import React from "react";
 
 import { UsMapPage } from "@/components/map/UsMapPage";
 
-
-function test() {
+export default function test() {
   return <MobiTop mobile={<UsMapPage />} desktop={<UsMapPage />} />;
 }
-
-export default test;

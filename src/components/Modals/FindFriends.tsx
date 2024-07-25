@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import React, { ReactNode } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -10,7 +9,7 @@ import {
 import { motion } from "framer-motion";
 import {FindFriends} from "../Share/InviteFriendsModal";
 
-export function FindFriendsModal({ children }: { children: ReactNode }) {
+export function FindFriendsModal({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <Drawer>

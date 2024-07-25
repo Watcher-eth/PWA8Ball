@@ -1,8 +1,5 @@
 import { SettingsPage } from "@/components/common/UtilPages/SettingsPage";
-import React from "react";
 
-const Settings: React.FC = () => {
+export default function Settings() {
   return <SettingsPage />;
-};
-
-export default Settings;
+};;
