@@ -21,6 +21,7 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
 import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
 export const SettingsPage: React.FC = () => {
   const initialSettings = {
@@ -29,6 +30,7 @@ export const SettingsPage: React.FC = () => {
     publicProfile: false,
   };
   const { user } = useUserStore();
+  const userBalance = useUserUsdcBalance()
   const [settings, setSettings] = useState(initialSettings);
   const [showSaveButton, setShowSaveButton] = useState(false);
   const chartData = [
@@ -234,7 +236,7 @@ export const SettingsPage: React.FC = () => {
             <div className="flex flex-row items-center justify-between w-full">
               <div className="flex flex-col -space-y-2">
                 <div className="text-white text-[2rem] font-bold">
-                  ${user?.balance?.length > 0 ? user?.balance : "0.00"}
+                  ${Number(userBalance).toFixed(2) ?? "0.00"}
                 </div>
                 <div className="text-white text-[1rem] font-semibold">
                   Your balance

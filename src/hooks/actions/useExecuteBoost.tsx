@@ -7,6 +7,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
+import { useUserUsdcBalance } from "../wallet/useUserUsdcBalance";
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
@@ -16,15 +17,15 @@ export function useExecuteBoost() {
   const { mutate: boostV2 } = useBoostMarket2();
   const { client, address } = useClientAddress();
   const { approveToken } = useEightBallApproval();
+  const userBalance = useUserUsdcBalance();
 
-  
   async function executeBoost({ id, amount }: { id: number; amount: number }) {
     setLoading(true);
 
     try {
-      const userBalance = Number(userCon?.balance) / 1000000;
-      const hasBalance = userBalance > amount;
-      console.log("Compare", userBalance, amount);
+      const userBalanceNum = Number(userBalance) / 1000000;
+      const hasBalance = userBalanceNum > amount;
+      console.log("Compare", userBalanceNum, amount);
       if (!hasBalance) {
         throw new Error("Insufficient balance to boost the market.");
       }

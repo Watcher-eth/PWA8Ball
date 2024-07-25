@@ -50,8 +50,10 @@ export function PredictModal({
 
   const [sliderValue, setSliderValue] = useState(""); // Use a string to hold the value
   const setVotingState = useVotingStore((state) => state.setState);
+  const amount = useVotingStore((state) => state.amount);
+  const { user } = useUserStore();
+  const userBalance = useUserUsdcBalance()
 
-  const userBalance = 40;
 
   const baseFontSize = "4rem";
   const lengthAdjustmentThreshold = 3;
@@ -116,15 +118,12 @@ export function PredictModal({
     });
   };
 
-  const amount = useVotingStore((state) => state.amount);
-  const { user } = useUserStore();
+
   console.log({ user });
   return (
     <div className="w-full flex-grow ">
       <Drawer>
-        <DrawerTrigger className="w-full">
-          {children}
-        </DrawerTrigger>
+        <DrawerTrigger className="w-full">{children}</DrawerTrigger>
         <DrawerContent className=" border-0 rounded-[2rem] self-center">
           <motion.div
             layout
@@ -210,7 +209,7 @@ export function PredictModal({
                 </div>
               )}
               {step === 2 &&
-                (user?.balance > amount ? (
+                (userBalance > amount ? (
                   <ConfirmPrediction
                     option={option}
                     options={options}
