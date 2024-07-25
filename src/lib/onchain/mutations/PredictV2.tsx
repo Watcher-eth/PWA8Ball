@@ -7,8 +7,6 @@ import {
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 
-import { createPrediction } from "@/supabase/mutations/createPrediction";
-import { supabase } from "@/supabase/supabaseClient";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
 
