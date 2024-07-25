@@ -35,26 +35,26 @@ export function MobileLoadingPrediction({
       <motion.img
         src={image}
         alt="Prediction"
-        className="rounded-xl mb-6 object-cover mt-14 z-[10]"
+        className="rounded-xl mb-6 object-cover mt-14 z-10"
         animate={controls}
         initial={{ height: 0, width: 0 }}
       />
       <motion.p
-        className="text-lg font-bold text-white z-[10]"
+        className="text-lg font-bold text-white z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
       >
         Submitting your Prediction
       </motion.p>
       <motion.p
-        className="text-md mt-1 text-[#858585] text-center px-7 font-normal z-[10]"
+        className="text-md mt-1 text-[#858585] text-center px-7 font-normal z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
       >
         {question}
       </motion.p>
       <motion.p
-        className="text-5xl mt-4 text-white font-bold z-[10]"
+        className="text-5xl mt-4 text-white font-bold z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
       >
