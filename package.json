@@ -80,10 +80,12 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.3",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/react-simple-maps": "^3.0.5",
     "@uniswap/widgets": "^2.59.0",
     "drizzle-kit": "^0.20.13",
     "embla-carousel": "^8.0.0-rc19",
