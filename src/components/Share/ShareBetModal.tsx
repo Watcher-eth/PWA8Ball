@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { AnimatePresence } from "framer-motion";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard.tsx";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 

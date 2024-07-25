@@ -4,7 +4,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Copy } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard.tsx";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard.tsx";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 
 export const ShareTopic = ({
   id,
