@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -16,7 +16,7 @@ import { OnrampStep } from "../PredictModal/OnrampStep";
 import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     if (isOpen) {
