@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { DesktopMarketPage } from "@/components/Predictions/DesktopMarketPage";
-import { MobiTop } from "@/components/ui/MobiTop";
+import { MobiTop } from "@/components/layouts/MobiTop";
 
 import { MobileMarketPage } from "@/components/Predictions/MobileMarketPage";
 import { GetServerSideProps } from "next";

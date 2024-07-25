@@ -1,6 +1,6 @@
 import { isMobile } from "@/utils/isMobile";
 import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
-import { NavBar } from "@/components/common/NavBar";
+import { MobileNavBar } from "@/components/layouts/MobileNavBar";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +10,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
         {children}
         {isMobile() && (
           <div className="flex items-center justify-center w-screen fixed bottom-6 z-15">
-            <NavBar />
+            <MobileNavBar />
           </div>
         )}
       </div>

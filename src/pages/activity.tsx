@@ -1,7 +1,7 @@
 import { ActivityPage } from "@/components/Activity";
 import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
-import { MobiTop } from "@/components/ui/MobiTop";
+import { MobiTop } from "@/components/layouts/MobiTop";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 export default function Activity() {

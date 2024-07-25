@@ -1,6 +1,6 @@
 import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
-import { MobiTop } from "@/components/ui/MobiTop";
+import { MobiTop } from "@/components/layouts/MobiTop";
 import React from "react";
 
 import { UsMapPage } from "@/components/map/UsMapPage";

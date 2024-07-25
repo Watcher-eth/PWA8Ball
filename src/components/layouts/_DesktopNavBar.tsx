@@ -1,18 +1,24 @@
 // @ts-nocheck
-import { Bell, DoorOpen, Search } from "lucide-react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopNotificationModal } from "../Notifications/DesktopNotificationModal";
-import { DesktopSearchModal } from "../Search/DesktopSearchModal";
-import { DesktopProfilePopover } from "../profile/DesktopProfilePopover";
-import { DesktopOnboardingModal } from "../Onboarding/DesktopOnboardingModal";
 import Link from "next/link";
+import { Bell, Search } from "lucide-react";
 import { HOME_PATH } from "@/utils/urls";
+import { useUserStore } from "@/lib/stores/UserStore";
+
 import { ConnectButton } from "@/components/buttons/ConnectButton";
 import { NavIconButton } from "@/components/buttons/NavIconButton";
 
-export function DesktopNavbar() {
+import { DesktopNotificationModal } from "@/components/Notifications/DesktopNotificationModal";
+import { DesktopSearchModal } from "@/components/Search/DesktopSearchModal";
+import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
+import { DesktopOnboardingModal } from "@/components/Onboarding/DesktopOnboardingModal";
+
+
+
+export function DesktopNavBar() {
   const { user } = useUserStore();
   console.log("user", user);
+  const userId = user?.external_auth_provider_user_id;
+
   return (
     <div className="w-full absolute z-50 top-0">
       <div
@@ -38,12 +44,10 @@ export function DesktopNavbar() {
             />
           </Link>
           <div className="flex items-center space-x-8">
-            <DesktopSearchModal userId={user?.external_auth_provider_user_id}>
+            <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
-            <DesktopNotificationModal
-              userId={user?.external_auth_provider_user_id}
-            >
+            <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
