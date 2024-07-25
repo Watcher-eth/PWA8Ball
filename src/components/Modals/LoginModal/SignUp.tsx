@@ -96,7 +96,7 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
   const { connectWallet } = useConnectWallet();
   const [isEmail, setIsEmail] = useState<boolean>(false);
 
-  //Cancle to go back
+  //Cancel to go back
   const stepVariants = {
     initial: { opacity: 0, y: 10 },
     animate: { opacity: 1, y: 0 },
@@ -165,7 +165,7 @@ function EmailLogin({
     setStep(2);
   };
 
-  //Cancle to go back
+  //Cancel to go back
 
   return (
     <motion.div key="step3" initial="initial" animate="animate" exit="exit">
