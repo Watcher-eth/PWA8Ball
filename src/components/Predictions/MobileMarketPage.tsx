@@ -188,7 +188,7 @@ function MobileMarketContent({
       >
         {description}
       </div>
-      <div className="flex items-center justify-around mx-4 z-2 gap-2">
+      <div className="flex items-center justify-around mx-4 z-2 space-x-4">
         <PredictModal
           handleOpen={handleOpen}
           image={image}
