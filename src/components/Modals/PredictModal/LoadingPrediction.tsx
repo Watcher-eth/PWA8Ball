@@ -23,50 +23,42 @@ export function MobileLoadingPrediction({
       <motion.img
         src={image}
         alt="Prediction"
-        className="absolute top-[-15px] object-cover w-full h-[425px] rounded-t-lg mb-6"
+        className="absolute top-[-15px] object-cover w-full h-[425px] rounded-t-[30px] mb-6"
         style={{
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
         }}
       />
       <motion.div
-        className="absolute top-[-15px] w-full h-[425px] rounded-t-lg mb-6"
+        className="absolute top-[-15px] w-full h-[425px] rounded-t-[30px] mb-6"
         style={{
           background:
             "linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.8), #131313)",
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
         }}
       />
       <motion.img
         src={image}
         alt="Prediction"
-        className="rounded-xl mb-6 object-cover mt-14"
+        className="rounded-xl mb-6 object-cover mt-14 z-10"
         animate={controls}
         initial={{ height: 0, width: 0 }}
-        style={{ zIndex: 10 }}
       />
       <motion.p
-        className="text-lg font-bold text-white"
+        className="text-lg font-bold text-white z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
       >
         Submitting your Prediction
       </motion.p>
       <motion.p
-        className="text-md mt-1 text-[#858585] text-center px-7 font-normal"
+        className="text-md mt-1 text-[#858585] text-center px-7 font-normal z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
       >
         {question}
       </motion.p>
       <motion.p
-        className="text-5xl mt-4 text-white  font-bold"
+        className="text-5xl mt-4 text-white font-bold z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
-        style={{ zIndex: 10 }}
       >
         {answer}
       </motion.p>
@@ -83,7 +75,13 @@ export function DesktopLoadingPrediction({
   answer,
   loading,
   success,
-}: LoadingPredictionProps) {
+}: {
+  image: string;
+  question: string;
+  answer: string;
+  loading: boolean;
+  success: boolean;
+}) {
   const controls = useLoadingAnimationControls();
 
   return (
@@ -117,32 +115,28 @@ export function DesktopLoadingPrediction({
         <motion.img
           src={image}
           alt="Prediction"
-          className="rounded-md mb-6 object-cover mt-16"
+          className="rounded-md mb-6 object-cover mt-16 z-10"
           animate={controls}
           initial={{ height: 0, width: 0 }}
-          style={{ zIndex: 10 }}
         />
         <motion.p
-          className="text-lg font-bold text-white"
+          className="text-lg font-bold text-white z-10"
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          style={{ zIndex: 10 }}
         >
           Submitting your Prediction
         </motion.p>
         <motion.p
-          className="text-md mt-1 text-[#858585] text-center px-7 font-normal"
+          className="text-md mt-1 text-[#858585] text-center px-7 font-normal z-10"
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          style={{ zIndex: 10 }}
         >
           {question}
         </motion.p>
         <motion.p
-          className="text-5xl mt-9 text-white mb-8  font-bold"
+          className="text-5xl mt-9 text-white mb-8 font-bold z-10"
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          style={{ zIndex: 10 }}
         >
           {answer}
         </motion.p>

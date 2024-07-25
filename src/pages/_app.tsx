@@ -76,8 +76,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       {/**Need to check if this is valid*/}
       <SonnerToaster
         position="top-center"
-        style={{ zIndex: 100 }}
-        className="bg-[#121212] rounded-xl"
+        className="bg-[#121212] rounded-xl z-[100]"
       />
     </>
   );

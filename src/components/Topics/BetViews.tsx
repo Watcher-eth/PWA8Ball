@@ -53,8 +53,7 @@ export const BetBigView = ({
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
         <div
-          style={{ zIndex: 10, borderRadius: "15px" }}
-          className="absolute top-3 right-3 flex items-center bg-white px-[0.5rem] pr-1 p-1 rounded-lg"
+          className="absolute top-3 right-3 flex items-center bg-white px-2 pr-1 p-1 rounded-lg z-10"
         >
           <span className="text-[#212121] font-bold text-12 mr-0">223</span>
           <Users className="text-[#212121]" strokeWidth={3.5} height={13} />
