@@ -1,9 +1,10 @@
 export type User = {
-  id: string;
+  external_auth_provider_user_id: string;
   name: string;
   walletaddress: string;
   pfp: string;
   pointsBalance: number;
+
   setState: (values: Partial<User>) => void;
   reset: () => void;
 };

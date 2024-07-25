@@ -23,14 +23,15 @@ import { DesktopPredictComponent } from "./DesktopPredictComponent";
 import { AlignLeft } from "lucide-react";
 import { DesktopBettersModal } from "./Betters/DesktopBettersModal";
 import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
+import { useState } from "react";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
-
   const userImages = fillUserImages(users, 3);
-  console.log("user owns", userOwns);
+  const [comments, setComments] = useState([]);
+
   return (
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
@@ -168,11 +169,11 @@ export function DesktopMarketPage({ users, market, id }) {
                 topic_id={market?.topic_id}
                 users={users}
                 totalComments={market?.total_comments}
-                optimisticComments={[]}
+                optimisticComments={comments}
                 marketId={id}
                 setReply={() => {}}
                 isDesktop={true}
-                handleComment={() => {}}
+                handleComment={setComments}
               />
             </Col>
             <Col xs={3}>

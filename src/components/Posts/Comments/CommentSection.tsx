@@ -73,7 +73,7 @@ export const CommentSection = ({
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
-      <AddComment user={user} />
+      <AddComment user={user} addOptimisticComment={handleComment} />
       <div>
         {allComments.map((item) => {
           let commentUser;
