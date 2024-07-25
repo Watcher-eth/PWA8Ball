@@ -22,7 +22,7 @@ export function NumericKeypad({
   return (
     <>
       <div className="flex flex-row items-center justify-between px-2">
-        {["10", "25", "50", "100", userBalance.toFixed(2)].map((amount) => (
+        {["10", "25", "50", "100", userBalance?.toFixed(2)].map((amount) => (
           <KeypadAmountButton
             key={amount}
             onClick={() => setSliderValue(String(amount))}
@@ -71,7 +71,3 @@ export function NumericKeypad({
     </>
   );
 }
-
-
-
-

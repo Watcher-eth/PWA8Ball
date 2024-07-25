@@ -3,11 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { formatWithCommas } from "@/utils/string/formatWithCommas";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
 import { AnimatePresence, motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
@@ -21,8 +17,7 @@ import { NumericKeypad } from "@/components/NumericKeypad";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
-
-
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
 export function PredictModal({
   text,
@@ -53,8 +48,7 @@ export function PredictModal({
   const setVotingState = useVotingStore((state) => state.setState);
   const amount = useVotingStore((state) => state.amount);
   const { user } = useUserStore();
-  const userBalance = useUserUsdcBalance()
-
+  const userBalance = useUserUsdcBalance();
 
   const baseFontSize = "4rem";
   const lengthAdjustmentThreshold = 3;
@@ -119,7 +113,6 @@ export function PredictModal({
     });
   };
 
-
   console.log({ user });
   return (
     <div className="w-full flex-grow ">
@@ -133,8 +126,8 @@ export function PredictModal({
           >
             <AnimatePresence>
               {step === 1 && (
-                <div className="flex flex-col p-8 w-full pt-4 bg-[#131313] rounded-[2.5rem] pb-8 z-15">
-                  <div className="flex flex-row items-center bg-gray-[#212121] rounded-2xl  w-full justify-center relative">
+                <div className="flex flex-col p-8 w-full pt-4 bg-[#080808]  pb-8 z-15">
+                  <div className="flex flex-row items-center bg-gray-[#080808]  w-full justify-center relative">
                     <img
                       className="size-8 rounded-full object-cover "
                       src={image}
@@ -165,7 +158,7 @@ export function PredictModal({
                     </div>
 
                     {parseFloat(sliderValue.replace(/,/g, "")) <=
-                      userBalance.toFixed(2) || sliderValue === "" ? (
+                      Number(userBalance).toFixed(2) || sliderValue === "" ? (
                       <div className="flex flex-row items-center mt-0">
                         <div
                           className="p-1 bg-red-500 rounded-full"
@@ -202,7 +195,7 @@ export function PredictModal({
                   <NumericKeypad
                     sliderValue={sliderValue}
                     setSliderValue={setSliderValue}
-                    userBalance={userBalance}
+                    userBalance={Number(userBalance)}
                     handleButtonPress={handleButtonPress}
                     handleDelete={handleDelete}
                     handleContinue={handleContinue}
@@ -244,4 +237,3 @@ export function PredictModal({
     </div>
   );
 }
-

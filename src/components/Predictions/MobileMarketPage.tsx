@@ -1,7 +1,7 @@
 // @ts-nocheck
 import "../../styles/fonts.css";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { HOME_PATH } from "@/utils/urls";
@@ -21,18 +21,12 @@ import { CommentSection } from "@/components/Posts/Comments/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
-
 import { formatMarket } from "@/utils/markets/formatMarketArr";
-
-
-
-
 
 import { ArrowLeft, Share } from "lucide-react";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
-
 
 export function MobileMarketPage({ market, users }) {
   const { user } = useUserStore();
@@ -54,10 +48,6 @@ export function MobileMarketPage({ market, users }) {
   );
 }
 
-
-
-
-
 function MobileMarketContent({
   image,
   title,
@@ -78,7 +68,6 @@ function MobileMarketContent({
   handleOpen,
   topic,
 }) {
-  console.log("this ran");
   return (
     <motion.div
       onClick={() => setIsDrawerOpen(false)}
@@ -199,7 +188,7 @@ function MobileMarketContent({
       >
         {description}
       </div>
-      <div className="flex items-center justify-around mx-2 z-2 gap-2">
+      <div className="flex items-center justify-around mx-4 z-2 gap-2">
         <PredictModal
           handleOpen={handleOpen}
           image={image}
@@ -211,12 +200,14 @@ function MobileMarketContent({
           marketId={id}
           options={[optionB.name, optionA.name]}
         >
-          <div className="mt-4 hover:scale-110 active:scale-93 transition-all w-full">
-            <OutcomeButton
-              text={optionB?.name}
-              multiplier={optionB.odds / 100}
-              option={0}
-            />
+          <div className="mt-4 hover:scale-101 active:scale-95 transition-all w-full">
+            <div>
+              <OutcomeButton
+                text={optionB?.name}
+                multiplier={optionB.odds / 100}
+                option={0}
+              />
+            </div>
           </div>
         </PredictModal>
         <PredictModal
@@ -230,7 +221,7 @@ function MobileMarketContent({
           marketId={id}
           options={[optionB.name, optionA.name]}
         >
-          <div className="mt-4 hover:scale-110 active:scale-93 transition-all w-full">
+          <div className="mt-4 hover:scale-101 active:scale-95 transition-all w-full">
             <OutcomeButton
               text={optionA?.name}
               multiplier={optionA.odds / 100}

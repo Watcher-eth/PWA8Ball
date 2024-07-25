@@ -20,7 +20,7 @@ export function OutcomeButton({
     <Button
       onClick={(e) => {
         onClick?.(e);
-        e.stopPropagation();
+        // e.stopPropagation();
       }}
       className={`
             ${outcomeOptionClassName}
