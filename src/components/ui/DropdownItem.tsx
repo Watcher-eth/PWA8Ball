@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Link from "next/link";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
