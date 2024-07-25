@@ -4,20 +4,19 @@ import "@rainbow-me/rainbowkit/styles.css";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { WagmiProvider } from "wagmi";
-
+import { base, baseSepolia, mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
+import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { PrivyProvider } from "@privy-io/react-auth";
 
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
-import { PrivyProvider } from "@privy-io/react-auth";
+
 import { AuthChecker } from "@/lib/providers/AuthProvider";
 
 import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 import { CustomHead } from "@/components/CustomHead";
-
-import { base, baseSepolia, mainnet } from "viem/chains";
 import { RootLayout } from "@/components/common/RootLayout";
 
 export const queryClient = new QueryClient();
