@@ -6,6 +6,7 @@ import { Bell, Users, Globe } from "lucide-react";
 import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
+import { parseOptionJSON } from "@/utils/predictions/parseOption";
 
 import { InviteFriendsPlaceholder } from "@/components/common/Placeholders/InviteFriendsPlaceholder";
 import { NotificationsModal } from "@/components/Modals/NotificationsModal";
@@ -15,7 +16,7 @@ import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";
 import { ActivityField } from "./ActivityField";
 import { Leaderboard } from "./Leaderboard";
 import { YourStats } from "./YourStats";
-import { parseOptionJSON } from "@/utils/predictions/parseOption";
+
 
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
@@ -37,7 +38,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     <div
       className={`
         no-scrollbar flex flex-col
-         
+
         p-5 pt-[30px]
         ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
       `}

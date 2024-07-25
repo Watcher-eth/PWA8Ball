@@ -2,7 +2,7 @@
 import { ActivityPage } from "@/components/Activity";
 import { DesktopNavbar } from "@/components/common/DesktopNavbar";
 import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
-import { ProfileSection } from "../profile/DesktopProfilePage";
+import { ProfileSection } from "@/components/profile/DesktopProfilePage";
 
 export function DesktopActivityPage({ userC }: { userC: IUser }) {
   const user = userC;
