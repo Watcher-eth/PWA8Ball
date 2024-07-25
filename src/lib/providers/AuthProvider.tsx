@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useEffect, ReactNode } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { usePrivy } from "@privy-io/react-auth";
 import { useInitializeUser } from "@/hooks/useInitializeUser";
@@ -10,7 +10,7 @@ export function AuthChecker({
   children,
   requireAuth = false,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   requireAuth?: boolean;
 }) {
   const { ready, authenticated } = usePrivy();
