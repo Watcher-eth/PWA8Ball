@@ -37,7 +37,7 @@ export function ConfirmPrediction(props: {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full bg-[#131313] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
+    <div className="flex flex-col items-center w-full bg-[#080808] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
       {loading || success ? (
         <MobileLoadingPrediction
           image={props.image}
@@ -48,7 +48,7 @@ export function ConfirmPrediction(props: {
           success={success}
         />
       ) : (
-        <motion.div className="flex flex-col items-center w-full bg-[#131313] px-6  rounded-lg">
+        <motion.div className="flex flex-col items-center w-full bg-[#080808] px-6  rounded-lg">
           <div className="flex flex-col w-full my-2 mt-0">
             <img
               src={props.image}
