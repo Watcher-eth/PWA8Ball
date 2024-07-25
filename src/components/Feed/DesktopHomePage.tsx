@@ -15,6 +15,7 @@ export function DesktopHomePage({ trendingMarkets }) {
     selectedTopic,
   });
 
+  console.log("markes", trendingMarkets[0]);
   return (
     <>
       <div className="-mt-4">

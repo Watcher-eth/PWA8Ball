@@ -5,7 +5,15 @@ import "../../styles/fonts.css";
 import { getMarketPath } from "@/utils/urls";
 import Link from "next/link";
 
-export function FeedCard({ image, title, description, icon, id }) {
+export function FeedCard({
+  image,
+  title,
+  description,
+  icon,
+  id,
+  outcomea,
+  optionA,
+}) {
   return (
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>
@@ -15,13 +23,15 @@ export function FeedCard({ image, title, description, icon, id }) {
           description={description}
           icon={icon}
           setIsDrawerOpen={() => {}}
+          odds={outcomea}
+          optionA={optionA.name}
         />
       </Link>
     </div>
   );
 }
 
-function DisplayFeedCard({ image, title, description, icon }) {
+function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
   return (
     <div
       className={`
@@ -43,12 +53,20 @@ function DisplayFeedCard({ image, title, description, icon }) {
         `}
       />
       <div
+        style={{ fontFamily: "Aeonik-Bold" }}
+        className="absolute top-3 z-[3] right-3 text-[0.95rem] bg-[#181818]/[0.1] text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
+      >
+        {(odds / 100).toFixed(0)}% {optionA !== "Yes" ? optionA : null}
+      </div>
+      <div
         style={{
           lineHeight: "2.3rem",
         }}
-        className="text-[2.3rem] text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-[2]"
+        className={`${
+          title?.length < 13 ? "text-[2.3rem]" : "text-[2.1rem]"
+        } text-start mb-[0.2rem] pr-10 pb-0 p-3 text-white text-bold font-[Benzin-Bold] z-[2]`}
       >
-        {title}{" "}
+        {title}
       </div>
       <div
         className={`
