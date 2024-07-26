@@ -20,14 +20,12 @@ export function AddComment({
   topic_id: string;
   addOptimisticComment: () => void;
 }) {
-  const [isFocused, setIsFocused] = useState(false);
   const [lineCount, setLineCount] = useState(1);
   const [content, setContent] = useState<string>();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: addComment } = useCreateComment();
 
   const handleCancel = () => {
-    setIsFocused(false);
     if (inputRef.current) {
       inputRef.current.blur();
     }
@@ -90,10 +88,7 @@ export function AddComment({
           className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-[transparent] focus:outline-none transition-all duration-300 resize-none
           border-b-[0.8px] focus:border-b-2 focus:border-b-transparent outline-none overflow-hidden
           `}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
           onInput={handleInput}
-          // style={{ outline: "none", overflow: "hidden" }}
         />
         <span
           className={`absolute left-0 w-full h-[2px] transition-all duration-300
@@ -106,9 +101,11 @@ export function AddComment({
           }}
         ></span>
 
-        <div
+        <div // hidden group-focus-within:flex
           className={`
-            hidden group-focus-within:flex flex-row mt-3 items-center space-x-3 justify-end
+            h-0 group-focus-within:h-12 flex flex-row  items-center space-x-3 justify-end
+            mt-0 group-focus-within:mt-3 overflow-hidden transition-all
+            opacity-0 group-focus-within:opacity-100
           `}
         >
           <div
@@ -118,7 +115,10 @@ export function AddComment({
             Cancel
           </div>
           <div
-            onClick={() => addUserComment()}
+            onClick={() => {
+              console.log("onClick triggered");
+              addUserComment();
+            }}
             className="text-white text-[0.9rem] font-semibold py-1.5 px-3 bg-[#FF0050] hover:scale-105 active:scale-95 transition-all rounded-full cursor-pointer"
           >
             Comment

@@ -251,10 +251,7 @@ function MobileMarketContent({
           topicId={topicId}
           users={users}
           totalComments={market?.total_comments}
-          optimisticComments={[]}
           marketId={id}
-          setReply={() => {}}
-          handleComment={() => {}}
         />
       </div>
       <div className="-mt-20">
