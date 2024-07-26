@@ -8,33 +8,27 @@ import { useGetNotificationsForUser } from "@/supabase/queries/notifications/use
 import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCheckUserHasPushToken";
 import { NotificationsPage } from "./UserNotifications";
 
-export const NotificationsModalPage = (props: { isDesktop?: boolean }) => {
+export function NotificationsModalPage({ isDesktop }: { isDesktop?: boolean }) {
   const { user } = useUserStore();
+  const userId = user?.external_auth_provider_user_id
   const handlePressTurnOnNotifications = () => {
-    registerForPushNotificationsAsync(user?.external_auth_provider_user_id);
+    registerForPushNotificationsAsync(userId);
   };
 
-  const {
-    data: hasToken,
-    isLoading: isLoadingToken,
-    isError: isErrorToken,
-  } = useCheckUserHasPushToken(user?.external_auth_provider_user_id);
-  const {
-    data: notifications,
-    isLoading: isLoadingNotifications,
-    isError: isErrorNotifications,
-  } = useGetNotificationsForUser(user?.external_auth_provider_user_id);
+  const { data: hasToken, isLoading: isLoadingToken } =
+    useCheckUserHasPushToken(userId);
+  const { data: notifications } = useGetNotificationsForUser(userId);
 
   if (hasToken && notifications?.length === 0) {
     return <NotificationsPlaceholder />;
   }
-  console.log(notifications?.length, props?.isDesktop);
+  console.log(notifications?.length, isDesktop);
   if (notifications?.length > 0) {
     return (
       <NotificationsPage
-        isDesktop={props?.isDesktop}
+        isDesktop={isDesktop}
         notifications={notifications}
-        userId={user.external_auth_provider_user_id}
+        userId={userId}
       />
     );
   }
@@ -46,8 +40,8 @@ export const NotificationsModalPage = (props: { isDesktop?: boolean }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: props?.isDesktop ? "25vw" : "100vw",
-          height: props?.isDesktop ? "60vh" : "90vh",
+          width: isDesktop ? "25vw" : "100vw",
+          height: isDesktop ? "60vh" : "90vh",
           top: 0,
           backgroundColor: "#101010",
         }}

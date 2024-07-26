@@ -19,7 +19,7 @@ import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBettersModal";
-import { CommentSection } from "@/components/CommentSection";
+import { CommentSection } from "@/components/Predictions/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
