@@ -28,20 +28,20 @@ interface Market {
   pair: string;
   created_by: string;
 }
+async function createMarket(marketParams: MarketParams): Promise<Market> {
+  const { data, error } = await supabase
+    .from("markets")
+    .insert(marketParams)
+    .single();
 
-export const useUserIntializeMarket = () => {
-  const createMarket = async (marketParams: MarketParams): Promise<Market> => {
-    const { data, error } = await supabase
-      .from("markets")
-      .insert(marketParams)
-      .single();
+  if (error) {
+    throw new Error(error.message);
+  }
 
-    if (error) {
-      throw new Error(error.message);
-    }
+  return data;
+};
 
-    return data;
-  };
+export function useUserIntializeMarket() {
 
   return { createMarket };
 };

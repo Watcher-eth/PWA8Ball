@@ -15,7 +15,9 @@ async function unfollowUser({
     .match({ follower_id: followerId, following_id: followingId })
     .delete()
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    throw new Error(error.message)
+  };
 };
 
 export const useUnfollowUser = () => {
