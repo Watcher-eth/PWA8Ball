@@ -26,7 +26,7 @@ export function BoostModal({
       <Drawer>
         <DrawerTrigger className="w-full">{children}</DrawerTrigger>
         <DrawerContent className=" border-0 rounded-3xl self-center">
-          <div className="flex flex-col p-2 ">
+          <div className="flex flex-col p-4 pb-8 ">
             <img className="h-14 w-14 object-cover rounded-full" src={image} />
             <div className="text-white text-[1.5rem] font-semibold mt-4 ">
               Boost and earn rewards

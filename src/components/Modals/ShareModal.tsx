@@ -11,7 +11,7 @@ export function ShareModal({
   topic,
   question,
   options,
-  isDesktop
+  isDesktop,
 }: {
   children: React.ReactNode;
   id: string;
@@ -55,7 +55,7 @@ export function ShareModal({
             className={`
               bg-white rounded-3xl rounded-t-[20px]
               h-[90vh] mb-5 w-screen relative
-              ${isDesktop ? "border-0" : "border-t-[1px] border-[#262626]"}
+            border-0 
             `}
           >
             <ShareBetModal

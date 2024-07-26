@@ -20,7 +20,7 @@ export function BettersOverview({
   return (
     <div
       className={`flex flex-col p-0 rounded-2xl m-4 ${
-        isDesktop ? "bg-[transparent]" : "bg-[#141414]"
+        isDesktop ? "bg-[transparent]" : "bg-[#080808]"
       } `}
     >
       <div className="flex flex-row items-center ">
@@ -110,7 +110,7 @@ export function BettersOverview({
       )}
 
       {users?.length > 0 ? (
-        <div style={{ height: "28vh", overflowY: "scroll" }}>
+        <div style={{ height: "30vh", overflowY: "scroll" }}>
           {users.map((user, index) => (
             <motion.div
               key={index}
@@ -130,10 +130,10 @@ export function BettersOverview({
       {users?.length > 4 && (
         <p
           style={{
-            fontFamily: "AeonikBold",
+            fontFamily: "Aeonik",
             fontSize: "14px",
             color: "#DCDCDC",
-            marginBottom: "15px",
+            marginBottom: "10px",
             marginTop: "15px",
             alignSelf: "center",
           }}
@@ -144,6 +144,3 @@ export function BettersOverview({
     </div>
   );
 }
-
-
-

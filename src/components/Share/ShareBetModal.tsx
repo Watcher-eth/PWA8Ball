@@ -5,7 +5,6 @@ import { copyToClipboard } from "@/utils/copyToClipboard";
 import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
 import { DesktopCardModal } from "../Modals/DesktopCardModal";
 
-
 interface Option {
   name: string;
   value: number;
@@ -39,7 +38,7 @@ export const ShareBetModal = ({
       console.error("Error during sharing", error);
     }
   };
-
+  console.log("options", options);
   return (
     <div
       className={`
@@ -48,7 +47,7 @@ export const ShareBetModal = ({
         ${
           isDesktop
             ? "h-[65vh] bg-[#080808] pt-5"
-            : "h-[110%] bg-[#121212] pt-10"
+            : "h-[110%] bg-[#080808] pt-7"
         }
       `}
     >
@@ -73,7 +72,7 @@ export const ShareBetModal = ({
         </div>
         <h1 className="text-4xl font-semibold text-white "> together</h1>
       </div>
-      <p className="text-[1.1rem] leading-5 mb-2 text-lightgrey mt-2">
+      <p className="text-[1.1rem] leading-5 mb-2 text-[lightgray] mt-2">
         Invite your friends and earn points when they make their first
         prediction
       </p>
@@ -95,25 +94,25 @@ export const ShareBetModal = ({
             </div>
             <h2
               style={{ lineHeight: "1.8rem" }}
-              className="text-[1.4rem] text-white leading-none"
+              className="text-[1.4rem] text-white font-semibold leading-none"
             >
               {question}
             </h2>
             <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
-              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#FF0050] gap-1">
+              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#FF0050] gap-1">
                 <span className="text-xl text-white font-medium">
                   {options[0]?.name}
                 </span>
-                <span className="text-sm text-lightgrey">
-                  /{options[0]?.value / 100}%
+                <span className="text-sm font-medium text-[white]/[0.8]">
+                  /{options[0]?.odds / 100}%
                 </span>
               </button>
-              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[10px] bg-[#0050FF] gap-1">
+              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#0050FF] gap-1">
                 <span className="text-xl text-white font-medium">
                   {options[1].name}
                 </span>
-                <span className="text-sm text-lightgrey">
-                  /{options[1].value / 100}%
+                <span className="text-sm font-medium text-[white]/[0.8]">
+                  /{options[1].odds / 100}%
                 </span>
               </button>
             </div>
@@ -154,7 +153,7 @@ export const ShareBetModal = ({
       </div>
       <div className="flex flex-row items-center gap-1 mt-4 self-center transition-transform transform hover:scale-102 active:scale-98">
         <Gift color="lightgrey" size={16} />
-        <span className="text-sm text-lightgrey">
+        <span className="text-sm text-[lightgray]">
           Earn 10% of every point your friend receives
         </span>
       </div>

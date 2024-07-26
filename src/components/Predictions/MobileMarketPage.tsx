@@ -80,7 +80,7 @@ function MobileMarketContent({
               <ArrowLeft
                 strokeWidth={3.8}
                 size={33}
-                className="p-2 rounded-full backdrop-blur-lg bg-[rgba(17,17,17,0.15)]"
+                className="p-2 text-white rounded-full backdrop-blur-lg bg-[rgba(17,17,17,0.15)]"
               />
             </Link>
           </DrawerClose>
@@ -95,7 +95,7 @@ function MobileMarketContent({
             <Share
               size={33}
               strokeWidth={3.3}
-              className="p-2 rounded-full backdrop-blur-xl bg-[rgba(17,17,17,0.15)]"
+              className="p-2 rounded-full text-white backdrop-blur-xl bg-[rgba(17,17,17,0.15)]"
             />
           </ShareModal>
         </div>

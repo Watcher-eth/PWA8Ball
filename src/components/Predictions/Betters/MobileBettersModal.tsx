@@ -10,7 +10,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { BettersOverview } from "./BettersOverview";
 
-
 export function MobileBettersModal({
   children,
   title,
@@ -22,8 +21,6 @@ export function MobileBettersModal({
   marketId,
   users,
 }) {
-
-
   return (
     <div className="z-2">
       <Drawer>
@@ -32,7 +29,7 @@ export function MobileBettersModal({
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#131313] rounded-3xl  ml-[4vw] mb-5 w-[92vw] relative"
+            className="bg-[#080808] rounded-3xl  self-center mb-5 w-[95vw] relative"
           >
             <AnimatePresence>
               <BettersOverview
@@ -53,7 +50,3 @@ export function MobileBettersModal({
     </div>
   );
 }
-
-
-
-
