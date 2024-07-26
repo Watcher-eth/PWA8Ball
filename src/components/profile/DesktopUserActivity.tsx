@@ -6,6 +6,7 @@ import { aggregatePredictedItems } from "@/utils/predictions/aggregatePrediction
 import { UserPredictionSkeleton } from "./UserPredictions";
 import { PredictionPositionModal } from "../Modals/PredictionPositionModal";
 import { motion } from "framer-motion";
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 export function DesktopUserActivity({
   walletAddress,
   userId,
@@ -48,29 +49,26 @@ export function DesktopUserActivity({
     ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
       []),
   ];
-
+  console.log("merged", mergedData[0]);
   return (
     <div className="h-screen w-full max-w-[29%] p-4 pt-3">
       <h1 className="text-white text-2xl font-semibold ">Your Activity</h1>
-      <div className="grid grid-cols-1 max-h-screen overflow-y-scroll -space-y-2">
+      <div className="grid grid-cols-1 max-h-screen overflow-y-scroll space-y-1 mt-1">
         {mergedData?.length > 0 ? (
           mergedData.map((item, index) => (
-            <PredictionPositionModal
-              key={`predicted-${item.id}-${item.option}`}
-              title={item.title}
-              image={item.image}
-              price={item.amount}
-              ownedAmount={item.amount / 100000}
-              options={item.options}
-              betId={item.market_id}
-              topic={item.market_id}
-              icon={item.icon}
-              question={item.question}
-              option={item.option}
-              optionNumber={item.option}
-              onClose={() => handleOpenBottomSheet({})}
-              openCashout={() => handleOpenBottomSheet({})}
-              handleReceipt={() => handleOpenBottomSheet({})}
+            <DesktopMyBetModal
+              key={`predicted-${item?.market_id}-${item?.option}`}
+              title={item?.title}
+              image={item?.image}
+              price={item?.amount}
+              ownedAmount={item?.amount}
+              betId={item?.market_id}
+              topic={item?.market_id}
+              question={item?.question}
+              options={item?.options[Number(item?.option) === 0 ? 1 : 0]}
+              option={Number(item?.option) === 0 ? 1 : 0}
+              optionNumber={Number(item?.option) === 0 ? 1 : 0}
+              initialProb={item?.initialprob}
             >
               <motion.div
                 whileHover={{ scale: 1.01 }}
@@ -102,7 +100,7 @@ export function DesktopUserActivity({
                   <div className="text-[0.85rem] text-[#909090]">+0.0%</div>
                 </div>
               </motion.div>
-            </PredictionPositionModal>
+            </DesktopMyBetModal>
           ))
         ) : (
           <div className="max-w-full">

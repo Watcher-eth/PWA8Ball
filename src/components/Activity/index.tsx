@@ -32,7 +32,6 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   }
 
   const groupedPredictions = groupPredictionsByDate(predictions);
-  console.log("preds", predictions[0]);
   return (
     <div
       className={`
@@ -118,6 +117,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
                                 option={option}
                                 id={item?.market_id}
                                 odds={12}
+                                userId={item?.user_id}
                                 initialProb={item.markets.initialProb}
                                 onOpenBottomSheet={() => {}}
                               />

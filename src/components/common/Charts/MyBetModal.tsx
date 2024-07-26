@@ -17,6 +17,7 @@ import { CashoutOverview } from "@/components/Predictions/Cashout/overview";
 import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution";
 import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
+import { getProfilePath } from "@/utils/urls";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -348,7 +349,7 @@ export const MobileMyBetModal = (props: {
         <motion.div
           onClick={() => {
             if (props.name) {
-              router.push({ pathname: "profile", query: { id: props.userId } });
+              router.push({ pathname: `u/${props?.userId}` });
             } else {
               props.setStep(2);
             }

@@ -18,6 +18,7 @@ export const ActivityField = ({
   isDesktop,
   id,
   initialProb,
+  userId,
   onOpenBottomSheet,
 }: {
   index: number;
@@ -27,6 +28,7 @@ export const ActivityField = ({
   title: string;
   image: string;
   question: string;
+  userId: string;
   isDesktop?: boolean;
   options: string[];
   option: { name: string; value: number; index: number };
@@ -34,7 +36,6 @@ export const ActivityField = ({
   initialProb: number;
   onOpenBottomSheet: () => void;
 }) => {
-  console.log("options2", amount);
 
   const MotionDivContent = () => (
     <motion.div
@@ -90,6 +91,9 @@ export const ActivityField = ({
         options={option}
         option={0}
         optionNumber={0}
+        name={name}
+        userId={userId}
+        isExternal={true}
         initialProb={initialProb}
       >
         <MotionDivContent />
