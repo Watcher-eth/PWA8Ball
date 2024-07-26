@@ -51,8 +51,8 @@ export function DesktopUserActivity({
 
   return (
     <div className="h-screen w-full max-w-[29%] p-4 pt-3">
-      <h1 className="text-white text-2xl font-semibold mb-4">Your Activity</h1>
-      <div className="grid grid-cols-1 gap-1">
+      <h1 className="text-white text-2xl font-semibold ">Your Activity</h1>
+      <div className="grid grid-cols-1 max-h-screen overflow-y-scroll -space-y-2">
         {mergedData?.length > 0 ? (
           mergedData.map((item, index) => (
             <PredictionPositionModal
@@ -90,7 +90,7 @@ export function DesktopUserActivity({
                         ? item.options[0].name
                         : item.options[1].name}
                     </div>
-                    <div className="text-[1rem] -ml-2.5 line-clamp-1 text-white text-semibold">
+                    <div className="text-[1rem]  line-clamp-1 text-white text-semibold">
                       {item?.question}
                     </div>
                   </div>

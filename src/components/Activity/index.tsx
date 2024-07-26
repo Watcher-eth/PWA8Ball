@@ -104,8 +104,6 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
                           </h2>
                           {predictions.map((item, idx) => {
                             const option = parseOptionJSON(item.option);
-                            console.log("item", item);
-
                             return (
                               <ActivityField
                                 isDesktop={isDesktop}
