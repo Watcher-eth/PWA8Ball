@@ -8,7 +8,7 @@ import { BetComment } from "@/types/PostTypes";
 import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 import { IUserWithBet } from "@/supabase/types";
 import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlaceholders";
-import AddComment from "./AddComment";
+import { AddComment } from "./AddComment";
 
 export const CommentSection = ({
   marketId,

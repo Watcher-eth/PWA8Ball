@@ -8,24 +8,23 @@ import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
 
 
 
-interface AddCommentProps {
-  user: User;
-  id: number;
-  topic_id: string;
-  addOptimisticComment: () => void;
-}
 
-function AddComment({
+export function AddComment({
   user,
   id,
   topic_id,
   addOptimisticComment,
-}: AddCommentProps) {
+}: {
+  user: User;
+  id: number;
+  topic_id: string;
+  addOptimisticComment: () => void;
+}) {
   const [isFocused, setIsFocused] = useState(false);
   const [lineCount, setLineCount] = useState(1);
   const [content, setContent] = useState<string>();
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { mutate: AddComment } = useCreateComment();
+  const { mutate: addComment } = useCreateComment();
 
   const handleCancel = () => {
     setIsFocused(false);
@@ -46,7 +45,7 @@ function AddComment({
 
   async function addUserComment() {
     const date = new Date();
-    const result = await AddComment({
+    const result = await addComment({
       market_id: id,
       content: content!,
       created_by: user?.external_auth_provider_user_id,
@@ -128,4 +127,4 @@ function AddComment({
   );
 }
 
-export default AddComment;
+
