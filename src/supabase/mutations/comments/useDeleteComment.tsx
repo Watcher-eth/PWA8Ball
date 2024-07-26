@@ -3,11 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 import { IComment } from "../useCreateComment";
 
-const deleteComment = async (commentId: string): Promise<IComment[] | null> => {
+async function deleteComment(commentId: string): Promise<IComment[] | null> {
   const { data, error } = await supabase
     .from("comments")
+    .match({ id: commentId })
     .delete()
-    .match({ id: commentId });
+
 
   if (error) {
     throw new Error(error.message);
