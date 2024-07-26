@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -8,13 +8,13 @@ import Link from "next/link";
 import { ChevronLeft, Share, Star } from "lucide-react";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
+import { LEADERBOARD_PATH } from "@/utils/urls";
 import { ShareTopicModal } from "@/components/Modals/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";
-import { LEADERBOARD_PATH } from "@/utils/urls";
 
 const ICON_BUTTON_CLASSNAME = `
-  bg-[rgba(21, 21, 21, 0.95)] backdrop-blur-2xl
+  bg-[rgba(21,21,21,0.95)] backdrop-blur-2xl
   rounded-full flex justify-center items-center
   absolute top-12 z-10
   `
@@ -32,8 +32,7 @@ export const FeaturedBet = ({
   const router = useRouter();
   const scrollRef = useRef(null);
 
-  const user = { external_auth_provider_user_id: "user-id" }; // Mock user data
-  const userId = user.external_auth_provider_user_id;
+
   const { data: membersProfiles } = useGetMembersForTopic(id);
   const { data: markets } = useGetMarketsForTopic(id);
 
@@ -125,7 +124,7 @@ export const FeaturedBet = ({
 
 };
 
-export const AvatarGroup = ({ images }) => {
+export function AvatarGroup({ images }) {
   return (
     <div className="flex mt-1 -space-x-2">
       {images?.map((image, index) => (
