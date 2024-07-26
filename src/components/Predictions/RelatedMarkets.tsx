@@ -19,7 +19,7 @@ export const RelatedMarkets = ({
     return (
       <div
         className={`
-          flex flex-col 
+          flex flex-col
           ${isDesktop ? "bg-transparent" : "bg-[#101010] p-4 pt-6"}
         `}
       >
@@ -44,7 +44,7 @@ export const RelatedMarkets = ({
             })}
         </div>
 
-        <div className="h-[80px]" />
+        <div className="h-20" />
       </div>
     );
 

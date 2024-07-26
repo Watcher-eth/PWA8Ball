@@ -264,16 +264,16 @@ export const FindFriends = ({ type }) => {
       <div
         className={`
           w-full h-[30px]
-          absolute bottom-[80px]
+          absolute bottom-20
         `}
         style={{
           backgroundImage:
-            "linear-gradient(rgba(10 ,10 ,10 , 0), rgba(10 ,10 ,10 , 0.6), #080808)",
+            "linear-gradient(rgba(10,10,10,0), rgba(10,10,10,0.6), #080808)",
         }}
       />
       <div
         className={`
-          h-[80px] absolute bottom-0
+          h-20 absolute bottom-0
           flex items-center justify-center
           p-2.5 pb-[45px] bg-[#080808]
           w-full
@@ -335,7 +335,7 @@ function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
           type === 1 ? console.log("follow") : shareLink();
         }}
         className={`
-          font-bold text-sm p-2.5 rounded-[18px] overflow-hidden
+          font-bold text-sm p-2.5 rounded-lg overflow-hidden
           ${isFollowing ? "text-gray-500" : "text-[rgb(22,22,22)]"}
           ${isFollowing ? "bg-gray-300" : "bg-white"}
           border-none cursor-pointer
