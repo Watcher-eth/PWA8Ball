@@ -80,48 +80,50 @@ export function AddComment({
         src={user?.pfp}
         alt="User Profile"
       />
-      <div className="flex flex-col w-full relative">
+      <div className="flex flex-col w-full relative group">
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           ref={inputRef}
           placeholder="Add a comment..."
           rows={1}
-          className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-[transparent] focus:outline-none transition-all duration-300 resize-none ${
-            isFocused ? "border-b-2 border-b-transparent" : "border-b-[0.8px]"
-          }`}
+          className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-[transparent] focus:outline-none transition-all duration-300 resize-none
+          border-b-[0.8px] focus:border-b-2 focus:border-b-transparent outline-none overflow-hidden
+          `}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onInput={handleInput}
-          style={{ outline: "none", overflow: "hidden" }}
+          // style={{ outline: "none", overflow: "hidden" }}
         />
         <span
-          className={`absolute left-0 w-full h-[2px] transition-all duration-300 ${
-            isFocused
-              ? "bg-[lightgray] scale-x-100"
-              : "bg-[transparent] scale-x-0"
-          }`}
+          className={`absolute left-0 w-full h-[2px] transition-all duration-300
+            group-focus-within:bg-[lightgray] group-focus-within:scale-x-100
+            bg-[transparent] scale-x-0 origin-center
+          `}
           style={{
             transformOrigin: "center",
             top: `${26 + (lineCount - 1) * 24}px`,
           }}
         ></span>
-        {isFocused && (
-          <div className="flex flex-row mt-3 items-center space-x-3 justify-end">
-            <div
-              className="text-white text-[0.9rem] font-semibold cursor-pointer"
-              onClick={handleCancel}
-            >
-              Cancel
-            </div>
-            <div
-              onClick={addUserComment}
-              className="text-white text-[0.9rem] font-semibold py-1.5 px-3 bg-[#FF0050] rounded-full cursor-pointer"
-            >
-              Comment
-            </div>
+
+        <div
+          className={`
+            hidden group-focus-within:flex flex-row mt-3 items-center space-x-3 justify-end
+          `}
+        >
+          <div
+            className="text-white text-[0.9rem] font-semibold cursor-pointer"
+            onClick={handleCancel}
+          >
+            Cancel
           </div>
-        )}
+          <div
+            onClick={() => addUserComment()}
+            className="text-white text-[0.9rem] font-semibold py-1.5 px-3 bg-[#FF0050] hover:scale-105 active:scale-95 transition-all rounded-full cursor-pointer"
+          >
+            Comment
+          </div>
+        </div>
       </div>
     </div>
   );
