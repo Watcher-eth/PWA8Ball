@@ -1,24 +1,13 @@
-// @ts-nocheck
-
-import React, { useState } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, ThumbsDown, UserCircle2Icon, UserIcon } from "lucide-react";
 
 import type { BetComment } from "@/types/PostTypes";
 import type { User } from "@/types/UserTypes";
-import { timeAgo } from "@/utils/datetime/timeAgo";
-import { parseOption } from "@/utils/predictions/parseOption";
-import { getProfilePath } from "@/utils/urls";
+
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
 
 import { CommentHeader } from "./CommentHeader";
+import { LikeDislikeSection } from "./LikeDislikeSection";
 
-interface CommentProps extends BetComment {
-  setReply: (name: string) => void;
-  handleComment: () => void;
-  user2: User;
-}
 
 export function Comment({
   id,
@@ -30,7 +19,12 @@ export function Comment({
   date,
   setReply,
   handleComment,
-}: CommentProps) {
+}: BetComment & {
+  created_at: string
+  setReply: (name: string) => void
+  handleComment: () => void
+  user2: User
+}) {
   const { mutate: deleteComment } = useDeleteComment();
 
   const handleDelete = () => {
@@ -69,78 +63,10 @@ export function Comment({
         >
           Reply
         </button>
-        <LikeDislikeSection/>
-
+        <LikeDislikeSection />
       </div>
       <div className="w-full self-center h-0 border-b border-white/20 mt-3 z-20" />
     </motion.div>
   );
 }
 
-
-function LikeDislikeSection() {
-  const [temporaryLike, setTemporaryLike] = useState(false);
-  const [temporaryDislike, setTemporaryDislike] = useState(false);
-  const handleLikePress = () => {
-    setTemporaryLike(!temporaryLike);
-    setTemporaryDislike(false);
-  };
-
-  const handleDislikePress = () => {
-    setTemporaryDislike(!temporaryDislike);
-    setTemporaryLike(false);
-  };
-
-  return (
-    <div className="flex flex-row items-center space-x-2.5">
-      <CommentReactionButton
-        onClick={handleLikePress}
-        IconComponent={Heart}
-        className={
-          temporaryLike
-            ? "text-[#e32636] fill-[#e32636]"
-            : "text-white hover:text-[#e32636]"
-        }
-      />
-      <CommentReactionButton
-        onClick={handleDislikePress}
-        IconComponent={ThumbsDown}
-        className={
-          temporaryDislike
-            ? "text-[#FF6700] fill-[#FF6700]"
-            : "text-white hover:text-[#FF6700]"
-        }
-      />
-    </div>
-  );
-}
-
-
-function CommentReactionButton({
-  onClick,
-  IconComponent,
-  className,
-}: {
-  onClick: () => void,
-  IconComponent: React.FC
-  className: string
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`
-        bg-none border-none cursor-pointer
-        flex items-center
-      `}
-    >
-      <IconComponent
-        size={19}
-        strokeWidth={3}
-        className={`
-          transition-all duration-75
-          ${className}
-        `}
-      />
-    </button>
-  );
-}
