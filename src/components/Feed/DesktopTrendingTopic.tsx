@@ -23,7 +23,7 @@ export function DesktopTrendingTopics({
   topicId: string;
 }) {
   const { data: membersProfiles } = useGetMembersForTopic(topicId);
-  const { data: markets, error, isLoading } = useGetMarketsForTopic(topicId);
+  const { data: markets } = useGetMarketsForTopic(topicId);
 
   return (
     <div className="relative w-full flex align-center justify-between h-[49vh] py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
@@ -84,11 +84,8 @@ export function DesktopTrendingTopics({
       <div className="relative w-[70vw] -mt-4">
         <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2 pr-7">
           {formatMarketArr({ markets })?.map((market, index) => {
-            console.log("Rendering card for market:", market); // Log each market being rendered
             return (
-              <div key={index}>
-                <FeedCard handleOpen={() => {}} {...market} />
-              </div>
+              <FeedCard key={index} {...market} />
             );
           })}
         </div>

@@ -1,6 +1,4 @@
 // @ts-nocheck
-import "../../styles/fonts.css";
-
 import { motion, LayoutGroup } from "framer-motion";
 
 import { Drawer, DrawerContent } from "@/components/ui/drawer";

@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import "../../styles/fonts.css";
-
 import { getMarketPath } from "@/utils/urls";
 import Link from "next/link";
 

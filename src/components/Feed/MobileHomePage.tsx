@@ -39,7 +39,6 @@ export function MobileHomePage({ trendingMarkets }) {
           return (
             <div key={index}>
               <FeedCard
-                handleOpen={handleOpenLoginModal}
                 {...bet}
                 image={bet.image!}
                 icon={bet?.icon}
