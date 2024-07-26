@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState, useRef } from "react";
 import { toast } from "sonner";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import type { User } from "@/types/UserTypes";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 

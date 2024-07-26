@@ -17,7 +17,7 @@ import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBettersModal";
-import { CommentSection } from "@/components/Posts/Comments/CommentSection";
+import { CommentSection } from "@/components/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 

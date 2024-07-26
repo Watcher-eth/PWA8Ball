@@ -11,7 +11,7 @@ import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlace
 import { AddComment } from "./AddComment";
 import { Comment } from "./Comment";
 
-export const CommentSection = ({
+export function CommentSection({
   marketId,
   totalComments,
   users,
@@ -21,7 +21,7 @@ export const CommentSection = ({
   totalComments: number;
   users: IUserWithBet[];
   isDesktop?: boolean;
-}) => {
+}) {
   const { user } = useUserStore();
 
   const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
