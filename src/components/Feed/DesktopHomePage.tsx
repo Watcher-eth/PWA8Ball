@@ -34,9 +34,7 @@ export function DesktopHomePage({ trendingMarkets }) {
       >
         {enrichedFeedData?.map((bet, index) => {
           return (
-            // <div key={index}>
-              <FeedCard {...bet} key={index} />
-            // </div>
+            <FeedCard {...bet} key={index} />
           );
         })}
       </motion.div>

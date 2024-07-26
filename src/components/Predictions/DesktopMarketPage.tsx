@@ -14,7 +14,7 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "@/components/layouts/StandardBleedOverlay";
-import { CommentSection } from "@/components/Posts/Comments/CommentSection";
+import { CommentSection } from "@/components/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
@@ -169,11 +169,8 @@ export function DesktopMarketPage({ users, market, id }) {
                 topic_id={market?.topic_id}
                 users={users}
                 totalComments={market?.total_comments}
-                optimisticComments={comments}
                 marketId={id}
-                setReply={() => {}}
                 isDesktop={true}
-                handleComment={setComments}
               />
             </Col>
             <Col xs={3}>

@@ -1,32 +1,30 @@
 // @ts-nocheck
 import _ from "lodash"
-
+import { useState } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { Comment } from "./Comment";
+
 import { BetComment } from "@/types/PostTypes";
-import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 import { IUserWithBet } from "@/supabase/types";
+import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
+
 import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlaceholders";
 import { AddComment } from "./AddComment";
+import { Comment } from "./Comment";
 
-export const CommentSection = ({
+export function CommentSection({
   marketId,
   totalComments,
-  optimisticComments,
   users,
   isDesktop,
-  handleComment,
-  setReply,
 }: {
   marketId: string;
   totalComments: number;
-  optimisticComments: BetComment[];
   users: IUserWithBet[];
-  handleComment: () => void;
   isDesktop?: boolean;
-  setReply: (name: string) => void;
-}) => {
+}) {
   const { user } = useUserStore();
+
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
 
   const {
     data: comments,
@@ -38,7 +36,7 @@ export const CommentSection = ({
     user?.external_auth_provider_user_id
   );
 
-  const findUserByExternalAuthId = (externalAuthId: string) => {
+  function findUserByExternalAuthId(externalAuthId: string) {
     return users?.find(
       (user) => user.external_auth_provider_user_id === externalAuthId
     );
@@ -49,12 +47,18 @@ export const CommentSection = ({
     (comment) => comment.id
   );
 
+
+  function addOptimisticComment(comment: BetComment) {
+    setOptimisticComments([comment, ...optimisticComments]);
+  }
+
+  const handleComment = () => {};
+  const setReply = () => {}
   if (allComments?.length < 1) {
     return (
       <NewPlaceholderComment isUser={true} isPost={false} onOpen={() => {}} />
     );
   }
-
   return (
     <div
       className={`
@@ -66,7 +70,10 @@ export const CommentSection = ({
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
-      <AddComment user={user} addOptimisticComment={handleComment} />
+      <AddComment
+        user={user}
+        addOptimisticComment={addOptimisticComment}
+      />
       <div>
         {allComments.map((item) => {
           const commentUser = findUserByExternalAuthId(item.created_by);
@@ -75,8 +82,8 @@ export const CommentSection = ({
             <Comment
               key={item.id}
               {...item}
-              setReply={() => {}}
-              handleComment={() => {}}
+              setReply={setReply}
+              handleComment={handleComment}
               user2={commentUser}
             />
           );

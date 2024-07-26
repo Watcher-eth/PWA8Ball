@@ -1,7 +1,9 @@
 // @ts-nocheck
+import "@/styles/fonts.css";
+import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
-import "@/styles/globals.css";
+
 import type { AppProps } from "next/app";
 import { WagmiProvider } from "wagmi";
 import { base, baseSepolia, mainnet } from "viem/chains";

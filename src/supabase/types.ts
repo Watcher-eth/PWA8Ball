@@ -28,7 +28,7 @@ export interface ITopic {
   image?: string;
 }
 
-interface option {
+interface Option {
   name: string;
   address: string;
 }
@@ -37,7 +37,7 @@ export interface IMarket {
   topicid: string;
   title: string;
   question: string;
-  options: option[]; // Assuming JSON string or adjust based on actual structure
+  options: Option[]; // Assuming JSON string or adjust based on actual structure
   image?: string;
   participants: number; // Assuming an integer count
   pair: string;

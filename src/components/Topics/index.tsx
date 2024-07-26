@@ -128,7 +128,7 @@ export const FeaturedBet = ({
 export const AvatarGroup = ({ images }) => {
   return (
     <div className="flex mt-1 -space-x-2">
-      {images.map((image, index) => (
+      {images?.map((image, index) => (
         <img
           key={index}
           src={image}

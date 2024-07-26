@@ -1,11 +1,13 @@
 // @ts-nocheck
-import "../../styles/fonts.css";
-
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowLeft, Share } from "lucide-react";
 
 import { HOME_PATH } from "@/utils/urls";
 import { fillUserImages } from "@/utils/fillUserImages";
+import { formatMarket } from "@/utils/markets/formatMarketArr";
+
+import { useModalStore } from "@/lib/stores/ModalStore";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { DrawerClose } from "@/components/ui/drawer";
@@ -13,23 +15,17 @@ import { DrawerClose } from "@/components/ui/drawer";
 import { PredictModal } from "@/components/Modals/PredictModal";
 import { ShareModal } from "@/components/Modals/ShareModal";
 
-import { useModalStore } from "@/lib/stores/ModalStore";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
+import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBettersModal";
-import { CommentSection } from "@/components/Posts/Comments/CommentSection";
+import { CommentSection } from "@/components/CommentSection";
 import { BetDetails } from "@/components/Predictions/BetDetails";
 import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
 
-import { formatMarket } from "@/utils/markets/formatMarketArr";
 
-import { ArrowLeft, Share } from "lucide-react";
-import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
-
-import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 export function MobileMarketPage({ market, users }) {
-  const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
 
@@ -201,13 +197,11 @@ function MobileMarketContent({
           options={[optionB.name, optionA.name]}
         >
           <div className="mt-4 hover:scale-101 active:scale-95 transition-all w-full">
-            <div>
-              <OutcomeButton
-                text={optionB?.name}
-                multiplier={optionB.odds / 100}
-                option={0}
-              />
-            </div>
+            <OutcomeButton
+              text={optionB?.name}
+              multiplier={optionB.odds / 100}
+              option={0}
+            />
           </div>
         </PredictModal>
         <PredictModal
@@ -251,10 +245,7 @@ function MobileMarketContent({
           topicId={topicId}
           users={users}
           totalComments={market?.total_comments}
-          optimisticComments={[]}
           marketId={id}
-          setReply={() => {}}
-          handleComment={() => {}}
         />
       </div>
       <div className="-mt-20">
