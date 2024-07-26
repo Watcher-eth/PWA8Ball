@@ -1,19 +1,14 @@
 // @ts-nocheck
 
 import { useEffect, useState } from "react";
-
 import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-
 import { AnimatePresence, motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { Vote } from "lucide-react";
-
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
-
 import { NumericKeypad } from "@/components/NumericKeypad";
-
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
@@ -43,7 +38,6 @@ export function PredictModal({
   children: React.ReactNode;
 }) {
   const [step, setStep] = useState(1);
-
   const [sliderValue, setSliderValue] = useState(""); // Use a string to hold the value
   const setVotingState = useVotingStore((state) => state.setState);
   const amount = useVotingStore((state) => state.amount);
@@ -55,6 +49,7 @@ export function PredictModal({
   const fontSizeAdjustmentFactor = 0.95;
 
   const [fontSize, setFontSize] = useState(baseFontSize);
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
     const newLength =
@@ -66,6 +61,13 @@ export function PredictModal({
         : parseFloat(baseFontSize);
     setFontSize(`${newLength}rem`); // animate the change
   }, [sliderValue]);
+
+  const triggerShakeIfExceedsBalance = (value) => {
+    if (parseFloat(value.replace(/,/g, "")) >= Number(userBalance) / 10 ** 6) {
+      setShake(true);
+      setTimeout(() => setShake(false), 500); // Reset the shake state after animation
+    }
+  };
 
   const handleButtonPress = (value) => {
     if (value === ".") {
@@ -92,15 +94,24 @@ export function PredictModal({
         }
       }
     }
+
+    // Trigger shake animation if the amount exceeds user balance
+    triggerShakeIfExceedsBalance(sliderValue + value);
   };
 
   function handleDelete() {
-    setSliderValue((prev) => formatWithCommas(prev.slice(0, -1)));
+    const newValue = formatWithCommas(sliderValue.slice(0, -1));
+    setSliderValue(newValue);
+
+    // Trigger shake animation if the amount exceeds user balance
+    triggerShakeIfExceedsBalance(newValue);
   }
+
   function handleContinue() {
     confirmSelection(2);
     setStep(2);
   }
+
   function confirmSelection(option) {
     if (parseFloat(sliderValue.replace(/,/g, "")) >= userBalance) {
       // showToast();
@@ -109,14 +120,14 @@ export function PredictModal({
     setVotingState({
       amount: parseFloat(sliderValue.replace(/,/g, "")),
     });
-  };
+  }
 
   console.log({ user });
   return (
     <div className="w-full flex-grow ">
       <Drawer>
         <DrawerTrigger className="w-full">{children}</DrawerTrigger>
-        <DrawerContent className=" border-0 rounded-[2rem] self-center">
+        <DrawerContent className="border-0 rounded-[2rem] self-center">
           <motion.div
             layout
             transition={{ duration: 0.2 }}
@@ -124,10 +135,10 @@ export function PredictModal({
           >
             <AnimatePresence>
               {step === 1 && (
-                <div className="flex flex-col p-8 w-full pt-4 bg-[#080808]  pb-8 z-15">
-                  <div className="flex flex-row items-center bg-gray-[#080808]  w-full justify-center relative">
+                <div className="flex flex-col p-8 w-full pt-4 bg-[#080808] pb-8 z-15">
+                  <div className="flex flex-row items-center bg-gray-[#080808] w-full justify-center relative">
                     <img
-                      className="size-8 rounded-full object-cover "
+                      className="size-8 rounded-full object-cover"
                       src={image}
                       alt="Question"
                     />
@@ -138,10 +149,14 @@ export function PredictModal({
                       </span>
                     </Marquee>
                   </div>
-                  <div
-                    className="flex flex-col items-center pt-[62px] pb-[55px]"
-                  >
-                    <div className="flex flex-row items-center justify-center">
+                  <div className="flex flex-col items-center pt-[62px] pb-[55px]">
+                    <motion.div
+                      animate={{
+                        x: shake ? [0, -10, 10, -10, 10, 0] : 0,
+                      }}
+                      transition={{ duration: 0.5 }}
+                      className="flex flex-row items-center justify-center"
+                    >
                       <span className="text-3xl font-mono text-gray-400 mr-1">
                         $
                       </span>
@@ -152,10 +167,11 @@ export function PredictModal({
                       >
                         {sliderValue || "0.00"}
                       </motion.span>
-                    </div>
+                    </motion.div>
 
                     {parseFloat(sliderValue.replace(/,/g, "")) <=
-                      Number(userBalance).toFixed(2) || sliderValue === "" ? (
+                      (Number(userBalance) / 10 ** 6).toFixed(2) ||
+                    sliderValue === "" ? (
                       <div className="flex flex-row items-center mt-0">
                         <div
                           className="p-1 bg-red-500 rounded-full"

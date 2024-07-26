@@ -39,7 +39,7 @@ export function NumericKeypad({
         ].map((row) => (
           <div
             key={row.join()}
-            className="flex flex-row justify-between items-center px-2 py-4"
+            className="flex  flex-row justify-between items-center px-2 py-4"
           >
             {row.map((num) => (
               <KeypadButton

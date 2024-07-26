@@ -14,7 +14,7 @@ export function KeypadButton({
       }}
       className={`
         text-xl font-bold text-white px-5
-        active:scale-95 hover:scale-101 transition-all
+        active:scale-115 hover:scale-102 transition-all
       `}
     >
       {value}
