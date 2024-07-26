@@ -17,7 +17,6 @@ import { ActivityField } from "./ActivityField";
 import { Leaderboard } from "./Leaderboard";
 import { YourStats } from "./YourStats";
 
-
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
   const { user } = useUserStore();
@@ -33,7 +32,7 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   }
 
   const groupedPredictions = groupPredictionsByDate(predictions);
-
+  console.log("preds", predictions[0]);
   return (
     <div
       className={`
@@ -113,12 +112,13 @@ export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
                                 question={item.markets.question}
                                 name={item.users.name}
                                 pfp={item.users.pfp}
-                                amount={item.amount / 10 ** 5}
-                                title={item.markets.question}
+                                amount={(item.amount / 10 ** 6).toFixed(2)}
+                                title={item.markets.title}
                                 image={item.markets.image}
                                 option={option}
                                 id={item?.market_id}
                                 odds={12}
+                                initialProb={item.markets.initialProb}
                                 onOpenBottomSheet={() => {}}
                               />
                             );

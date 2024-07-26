@@ -39,7 +39,7 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
       console.log("Web Share not supported on this browser");
     }
   };
-
+  console.log("options3", props.option, props.options);
   return (
     <div
       className={`flex flex-col items-center ${
@@ -60,7 +60,7 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
               <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
             </div>
             <span className="text-[17px] text-white mx-[6px] font-semibold">
-              Yes
+              {props.options?.name}
             </span>
           </div>
           <motion.div
@@ -72,7 +72,7 @@ export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
         </div>
         <div className="flex flex-row items-center justify-center">
           <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
-            {props.points?.toFixed(2)} $12,392
+            ${props.points}
           </div>
         </div>
         <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>

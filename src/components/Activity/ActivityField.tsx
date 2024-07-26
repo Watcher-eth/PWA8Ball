@@ -17,6 +17,7 @@ export const ActivityField = ({
   options,
   isDesktop,
   id,
+  initialProb,
   onOpenBottomSheet,
 }: {
   index: number;
@@ -30,9 +31,10 @@ export const ActivityField = ({
   options: string[];
   option: { name: string; value: number; index: number };
   id: string;
+  initialProb: number;
   onOpenBottomSheet: () => void;
 }) => {
-  console.log("options", option, options);
+  console.log("options2", amount);
 
   const MotionDivContent = () => (
     <motion.div
@@ -65,9 +67,7 @@ export const ActivityField = ({
         </div>
       </div>
       <div className="flex flex-col items-end gap-[3px]">
-        <p className="text-[18px] text-white font-bold">
-          ${(amount / 10).toFixed(2)}
-        </p>
+        <p className="text-[18px] text-white font-bold">${amount}</p>
         <p className="text-[14px] text-[#C7C7C7] font-bold">
           {option.name?.length < 8 ? option.name : option.name?.substring(0, 3)}
         </p>
@@ -83,13 +83,14 @@ export const ActivityField = ({
         title={title}
         image={image}
         price={amount}
-        ownedAmount={amount / 100000}
+        ownedAmount={amount}
         betId={id}
         topic={id}
         question={question}
         options={option}
         option={0}
         optionNumber={0}
+        initialProb={initialProb}
       >
         <MotionDivContent />
       </MyBetModalComponent>

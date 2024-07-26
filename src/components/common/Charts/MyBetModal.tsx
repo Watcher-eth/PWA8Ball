@@ -65,32 +65,15 @@ export const MobileMyBetModal = (props: {
     desktop: price.value,
     mobile: 100 - price.value,
   }));
-
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: props?.isDesktop ? "transparent" : "rgba(12,12,12, 1)",
-        alignSelf: "center",
-        paddingBottom: 30,
-        gap: 2,
-        padding: props?.isDesktop ? 5 : 15,
-        paddingTop: 10,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-      }}
-      className="w-full"
+      className={`flex flex-col ${
+        props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
+      } self-center pb-[30px] gap-[2px] ${
+        props?.isDesktop ? "p-[5px]" : "p-[15px]"
+      } pt-[10px] rounded-t-[30px] w-full`}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "5px 0",
-        }}
-      >
+      <div className="flex flex-row items-center justify-between my-[5px]">
         <motion.div
           onClick={() => {
             props.onClose();
@@ -110,51 +93,29 @@ export const MobileMyBetModal = (props: {
         >
           <img
             src={props.image}
-            style={{
-              height: 38,
-              width: 38,
-              borderRadius: "50%",
-              overflow: "hidden",
-              objectFit: "cover",
-            }}
+            className="h-[38px] w-[38px] rounded-full object-cover"
             alt="Market image"
           />
         </motion.div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "5px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: 19,
-            color: "white",
-            fontWeight: 700,
-          }}
-        >
+      <div className="flex flex-row items-center justify-between mt-[5px]">
+        <span className="text-[19px] text-white font-bold">
           {prices
             ? props.optionNumber === 1
               ? currentPrices[currentPrices.length - 1].value
               : currentPrices.length > 0
-              ? currentPrices[currentPrices.length - 1].value
+              ? 100 - currentPrices[currentPrices.length - 1].value
               : 100 - props.price
             : props.price / 10000}
           %{" "}
-          {props.options[props?.option === 1 ? 0 : 1]?.name
-            ? props.options[props?.option === 1 ? 0 : 1]?.name
+          {props.options[props?.optionNumber === 1 ? 0 : 1]?.name
+            ? props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             : props.options?.name}
         </span>
         <span
-          style={{
-            color: props.optionNumber === 0 ? "#FF0050" : "#0050FF",
-            fontSize: 20,
-            fontWeight: 700,
-          }}
+          className={`text-[20px] font-bold ${
+            props.optionNumber === 0 ? "text-[#FF0050]" : "text-[#0050FF]"
+          }`}
         >
           {percentageDifference && percentageDifference >= 0
             ? `+${percentageDifference}`
@@ -162,31 +123,11 @@ export const MobileMyBetModal = (props: {
           %
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: -3,
-        }}
-      >
-        <span
-          style={{
-            fontSize: 17,
-            color: "lightgray",
-            fontWeight: 600,
-          }}
-        >
+      <div className="flex flex-row items-center justify-between mt-[-3px]">
+        <span className="text-[17px] text-[lightgray] font-semibold">
           {props.title}
         </span>
-        <span
-          style={{
-            color: "lightgray",
-            fontSize: 17,
-            fontWeight: 600,
-          }}
-        >
+        <span className="text-[17px] text-[lightgray] font-semibold">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
@@ -327,126 +268,47 @@ export const MobileMyBetModal = (props: {
           </ChartContainer>
         </div>
       )}
-      <div
-        style={{
-          width: "75%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-          justifyContent: "space-between",
-          marginTop: 0,
-        }}
-      >
+      <div className="w-[75%] flex flex-row items-center self-center justify-between mt-0">
         {timeframes.map((item, index) => (
           <motion.div
             key={index}
             onClick={() => setTimeframe(item)}
-            style={{
-              padding: "4px 7px",
-
-              backgroundColor: timeframe === item ? "lightgray" : "transparent",
-              borderRadius: 15,
-            }}
+            className={`p-[4px_7px] ${
+              timeframe === item ? "bg-[lightgray]" : "bg-transparent"
+            } rounded-[15px]`}
           >
             <span
-              style={{
-                color: timeframe === item ? "black" : "gray",
-                fontSize: 14,
-                fontWeight: 700,
-              }}
+              className={`text-[14px] font-bold ${
+                timeframe === item ? "text-black" : "text-gray"
+              }`}
             >
               {item}
             </span>
           </motion.div>
         ))}
       </div>
-      <div
-        style={{
-          width: "100%",
-          height: 1,
-          backgroundColor: "rgba(100,100,100, 0.3)",
-          margin: "15px 0",
-        }}
-      />
+      <div className="w-[101%] h-[1px] bg-[rgba(100,100,100,0.3)] my-[15px] mt-[20px]" />
       {props.ownedAmount === undefined ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                color: "lightgray",
-              }}
-            >
-              Created by
-            </span>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 5,
-              }}
-            >
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-col items-start">
+            <span className="text-[12px] text-[lightgray]">Created by</span>
+            <div className="flex flex-row items-center mt-[5px]">
               <img
                 src={props.icon}
-                style={{
-                  height: 22,
-                  width: 22,
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  marginRight: 5,
-                }}
+                className="h-[22px] w-[22px] rounded-full mr-[5px]"
                 alt="Creator"
               />
-              <span
-                style={{
-                  color: "white",
-                  fontSize: 19,
-                  fontWeight: 600,
-                }}
-              >
+              <span className="text-white text-[19px] font-semibold">
                 {props.name}
               </span>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                color: "lightgray",
-              }}
-            >
+          <div className="flex flex-col items-end">
+            <span className="text-[12px] text-[lightgray]">
               Prediction Value
             </span>
             {prices && (
-              <span
-                style={{
-                  color: "white",
-                  fontSize: 19,
-                  fontWeight: 600,
-                  marginTop: 2,
-                }}
-              >
+              <span className="text-white text-[19px] font-semibold mt-[2px]">
                 $
                 {(
                   props.ownedAmount *
@@ -457,62 +319,21 @@ export const MobileMyBetModal = (props: {
           </div>
         </div>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                color: "lightgray",
-              }}
-            >
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-col items-start">
+            <span className="text-[12px] text-[lightgray]">
               {props.isExternal ? props.name : "You"} voted
             </span>
-            <span
-              style={{
-                color: "white",
-                fontSize: 19,
-                fontWeight: 600,
-              }}
-            >
-              {props.options[props?.option === 1 ? 0 : 1]?.name}
+            <span className="text-white text-[19px] font-semibold">
+              {props.options?.name}
             </span>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                color: "lightgray",
-              }}
-            >
+          <div className="flex flex-col items-end">
+            <span className="text-[12px] text-[lightgray]">
               Prediction Value
             </span>
             {prices && (
-              <span
-                style={{
-                  color: "white",
-                  fontSize: 19,
-                  fontWeight: 600,
-                }}
-              >
+              <span className="text-white text-[19px] font-semibold">
                 $
                 {(
                   props.ownedAmount *
@@ -523,18 +344,7 @@ export const MobileMyBetModal = (props: {
           </div>
         </div>
       )}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 8,
-          marginBottom: 10,
-          alignSelf: "center",
-          justifyContent: "space-between",
-        }}
-        className="w-full space-x-4"
-      >
+      <div className="flex flex-row items-center mt-[8px] mb-[10px] self-center justify-between w-full space-x-4">
         <motion.div
           onClick={() => {
             if (props.name) {
@@ -543,26 +353,14 @@ export const MobileMyBetModal = (props: {
               props.setStep(2);
             }
           }}
-          style={{
-            marginTop: 11,
-            borderRadius: 25,
-            padding: "10px 10px",
-            overflow: "hidden",
-            backgroundColor: "#1D1D1D",
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-            flexDirection: "row",
-            gap: 3,
-          }}
-          className="w-1/2"
+          className="mt-[11px] rounded-[25px] p-[10px] bg-[#1D1D1D] flex items-center justify-center flex-row gap-[3px] w-1/2"
         >
           {props.name ? (
             <User2 height={20} color={"#D9D9D9"} strokeWidth={3.3} />
           ) : (
             <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
           )}
-          <span style={{ fontSize: 20, color: "#D9D9D9", fontWeight: 800 }}>
+          <span className="text-[20px] text-[#D9D9D9] font-bold">
             {props.name ? "Profile" : "Cashout"}
           </span>
         </motion.div>
@@ -586,99 +384,33 @@ export const MobileMyBetModal = (props: {
               props.setStep(4);
             }
           }}
-          style={{
-            marginTop: 11,
-            display: "flex",
-            padding: "10px 8px",
-            flexDirection: "row",
-            borderRadius: 25,
-            overflow: "hidden",
-            backgroundColor: "#D9D9D9",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          className="w-1/2"
+          className="mt-[11px] flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
-          <span
-            style={{
-              fontSize: 20,
-              color: "#1D1D1D",
-              fontWeight: 800,
-              marginLeft: "3px",
-            }}
-          >
+          <span className="text-[20px] text-[#1D1D1D] font-bold ml-[3px]">
             Details
           </span>
         </motion.div>
       </div>
-      <div
-        style={{
-          height: 1,
-          width: "101%",
-          backgroundColor: "rgba(100,100,100, 0.3)",
-          margin: "14px 0",
-          marginTop: 20,
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "4px",
-        }}
-      >
+      <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
+      <div className="flex flex-row items-center gap-[4px]">
         <AlignLeft color="white" strokeWidth={3} size={17} />
-        <span
-          style={{
-            color: "white",
-            fontWeight: 600,
-            fontSize: 19,
-          }}
-        >
+        <span className="text-white font-semibold text-[19px]">
           About {props.title}
         </span>
       </div>
-      <span
-        style={{
-          color: "white",
-          fontSize: 16.5,
-          lineHeight: "19px",
-          marginTop: "5px",
-        }}
-      >
+      <span className="text-white text-[16.5px] leading-[19px] mt-[5px]">
         {props.question}
       </span>
-      <div
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "rgba(100,100,100, 0.3)",
-          margin: "14px 0",
-          marginTop: 12,
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-          gap: "5px",
-        }}
-      >
+      <div className="h-[1px] w-full bg-[rgba(100,100,100,0.3)] my-[14px] mt-[12px]" />
+      <div className="flex flex-row items-center self-center gap-[5px]">
         <Clock
           color="#989898"
           size={15}
           strokeWidth={4}
-          style={{
-            borderRadius: 5,
-            overflow: "hidden",
-            backgroundColor: "#171717",
-          }}
+          className="rounded-[5px] bg-[#171717]"
         />
-        <span style={{ color: "#989898", fontSize: 16, fontWeight: 600 }}>
+        <span className="text-[#989898] text-[16px] font-semibold">
           Not resolved yet
         </span>
       </div>
@@ -724,11 +456,11 @@ export function DesktopMyBetModal({
   isExternal?: boolean;
 }) {
   const [step, setStep] = useState(1);
-
+  console.log("oned2", ownedAmount);
   return (
     <DesktopCardModal
       cardClassName="w-full rounded-[1.5rem]"
-      dialogContentClassName="w-[30vw] bg-[#080808] rounded-[1.5rem]  min-w-[400px]"
+      dialogContentClassName="w-[30vw] bg-[#080808] rounded-[1.5rem] min-w-[400px]"
       cardContentClassName="w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[400px]"
       dialogClassName="w-full bg-[#080808] rounded-[1.5rem]"
       content={
@@ -796,7 +528,7 @@ export function DesktopMyBetModal({
             odds={"20"}
             onClose={() => {}}
             totalPot={ownedAmount}
-            amount={ownedAmount}
+            points={ownedAmount}
           />
         ) : null
       }
