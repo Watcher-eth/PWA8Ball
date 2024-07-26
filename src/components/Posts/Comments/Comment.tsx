@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, ThumbsDown } from "lucide-react";
+import { Heart, ThumbsDown, UserCircle2Icon, UserIcon } from "lucide-react";
 
 import type { BetComment } from "@/types/PostTypes";
 import type { User } from "@/types/UserTypes";
@@ -68,11 +68,7 @@ export function Comment({
           href={getProfilePath(user2?.external_auth_provider_user_id)}
         >
           <div className="flex flex-row items-center">
-            <img
-              src={user?.pfp}
-              alt="profile"
-              className="size-12 rounded-[50%] overflow-hidden object-cover mr-1.5"
-            />
+            <UserPfpIcon pfp={user?.pfp} />
             <div className="flex flex-col">
               <div className="flex flex-row items-center">
                 <p className="text-[16.5px]  text-white">{user?.name}</p>
@@ -103,20 +99,21 @@ export function Comment({
       </div>
 
       <p className="my-2 text-base text-white">{content}</p>
-      <div className="flex flex-row items-center justify-between mb-2">
+      <div className="flex flex-row items-center justify-between mb-1.5">
         <button
           onClick={() => {
             setReply(user?.name ?? name);
             handleComment();
           }}
           className={`
-            text-[15px] text-[#DDDDDD]
+            text-xs text-white/60 hover:text-white/80 py-1 px-2 rounded-full
+            ring-1 ring-transparent hover:ring-white/10 active:ring-white/20
             bg-none border-none cursor-pointer
           `}
         >
           Reply
         </button>
-        <div className="flex flex-row items-center mb-1.5">
+        <div className="flex flex-row items-center">
           <button
             onClick={handleLikePress}
             className={`
@@ -125,10 +122,16 @@ export function Comment({
             `}
           >
             <Heart
-              fill={temporaryLike ? "#e32636" : "transparent"}
-              color={temporaryLike ? "#e32636" : "white"}
               size={19}
               strokeWidth={3}
+              className={`
+                transition-all duration-75
+                ${
+                  temporaryLike
+                    ? "text-[#e32636] fill-[#e32636]"
+                    : "text-white hover:text-[#e32636]"
+                }
+              `}
             />
           </button>
           <button
@@ -139,15 +142,39 @@ export function Comment({
             `}
           >
             <ThumbsDown
-              fill={temporaryDislike ? "#FF6700" : "transparent"}
-              color={temporaryDislike ? "#FF6700" : "white"}
               size={19}
               strokeWidth={3}
+              className={`
+                transition-all duration-75
+                ${
+                  temporaryDislike
+                    ? "text-[#FF6700] fill-[#FF6700]"
+                    : "text-white hover:text-[#FF6700]"
+                }
+              `}
             />
           </button>
         </div>
       </div>
-      <div className="w-[calc(100%+48px)] self-center h-[0.35px] bg-[#303030] mt-1.5 mb-px z-20" />
+      <div className="w-[calc(100%+48px)] self-center h-[0.35px] bg-[#303030] mt-3 mb-px z-20" />
     </motion.div>
   );
+}
+
+
+function UserPfpIcon({ pfp }: { pfp?: string }) {
+  if (pfp?.length > 0) {
+    return (
+      <img
+        src={pfp}
+        alt="profile"
+        className="size-12 rounded-[50%] overflow-hidden object-cover mr-1.5"
+      />
+    );
+  } else {
+    return (
+      <UserCircle2Icon size={48} className="mr-1.5"/>
+    );
+  }
+
 }

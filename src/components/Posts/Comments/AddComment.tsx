@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState, useRef } from "react";
 import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 import { User } from "@/types/UserTypes";
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
@@ -43,14 +43,10 @@ export function AddComment({
 
   async function addUserComment() {
     const date = new Date();
-    const result = await addComment({
-      market_id: id,
-      content: content!,
-      created_by: user?.external_auth_provider_user_id,
-      topic_id: topic_id,
-      parent_id: "words[1]",
-    });
-
+    if (content?.length < 1) {
+      toast.error("Comment cannot be empty!", {});
+      return;
+    }
     addOptimisticComment({
       name: user.name,
       pfp: user.pfp,
@@ -59,6 +55,15 @@ export function AddComment({
       extraComments: [],
       id: id,
     });
+    const result = await addComment({
+      market_id: id,
+      content: content!,
+      created_by: user?.external_auth_provider_user_id,
+      topic_id: topic_id,
+      parent_id: "words[1]",
+    });
+
+
 
     toast.success("Commented successfully!", {
       icon: <CheckCircle height={"15px"} />,
@@ -103,30 +108,47 @@ export function AddComment({
 
         <div // hidden group-focus-within:flex
           className={`
-            h-0 group-focus-within:h-12 flex flex-row  items-center space-x-3 justify-end
-            mt-0 group-focus-within:mt-3 overflow-hidden transition-all
-            opacity-0 group-focus-within:opacity-100
+            h-12 group-focus-within:h-12 flex flex-row  items-center space-x-3 justify-end
+            mt-0 group-focus-within:mt-2 overflow-y-hidden overflow-x-visible transition-all
+            opacity-0 group-focus-within:opacity-100 px-2
           `}
         >
-          <div
-            className="text-white text-[0.9rem] font-semibold cursor-pointer"
+          <CommentActionButton
+            className={`
+              text-white/80
+              hover:text-white/100 hover:ring-1 hover:ring-white/10
+            `}
             onClick={handleCancel}
-          >
-            Cancel
-          </div>
-          <div
-            onClick={() => {
-              console.log("onClick triggered");
-              addUserComment();
-            }}
-            className="text-white text-[0.9rem] font-semibold py-1.5 px-3 bg-[#FF0050] hover:scale-105 active:scale-95 transition-all rounded-full cursor-pointer"
-          >
-            Comment
-          </div>
+            label="Cancel"
+          />
+          <CommentActionButton
+            onClick={() => addUserComment()}
+            className={`
+              text-white
+              bg-blue-600
+            `}
+            label="Comment"
+          />
         </div>
       </div>
     </div>
   );
 }
 
+function CommentActionButton({ onClick, label, className="" }) {
+  return (
+    <div
+      className={`
+        text-sm font-semibold cursor-pointer
+        py-1.5 px-3 rounded-full
+        hover:scale-105 active:scale-95 transition-all
+
+        ${className}
+      `}
+      onClick={onClick}
+    >
+      {label}
+    </div>
+  );
+}
 
