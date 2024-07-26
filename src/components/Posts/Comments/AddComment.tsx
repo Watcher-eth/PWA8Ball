@@ -2,8 +2,9 @@
 import { useState, useRef } from "react";
 import { toast } from "sonner";
 import { CheckCircle, XCircle } from "lucide-react";
+import type { User } from "@/types/UserTypes";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
-import { User } from "@/types/UserTypes";
+
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
 
 

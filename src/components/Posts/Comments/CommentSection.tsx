@@ -1,14 +1,15 @@
 // @ts-nocheck
 import _ from "lodash"
-
+import { useState } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { Comment } from "./Comment";
+
 import { BetComment } from "@/types/PostTypes";
-import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 import { IUserWithBet } from "@/supabase/types";
+import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
+
 import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlaceholders";
 import { AddComment } from "./AddComment";
-import { useState } from "react";
+import { Comment } from "./Comment";
 
 export const CommentSection = ({
   marketId,
@@ -69,7 +70,10 @@ export const CommentSection = ({
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
-      <AddComment user={user} addOptimisticComment={addOptimisticComment} />
+      <AddComment
+        user={user}
+        addOptimisticComment={addOptimisticComment}
+      />
       <div>
         {allComments.map((item) => {
           const commentUser = findUserByExternalAuthId(item.created_by);
