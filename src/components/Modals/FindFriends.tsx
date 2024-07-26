@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { motion } from "framer-motion";
 
 import {
   Drawer,
@@ -6,8 +7,8 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { motion } from "framer-motion";
-import {FindFriends} from "../Share/InviteFriendsModal";
+
+import { FindFriends } from "@/components/Share/InviteFriendsModal";
 
 export function FindFriendsModal({ children }: { children: React.ReactNode }) {
   return (
