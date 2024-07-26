@@ -12,6 +12,7 @@ import { parseOption } from "@/utils/predictions/parseOption";
 import { getProfilePath } from "@/utils/urls";
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
 
+import { CommentHeader } from "./CommentHeader";
 
 interface CommentProps extends BetComment {
   setReply: (name: string) => void;
@@ -31,8 +32,7 @@ export function Comment({
   handleComment,
 }: CommentProps) {
   const { mutate: deleteComment } = useDeleteComment();
-  const [temporaryLike, setTemporaryLike] = useState(false);
-  const [temporaryDislike, setTemporaryDislike] = useState(false);
+
   const handleDelete = () => {
     deleteComment(id, {
       onSuccess: (data) => {
@@ -44,15 +44,6 @@ export function Comment({
     });
   };
   console.log("date", created_at, date);
-  const handleLikePress = () => {
-    setTemporaryLike(!temporaryLike);
-    setTemporaryDislike(false);
-  };
-
-  const handleDislikePress = () => {
-    setTemporaryDislike(!temporaryDislike);
-    setTemporaryLike(false);
-  };
 
   return (
     <motion.div
@@ -60,46 +51,11 @@ export function Comment({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col w-full"
+      className="flex flex-col w-full pt-5"
     >
-      <div className="flex flex-row w-full items-center justify-between mt-5">
-        <Link
-          className="cursor-pointer"
-          href={getProfilePath(user2?.external_auth_provider_user_id)}
-        >
-          <div className="flex flex-row items-center">
-            <UserPfpIcon pfp={user?.pfp} />
-            <div className="flex flex-col">
-              <div className="flex flex-row items-center">
-                <p className="text-[16.5px]  text-white">{user?.name}</p>
-                {user2 && (
-                  <p
-                    className={`
-                      text-[12px] font-[Aeonik-Bold] text-white
-                      px-1.5 py-px rounded-[10px] overflow-hidden ml-1.5
-                      ${
-                        parseOption(user2?.option) === "No"
-                          ? "bg-[#FF0050]"
-                          : "bg-[#0050FF]"
-                      }
-                    `}
-                  >
-                    ${(user2?.amount / 10 ** 6).toFixed(2)}{" "}
-                    {parseOption(user2?.option)}
-                  </p>
-                )}
-              </div>
-
-              <p className="text-[14.5px] text-[lightgray] mt-0">
-                Replied {timeAgo(created_at ?? created_at)}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
-
-      <p className="my-2 text-base text-white">{content}</p>
-      <div className="flex flex-row items-center justify-between mb-1.5">
+      <CommentHeader user={user} user2={user2} created_at={created_at} />
+      <p className="my-2 text-base text-white ml-12">{content}</p>
+      <div className="flex flex-row items-center justify-between mb-1.5 ml-10">
         <button
           onClick={() => {
             setReply(user?.name ?? name);
@@ -113,68 +69,78 @@ export function Comment({
         >
           Reply
         </button>
-        <div className="flex flex-row items-center">
-          <button
-            onClick={handleLikePress}
-            className={`
-              bg-none border-none cursor-pointer
-              flex items-center mr-2.5
-            `}
-          >
-            <Heart
-              size={19}
-              strokeWidth={3}
-              className={`
-                transition-all duration-75
-                ${
-                  temporaryLike
-                    ? "text-[#e32636] fill-[#e32636]"
-                    : "text-white hover:text-[#e32636]"
-                }
-              `}
-            />
-          </button>
-          <button
-            onClick={handleDislikePress}
-            className={`
-              bg-none border-none cursor-pointer
-              flex items-center
-            `}
-          >
-            <ThumbsDown
-              size={19}
-              strokeWidth={3}
-              className={`
-                transition-all duration-75
-                ${
-                  temporaryDislike
-                    ? "text-[#FF6700] fill-[#FF6700]"
-                    : "text-white hover:text-[#FF6700]"
-                }
-              `}
-            />
-          </button>
-        </div>
+        <LikeDislikeSection/>
+
       </div>
-      <div className="w-[calc(100%+48px)] self-center h-[0.35px] bg-[#303030] mt-3 mb-px z-20" />
+      <div className="w-full self-center h-0 border-b border-white/20 mt-3 z-20" />
     </motion.div>
   );
 }
 
 
-function UserPfpIcon({ pfp }: { pfp?: string }) {
-  if (pfp?.length > 0) {
-    return (
-      <img
-        src={pfp}
-        alt="profile"
-        className="size-12 rounded-[50%] overflow-hidden object-cover mr-1.5"
-      />
-    );
-  } else {
-    return (
-      <UserCircle2Icon size={48} className="mr-1.5"/>
-    );
-  }
+function LikeDislikeSection() {
+  const [temporaryLike, setTemporaryLike] = useState(false);
+  const [temporaryDislike, setTemporaryDislike] = useState(false);
+  const handleLikePress = () => {
+    setTemporaryLike(!temporaryLike);
+    setTemporaryDislike(false);
+  };
 
+  const handleDislikePress = () => {
+    setTemporaryDislike(!temporaryDislike);
+    setTemporaryLike(false);
+  };
+
+  return (
+    <div className="flex flex-row items-center space-x-2.5">
+      <CommentReactionButton
+        onClick={handleLikePress}
+        IconComponent={Heart}
+        className={
+          temporaryLike
+            ? "text-[#e32636] fill-[#e32636]"
+            : "text-white hover:text-[#e32636]"
+        }
+      />
+      <CommentReactionButton
+        onClick={handleDislikePress}
+        IconComponent={ThumbsDown}
+        className={
+          temporaryDislike
+            ? "text-[#FF6700] fill-[#FF6700]"
+            : "text-white hover:text-[#FF6700]"
+        }
+      />
+    </div>
+  );
+}
+
+
+function CommentReactionButton({
+  onClick,
+  IconComponent,
+  className,
+}: {
+  onClick: () => void,
+  IconComponent: React.FC
+  className: string
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        bg-none border-none cursor-pointer
+        flex items-center
+      `}
+    >
+      <IconComponent
+        size={19}
+        strokeWidth={3}
+        className={`
+          transition-all duration-75
+          ${className}
+        `}
+      />
+    </button>
+  );
 }
