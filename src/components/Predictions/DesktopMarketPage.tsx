@@ -177,7 +177,7 @@ export function DesktopMarketPage({ users, market, id }) {
               />
             </Col>
             <Col xs={3}>
-              <div className=" rounded-lg">
+              <div className="mx-4 mt-2 rounded-lg">
                 <RelatedMarkets
                   isDesktop={true}
                   topicId={market?.topic_id}

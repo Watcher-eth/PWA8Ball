@@ -16,7 +16,7 @@ export function DesktopBettersModal({
   return (
     <DesktopCardModal
       cardContentClassName="bg-[#080808]/30  backdrop-blur-lg"
-      dialogContentClassName="xl:max-w-[27%] sm:max-w-[55%] md:max-w-[35%]"
+      dialogContentClassName="xl:max-w-[28%] sm:max-w-[55%] md:max-w-[35%]"
       content={
         <BettersOverview
           isDesktop={true}
@@ -35,4 +35,3 @@ export function DesktopBettersModal({
     </DesktopCardModal>
   );
 }
-

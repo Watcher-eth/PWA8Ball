@@ -16,7 +16,6 @@ import { DesktopOnboardingModal } from "@/components/Onboarding/DesktopOnboardin
 
 export function DesktopNavBar() {
   const { user } = useUserStore();
-  console.log("user", user);
   const userId = user?.external_auth_provider_user_id;
 
   return (

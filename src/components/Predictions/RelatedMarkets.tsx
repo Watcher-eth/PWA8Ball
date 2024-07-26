@@ -1,6 +1,5 @@
 // @ts-nocheck
 import Link from "next/link";
-
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
@@ -20,13 +19,15 @@ export const RelatedMarkets = ({
     return (
       <div
         className={`
-          flex flex-col p-t
-          ${isDesktop ? "bg-transparent" : "bg-[#101010]  p-4 pt-6"}
+          flex flex-col 
+          ${isDesktop ? "bg-transparent" : "bg-[#101010] p-4 pt-6"}
         `}
       >
-        <div className="pb-3" style={styles.header}>
+        <div className="pb-3 flex flex-row items-center">
           <StarHalf color={"white"} strokeWidth={3} />
-          <span style={styles.headerText}>Related Predictions</span>
+          <span className="text-[20px] text-white ml-0 font-bold">
+            Related Predictions
+          </span>
         </div>
         <div className="flex flex-col gap-2">
           {markets
@@ -43,7 +44,7 @@ export const RelatedMarkets = ({
             })}
         </div>
 
-        <div style={styles.spacer} />
+        <div className="h-[80px]" />
       </div>
     );
 
@@ -67,26 +68,24 @@ function RelatedMarketQuestion({
         className={`
           flex flex-row items-center
           p-2 rounded-[10px] cursor-pointer
-           ${
-             isDesktop
-               ? " bg-transparent border border-white/10 hover:border-white/20"
-               : "bg-[#191919]"
-           }
+          ${
+            isDesktop
+              ? "bg-transparent border border-white/10 hover:border-white/20"
+              : "bg-[#191919]"
+          }
           transition-all
         `}
       >
-        <img style={styles.marketImage} src={image} alt={title} />
-        <div style={styles.marketDetails} className=" -space-y-1">
-          <span
-            className="line-clamp-1 font-[Aeonik-Bold]	"
-            style={styles.marketQuestion}
-          >
+        <img
+          className="h-[54px] w-[54px] rounded-[8px] object-cover"
+          src={image}
+          alt={title}
+        />
+        <div className="flex flex-col ml-[9px] -space-y-1">
+          <span className="line-clamp-1 font-[Aeonik-Bold] text-[16px] text-[lightgray] max-w-[73vw] mb-[1px] overflow-hidden">
             {question}
           </span>
-          <span
-            className="text-lg font-[Aeonik-Bold]"
-            style={styles.marketProbability}
-          >
+          <span className="text-lg font-[Aeonik-Bold] text-white">
             {currentprob ?? initialprob}%{" "}
             {option === 0 ? options[option + 1].name : options[option - 1].name}
           </span>
@@ -95,52 +94,3 @@ function RelatedMarketQuestion({
     </Link>
   );
 }
-
-const styles = {
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  headerText: {
-    fontSize: 20,
-    color: "white",
-    marginLeft: 0,
-    fontWeight: "bold",
-  },
-  marketItem: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 7,
-    borderRadius: 10,
-    marginTop: 11,
-    backgroundColor: "#1A1A1A",
-    cursor: "pointer",
-  },
-  marketImage: {
-    height: 54,
-    width: 54,
-    borderRadius: 8,
-    overflow: "hidden",
-    objectFit: "cover",
-  },
-  marketDetails: {
-    display: "flex",
-    flexDirection: "column",
-    marginLeft: 9,
-  },
-  marketQuestion: {
-    fontSize: 16,
-    color: "lightgray",
-    maxWidth: "73vw", // Adjusted to 80% of the viewport width
-    marginBottom: 1,
-    overflow: "hidden",
-  },
-  marketProbability: {
-    color: "white",
-  },
-  spacer: {
-    height: 80,
-  },
-};

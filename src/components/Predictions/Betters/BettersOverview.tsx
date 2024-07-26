@@ -19,8 +19,8 @@ export function BettersOverview({
 }) {
   return (
     <div
-      className={`flex flex-col p-0 rounded-2xl m-4 ${
-        isDesktop ? "bg-[transparent]" : "bg-[#080808]"
+      className={`flex flex-col p-0 rounded-2xl ${
+        isDesktop ? "bg-[transparent]" : " m-4 bg-[#080808]"
       } `}
     >
       <div className="flex flex-row items-center ">
