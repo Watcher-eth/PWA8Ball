@@ -1,7 +1,7 @@
 // @ts-nocheck
+import _ from "lodash"
 import { useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
-import debounce from "lodash/debounce";
 import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
 import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
@@ -80,7 +80,7 @@ export function SearchOverview() {
   const masterList = getMasterList();
 
   const debouncedSearch = useCallback(
-    debounce((text) => {
+    _.debounce((text) => {
       setDebouncedText(text);
     }, 300),
     []

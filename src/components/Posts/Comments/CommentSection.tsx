@@ -1,7 +1,6 @@
 // @ts-nocheck
+import _ from "lodash"
 
-import React from "react";
-import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { Comment } from "./Comment";
 import { BetComment } from "@/types/PostTypes";
@@ -40,23 +39,15 @@ export const CommentSection = ({
   );
 
   const findUserByExternalAuthId = (externalAuthId: string) => {
-    return users.find(
+    return users?.find(
       (user) => user.external_auth_provider_user_id === externalAuthId
     );
   };
 
-  const allComments = React.useMemo(() => {
-    const commentIds = new Set();
-    const combinedComments = [...optimisticComments, ...(comments || [])];
-    return combinedComments.filter((comment) => {
-      if (commentIds.has(comment.id)) {
-        return false;
-      } else {
-        commentIds.add(comment.id);
-        return true;
-      }
-    });
-  }, [comments, optimisticComments]);
+  const allComments = _.uniqBy(
+    [...optimisticComments, ...(comments || [])],
+    (comment) => comment.id
+  );
 
   if (allComments?.length < 1) {
     return (
@@ -66,9 +57,11 @@ export const CommentSection = ({
 
   return (
     <div
-      className={`${isDesktop ? "w-full" : "w-[96vw]"}  flex flex-col ${
-        isDesktop ? "px-3" : "p-5"
-      }  pb-[78px]`}
+      className={`
+        flex flex-col
+        ${isDesktop ? "px-3" : "p-5"}
+        ${isDesktop ? "w-full" : "w-[96vw]"}
+        pb-20`}
     >
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
@@ -76,10 +69,7 @@ export const CommentSection = ({
       <AddComment user={user} addOptimisticComment={handleComment} />
       <div>
         {allComments.map((item) => {
-          let commentUser;
-
-          if (users?.length > 0)
-            commentUser = findUserByExternalAuthId(item.created_by);
+          const commentUser = findUserByExternalAuthId(item.created_by);
 
           return (
             <Comment
@@ -87,7 +77,6 @@ export const CommentSection = ({
               {...item}
               setReply={() => {}}
               handleComment={() => {}}
-              hasPosition={!!commentUser}
               user2={commentUser}
             />
           );

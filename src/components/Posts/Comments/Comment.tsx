@@ -5,17 +5,17 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, ThumbsDown } from "lucide-react";
 
-import { BetComment } from "@/types/PostTypes";
+import type { BetComment } from "@/types/PostTypes";
+import type { User } from "@/types/UserTypes";
 import { timeAgo } from "@/utils/datetime/timeAgo";
 import { parseOption } from "@/utils/predictions/parseOption";
 import { getProfilePath } from "@/utils/urls";
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
-import { User } from "@/types/UserTypes";
+
 
 interface CommentProps extends BetComment {
   setReply: (name: string) => void;
   handleComment: () => void;
-  hasPosition: boolean;
   user2: User;
 }
 
@@ -26,7 +26,6 @@ export function Comment({
   created_at,
   content,
   name,
-  hasPosition,
   date,
   setReply,
   handleComment,
@@ -34,7 +33,6 @@ export function Comment({
   const { mutate: deleteComment } = useDeleteComment();
   const [temporaryLike, setTemporaryLike] = useState(false);
   const [temporaryDislike, setTemporaryDislike] = useState(false);
-
   const handleDelete = () => {
     deleteComment(id, {
       onSuccess: (data) => {
@@ -78,7 +76,7 @@ export function Comment({
             <div className="flex flex-col">
               <div className="flex flex-row items-center">
                 <p className="text-[16.5px]  text-white">{user?.name}</p>
-                {hasPosition && (
+                {user2 && (
                   <p
                     className={`
                       text-[12px] font-[Aeonik-Bold] text-white
