@@ -1,3 +1,6 @@
+import { supabase } from "@/supabase/supabaseClient";
+import { useMutation } from "@tanstack/react-query";
+
 export interface NewComment {
   market_id: number;
   content: string;
@@ -17,9 +20,8 @@ export interface IComment {
   likes: any; // Adjust according to your schema
   parent_id?: string | null; // New field to handle replies
 }
-import { supabase } from "../supabaseClient";
 
-const createComment = async (newComment: NewComment): Promise<IComment> => {
+export async function createComment(newComment: NewComment): Promise<IComment> {
   const { data, error } = await supabase
     .from("comments")
     .insert([newComment])
@@ -63,9 +65,9 @@ const createComment = async (newComment: NewComment): Promise<IComment> => {
   return data;
 };
 
-export { createComment };
+
 // useCreateComment.ts
-import { useMutation } from "@tanstack/react-query";
+
 
 export const useCreateComment = () => {
   return useMutation<IComment, Error, NewComment>({

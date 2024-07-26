@@ -5,7 +5,8 @@ import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-interface RemoveLPConfirmationScreenProps {
+
+export function CashoutConfirmScreen(props : {
   changeStep: () => void;
   onClose: () => void;
   title: string;
@@ -16,10 +17,7 @@ interface RemoveLPConfirmationScreenProps {
   options: [];
   isDesktop?: boolean;
 }
-
-export const CashoutConfirmScreen: React.FC<RemoveLPConfirmationScreenProps> = (
-  props
-) => {
+) {
   const { onClose } = props;
   const { user } = useUserStore();
 

@@ -5,7 +5,7 @@ import {
   DesktopMyBetModal,
 } from "../common/Charts/MyBetModal";
 
-export const ActivityField = ({
+export function ActivityField({
   index,
   pfp,
   name,
@@ -35,7 +35,7 @@ export const ActivityField = ({
   id: string;
   initialProb: number;
   onOpenBottomSheet: () => void;
-}) => {
+}) {
 
   const MotionDivContent = () => (
     <motion.div

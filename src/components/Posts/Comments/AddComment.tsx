@@ -1,11 +1,12 @@
 // @ts-nocheck
-
+import { useState, useRef } from "react";
+import { toast } from "sonner";
+import { CheckCircle } from "lucide-react";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 import { User } from "@/types/UserTypes";
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
-import { CheckCircle } from "lucide-react";
-import { useState, useRef } from "react";
-import { toast } from "sonner";
+
+
 
 interface AddCommentProps {
   user: User;
@@ -80,7 +81,7 @@ function AddComment({
         src={user?.pfp}
         alt="User Profile"
       />
-      <div className="flex flex-col w-[95%] relative">
+      <div className="flex flex-col w-full relative">
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}

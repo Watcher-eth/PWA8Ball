@@ -55,8 +55,6 @@ export function PredictModal({
   const fontSizeAdjustmentFactor = 0.95;
 
   const [fontSize, setFontSize] = useState(baseFontSize);
-  const [paddingTop, setPaddingTop] = useState(62);
-  const [paddingBottom, setPaddingBottom] = useState(55);
 
   useEffect(() => {
     const newLength =
@@ -103,7 +101,7 @@ export function PredictModal({
     confirmSelection(2);
     setStep(2);
   }
-  const confirmSelection = (option) => {
+  function confirmSelection(option) {
     if (parseFloat(sliderValue.replace(/,/g, "")) >= userBalance) {
       // showToast();
       return;
@@ -141,8 +139,7 @@ export function PredictModal({
                     </Marquee>
                   </div>
                   <div
-                    className="flex flex-col items-center"
-                    style={{ paddingTop, paddingBottom }}
+                    className="flex flex-col items-center pt-[62px] pb-[55px]"
                   >
                     <div className="flex flex-row items-center justify-center">
                       <span className="text-3xl font-mono text-gray-400 mr-1">

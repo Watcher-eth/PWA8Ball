@@ -18,10 +18,7 @@ export function OutcomeButton({
   const outcomeOptionClassName = getClassNameFromOption(option);
   return (
     <Button
-      onClick={(e) => {
-        onClick?.(e);
-        // e.stopPropagation();
-      }}
+      onClick={onClick}
       className={`
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all

@@ -45,10 +45,12 @@ export function DesktopProfilePopover({
   const { user } = useUserStore();
   const { disconnectUser } = useDisconnectUser();
   const { displayName } = useMyEns();
+
   const displayUsername =
-    user?.name?.slice(0, 2) == "0x"
+    (!user?.name || (user?.name?.slice(0, 2) == "0x"))
       ? displayName
       : user?.name;
+  console.log(user?.name, displayName, displayUsername);
 
 
   return (
@@ -62,7 +64,10 @@ export function DesktopProfilePopover({
             {user?.pfp ? (
               <img className="size-6 rounded-full mr-2" src={user?.pfp} />
             ) : (
-              <UserCircle className="size-6 text-white" strokeWidth={2.2} />
+              <UserCircle
+                className="size-6 rounded-full mr-2"
+                strokeWidth={2.2}
+              />
             )}
             <div>{displayUsername}</div>
           </DropdownMenuLabel>

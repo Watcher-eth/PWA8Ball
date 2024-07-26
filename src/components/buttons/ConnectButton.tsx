@@ -1,5 +1,6 @@
 import { IUser } from "@/supabase/types";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
+import { UserCircle } from "lucide-react";
 
 export function ConnectButton({ user }: { user: IUser }) {
   const { displayName } = useMyEns();
@@ -15,12 +16,14 @@ export function ConnectButton({ user }: { user: IUser }) {
       `}
     >
       {displayName ?? "Connect"}
-      {user && (
+      {user?.pfp ? (
         <img
           src={user?.pfp}
           alt={user?.name}
           className="size-6 rounded-full  ml-2 -mr-1 inline"
         />
+      ) : (
+        <UserCircle className="size-6 rounded-full ml-2 -mr-1 inline" />
       )}
     </div>
   );

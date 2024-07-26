@@ -1,12 +1,13 @@
 // @ts-nocheck
+import { motion } from "framer-motion";
 import { useEffect } from "react";
+
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import { UserPredictionSkeleton } from "./UserPredictions";
-import { PredictionPositionModal } from "../Modals/PredictionPositionModal";
-import { motion } from "framer-motion";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
+import { UserPredictionSkeleton } from "./UserPredictions";
+
 export function DesktopUserActivity({
   walletAddress,
   userId,
