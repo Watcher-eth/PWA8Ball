@@ -12,8 +12,8 @@ async function unfollowUser({
 }) {
   const { error } = await supabase
     .from("user_follows")
+    .match({ follower_id: followerId, following_id: followingId })
     .delete()
-    .match({ follower_id: followerId, following_id: followingId });
 
   if (error) throw new Error(error.message);
 };
