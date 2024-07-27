@@ -6,7 +6,6 @@ import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollower
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
-import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
 
 export default function ProfilePage({

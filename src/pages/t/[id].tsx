@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { supabase } from "@/supabase/supabaseClient";
-import { FeaturedBet } from "@/components/Topics";
+import { Topic } from "@/components/_topic";
 
 
 export async function getServerSideProps(context) {
@@ -48,7 +48,7 @@ export default function TopicPage({
 
     return (
       <div>
-        <FeaturedBet
+        <Topic
           id={id}
           name={title}
           description={description}

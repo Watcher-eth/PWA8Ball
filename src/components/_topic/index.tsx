@@ -12,6 +12,7 @@ import { LEADERBOARD_PATH } from "@/utils/urls";
 import { ShareTopicModal } from "@/components/modals/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";
+import { AvatarGroup } from "./AvatarGroup";
 
 const ICON_BUTTON_CLASSNAME = `
   bg-[rgba(21,21,21,0.95)] backdrop-blur-2xl
@@ -19,7 +20,7 @@ const ICON_BUTTON_CLASSNAME = `
   absolute top-12 z-10
   `
 
-export const FeaturedBet = ({
+export function Topic({
   name,
   description,
   image,
@@ -28,7 +29,7 @@ export const FeaturedBet = ({
   id,
   type,
   members,
-}) => {
+}) {
   const router = useRouter();
   const scrollRef = useRef(null);
 
@@ -124,19 +125,5 @@ export const FeaturedBet = ({
 
 };
 
-export function AvatarGroup({ images }) {
-  return (
-    <div className="flex mt-1 -space-x-2">
-      {images?.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Avatar ${index}`}
-          className="size-6 rounded-full border-2 border-[#070707]"
-        />
-      ))}
-    </div>
-  );
-};
 
 

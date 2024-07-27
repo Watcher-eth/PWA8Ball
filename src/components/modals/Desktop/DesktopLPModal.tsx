@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { DesktopCardModal } from "../DesktopCardModal";
-import { Overview } from "@/components/Predictions/Liquidity/RemoveLiquidityModal/Overview";
-import { RemoveLPConfirmationScreen } from "@/components/Predictions/Liquidity/RemoveLiquidityModal/Confirm";
+import { Overview } from "@/components/predictions/Liquidity/RemoveLiquidityModal/Overview";
+import { RemoveLPConfirmationScreen } from "@/components/predictions/Liquidity/RemoveLiquidityModal/Confirm";
 
 export function DesktopLPModal({
   children,
