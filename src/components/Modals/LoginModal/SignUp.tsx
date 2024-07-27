@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { AtSign, CircleUser, Wallet, WalletCards } from "lucide-react";
-import { useConnectWallet, useLogin, usePrivy } from "@privy-io/react-auth";
+import { Wallet } from "lucide-react";
+import { useConnectWallet, useLogin } from "@privy-io/react-auth";
 
 import { useCreateUser } from "@/supabase/mutations/useCreateUser";
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
