@@ -6,7 +6,7 @@ import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { DesktopCardModal } from "../modals/DesktopCardModal";
-import { AppleIcon, GoogleIcon, XIcon } from "../common/Icons/AuthIcons";
+import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
