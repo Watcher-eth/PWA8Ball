@@ -17,7 +17,6 @@ import { CashoutOverview } from "@/components/predictions/Cashout/overview";
 import { CashOutWarningScreen } from "@/components/predictions/CreatorResolution";
 import { CashoutConfirmScreen } from "@/components/predictions/Cashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
-import { getProfilePath } from "@/utils/urls";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -139,8 +138,8 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       {prices ? (
-        <div>
-          <ChartContainer className="h-[23vh] w-full my-4" config={chartConfig}>
+        <div className="h-[23vh] my-4">
+          <ChartContainer className="h-full w-full" config={chartConfig}>
             <AreaChart
               accessibilityLayer
               data={chartData}

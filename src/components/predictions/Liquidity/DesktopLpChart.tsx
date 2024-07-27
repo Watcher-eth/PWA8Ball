@@ -1,73 +1,42 @@
 // @ts-nocheck
-import { Line, LineChart, XAxis } from "recharts";
 
-import {
-  Card
-} from "@/components/ui/tailwind/Card";
+
+
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { GenericLineChart, DEFAULT_CHART_CONFIG } from "@/components/charts/GenericLineChart";
+import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 
+
+
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
+
+const data = [
+  { date: "2023-01", sales: 100, profit: 50, customers: 200 },
+  { date: "2023-02", sales: 150, profit: 75, customers: 250 },
+  { date: "2023-03", sales: 200, profit: 100, customers: 300 },
+];
 
 export function DesktopLpChart() {
-  const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-  ];
-
-  const chartConfig = {
-    desktop: {
-      label: "Desktop",
-      color: "hsl(var(--chart-1))",
-    },
-    mobile: {
-      label: "Mobile",
-      color: "hsl(var(--chart-2))",
-    },
-  } satisfies ChartConfig;
-
   return (
-    <Card className="border-0 h-[35vh] px-4 my-10 ">
-        <ChartContainer className="h-full w-full" config={chartConfig}>
-          <LineChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Line
-              dataKey="desktop"
-              type="monotone"
-              stroke="#ffffff"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="mobile"
-              type="monotone"
-              stroke="#212121"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ChartContainer>
-    </Card>
+    // <GenericLineChart chartData={chartData}  />
+    <GenericAreaChart
+      chartData={data}
+      xAxisKey="date"
+      customConfig={{
+        sales: { label: "Total Sales", color: "hsl(var(--chart-5))" },
+      }}
+    />
   );
 }

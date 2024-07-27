@@ -2,16 +2,16 @@
 
 import { useRouter } from "next/router";
 import { useUserStore } from "@/lib/stores/UserStore";
-import {
-  DesktopLiquidityPosition,
-} from "./LiquidityPosition";
+
 
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
+
+import { Card } from "@/components/ui/tailwind/Card";
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
 
-
+import { DesktopLiquidityPosition } from "./LiquidityPosition";
 import { DesktopLpChart } from "./DesktopLpChart"
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
@@ -41,7 +41,9 @@ export function DesktopLiquidityPage() {
           </div>
         </div>
         <div className="h-[30%]">
-          <DesktopLpChart />
+          <Card className="border-0 h-[35vh] px-4 my-10 ">
+            <DesktopLpChart />
+          </Card>
         </div>
         <div className="text-[white] text-2xl  mb-4  px-10 font-[Aeonik-Bold]">
           Your Boosts
