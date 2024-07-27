@@ -12,10 +12,10 @@ import { InviteFriendsPlaceholder } from "@/components/common/Placeholders/Invit
 import { NotificationsModal } from "@/components/modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
-import { FollowPredictionSkeleton } from "./FollowPredi ctionSkeleton";
-import { ActivityField } from "./Activ ityField";
-import { Leaderboard } from "./Leader board";
-import { YourStats } from "./YourSt ats";
+import { FollowPredictionSkeleton } from "@/components/activity/FollowPredictionSkeleton";
+import { ActivityField } from "@/components/activity/ActivityField";
+import { Leaderboard } from "@/components/activity/Leaderboard";
+import { YourStats } from "@/components/activity/YourStats";
 
 export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
