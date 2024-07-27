@@ -66,6 +66,7 @@ export function DesktopChart(props: {
       color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
+  
   return (
     <div>
       <div

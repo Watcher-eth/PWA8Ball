@@ -28,11 +28,6 @@ export default function ProfilePage({
         />
       }
       desktop={
-        /**
-         * @NOTE: Have no idea whether or not activity page or profile page should be used here
-         * naming is confuzzling as fuck
-         */
-        // <DesktopProfilePage/>
         <DesktopProfilePage
           userId={userId}
           totalFollowers={totalFollowers}
