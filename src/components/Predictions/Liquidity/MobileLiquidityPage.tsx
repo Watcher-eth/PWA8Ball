@@ -8,7 +8,7 @@ import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/common/Placeholders/NewPlaceholders";
 
-export function LiquidityPage() {
+export function MobileLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
   const {

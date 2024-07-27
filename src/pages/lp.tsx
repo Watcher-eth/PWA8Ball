@@ -1,5 +1,12 @@
-import { LiquidityPage } from "@/components/Predictions/Liquidity/LiquidityPage";
+import { MobiTop } from "@/components/layouts/MobiTop";
+import { DesktopLiquidityPage } from "@/components/Predictions/Liquidity/DesktopLiquidityPage";
+import { MobileLiquidityPage } from "@/components/Predictions/Liquidity/MobileLiquidityPage";
 
 export default function Lp() {
-  return <LiquidityPage />;
+  return (
+    <MobiTop
+      mobile={<MobileLiquidityPage />}
+      desktop={<DesktopLiquidityPage />}
+    />
+  );
 }
