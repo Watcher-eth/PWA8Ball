@@ -35,8 +35,6 @@ import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
 
-
-
 export function DesktopProfilePopover({
   children,
 }: {
@@ -47,11 +45,8 @@ export function DesktopProfilePopover({
   const { displayName } = useMyEns();
 
   const displayUsername =
-    (!user?.name || (user?.name?.slice(0, 2) == "0x"))
-      ? displayName
-      : user?.name;
+    !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
   console.log(user?.name, displayName, displayUsername);
-
 
   return (
     <Dialog>
@@ -89,7 +84,7 @@ export function DesktopProfilePopover({
             <DropdownItem
               label="Your Boosts"
               IconComponent={Rocket}
-              href={getProfilePath(user?.external_auth_provider_user_id)}
+              href={"lp"}
             />
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
