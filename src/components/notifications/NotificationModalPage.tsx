@@ -1,11 +1,12 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-import { FollowPredictionSkeleton } from "../activity/FollowPredictionSkeleton";
+
 
 import { registerForPushNotificationsAsync } from "@/utils/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCheckUserHasPushToken";
+import { FollowPredictionSkeleton } from "../activity/FollowPredictionSkeleton";
 import { NotificationsPage } from "./UserNotifications";
 
 export function NotificationsModalPage({ isDesktop }: { isDesktop?: boolean }) {

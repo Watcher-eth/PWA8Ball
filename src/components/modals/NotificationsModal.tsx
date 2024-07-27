@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { NotificationsModalPage } from "../Notifications/NotificationModalPage";
+import { NotificationsModalPage } from "../notifications/NotificationModalPage";
 
 export function NotificationsModal({ children }: { children: React.ReactNode }) {
   const handleShare = async () => {

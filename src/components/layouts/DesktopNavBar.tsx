@@ -7,7 +7,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { ConnectButton } from "@/components/buttons/ConnectButton";
 import { NavIconButton } from "@/components/buttons/NavIconButton";
 
-import { DesktopNotificationModal } from "@/components/Notifications/DesktopNotificationModal";
+import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "@/components/Search/DesktopSearchModal";
 import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/Onboarding/DesktopOnboardingModal";
