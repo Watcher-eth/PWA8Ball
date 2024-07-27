@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Switch } from "@/components/ui/switch";
+
 import {
   ChevronRight,
   CreditCard,
@@ -8,7 +8,7 @@ import {
   Save,
   UserPlus,
 } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Label,
   PolarGrid,
@@ -17,13 +17,14 @@ import {
   RadialBarChart,
 } from "recharts";
 import { CardContent } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
 import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
-export const SettingsPage: React.FC = () => {
+export function SettingsPage() {
   const initialSettings = {
     pushNotifications: false,
     personalizedRecommendations: false,

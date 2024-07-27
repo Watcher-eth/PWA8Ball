@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { BettersOverview } from "./BettersOverview";
 
 export function DesktopBettersModal({

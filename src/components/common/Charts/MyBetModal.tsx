@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { AlignLeft, ArrowLeftRight, Clock, Receipt, User2 } from "lucide-react";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
-import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
   ChartContainer,

@@ -3,7 +3,7 @@
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 import { NotificationCard } from "./UserNotifications";
 import { NotificationsPlaceholder } from "../common/Placeholders/NewPlaceholders";
-import { DesktopCardModal } from "../Modals/DesktopCardModal";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 export function DesktopNotificationModal({

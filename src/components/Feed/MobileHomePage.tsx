@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 
-import { LoginModal } from "@/components/Modals/LoginModal";
+import { LoginModal } from "@/components/modals/LoginModal";
 
 import { FeedCard } from "./FeedCard";
 import { TopicHeader } from "./TopicHeader";

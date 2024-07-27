@@ -13,7 +13,7 @@ import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
 import { DesktopChart } from "@/components/common/Charts/DesktopChart";
-import { DesktopLoadingPrediction } from "@/components/Modals/PredictModal/LoadingPrediction";
+import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
 import { DesktopShareBetModal } from "@/components/Share/ShareBetModal";
 
 import { CashoutConfirmScreen } from "./Cashout/confirm";

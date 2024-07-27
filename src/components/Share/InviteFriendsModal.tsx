@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
-import { DesktopCardModal } from "../Modals/DesktopCardModal";
-import { Spinner } from "../Modals/PredictModal/Spinner";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
+import { Spinner } from "../modals/PredictModal/Spinner";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");

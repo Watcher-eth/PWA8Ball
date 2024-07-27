@@ -5,7 +5,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-import { DesktopCardModal } from "../Modals/DesktopCardModal";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { AppleIcon, GoogleIcon, XIcon } from "../common/Icons/AuthIcons";
 
 const METAMASK_ICON_SRC =

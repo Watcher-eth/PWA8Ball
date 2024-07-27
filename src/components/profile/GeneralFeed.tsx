@@ -10,7 +10,7 @@ import {
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { NewPlaceholder } from "../common/Placeholders/NewPlaceholders";
-import { PredictionPositionModal } from "../Modals/PredictionPositionModal";
+import { PredictionPositionModal } from "../modals/PredictionPositionModal";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 export const GeneralFeed = ({

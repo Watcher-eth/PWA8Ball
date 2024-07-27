@@ -9,7 +9,7 @@ import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDa
 import { parseOptionJSON } from "@/utils/predictions/parseOption";
 
 import { InviteFriendsPlaceholder } from "@/components/common/Placeholders/InviteFriendsPlaceholder";
-import { NotificationsModal } from "@/components/Modals/NotificationsModal";
+import { NotificationsModal } from "@/components/modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 import { FollowPredictionSkeleton } from "./FollowPredictionSkeleton";

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
 import { RemoveLiquidityModal } from "./RemoveLiquidityModal";
-import { DesktopLPModal } from "@/components/Modals/Desktop/DesktopLPModal";
+import { DesktopLPModal } from "@/components/modals/Desktop/DesktopLPModal";
 
 export function LiquidityPosition({
   image,

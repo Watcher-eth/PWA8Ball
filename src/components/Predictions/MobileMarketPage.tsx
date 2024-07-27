@@ -12,8 +12,8 @@ import { useModalStore } from "@/lib/stores/ModalStore";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { DrawerClose } from "@/components/ui/drawer";
 
-import { PredictModal } from "@/components/Modals/PredictModal";
-import { ShareModal } from "@/components/Modals/ShareModal";
+import { PredictModal } from "@/components/modals/PredictModal";
+import { ShareModal } from "@/components/modals/ShareModal";
 
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";

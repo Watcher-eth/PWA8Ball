@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { DesktopCardModal } from "@/components/Modals/DesktopCardModal";
-import { GetGhoModal } from "@/components/Modals/PredictModal/GetGhoModal";
-import { OnrampStep } from "@/components/Modals/PredictModal/OnrampStep";
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
+import { GetGhoModal } from "@/components/modals/PredictModal/GetGhoModal";
+import { OnrampStep } from "@/components/modals/PredictModal/OnrampStep";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
