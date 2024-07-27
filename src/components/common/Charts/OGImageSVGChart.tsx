@@ -25,6 +25,6 @@ function Chart({ prices }: OGChartData) {
   );
 }
 
-export function generateChartSVG(prices: OGChartData) {
+export function generateChartSVG(prices: Price[]) {
   return renderToStaticMarkup(<Chart prices={prices} />);
 }
