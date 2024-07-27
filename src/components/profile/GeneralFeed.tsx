@@ -9,7 +9,7 @@ import {
 } from "./UserPredictions";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
-import { NewPlaceholder } from "../common/Placeholders/NewPlaceholders";
+import { NewPlaceholder } from "../common/placeholders/NewPlaceholders";
 import { PredictionPositionModal } from "../modals/PredictionPositionModal";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 

@@ -7,7 +7,7 @@ import {
 } from "./LiquidityPosition";
 
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
-import { NewPlaceholderLp } from "@/components/common/Placeholders/NewPlaceholders";
+import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
 
 
 import { DesktopLpChart } from "./DesktopLpChart"

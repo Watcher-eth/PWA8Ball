@@ -7,7 +7,7 @@ import { BetComment } from "@/types/PostTypes";
 import { IUserWithBet } from "@/supabase/types";
 import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 
-import { NewPlaceholderComment } from "@/components/common/Placeholders/NewPlaceholders";
+import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders";
 import { AddComment } from "./AddComment";
 import { Comment } from "./Comment";
 
