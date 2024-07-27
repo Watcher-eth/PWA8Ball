@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { getProfilePath } from "@/utils/urls";
+import { UserCircle } from 'lucide-react';
 
 export function BettersOverviewItem({
   name,
@@ -43,17 +44,19 @@ export function BettersOverviewItem({
             alignItems: "center",
           }}
         >
-          <img
-            src={pfp}
-            alt={name}
-            style={{
-              height: "45px",
-              width: "45px",
-              borderRadius: "22px",
-              overflow: "hidden",
-              objectFit: "cover",
-            }}
-          />
+          {pfp ? (
+            <img
+              src={pfp}
+              alt={name}
+              className="size-10 rounded-full object-cover "
+            />
+          ) : (
+            <UserCircle
+              className="size-10 rounded-full object-cover text-white/70"
+              strokeWidth={2}
+            />
+          )}
+
           <div
             style={{
               display: "flex",

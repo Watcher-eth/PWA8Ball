@@ -312,13 +312,13 @@ function DesktopConfirmPrediction({
             >
               <motion.button
                 className={`
-            mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
-            font-bold flex items-center justify-center gap-1 self-center
-            hover:scale-101 active:scale-98 transition-all w-full
-          `}
+                  mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
+                  font-bold flex items-center justify-center gap-1 self-center
+                  hover:scale-101 active:scale-98 transition-all w-full
+                `}
                 initial={{ width: "24vw" }}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-around gap-2">
                   <SharePredictButton success={success} />
                 </div>
               </motion.button>

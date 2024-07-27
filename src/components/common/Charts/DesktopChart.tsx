@@ -13,6 +13,7 @@ import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesFor
 
 import { processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
+import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 
 export const chartConfig = {
   desktop: {
@@ -53,33 +54,14 @@ export function DesktopChart(props: {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    desktop: price.value,
-    mobile: 100 - price.value,
+    [`${props.options[0].name}`]: 100 - price.value,
+    [`${props.options[1].name}`]: price.value,
   }));
-
-  const chartConfig2 = {
-    desktop: {
-      label: props.options[1].name,
-      color: "hsl(var(--chart-1))",
-    },
-    mobile: {
-      label: props.options[0].name,
-      color: "hsl(var(--chart-2))",
-    },
-  } satisfies ChartConfig;
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "30px 0 0 0",
-        }}
-      >
-        <motion.div
+      <div className="flex flex-row items-center justify-between mt-6">
+        <div
           onClick={() => {
             props.onClose();
             router.push({
@@ -97,34 +79,14 @@ export function DesktopChart(props: {
           }}
         >
           <img
+            className="size-9 rounded-full object-cover"
             src={props.image}
-            style={{
-              height: 38,
-              width: 38,
-              borderRadius: "50%",
-              overflow: "hidden",
-              objectFit: "cover",
-            }}
             alt="Market image"
           />
-        </motion.div>
+        </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "5px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: 17,
-            color: "white",
-            fontWeight: 700,
-          }}
-        >
+      <div className="flex flex-row items-center justify-between mt-1">
+        <span className="text-white text-lg font-semibold">
           {prices
             ? props.optionNumber === 1
               ? currentPrices[currentPrices.length - 1].value
@@ -135,44 +97,22 @@ export function DesktopChart(props: {
           % {props.options[props?.option === 1 ? 0 : 1]?.name}
         </span>
         <span
-          style={{
-            color: props.optionNumber === 0 ? "#FF0050" : "#0050FF",
-            fontSize: 18,
-            fontWeight: 700,
-          }}
+          className={`
+            text-white text-lg font-semibold
+            ${props.optionNumber === 0 ? "text-red-500" : "text-blue-500"}
+          `}
         >
           {percentageDifference && percentageDifference >= 0
             ? `+${percentageDifference}`
-            : `${percentageDifference}`}
+            : `-${percentageDifference}`}
           %
         </span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: -3,
-          marginBottom: 3,
-        }}
-      >
-        <span
-          style={{
-            fontSize: 17,
-            color: "lightgray",
-            fontWeight: 600,
-          }}
-        >
+      <div className="flex flex-row items-center justify-between pb-1">
+        <span className="text-base text-white/80 font-semibold">
           {props.title}
         </span>
-        <span
-          style={{
-            color: "lightgray",
-            fontSize: 17,
-            fontWeight: 600,
-          }}
-        >
+        <span className="text-base text-white/80 font-semibold">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
@@ -182,154 +122,29 @@ export function DesktopChart(props: {
             : "This Month"}
         </span>
       </div>
-      <ChartContainer className="h-[25vh] w-full" config={chartConfig2}>
-        <AreaChart accessibilityLayer data={chartData}>
-          <CartesianGrid vertical={false} />
-          <XAxis
-            dataKey="month"
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            tickFormatter={(value) => value.slice(0, 3)}
-          />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-          <defs>
-            <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor="var(--color-desktop)"
-                stopOpacity={0.8}
-              />
-              <stop
-                offset="95%"
-                stopColor="var(--color-desktop)"
-                stopOpacity={0.1}
-              />
-            </linearGradient>
-            <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor="var(--color-mobile)"
-                stopOpacity={0.8}
-              />
-              <stop
-                offset="95%"
-                stopColor="var(--color-mobile)"
-                stopOpacity={0.1}
-              />
-            </linearGradient>
-          </defs>
-          <Area
-            dataKey="mobile"
-            type="natural"
-            fill="url(#fillMobile)"
-            fillOpacity={0.4}
-            stroke="var(--color-mobile)"
-            stackId="a"
-          />
-          <Area
-            dataKey="desktop"
-            type="natural"
-            fill="url(#fillDesktop)"
-            fillOpacity={0.4}
-            stroke="var(--color-desktop)"
-            stackId="a"
-          />
-        </AreaChart>
-      </ChartContainer>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-          justifyContent: "space-between",
-          marginBottom: 10,
-          marginTop: 0,
-          padding: "0 3rem",
-        }}
-      >
-        {timeframes.map((item, index) => (
-          <motion.div
-            key={index}
-            onClick={() => setTimeframe(item)}
-            style={{
-              padding: "4px 7px",
-
-              backgroundColor: timeframe === item ? "lightgray" : "transparent",
-              borderRadius: 15,
-            }}
-          >
-            <span
-              style={{
-                color: timeframe === item ? "black" : "gray",
-                fontSize: 14,
-                fontWeight: 700,
-              }}
-            >
-              {item}
-            </span>
-          </motion.div>
-        ))}
+      <div className="h-[25vh] min-h-[280px]">
+        <GenericAreaChart
+          chartData={chartData}
+          xAxisKey="month"
+          xAxisTickFormatter={(value) => value.slice(0, 3)}
+        />
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: -24,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              color: "lightgray",
-            }}
-          >
-            You voted
-          </span>
-          <span
-            style={{
-              color: "white",
-              fontSize: 19,
-              fontWeight: 600,
-            }}
-          >
+      <TimeframeSelector
+        timeframes={timeframes}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
+      />
+      <div className="flex flex-row items-center justify-between -mb-6">
+        <div className="flex flex-col items-start">
+          <span className="text-xs text-white/70">You voted</span>
+          <span className="text-white text-lg font-semibold">
             {props.options[props?.userOwns?.highest_option === 1 ? 0 : 1]?.name}
           </span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              color: "lightgray",
-            }}
-          >
-            Prediction Value
-          </span>
+        <div className="flex flex-col items-end">
+          <span className="text-xs text-white/70">Prediction Value</span>
           {prices && (
-            <span
-              style={{
-                color: "white",
-                fontSize: 19,
-                fontWeight: 600,
-              }}
-            >
+            <span className="text-white text-lg font-semibold">
               $
               {(
                 props?.userOwns?.highest_amount *
@@ -339,6 +154,41 @@ export function DesktopChart(props: {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+
+function TimeframeSelector({ timeframes, timeframe, setTimeframe }) {
+  return (
+    <div
+      className={`
+        flex flex-row items-center justify-between self-center
+        mb-2.5 px-12
+      `}
+    >
+      {timeframes.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => setTimeframe(item)}
+          style={{
+            padding: "4px 7px",
+
+            backgroundColor: timeframe === item ? "lightgray" : "transparent",
+            borderRadius: 15,
+          }}
+        >
+          <span
+            style={{
+              color: timeframe === item ? "black" : "gray",
+              fontSize: 14,
+              fontWeight: 700,
+            }}
+          >
+            {item}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }

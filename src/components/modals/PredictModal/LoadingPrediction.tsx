@@ -88,7 +88,7 @@ export function DesktopLoadingPrediction({
       <motion.img
         src={image}
         alt="Prediction"
-        className="rounded-md mb-6 rounded-t-[30px] object-cover mt-16 z-10"
+        className="rounded-md rounded-t-lg object-cover mt-0 z-10"
       />
       <motion.div className="absolute rounded-t-[30px]  w-full h-full backdrop-blur-xl " />
       <motion.div
