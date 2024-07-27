@@ -4,11 +4,9 @@ import { useGetNotificationsForUser } from "@/supabase/queries/notifications/use
 
 import { NotificationCard } from "./NotificationCard";
 
-export function NotificationsPage({ userId, isDesktop }) {
+export function UserNotifications({ userId, isDesktop }) {
   const {
     data: notifications,
-    isLoading,
-    error,
   } = useGetNotificationsForUser(userId);
 
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { NotificationsModalPage } from "../notifications/NotificationModalPage";
+import { NotificationsModalContent } from "../notifications/NotificationsModalContent";
 
 export function NotificationsModal({ children }: { children: React.ReactNode }) {
   const handleShare = async () => {
@@ -38,7 +38,7 @@ export function NotificationsModal({ children }: { children: React.ReactNode }) 
             className={`bg-[#171717] rounded-t-3xl
         h-[95vh] mb-5 w-screen relative`}
           >
-            <NotificationsModalPage />
+            <NotificationsModalContent />
           </motion.div>
         </DrawerContent>
       </Drawer>

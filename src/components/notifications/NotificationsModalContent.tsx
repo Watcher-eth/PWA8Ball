@@ -7,11 +7,11 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCheckUserHasPushToken";
 import { FollowPredictionSkeleton } from "../activity/FollowPredictionSkeleton";
-import { NotificationsPage } from "./UserNotifications";
+import { UserNotifications } from "./UserNotifications";
 
-export function NotificationsModalPage({ isDesktop }: { isDesktop?: boolean }) {
+export function NotificationsModalContent({ isDesktop }: { isDesktop?: boolean }) {
   const { user } = useUserStore();
-  const userId = user?.external_auth_provider_user_id
+  const userId = user?.external_auth_provider_user_id;
   const handlePressTurnOnNotifications = () => {
     registerForPushNotificationsAsync(userId);
   };
@@ -26,7 +26,7 @@ export function NotificationsModalPage({ isDesktop }: { isDesktop?: boolean }) {
   console.log(notifications?.length, isDesktop);
   if (notifications?.length > 0) {
     return (
-      <NotificationsPage
+      <UserNotifications
         isDesktop={isDesktop}
         notifications={notifications}
         userId={userId}
