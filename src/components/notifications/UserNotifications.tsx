@@ -11,17 +11,7 @@ export function NotificationsPage({ userId, isDesktop }) {
     error,
   } = useGetNotificationsForUser(userId);
 
-  if (isLoading) {
-    return <span className="text-white">Loading...</span>;
-  }
 
-  if (error) {
-    return <span className="text-white">Error: {error.message}</span>;
-  }
-
-  if (!(notifications?.length > 0)) {
-    return <span className="text-white">No notifications found.</span>;
-  }
 
   return (
     <div
@@ -36,17 +26,21 @@ export function NotificationsPage({ userId, isDesktop }) {
     >
       <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
       <div className="w-full overflow-y-auto">
-        {notifications.map((item, index) => (
-          <NotificationCard
-            key={item.id}
-            index={index}
-            type={item.type}
-            user={item.users}
-            message={item.head}
-            image={item.image}
-            comment={item.comment}
-          />
-        ))}
+        {notifications?.length > 0 ? (
+          notifications.map((item, index) => (
+            <NotificationCard
+              key={item.id}
+              index={index}
+              type={item.type}
+              user={item.users}
+              message={item.head}
+              image={item.image}
+              comment={item.comment}
+            />
+          ))
+        ) : (
+          <span className="text-white">No notifications found.</span>
+        )}
       </div>
     </div>
   );
