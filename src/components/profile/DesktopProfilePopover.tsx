@@ -28,7 +28,7 @@ import {
   UserCircle,
 } from "lucide-react";
 
-import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
+import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
 import { DesktopInviteFriends } from "@/components/share/InviteFriendsModal";
 import { Dialog } from "@/components/ui/dialog";
 import { DropdownItem } from "@/components/ui/DropdownItem";
