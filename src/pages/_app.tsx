@@ -18,8 +18,8 @@ import { AuthChecker } from "@/lib/providers/AuthProvider";
 
 import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
-import { CustomHead } from "@/components/CustomHead";
-import { RootLayout } from "@/components/common/RootLayout";
+import { CustomHead } from "@/components/layouts/CustomHead";
+import { RootLayout } from "@/components/layouts/RootLayout";
 
 export const queryClient = new QueryClient();
 

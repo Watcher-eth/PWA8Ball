@@ -12,10 +12,9 @@ import {
 import { Calendar, Search, User, X } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-
 import { Button } from "@/components/ui/Button";
 
-import { RandomMemoji } from "../common/MemojiAvatar";
+import { RandomMemoji } from "@/components/common/RandomMemoji";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { ACTIVITY_PATH } from "@/utils/urls";
 
