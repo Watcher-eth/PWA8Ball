@@ -1,7 +1,8 @@
 // @ts-nocheck
-
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+
 import {
   ChartConfig,
   ChartContainer,
@@ -9,7 +10,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
-import { useState } from "react";
+
 import { processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 
@@ -66,7 +67,7 @@ export function DesktopChart(props: {
       color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
-  
+
   return (
     <div>
       <div

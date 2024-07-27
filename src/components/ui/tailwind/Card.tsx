@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 
-const baseClassName = `!bg-transparent bg-gradient-to-r from-slate-400/10 to-slate-400/10
+const baseClassName = `!bg-transparent bg-gradient-to-r from-slate-400/[0.01] to-slate-400/[0.01]
   rounded-2xl ring-1 ring-white/10 p-4 rounded-md backdrop-blur-xl`
 const titleBaseClassName = "font-medium text-lg text-white"
 
