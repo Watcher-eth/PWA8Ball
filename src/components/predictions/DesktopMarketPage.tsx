@@ -14,9 +14,9 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "@/components/layouts/StandardBleedOverlay";
-import { CommentSection } from "@/componentspredictionsCommentSection";
-import { BetDetails } from "@/componentspredictionsBetDetails";
-import { RelatedMarkets } from "@/componentspredictionsRelatedMarkets";
+import { CommentSection } from "@/components/predictions/CommentSection";
+import { BetDetails } from "@/components/predictions/BetDetails";
+import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
 

@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";
-import { CashoutOverview } from "..predictionsCashout/overview.tsx";
-import { CashOutWarningScreen } from "..predictionsCashout/warning.tsx";
-import { CashoutConfirmScreen } from "..predictionsCashout/confirm.tsx";
+import { CashoutOverview } from "../predictions/Cashout/overview.tsx";
+import { CashOutWarningScreen } from "../predictions/Cashout/warning.tsx";
+import { CashoutConfirmScreen } from "../predictions/Cashout/confirm.tsx";
 
 export function PredictionPositionModal({
   children,
