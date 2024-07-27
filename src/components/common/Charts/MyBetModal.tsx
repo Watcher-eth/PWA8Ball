@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -17,6 +16,7 @@ import { CashoutOverview } from "@/components/predictions/Cashout/overview";
 import { CashOutWarningScreen } from "@/components/predictions/CreatorResolution";
 import { CashoutConfirmScreen } from "@/components/predictions/Cashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
+import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -62,8 +62,10 @@ export const MobileMyBetModal = (props: {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    desktop: price.value,
-    mobile: 100 - price.value,
+    [`${props.options[0]}`]: 100 - price.value,
+    [`${props.options[1]}`]: price.value,
+    // desktop: price.value,
+    // mobile: 100 - price.value,
   }));
   return (
     <div
@@ -268,25 +270,11 @@ export const MobileMyBetModal = (props: {
           </ChartContainer>
         </div>
       )}
-      <div className="w-[75%] flex flex-row items-center self-center justify-between mt-0">
-        {timeframes.map((item, index) => (
-          <motion.div
-            key={index}
-            onClick={() => setTimeframe(item)}
-            className={`p-[4px_7px] ${
-              timeframe === item ? "bg-[lightgray]" : "bg-transparent"
-            } rounded-[15px]`}
-          >
-            <span
-              className={`text-[14px] font-bold ${
-                timeframe === item ? "text-black" : "text-gray"
-              }`}
-            >
-              {item}
-            </span>
-          </motion.div>
-        ))}
-      </div>
+      <TimeframeSelector
+        timeframes={timeframes}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
+      />
       <div className="w-[101%] h-[1px] bg-[rgba(100,100,100,0.3)] my-[15px] mt-[20px]" />
       {props.ownedAmount === undefined ? (
         <div className="flex flex-row items-center justify-between">

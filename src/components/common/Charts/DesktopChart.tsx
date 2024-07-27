@@ -5,16 +5,13 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 
 import { processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
-
+import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -122,18 +119,19 @@ export function DesktopChart(props: {
             : "This Month"}
         </span>
       </div>
-      <div className="h-[25vh] min-h-[280px]">
+      <TimeframeSelector
+        timeframes={timeframes}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
+      />
+      <div className="h-[25vh] min-h-[280px] pb-2">
         <GenericAreaChart
           chartData={chartData}
           xAxisKey="month"
           xAxisTickFormatter={(value) => value.slice(0, 3)}
         />
       </div>
-      <TimeframeSelector
-        timeframes={timeframes}
-        timeframe={timeframe}
-        setTimeframe={setTimeframe}
-      />
+
       <div className="flex flex-row items-center justify-between -mb-6">
         <div className="flex flex-col items-start">
           <span className="text-xs text-white/70">You voted</span>
@@ -159,36 +157,3 @@ export function DesktopChart(props: {
 }
 
 
-function TimeframeSelector({ timeframes, timeframe, setTimeframe }) {
-  return (
-    <div
-      className={`
-        flex flex-row items-center justify-between self-center
-        mb-2.5 px-12
-      `}
-    >
-      {timeframes.map((item, index) => (
-        <div
-          key={index}
-          onClick={() => setTimeframe(item)}
-          style={{
-            padding: "4px 7px",
-
-            backgroundColor: timeframe === item ? "lightgray" : "transparent",
-            borderRadius: 15,
-          }}
-        >
-          <span
-            style={{
-              color: timeframe === item ? "black" : "gray",
-              fontSize: 14,
-              fontWeight: 700,
-            }}
-          >
-            {item}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
