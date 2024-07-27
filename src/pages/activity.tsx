@@ -1,5 +1,5 @@
 import { ActivityPage } from "@/components/Activity";
-import { DesktopActivityPage } from "@/components/Activity/DesktopActivityPage";
+import { DesktopActivityPage } from "@/components/activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { useUserStore } from "@/lib/stores/UserStore";

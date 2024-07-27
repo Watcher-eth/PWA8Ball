@@ -6,9 +6,9 @@ import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 
-import { FeedCard } from "@/components/Feed/FeedCard";
-import { DesktopTrendingTopics } from "@/components/Feed/DesktopTrendingTopic";
-import { TopicHeader } from "@/components/Feed/TopicHeader";
+import { FeedCard } from "@/components/home/FeedCard";
+import { DesktopTrendingTopics } from "@/components/home/DesktopTrendingTopic";
+import { TopicHeader } from "@/components/home/TopicHeader";
 
 
 export function DesktopHomePage({ trendingMarkets }) {

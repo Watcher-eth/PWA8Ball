@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useGetLeaderboardForTopic } from "@/supabase/queries/leaderboard/useGetLeaderboardForTopic";
 
-import { PredictorInfo } from "../Activity/PredictorInfo";
+import { PredictorInfo } from "../activity/PredictorInfo";
 
 
 const Leaderboard = ({ topicId }) => {

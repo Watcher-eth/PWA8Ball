@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-import { FollowPredictionSkeleton } from "../Activity/FollowPredictionSkeleton";
+import { FollowPredictionSkeleton } from "../activity/FollowPredictionSkeleton";
 
 import { registerForPushNotificationsAsync } from "@/utils/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";

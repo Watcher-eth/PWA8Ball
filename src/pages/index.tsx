@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { DesktopHomePage } from "@/components/Feed/DesktopHomePage";
-import { MobileHomePage } from "@/components/Feed/MobileHomePage";
+import { DesktopHomePage } from "@/components/home/DesktopHomePage";
+import { MobileHomePage } from "@/components/home/MobileHomePage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { fetchTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 
