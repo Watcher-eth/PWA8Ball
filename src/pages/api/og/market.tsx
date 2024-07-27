@@ -17,7 +17,7 @@ export default async function GET(request: Request) {
     const prices = market.prices;
 
     //TODO: Need to check svg generation works correctly and gets displayed correctly
-    const chartSVG = generateChartSVG({ prices });
+    const chartSVG = generateChartSVG(prices);
 
     return new ImageResponse(
       (
