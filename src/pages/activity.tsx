@@ -1,5 +1,5 @@
-import { MobileActivityPage } from "@/components/activity_d/MobileActivityPage";
-import { DesktopActivityPage } from "@/components/activity_d/DesktopActivityPage";
+import { MobileActivityPage } from "@/components/activity/MobileActivityPage";
+import { DesktopActivityPage } from "@/components/activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { useUserStore } from "@/lib/stores/UserStore";
