@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/drawer.tsx";
 import { motion } from "framer-motion";
 
-import { ShareTopic } from "../Share/ShareTopic.tsx";
+import { ShareTopic } from "../share/ShareTopic.tsx";
 
 export function ShareTopicModal({
   children,

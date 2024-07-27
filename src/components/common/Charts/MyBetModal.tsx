@@ -13,9 +13,9 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartConfig } from "./DesktopChart";
-import { CashoutOverview } from "@/components/Predictions/Cashout/overview";
-import { CashOutWarningScreen } from "@/components/Predictions/CreatorResolution";
-import { CashoutConfirmScreen } from "@/components/Predictions/Cashout/confirm";
+import { CashoutOverview } from "@/componentspredictionsCashout/overview";
+import { CashOutWarningScreen } from "@/componentspredictionsCreatorResolution";
+import { CashoutConfirmScreen } from "@/componentspredictionsCashout/confirm";
 import { processPrices } from "@/utils/chartUtils";
 import { getProfilePath } from "@/utils/urls";
 

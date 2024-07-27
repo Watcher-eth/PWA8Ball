@@ -8,7 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { FindFriends } from "@/components/Share/InviteFriendsModal";
+import { FindFriends } from "@/components/share/InviteFriendsModal";
 
 export function FindFriendsModal({ children }: { children: React.ReactNode }) {
   return (

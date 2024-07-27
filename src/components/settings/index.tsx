@@ -20,7 +20,7 @@ import { CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopInviteFriends } from "@/components/Share/InviteFriendsModal";
+import { DesktopInviteFriends } from "@/components/share/InviteFriendsModal";
 import { DesktopOnrampModal } from "@/components/Onboarding/Onramp/DesktopOnrampModal";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 

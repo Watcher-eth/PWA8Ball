@@ -3,10 +3,10 @@ import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMa
 import { fetchMarketById } from "@/supabase/queries/useGetMarketById";
 import { DEFAULT_USER_ID } from "@/constants/testData";
 
-import { DesktopMarketPage } from "@/components/Predictions/DesktopMarketPage";
+import { DesktopMarketPage } from "@/componentspredictionsDesktopMarketPage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 
-import { MobileMarketPage } from "@/components/Predictions/MobileMarketPage";
+import { MobileMarketPage } from "@/componentspredictionsMobileMarketPage";
 
 
 export default function MarketPage({

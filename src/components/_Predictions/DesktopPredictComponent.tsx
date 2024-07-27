@@ -14,7 +14,7 @@ import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
 import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
-import { DesktopShareBetModal } from "@/components/Share/ShareBetModal";
+import { DesktopShareBetModal } from "@/components/share/ShareBetModal";
 
 import { CashoutConfirmScreen } from "./Cashout/confirm";
 import { CashOutWarningScreen } from "./Cashout/warning";

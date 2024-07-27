@@ -18,10 +18,10 @@ import { ShareModal } from "@/components/modals/ShareModal";
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
-import { MobileBettersModal } from "@/components/Predictions/Betters/MobileBettersModal";
-import { CommentSection } from "@/components/Predictions/CommentSection";
-import { BetDetails } from "@/components/Predictions/BetDetails";
-import { RelatedMarkets } from "@/components/Predictions/RelatedMarkets";
+import { MobileBettersModal } from "@/componentspredictionsBetters/MobileBettersModal";
+import { CommentSection } from "@/componentspredictionsCommentSection";
+import { BetDetails } from "@/componentspredictionsBetDetails";
+import { RelatedMarkets } from "@/componentspredictionsRelatedMarkets";
 
 
 
