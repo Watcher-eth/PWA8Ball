@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { ShareBetModal } from "../share/ShareBetModal";
+import { ShareBetContent } from "./ShareBetContent";
 
-export function ShareModal({
+export function MobileShareBetModal({
   children,
   id,
   title,
@@ -58,7 +58,7 @@ export function ShareModal({
             border-0
             `}
           >
-            <ShareBetModal
+            <ShareBetContent
               id={id}
               title={title}
               image={image}

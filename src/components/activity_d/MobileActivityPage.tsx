@@ -8,7 +8,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
 import { parseOptionJSON } from "@/utils/predictions/parseOption";
 
-import { InviteFriendsPlaceholder } from "@/components/common/Placeholders/InviteFriendsPlaceholder";
+import { InviteFriendsPlaceholder } from "@/components/common/placeholders/InviteFriendsPlaceholder";
 import { NotificationsModal } from "@/components/modals/NotificationsModal";
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
@@ -17,7 +17,7 @@ import { ActivityField } from "@/components/activity/ActivityField";
 import { Leaderboard } from "@/components/activity/Leaderboard";
 import { YourStats } from "@/components/activity/YourStats";
 
-export function ActivityPage({ isDesktop }: { isDesktop?: boolean }) {
+export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
   const { user } = useUserStore();
   const {

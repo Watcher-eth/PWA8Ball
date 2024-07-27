@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Link from "next/link";
-
+import { useDebounceValue } from "usehooks-ts";
 import { useQuery } from "@tanstack/react-query";
 import {
   Drawer,
@@ -18,9 +18,9 @@ import { Button } from "@/components/ui/Button";
 import { RandomMemoji } from "../common/MemojiAvatar";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { ACTIVITY_PATH } from "@/utils/urls";
-import { useDebounceValue } from "usehooks-ts";
 
-export function SearchModal() {
+
+export function MobileSearchModal() {
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useDebounceValue("", 300)
 
 

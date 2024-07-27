@@ -9,7 +9,7 @@ import { useCheckUserHasPushToken } from "@/supabase/queries/notifications/useCh
 import { FollowPredictionSkeleton } from "../activity/FollowPredictionSkeleton";
 import { UserNotifications } from "./UserNotifications";
 
-export function NotificationsModalContent({ isDesktop }: { isDesktop?: boolean }) {
+export function NotificationsContent({ isDesktop }: { isDesktop?: boolean }) {
   const { user } = useUserStore();
   const userId = user?.external_auth_provider_user_id;
   const handlePressTurnOnNotifications = () => {

@@ -8,7 +8,7 @@ import { ConnectButton } from "@/components/buttons/ConnectButton";
 import { NavIconButton } from "@/components/buttons/NavIconButton";
 
 import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal";
-import { DesktopSearchModal } from "@/components/Search/DesktopSearchModal";
+import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
 import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
 

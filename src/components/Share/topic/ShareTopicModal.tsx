@@ -1,9 +1,32 @@
 // @ts-nocheck
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { motion } from "framer-motion";
-import { NotificationsModalContent } from "../notifications/NotificationsModalContent";
 
-export function NotificationsModal({ children }: { children: React.ReactNode }) {
+import { ShareTopic } from "./ShareTopic";
+
+export function ShareTopicModal({
+  children,
+  id,
+  title,
+  image,
+  topic,
+  question,
+  members,
+  markets,
+}: {
+  children: React.ReactNode;
+  id: string;
+  title: string;
+  image: string;
+  topic: string;
+  question: string;
+  members: number;
+  markets: number;
+}) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -35,13 +58,22 @@ export function NotificationsModal({ children }: { children: React.ReactNode }) 
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className={`bg-[#171717] rounded-t-3xl
-        h-[95vh] mb-5 w-screen relative`}
+            className="bg-white rounded-3xl
+        h-[90vh] mb-5 w-screen relative"
           >
-            <NotificationsModalContent />
+            <ShareTopic
+              id={id}
+              title={title}
+              image={image}
+              topic={topic}
+              question={question}
+              members={members}
+              markets={markets}
+            />
           </motion.div>
         </DrawerContent>
       </Drawer>
     </div>
   );
 }
+

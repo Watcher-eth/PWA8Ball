@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { ShareBetModal } from "./ShareBetModal";
-import { DesktopCardModal } from "../modals/DesktopCardModal";
+import { ShareBetContent } from "./ShareBetContent";
+import { DesktopCardModal } from "../../modals/DesktopCardModal";
 
 export function DesktopShareBetModal({
   children,
@@ -23,7 +23,7 @@ export function DesktopShareBetModal({
     <DesktopCardModal
       dialogContentClassName="!w-[35vw]"
       content={
-        <ShareBetModal
+        <ShareBetContent
           isDesktop={true}
           id={id}
           title={title}

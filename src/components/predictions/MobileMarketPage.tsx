@@ -13,7 +13,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { DrawerClose } from "@/components/ui/drawer";
 
 import { PredictModal } from "@/components/modals/PredictModal";
-import { ShareModal } from "@/components/modals/ShareModal";
+import { MobileShareBetModal } from "@/components/share/bet/MobileShareBetModal";
 
 import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
@@ -80,7 +80,7 @@ function MobileMarketContent({
               />
             </Link>
           </DrawerClose>
-          <ShareModal
+          <MobileShareBetModal
             image={image}
             title={title}
             question={description}
@@ -93,7 +93,7 @@ function MobileMarketContent({
               strokeWidth={3.3}
               className="p-2 rounded-full text-white backdrop-blur-xl bg-[rgba(17,17,17,0.15)]"
             />
-          </ShareModal>
+          </MobileShareBetModal>
         </div>
         <motion.div className="w-screen h-[42vh] relative">
           <img
