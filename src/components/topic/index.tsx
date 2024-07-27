@@ -6,9 +6,12 @@ import { useRouter } from "next/router";
 import Link from "next/link";
  // Adjust import path as necessary
 import { ChevronLeft, Share, Star } from "lucide-react";
+
+import { LEADERBOARD_PATH } from "@/utils/urls";
+
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
-import { LEADERBOARD_PATH } from "@/utils/urls";
+
 import { ShareTopicModal } from "@/components/modals/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";

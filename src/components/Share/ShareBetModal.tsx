@@ -2,7 +2,7 @@
 import { AnimatePresence } from "framer-motion";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
-import { CashoutConfirmScreen } from "../Predictions/Cashout/confirm";
+import { CashoutConfirmScreen } from "../predictions/Cashout/confirm";
 import { DesktopCardModal } from "../modals/DesktopCardModal";
 
 interface Option {
@@ -10,7 +10,7 @@ interface Option {
   value: number;
 }
 
-export const ShareBetModal = ({
+export function ShareBetModal({
   id,
   title,
   image,
@@ -26,7 +26,7 @@ export const ShareBetModal = ({
   question: string;
   options: Option[];
   isDesktop?: boolean;
-}) => {
+}) {
   const shareLink = async () => {
     try {
       await navigator.share({
@@ -43,12 +43,8 @@ export const ShareBetModal = ({
     <div
       className={`
         w-full flex flex-col p-5
-        rounded-t-[20px]
-        ${
-          isDesktop
-            ? "h-[65vh] bg-[#080808] pt-5"
-            : "h-[110%] bg-[#080808] pt-7"
-        }
+        rounded-t-[20px] bg-[#080808]
+        ${isDesktop ? "h-[65vh]  pt-5" : "h-[110%] pt-7"}
       `}
     >
       <h1 className="text-4xl font-semibold text-white mb-[-2]">More fun</h1>

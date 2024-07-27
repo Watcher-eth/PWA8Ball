@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { supabase } from "@/supabase/supabaseClient";
-import { Topic } from "@/components/_topic";
+import { Topic } from "@/components/topic";
 
 
 export async function getServerSideProps(context) {
