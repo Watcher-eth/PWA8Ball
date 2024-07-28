@@ -9,7 +9,7 @@ import {
 } from "viem";
 import { baseGoerli } from "viem/chains";
 import { rpcClient } from "@/lib/onchain/rpcClient";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
 
 export const EightballV1ABI = [
   {

@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { EightballV1ABI } from "../contracts/Eightball";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
 
 export const useGetOdds = (marketId: number) => {
   return useQuery({

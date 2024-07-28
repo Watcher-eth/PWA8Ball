@@ -10,7 +10,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
 
 async function removeLp(props: {
   userId: string;

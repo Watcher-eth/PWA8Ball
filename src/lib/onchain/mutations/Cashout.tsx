@@ -9,8 +9,8 @@ import {
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/Onchain";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/_Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
 interface CashoutParams {
   preferYes: boolean;
   option: string;

@@ -1,6 +1,6 @@
 import { type Address } from "viem";
 import { useTokenBalance } from "@/hooks/wallet/useTokenBalance";
-import { BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/Onchain";
+import { BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/_Onchain";
 
 
 export function useUsdcBalance({ address }: { address?: Address }) {
