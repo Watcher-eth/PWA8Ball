@@ -1,5 +1,5 @@
-
-import React, { useState } from "react";
+// @ts-nocheck
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { AlignLeft, ArrowLeftRight, Clock, Receipt, User2 } from "lucide-react";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
@@ -25,7 +25,7 @@ export const MobileMyBetModal = (props: {
   image: string;
   price: number;
   ownedAmount: number;
-  options: string[];
+  options: {name: string }[];
   percentage: number;
   betId: string;
   topic: string;
@@ -41,8 +41,9 @@ export const MobileMyBetModal = (props: {
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
-  setStep: () => void;
+  setStep: (num: number) => void;
 }) => {
+  console.log({props})
   const [timeframe, setTimeframe] = useState("1M");
 
   const { data: prices, error: priceError } = useGetPricesForMarket(
@@ -62,8 +63,8 @@ export const MobileMyBetModal = (props: {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    [`${props.options[0]}`]: 100 - price.value,
-    [`${props.options[1]}`]: price.value,
+    [`${props.options[0].name}`]: 100 - price.value,
+    [`${props.options[1].name}`]: price.value,
     // desktop: price.value,
     // mobile: 100 - price.value,
   }));
@@ -125,11 +126,11 @@ export const MobileMyBetModal = (props: {
           %
         </span>
       </div>
-      <div className="flex flex-row items-center justify-between mt-[-3px]">
-        <span className="text-[17px] text-[lightgray] font-semibold">
+      <div className="flex flex-row items-center justify-between pb-1">
+        <span className="text-base text-white/80 font-semibold">
           {props.title}
         </span>
-        <span className="text-[17px] text-[lightgray] font-semibold">
+        <span className="text-base text-white/80 font-semibold">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
