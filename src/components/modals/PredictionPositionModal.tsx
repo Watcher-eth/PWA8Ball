@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/drawer.tsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";
-import { CashoutOverview } from "../predictions/Cashout/overview.tsx";
-import { CashOutWarningScreen } from "../predictions/Cashout/warning.tsx";
-import { CashoutConfirmScreen } from "../predictions/Cashout/confirm.tsx";
+import { CashoutOverview } from "../predictions/Cashout/CashoutOverview";
+import { CashoutWarningScreen } from "../predictions/Cashout/CashoutWarningScreen";
+import { CashoutConfirmScreen } from "../predictions/Cashout/CashoutConfirmScreen";
 
 export function PredictionPositionModal({
   children,
@@ -130,7 +130,7 @@ export function PredictionPositionModal({
                 />
               )}
               {step === 3 && (
-                <CashOutWarningScreen
+                <CashoutWarningScreen
                   option={option}
                   options={options}
                   image={image}

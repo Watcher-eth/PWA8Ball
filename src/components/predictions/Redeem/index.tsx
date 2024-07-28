@@ -14,10 +14,9 @@ import { useVotingStore } from "@/lib/stores/VotingStore";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 
-import ProposeAnswer from "./Propose";
-import SubmitProof from "./Proof";
+
 import { RedeemOverview } from "./RedeemOverview";
-import { CashoutConfirmScrreen } from "../Cashout/confirm";
+import { CashoutConfirmScrreen } from "../Cashout/CashoutConfirmScreen";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 export function RedeemModal({

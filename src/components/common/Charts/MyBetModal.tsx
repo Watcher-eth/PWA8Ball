@@ -12,9 +12,9 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartConfig } from "./DesktopChart";
-import { CashoutOverview } from "@/components/predictions/Cashout/overview";
-import { CashOutWarningScreen } from "@/components/predictions/CreatorResolution";
-import { CashoutConfirmScreen } from "@/components/predictions/Cashout/confirm";
+import { CashoutOverview } from "@/components/predictions/Cashout/CashoutOverview";
+import { CashoutWarningScreen } from "@/components/predictions/Cashout/CashoutWarningScreen";
+import { CashoutConfirmScreen } from "@/components/predictions/Cashout/CashoutConfirmScreen";
 import { processPrices } from "@/utils/chartUtils";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 
@@ -490,7 +490,7 @@ export function DesktopMyBetModal({
             isDesktop={true}
           />
         ) : step === 3 ? (
-          <CashOutWarningScreen
+          <CashoutWarningScreen
             option={option}
             options={options}
             image={image}

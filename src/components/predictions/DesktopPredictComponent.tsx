@@ -16,9 +16,9 @@ import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
 import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal";
 
-import { CashoutConfirmScreen } from "./Cashout/confirm";
-import { CashOutWarningScreen } from "./Cashout/warning";
-import { CashoutOverview } from "./Cashout/overview";
+import { CashoutConfirmScreen } from "./Cashout/CashoutConfirmScreen";
+import { CashOutWarningScreen } from "./Cashout/CashOutWarningScreen";
+import { CashoutOverview } from "./Cashout/CashoutOverview";
 
 export function DesktopPredictComponent(props: {
   question: string;

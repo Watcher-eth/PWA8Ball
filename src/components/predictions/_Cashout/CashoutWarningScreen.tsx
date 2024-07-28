@@ -3,7 +3,7 @@ import { AlertTriangle, Clock, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
 
-export function CashOutWarningScreen({
+export function CashoutWarningScreen({
   changeStep,
   onClose,
   title,
