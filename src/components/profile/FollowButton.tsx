@@ -8,17 +8,11 @@ import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useCheckIfFollowing } from "@/supabase/queries/user/useCheckIfFollowing";
 
-export const FollowButton = ({
+export function FollowButton({
   profileId,
-  // isUser,
-  setEdit,
-  showToast,
 }: {
   profileId: string;
-  // isUser: boolean;
-  setEdit: () => void;
-  showToast?: () => void;
-}) => {
+}) {
   const { user } = useUserStore();
   const followerId = user?.external_auth_provider_user_id;
   const followingId = profileId;

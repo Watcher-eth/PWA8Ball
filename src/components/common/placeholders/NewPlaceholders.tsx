@@ -1,10 +1,11 @@
 // @ts-nocheck
-import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
-import { motion } from "framer-motion";
 
-import { UserPredictionSkeleton } from "@/components/profile/UserPredictions";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
+import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
+import { UserPredictionSkeleton } from "@/components/profile/GeneralFeed/UserPredictionSkeleton";
+
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export function NewPlaceholder({ isUser }) {
@@ -29,9 +30,9 @@ export function NewPlaceholder({ isUser }) {
         </div>
       </div>
       <Link href={HOME_PATH} className="w-[85%]">
-        <motion.button className="w-full mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+        <button className="w-full mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
-        </motion.button>
+        </button>
       </Link>
     </div>
   );

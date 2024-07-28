@@ -75,9 +75,9 @@ export function PredictionPositionModal({
         <DrawerOverlay className="fixed inset-0 bg-black/40" />
 
         <DrawerTrigger>
-          <motion.div className="mt-4 hover:scale-101 active:scale-95 transition-all">
+          <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
             {children}
-          </motion.div>
+          </div>
         </DrawerTrigger>
         <DrawerContent className=" border-0 rounded-3xl self-center">
           <motion.div

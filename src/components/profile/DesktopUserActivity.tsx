@@ -6,7 +6,7 @@ import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCrea
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
-import { UserPredictionSkeleton } from "./UserPredictions";
+import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton";
 
 export function DesktopUserActivity({
   walletAddress,

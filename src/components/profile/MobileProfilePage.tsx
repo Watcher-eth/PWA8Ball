@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import Link from "next/link";
-import { PieChart, Twitter, CircleEllipsis } from "lucide-react";
-import { GeneralFeed } from "@/components/profile/GeneralFeed";
+import { PieChart, CircleEllipsis } from "lucide-react";
+import { GeneralFeed } from "@/components/profile/GeneralFeed/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 
 import { SocialsSection } from "@/components/common/SocialsSection";
@@ -63,9 +63,7 @@ export function MobileProfilePage({
               {totalFollowers} Followers
             </p>
             <FollowButton
-              setEdit={() => {}}
               profileId={userC?.external_auth_provider_user_id}
-              isUser={false}
             />
           </div>
         </div>
@@ -73,7 +71,6 @@ export function MobileProfilePage({
 
       <div className="w-full flex flex-col items-center -mt-[200px]">
         <GeneralFeed
-          handleOpenBottomSheet={(props) => console.log(props)}
           walletAddy={userC?.walletaddress}
           id={userId}
           onParentRefresh={() => console.log("Refreshed!")}

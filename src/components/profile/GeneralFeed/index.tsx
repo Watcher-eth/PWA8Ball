@@ -2,23 +2,24 @@
 
 import React, { useEffect } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import {
-  UserPredictions,
-  CreatedPrediction,
-  UserPredictionSkeleton,
-} from "./UserPredictions";
+
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
-import { NewPlaceholder } from "../common/placeholders/NewPlaceholders";
-import { PredictionPositionModal } from "../modals/PredictionPositionModal";
+
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-export const GeneralFeed = ({
-  handleOpenBottomSheet,
+import { NewPlaceholder } from "../../common/placeholders/NewPlaceholders";
+import { PredictionPositionModal } from "../../modals/PredictionPositionModal";
+
+import { UserPrediction, CreatedPrediction } from "./UserPrediction";
+import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
+
+
+export function GeneralFeed({
   walletAddy,
   id,
   onParentRefresh,
-}) => {
+}) {
   const { user } = useUserStore();
 
   const walletAddress = walletAddy || user?.walletaddress;
@@ -59,7 +60,7 @@ export const GeneralFeed = ({
   ];
 
   return (
-    <div className="flex flex-col gap-[-0.1rem] items-center">
+    <div className="flex flex-col items-center">
       {mergedData.length < 1 ? (
         <NewPlaceholder
           isUser={userId === user?.external_auth_provider_user_id}
@@ -82,27 +83,9 @@ export const GeneralFeed = ({
               option={item.option}
               optionNumber={item.optionNumber}
               isExternal={item.isExternal}
-              onClose={() => handleOpenBottomSheet({})}
-              openCashout={() => handleOpenBottomSheet({})}
-              handleReceipt={() => handleOpenBottomSheet({})}
             >
-              <UserPredictions
+              <UserPrediction
                 key={`predicted-${item.id}-${item.option}`}
-                onOpenBottomSheet={() =>
-                  handleOpenBottomSheet({
-                    amount: item.amount / 100000,
-                    title: item.title,
-                    image: item.image,
-                    price: item.amount,
-                    question: item.question,
-                    betId: item.market_id,
-                    topic: item.market_id,
-                    option:
-                      item.option === 0
-                        ? item.options[item.option + 1]?.name
-                        : item.options[item.option - 1]?.name,
-                  })
-                }
                 option={
                   item.option === 0
                     ? item.options[item.option + 1]?.name
@@ -120,21 +103,9 @@ export const GeneralFeed = ({
           ) : (
             <CreatedPrediction
               key={`created-${item.id}`}
-              onOpenBottomSheet={() =>
-                handleOpenBottomSheet({
-                  amount: item.amount,
-                  title: item.title,
-                  image: item.image,
-                  price: item.amount,
-                  question: item.question,
-                  betId: item.id,
-                  topic: item.topicid,
-                  isCreated: true,
-                  name: user.name,
-                  icon: user.pfp,
-                })
-              }
               index={index}
+              id={item.id}
+              item={item}
               title={item.title}
               question={item.question}
               image={item.image}
