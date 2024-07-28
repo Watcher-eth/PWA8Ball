@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import React, { useState, useEffect } from "react";
-import { useQuery } from "@airstack/airstack-react";
-import { convertIpfsUrl } from "@/utils/urls/modifyIpfsUrl";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
+import { useQuery } from "@airstack/airstack-react";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
-import { DesktopCardModal } from "../modals/DesktopCardModal";
-import { Spinner } from "../modals/PredictModal/Spinner";
+
+import { convertIpfsUrl } from "@/utils/urls/modifyIpfsUrl";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
+import { Spinner } from "@/components/modals/PredictModal/Spinner";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");
@@ -17,7 +17,7 @@ export const FindFriends = ({ type }) => {
   const { width, height } = { width: 800, height: 600 }; // Example dimensions
   const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
   const { data, error, loading } = useQuery(
-    onchainFollowingQuery2,
+    DFFAULT_ONCHAIN_FOLLOWING_QUERY,
     {},
     { cache: false }
   );
@@ -352,7 +352,9 @@ function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
     </div>
   );
 }
-export const onchainFollowingQuery2 = `query MyQuery {
+
+
+const DFFAULT_ONCHAIN_FOLLOWING_QUERY = `query MyQuery {
     SocialFollowings(
       input: {filter: {identity: {_eq: "0x8512B8f41a6D1f2Aa0D09ae710b705498735F265"}}, blockchain: ALL}
     ) {
@@ -371,21 +373,3 @@ export const onchainFollowingQuery2 = `query MyQuery {
       }
     }
   }`;
-
-export function DesktopInviteFriends({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <DesktopCardModal
-      dialogContentClassName="rounded-[1.5rem] "
-      dialogClassName="xl:max-w-[25%]"
-      cardClassName="xl:max-w-[32vw] md:max-w-[45vw] sm:max-w-[65vw] "
-      cardContentClassName="bg-[#080808]/75  rounded-[1.5rem] p-0 h-[75vh] backdrop-blur-lg"
-      content={<FindFriends type={2} />}
-    >
-      {children}
-    </DesktopCardModal>
-  );
-}

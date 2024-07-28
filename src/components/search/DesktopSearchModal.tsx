@@ -1,5 +1,5 @@
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { SearchOverview } from "./SearchOverview";
-import { DesktopCardModal } from "../modals/DesktopCardModal";
 
 export function DesktopSearchModal({
   children,

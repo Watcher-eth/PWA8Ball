@@ -1,37 +1,13 @@
-// @ts-nocheck
-
-import React, { useState } from "react";
-import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/Button";
-import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowDown,
-  AtSign,
   BatteryCharging,
   CalendarClock,
   Receipt,
   X,
 } from "lucide-react";
 
-export function BoostExplainerModal({ isOpen, setOpen, onClose }) {
-  return (
-    <Drawer open={isOpen}>
-      <DrawerContent className="border-0 rounded-3xl self-center">
-        <motion.div
-          layout
-          transition={{ duration: 0.2 }}
-          className=" rounded-3xl  relative"
-        >
-          <AnimatePresence>
-            <BoostExplainer setOpen={setOpen} onClose={onClose} />
-          </AnimatePresence>
-        </motion.div>
-      </DrawerContent>
-    </Drawer>
-  );
-}
 
-function BoostExplainer({
+
+export function BoostExplainer({
   setOpen,
   onClose,
 }: {
@@ -51,17 +27,17 @@ function BoostExplainer({
           bg-[#131313] px-[23px] py-[15px] rounded-[20px]
         `}
       >
-        <motion.button
-          whileTap={{ scale: 0.97 }}
+        <button
           onClick={onClose}
           className={`
             px-1.5 py-2 rounded-[17px] overflow-hidden
             bg-[#282828] top-[75px] left-[85%]
             border-none cursor-pointer
+            transition-all active:scale-97
           `}
         >
           <X color={"#686868"} strokeWidth={5} height={20} />
-        </motion.button>
+        </button>
         <h2
           className={`
             text-[24px] font-bold text-white
@@ -150,8 +126,7 @@ function BoostExplainer({
       </div>
 
       <div className="flex flex-row items-center mb-5">
-        <motion.button
-          whileTap={{ scale: 0.97 }}
+        <button
           onClick={() => {
             onClose();
             setOpen();
@@ -162,6 +137,7 @@ function BoostExplainer({
             border-none cursor-pointer
             bg-[#D9D9D9] w-[85vw] p-2.5
             items-center justify-center
+            transition-all active:scale-97
           `}
         >
           <div className="flex flex-row items-center justify-center">
@@ -169,7 +145,7 @@ function BoostExplainer({
               Got it
             </span>
           </div>
-        </motion.button>
+        </button>
       </div>
     </div>
   );

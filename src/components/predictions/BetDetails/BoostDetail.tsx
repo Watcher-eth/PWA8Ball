@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Rocket } from "lucide-react";
 import { BoostModal } from "@/components/modals/BoostModal";
 import { DesktopBoostModal } from "@/components/modals/BoostModal/DesktopBoostModal";
-import { BoostExplainerModal } from "@/components/modals/Tutorials/BoostExplainerModal";
+import { BoostExplainerModal } from "@/components/modals/BoostExplainerModal";
 
 export function BoostDetail({
   id,

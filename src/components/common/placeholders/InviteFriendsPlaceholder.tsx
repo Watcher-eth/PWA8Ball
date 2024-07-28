@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { MailCheck } from "lucide-react";
-import { FindFriendsModal } from "@/components/modals/FindFriends";
+import { FindFriendsModal } from "@/components/modals/FindFriendsModal";
 
 export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
   const controls = useAnimation();

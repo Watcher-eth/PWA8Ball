@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
-import { DesktopInviteFriends } from "@/components/share/InviteFriendsModal";
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
 import { Dialog } from "@/components/ui/dialog";
 import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
