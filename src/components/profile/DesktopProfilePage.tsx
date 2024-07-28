@@ -1,6 +1,8 @@
 // @ts-nocheck
 import { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+import Link from "next/link";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import {
   DropdownMenu,
@@ -8,10 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { DesktopLpModal } from "@/components/lp/LpModal/DesktopLpModal";
-import Link from "next/link";
+
+
 import { DesktopMyBetModal } from "@/components/common/Charts/MyBetModal";
 
 import {
@@ -25,33 +28,21 @@ import {
   TrendingUp,
   UserPlus,
 } from "lucide-react";
-import {
-  Label,
-  PolarGrid,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-} from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+
+import { Card } from "@/components/ui/tailwind/Card";
+import { ChartConfig,  } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import { toast } from "sonner";
+
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
+import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 
-
+import { ContrastButton } from "@/components/buttons/ContrastButton";
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -296,75 +287,18 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
 function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
   return (
     <div className="text-center">
-      <p className="font-bold">{value}</p>
-      <p className="text-[#909090]">{suffix}</p>
+      <p className="font-bold text-lg">{value}</p>
+      <p className="text-[#909090] text-sm">{suffix}</p>
     </div>
   );
 }
 
-function ContrastButton({
-  label,
-  className = "",
-  setEdit,
-  edit,
-}: {
-  label: React.ReactNode;
-  className?: string;
-  setEdit: () => void;
-  edit: boolean;
-}) {
-  return (
-    <div
-      onClick={() => {
-        if (label === "Edit") {
-          setEdit(!edit);
-        }
-        if (label === "Follow") {
-        }
-        if (label === "Share") {
-          toast(
-            <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
-              <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
-                <ClipboardList className="text-white h-[0.95rem]" />
-              </div>
-              Copied to Clipboard
-            </div>,
-            {
-              unstyled: true,
-              classNames: {
-                title: "text-red-400 text-2xl",
-                description: "text-red-400",
-                actionButton: "bg-zinc-400",
-                cancelButton: "bg-orange-400",
-                closeButton: "bg-lime-400",
-              },
-            }
-          );
-        }
-      }}
-      className={`
-        w-1/2 h-10 font-semibold text-[0.95rem] text-white bg-[#212121]
-        flex justify-center items-center rounded-md
-        hover:scale-102 active:scale-98
-        ${className}
-      `}
-    >
-      {label === "Share" ? (
-        <Share className="h-[1rem] mr-1" strokeWidth={3} />
-      ) : label === "Edit" ? (
-        <Pencil className="h-[0.9rem] mr-1" strokeWidth={3} />
-      ) : (
-        <UserPlus className="h-[1rem] mr-1" strokeWidth={3} />
-      )}{" "}
-      {label}
-    </div>
-  );
-}
+
 
 export const ProfileSection = ({ userC, user }) => {
   const [edit, setEdit] = useState(false);
   const [userName, setUsername] = useState<string>();
-  const [PFP, setPFP] = useState<string>();
+  const [pfp, setPfp] = useState<string>();
   const fileInputRef = useRef(null);
   const { mutate: updateUserProfile } = useUpdateUserProfile();
   const { data: totalFollowers } = useGetTotalFollowers(
@@ -382,29 +316,14 @@ export const ProfileSection = ({ userC, user }) => {
     { category: "US Elections", percentage: 42, fill: "#1E90FF" },
   ];
 
-  const chartConfig = {
-    percentage: {
-      label: "Percentage",
-    },
-    GTA6: {
-      label: "GTA 6",
-      color: "#FF6600",
-    },
-    TaylorSwift: {
-      label: "Taylor Swift",
-      color: "#FF1493",
-    },
-  } satisfies ChartConfig;
 
   return (
-    <div className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-4 px-8 relative">
-      <img
+    <Card className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-4 px-8 relative">
+      {/* <img
         src={userC?.pfp}
         alt="Profile Header"
         className="w-full h-10 absolute top-0 left-0 rounded-t-[1.5rem] right-0 object-cover"
-      />
-      <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] bg-gradient-to-b from-transparent via-[#131313]/80 to-[#131313]" />
-      <div className="absolute top-0 left-0 right-0 h-[15%] rounded-[1.5rem] backdrop-blur-lg bg-opacity-50" />
+      /> */}
       <div className="flex flex-col items-center mb-4 mt-6 relative">
         <img
           src={userC?.pfp}
@@ -415,7 +334,7 @@ export const ProfileSection = ({ userC, user }) => {
         <input
           type="file"
           ref={fileInputRef}
-          style={{ display: "none" }}
+          className="hidden"
           // onChange={handleFileChange}
         />
 
@@ -432,7 +351,7 @@ export const ProfileSection = ({ userC, user }) => {
             value={userName}
             onChange={(e) => setUsername(e.target.value)}
             placeholder={userC?.name}
-            className="text-white border-0 active:border-0 rounded-md text-xl w-1/8 text-center bg-[transparent] font-bold"
+            className="text-white border-0 active:border-0 rounded-md text-xl w-1/8 text-center bg-transparentfont-bold"
           ></input>
         ) : (
           <h2 className="text-white text-xl font-bold">{userC?.name}</h2>
@@ -445,100 +364,33 @@ export const ProfileSection = ({ userC, user }) => {
         <TextWithSuffix value={"12"} suffix="Predictions" />
       </div>
       <div className="flex justify-between mb-4 space-x-4">
-        <ContrastButton
-          label={
-            userC?.external_auth_provider_user_id ===
-            user?.external_auth_provider_user_id
-              ? "Share"
-              : "Follow"
-          }
-        />
-        <ContrastButton
-          setEdit={setEdit}
-          edit={edit}
-          label={
-            userC?.external_auth_provider_user_id ===
-            user?.external_auth_provider_user_id
-              ? "Edit"
-              : "Share"
-          }
-        />
+        <ShareButton />
+        {userC?.external_auth_provider_user_id ===
+        user?.external_auth_provider_user_id ? (
+          <ContrastButton
+            label="Edit"
+            IconComponent={Pencil}
+            onClick={() => {
+              setEdit(!edit);
+            }}
+          />
+        ) : (
+          <ContrastButton
+            label="Follow"
+            IconComponent={UserPlus}
+          />
+        )}
       </div>
       <div>
-        <Card className="bg-[transparent]  border-1 border-[#212121]">
-          <CardHeader className="items-center pb-0">
-            <CardTitle className="text-white">
-              {userC?.name}'s Accuracy
-            </CardTitle>
-            <CardDescription className="text-gray-400">
-              15th July
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1  pb-0">
-            <ChartContainer
-              config={chartConfig}
-              className="mx-auto aspect-square  max-h-[250px]"
-            >
-              <RadialBarChart
-                data={chartData}
-                startAngle={0}
-                endAngle={360}
-                innerRadius={83}
-                outerRadius={110}
-              >
-                <PolarGrid
-                  gridType="circle"
-                  radialLines={false}
-                  stroke="none"
-                  className="first:fill-muted last:fill-[#151515]"
-                  polarRadius={[50, 70, 90]}
-                />
-                <RadialBar dataKey="percentage" background cornerRadius={10} />
-                <PolarRadiusAxis
-                  className="bg-[transparent]"
-                  tick={false}
-                  tickLine={false}
-                  axisLine={false}
-                >
-                  <Label
-                    className="bg-[transparent]"
-                    content={({ viewBox }) => {
-                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                        const totalPercentage = chartData.reduce(
-                          (sum, entry) => sum + entry.percentage,
-                          0
-                        );
-                        return (
-                          <text
-                            x={viewBox.cx}
-                            y={viewBox.cy}
-                            textAnchor="middle"
-                            dominantBaseline="middle"
-                          >
-                            <tspan
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              className="fill-white text-4xl font-bold"
-                            >
-                              {totalPercentage}%
-                            </tspan>
-                            <tspan
-                              x={viewBox.cx}
-                              y={(viewBox.cy || 0) + 24}
-                              className="fill-gray-400"
-                            >
-                              Accuracy
-                            </tspan>
-                          </text>
-                        );
-                      }
-                    }}
-                  />
-                </PolarRadiusAxis>
-              </RadialBarChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
+        <div>
+          <div className="mx-auto aspect-square h-[250px]">
+            <GenericPolarChart
+              chartData={chartData}
+              angleKey="category"
+              radiusKey="percentage"
+            />
+          </div>
+          <div className="flex-col space-y-2 text-sm">
             <div className="flex items-center gap-2 font-medium leading-none">
               Trending up by 5.2% this month{" "}
               <TrendingUp className="h-4 w-4 text-white" />
@@ -546,28 +398,61 @@ export const ProfileSection = ({ userC, user }) => {
             <div className="leading-none text-gray-400">
               Showing accuracy for the last 6 months
             </div>
-          </CardFooter>
-        </Card>
-        {userName?.length > 0 || PFP?.length > 0 ? (
-          <div
-            onClick={() => {
-              const name = userName?.length > 0 ? userName : user?.name;
-              const pfp = PFP?.length > 0 ? PFP : user?.pfp;
-              const userId = user?.external_auth_provider_user_id;
-              updateUserProfile({
-                userId,
-                updates: {
-                  name,
-                  pfp,
-                },
-              });
-            }}
-            className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"
-          >
-            Save changes
           </div>
-        ) : null}
+        </div>
+        {userName?.length > 0 ||
+          (pfp?.length > 0 && (
+            <div
+              onClick={() => {
+                updateUserProfile({
+                  userId: user?.external_auth_provider_user_id,
+                  updates: {
+                    name: userName?.length > 0 ? userName : user?.name,
+                    pfp: pfp?.length > 0 ? pfp : user?.pfp,
+                  },
+                });
+              }}
+              className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"
+            >
+              Save changes
+            </div>
+          ))}
       </div>
-    </div>
+    </Card>
   );
 };
+
+
+function ShareButton() {
+  return (
+    <ContrastButton
+      label="Share"
+      IconComponent={Share}
+      onClick={() => {
+        toast(
+          <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+            <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
+              <ClipboardList className="text-white h-[0.95rem]" />
+            </div>
+            Copied to Clipboard
+          </div>,
+          {
+            unstyled: true,
+            classNames: {
+              title: "text-red-400 text-2xl",
+              description: "text-red-400",
+              actionButton: "bg-zinc-400",
+              cancelButton: "bg-orange-400",
+              closeButton: "bg-lime-400",
+            },
+          }
+        );
+      }}
+    />
+  )
+}
+
+
+
+
+

@@ -15,13 +15,11 @@ export function BettersOverview({
   odds,
   marketId,
   users,
-  isDesktop,
 }) {
   return (
     <div
-      className={`flex flex-col p-0 rounded-2xl ${
-        isDesktop ? "bg-[transparent]" : " m-4 bg-[#080808]"
-      } `}
+      className={`flex flex-col rounded-2xl p-4 sm:p-0 `}
+
     >
       <div className="flex flex-row items-center ">
         <img
@@ -118,7 +116,7 @@ export function BettersOverview({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              style={{ alignSelf: "center" }}
+              className="self-center"
             >
               <BettersOverviewItem onClose={() => {}} {...user} />
             </motion.div>

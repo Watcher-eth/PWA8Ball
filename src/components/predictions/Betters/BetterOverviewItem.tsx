@@ -26,24 +26,16 @@ export function BettersOverviewItem({
         onClick={() => {
           onClose();
         }}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          marginTop: "8px",
-          marginBottom: "8px",
-          cursor: "pointer",
-        }}
+        className={`
+          flex flex-row justify-between items-center
+          w-full py-2 cursor-pointer
+          border border-transparent
+          hover:border-white/10 active:border-white/20
+          hover:bg-slate-400/10 active:bg-slate-400/20
+          px-1 rounded-lg transition-all
+        `}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <div className="flex flex-row items-center">
           {pfp ? (
             <img
               src={pfp}
@@ -68,7 +60,6 @@ export function BettersOverviewItem({
             <p
               style={{
                 fontFamily: "Aeonik-Bold",
-
                 fontSize: "18px",
                 color: "white",
               }}
@@ -76,6 +67,7 @@ export function BettersOverviewItem({
               {name}
             </p>
             <p
+              className="-mt-1"
               style={{
                 fontFamily: "Aeonik-Bold",
                 fontSize: "14px",

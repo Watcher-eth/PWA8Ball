@@ -91,7 +91,7 @@ export function AddComment({
           ref={inputRef}
           placeholder="Add a comment..."
           rows={1}
-          className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-[transparent] focus:outline-none transition-all duration-300 resize-none
+          className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-transparentfocus:outline-none transition-all duration-300 resize-none
           border-b-[0.8px] focus:border-b-2 focus:border-b-transparent outline-none overflow-hidden
           `}
           onInput={handleInput}
@@ -99,7 +99,7 @@ export function AddComment({
         <span
           className={`absolute left-0 w-full h-[2px] transition-all duration-300
             group-focus-within:bg-[lightgray] group-focus-within:scale-x-100
-            bg-[transparent] scale-x-0 origin-center
+            bg-transparentscale-x-0 origin-center
           `}
           style={{
             transformOrigin: "center",
