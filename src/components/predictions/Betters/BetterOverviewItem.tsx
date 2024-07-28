@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { UserCircle } from "lucide-react";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { getProfilePath } from "@/utils/urls";
-import { UserCircle } from 'lucide-react';
+
 
 export function BettersOverviewItem({
   name,
