@@ -8,7 +8,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/Onchain";
 import { createMarket } from "@/supabase/mutations/createMarket";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 

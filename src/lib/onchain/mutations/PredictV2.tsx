@@ -4,7 +4,7 @@ import { EightballV1ABI } from "@/lib/onchain/contracts/Eightball";
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/Onchain";
 import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
