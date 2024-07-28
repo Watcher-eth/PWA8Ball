@@ -16,9 +16,9 @@ import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
 import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal";
 
-import { CashoutConfirmScreen } from "./Cashout/CashoutConfirmScreen";
-import { CashOutWarningScreen } from "./Cashout/CashOutWarningScreen";
-import { CashoutOverview } from "./Cashout/CashoutOverview";
+import { CashoutConfirmScreen } from "./cashout/CashoutConfirmScreen";
+import { CashoutWarningScreen } from "./cashout/CashoutWarningScreen";
+import { CashoutOverview } from "./cashout/CashoutOverview";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -161,7 +161,7 @@ export function DesktopPredictComponent(props: {
             />
           )}
           {step === 6 && (
-            <CashOutWarningScreen
+            <CashoutWarningScreen
               {...props}
               changeStep={setStep}
               odds={"20"}
