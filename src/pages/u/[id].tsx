@@ -17,6 +17,7 @@ export default function ProfilePage({
   totalFollowers: number;
   userC: User;
 }) {
+
   return (
     <MobiTop
       mobile={

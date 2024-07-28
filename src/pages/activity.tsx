@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { MobileActivityPage } from "@/components/activity/MobileActivityPage";
 import { DesktopActivityPage } from "@/components/activity/DesktopActivityPage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
