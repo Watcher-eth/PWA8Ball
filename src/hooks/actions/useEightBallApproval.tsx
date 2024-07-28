@@ -2,7 +2,7 @@ import { useTokenContractApproval } from "./useTokenContractApproval";
 import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
   BASE_SEPOLIA_USDC_ADDRESS,
-} from "@/constants/_Onchain";
+} from "@/constants/onchain";
 
 export function useEightBallApproval() {
   return useTokenContractApproval({

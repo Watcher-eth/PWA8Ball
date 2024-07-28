@@ -28,7 +28,7 @@ import { useAccount } from "wagmi";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getWalletClient } from "@wagmi/core";
 import { wagmiConfig } from "@/pages/_app";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS, BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/_Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS, BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/onchain";
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";

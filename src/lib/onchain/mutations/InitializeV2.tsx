@@ -8,9 +8,9 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/_Onchain";
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain";
 import { createMarket } from "@/supabase/mutations/createMarket";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
 
 async function initialize(props: {
   amount: number;

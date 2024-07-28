@@ -8,7 +8,7 @@ import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
 import { supabase } from "@/supabase/supabaseClient";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
 
 interface BoostMarket {
   amount: number;

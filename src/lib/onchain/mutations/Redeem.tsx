@@ -9,7 +9,7 @@ import { USDC_ABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { supabase } from "@/supabase/supabaseClient";
 import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/_Onchain";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
 interface RedeemParams {
   marketId: number;
   outcomeTokenAddress: Address;
