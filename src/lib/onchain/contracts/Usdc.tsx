@@ -1,7 +1,4 @@
 // @ts-nocheck
-export const USDC_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e"; // Replace with your contract's address
-const mainnetUSDC = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
-
 export const USDC_ABI = [
   {
     type: "function",

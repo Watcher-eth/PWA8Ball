@@ -9,9 +9,7 @@ import {
 } from "viem";
 import { baseGoerli } from "viem/chains";
 import { rpcClient } from "@/lib/onchain/rpcClient";
-
-// export const EightBallAddress = "0xCc6Fb15132C91C60675ef9F153527dcC863fa8C6"; // Replace with your contract's address
-export const EightBallAddress = "0x5163000a5475e2e6B301f2424e6a7a0299508ede"; // Replace with your contract's address
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 export const EightballV1ABI = [
   {
@@ -422,12 +420,11 @@ export const EightballV1ABI = [
   { type: "error", name: "TransferFailed", inputs: [] },
 ] as const;
 
-
 export async function getEightBallContract(walletClient: WalletClient) {
   // Use walletClient for write operations and rpcClient for read operations
   const contract = getContract({
     abi: EightballV1ABI,
-    address: EightBallAddress,
+    address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
     client: { public: rpcClient, wallet: walletClient },
   });
 

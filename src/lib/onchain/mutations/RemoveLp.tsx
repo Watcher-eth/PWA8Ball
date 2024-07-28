@@ -2,7 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
 import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { V2_PAIR_ABI } from "../contracts/V2Pair";
@@ -10,6 +10,7 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 async function removeLp(props: {
   userId: string;
@@ -41,7 +42,7 @@ async function removeLp(props: {
 
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
 
@@ -49,7 +50,7 @@ async function removeLp(props: {
       liquidityTokens,
       currentPairId,
     ]);
-    
+
     console.log("hash", hash);
   } catch (error) {
     console.error("Error during market boost", error);

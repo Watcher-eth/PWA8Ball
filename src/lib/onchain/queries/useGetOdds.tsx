@@ -2,7 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { rpcClient } from "@/lib/onchain/rpcClient";
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 export const useGetOdds = (marketId: number) => {
   return useQuery({
@@ -12,7 +13,7 @@ export const useGetOdds = (marketId: number) => {
 
       try {
         const odds = await rpcClient.readContract({
-          address: EightBallAddress,
+          address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
           abi: EightballV1ABI,
           args: [BigInt(marketId)],
           functionName: "getOdds",

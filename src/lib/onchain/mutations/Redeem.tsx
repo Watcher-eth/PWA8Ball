@@ -2,13 +2,14 @@
 import { ethers } from "ethers";
 
 import { useMutation } from "@tanstack/react-query";
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
 import { WalletClient, getContract, Address } from "viem";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { USDC_ABI } from "../contracts/Usdc";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { supabase } from "@/supabase/supabaseClient";
 import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 interface RedeemParams {
   marketId: number;
   outcomeTokenAddress: Address;
@@ -25,7 +26,7 @@ async function cashoutPrediction(props: RedeemParams) {
   try {
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
 

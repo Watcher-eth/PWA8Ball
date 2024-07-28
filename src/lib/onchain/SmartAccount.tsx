@@ -21,15 +21,14 @@ import {
   createPimlicoBundlerClient,
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico";
-
-import { USDC_ADDRESS, USDC_ABI } from "./contracts/Usdc";
-import { EightBallAddress } from "./contracts/Eightball";
+import { USDC_ABI } from "./contracts/Usdc";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
 import { useAccount } from "wagmi";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getWalletClient } from "@wagmi/core";
 import { wagmiConfig } from "@/pages/_app";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS, BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/Onchain";
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";
@@ -43,7 +42,7 @@ interface SmartAccountInterface {
   /** Smart account client to send signature/transaction requests to the smart account */
   smartAccountClient?: SmartAccountClient;
   /** EOA client for regular EOAs */
-  eoaClient?: any ;
+  eoaClient?: any;
   /** Smart account address */
   smartAccountAddress?: Address;
   /** Boolean to indicate whether the smart account state has initialized */
@@ -146,9 +145,9 @@ export const SmartAccountProvider = ({
     const account = smartAccountClient.account?.address;
     console.log("Step 3", account);
     const allowance = await publicClient.readContract({
-      address: USDC_ADDRESS,
+      address: BASE_SEPOLIA_USDC_ADDRESS,
       abi: USDC_ABI,
-      args: [account, EightBallAddress],
+      args: [account, BASE_SEPOLIA_EIGHTBALL_ADDRESS],
       functionName: "allowance",
     });
 
@@ -157,14 +156,14 @@ export const SmartAccountProvider = ({
       try {
         const contract = getContract({
           abi: USDC_ABI,
-          address: USDC_ADDRESS,
+          address: BASE_SEPOLIA_USDC_ADDRESS,
           client: { public: rpcClient, wallet: smartAccountClient },
         });
 
         console.log("contract", contract);
 
         const hash = await contract.write.approve([
-          EightBallAddress,
+          BASE_SEPOLIA_EIGHTBALL_ADDRESS,
           10000000000n,
         ]);
         console.log("hash", hash);

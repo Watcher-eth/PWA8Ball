@@ -1,14 +1,12 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
-import {
-  EightBallAddress,
-  EightballV1ABI,
-} from "@/lib/onchain/contracts/Eightball";
+import { EightballV1ABI } from "@/lib/onchain/contracts/Eightball";
 import { SmartAccountClient } from "permissionless";
 import { type Address, getContract } from "viem";
 
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 interface PredictParams {
   amount: number;
@@ -30,7 +28,7 @@ async function predict(props: PredictParams) {
     const preferYesNum = props.preferYes ? 1 : 0;
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
 

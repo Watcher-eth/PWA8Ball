@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query";
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
 import { type Address, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 interface CashoutParams {
   preferYes: boolean;
   option: string;
@@ -50,7 +51,7 @@ async function cashoutPrediction(props: CashoutParams) {
 
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
 

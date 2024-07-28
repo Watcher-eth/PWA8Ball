@@ -1,10 +1,12 @@
-import { USDC_ADDRESS } from "@/lib/onchain/contracts/Usdc";
 import { useTokenContractApproval } from "./useTokenContractApproval";
-import { EightBallAddress } from "@/lib/onchain/contracts/Eightball";
+import {
+  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+  BASE_SEPOLIA_USDC_ADDRESS,
+} from "@/constants/Onchain";
 
 export function useEightBallApproval() {
   return useTokenContractApproval({
-    tokenAddress: USDC_ADDRESS,
-    contractAddress: EightBallAddress,
+    tokenAddress: BASE_SEPOLIA_USDC_ADDRESS,
+    contractAddress: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
   });
 }

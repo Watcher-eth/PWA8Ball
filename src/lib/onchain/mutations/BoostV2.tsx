@@ -2,12 +2,13 @@
 
 import { useMutation } from "@tanstack/react-query";
 
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
 import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
 import { supabase } from "@/supabase/supabaseClient";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 interface BoostMarket {
   amount: number;
@@ -24,10 +25,10 @@ async function boostV2(props: BoostMarket) {
   try {
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
-    
+
     // Boost the market
     const hash = await contract.write.boostMarket([
       BigInt(props.amount),

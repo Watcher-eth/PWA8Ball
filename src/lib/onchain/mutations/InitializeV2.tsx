@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query";
-import { EightBallAddress, EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "../contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract } from "viem";
 import { SmartAccountClient } from "permissionless";
@@ -10,6 +10,7 @@ import {
 } from "../contracts/EightballStorage";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/operations";
 import { createMarket } from "@/supabase/mutations/createMarket";
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/Onchain";
 
 async function initialize(props: {
   amount: number;
@@ -40,7 +41,7 @@ async function initialize(props: {
 
     const contract = getContract({
       abi: EightballV1ABI,
-      address: EightBallAddress,
+      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
     // Boost the market
