@@ -16,7 +16,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 
 
 import { RedeemOverview } from "./RedeemOverview";
-import { CashoutConfirmScrreen } from "../Cashout/CashoutConfirmScreen";
+import { CashoutConfirmScrreen } from "../cashout/CashoutConfirmScreen";
 import { OutcomeButton } from "@/components/buttons/OutcomeButton";
 
 export function RedeemModal({

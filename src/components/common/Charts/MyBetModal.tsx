@@ -12,9 +12,9 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartConfig } from "./DesktopChart";
-import { CashoutOverview } from "@/components/predictions/Cashout/CashoutOverview";
-import { CashoutWarningScreen } from "@/components/predictions/Cashout/CashoutWarningScreen";
-import { CashoutConfirmScreen } from "@/components/predictions/Cashout/CashoutConfirmScreen";
+import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
+import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
+import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
 import { processPrices } from "@/utils/chartUtils";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 
