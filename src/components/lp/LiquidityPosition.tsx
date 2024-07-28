@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
-import { RemoveLiquidityModal } from "./RemoveLiquidityModal";
-import { DesktopLPModal } from "@/components/modals/Desktop/DesktopLPModal";
+import { RemoveLiquidityModal } from "./LpModal/RemoveLiquidityModal";
+import { DesktopLpModal } from "./LpModal/DesktopLpModal";
 
 export function LiquidityPosition({
   image,
@@ -77,7 +77,7 @@ export function DesktopLiquidityPosition({
   onChange: () => void;
 }) {
   return (
-    <DesktopLPModal image={image} title={title} amount={amount} id={id}>
+    <DesktopLpModal image={image} title={title} amount={amount} id={id}>
       <motion.div className="flex min-h-[20vh] justify-between hover:scale-101 active:scale-97 flex-col p-3.5 pt-3 pb-3 rounded-[15px] bg-[rgba(49,49,49,0.78)] mb-[15px] relative cursor-pointer overflow-hidden">
         <img
           className="h-full  w-full rounded-[15px] object-cover absolute z-0 filter blur-[35px] scale-[1.2]"
@@ -119,6 +119,6 @@ export function DesktopLiquidityPosition({
           </motion.button>
         </div>
       </motion.div>
-    </DesktopLPModal>
+    </DesktopLpModal>
   );
 }

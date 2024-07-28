@@ -1,6 +1,7 @@
 // @ts-nocheck
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { ShareBetContent } from "./ShareBetContent";
-import { DesktopCardModal } from "../../modals/DesktopCardModal";
+
 
 export function DesktopShareBetModal({
   children,

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { PieChart, CircleEllipsis } from "lucide-react";
-import { GeneralFeed } from "@/components/profile/GeneralFeed/GeneralFeed";
+import { GeneralFeed } from "@/components/profile/GeneralFeed";
 import { FollowButton } from "@/components/profile/FollowButton";
 
 import { SocialsSection } from "@/components/common/SocialsSection";

@@ -10,10 +10,10 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
-import { DesktopLPModal } from "../modals/Desktop/DesktopLPModal";
+import { DesktopLpModal } from "@/components/lp/LpModal/DesktopLpModal";
 import Link from "next/link";
-import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
-import { User } from "@/types/UserTypes";
+import { DesktopMyBetModal } from "@/components/common/Charts/MyBetModal";
+
 import {
   BarChart,
   ClipboardList,
@@ -49,12 +49,9 @@ import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { toast } from "sonner";
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
-import { Input } from "../ui/Input";
 
-const chartData = [
-  { category: "GTA 6", percentage: 28, fill: "#FF6600" },
-  { category: "US Elections", percentage: 42, fill: "#1E90FF" },
-];
+
+
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -262,7 +259,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
         <div className="space-y-4">
           {filteredPositions?.map((item, index) => {
             return (
-              <DesktopLPModal
+              <DesktopLpModal
                 image={item?.image}
                 title={item?.title}
                 amount={item?.amount}
@@ -287,7 +284,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
                     </p>
                   </div>
                 </motion.div>
-              </DesktopLPModal>
+              </DesktopLpModal>
             );
           })}
         </div>

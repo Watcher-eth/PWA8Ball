@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { PenBox, UserMinus, UserPlus, UserRoundPlus } from "lucide-react";
+import { PenBox, UserMinus, UserPlus } from "lucide-react";
 import { useFollowUser } from "@/supabase/mutations/follow/useFollowUser";
 import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
 import { useUserStore } from "@/lib/stores/UserStore";
@@ -18,8 +18,8 @@ export function FollowButton({
   const followingId = profileId;
   const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId);
 
-  const [isFollowing, setFollowing] = useState<boolean>(false);
-  const [temporaryUnfollow, setTemporaryUnfollow] = useState<boolean>(false);
+  const [isFollowing, setFollowing] = useState(false);
+  const [temporaryUnfollow, setTemporaryUnfollow] = useState(false);
 
   const { mutate: followUser } = useFollowUser();
   const { mutate: unfollowUser } = useUnfollowUser();

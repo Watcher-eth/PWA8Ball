@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import { useState } from "react";
-import { DesktopCardModal } from "../DesktopCardModal";
-import { Overview } from "@/components/predictions/Liquidity/RemoveLiquidityModal/Overview";
-import { RemoveLPConfirmationScreen } from "@/components/predictions/Liquidity/RemoveLiquidityModal/Confirm";
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
+import { Overview } from "@/components/lp/LpModal/Overview";
+import { RemoveLPConfirmationScreen } from "@/components/lp/LpModal/Confirm";
 
-export function DesktopLPModal({
+export function DesktopLpModal({
   children,
   id,
   title,
