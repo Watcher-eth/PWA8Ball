@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Rocket } from "lucide-react";
-import { BoostModal } from "@/components/modals/BoostModal";
+import { MobileBoostModal } from "@/components/modals/BoostModal/MobileBoostModal";
 import { DesktopBoostModal } from "@/components/modals/BoostModal/DesktopBoostModal";
 import { BoostExplainerModal } from "@/components/modals/BoostExplainerModal";
 
@@ -16,7 +16,7 @@ export function BoostDetail({
   isDesktop: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const BoostModalComponent = isDesktop ? DesktopBoostModal : BoostModal;
+  const BoostModalComponent = isDesktop ? DesktopBoostModal : MobileBoostModal;
 
   return (
     <>

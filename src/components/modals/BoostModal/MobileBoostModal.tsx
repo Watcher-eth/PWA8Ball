@@ -10,7 +10,7 @@ import { BoostInfoRow } from "./DesktopBoostModal";
 import { Input } from "@/components/ui/Input";
 import { useState } from "react";
 
-export function BoostModal({
+export function MobileBoostModal({
   children,
   image,
   id,

@@ -1,18 +1,21 @@
 // @ts-nocheck
 
 import { useEffect, useState } from "react";
-import { formatWithCommas } from "@/utils/string/formatWithCommas";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+
 import { AnimatePresence, motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { Vote } from "lucide-react";
+
+import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
+
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { NumericKeypad } from "@/components/NumericKeypad";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
 export function PredictModal({
   text,
