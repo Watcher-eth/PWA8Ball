@@ -50,12 +50,7 @@ export function BettersOverviewItem({
           )}
 
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginLeft: "7px",
-              maxWidth: "70%",
-            }}
+            className="flex flex-col ml-2 max-w-[70%]"
           >
             <p
               style={{
