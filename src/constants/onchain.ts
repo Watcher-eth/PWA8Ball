@@ -10,12 +10,17 @@ export const BASE_SEPOLIA_STORAGE_ADDRESS =
 
 //Mainnet (Base)
 export const BASE_USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
-export const BASE_EIGHTBALL_ADDRESS = " ";
+export const BASE_EIGHTBALL_ADDRESS = "";
 export const BASE_ROUTER_ADDRESS = "0x6Fe45F9bC0871e0337C7B095a76799e754a10Acf";
-export const BASE_STORAGE_ADDRESS = " ";
+export const BASE_STORAGE_ADDRESS = "";
 
 
 //Operations
+//Recipient (Protocol Fee)
 export const BASE_FEE_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"
+
+//Operator (Client / Frontend provider)
 export const BASE_OPERATOR_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853"
+
+//Operator (Admin / Frontend provider)
 export const ROOT_OPERATOR_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853";

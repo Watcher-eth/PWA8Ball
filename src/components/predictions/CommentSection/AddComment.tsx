@@ -7,9 +7,6 @@ import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
 
-
-
-
 export function AddComment({
   user,
   id,
@@ -64,8 +61,6 @@ export function AddComment({
       parent_id: "words[1]",
     });
 
-
-
     toast.success("Commented successfully!", {
       icon: <CheckCircle height={"15px"} />,
       style: {
@@ -91,15 +86,15 @@ export function AddComment({
           ref={inputRef}
           placeholder="Add a comment..."
           rows={1}
-          className={`pb-1 placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-transparentfocus:outline-none transition-all duration-300 resize-none
+          className={`pb-1 bg-[transparent] placeholder-[lightgray] w-full border-[#303030] text-[lightgray] bg-transparentfocus:outline-none transition-all duration-300 resize-none
           border-b-[0.8px] focus:border-b-2 focus:border-b-transparent outline-none overflow-hidden
           `}
           onInput={handleInput}
         />
         <span
           className={`absolute left-0 w-full h-[2px] transition-all duration-300
-            group-focus-within:bg-[lightgray] group-focus-within:scale-x-100
-            bg-transparentscale-x-0 origin-center
+            group-focus-within:bg-[#505050] group-focus-within:scale-x-100
+            bg-transparentscale-x-0 transform origin-center
           `}
           style={{
             transformOrigin: "center",
@@ -136,7 +131,7 @@ export function AddComment({
   );
 }
 
-function CommentActionButton({ onClick, label, className="" }) {
+function CommentActionButton({ onClick, label, className = "" }) {
   return (
     <div
       className={`
@@ -152,4 +147,3 @@ function CommentActionButton({ onClick, label, className="" }) {
     </div>
   );
 }
-
