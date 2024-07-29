@@ -8,16 +8,12 @@ import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useCheckIfFollowing } from "@/supabase/queries/user/useCheckIfFollowing";
 
-export function FollowButton({
-  profileId,
-}: {
-  profileId: string;
-}) {
+export function FollowButton({ profileId }: { profileId: string }) {
   const { user } = useUserStore();
   const followerId = user?.external_auth_provider_user_id;
   const followingId = profileId;
   const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId);
-
+  const [edit, setEdit] = useState<boolean>();
   const [isFollowing, setFollowing] = useState(false);
   const [temporaryUnfollow, setTemporaryUnfollow] = useState(false);
 
@@ -76,7 +72,7 @@ export function FollowButton({
   }
 
   return null;
-};
+}
 
 function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
   return (

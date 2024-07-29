@@ -10,7 +10,6 @@ import {
 
 import { generateChartConfig } from "./generateChartConfig";
 
-
 export function GenericAreaChart({
   chartData,
   xAxisKey = "month",
@@ -36,6 +35,7 @@ export function GenericAreaChart({
         margin={{
           left: 0,
           right: 0,
+          top: 10,
         }}
       >
         <CartesianGrid vertical={false} />
@@ -78,7 +78,6 @@ export function GenericAreaChart({
             fill={`url(#fill${key})`}
             fillOpacity={0.4}
             stroke={chartConfig[key].color}
-            stackId="a"
           />
         ))}
       </AreaChart>
