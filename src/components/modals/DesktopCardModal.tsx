@@ -2,12 +2,13 @@
 
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import {
-  Card,
+  // Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { Card } from "@/components/ui/tailwind/Card"
 import { AnimatePresence, motion } from "framer-motion";
 export function DesktopCardModal({
   children,
@@ -41,9 +42,8 @@ export function DesktopCardModal({
       >
         <Card
           className={`
-            shadow-none
-            border-2 border-[#181818]
-            rounded-2xl ${cardClassName}
+            shadow-none !p-0 w-full
+            rounded-2xl  !bg-[#080808]/85 ${cardClassName}
           `}
         >
           {(title || subtitle) && (

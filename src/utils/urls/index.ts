@@ -1,7 +1,7 @@
 
 
 
-const BASE_URL = "https://tryblitz.xyz"
+const BASE_URL = "https://tryglimpse.xyz"
 
 const PWA_URL = "https://pwa-8-ball.vercel.app"
 
@@ -9,7 +9,7 @@ const PWA_URL = "https://pwa-8-ball.vercel.app"
 export const HOME_PATH = "/"
 export const ACTIVITY_PATH = "/activity"
 
-export const LEADERBOARD_PATH = "/CommunityLeaderboard"
+export const LEADERBOARD_PATH = "/leaderboard"
 
 export const SETTINGS_PATH = "/settings"
 

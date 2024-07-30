@@ -8,9 +8,9 @@ export function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
   const shareLink = async () => {
     try {
       const result = await navigator.share({
-        message: "Follow me on Blitz to see my predictions for the future",
-        url: "https://tryblitz.xyz",
-        title: `${user?.name} on Blitz`,
+        message: "Follow me on Glimpse to see my predictions for the future",
+        url: "https://tryglimpse.xyz",
+        title: `${user?.name} on Glimpse`,
       });
     } catch (error) {
       console.error("Error during sharing", error);

@@ -260,7 +260,7 @@ export default async function GET(request: Request) {
               fontFamily: "Benzin",
             }}
           >
-            Blitz
+            Glimpse
           </div>
         </div>
       ),

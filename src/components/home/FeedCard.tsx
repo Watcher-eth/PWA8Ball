@@ -52,7 +52,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       />
       <div
         style={{ fontFamily: "Aeonik-Bold" }}
-        className="absolute top-3 z-3 right-3 text-[0.95rem] bg-[#181818]/[0.1] text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
+        className="absolute top-3 z-3 right-3 text-[0.95rem] bg-[#181818]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
       >
         {(odds / 100).toFixed(0)}% {optionA !== "Yes" ? optionA : null}
       </div>

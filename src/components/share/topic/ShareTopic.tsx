@@ -21,7 +21,7 @@ export const ShareTopic = ({
   const shareLink = async () => {
     try {
       await navigator.share({
-        message: `Join ${title} on Blitz to get all the latest predictions and odds.`,
+        message: `Join ${title} on Glimpse to get all the latest predictions and odds.`,
         url: `https://pwa-8-ball.vercel.app/t/${id}`,
         title: title,
       });

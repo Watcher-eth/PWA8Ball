@@ -196,7 +196,7 @@ export const FindFriends = ({ type }) => {
         >
           <button
             onClick={() =>
-              linkFarcaster({ relyingParty: "https://tryblitz.xyz" })
+              linkFarcaster({ relyingParty: "https://tryglimpse.xyz" })
             }
           >
             <img

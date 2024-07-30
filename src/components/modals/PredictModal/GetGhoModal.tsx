@@ -42,7 +42,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       />
       <LabeledSectionWithIcon
         title="Receive"
-        description="Receive USDC from one of your wallets to your Blitz address"
+        description="Receive USDC from one of your wallets to your Glimpse address"
         IconComponent={ArrowDown}
         className="bg-green-400"
         onClick={() => setStep(4)}

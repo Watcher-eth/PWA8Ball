@@ -30,8 +30,8 @@ export function ShareBetContent({
   const shareLink = async () => {
     try {
       await navigator.share({
-        title: `${title} on Blitz`,
-        text: "This prediction on Blitz is wild! Check it out",
+        title: `${title} on Glimpse`,
+        text: "This prediction on Glimpse is wild! Check it out",
         url: `https://pwa-8-ball.vercel.app/p/${id}`,
       });
     } catch (error) {

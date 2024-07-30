@@ -30,11 +30,11 @@ export function CustomHead({ topicData, userId, router, ...rest }) {
 function SplashSeo() {
   return (
     <NextSeo
-      title="Blitz"
-      description="Blitz prediction market"
+      title="Glimpse"
+      description="Glimpse prediction market"
       openGraph={{
-        title: "TryBlitz",
-        description: "Try Blitz",
+        title: "TryGlimpse",
+        description: "Try Glimpse",
         type: "website",
         images: [
           {
@@ -133,7 +133,7 @@ function ProfileSeo({ userId }) {
 }
 
 const DEFAULT_TWITTER_INFO = {
-  handle: "@tryblitz",
+  handle: "@tryglimpse",
   site: "@site",
   cardType: "summary_large_image",
 };

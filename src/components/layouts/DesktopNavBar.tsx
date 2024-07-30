@@ -32,15 +32,20 @@ export function DesktopNavBar() {
           `}
         >
           <Link href={HOME_PATH}>
-            <NavIconButton
-              icon={
-                <img
-                  src="/images/OrbLogo.png" // Replace with your image path
-                  alt="Left Icon"
-                  className="size-10 rounded-full ml-1"
-                />
-              }
-            />
+            <div className="flex items-center">
+              <NavIconButton
+                icon={
+                  <img
+                    src="/images/OrbLogo.png" // Replace with your image path
+                    alt="Left Icon"
+                    className="size-10 rounded-full ml-1"
+                  />
+                }
+              />
+              <div className="pl-2 font-[Aeonik] text-2xl">
+                Glimpse
+              </div>
+            </div>
           </Link>
           <div className="flex items-center space-x-8">
             <DesktopSearchModal userId={userId}>
@@ -50,15 +55,15 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
-            {user ? (
-              <DesktopProfilePopover>
-                <ConnectButton user={user}/>
-              </DesktopProfilePopover>
-            ) : (
-              <DesktopOnboardingModal>
-                <ConnectButton />
-              </DesktopOnboardingModal>
-            )}
+              {user ? (
+                <DesktopProfilePopover>
+                  <ConnectButton user={user} />
+                </DesktopProfilePopover>
+              ) : (
+                <DesktopOnboardingModal>
+                  <ConnectButton />
+                </DesktopOnboardingModal>
+              )}
             </div>
           </div>
         </div>

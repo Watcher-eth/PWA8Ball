@@ -30,7 +30,7 @@ export function ConfirmPrediction(props: {
       //   text: `I just predicted ${
       //     options[Option - 1]
       //   } for ${question}. What do you think?`,
-      //   url: "https://tryblitz.xyz",
+      //   url: "https://tryglimpse.xyz",
       // });
     } catch (error) {
       console.error("Error during sharing", error);
