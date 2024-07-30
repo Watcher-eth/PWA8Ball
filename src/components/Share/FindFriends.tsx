@@ -6,7 +6,7 @@ import { useQuery } from "@airstack/airstack-react";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
 
-import { convertIpfsUrl } from "@/utils/urls/modifyIpfsUrl";
+import { convertIpfsUrl } from "@/utils/urls/convertIpfsUrl";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { Spinner } from "@/components/modals/PredictModal/Spinner";
