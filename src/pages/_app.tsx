@@ -14,7 +14,7 @@ import { PrivyProvider } from "@privy-io/react-auth";
 
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
 
-import { AuthChecker } from "@/lib/providers/AuthProvider";
+import { AuthChecker } from "@/providers/AuthProvider";
 
 import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 

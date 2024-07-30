@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useInitializeUser } from "@/hooks/useInitializeUser";
 
 export function AuthChecker({
