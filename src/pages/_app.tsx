@@ -15,6 +15,7 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
 
 import { AuthChecker } from "@/providers/AuthProvider";
+import { GraphQlProvider } from "@/providers/GraphQlProvider";
 
 import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
@@ -63,9 +64,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
             >
               <AuthChecker>
                 <RainbowKitProvider coolMode>
-                  <RootLayout>
-                    <Component {...pageProps} />
-                  </RootLayout>
+                  <GraphQlProvider>
+                    <RootLayout>
+                      <Component {...pageProps} />
+                    </RootLayout>
+                  </GraphQlProvider>
                 </RainbowKitProvider>
               </AuthChecker>
             </PrivyProvider>

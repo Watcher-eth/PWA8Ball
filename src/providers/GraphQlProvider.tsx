@@ -8,7 +8,7 @@ import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 // import { relayStylePagination } from "@apollo/client/utilities"
 
 const GRAPH_ENDPOINT_URL =
-  "https://<ponder-railway-id>.up.railway.app/graphql";
+  "https://prysmindexer-production.up.railway.app/graphql";
 
 
 export const APOLLO_CLIENT = new ApolloClient({
