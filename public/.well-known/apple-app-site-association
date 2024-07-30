@@ -1,0 +1,22 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "21679397801.com.anonymous.bl1tz",
+        "paths": [
+          "/u/*",
+          "/p/*",
+          "/t/*",
+          "/up/*",
+          "/"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "21679397801.com.anonymous.bl1tz"
+    ]
+  }
+}

@@ -1,9 +1,6 @@
 import { ImageResponse } from "@vercel/og";
-
-import { IUser } from "@/supabase/types";
 import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
 import { aeonikFontDataPromise } from "@/utils/fonts";
-import { generateChartSVG } from "@/components/common/Charts/OGImageSVGChart";
 
 export const runtime = "edge";
 
@@ -15,9 +12,6 @@ export default async function GET(request: Request) {
 
     const market = await fetchMarketAndPricesById(id);
     const prices = market.prices;
-
-    //TODO: Need to check svg generation works correctly and gets displayed correctly
-    const chartSVG = generateChartSVG(prices);
 
     return new ImageResponse(
       (
@@ -77,10 +71,10 @@ export default async function GET(request: Request) {
           >
             {market.market.question}
           </div>
-          <div
+          {/* <div
             dangerouslySetInnerHTML={{ __html: chartSVG }}
             style={{ width: "1200px", height: "630px" }}
-          />
+          /> */}
         </div>
       ),
       {
