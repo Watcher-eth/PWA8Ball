@@ -21,7 +21,7 @@ export function SearchInputSection({
         className={`
             w-full outline-none border-0
             py-2 px-4
-            bg-transparenttext-white placeholder-[#707070]
+            bg-transparent text-white placeholder-[#707070]
             text-[1rem] rounded-lg
           `}
       />
