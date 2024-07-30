@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const AppBanner = () => {
+export function AppBanner() {
   const [isInstalled, setIsInstalled] = useState(false);
 
   const handleInstallClick = () => {
@@ -34,5 +34,3 @@ export const AppBanner = () => {
     </div>
   );
 };
-
-export default AppBanner;

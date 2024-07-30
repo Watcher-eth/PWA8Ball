@@ -4,10 +4,10 @@ import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMa
 import { fetchMarketById } from "@/supabase/queries/useGetMarketById";
 import { DEFAULT_USER_ID } from "@/constants/testData";
 
-import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
 import { MobiTop } from "@/components/layouts/MobiTop";
-
+import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
 import { MobileMarketPage } from "@/components/predictions/MobileMarketPage";
+
 import { IUserWithBet } from "@/supabase/types";
 import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
 
