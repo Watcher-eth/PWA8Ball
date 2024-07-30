@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
 import { fetchMarketById } from "@/supabase/queries/useGetMarketById";
 import { DEFAULT_USER_ID } from "@/constants/testData";
@@ -7,6 +8,8 @@ import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 
 import { MobileMarketPage } from "@/components/predictions/MobileMarketPage";
+import { IUserWithBet } from "@/supabase/types";
+import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
 
 
 export default function MarketPage({
@@ -15,7 +18,7 @@ export default function MarketPage({
   id,
 }: {
   users: IUserWithBet[];
-  market: IMarketWithTopic;
+  market: IMarketWithTopicDetails;
   id: string;
 }) {
   return (

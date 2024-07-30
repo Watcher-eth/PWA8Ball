@@ -8,6 +8,7 @@ import { LoginModal } from "@/components/modals/LoginModal";
 
 import { FeedCard } from "./FeedCard";
 import { TopicHeader } from "./TopicHeader";
+import { AppBanner } from "../common/AppBanner";
 
 export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();
@@ -30,6 +31,7 @@ export function MobileHomePage({ trendingMarkets }) {
 
   return (
     <div className="w-screen flex flex-col  no-scrollbar py-0  bg-[#101010]">
+      <AppBanner />
       <TopicHeader
         setSelectedTopic={setSelectedTopic}
         selectedTopic={selectedTopic}

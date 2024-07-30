@@ -26,6 +26,7 @@ import {
   User,
   Wallet,
   UserCircle,
+  ArrowDownToLine,
 } from "lucide-react";
 
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
@@ -81,6 +82,7 @@ export function DesktopProfilePopover({
               IconComponent={Settings}
               href={SETTINGS_PATH}
             />
+
             <DropdownItem
               label="Your Boosts"
               IconComponent={Rocket}
@@ -124,6 +126,11 @@ export function DesktopProfilePopover({
                   <DropdownItem label="More..." />
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
+              <DropdownItem
+                label="Download on IOS"
+                IconComponent={ArrowDownToLine}
+                href={"https://testflight.apple.com/join/xBbJ2OPO"}
+              />
             </DropdownMenuSub>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
