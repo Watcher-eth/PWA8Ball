@@ -7,10 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push": "drizzle-kit push:mysql --config drizzle.config.ts",
-    "db:generate": "drizzle-kit generate:mysql",
-    "db:introspect": "drizzle-kit introspect:mysql",
-    "db:studio": "drizzle-kit studio"
+    "gql-compile": "graphql-codegen",
+    "gql-watch": "graphql-codegen -w"
   },
   "dependencies": {
     "@airstack/airstack-react": "^0.6.3",
@@ -82,6 +80,9 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.3.3",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@types/d3": "^7.4.3",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.14.8",

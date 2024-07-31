@@ -7,7 +7,7 @@ import {
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 // import { relayStylePagination } from "@apollo/client/utilities"
 
-const GRAPH_ENDPOINT_URL =
+export const GRAPH_ENDPOINT_URL =
   "https://prysmindexer-production.up.railway.app/graphql";
 
 

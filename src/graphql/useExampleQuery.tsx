@@ -1,8 +1,8 @@
-import { gql, useQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
+import { gql } from "@/__generated__/gql";
 
-
-const EXAMPLE_MARKET_QUERY = gql`
-  query OnchainMarketsQuery($id: BigInt!) {
+const EXAMPLE_MARKET_QUERY = gql(/* GraphQL */`
+  query OnchainMarkets($id: BigInt!) {
     onchainMarkets(id: $id) {
       id
       outcomeA
@@ -19,9 +19,11 @@ const EXAMPLE_MARKET_QUERY = gql`
       proposedAt
     }
   }
-`;
+`)
 
 export function useExampleQuery() {
-  const { data, loading, error } = useQuery(EXAMPLE_MARKET_QUERY);
+  const { data, loading, error } = useQuery(EXAMPLE_MARKET_QUERY, {
+    variables: { id: 1 },
+  });
   return data?.onchainMarkets;
 }
