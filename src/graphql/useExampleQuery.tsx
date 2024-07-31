@@ -1,5 +1,6 @@
-import { useQuery } from "@apollo/client"
-import { gql } from "@/__generated__/gql";
+import { useQuery } from "@apollo/client" // import { gql } from here for untyped queries
+import { gql } from "@/__generated__/gql"; // for typed queries
+
 
 const TYPED_EXAMPLE_MARKET_QUERY = gql(/* GraphQL */`
   query OnchainMarkets($id: BigInt!) {
