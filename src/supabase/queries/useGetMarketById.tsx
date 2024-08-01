@@ -28,11 +28,11 @@ export async function fetchMarketById(
 
   if (error) {
     console.error("Fetch Market By ID Error:", error.message);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
   // Since the function returns a set of 'markets', handle the response appropriately
   return data?.[0] ?? null; // Assuming the function returns an array, and you need the first item
-};
+}
 
 export const useGetMarketById = (marketId: string, userId: string) => {
   return useQuery({
