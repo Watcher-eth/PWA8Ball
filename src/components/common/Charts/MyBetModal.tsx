@@ -43,7 +43,6 @@ export const MobileMyBetModal = (props: {
   handleReceipt: () => void;
   setStep: (num: number) => void;
 }) => {
-  console.log({props})
   const [timeframe, setTimeframe] = useState("1M");
 
   const { data: prices, error: priceError } = useGetPricesForMarket(
@@ -445,7 +444,6 @@ export function DesktopMyBetModal({
   isExternal?: boolean;
 }) {
   const [step, setStep] = useState(1);
-  console.log("oned2", ownedAmount);
   return (
     <DesktopCardModal
       cardClassName="w-full rounded-[1.5rem]"

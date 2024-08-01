@@ -16,7 +16,6 @@ export function UserPrediction({
   optional,
   betId,
 }) {
-  console.log("betId", betId);
   return (
     <ProfilePrediction
       image={image}

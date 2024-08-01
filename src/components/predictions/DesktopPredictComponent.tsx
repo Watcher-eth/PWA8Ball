@@ -208,7 +208,6 @@ function DesktopConfirmPrediction({
 }) {
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
-  // console.log({option, option2})
 
   const { executePrediction, loading, success } = useExecutePrediction();
 

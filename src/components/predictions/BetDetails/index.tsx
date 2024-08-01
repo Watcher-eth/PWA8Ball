@@ -29,7 +29,6 @@ export function BetDetails({
     refetch,
   } = useGetLPForUser(user?.walletaddress);
 
-  console.log("details2", image);
 
 
   return (

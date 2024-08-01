@@ -50,7 +50,6 @@ export function DesktopUserActivity({
     ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
       []),
   ];
-  console.log("merged", mergedData[0]);
   return (
     <div className="h-screen w-full max-w-[29%] p-4 pt-3">
       <h1 className="text-white text-2xl font-semibold ">Your Activity</h1>

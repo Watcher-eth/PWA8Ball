@@ -51,7 +51,6 @@ export function RemoveLPConfirmationScreen(props: {
     if (smartAccountReady) {
       try {
         setLoading(true);
-        console.log("marketd", props.id);
         if (userCon?.walletType === "smartwallet")
           removeLP({
             userId: userCon?.external_auth_provider_user_id!,

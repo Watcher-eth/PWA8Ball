@@ -74,7 +74,6 @@ export function DesktopBoostModal({
   image: string;
   id: string;
 }) {
-  console.log("image", image);
 
   return (
     <DesktopCardModal

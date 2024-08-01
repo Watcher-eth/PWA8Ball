@@ -21,7 +21,6 @@ export function DesktopNotificationModal({
     error,
   } = useGetNotificationsForUser(userId);
   const { user } = useUserStore();
-  console.log("notifs", notifications);
   return (
     <DesktopCardModal
       title="Notifications"

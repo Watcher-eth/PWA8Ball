@@ -125,7 +125,6 @@ export function PredictModal({
     });
   }
 
-  console.log({ user });
   return (
     <div className="w-full flex-grow ">
       <Drawer>

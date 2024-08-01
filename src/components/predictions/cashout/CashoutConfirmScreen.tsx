@@ -37,7 +37,7 @@ export function CashoutConfirmScreen(props : {
       console.log("Web Share not supported on this browser");
     }
   };
-  console.log("options3", props.option, props.options);
+
   return (
     <div
       className={`flex flex-col items-center ${
