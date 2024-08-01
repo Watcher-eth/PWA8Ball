@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-
 import {
   ChevronRight,
   CreditCard,
@@ -31,7 +30,7 @@ export function SettingsPage() {
     publicProfile: false,
   };
   const { user } = useUserStore();
-  const userBalance = useUserUsdcBalance()
+  const userBalance = useUserUsdcBalance();
   const [settings, setSettings] = useState(initialSettings);
   const [showSaveButton, setShowSaveButton] = useState(false);
   const chartData = [
@@ -63,6 +62,7 @@ export function SettingsPage() {
       [key]: value,
     }));
   };
+
 
   return (
     <div className="container p-4 bg-[#181818] w-full h-full">
@@ -299,4 +299,4 @@ export function SettingsPage() {
       </div>
     </div>
   );
-};
+}

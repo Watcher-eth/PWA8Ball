@@ -7,6 +7,7 @@ import { Copy } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { shortenAddress } from "@/utils/address/shortenAddress";
+import RampInstantSDK from "@ramp-network/ramp-instant-sdk";
 
 const stepVariants = {
   initial: { opacity: 0, y: 10 },
@@ -16,7 +17,7 @@ const stepVariants = {
 
 export function OnrampStep({
   setStep,
-  method
+  method,
 }: {
   setStep: (step: number) => void;
   method: number;
@@ -51,16 +52,8 @@ function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
         <div className="Uniswap"></div>
       </div>
       <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between">
-        <StepButton
-          onClick={() => setStep(1)}
-          isDark={false}
-          label="Back"
-        />
-        <StepButton
-          onClick={() => setStep(3)}
-          isDark={true}
-          label="Continue"
-        />
+        <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
+        <StepButton onClick={() => setStep(3)} isDark={true} label="Continue" />
       </div>
     </motion.div>
   );
@@ -143,6 +136,19 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
 }
 
 const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
+  new RampInstantSDK({
+    hostAppName: "Glimpse",
+    hostLogoUrl:
+      "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvUW1kMWVWaHZZWHRBUnhCSFZNVkF3aDJUS1RFdHBuMld3RUtBemhUTXBBa1M1Zg",
+    enabledFlows: ["ONRAMP"],
+    defaultFlow: "ONRAMP",
+    fiatCurrency: "USD",
+    fiatValue: 10.0,
+    userAddress: user?.walletaddress,
+    defaultAsset: "USDC",
+    finalUrl: "https://pwa-8-ball.vercel.app/settings",
+  }).show();
+
   return (
     <motion.div
       key="step5"
@@ -213,30 +219,21 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
         <div> Buy through MoonPay</div>
       </Button>
       <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between space-x-4">
-        <StepButton
-          onClick={() => setStep(1)}
-          isDark={false}
-          label="Back"
-        />
-        <StepButton
-          onClick={() => setStep(3)}
-          isDark={true}
-          label="Continue"
-        />
+        <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
+        <StepButton onClick={() => setStep(3)} isDark={true} label="Continue" />
       </div>
     </motion.div>
   );
 };
 
-
-
-function StepButton({ onClick, children, isDark, label, className="" }) {
-  let styleClassName
+function StepButton({ onClick, children, isDark, label, className = "" }) {
+  let styleClassName;
   if (isDark) {
     styleClassName =
       "active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-white";
   } else {
-    styleClassName = "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121]"
+    styleClassName =
+      "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121]";
   }
 
   return (
