@@ -142,13 +142,13 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
       "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvUW1kMWVWaHZZWHRBUnhCSFZNVkF3aDJUS1RFdHBuMld3RUtBemhUTXBBa1M1Zg",
     enabledFlows: ["ONRAMP"],
     defaultFlow: "ONRAMP",
-    fiatCurrency: "USD",
-    fiatValue: 10.0,
+    // fiatCurrency: "USD",
+    // fiatValue: 10.0,
     userAddress: user?.walletaddress,
-    defaultAsset: "USDC",
-    finalUrl: "https://pwa-8-ball.vercel.app/settings",
+    // defaultAsset: "USDC",
+    // finalUrl: "https://pwa-8-ball.vercel.app/settings",
   }).show();
-
+  
   return (
     <motion.div
       key="step5"
