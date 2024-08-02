@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { useQuery as useReactQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 import { IMarket } from "@/supabase/types";

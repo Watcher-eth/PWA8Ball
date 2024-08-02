@@ -42,6 +42,8 @@ const TYPED_EXAMPLE_MARKET_QUERY = gql(/* GraphQL */`
 //     }
 //   }
 // `
+
+
 export function useExampleQuery() {
   const { data, loading, error } = useQuery(TYPED_EXAMPLE_MARKET_QUERY, {
     variables: { id: 1 },
