@@ -34,11 +34,12 @@ export function NotificationCard({
 
   return (
     <div
-      className="mb-2.5 bg-[#101010]/[0.9] animate-fadeInUp"
+      className="  animate-fadeInUp"
       style={{ animationDelay: `${index * 150}ms` }}
     >
+      <div className="my-1 h-[0.13rem] w-full bg-[#181818] " />
       <div
-        className="flex items-center p-3 bg-[#191919] rounded-lg shadow-lg"
+        className="flex items-center p-3 px-5 rounded-lg shadow-lg"
         onClick={() => {}}
       >
         {type === "like" && (
@@ -48,7 +49,7 @@ export function NotificationCard({
             alt="Profile"
           />
         )}
-        <div className="flex-1">
+        <div className="flex-1 -space-y-0.5">
           {type === "like" && (
             <>
               <div className="flex items-baseline">
@@ -67,7 +68,7 @@ export function NotificationCard({
           )}
           {type === "follow" && (
             <>
-              <span className="font-bold text-white text-lg">{message}</span>
+              <span className="font-bold  text-white text-lg">{message}</span>
               <p className="text-[#777] text-base">
                 {user?.name} started following you
               </p>
@@ -75,7 +76,7 @@ export function NotificationCard({
           )}
           {type === "reply" && (
             <>
-              <span className="font-bold text-white text-lg">
+              <span className="font-bold  text-white text-lg">
                 {user?.name} {message}
               </span>
               <p className="text-[#777] text-base line-clamp-2">
@@ -92,4 +93,4 @@ export function NotificationCard({
       </div>
     </div>
   );
-};
+}

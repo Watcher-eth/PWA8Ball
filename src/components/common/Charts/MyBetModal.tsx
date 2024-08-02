@@ -25,7 +25,7 @@ export const MobileMyBetModal = (props: {
   image: string;
   price: number;
   ownedAmount: number;
-  options: {name: string }[];
+  options: { name: string }[];
   percentage: number;
   betId: string;
   topic: string;
@@ -62,8 +62,8 @@ export const MobileMyBetModal = (props: {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    [`${props.options[0].name}`]: 100 - price.value,
-    [`${props.options[1].name}`]: price.value,
+    [`${props.options[0]?.name}`]: 100 - price.value,
+    [`${props.options[1]?.name}`]: price.value,
     // desktop: price.value,
     // mobile: 100 - price.value,
   }));

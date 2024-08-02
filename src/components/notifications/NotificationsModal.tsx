@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 
 import { NotificationsContent } from "./NotificationsContent";
 
-export function NotificationsModal({ children }: { children: React.ReactNode }) {
+export function NotificationsModal({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -36,7 +40,7 @@ export function NotificationsModal({ children }: { children: React.ReactNode }) 
             layout
             transition={{ duration: 0.2 }}
             style={{ borderTopRightRadius: 20, borderTopLeftRadius: 20 }}
-            className={`bg-[#171717] rounded-t-3xl
+            className={`bg-[#080808] rounded-t-3xl
         h-[95vh] mb-5 w-screen relative`}
           >
             <NotificationsContent />

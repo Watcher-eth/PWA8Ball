@@ -5,25 +5,21 @@ import { useGetNotificationsForUser } from "@/supabase/queries/notifications/use
 import { NotificationCard } from "./NotificationCard";
 
 export function UserNotifications({ userId, isDesktop }) {
-  const {
-    data: notifications,
-  } = useGetNotificationsForUser(userId);
-
-
+  const { data: notifications } = useGetNotificationsForUser(userId);
 
   return (
     <div
       className={`
-        flex flex-col items-center w-[22vw] p-5 pt-3.5
+        flex flex-col items-center p-5 px-0 pt-3.5
         ${
           isDesktop
             ? "bg-[#171717] rounded-xl border-2 border-[#292929]"
-            : "bg-[#101010]"
+            : "bg-[#080808]"
         }
       `}
     >
-      <h1 className="font-bold text-white text-2xl my-3">Notifications</h1>
-      <div className="w-full overflow-y-auto">
+      <h1 className="font-bold self-start text-white px-5 text-2xl my-3">Notifications</h1>
+      <div className="w-full overflow-y-auto ">
         {notifications?.length > 0 ? (
           notifications.map((item, index) => (
             <NotificationCard

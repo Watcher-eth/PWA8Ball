@@ -28,7 +28,58 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   } = useGetFollowingPredictions(user?.external_auth_provider_user_id);
 
   if (isLoading || predictions === undefined) {
-    return <ActivitySkeleton />;
+    return (
+      <div
+        className={`
+      no-scrollbar flex flex-col
+
+      p-5 pt-[30px]
+      ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
+    `}
+      >
+        <div
+          className={`
+        fixed w-screen h-[125px] bottom-0 rounded-t-lg
+        z-2
+      `}
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.8))",
+          }}
+        />
+        <div
+          className={`
+        flex flex-row w-full justify-between items-center
+        mb-2.5 ${isDesktop ? "bg-[transparent]" : "bg-[#101010]"}
+      `}
+        >
+          <motion.button
+            className={`p-2 rounded-[20px] ${
+              page ? "bg-[#FF0050]" : "bg-[#1C1C1E]"
+            }`}
+            onClick={() => setPage(!page)}
+          >
+            {page ? (
+              <Globe color="white" strokeWidth={3} size={18} />
+            ) : (
+              <Users color="white" strokeWidth={3} size={18} />
+            )}
+          </motion.button>
+          <h1 className="text-[20px] text-white font-bold">
+            {page ? "Global" : "Your Friends"}
+          </h1>
+          <NotificationsModal isDesktop={isDesktop}>
+            <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
+              <Bell color="white" strokeWidth={3} size={20} />
+            </motion.button>
+          </NotificationsModal>
+        </div>
+
+        <div>
+          <ActivitySkeleton />;
+        </div>
+      </div>
+    );
   }
 
   const groupedPredictions = groupPredictionsByDate(predictions);
@@ -72,7 +123,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
         <h1 className="text-[20px] text-white font-bold">
           {page ? "Global" : "Your Friends"}
         </h1>
-        <NotificationsModal isDesktop={isDesktop}>
+        <NotificationsModal isDesktop={false}>
           <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
             <Bell color="white" strokeWidth={3} size={20} />
           </motion.button>
@@ -142,7 +193,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
 
 function ActivitySkeleton() {
   return (
-    <div className="flex flex-col items-center  w-full h-[333px] p-4">
+    <div className="flex flex-col items-center min-h-screen  w-full bg-[#080808] h-[333px] p-4">
       <div className="my-3 max-w-full">
         <AltSkeleton className="h-4.5 !bg-[#212121] " />
       </div>
