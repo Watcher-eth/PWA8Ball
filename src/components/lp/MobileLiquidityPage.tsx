@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
-import { useGetLpByUser } from "@/graphql/queries/Liquidity/useGetLpByUser";
+import { useGetLpByUser } from "@/graphql/queries/_Liquidity/useGetLpByUser";
 
 export function MobileLiquidityPage() {
   const router = useRouter();
