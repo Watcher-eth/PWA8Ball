@@ -1,4 +1,4 @@
-import { useQuery  } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { gql } from "@/__generated__/gql";
 
 const ORDERS_QUERY = gql(/* GraphQL */`
