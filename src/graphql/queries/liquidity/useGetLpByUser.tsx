@@ -6,7 +6,7 @@ import { supabase } from "@/supabase/supabaseClient";
 
 const GET_LP_BY_USER = gql`
   query GetLpByUser($userAddress: String!) {
-    lps(where: { userAddress: { _eq: $userAddress } }) {
+    lps(where: { userAddress: $userAddress }) {
       items {
         amount
         id

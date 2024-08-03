@@ -3,8 +3,8 @@ import { gql } from "@/__generated__/gql"; // for typed queries
 
 
 const TYPED_EXAMPLE_MARKET_QUERY = gql(/* GraphQL */`
-  query OnchainMarkets($id: BigInt!) {
-    onchainMarkets(id: $id) {
+  query ExampleOnchainMarket($id: BigInt!) {
+    onchainMarket(id: $id) {
       id
       outcomeA
       outcomeB
@@ -48,5 +48,5 @@ export function useExampleQuery() {
   const { data, loading, error } = useQuery(TYPED_EXAMPLE_MARKET_QUERY, {
     variables: { id: 1 },
   });
-  return data?.onchainMarkets;
+  return data?.onchainMarket;
 }

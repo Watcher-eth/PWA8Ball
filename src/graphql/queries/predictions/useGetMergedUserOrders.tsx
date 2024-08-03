@@ -1,4 +1,4 @@
-import { useGetMarketsWithTopicsByIds } from "../Markets/useGetMarketsWithTopicsByIds";
+import { useGetMarketsWithTopicsByIds } from "../markets/useGetMarketsWithTopicsByIds";
 import { useGetUserOrders } from "./useGetUserOrders";
 
 

@@ -1,8 +1,8 @@
 import { gql, useQuery as useGraphQLQuery } from "@apollo/client";
 
 const ONCHAIN_MARKET_QUERY = gql`
-  query OnchainMarkets($id: BigInt!) {
-    onchainMarkets(id: $id) {
+  query OnchainMarket($id: BigInt!) {
+    onchainMarket(id: $id) {
       id
       outcomeA
       outcomeB
@@ -25,5 +25,5 @@ export function useOnchainMarketQuery(id: number) {
     variables: { id },
   });
 
-  return { data: data?.onchainMarkets, loading, error };
+  return { data: data?.onchainMarket, loading, error };
 }

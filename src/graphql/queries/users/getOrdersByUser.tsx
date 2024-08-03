@@ -6,7 +6,7 @@ import { supabase } from "@/supabase/supabaseClient";
 
 const GET_ORDERS_BY_USER = gql`
   query GetOrdersByUser($sender: String!) {
-    orders(where: { sender: { _eq: $sender } }) {
+    orders(where: { sender: $sender }) {
       items {
         amount
         marketId
