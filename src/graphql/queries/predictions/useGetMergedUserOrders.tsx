@@ -9,12 +9,10 @@ export const useMergedOrdersData = (userAddress: string) => {
     error: ordersError,
   } = useGetUserOrders(userAddress);
 
-  const marketIds = ordersData?.map((order) => order.marketId) || [];
+  const marketIds = ordersData?.map((order) => order.marketId) ?? []
+
   const { data: marketsData, error: marketsError } =
     useGetMarketsWithTopicsByIds(marketIds);
-
-  const loading = ordersLoading;
-  const error = ordersError || marketsError;
 
   const mergedData = ordersData?.map((order) => {
     const marketData = marketsData?.find(
@@ -26,5 +24,9 @@ export const useMergedOrdersData = (userAddress: string) => {
     };
   });
 
-  return { data: mergedData, loading, error };
+  return {
+    data: mergedData,
+    loading: ordersLoading,
+    error: ordersError || marketsError
+  };
 };
