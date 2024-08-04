@@ -3,6 +3,7 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { useQuery as useReactQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
+import { useGetMarketsWithTopicsByIds } from "../markets/useGetMarketsWithTopicsByIds";
 
 const GET_LP_BY_USER = gql`
   query GetLpByUser($userAddress: String!) {
@@ -44,8 +45,8 @@ export function useGetLpByUser(userAddress: string) {
   });
 
   return {
-    data: combinedData,
-    loading: lpLoading || marketLoading,
-    error: lpError || marketError,
+    data: mergedData,
+    loading: lpLoading,
+    error: lpError || marketsError,
   };
 }

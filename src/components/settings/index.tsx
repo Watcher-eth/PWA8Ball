@@ -3,9 +3,11 @@
 import {
   ChevronRight,
   CreditCard,
+  Download,
   ReceiptText,
   Save,
   UserPlus,
+  Wallet,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import {
@@ -22,6 +24,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
+import { shortenAddress } from "@/utils/address/shortenAddress";
 
 export function SettingsPage() {
   const initialSettings = {
@@ -62,7 +65,6 @@ export function SettingsPage() {
       [key]: value,
     }));
   };
-
 
   return (
     <div className="container p-4 bg-[#181818] w-full h-full">
@@ -237,7 +239,7 @@ export function SettingsPage() {
             <div className="flex flex-row items-center justify-between w-full">
               <div className="flex flex-col -space-y-2">
                 <div className="text-white text-[2rem] font-bold">
-                  ${Number(userBalance).toFixed(2) ?? "0.00"}
+                  ${(Number(userBalance) / 10 ** 6).toFixed(2) ?? "0.00"}
                 </div>
                 <div className="text-white text-[1rem] font-semibold">
                   Your balance
@@ -293,6 +295,30 @@ export function SettingsPage() {
                   </button>
                 </DesktopOnrampModal>
               </div>
+            </div>
+          </div>
+          <div className="flex flex-col rounded-md bg-[#181818] p-5 px-8 mt-10">
+            <img className="w-full h-full" src="/images/Wallet.png" />
+            <div className="h-[0.1rem] w-full bg-[#222222] mb-5 mt-1.5" />
+            <div className="flex flex-row items-center justify-between">
+              <button className="px-2 space-x-5 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+                <Wallet
+                  color="white"
+                  className="mr-1"
+                  height={17}
+                  strokeWidth={2.5}
+                />
+                {user?.walletaddress && shortenAddress(user?.walletaddress)}
+              </button>
+              <button className="px-2 space-x-5 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+                <Download
+                  color="white"
+                  className="mr-1"
+                  height={17}
+                  strokeWidth={2.5}
+                />
+                Export Wallet
+              </button>
             </div>
           </div>
         </div>
