@@ -19,19 +19,6 @@ const GET_LP_BY_USER = gql`
   }
 `;
 
-const fetchMarketDetails = async (marketIds) => {
-  const { data, error } = await supabase
-    .from("markets")
-    .select("id, title, question, image, options")
-    .in("id", marketIds);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return data;
-};
-
 export function useGetLpByUser(userAddress: string) {
   const {
     data: lpData,
@@ -43,21 +30,18 @@ export function useGetLpByUser(userAddress: string) {
 
   const marketIds = lpData?.lps?.items?.map((lp) => lp.marketId) || [];
 
-  const {
-    data: marketData,
-    isLoading: marketLoading,
-    error: marketError,
-  } = useReactQuery({
-    queryKey: ["UserLpMarkets", marketIds],
-    queryFn: () => fetchMarketDetails(marketIds),
-    enabled: marketIds.length > 0, // This query will only run if marketIds array is not empty
-  });
+  const { data: marketsData, error: marketsError } =
+    useGetMarketsWithTopicsByIds(marketIds);
 
-  const combinedData =
-    lpData?.lps?.items.map((lp) => ({
-      ...lp,
-      market: marketData?.find((market) => market.id === lp.marketId),
-    })) || [];
+  const mergedData = lpData?.map((lpPosition) => {
+    const marketData = marketsData?.find(
+      (market) => market.id === lpPosition.marketId
+    );
+    return {
+      ...lpPosition,
+      ...marketData,
+    };
+  });
 
   return {
     data: combinedData,

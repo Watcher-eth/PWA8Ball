@@ -20,7 +20,7 @@ const ONCHAIN_MARKET_QUERY = gql`
   }
 `;
 
-export function useOnchainMarketQuery(id: number) {
+export function useGetOnchainMarket(id: number) {
   const { data, loading, error } = useGraphQLQuery(ONCHAIN_MARKET_QUERY, {
     variables: { id },
   });
