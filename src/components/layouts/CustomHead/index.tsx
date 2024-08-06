@@ -38,9 +38,9 @@ function SplashSeo() {
         type: "website",
         images: [
           {
-            url: OG_API_SPLASH_URL,
+            url: "../../../../public/images/HomeMeta.png",
             width: 1200,
-            height: 630,
+            height: 843,
             alt: "Topic Cover Image",
           },
         ],
