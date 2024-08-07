@@ -30,7 +30,7 @@ async function boostV2(props: BoostMarket) {
     });
 
     // Boost the market
-    const hash = await contract.write.boostMarket([
+    const hash = await contract.write.addLiquidity([
       BigInt(props.amount),
       BigInt(props.marketId),
     ]);
