@@ -15,6 +15,7 @@ import { BetComment } from "@/types/PostTypes";
 import _ from "lodash";
 import Link from "next/link";
 import { Comment } from "../predictions/CommentSection/Comment";
+import JoinTopicButton from "./JoinTopicButton";
 
 function DesktopTopic({
   name,
@@ -56,21 +57,15 @@ function DesktopTopic({
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">
             <img
-              className="w-full transform rotate-180 object-cover h-80 relative -mt-40"
+              className="w-full transform  object-cover h-80 relative -mt-40"
               alt="CoverImage"
               src={image}
             />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
-            <InverseBleedOverlay>
-              <img
-                className="size-22 md:size-26 lg:size-32 xl:size-34 ml-20 absolute -bottom-12 object-cover  rounded-[0.5rem] mb-4   z-20"
-                src={image}
-              />
-            </InverseBleedOverlay>
+            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent  absolute bottom-0" />
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="full h-full overflow-y-auto pt-10 px-20 flex flex-col">
+      <div className="full h-full overflow-y-auto z-20 -mt-2 px-5  flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col -space-y-3 mt-2">
             <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
@@ -82,9 +77,11 @@ function DesktopTopic({
           </div>
           <div className="flex flex-col items-end">
             <div className="flex flex-row space-x-2 items-center">
-              <div className="p-4 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-1.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
-                <div>Join</div>
-              </div>
+              <JoinTopicButton
+                topicId={id}
+                userId={user?.external_auth_provider_user_id}
+                showToast={() => {}}
+              />
               <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
                 <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
               </div>
@@ -100,13 +97,9 @@ function DesktopTopic({
                   />
                 ))}
               </div>{" "}
-              <span className="text-[lightgray] text-[1.15rem] ml-1 font-[400]">
+              <span className="text-[lightgray] text-[1.15rem] ml-1 font-[500]">
                 {membersProfiles?.length > 0
-                  ? `${membersProfiles[0].name}${
-                      membersProfiles.length > 1
-                        ? `, ${membersProfiles[1].name}`
-                        : ""
-                    }${` & ${members - 1} others`}`
+                  ? `${`${members} Members`}`
                   : `Be the first to join ${name}`}
               </span>
             </div>
@@ -118,7 +111,7 @@ function DesktopTopic({
         </div>
         <div className="flex flex-row space-x-8 mb-8">
           {markets?.map((item, index) => {
-            if (index < 2)
+            if (index < 3)
               return (
                 <DesktopTopicItem
                   question={item?.question}
@@ -137,24 +130,25 @@ function DesktopTopic({
         </div>
         <div className="flex flex-row space-x-5 mb-20">
           {markets?.map((item, index) => {
-            return (
-              <DesktopTopicItem
-                question={item?.question}
-                title={item.title}
-                image={item.image}
-                created_at={item.created_at}
-                size="small"
-                outcomes={[
-                  { name: item.options[0].name, value: item.outcomea },
-                  { name: item.options[1].name, value: item.outcomeb },
-                ]}
-              />
-            );
+            if (index < 6)
+              return (
+                <DesktopTopicItem
+                  question={item?.question}
+                  title={item.title}
+                  image={item.image}
+                  created_at={item.created_at}
+                  size="small"
+                  outcomes={[
+                    { name: item.options[0].name, value: item.outcomea },
+                    { name: item.options[1].name, value: item.outcomeb },
+                  ]}
+                />
+              );
           })}
         </div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full py-7 px-[3.3rem] mt-20 bg-[#151515]">
+            <div className="w-full relative py-7 px-[3.3rem] mt-20 bg-[#151515]">
               <div className="text-[1.65rem] text-white font-[700]">
                 Community
               </div>
@@ -184,7 +178,7 @@ function DesktopTopic({
             {markets?.map((item, index) => {
               console.log("outcomes", item);
 
-              if (index < 3)
+              if (index < 4)
                 return (
                   <DesktopTopicItem
                     question={item?.question}
@@ -226,7 +220,7 @@ interface DesktopItemProps {
 function DesktopTopicItem(props: DesktopItemProps) {
   const sizeClasses = {
     large: {
-      container: "w-1/2",
+      container: "w-1/3",
       image: "h-[30vh]",
       title: "text-[1rem]",
       question: "text-[1.3rem]",
@@ -234,7 +228,7 @@ function DesktopTopicItem(props: DesktopItemProps) {
       lineHeight: "leading-[1.55rem]",
     },
     medium: {
-      container: "w-1/3",
+      container: "w-1/4",
       image: "h-[22vh]",
       title: "text-[1rem]",
       question: "text-[1.1rem]",
@@ -242,7 +236,7 @@ function DesktopTopicItem(props: DesktopItemProps) {
       lineHeight: "leading-[1.35rem]",
     },
     small: {
-      container: "w-1/4",
+      container: "w-1/5",
       image: "h-[15vh]",
       title: "text-[1rem]",
       question: "text-[1rem]",
@@ -316,8 +310,8 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
           background: "linear-gradient(to right, transparent, #FF0050)",
         }}
       ></div>
-      <div className="absolute left-0 ml-2">{labels[0]}</div>
-      <div className="absolute right-0 mr-2">{labels[1]}</div>
+      <div className="absolute left-3 ml-2">{labels[0]}</div>
+      <div className="absolute right-3 mr-2">{labels[1]}</div>
     </div>
   );
 };

@@ -3,7 +3,8 @@ import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { FeedCard } from "./FeedCard";
-
+import Link from "next/link";
+import { getTopicPath } from "@/utils/urls";
 
 export function DesktopTrendingTopics({
   title,
@@ -34,10 +35,23 @@ export function DesktopTrendingTopics({
       <div className="absolute inset-0 bg-[#080808] opacity-30 rounded-lg"></div>
       <div className="absolute inset-0 backdrop-filter backdrop-blur-lg rounded-lg"></div>
       <div className="flex flex-col h-full">
-        <img
-          className="min-h-[10vh] ml-6 w-[10vh] rounded-xl relative z-10"
-          src={imageUrl}
-        />
+        <Link
+          href={{
+            pathname: getTopicPath(topicId),
+            query: {
+              id: topicId,
+              name: title,
+              description: subtitle,
+              image: imageUrl,
+              members: membersProfiles,
+            },
+          }}
+        >
+          <img
+            className="min-h-[10vh] ml-6 w-[10vh] rounded-xl relative z-10"
+            src={imageUrl}
+          />
+        </Link>
         <div className="relative p-6 pb-0 text-white flex flex-col w-[24vw] h-full justify-between z-10">
           <div className="flex flex-col">
             <div className="flex items-center space-x-2 mb-2">
@@ -48,7 +62,20 @@ export function DesktopTrendingTopics({
                 🔥 Trending Today
               </span>
             </div>
-            <h2 className="text-[2rem] font-bold">{title}</h2>
+            <Link
+              href={{
+                pathname: getTopicPath(topicId),
+                query: {
+                  id: topicId,
+                  name: title,
+                  description: subtitle,
+                  image: imageUrl,
+                  members: membersProfiles,
+                },
+              }}
+            >
+              <h2 className="text-[2rem] font-bold">{title}</h2>
+            </Link>
             <p className="text-md mt-[-0.4rem] mb-4">{subtitle}</p>
           </div>
           <div className="flex flex-col">
@@ -84,9 +111,7 @@ export function DesktopTrendingTopics({
       <div className="relative w-[70vw] -mt-4">
         <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2 pr-7">
           {formatMarketArr({ markets })?.map((market, index) => {
-            return (
-              <FeedCard key={index} {...market} />
-            );
+            return <FeedCard key={index} {...market} />;
           })}
         </div>
       </div>

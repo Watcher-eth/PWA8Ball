@@ -75,6 +75,6 @@ function UserPfpIcon({ pfp }: { pfp?: string }) {
       />
     );
   } else {
-    return <UserCircle2Icon size={40}  />;
+    return <UserCircle2Icon color="gray" size={40}  />;
   }
 }
