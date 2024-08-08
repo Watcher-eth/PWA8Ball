@@ -1,5 +1,5 @@
 // @ts-nocheck
-import _ from "lodash"
+import _ from "lodash";
 import { useState } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -10,6 +10,12 @@ import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllComments
 import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders";
 import { AddComment } from "./AddComment";
 import { Comment } from "./Comment";
+
+export function findUserByExternalAuthId(externalAuthId: string) {
+  return users?.find(
+    (user) => user.external_auth_provider_user_id === externalAuthId
+  );
+}
 
 export function CommentSection({
   marketId,
@@ -24,7 +30,9 @@ export function CommentSection({
 }) {
   const { user } = useUserStore();
 
-  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
+    []
+  );
 
   const {
     data: comments,
@@ -36,24 +44,17 @@ export function CommentSection({
     user?.external_auth_provider_user_id
   );
 
-  function findUserByExternalAuthId(externalAuthId: string) {
-    return users?.find(
-      (user) => user.external_auth_provider_user_id === externalAuthId
-    );
-  };
-
   const allComments = _.uniqBy(
     [...optimisticComments, ...(comments || [])],
     (comment) => comment.id
   );
-
 
   function addOptimisticComment(comment: BetComment) {
     setOptimisticComments([comment, ...optimisticComments]);
   }
 
   const handleComment = () => {};
-  const setReply = () => {}
+  const setReply = () => {};
   if (allComments?.length < 1) {
     return (
       <NewPlaceholderComment isUser={true} isPost={false} onOpen={() => {}} />
@@ -70,10 +71,7 @@ export function CommentSection({
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
-      <AddComment
-        user={user}
-        addOptimisticComment={addOptimisticComment}
-      />
+      <AddComment user={user} addOptimisticComment={addOptimisticComment} />
       <div>
         {allComments.map((item) => {
           const commentUser = findUserByExternalAuthId(item.created_by);
@@ -91,4 +89,4 @@ export function CommentSection({
       </div>
     </div>
   );
-};
+}

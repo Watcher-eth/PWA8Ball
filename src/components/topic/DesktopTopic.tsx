@@ -1,13 +1,21 @@
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
+import { AvatarGroup } from "./AvatarGroup";
+import { Medal, Trophy, UserPlus } from "lucide-react";
+import { AddComment } from "../predictions/CommentSection/AddComment";
+import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
+import { findUserByExternalAuthId } from "../predictions/CommentSection";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { BetComment } from "@/types/PostTypes";
+import _ from "lodash";
 
 function DesktopTopic({
   name,
@@ -24,6 +32,24 @@ function DesktopTopic({
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
   const { data: markets } = useGetMarketsForTopic(id);
+  const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
+  const { user } = useUserStore();
+
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
+    []
+  );
+
+  const allComments = _.uniqBy(
+    [...optimisticComments, ...(comments || [])],
+    (comment) => comment.id
+  );
+
+  function addOptimisticComment(comment: BetComment) {
+    setOptimisticComments([comment, ...optimisticComments]);
+  }
+
+  const handleComment = () => {};
+  const setReply = () => {};
 
   return (
     <StandardPageWrapper className="h-full flex  flex-col">
@@ -46,14 +72,44 @@ function DesktopTopic({
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
       <div className="full h-full overflow-y-auto pt-10 px-20 flex flex-col">
-        <div className="flex flex-row  justify-between">
+        <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col -space-y-2">
             <div className="text-[2.8rem] text-white font-[700]">{name}</div>
             <div className="text-[1.2rem] text-[white]/[0.9] font-[400]">
               {description}
             </div>
           </div>
-          <div className="flex flex-col"></div>
+          <div className="flex flex-col items-end">
+            <div className="flex flex-row space-x-2 items-center">
+              <div className="p-4 flex space-x-2 flex-row items-center py-1.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+                <div>Join</div>
+              </div>
+              <div className="p-2.5 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+                <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
+              </div>
+            </div>
+            <div className="flex items-center mt-1 space-x-2 -mb-1 ml-[-0.2rem]">
+              <div className="flex mt-1 -space-x-2">
+                {membersProfiles?.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.pfp}
+                    alt={`Avatar ${index}`}
+                    className="size-8 rounded-full border-2 border-[#151515]"
+                  />
+                ))}
+              </div>{" "}
+              <span className="text-[lightgray] text-[1.15rem] ml-1 font-[400]">
+                {membersProfiles?.length > 0
+                  ? `${membersProfiles[0].name}${
+                      membersProfiles.length > 1
+                        ? `, ${membersProfiles[1].name}`
+                        : ""
+                    }${` & ${members - 1} others`}`
+                  : `Be the first to join ${name}`}
+              </span>
+            </div>
+          </div>
         </div>
         <div className="h-[0.12rem] w-full bg-[#212121] mt-3.5 mb-8" />
         <div className="text-[2.2rem] mb-3 text-[#FF0050] font-[Aeonik-Bold]">
@@ -88,11 +144,26 @@ function DesktopTopic({
         </div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full py-7 mt-20 bg-[#151515]">
+            <div className="w-full py-7 px-[3.3rem] mt-20 bg-[#151515]">
               <div className="text-[1.65rem] text-white font-[700]">
                 Community
               </div>
-              <div>comments</div>
+
+              <div>
+                {allComments.map((item) => {
+                  const commentUser = findUserByExternalAuthId(item.created_by);
+
+                  return (
+                    <Comment
+                      key={item.id}
+                      {...item}
+                      setReply={setReply}
+                      handleComment={handleComment}
+                      user2={commentUser}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
@@ -163,7 +234,7 @@ function DesktopTopicItem(props: DesktopItemProps) {
 
   return (
     <div
-      className={`${selectedSize.container} flex-col border-[0.1rem] border-[#151515] rounded-lg`}
+      className={`${selectedSize.container} hover:scale-101 active:scale-99 flex-col border-[0.1rem] border-[#151515] rounded-lg`}
     >
       <img
         className={`w-full ${selectedSize.image} object-cover rounded-t-lg `}
@@ -179,7 +250,7 @@ function DesktopTopicItem(props: DesktopItemProps) {
         >
           {props.question}
         </div>
-        <div className="h-[0.1rem] mt-3 mb-1.5 w-full bg-[#313131]" />
+        <div className="h-[0.05rem] mt-3 mb-1.5 w-full bg-[#313131]" />
         <div className={`text-[lightgray] py-1 px-5 ${selectedSize.date}`}>
           1h ago - 323 Predictors
         </div>

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Link from "next/link";
- // Adjust import path as necessary
+// Adjust import path as necessary
 import { ChevronLeft, Share, Star } from "lucide-react";
 
 import { LEADERBOARD_PATH } from "@/utils/urls";
@@ -16,12 +16,13 @@ import { ShareTopicModal } from "@/components/share/topic/ShareTopicModal";
 
 import { BetBigView, BetSmallView } from "./BetViews";
 import { AvatarGroup } from "./AvatarGroup";
+import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
 
 const ICON_BUTTON_CLASSNAME = `
   bg-[rgba(21,21,21,0.95)] backdrop-blur-2xl
   rounded-full flex justify-center items-center
   absolute top-12 z-10
-  `
+  `;
 
 export function Topic({
   name,
@@ -35,7 +36,6 @@ export function Topic({
 }) {
   const router = useRouter();
   const scrollRef = useRef(null);
-
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
   const { data: markets } = useGetMarketsForTopic(id);
@@ -125,8 +125,4 @@ export function Topic({
       </div>
     </div>
   );
-
-};
-
-
-
+}
