@@ -8,14 +8,13 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
-import { AvatarGroup } from "./AvatarGroup";
 import { Medal, Trophy, UserPlus } from "lucide-react";
-import { AddComment } from "../predictions/CommentSection/AddComment";
 import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
-import { findUserByExternalAuthId } from "../predictions/CommentSection";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { BetComment } from "@/types/PostTypes";
 import _ from "lodash";
+import Link from "next/link";
+import { Comment } from "../predictions/CommentSection/Comment";
 
 function DesktopTopic({
   name,
@@ -73,18 +72,20 @@ function DesktopTopic({
       </StandardBleedOverlay>
       <div className="full h-full overflow-y-auto pt-10 px-20 flex flex-col">
         <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-col -space-y-2">
-            <div className="text-[2.8rem] text-white font-[700]">{name}</div>
+          <div className="flex flex-col -space-y-3 mt-2">
+            <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
+              {name}
+            </div>
             <div className="text-[1.2rem] text-[white]/[0.9] font-[400]">
               {description}
             </div>
           </div>
           <div className="flex flex-col items-end">
             <div className="flex flex-row space-x-2 items-center">
-              <div className="p-4 flex space-x-2 flex-row items-center py-1.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+              <div className="p-4 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-1.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
                 <div>Join</div>
               </div>
-              <div className="p-2.5 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+              <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
                 <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
               </div>
             </div>
@@ -95,7 +96,7 @@ function DesktopTopic({
                     key={index}
                     src={image.pfp}
                     alt={`Avatar ${index}`}
-                    className="size-8 rounded-full border-2 border-[#151515]"
+                    className="size-8 hover:scale-103 active:scale-97 rounded-full border-2 border-[#151515]"
                   />
                 ))}
               </div>{" "}
@@ -112,7 +113,7 @@ function DesktopTopic({
           </div>
         </div>
         <div className="h-[0.12rem] w-full bg-[#212121] mt-3.5 mb-8" />
-        <div className="text-[2.2rem] mb-3 text-[#FF0050] font-[Aeonik-Bold]">
+        <div className="text-[2.1rem] mb-2.5 text-[white] font-[Aeonik-Bold]">
           Top Predictions
         </div>
         <div className="flex flex-row space-x-8 mb-8">
@@ -125,6 +126,11 @@ function DesktopTopic({
                   image={item.image}
                   created_at={item.created_at}
                   size="large"
+                  id={item.id}
+                  outcomes={[
+                    { name: item.options[0].name, value: item.outcomea },
+                    { name: item.options[1].name, value: item.outcomeb },
+                  ]}
                 />
               );
           })}
@@ -138,6 +144,10 @@ function DesktopTopic({
                 image={item.image}
                 created_at={item.created_at}
                 size="small"
+                outcomes={[
+                  { name: item.options[0].name, value: item.outcomea },
+                  { name: item.options[1].name, value: item.outcomeb },
+                ]}
               />
             );
           })}
@@ -151,8 +161,7 @@ function DesktopTopic({
 
               <div>
                 {allComments.map((item) => {
-                  const commentUser = findUserByExternalAuthId(item.created_by);
-
+                  const commentUser = {};
                   return (
                     <Comment
                       key={item.id}
@@ -173,6 +182,8 @@ function DesktopTopic({
           </div>
           <div className="flex flex-row space-x-5">
             {markets?.map((item, index) => {
+              console.log("outcomes", item);
+
               if (index < 3)
                 return (
                   <DesktopTopicItem
@@ -181,6 +192,10 @@ function DesktopTopic({
                     image={item.image}
                     created_at={item.created_at}
                     size="medium"
+                    outcomes={[
+                      { name: item.options[0].name, value: item.outcomea },
+                      { name: item.options[1].name, value: item.outcomeb },
+                    ]}
                   />
                 );
             })}
@@ -193,13 +208,19 @@ function DesktopTopic({
 
 export default DesktopTopic;
 
+interface Outcome {
+  name: string;
+  value: number;
+}
+
 interface DesktopItemProps {
   image: string;
   title: string;
   question: string;
-  outcomes: { name: string; value: number }[];
+  outcomes: Outcome[];
   created_at: string;
   size: "large" | "medium" | "small";
+  id: string;
 }
 
 function DesktopTopicItem(props: DesktopItemProps) {
@@ -231,16 +252,27 @@ function DesktopTopicItem(props: DesktopItemProps) {
   };
 
   const selectedSize = sizeClasses[props.size];
-
+  console.log("outcomes", props.outcomes);
   return (
-    <div
+    <Link
+      href={`/p/${props.id}`}
       className={`${selectedSize.container} hover:scale-101 active:scale-99 flex-col border-[0.1rem] border-[#151515] rounded-lg`}
     >
       <img
         className={`w-full ${selectedSize.image} object-cover rounded-t-lg `}
         src={props.image}
       />
-      <div>slider</div>
+      <GradientBar
+        percentage={(props.outcomes[0]?.value / 100).toFixed(2)}
+        labels={[
+          `${(props.outcomes[0]?.value / 100).toFixed(0)}% ${
+            props.outcomes[0]?.name
+          } `,
+          `${props.outcomes[1]?.name} ${(
+            props.outcomes[1]?.value / 100
+          ).toFixed(0)}%`,
+        ]}
+      />
       <div className="flex flex-col pt-2.5 rounded-b-lg pb-1.5 bg-[#151515]">
         <div className={`text-[lightgray] px-5 ${selectedSize.title}`}>
           {props.title}
@@ -255,6 +287,37 @@ function DesktopTopicItem(props: DesktopItemProps) {
           1h ago - 323 Predictors
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
+
+type GradientBarProps = {
+  percentage: number;
+  labels: [string, string];
+};
+
+const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
+  // Ensure the percentage is between 1 and 100
+  const validPercentage = Math.min(Math.max(percentage, 1), 100);
+
+  return (
+    <div className="relative w-full bg-[#151515] h-8 flex items-center text-white">
+      <div
+        className="absolute left-0 h-full"
+        style={{
+          width: `${validPercentage + 2}%`,
+          background: "linear-gradient(to right, #0067E1, transparent)",
+        }}
+      ></div>
+      <div
+        className="absolute right-0 h-full"
+        style={{
+          width: `${100 - validPercentage + 2}%`,
+          background: "linear-gradient(to right, transparent, #FF0050)",
+        }}
+      ></div>
+      <div className="absolute left-0 ml-2">{labels[0]}</div>
+      <div className="absolute right-0 mr-2">{labels[1]}</div>
+    </div>
+  );
+};

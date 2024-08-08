@@ -11,10 +11,11 @@ import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlace
 import { AddComment } from "./AddComment";
 import { Comment } from "./Comment";
 
-export function findUserByExternalAuthId(externalAuthId: string) {
-  return users?.find(
-    (user) => user.external_auth_provider_user_id === externalAuthId
-  );
+export function findUserByExternalAuthId(externalAuthId: string, users) {
+  if (users)
+    return users?.find(
+      (user) => user.external_auth_provider_user_id === externalAuthId
+    );
 }
 
 export function CommentSection({
@@ -73,19 +74,23 @@ export function CommentSection({
       </p>
       <AddComment user={user} addOptimisticComment={addOptimisticComment} />
       <div>
-        {allComments.map((item) => {
-          const commentUser = findUserByExternalAuthId(item.created_by);
+        {allComments.length > 0 &&
+          allComments.map((item) => {
+            const commentUser = findUserByExternalAuthId(
+              item.created_by,
+              users
+            );
 
-          return (
-            <Comment
-              key={item.id}
-              {...item}
-              setReply={setReply}
-              handleComment={handleComment}
-              user2={commentUser}
-            />
-          );
-        })}
+            return (
+              <Comment
+                key={item.id}
+                {...item}
+                setReply={setReply}
+                handleComment={handleComment}
+                user2={commentUser}
+              />
+            );
+          })}
       </div>
     </div>
   );
