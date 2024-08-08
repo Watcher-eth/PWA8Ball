@@ -16,6 +16,8 @@ import _ from "lodash";
 import Link from "next/link";
 import { Comment } from "../predictions/CommentSection/Comment";
 import JoinTopicButton from "./JoinTopicButton";
+import { motion } from "framer-motion";
+import { skeletonVariants } from "../ui/Skeleton";
 
 function DesktopTopic({
   name,
@@ -51,21 +53,51 @@ function DesktopTopic({
   const handleComment = () => {};
   const setReply = () => {};
 
+  const renderDesktopTopicItems = (items, size, count) => {
+    const placeholders = Array.from({ length: count - items.length });
+    return (
+      <>
+        {items.map((item, index) => (
+          <DesktopTopicItem
+            key={item.id}
+            question={item?.question}
+            title={item.title}
+            image={item.image}
+            created_at={item.created_at}
+            size={size}
+            id={item.id}
+            outcomes={[
+              { name: item.options[0].name, value: item.outcomea },
+              { name: item.options[1].name, value: item.outcomeb },
+            ]}
+          />
+        ))}
+        {placeholders.map((_, index) => (
+          <DesktopTopicItemSkeleton
+            key={`skeleton-${index}`}
+            size={size}
+            index={index}
+          />
+        ))}
+      </>
+    );
+  };
+
   return (
-    <StandardPageWrapper className="h-full flex  flex-col">
+    <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">
             <img
-              className="w-full transform  object-cover h-80 relative -mt-40"
+              className="w-full transform object-cover h-80 relative -mt-40"
               alt="CoverImage"
               src={image}
             />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent  absolute bottom-0" />
+            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="full h-full overflow-y-auto z-20 -mt-2 px-5  flex flex-col">
+      <div className="full h-full overflow-y-auto z-20 -mt-2 px-5 flex flex-col">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col -space-y-3 mt-2">
             <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
@@ -110,41 +142,10 @@ function DesktopTopic({
           Top Predictions
         </div>
         <div className="flex flex-row space-x-8 mb-8">
-          {markets?.map((item, index) => {
-            if (index < 3)
-              return (
-                <DesktopTopicItem
-                  question={item?.question}
-                  title={item.title}
-                  image={item.image}
-                  created_at={item.created_at}
-                  size="large"
-                  id={item.id}
-                  outcomes={[
-                    { name: item.options[0].name, value: item.outcomea },
-                    { name: item.options[1].name, value: item.outcomeb },
-                  ]}
-                />
-              );
-          })}
+          {renderDesktopTopicItems(markets?.slice(0, 3) || [], "large", 3)}
         </div>
         <div className="flex flex-row space-x-5 mb-20">
-          {markets?.map((item, index) => {
-            if (index < 6)
-              return (
-                <DesktopTopicItem
-                  question={item?.question}
-                  title={item.title}
-                  image={item.image}
-                  created_at={item.created_at}
-                  size="small"
-                  outcomes={[
-                    { name: item.options[0].name, value: item.outcomea },
-                    { name: item.options[1].name, value: item.outcomeb },
-                  ]}
-                />
-              );
-          })}
+          {renderDesktopTopicItems(markets?.slice(0, 5) || [], "small", 5)}
         </div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
@@ -175,24 +176,7 @@ function DesktopTopic({
             Popular Today
           </div>
           <div className="flex flex-row space-x-5">
-            {markets?.map((item, index) => {
-              console.log("outcomes", item);
-
-              if (index < 4)
-                return (
-                  <DesktopTopicItem
-                    question={item?.question}
-                    title={item.title}
-                    image={item.image}
-                    created_at={item.created_at}
-                    size="medium"
-                    outcomes={[
-                      { name: item.options[0].name, value: item.outcomea },
-                      { name: item.options[1].name, value: item.outcomeb },
-                    ]}
-                  />
-                );
-            })}
+            {renderDesktopTopicItems(markets?.slice(0, 4) || [], "medium", 4)}
           </div>
         </div>
       </div>
@@ -315,3 +299,90 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
     </div>
   );
 };
+
+function DesktopTopicItemSkeleton(props: {
+  size: "large" | "medium" | "small";
+  index: number;
+}) {
+  const sizeClasses = {
+    large: {
+      container: "w-1/3 h-full",
+      image: "h-[30vh]",
+      title: "text-[1rem]",
+      question: "text-[1.3rem]",
+      date: "text-[0.85rem]",
+      lineHeight: "leading-[1.55rem]",
+    },
+    medium: {
+      container: "w-1/4 h-full",
+      image: "h-[22vh]",
+      title: "text-[1rem]",
+      question: "text-[1.1rem]",
+      date: "text-[0.85rem]",
+      lineHeight: "leading-[1.35rem]",
+    },
+    small: {
+      container: "w-1/5 h-full",
+      image: "h-[15vh]",
+      title: "text-[1rem]",
+      question: "text-[1rem]",
+      date: "text-[0.85rem]",
+      lineHeight: "leading-[1.25rem]",
+    },
+  };
+
+  const selectedSize = sizeClasses[props.size];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, delay: props.index * 0.2 }}
+      className={`${selectedSize.container} hover:scale-101 active:scale-99 flex-col border-[0.1rem] border-[#151515] rounded-lg`}
+    >
+      <motion.div
+        className={`w-full ${selectedSize.image} bg-[#101010] rounded-t-lg`}
+        variants={skeletonVariants}
+        initial="initial"
+        animate="pulse"
+      />
+
+      <div className="flex flex-col pt-4 rounded-b-lg pb-1.5 bg-[#151515]">
+        <motion.div
+          className={`text-[lightgray] w-[40%] my-1 mx-2 ${selectedSize.title} bg-[#212121] h-[18px] rounded-full`}
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
+        <motion.div
+          className={`text-[lightgray] my-1 mx-2 ${selectedSize.title} bg-[#212121] h-[20px] rounded-full`}
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
+        <motion.div
+          className={`text-white font-[600] w-[70%] my-1 mx-2 ${selectedSize.lineHeight} my-1 px-5 ${selectedSize.question} bg-[#212121] h-[20px] rounded-full`}
+          variants={skeletonVariants}
+          initial="initial"
+          animate="pulse"
+        />
+        <div className="h-[0.05rem] mt-5 mb-1.5 w-full bg-[#242424]" />
+        <div className="flex flex-row justify-between">
+          <motion.div
+            className={`text-[lightgray] w-[22%] py-1 mx-2 my-1 px-5 ${selectedSize.date} bg-[#212121] h-[15px] rounded-full`}
+            variants={skeletonVariants}
+            initial="initial"
+            animate="pulse"
+          />
+          <motion.div
+            className={`text-[lightgray] w-[35%] py-1 mx-2 my-1 px-5 ${selectedSize.date} bg-[#212121] h-[15px] rounded-full`}
+            variants={skeletonVariants}
+            initial="initial"
+            animate="pulse"
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}

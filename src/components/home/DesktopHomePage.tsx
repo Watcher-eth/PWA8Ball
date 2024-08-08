@@ -10,7 +10,6 @@ import { FeedCard } from "@/components/home/FeedCard";
 import { DesktopTrendingTopics } from "@/components/home/DesktopTrendingTopic";
 import { TopicHeader } from "@/components/home/TopicHeader";
 
-
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enrichedFeedData = formatMarketArr({
@@ -33,20 +32,16 @@ export function DesktopHomePage({ trendingMarkets }) {
         className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible"
       >
         {enrichedFeedData?.map((bet, index) => {
-          return (
-            <FeedCard {...bet} key={index} />
-          );
+          return <FeedCard {...bet} key={index} />;
         })}
       </motion.div>
-      <StandardPageWrapper>
-        <DesktopTrendingTopics
-          title="US Elections"
-          imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
-          subtitle="Everything about the US 2020 Federal Election"
-          amount={"260,032"}
-          topicId="1"
-        />
-      </StandardPageWrapper>
+      <DesktopTrendingTopics
+        title="US Elections"
+        imageUrl="https://assets.ey.com/content/dam/ey-sites/ey-com/en_ch/webcast/2021/01/ey-the-impact-of-the-us-election-on-the-global-business-environment-version2-20210112.jpg"
+        subtitle="Everything about the US 2020 Federal Election"
+        amount={"260,032"}
+        topicId="1"
+      />
     </>
   );
 }

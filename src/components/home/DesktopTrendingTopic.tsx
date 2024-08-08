@@ -5,6 +5,7 @@ import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic"
 import { FeedCard } from "./FeedCard";
 import Link from "next/link";
 import { getTopicPath } from "@/utils/urls";
+import { skeletonVariants } from "../ui/Skeleton";
 
 export function DesktopTrendingTopics({
   title,
@@ -27,14 +28,14 @@ export function DesktopTrendingTopics({
   const { data: markets } = useGetMarketsForTopic(topicId);
 
   return (
-    <div className="relative w-full flex align-center justify-between h-[49vh] py-8 rounded-[1.2rem] shadow-lg overflow-hidden">
+    <div className="relative w-full flex align-center justify-between h-[53vh] py-8 flex-row items-center  shadow-lg overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
-      <div className="absolute inset-0 bg-[#080808] opacity-30 rounded-lg"></div>
-      <div className="absolute inset-0 backdrop-filter backdrop-blur-lg rounded-lg"></div>
-      <div className="flex flex-col h-full">
+      <div className="absolute inset-0 bg-[#080808] opacity-30 "></div>
+      <div className="absolute inset-0 backdrop-filter backdrop-blur-lg "></div>
+      <div className="flex flex-col pt-6 h-full">
         <Link
           href={{
             pathname: getTopicPath(topicId),
@@ -52,7 +53,7 @@ export function DesktopTrendingTopics({
             src={imageUrl}
           />
         </Link>
-        <div className="relative p-6 pb-0 text-white flex flex-col w-[24vw] h-full justify-between z-10">
+        <div className="relative p-6  text-white flex flex-col w-[24vw] h-full  justify-between z-10">
           <div className="flex flex-col">
             <div className="flex items-center space-x-2 mb-2">
               <span
@@ -108,7 +109,7 @@ export function DesktopTrendingTopics({
           </div>
         </div>
       </div>
-      <div className="relative w-[70vw] -mt-4">
+      <div className="relative w-[70vw] ">
         <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2 pr-7">
           {formatMarketArr({ markets })?.map((market, index) => {
             return <FeedCard key={index} {...market} />;
@@ -118,3 +119,4 @@ export function DesktopTrendingTopics({
     </div>
   );
 }
+
