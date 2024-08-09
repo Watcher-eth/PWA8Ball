@@ -6,6 +6,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 
+import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp";
 import { Card } from "@/components/ui/tailwind/Card";
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
@@ -16,11 +17,12 @@ import { DesktopLpChart } from "./DesktopLpChart"
 export function DesktopLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
-  const {
-    data: positions,
-    isLoading,
-    refetch,
-  } = useGetLPForUser(user?.walletaddress);
+  const { data: positions, loading: isLoading, error } = useGetUserLp(user?.walletaddress);
+  // const {
+  //   data: positions,
+  //   isLoading,
+  //   refetch,
+  // } = useGetLPForUser(user?.walletaddress);
 
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
 

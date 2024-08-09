@@ -3,7 +3,7 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_USER_LP = gql`
-  query UserLp($userAddress) {
+  query UserLp($userAddress: String) {
     lps(where: { userAddress: $userAddress }) {
       items {
         amount
@@ -33,10 +33,12 @@ export function useGetUserLp(userAddress: string) {
     error: lpError,
   } = useApolloQuery(GET_USER_LP, {
     variables: { userAddress },
+    enabled: Boolean(userAddress),
   });
+  console.log("lpData", lpData);
 
   return {
-    data: lpData,
+    data: lpData?.items ?? [],
     loading: lpLoading,
     error: lpError,
   };
