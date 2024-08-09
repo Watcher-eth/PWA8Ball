@@ -6,7 +6,6 @@ import { FeedCard } from "./FeedCard";
 import Link from "next/link";
 import { getTopicPath } from "@/utils/urls";
 import { skeletonVariants } from "../ui/Skeleton";
-import { trackClickTopic } from "@/lib/events/StandardEvents";
 
 export function DesktopTrendingTopics({
   title,
@@ -38,7 +37,6 @@ export function DesktopTrendingTopics({
       <div className="absolute inset-0 backdrop-filter backdrop-blur-lg "></div>
       <div className="flex flex-col pt-6 h-full">
         <Link
-          onClick={() => trackClickTopic(topicId, "pwa")}
           href={{
             pathname: getTopicPath(topicId),
             query: {
@@ -66,7 +64,6 @@ export function DesktopTrendingTopics({
               </span>
             </div>
             <Link
-              onClick={() => trackClickTopic(topicId, "pwa")}
               href={{
                 pathname: getTopicPath(topicId),
                 query: {

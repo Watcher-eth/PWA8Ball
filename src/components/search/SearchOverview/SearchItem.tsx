@@ -3,7 +3,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
 import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls";
-import { trackClickTopic, trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function MarketItem({
   id,
@@ -17,7 +16,6 @@ export function MarketItem({
 }) {
   return (
     <Link
-      onClick={() => trackViewMarket(id, "pwa")}
       href={getMarketPath(id)}
       prefetch={true}
     >
@@ -47,7 +45,6 @@ export function TopicItem({
 }) {
   return (
     <Link
-      onClick={() => trackClickTopic(topicId, "pwa")}
       href={getTopicPath(topidId)}
       prefetch={true}
     >

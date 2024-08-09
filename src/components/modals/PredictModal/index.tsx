@@ -16,7 +16,6 @@ import { NumericKeypad } from "@/components/NumericKeypad";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
-import { trackPredictionStep } from "@/lib/events/StandardEvents";
 
 export function PredictModal({
   text,
@@ -112,12 +111,7 @@ export function PredictModal({
   }
 
   function handleContinue() {
-    trackPredictionStep(
-      marketId,
-      1,
-      { amount: parseFloat(sliderValue.replace(/,/g, "")) },
-      "pwa"
-    );
+    
     confirmSelection(2);
     setStep(2);
   }

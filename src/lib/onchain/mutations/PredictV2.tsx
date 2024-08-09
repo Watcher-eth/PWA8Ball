@@ -7,7 +7,6 @@ import { type Address, getContract } from "viem";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain";
 import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
-import { trackMakePrediction } from "@/lib/events/StandardEvents";
 
 interface PredictParams {
   amount: number;
@@ -55,7 +54,6 @@ async function predict(props: PredictParams) {
       props.amount,
       props.option
     );
-    trackMakePrediction(props.marketId, props.amount, props.option, "pwa");
   } catch (error) {
     console.error("Error during prediction", error);
     throw error;

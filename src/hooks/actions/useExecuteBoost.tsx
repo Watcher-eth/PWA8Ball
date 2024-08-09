@@ -8,7 +8,6 @@ import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import { trackBoostMarket } from "@/lib/events/StandardEvents";
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
@@ -50,7 +49,6 @@ export function useExecuteBoost() {
         style: { backgroundColor: "#5ACE5A", color: "white" },
       });
 
-      trackBoostMarket(String(id), amount * 1000000, "pwa");
       setTimeout(() => {
         setLoading(false);
         setSuccess(true);

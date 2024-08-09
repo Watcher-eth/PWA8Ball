@@ -8,7 +8,6 @@ import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 
 import { MobileLoadingPrediction } from "./LoadingPrediction";
-import { trackAbandonedAction, trackPredictionStep } from "@/lib/events/StandardEvents";
 
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void;
@@ -165,12 +164,6 @@ export function ConfirmPrediction(props: {
                   options,
                 });
 
-            trackPredictionStep(
-              marketId,
-              2,
-              { option: option, amount: amount },
-              "pwa"
-            );
           }}
           className="mt-3 py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
           initial={{ width: "40vw" }}
