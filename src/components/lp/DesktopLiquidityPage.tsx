@@ -3,36 +3,37 @@
 import { useRouter } from "next/router";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
-
 import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp";
 import { Card } from "@/components/ui/tailwind/Card";
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
 
 import { DesktopLiquidityPosition } from "./LiquidityPosition";
-import { DesktopLpChart } from "./DesktopLpChart"
+import { DesktopLpChart } from "./DesktopLpChart";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
-  const { data: positions, loading: isLoading, error } = useGetUserLp(user?.walletaddress);
-  // const {
-  //   data: positions,
-  //   isLoading,
-  //   refetch,
-  // } = useGetLPForUser(user?.walletaddress);
+  const {
+    data: positions,
+    loading: isLoading,
+    error,
+  } = useGetUserLp("0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591");
 
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
+  const totalAmount = filteredPositions.reduce(
+    (acc, item) => acc + item.amount,
+    0
+  );
 
+  console.log("pos", positions);
   return (
     <StandardPageWrapper>
       <div className="pt-10 flex flex-col h-full min-h-screen bg-[#080808] w-full ">
         <div className="flex flex-col -space-y-3 px-10">
           <div className="flex flex-row items-baseline">
             <div className="text-white text-[3.5rem] font-semibold font-[Aeonik-Bold]">
-              $12.345,00
+              ${(totalAmount / 1000000).toFixed(2)}
             </div>
             <div className="text-[lightgray] text-2xl ml-2 mb-3  font-[Aeonik]">
               +12.5%
@@ -73,4 +74,3 @@ export function DesktopLiquidityPage() {
     </StandardPageWrapper>
   );
 }
-
