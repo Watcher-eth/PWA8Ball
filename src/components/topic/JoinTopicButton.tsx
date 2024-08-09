@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useLeaveTopic } from "@/supabase/mutations/topics/useLeaveTopic";
 import { useJoinTopic } from "@/supabase/mutations/topics/useJoinTopic";
 import { useCheckUserTopicMembership } from "@/supabase/mutations/topics/useCheckUserTopicMembership";
-import { trackJoinTopic } from "@/lib/events/StandardEvents";
 
 interface JoinTopicButtonProps {
   topicId: string;
@@ -21,7 +20,6 @@ const JoinTopicButton: React.FC<JoinTopicButtonProps> = ({
   const [optimisticJoin, setOptimisticJoin] = useState(false);
 
   const handleJoin = () => {
-    trackJoinTopic(topicId, "pwa");
     if (!optimisticJoin) {
       joinMutation.mutate({ userId, topicId });
       setOptimisticJoin(true);

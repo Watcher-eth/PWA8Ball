@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { trackItemShare } from "@/lib/events/StandardEvents";
 
 export function CashoutConfirmScreen(props: {
   changeStep: () => void;
@@ -23,7 +22,6 @@ export function CashoutConfirmScreen(props: {
 
   const shareLink = async () => {
     if (navigator.share) {
-      trackItemShare("market", String(props.id), "pwa");
 
       try {
         await navigator.share({

@@ -8,7 +8,6 @@ import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarkets
 import { useOverlaySearch } from "@/hooks/useOverlaySearch";
 import { MarketItem, TopicItem, FriendItem } from "./SearchItem";
 import { SearchInputSection } from "./SearchInputSection";
-import { trackSearch } from "@/lib/events/StandardEvents";
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
@@ -57,7 +56,6 @@ export function SearchOverview() {
   function handleSearch(e) {
     onSearch(e.target.value);
     debouncedSearch(e.target.value);
-    trackSearch(e.target.value, "pwa");
   }
 
   // this part is black magic fuckery that needs to be properly rewritten

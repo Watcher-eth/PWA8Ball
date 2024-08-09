@@ -1,4 +1,3 @@
-import { trackAddComment } from "@/lib/events/StandardEvents";
 import { supabase } from "@/supabase/supabaseClient";
 import { useMutation } from "@tanstack/react-query";
 
@@ -23,7 +22,6 @@ export interface IComment {
 }
 
 export async function createComment(newComment: NewComment): Promise<IComment> {
-  trackAddComment(String(newComment.market_id), newComment.created_by, "pwa");
   const { data, error } = await supabase
     .from("comments")
     .insert([newComment])

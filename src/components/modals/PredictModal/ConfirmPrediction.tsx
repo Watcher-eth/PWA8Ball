@@ -137,7 +137,6 @@ export function ConfirmPrediction(props: {
         {!success && (
           <motion.button
             onClick={() => {
-              trackAbandonedAction("Predict Confirmation", props?.id, "pwa");
 
               props.setStep(1);
             }}

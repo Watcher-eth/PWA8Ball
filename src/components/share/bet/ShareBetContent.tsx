@@ -3,7 +3,6 @@ import { AnimatePresence } from "framer-motion";
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
-import { trackItemShare } from "@/lib/events/StandardEvents";
 
 interface Option {
   name: string;
@@ -28,7 +27,6 @@ export function ShareBetContent({
   isDesktop?: boolean;
 }) {
   const shareLink = async () => {
-    trackItemShare("market", id, "pwa");
     try {
       await navigator.share({
         title: `${title} on Glimpse`,

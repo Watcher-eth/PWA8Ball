@@ -5,7 +5,6 @@ import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
 
 import { ProfilePrediction } from "./ProfilePrediction";
-import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function UserPrediction({
   index,
@@ -48,7 +47,6 @@ export function CreatedPrediction({
 }) {
   return (
     <Link
-      onClick={() => trackViewMarket(id, "pwa")}
       href={getMarketPath(id)}
       className="transition-all hover:scale-101 active:scale-95"
     >

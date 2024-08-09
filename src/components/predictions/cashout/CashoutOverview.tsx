@@ -3,7 +3,6 @@
 import React from "react";
 import { X, Clock } from "lucide-react";
 import { motion } from "framer-motion";
-import { trackAbandonedAction } from "@/lib/events/StandardEvents";
 
 interface RemoveLPOverviewProps {
   setIsOpen: () => void;
@@ -79,7 +78,6 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
       <div className="flex flex-row items-center gap-1 w-full mb-1 mt-2.5">
         <motion.div
           onClick={() => {
-            trackAbandonedAction("Cashout", "Step 1", "pwa");
 
             props?.changeStep(1);
           }}

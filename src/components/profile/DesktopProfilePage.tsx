@@ -41,7 +41,6 @@ import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
-import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -172,7 +171,6 @@ export function DesktopProfilePage() {
             if (index < 3)
               return (
                 <Link
-                  onClick={() => trackViewMarket(String(item.market_id), "pwa")}
                   href={`/p/${item.market_id}`}
                 >
                   <motion.div

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
-import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 export const RelatedMarkets = ({
   topicId,
@@ -65,7 +64,6 @@ function RelatedMarketQuestion({
 }) {
   return (
     <Link
-      onClick={() => trackViewMarket(String(id), "pwa")}
       href={`/p/${id}`}
       prefetch={true}
     >

@@ -6,7 +6,6 @@ import type { User } from "@/types/UserTypes";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
-import { trackAbandonedAction } from "@/lib/events/StandardEvents";
 
 export function AddComment({
   user,
@@ -25,7 +24,6 @@ export function AddComment({
   const { mutate: addComment } = useCreateComment();
 
   const handleCancel = () => {
-    trackAbandonedAction("Cancle Comment", id, "pwa");
     if (inputRef.current) {
       inputRef.current.blur();
     }

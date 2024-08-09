@@ -3,7 +3,6 @@ import { DrawerClose } from "@/components/ui/drawer";
 import { KeypadActionButton } from "./KeypadActionButton";
 import { KeypadButton } from "./KeypadButton";
 import { KeypadAmountButton } from "./KeypadAmountButton";
-import { trackAbandonedAction } from "@/lib/events/StandardEvents";
 
 export function NumericKeypad({
   sliderValue,
@@ -60,7 +59,7 @@ export function NumericKeypad({
       <div className="flex flex-row items-center w-full mt-4 justify-center">
         {sliderValue === "" ? (
           <DrawerClose>
-            <KeypadActionButton onClick={()=> trackAbandonedAction("Cancle Numpad", "Numpad", "pwa")} label="Cancel" />
+            <KeypadActionButton  label="Cancel" />
           </DrawerClose>
         ) : (
           <KeypadActionButton

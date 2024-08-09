@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import { trackViewMarket } from "@/lib/events/StandardEvents";
 import { getMarketPath } from "@/utils/urls";
 import Link from "next/link";
 
@@ -16,7 +15,6 @@ export function FeedCard({
   return (
     <div>
       <Link
-        onClick={() => trackViewMarket(id, "pwa")}
         href={getMarketPath(id)}
         prefetch={true}
       >
