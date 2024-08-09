@@ -55,6 +55,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <CustomHead {...pageProps} router={router} />
+      <SonnerToaster
+        position="top-center"
+        className="bg-[#121212] rounded-xl z-100"
+      />
       <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
           <AirstackProvider
@@ -78,10 +82,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
         </QueryClientProvider>
       </WagmiProvider>
       {/**Need to check if this is valid*/}
-      <SonnerToaster
-        position="top-center"
-        className="bg-[#121212] rounded-xl z-100"
-      />
     </>
   );
 }

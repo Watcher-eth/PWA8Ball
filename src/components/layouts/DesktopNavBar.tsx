@@ -12,12 +12,9 @@ import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
 import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
 
-
-
 export function DesktopNavBar() {
   const { user } = useUserStore();
   const userId = user?.external_auth_provider_user_id;
-
   return (
     <div className="w-full absolute z-50 top-0">
       <div
@@ -42,9 +39,7 @@ export function DesktopNavBar() {
                   />
                 }
               />
-              <div className="pl-2 font-[Aeonik] text-2xl">
-                Glimpse
-              </div>
+              <div className="pl-2 font-[Aeonik] text-2xl">Glimpse</div>
             </div>
           </Link>
           <div className="flex items-center space-x-8">
@@ -55,7 +50,7 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
-              {user ? (
+              {!user?.name.startsWith("0x") ? (
                 <DesktopProfilePopover>
                   <ConnectButton user={user} />
                 </DesktopProfilePopover>
@@ -71,6 +66,3 @@ export function DesktopNavBar() {
     </div>
   );
 }
-
-
-

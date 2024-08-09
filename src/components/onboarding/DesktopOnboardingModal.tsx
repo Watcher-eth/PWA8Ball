@@ -7,6 +7,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons";
+import DesktopCreateProfile from "./DesktopCreateProfile";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
@@ -20,12 +22,21 @@ export function DesktopOnboardingModal({
 }: {
   children: React.ReactNode;
 }) {
+  const { user } = useUserStore();
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
-      content={<DesktopOnboarding />}
+      content={
+        !user ? (
+          <DesktopOnboarding />
+        ) : user?.name.startsWith("0x") ? (
+          <DesktopCreateProfile />
+        ) : (
+          <DesktopOnboarding />
+        )
+      }
     >
       {children}
     </DesktopCardModal>

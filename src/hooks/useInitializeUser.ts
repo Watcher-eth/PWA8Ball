@@ -14,7 +14,7 @@ import { v5 as uuidv5 } from "uuid";
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7"; // Define a static namespace for generating UUIDs
 const DEFAULT_PFP =
-  "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvYmFmeWJlaWZvMmZsZGVreHZ5dXFiYWczbHZjNjdpZTZxNXZmdnRmcGo1bm5zcmdyYWdrNTVxcHcyMmk";
+  "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6";
 
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy();
@@ -52,7 +52,6 @@ export function useInitializeUser() {
       } else {
         const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
-
 
         setUser({
           ...newUser,
