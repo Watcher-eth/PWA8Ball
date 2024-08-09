@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { gql } from "@/__generated__/gql";
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
-const ORDERS_QUERY = gql(/* GraphQL */`
+const ORDERS_QUERY = gql(/* GraphQL */ `
   query Orders($userAddress: String!) {
     orders(where: { sender: $userAddress }) {
       items {
@@ -23,7 +24,7 @@ const ORDERS_QUERY = gql(/* GraphQL */`
 
 export function useGetUserOrders(userAddress: string) {
   const { data, loading, error } = useQuery(ORDERS_QUERY, {
-    variables: { userAddress },
+    variables: { userAddress: getChecksummedAddress(userAddress) },
   });
 
   return { data: data?.orders?.items, loading, error };

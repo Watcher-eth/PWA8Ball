@@ -1,11 +1,11 @@
 //@ts-nocheck
 
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery, gql } from "@apollo/client";
 import { useQuery as useReactQuery } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
-import { gql } from "@/__generated__";
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
-const GET_ORDERS_BY_USER = gql(/* GraphQL */ `
+const GET_ORDERS_BY_USER = gql`
   query UserOrders($userAddress: String) {
     orders(where: { userAddress: $userAddress }, limit: 1) {
       items {
@@ -27,7 +27,7 @@ const GET_ORDERS_BY_USER = gql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
 export function useGetOrdersByUser(userAddress: string) {
   const {
@@ -35,7 +35,7 @@ export function useGetOrdersByUser(userAddress: string) {
     loading: orderLoading,
     error: orderError,
   } = useApolloQuery(GET_ORDERS_BY_USER, {
-    variables: { userAddress },
+    variables: { userAddress: getChecksummedAddress(userAddress) },
   });
 
   return {

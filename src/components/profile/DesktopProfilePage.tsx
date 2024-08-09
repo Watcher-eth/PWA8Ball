@@ -41,6 +41,8 @@ import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
+import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
+import { useGetOrdersByUser } from "@/graphql/queries/users/getOrdersByUser";
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -49,12 +51,14 @@ export function DesktopProfilePage() {
     user?.external_auth_provider_user_id
   );
   const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
+  const { data: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
 
   const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
 
+  console.log("orders", ordersData2);
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808] px-8">
       <ProfileSection userC={userC} user={user} />
@@ -170,9 +174,7 @@ export function DesktopProfilePage() {
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
-                <Link
-                  href={`/p/${item.market_id}`}
-                >
+                <Link href={`/p/${item.market_id}`}>
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
