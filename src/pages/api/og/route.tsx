@@ -3,6 +3,7 @@ import { ImageResponse } from "@vercel/og";
 import { IUser } from "@/supabase/types";
 import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
 import { aeonikFontDataPromise } from "@/utils/fonts";
+import { getLevel } from "@/constants/CredLevels";
 
 export const runtime = "edge";
 
@@ -13,8 +14,9 @@ export default async function GET(request: Request) {
       searchParams.get("id")?.slice(0, 100) ||
       "did:privy:clutganzs01rz2oqk4vvlw1ih";
     const fontData = await aeonikFontDataPromise;
-
     const user = await fetchUserByExternalAuthId(id);
+
+    const level = getLevel(user?.liquiditypoints!);
     return new ImageResponse(
       (
         <div
@@ -75,11 +77,11 @@ export default async function GET(request: Request) {
               src={user?.pfp}
               alt="Profile"
               style={{
-                width: "220px",
-                height: "220px",
+                width: "250px",
+                height: "250px",
                 marginBottom: "20px",
                 borderRadius: "50%",
-                borderWidth: 3,
+                borderWidth: 6,
                 marginTop: "20px",
                 borderColor: "#070707",
                 border: "3px #070707 solid",
@@ -87,7 +89,7 @@ export default async function GET(request: Request) {
             />
             <h2
               style={{
-                fontSize: "4.78rem",
+                fontSize: "4.8rem",
                 fontWeight: "bold",
                 color: "white",
               }}
@@ -96,13 +98,17 @@ export default async function GET(request: Request) {
             </h2>
             <p
               style={{
-                marginTop: "-1.25rem",
+                marginTop: "-1.3rem",
                 fontSize: "3.3rem",
                 fontWeight: "normal",
                 color: "#eeeeee",
+                padding: "0.4rem 1rem",
+                borderRadius: "50%",
+                backgroundColor: "#181818",
+                border: "1.5px solid #212121",
               }}
             >
-              15 Predictions | 98% Accuracy
+              {level.name}
             </p>
           </div>
           <div

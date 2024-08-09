@@ -8,7 +8,6 @@ import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts";
 
 export const runtime = "edge";
 
-
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -18,8 +17,8 @@ export default async function GET(request: Request) {
       benzinFontDataPromise,
     ]);
 
-    const topic = getTopics("3");
-    const members = await fetchMembersForTopic("3");
+    const topic = getTopics(id);
+    const members = await fetchMembersForTopic(id);
 
     const memberImgProps = {
       width: "40px",
@@ -70,6 +69,7 @@ export default async function GET(request: Request) {
                 fontSize: "3.2rem",
                 color: "#b3b3b3",
                 marginBottom: "25px",
+                maxWidth: "70%",
               }}
             >
               {topic?.description ?? "Everything about the 2024 US Elections"}
@@ -80,7 +80,6 @@ export default async function GET(request: Request) {
                 alignItems: "center",
               }}
             >
-              {" "}
               <div
                 style={{
                   display: "flex",
@@ -185,12 +184,13 @@ export default async function GET(request: Request) {
                 justifyContent: "center",
                 gap: "8px",
                 padding: "22px 80px",
-                backgroundColor: "#212121",
+                backgroundColor: "#181818",
                 border: "none",
                 borderRadius: "60px",
                 fontSize: "2.8rem",
                 fontWeight: "bold",
                 cursor: "pointer",
+                border: "1.5px solid #212121",
                 color: "white",
               }}
             >
@@ -213,7 +213,6 @@ export default async function GET(request: Request) {
   }
 }
 
-
 async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
   const { data, error } = await SUPABASE_CLIENT.from("user_topics")
     .select(
@@ -233,7 +232,7 @@ async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
 
   // Flatten the structure to directly get user details
   return data.map((entry) => entry.users).flat();
-};
+}
 
 async function getTopics(searchString: string): Promise<ITopic> {
   const { data, error } = await SUPABASE_CLIENT.from("topics")
@@ -243,4 +242,4 @@ async function getTopics(searchString: string): Promise<ITopic> {
   if (error) throw new Error(error.message);
 
   return data;
-};
+}
