@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import amplitude from "amplitude-js";
+import * as amplitude from "@amplitude/analytics-browser";
 
 const Amplitude = amplitude.getInstance();
 
@@ -16,103 +16,133 @@ type Context = Record<string, unknown>;
 type Filters = Record<string, unknown>;
 
 // User clicks on / views a market
-export const trackViewMarket = (marketId: MarketId) => {
-  Amplitude.logEvent("View Market", { marketId });
+export const trackViewMarket = (marketId: MarketId, device: string) => {
+  Amplitude.logEvent("View Market", { marketId, device });
 };
 
 // User makes a prediction
 export const trackMakePrediction = (
   marketId: MarketId,
   amount: number,
-  option: string
+  option: string,
+  device: string
 ) => {
-  Amplitude.logEvent("Make Prediction", { marketId, amount, option });
+  Amplitude.logEvent("Make Prediction", { marketId, amount, option, device });
 };
 
 // User boosts a market
-export const trackBoostMarket = (marketId: MarketId, boostAmount: number) => {
-  Amplitude.logEvent("Boost Market", { marketId, boostAmount });
+export const trackBoostMarket = (
+  marketId: MarketId,
+  boostAmount: number,
+  device: string
+) => {
+  Amplitude.logEvent("Boost Market", { marketId, boostAmount, device });
 };
 
 // User joins a topic
-export const trackJoinTopic = (topicId: TopicId) => {
-  Amplitude.logEvent("Join Topic", { topicId });
+export const trackJoinTopic = (topicId: TopicId, device: string) => {
+  Amplitude.logEvent("Join Topic", { topicId, device });
 };
 
 // User clicks on a category
-export const trackClickCategory = (categoryId: CategoryId) => {
-  Amplitude.logEvent("Click Category", { categoryId });
+export const trackClickCategory = (categoryId: CategoryId, device: string) => {
+  Amplitude.logEvent("Click Category", { categoryId, device });
 };
 
 // User clicks on a topic
-export const trackClickTopic = (topicId: TopicId) => {
-  Amplitude.logEvent("Click Topic", { topicId });
+export const trackClickTopic = (topicId: TopicId, device: string) => {
+  Amplitude.logEvent("Click Topic", { topicId, device });
 };
 
 // User follows another user
-export const trackFollowUser = (followedUserId: UserId) => {
-  Amplitude.logEvent("Follow User", { followedUserId });
+export const trackFollowUser = (
+  followedUserId: UserId,
+  followerId: UserId,
+  device: string
+) => {
+  Amplitude.logEvent("Follow User", { followedUserId, followerId, device });
 };
 
 // Onboarding steps
 export const trackOnboardingStep = (
   marketId: MarketId,
   amount: number,
-  option: string
+  option: string,
+  device: string
 ) => {
-  Amplitude.logEvent("User onramp", { marketId, amount });
+  Amplitude.logEvent("User onramp", { marketId, amount, option, device });
 };
 
 // User onramp steps
-export const trackOnramp = (step: Step) => {
-  Amplitude.logEvent("Onboarding Step", { step });
+export const trackOnramp = (step: Step, device: string) => {
+  Amplitude.logEvent("Onboarding Step", { step, device });
 };
 
 // User connects socials
-export const trackConnectSocials = (socialPlatform: SocialPlatform) => {
-  Amplitude.logEvent("Connect Socials", { socialPlatform });
+export const trackConnectSocials = (
+  socialPlatform: SocialPlatform,
+  device: string
+) => {
+  Amplitude.logEvent("Connect Socials", { socialPlatform, device });
 };
 
 // Steps for making a prediction
 export const trackPredictionStep = (
   marketId: MarketId,
   step: Step,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
+  device: string
 ) => {
-  Amplitude.logEvent("Prediction Step", { marketId, step, data });
+  Amplitude.logEvent("Prediction Step", { marketId, step, data, device });
 };
 
 // User goes on site (once a day or multiple times)
-export const trackSiteVisit = () => {
-  Amplitude.logEvent("Site Visit", { timestamp: new Date() });
+export const trackSiteVisit = (device: string) => {
+  Amplitude.logEvent("Site Visit", { timestamp: new Date(), device });
 };
 
 // User login
-export const trackUserLogin = (userId: UserId) => {
-  Amplitude.logEvent("User Login", { userId });
+export const trackUserLogin = (userId: UserId, device: string) => {
+  Amplitude.logEvent("User Login", { userId, device });
 };
 
 // User search
-export const trackSearch = (searchTerm: string, filters: Filters) => {
-  Amplitude.logEvent("Search", { searchTerm, filters });
+export const trackSearch = (searchTerm: string, device: string) => {
+  Amplitude.logEvent("Search", { searchTerm, device });
 };
 
 // Error events
-export const trackErrorEvent = (errorType: ErrorType, context: Context) => {
-  Amplitude.logEvent("Error Event", { errorType, context });
+export const trackErrorEvent = (
+  errorType: ErrorType,
+  context: Context,
+  device: string
+) => {
+  Amplitude.logEvent("Error Event", { errorType, context, device });
 };
 
 // Item share
-export const trackItemShare = (itemType: ItemType, itemId: string) => {
-  Amplitude.logEvent("Item Share", { itemType, itemId });
+export const trackItemShare = (
+  itemType: ItemType,
+  itemId: string,
+  device: string
+) => {
+  Amplitude.logEvent("Item Share", { itemType, itemId, device });
 };
 
 // Add comment
-export const trackAddComment = (itemType: ItemType, itemId: string) => {
-  Amplitude.logEvent("Add Comment", { itemType, itemId });
+export const trackAddComment = (
+  marketId: string,
+  userId: string,
+  device: string
+) => {
+  Amplitude.logEvent("Add Comment", { marketId, userId, device });
 };
 
 // Abandoned action
-export const trackAbandonedAction = (actionType: string, itemId: string) => {
-  Amplitude.logEvent("Abandoned Action", { actionType, itemId });
+export const trackAbandonedAction = (
+  actionType: string,
+  itemId: string,
+  device: string
+) => {
+  Amplitude.logEvent("Abandoned Action", { actionType, itemId, device });
 };

@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
-import { useGetLpByUser } from "@/graphql/queries/liquidity/useGetLpByUser";
-
 export function MobileLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
@@ -18,7 +16,6 @@ export function MobileLiquidityPage() {
     refetch,
   } = useGetLPForUser(user?.walletaddress);
 
-  const { data, loading, error } = useGetLpByUser(user?.walletaddress);
 
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
 

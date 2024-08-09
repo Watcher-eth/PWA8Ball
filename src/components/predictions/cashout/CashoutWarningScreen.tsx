@@ -2,6 +2,7 @@
 import { AlertTriangle, Clock, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
+import { trackAbandonedAction } from "@/lib/events/StandardEvents";
 
 export function CashoutWarningScreen({
   changeStep,
@@ -87,6 +88,8 @@ export function CashoutWarningScreen({
       >
         <motion.div
           onClick={() => {
+            trackAbandonedAction("Cashout", "Step 2", "pwa");
+
             isDesktop ? changeStep(4) : changeStep(1);
           }}
           className={`

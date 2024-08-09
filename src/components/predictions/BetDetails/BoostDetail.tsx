@@ -20,7 +20,7 @@ export function BoostDetail({
 
   return (
     <>
-      <BoostModalComponent image={image} id={id}>
+      <BoostModalComponent  image={image} id={id}>
         <div
           className={`
             flex flex-row w-full items-center justify-between flex-grow

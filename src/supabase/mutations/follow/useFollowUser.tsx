@@ -2,6 +2,7 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
+import { trackFollowUser } from "@/lib/events/StandardEvents";
 
 async function followUser({
   followerId,
@@ -15,6 +16,7 @@ async function followUser({
     .insert([{ follower_id: followerId, following_id: followingId }])
     .single();
 
+  trackFollowUser(followingId, followerId, "pwa");
   if (error) throw new Error(error.message);
   return data;
 }

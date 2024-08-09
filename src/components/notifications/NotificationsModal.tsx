@@ -9,24 +9,6 @@ export function NotificationsModal({
 }: {
   children: React.ReactNode;
 }) {
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "WebShare Example",
-          text: "Check out this website!",
-          url: "https://www.example.com",
-        });
-        console.log("Data was shared successfully");
-      } catch (err) {
-        console.error("Share failed:");
-      }
-    } else {
-      // Fallback for browsers that don't support the Web Share API
-      console.log("Web Share not supported on this browser");
-    }
-  };
-
   return (
     <div>
       <Drawer>

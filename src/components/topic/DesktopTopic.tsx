@@ -18,6 +18,7 @@ import { Comment } from "../predictions/CommentSection/Comment";
 import JoinTopicButton from "./JoinTopicButton";
 import { motion } from "framer-motion";
 import { skeletonVariants } from "../ui/Skeleton";
+import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 function DesktopTopic({
   name,
@@ -233,6 +234,7 @@ function DesktopTopicItem(props: DesktopItemProps) {
   console.log("outcomes", props.outcomes);
   return (
     <Link
+      onClick={() => trackViewMarket(props.id, "pwa")}
       href={`/p/${props.id}`}
       className={`${selectedSize.container} hover:scale-101 active:scale-99 flex-col border-[0.1rem] border-[#151515] rounded-lg`}
     >

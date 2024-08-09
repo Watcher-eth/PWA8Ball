@@ -14,7 +14,6 @@ import {
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { DesktopLpModal } from "@/components/lp/LpModal/DesktopLpModal";
 
-
 import { DesktopMyBetModal } from "@/components/common/Charts/MyBetModal";
 
 import {
@@ -30,7 +29,7 @@ import {
 } from "lucide-react";
 
 import { Card } from "@/components/ui/tailwind/Card";
-import { ChartConfig,  } from "@/components/ui/chart";
+import { ChartConfig } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
@@ -41,8 +40,8 @@ import { aggregatePredictedItems } from "@/utils/predictions/aggregatePrediction
 import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
-
 import { ContrastButton } from "@/components/buttons/ContrastButton";
+import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -172,7 +171,10 @@ export function DesktopProfilePage() {
           {mergedData?.map((item, index) => {
             if (index < 3)
               return (
-                <Link href={`/p/${item.market_id}`}>
+                <Link
+                  onClick={() => trackViewMarket(String(item.market_id), "pwa")}
+                  href={`/p/${item.market_id}`}
+                >
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
@@ -292,8 +294,6 @@ function TextWithSuffix({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
-
-
 export const ProfileSection = ({ userC, user }) => {
   const [edit, setEdit] = useState(false);
   const [userName, setUsername] = useState<string>();
@@ -314,7 +314,6 @@ export const ProfileSection = ({ userC, user }) => {
     { category: "GTA 6", percentage: 28, fill: "#FF6600" },
     { category: "US Elections", percentage: 42, fill: "#1E90FF" },
   ];
-
 
   return (
     <Card className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-4 px-8 relative">
@@ -374,10 +373,7 @@ export const ProfileSection = ({ userC, user }) => {
             }}
           />
         ) : (
-          <ContrastButton
-            label="Follow"
-            IconComponent={UserPlus}
-          />
+          <ContrastButton label="Follow" IconComponent={UserPlus} />
         )}
       </div>
       <div>
@@ -421,7 +417,6 @@ export const ProfileSection = ({ userC, user }) => {
   );
 };
 
-
 function ShareButton() {
   return (
     <ContrastButton
@@ -448,10 +443,5 @@ function ShareButton() {
         );
       }}
     />
-  )
+  );
 }
-
-
-
-
-

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
 
 import { ProfilePrediction } from "./ProfilePrediction";
+import { trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function UserPrediction({
   index,
@@ -26,8 +27,8 @@ export function UserPrediction({
         <div
           className={`
             py-1 rounded-full text-white font-bold
-            ${ option === "No" ? "px-3" : "px-2" }
-            ${ optional === 1 ? "bg-[#0050FF]" : "bg-[#FF0050]" }
+            ${option === "No" ? "px-3" : "px-2"}
+            ${optional === 1 ? "bg-[#0050FF]" : "bg-[#FF0050]"}
           `}
         >
           {option?.length < 8 ? option : option?.substring(0, 3)}
@@ -43,10 +44,14 @@ export function CreatedPrediction({
   question,
   amount,
   title,
-  id
+  id,
 }) {
   return (
-    <Link href={getMarketPath(id)} className="transition-all hover:scale-101 active:scale-95">
+    <Link
+      onClick={() => trackViewMarket(id, "pwa")}
+      href={getMarketPath(id)}
+      className="transition-all hover:scale-101 active:scale-95"
+    >
       <ProfilePrediction
         image={image}
         question={question}
@@ -60,4 +65,4 @@ export function CreatedPrediction({
       />
     </Link>
   );
-};
+}

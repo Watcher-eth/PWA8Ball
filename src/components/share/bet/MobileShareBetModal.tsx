@@ -2,6 +2,7 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 import { ShareBetContent } from "./ShareBetContent";
+import { trackItemShare } from "@/lib/events/StandardEvents";
 
 export function MobileShareBetModal({
   children,
@@ -24,6 +25,7 @@ export function MobileShareBetModal({
 }) {
   const handleShare = async () => {
     if (navigator.share) {
+      trackItemShare("market", id, "pwa");
       try {
         await navigator.share({
           title: "WebShare Example",

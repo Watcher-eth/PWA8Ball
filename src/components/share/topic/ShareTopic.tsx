@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Copy, Gift, Share as ShareIcon } from "lucide-react";
 import { copyToClipboard } from "@/utils/copyToClipboard";
+import { trackItemShare } from "@/lib/events/StandardEvents";
 
 export const ShareTopic = ({
   id,
@@ -19,6 +20,8 @@ export const ShareTopic = ({
   markets: number;
 }) => {
   const shareLink = async () => {
+    trackItemShare("topic", id, "pwa");
+
     try {
       await navigator.share({
         message: `Join ${title} on Glimpse to get all the latest predictions and odds.`,

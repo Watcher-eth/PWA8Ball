@@ -1,8 +1,7 @@
-
-
 import { Users } from "lucide-react";
 import Link from "next/link";
 import { getTopicPath } from "@/utils/urls";
+import { trackClickTopic } from "@/lib/events/StandardEvents";
 
 export function TopicInfoDetail({
   topicId,
@@ -21,6 +20,7 @@ export function TopicInfoDetail({
 }) {
   return (
     <Link
+      onClick={() => trackClickTopic(topicId, "pwa")}
       href={{
         pathname: getTopicPath(topicId),
         query: {

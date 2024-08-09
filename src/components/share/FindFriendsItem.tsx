@@ -1,12 +1,15 @@
 // @ts-nocheck
 import { convertIpfsUrl } from "@/utils/urls/convertIpfsUrl";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { trackItemShare } from "@/lib/events/StandardEvents";
 
 export function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
   const { user } = useUserStore();
 
   const shareLink = async () => {
     try {
+      trackItemShare("user", user?.external_auth_provider_user_id, "pwa");
+
       const result = await navigator.share({
         message: "Follow me on Glimpse to see my predictions for the future",
         url: "https://tryglimpse.xyz",

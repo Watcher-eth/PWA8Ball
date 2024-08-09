@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { trackItemShare } from "@/lib/events/StandardEvents";
 
-
-export function CashoutConfirmScreen(props : {
+export function CashoutConfirmScreen(props: {
   changeStep: () => void;
   onClose: () => void;
   title: string;
@@ -15,19 +15,21 @@ export function CashoutConfirmScreen(props : {
   image: string;
   option: number;
   options: [];
+  id: number;
   isDesktop?: boolean;
-}
-) {
+}) {
   const { onClose } = props;
   const { user } = useUserStore();
 
   const shareLink = async () => {
     if (navigator.share) {
+      trackItemShare("market", String(props.id), "pwa");
+
       try {
         await navigator.share({
-          title: "WebShare Example",
-          text: "Check out this website!",
-          url: "https://www.example.com",
+          title: `${props.title} on Glimpse`,
+          text: "This prediction on Glimpse is wild! Check it out",
+          url: `https://pwa-8-ball.vercel.app/p/${props.id}`,
         });
         console.log("Data was shared successfully");
       } catch (err) {
@@ -133,4 +135,4 @@ export function CashoutConfirmScreen(props : {
       </div>
     </div>
   );
-};
+}

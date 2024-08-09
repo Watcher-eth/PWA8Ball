@@ -77,6 +77,7 @@ export function DesktopBoostModal({
 
   return (
     <DesktopCardModal
+    
       cardClassName="w-full"
       dialogContentClassName="w-[30vw] min-w-[400px]"
       cardContentClassName="w-[30vw] min-w-[400px]"

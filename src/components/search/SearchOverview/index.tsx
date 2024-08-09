@@ -1,17 +1,14 @@
 // @ts-nocheck
-import _ from "lodash"
+import _ from "lodash";
 import { useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
 import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
 import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
 import { useOverlaySearch } from "@/hooks/useOverlaySearch";
-import {
-  MarketItem,
-  TopicItem,
-  FriendItem,
-} from "./SearchItem";
+import { MarketItem, TopicItem, FriendItem } from "./SearchItem";
 import { SearchInputSection } from "./SearchInputSection";
+import { trackSearch } from "@/lib/events/StandardEvents";
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
@@ -19,7 +16,6 @@ const friends = [
 ];
 
 export function SearchOverview() {
-
   const [debouncedText, setDebouncedText] = useState("");
   const { data: trendingMarkets } = useGetTrendingMarkets();
   const { data: users } = useGetUsersByName(debouncedText);
@@ -61,7 +57,8 @@ export function SearchOverview() {
   function handleSearch(e) {
     onSearch(e.target.value);
     debouncedSearch(e.target.value);
-  };
+    trackSearch(e.target.value, "pwa");
+  }
 
   // this part is black magic fuckery that needs to be properly rewritten
   function getMasterList() {
@@ -140,19 +137,18 @@ export function SearchOverview() {
             <>
               <Section title="Suggested">
                 {displayedTrendingMarkets.map((market, index) => (
-                    <MarketItem
-                      id={market.id}
-                      key={index}
-                      currentIdx={currentIdx}
-                      idx={market.idx}
-                      title={market.title}
-                      subtitle={market.question}
-                      time={3.22}
-                      type={"market.type"}
-                      image={market.image}
-                    />
-                  )
-                )}
+                  <MarketItem
+                    id={market.id}
+                    key={index}
+                    currentIdx={currentIdx}
+                    idx={market.idx}
+                    title={market.title}
+                    subtitle={market.question}
+                    time={3.22}
+                    type={"market.type"}
+                    image={market.image}
+                  />
+                ))}
               </Section>
               <Section title="Friends">
                 {displayedFriends.map((friend, index) => (
@@ -168,19 +164,18 @@ export function SearchOverview() {
               </Section>
               <Section title="Trending Topics">
                 {displayedTrendingTopics?.map((market, index) => (
-                    <TopicItem
-                      topidId={market.topic_id}
-                      key={index}
-                      currentIdx={currentIdx}
-                      idx={market.idx}
-                      title={market?.topic_title}
-                      subtitle={market?.topic_description}
-                      members={420}
-                      type={"market.type"}
-                      image={market.topic_image}
-                    />
-                  )
-                )}
+                  <TopicItem
+                    topidId={market.topic_id}
+                    key={index}
+                    currentIdx={currentIdx}
+                    idx={market.idx}
+                    title={market?.topic_title}
+                    subtitle={market?.topic_description}
+                    members={420}
+                    type={"market.type"}
+                    image={market.topic_image}
+                  />
+                ))}
               </Section>
             </>
           )}
@@ -188,7 +183,7 @@ export function SearchOverview() {
       </AnimatePresence>
     </div>
   );
-};
+}
 
 function Section({ title, children }) {
   return (
@@ -196,5 +191,5 @@ function Section({ title, children }) {
       <h3 className="text-gray-400 text-sm mb-2">{title}</h3>
       <div className="-ml-1">{children}</div>
     </div>
-  )
+  );
 }

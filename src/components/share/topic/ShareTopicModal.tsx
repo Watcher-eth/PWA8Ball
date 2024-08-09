@@ -1,12 +1,9 @@
 // @ts-nocheck
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { motion } from "framer-motion";
 
 import { ShareTopic } from "./ShareTopic";
+import { trackItemShare } from "@/lib/events/StandardEvents";
 
 export function ShareTopicModal({
   children,
@@ -28,6 +25,8 @@ export function ShareTopicModal({
   markets: number;
 }) {
   const handleShare = async () => {
+    trackItemShare("topic", id, "pwa");
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -76,4 +75,3 @@ export function ShareTopicModal({
     </div>
   );
 }
-

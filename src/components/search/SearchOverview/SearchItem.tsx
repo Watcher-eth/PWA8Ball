@@ -1,8 +1,9 @@
 // @ts-nocheck
-import Link from "next/link"
-import { motion } from "framer-motion"
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { Users } from "lucide-react";
-import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls"
+import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls";
+import { trackClickTopic, trackViewMarket } from "@/lib/events/StandardEvents";
 
 export function MarketItem({
   id,
@@ -15,7 +16,11 @@ export function MarketItem({
   currentIdx,
 }) {
   return (
-    <Link href={getMarketPath(id)} prefetch={true}>
+    <Link
+      onClick={() => trackViewMarket(id, "pwa")}
+      href={getMarketPath(id)}
+      prefetch={true}
+    >
       <SearchItem
         title={title}
         subtitle={subtitle}
@@ -41,7 +46,11 @@ export function TopicItem({
   currentIdx,
 }) {
   return (
-    <Link href={getTopicPath(topidId)} prefetch={true}>
+    <Link
+      onClick={() => trackClickTopic(topicId, "pwa")}
+      href={getTopicPath(topidId)}
+      prefetch={true}
+    >
       <SearchItem
         title={title}
         subtitle={subtitle}
