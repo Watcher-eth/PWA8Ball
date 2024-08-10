@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 
 // Define the GraphQL query
 const GET_ORDER_BY_ID = gql`
-  query UserLp($id: String!) {
+  query OrderById($id: String!) {
     order(id: $id) {
       amount
       marketId

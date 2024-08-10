@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { useGetOrderById } from "@/graphql/queries/predictions/useGetOrderById";
 
 export function Receipt(props: {
   question: string;
@@ -17,7 +18,10 @@ export function Receipt(props: {
   onClose?: () => void;
 }) {
   const { user } = useUserStore();
-
+  const { data, loading, error } = useGetOrderById(
+    "10-0x870b7F3f229D08918d33F8b09766eaB412aBEebf-1"
+  );
+  console.log("order", data);
   const shareLink = async () => {
     if (navigator.share) {
       try {
@@ -81,18 +85,18 @@ export function Receipt(props: {
 
   return (
     <div
-      className={`relative flex m-3 mt-8 pb-0 flex-col items-center ${
-        props.isDesktop ? "bg-transparent" : "bg-[#121212]"
-      } ${props.isDesktop ? "p-1" : "p-5"} ${
-        props.isDesktop ? "rounded-[20px]" : "rounded-[0px]"
-      }`}
+      className={`relative flex self-center shadow-lg  pb-0 flex-col items-center 
+       bg-[#121212]
+       ${props.isDesktop ? "p-5 w-[27%] m-3 xl:w-[25%]" : "p-6 -ml-0 m-6  w-full"}
+    
+      `}
     >
       <div className={`absolute w-full`} style={roughEdgeTop}></div>
       <div className={`absolute w-full`} style={roughEdgeBottom}></div>
       <div
         className={`flex flex-col z-[3] w-full ${
           props.isDesktop ? "bg-transparent" : "bg-[#131313]"
-        } rounded-[20px]`}
+        } `}
       >
         <div className="flex flex-row items-center justify-between w-full">
           <div className="w-[37px]"></div>
@@ -165,12 +169,10 @@ export function Receipt(props: {
           </span>
         </div>
       </div>
-      <div className="flex flex-row z-[3] items-center gap-[5px] mb-2 my-[5px]">
+      <div className="flex flex-row z-[3] w-full items-center gap-[5px] px-1 mb-2 my-[5px]">
         <div
           onClick={shareLink}
-          className={`mt-[12px] flex flex-row p-[8px] rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
-            props?.isDesktop ? "w-[24vw]" : `w-[85vw]`
-          } items-center justify-center cursor-pointer`}
+          className={`mt-[12px] flex flex-row p-[8px] rounded-[24px] overflow-hidden bg-[#D9D9D9] w-full items-center justify-center cursor-pointer`}
         >
           <div className="flex flex-row items-center justify-center">
             <ShareIcon color="black" strokeWidth={3} height={23} />
