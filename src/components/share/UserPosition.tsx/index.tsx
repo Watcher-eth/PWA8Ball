@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-import React, { useState } from "react";
+import React from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
@@ -12,9 +10,11 @@ export function Receipt(props: {
   points: number;
   image: string;
   option: number;
-  options: [];
+  options: string[]; // Updated this to string[] to ensure correct type
   id: number;
   isDesktop?: boolean;
+  changeStep?: (step: number) => void;
+  onClose?: () => void;
 }) {
   const { user } = useUserStore();
 
@@ -35,17 +35,63 @@ export function Receipt(props: {
     }
   };
 
+  const svgFilter = (rotate: number) => `
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="40px" style="transform: rotate(${rotate}deg);">
+      <defs>
+        <filter id="roughEdgeFilter">
+          <feTurbulence baseFrequency="0.05" numOctaves="3" result="turbulence"/>
+          <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="6" />
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" fill="#121212" filter="url(#roughEdgeFilter)" />
+    </svg>
+  `;
+
+  const roughEdgeTop = {
+    backgroundImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(
+      svgFilter(0)
+    )}')`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "top",
+    backgroundSize: "100% 40px",
+    content: '""',
+    position: "absolute" as "absolute",
+    top: -8,
+    left: 0,
+    right: 0,
+    height: "40px",
+    zIndex: 0,
+  };
+
+  const roughEdgeBottom = {
+    backgroundImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(
+      svgFilter(180)
+    )}')`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "bottom",
+    backgroundSize: "100% 40px",
+    content: '""',
+    position: "absolute" as "absolute",
+    bottom: -25,
+    left: 0,
+    right: 0,
+    height: "40px",
+    zIndex: 0,
+  };
+
   return (
     <div
-      className={`flex m-3 mt-5 border-2 border-[#151515] flex-col items-center ${
-        props.isDesktop ? "bg-transparent" : "bg-[#080808]"
-      }  ${props.isDesktop ? "p-1" : "p-5"}  ${
-        props.isDesktop ? "rounded-[20px]" : "rounded-[20px]"
+      className={`relative flex m-3 mt-8 pb-0 flex-col items-center ${
+        props.isDesktop ? "bg-transparent" : "bg-[#121212]"
+      } ${props.isDesktop ? "p-1" : "p-5"} ${
+        props.isDesktop ? "rounded-[20px]" : "rounded-[0px]"
       }`}
     >
+      <div className={`absolute w-full`} style={roughEdgeTop}></div>
+      <div className={`absolute w-full`} style={roughEdgeBottom}></div>
       <div
-        className={`flex flex-col w-full ${
-          props.isDesktop ? "bg-transparent" : "bg-[#080808]"
+        className={`flex flex-col z-[3] w-full ${
+          props.isDesktop ? "bg-transparent" : "bg-[#131313]"
         } rounded-[20px]`}
       >
         <div className="flex flex-row items-center justify-between w-full">
@@ -59,7 +105,11 @@ export function Receipt(props: {
             </span>
           </div>
           <motion.div
-            onClick={() => (props.isDesktop ? props.changeStep(4) : onClose())}
+            onClick={() =>
+              props.isDesktop
+                ? props.changeStep(4)
+                : props.onClose && props.onClose()
+            }
             className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
           >
             <X color={"#585858"} strokeWidth={5} height={18} />
@@ -79,7 +129,7 @@ export function Receipt(props: {
             </span>
             <img
               className="h-[38px] object-cover w-[38px] rounded-[10px] overflow-hidden"
-              src={props?.image}
+              src={props.image}
               alt="Market"
             />
           </div>
@@ -95,14 +145,15 @@ export function Receipt(props: {
             </div>
           </div>
         </div>
-
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
           <div className="flex flex-row items-center">
-            <span className="text-[20px] mr-[8px] text-white">{user.name}</span>
+            <span className="text-[20px] mr-[8px] text-white">
+              {user?.name}
+            </span>
             <img
               className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
-              src={user.pfp}
+              src={user?.pfp ? user?.pfp : ""}
               alt="Pen"
             />
           </div>
@@ -114,7 +165,7 @@ export function Receipt(props: {
           </span>
         </div>
       </div>
-      <div className="flex flex-row items-center gap-[5px] my-[5px]">
+      <div className="flex flex-row z-[3] items-center gap-[5px] mb-2 my-[5px]">
         <div
           onClick={shareLink}
           className={`mt-[12px] flex flex-row p-[8px] rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
