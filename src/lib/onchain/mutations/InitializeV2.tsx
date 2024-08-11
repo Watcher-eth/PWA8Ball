@@ -47,8 +47,11 @@ async function initialize(props: {
     // Boost the market
     const hash = await contract.write.initializeMarket([
       ROOT_OPERATOR_ADDRESS,
+      ROOT_OPERATOR_ADDRESS,
       account,
       BigInt(initialProb),
+      props.title,
+      props.description,
     ]);
 
     console.log("hash", hash);
