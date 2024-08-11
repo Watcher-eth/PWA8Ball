@@ -201,7 +201,7 @@ interface DesktopItemProps {
   id: string;
 }
 
-function DesktopTopicItem(props: DesktopItemProps) {
+export function DesktopTopicItem(props: DesktopItemProps) {
   const sizeClasses = {
     large: {
       container: "w-1/3",
@@ -240,17 +240,6 @@ function DesktopTopicItem(props: DesktopItemProps) {
         className={`w-full ${selectedSize.image} object-cover rounded-t-lg `}
         src={props.image}
       />
-      <GradientBar
-        percentage={(props.outcomes[0]?.value / 100).toFixed(2)}
-        labels={[
-          `${(props.outcomes[0]?.value / 100).toFixed(0)}% ${
-            props.outcomes[0]?.name
-          } `,
-          `${props.outcomes[1]?.name} ${(
-            props.outcomes[1]?.value / 100
-          ).toFixed(0)}%`,
-        ]}
-      />
       <div className="flex flex-col pt-2.5 rounded-b-lg pb-1.5 bg-[#151515]">
         <div className={`text-[lightgray] px-5 ${selectedSize.title}`}>
           {props.title}
@@ -261,6 +250,20 @@ function DesktopTopicItem(props: DesktopItemProps) {
           {props.question}
         </div>
         <div className="h-[0.05rem] mt-3 mb-1.5 w-full bg-[#313131]" />
+
+        <GradientBar
+          percentage={(props.outcomes[0]?.value / 100).toFixed(2)}
+          labels={[
+            `${(props.outcomes[0]?.value / 100).toFixed(0)}% ${
+              props.outcomes[0]?.name
+            } `,
+            `${props.outcomes[1]?.name} ${(
+              props.outcomes[1]?.value / 100
+            ).toFixed(0)}%`,
+          ]}
+        />
+        <div className="h-[0.05rem] mt-3 mb-1.5 w-full bg-[#313131]" />
+
         <div className={`text-[lightgray] py-1 px-5 ${selectedSize.date}`}>
           1h ago - 323 Predictors
         </div>
@@ -279,28 +282,37 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
   const validPercentage = Math.min(Math.max(percentage, 1), 100);
 
   return (
-    <div className="relative w-full bg-[#151515] h-8 flex items-center text-white">
+    <div className="relative m-2 mx-4 bg-[#151515] h-11 rounded-md flex items-center text-white">
       <div
-        className="absolute left-0 h-full"
+        className="absolute left-0 h-full rounded-l-md"
         style={{
-          width: `${validPercentage + 2}%`,
+          width: `${validPercentage}%`,
           background: "linear-gradient(to right, #0067E1, transparent)",
         }}
       ></div>
       <div
-        className="absolute right-0 h-full"
+        className="absolute h-full rounded-r-md"
         style={{
-          width: `${100 - validPercentage + 2}%`,
+          left: `${validPercentage}%`,
+          width: `${100 - validPercentage}%`,
           background: "linear-gradient(to right, transparent, #FF0050)",
         }}
       ></div>
-      <div className="absolute left-3 ml-2">{labels[0]}</div>
-      <div className="absolute right-3 mr-2">{labels[1]}</div>
+      <div
+        className="h-14 w-1.5 bg-white/[80%] rounded-md absolute z-2"
+        style={{
+          left: `${validPercentage}%`,
+          transform: "translateX(-50%)",
+          opacity: validPercentage > 12 ? 1 : 0,
+        }}
+      />
+      <div className="absolute font-[500] left-2.5 ml-2">{labels[0]}</div>
+      <div className="absolute font-[500] right-2.5 mr-2">{labels[1]}</div>
     </div>
   );
 };
 
-function DesktopTopicItemSkeleton(props: {
+export function DesktopTopicItemSkeleton(props: {
   size: "large" | "medium" | "small";
   index: number;
 }) {
