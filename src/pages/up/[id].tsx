@@ -18,7 +18,7 @@ export default function MarketPage({
         className="absolute top-0 w-full h-full"
         src="https://rockstarintel.com/wp-content/uploads/2024/03/GTA-VI-article-image-illustration-2.webp"
       />
-      <div className="absolute top-0 w-full h-full backdrop-blur-md" />
+      <div className="absolute top-0 w-full h-full backdrop-blur-xl backdrop-brightness-50" />
       <MobiTop
         desktop={
           <Receipt
