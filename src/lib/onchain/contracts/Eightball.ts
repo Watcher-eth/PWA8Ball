@@ -95,10 +95,8 @@ export const EightballV1ABI = [
     inputs: [
       { name: "_operator", type: "address", internalType: "address" },
       { name: "_creator", type: "address", internalType: "address" },
-      { name: "_disputer", type: "address", internalType: "address" },
       { name: "_initProb", type: "uint256", internalType: "uint256" },
       { name: "_fullNames", type: "string[2]", internalType: "string[2]" },
-      { name: "_shortNames", type: "string[2]", internalType: "string[2]" },
       { name: "title", type: "string", internalType: "string" },
       { name: "question", type: "string", internalType: "string" },
     ],
@@ -120,7 +118,6 @@ export const EightballV1ABI = [
           { name: "liquidityPool", type: "address", internalType: "address" },
           { name: "outcome", type: "address", internalType: "address" },
           { name: "creator", type: "address", internalType: "address" },
-          { name: "disputer", type: "address", internalType: "address" },
           { name: "isResolved", type: "bool", internalType: "bool" },
           { name: "isPreResolution", type: "bool", internalType: "bool" },
         ],
@@ -233,7 +230,13 @@ export const EightballV1ABI = [
         internalType: "uint256",
       },
       {
-        name: "_Amount",
+        name: "amountUsdc",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "outcomeTokens",
         type: "uint256",
         indexed: false,
         internalType: "uint256",
@@ -333,13 +336,13 @@ export const EightballV1ABI = [
         internalType: "uint256",
       },
       {
-        name: "_Amount",
+        name: "amountUsdc",
         type: "uint256",
         indexed: false,
         internalType: "uint256",
       },
       {
-        name: "_outcomeTokens",
+        name: "outcomeTokens",
         type: "uint256",
         indexed: false,
         internalType: "uint256",
@@ -387,6 +390,13 @@ export const EightballV1ABI = [
         indexed: false,
         internalType: "uint256",
       },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "PredictionMetadata",
+    inputs: [
       { name: "title", type: "string", indexed: false, internalType: "string" },
       {
         name: "question",
@@ -395,10 +405,10 @@ export const EightballV1ABI = [
         internalType: "string",
       },
       {
-        name: "creator",
-        type: "address",
-        indexed: true,
-        internalType: "address",
+        name: "fullNames",
+        type: "string[2]",
+        indexed: false,
+        internalType: "string[2]",
       },
     ],
     anonymous: false,
