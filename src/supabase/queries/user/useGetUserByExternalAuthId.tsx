@@ -13,12 +13,10 @@ export async function fetchUserByExternalAuthId(
     .eq("external_auth_provider_user_id", externalAuthId)
     .single(); // Using .single() because we expect at most one record
 
-  if (error) {
-    console.error("Fetch User By External Auth ID Error:", error.message);
-    throw new Error(error.message);
-  }
+  console.error("Fetch User By External Auth ID Error:", error.message);
 
-  return data;
+
+  return data ?? {};
 };
 
 export const useGetUserByExternalAuthId = (externalAuthId: string) => {

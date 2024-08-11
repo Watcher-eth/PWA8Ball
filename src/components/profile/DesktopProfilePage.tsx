@@ -44,12 +44,8 @@ import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
 import { useGetOrdersByUser } from "@/graphql/queries/users/useGetOrdersByUser";
 
-export function DesktopProfilePage() {
+export function DesktopProfilePage({ userId, userC }) {
   const { user } = useUserStore();
-
-  const { data: userC } = useGetUserByExternalAuthId(
-    user?.external_auth_provider_user_id
-  );
   // const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
   const { orders: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
   const ordersData = ordersData2
