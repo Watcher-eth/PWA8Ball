@@ -29,7 +29,7 @@ export function useGetUserLp(userAddress: string) {
     error: lpError,
   } = useApolloQuery(GET_USER_LP, {
     variables: { userAddress: getChecksummedAddress(userAddress) },
-    enabled: Boolean(userAddress),
+    skip: !Boolean(userAddress),
   });
   // console.log(
   //   getChecksummedAddress("0x9fefd0bb2d175b039c8c72c55eea11bc66452591")

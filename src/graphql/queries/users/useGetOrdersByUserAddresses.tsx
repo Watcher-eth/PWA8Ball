@@ -1,12 +1,13 @@
 //@ts-nocheck
 
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_ORDERS_BY_USER_ADDRESSES = gql`
   query UserOrders(
-    $userAddress: [String!] = ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"]
+    $userAddresses: [String!]
   ) {
-    orders(where: { userAddress_in: $userAddress }, limit: 1) {
+    orders(where: { userAddress_in: $userAddresses }, limit: 1) {
       items {
         amount
         marketId
@@ -15,13 +16,10 @@ const GET_ORDERS_BY_USER_ADDRESSES = gql`
         timestamp
         tokensOwned
         market {
-          marketDetail {
-            image
-            question
-            title
-            id
-          }
           id
+          marketId
+          question
+          title
         }
         user {
           name
@@ -35,16 +33,21 @@ const GET_ORDERS_BY_USER_ADDRESSES = gql`
 
 export function useGetOrdersByUserAddresses(userAddresses: string[]) {
   const {
-    data: orderData,
-    loading: orderLoading,
-    error: orderError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_ORDERS_BY_USER_ADDRESSES, {
-    variables: { userAddress: userAddresses },
+    variables: {
+      userAddresses:
+        userAddresses.length > 0
+          ? userAddresses?.map(getChecksummedAddress)
+          : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"]
+    },
   });
 
   return {
-    data: orderData,
-    loading: orderLoading,
-    error: orderError,
+    orders: data?.orders?.items ?? [],
+    loading,
+    error,
   };
 }

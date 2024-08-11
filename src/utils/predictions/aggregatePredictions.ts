@@ -21,8 +21,8 @@ export const aggregatePredictions = (predictions) => {
 export const aggregatePredictedItems = (orders: any) => {
   const aggregated = {};
 
-  orders.forEach((item: any) => {
-    const key = `${item.market_id}-${item.option}`;
+  orders?.forEach((item: any) => {
+    const key = `${item.marketId}-${item.option}`;
     if (aggregated[key]) {
       aggregated[key].amount += item.amount;
     } else {

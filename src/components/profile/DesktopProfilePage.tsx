@@ -42,7 +42,7 @@ import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
-import { useGetOrdersByUser } from "@/graphql/queries/users/getOrdersByUser";
+import { useGetOrdersByUser } from "@/graphql/queries/users/useGetOrdersByUser";
 
 export function DesktopProfilePage() {
   const { user } = useUserStore();
@@ -50,10 +50,10 @@ export function DesktopProfilePage() {
   const { data: userC } = useGetUserByExternalAuthId(
     user?.external_auth_provider_user_id
   );
-  const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
-  const { data: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
-
-  const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
+  // const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
+  const { orders: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
+  const ordersData = ordersData2
+  const aggregatedOrdersData = aggregatePredictedItems(ordersData ?? []);
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
@@ -135,8 +135,8 @@ export function DesktopProfilePage() {
                     <div className="text-[0.85rem] text-[#909090]">
                       You predicted{" "}
                       {item?.option === 1
-                        ? item.options[0].name
-                        : item.options[1].name}
+                        ? item.options?.[0].name
+                        : item.options?.[1].name}
                     </div>
                     <div className="text-[1rem] line-clamp-1 text-white text-semibold">
                       {item?.question}
@@ -188,8 +188,8 @@ export function DesktopProfilePage() {
                       <div className="text-[0.85rem] text-[#909090]">
                         You predicted{" "}
                         {item?.option === 1
-                          ? item.options[0].name
-                          : item.options[1].name}
+                          ? item.options?.[0].name
+                          : item.options?.[1].name}
                       </div>
                       <div className="text-[1rem] line-clamp-1 text-white text-semibold">
                         {item?.question}
