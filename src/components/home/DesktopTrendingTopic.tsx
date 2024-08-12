@@ -28,13 +28,13 @@ export function DesktopTrendingTopics({
   const { data: markets } = useGetMarketsForTopic(topicId);
 
   return (
-    <div className="relative w-full flex align-center justify-between h-[53vh] py-8 flex-row items-center  shadow-lg overflow-hidden">
+    <div className="relative w-full flex align-center shadow-inner justify-between h-[56vh] py-8 flex-row items-center   overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
       <div className="absolute inset-0 bg-[#080808] opacity-30 "></div>
-      <div className="absolute inset-0 backdrop-filter backdrop-blur-lg "></div>
+      <div className="absolute inset-0 backdrop-filter backdrop-blur-3xl "></div>
       <div className="flex flex-col pt-6 h-full">
         <Link
           href={{

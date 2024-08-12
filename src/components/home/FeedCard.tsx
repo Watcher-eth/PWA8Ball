@@ -37,7 +37,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
     <div
       className={`
         flex items-start flex-col rounded-lg w-[88vw]  max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
-        shadow-transparent shadow-md hover:shadow-purple-400/30 hover:scale-10 active:scale-98 transition-all
+         shadow-md hover:shadow-purple-400/30 hover:scale-10 active:scale-98 transition-all
         cursor-pointer font-[Aeonik-Bold]
       `}
     >
