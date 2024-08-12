@@ -6,5 +6,5 @@ import { UsMapPage } from "@/components/map/UsMapPage";
 import ElectionPage from "@/components/topic/ElectionPage";
 
 export default function test() {
-  return <ElectionPage />;
+  return <MobiTop desktop={<ElectionPage />} mobile={<ElectionPage />} />;
 }

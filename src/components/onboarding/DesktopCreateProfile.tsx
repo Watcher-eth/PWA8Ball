@@ -63,7 +63,7 @@ function DesktopCreateProfile() {
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
           alt="Logo"
         />
-        <h2 className="text-2xl font-bold mb-2">Welcome to 8Ball</h2>
+        <h2 className="text-2xl font-bold mb-2">Welcome to Glimpse</h2>
         <p className="text-center mb-6 px-6 text-[lightgray]">
           Please add a profile picture and a username to complete your profile
         </p>

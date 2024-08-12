@@ -8,7 +8,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Card } from "@/components/ui/tailwind/Card"
+import { Card } from "@/components/ui/tailwind/Card";
 import { AnimatePresence, motion } from "framer-motion";
 export function DesktopCardModal({
   children,
@@ -48,8 +48,10 @@ export function DesktopCardModal({
         >
           {(title || subtitle) && (
             <CardHeader className="border-b border-[#212121]">
-              <CardTitle>{title}</CardTitle>
-              <CardDescription>{subtitle}</CardDescription>
+              <CardTitle className="text-white">{title}</CardTitle>
+              <CardDescription className="text-[lightgray]">
+                {subtitle}
+              </CardDescription>
             </CardHeader>
           )}
           <CardContent className={`p-6 rounded-2xl ${cardContentClassName}`}>

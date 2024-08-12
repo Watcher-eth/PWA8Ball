@@ -15,7 +15,7 @@ export function ConnectButton({ user }: { user: IUser }) {
         px-4 py-2 rounded-lg flex flex-row items-center
       `}
     >
-      {displayName ?? "Connect"}
+      {displayName ? displayName : user?.name ? user?.name : "Connect"}
       {user?.pfp ? (
         <img
           src={user?.pfp}

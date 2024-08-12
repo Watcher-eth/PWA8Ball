@@ -53,7 +53,7 @@ function DesktopOnboarding() {
           src={"/images/OrbLogo.png"}
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
         ></img>
-        <h2 className="text-2xl font-bold mb-2">Welcome to 8Ball</h2>
+        <h2 className="text-2xl font-bold mb-2">Welcome to Glimpse</h2>
         <p className="text-center mb-6 px-6 text-[lightgray]">
           Sign up with your email or connect a Web3 wallet to start predicting
           the future.
