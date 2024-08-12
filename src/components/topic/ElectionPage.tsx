@@ -199,9 +199,11 @@ function ElectionPage() {
               Swing States
             </div>
           </div>
-          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-md border-2 border-[#212121] bg-[#121212]">
-            <ShareIcon color="#999999" size={"1rem"} strokeWidth={3.5} />
-            <div className="text-lg font-[500] text-[#999999] ml-1">Share</div>
+          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212]">
+            <div className="text-lg font-[500] text-[#999999] mr-1">
+              See all
+            </div>
+            <ChevronDown color="#999999" size={"1rem"} strokeWidth={3.5} />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-5 mb-8">
@@ -225,9 +227,11 @@ function ElectionPage() {
               Trending Today
             </div>
           </div>
-          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-md border-2 border-[#212121] bg-[#121212]">
-            <ShareIcon color="#999999" size={"1rem"} strokeWidth={3.5} />
-            <div className="text-lg font-[500] text-[#999999] ml-1">Share</div>
+          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212]">
+            <div className="text-lg font-[500] text-[#999999] mr-1">
+              See all
+            </div>
+            <ChevronDown color="#999999" size={"1rem"} strokeWidth={3.5} />
           </div>
         </div>
         {markets?.slice(0, 5).map((item) => (
