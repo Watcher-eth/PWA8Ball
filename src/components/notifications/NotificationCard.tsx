@@ -37,18 +37,17 @@ export function NotificationCard({
       className="  animate-fadeInUp"
       style={{ animationDelay: `${index * 150}ms` }}
     >
-      <div className="my-1 h-[0.13rem] w-full bg-[#181818] " />
+      <div className="my-1 h-[0.1rem] w-full bg-[#191919] " />
       <div
         className="flex items-center p-3 px-5 rounded-lg shadow-lg"
         onClick={() => {}}
       >
-        {type === "like" && (
-          <img
-            className="size-11 rounded-full mr-2.5"
-            src={user?.pfp}
-            alt="Profile"
-          />
-        )}
+        <img
+          className="size-11 rounded-full mr-2.5"
+          src={user?.pfp}
+          alt="Profile"
+        />
+
         <div className="flex-1 -space-y-0.5">
           {type === "like" && (
             <>
@@ -85,9 +84,12 @@ export function NotificationCard({
             </>
           )}
         </div>
-        <div className="p-2 rounded-full border-3 border-[#323232]">{icon}</div>
-        {type === "follow" && (
+        {type === "follow" ? (
           <span className="text-[#4a90e2] font-bold">Follow</span>
+        ) : (
+          <div className="p-2 text-[lightgray] rounded-full border-3 border-[#323232]">
+            {icon}
+          </div>
         )}
         {image && <img src={image} alt="Notification" />}
       </div>

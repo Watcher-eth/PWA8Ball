@@ -16,11 +16,10 @@ export function MobileLiquidityPage() {
     refetch,
   } = useGetLPForUser(user?.walletaddress);
 
-
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
 
   return (
-    <div className="pt-16 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
+    <div className="pt-4 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
       <div className="flex flex-row items-center justify-between my-[18px]">
         <motion.button
           onClick={() => router.back()}

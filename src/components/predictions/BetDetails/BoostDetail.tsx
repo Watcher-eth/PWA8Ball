@@ -20,13 +20,13 @@ export function BoostDetail({
 
   return (
     <>
-      <BoostModalComponent  image={image} id={id}>
+      <BoostModalComponent image={image} id={id}>
         <div
           className={`
             flex flex-row w-full items-center justify-between flex-grow
             p-2 border border-white/10 hover:border-white/20
              rounded-[12px]
-            hover:scale-101 active:scale-98 transition-all
+             active:scale-98 transition-all
             cursor-pointer
         `}
           onClick={isDesktop ? () => {} : handleBoost}
@@ -54,4 +54,4 @@ export function BoostDetail({
       />
     </>
   );
-};
+}

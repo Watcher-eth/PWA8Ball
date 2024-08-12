@@ -36,7 +36,7 @@ export function TopicInfoDetail({
             flex flex-row w-full items-center justify-between
             p-2 border border-white/10 hover:border-white/20
             rounded-[12px]
-            hover:scale-101 active:scale-98 transition-all
+         active:scale-98 transition-all
           `}
       >
         <>

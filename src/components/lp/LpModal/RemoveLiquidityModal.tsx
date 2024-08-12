@@ -40,11 +40,11 @@ export function RemoveLiquidityModal({
           {children}
         </motion.div>
       </DrawerTrigger>
-      <DrawerContent className="border-0 rounded-3xl self-center">
+      <DrawerContent className="border-0 bg-[#transparent] rounded-3xl self-center">
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-[#171717] rounded-3xl  mb-5 w-full relative"
+          className="bg-[#121212] rounded-3xl  mb-2 w-full relative"
         >
           <AnimatePresence>
             {step === 1 && (

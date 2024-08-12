@@ -48,7 +48,7 @@ export function RulesCollapsible() {
             </div>
             <div className="flex flex-row items-center space-x-2">
               <div className="text-22 text-[lightgray] font-[Aeonik-Bold]">
-                Anon
+                By Anon
               </div>
               <img
                 src={

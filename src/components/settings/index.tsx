@@ -67,10 +67,10 @@ export function SettingsPage() {
   };
 
   return (
-    <div className="container p-4 bg-[#181818] w-full h-full">
+    <div className="container p-0 w-full h-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first rounded-md p-5 relative">
-          <div className="text-white font-semibold text-2xl -mb-5">
+        <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first rounded-md p-5  relative">
+          <div className="text-white font-semibold text-3xl -mb-5 -mt-3">
             Settings
           </div>
           <div className="w-full p-4 rounded-md bg-[#151515] flex flex-row items-center justify-between">
@@ -163,7 +163,7 @@ export function SettingsPage() {
                 <div className="text-md text-[#909090]">0 referrals</div>
               </div>
             </div>
-            <CardContent className="flex-1 w-[30%] pb-0">
+            <CardContent className="flex-1 w-[30%] ">
               <ChartContainer
                 config={chartConfig}
                 className="mx-auto aspect-square max-h-[250px]"
@@ -228,7 +228,7 @@ export function SettingsPage() {
                 // Handle save action here
                 setShowSaveButton(false); // Hide the save button after saving
               }}
-              className=" bottom-4 right-4 bg-[#181818] text-white justify-center font-semibold flex flex-row items-center px-4 py-2 rounded-md"
+              className=" bg-[#151515] text-white justify-center font-semibold flex flex-row items-center px-4 py-2.5 rounded-md"
             >
               <Save className="h-[1rem]" strokeWidth={2.5} /> Save
             </button>
