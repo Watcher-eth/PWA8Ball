@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { formatAmountWithCommas } from "@/utils/markets/formatAmountWithCommas";
 
 export function CashoutConfirmScreen(props: {
   changeStep: () => void;
@@ -22,7 +23,6 @@ export function CashoutConfirmScreen(props: {
 
   const shareLink = async () => {
     if (navigator.share) {
-
       try {
         await navigator.share({
           title: `${props.title} on Glimpse`,
@@ -42,7 +42,7 @@ export function CashoutConfirmScreen(props: {
     <div
       className={`flex flex-col items-center ${
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-      } mt-0 ${props.isDesktop ? "p-1" : "p-5"}  ${
+      } mt-0 ${props.isDesktop ? "p-6" : "p-5"}  ${
         props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"
       }`}
     >
@@ -70,7 +70,7 @@ export function CashoutConfirmScreen(props: {
         </div>
         <div className="flex flex-row items-center justify-center">
           <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
-            ${props.points}
+            ${formatAmountWithCommas(props.points)}
           </div>
         </div>
         <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>

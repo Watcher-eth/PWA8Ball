@@ -102,7 +102,8 @@ export function DesktopPredictComponent(props: {
               className={`
                 flex flex-row items-center justify-around
                 self-center w-full
-                mt-2 mb-9 px-2.5
+                mt-2 mb-9 px-6
+                space-x-4
               `}
             >
               <motion.div
@@ -110,8 +111,8 @@ export function DesktopPredictComponent(props: {
                   setStep(5);
                 }}
                 className={`
-                  mt-3 rounded-lg p-2.5 overflow-hidden
-                  bg-[#1D1D1D] w-[12vw]
+                  mt-3 rounded-md p-2.5 overflow-hidden
+                  bg-[#1D1D1D] w-1/2
                   flex flex-row items-center justify-center
                   gap-1
                 `}
@@ -129,8 +130,8 @@ export function DesktopPredictComponent(props: {
                   setStep(7);
                 }}
                 className={`
-                  mt-3 rounded-lg p-2.5 overflow-hidden
-                  bg-[#D9D9D9] w-[12vw]
+                  mt-3 rounded-md p-2.5 overflow-hidden
+                  bg-[#D9D9D9]  w-1/2
                   flex flex-row items-center justify-center
                   gap-1
                 `}
@@ -177,7 +178,7 @@ export function DesktopPredictComponent(props: {
               changeStep={setStep}
               odds={"20"}
               totalPot={1200}
-              amount={1200}
+              points={1200}
               isDesktop={true}
             />
           )}

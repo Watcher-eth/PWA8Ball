@@ -24,6 +24,7 @@ import { AlignLeft } from "lucide-react";
 import { DesktopBettersModal } from "./Betters/DesktopBettersModal";
 import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
 import { useState } from "react";
+import { RulesCollapsible } from "./BetDetails/RulesCollapsible";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
@@ -139,6 +140,7 @@ export function DesktopMarketPage({ users, market, id }) {
                   id={id}
                   isDesktop={true}
                 />
+                <RulesCollapsible />
               </div>
             </Col>
             <Col xs={4} lg={3}>

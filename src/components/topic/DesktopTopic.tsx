@@ -149,7 +149,7 @@ function DesktopTopic({
         </div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full relative py-7 px-[3.3rem] mt-20 bg-[#151515]">
+            <div className="w-full relative py-7 px-[3.3rem] mt-20 ">
               <div className="text-[1.65rem] text-white font-[700]">
                 Community
               </div>
