@@ -13,40 +13,10 @@ import {
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
-import { DesktopTopicItem, DesktopTopicItemSkeleton } from "./DesktopTopic";
 import { sectionDataMap, SwingStates } from "@/constants/Elections";
 import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
-
-const renderDesktopTopicItems = (items, size, count) => {
-  const placeholders = Array.from({ length: count - items.length });
-  return (
-    <>
-      {items.map((item) => (
-        <DesktopTopicItem
-          key={item.id}
-          question={item?.question}
-          title={item.title}
-          image={item.image}
-          created_at={item.created_at}
-          size={size}
-          id={item.id}
-          outcomes={[
-            { name: item.options[0].name, value: item.outcomea },
-            { name: item.options[1].name, value: item.outcomeb },
-          ]}
-        />
-      ))}
-      {placeholders.map((_, index) => (
-        <DesktopTopicItemSkeleton
-          key={`skeleton-${index}`}
-          size={size}
-          index={index}
-        />
-      ))}
-    </>
-  );
-};
+import { UsMapCard } from "../map/UsMapCard";
 
 const SwingStateComponent = ({ sectionData, state }) => (
   <div className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
@@ -60,7 +30,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
     />
     <div className="flex flex-row items-center z-2">
       <img className="w-[7rem] rounded-md" src={state.flag} />
-      <div className="flex flex-col ml-3">
+      <div className="flex flex-col ml-3 -space-y-1.5">
         <div className="text-[2rem] text-white font-[600]">{state.name}</div>
         <div className="text-xl text-[lightgray] font-[400]">
           {state.votes} Electoral votes at stake
@@ -168,7 +138,7 @@ function ElectionPage() {
             style={{ width: `${sectionData.odds[1]}%` }}
           />
           <div className="flex flex-row items-center z-1">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col hover:scale-101 items-center">
               <img
                 src={sectionData.images[0]}
                 className="h-[8rem] w-[8rem] object-cover rounded-full"
@@ -208,7 +178,7 @@ function ElectionPage() {
                 1%
               </div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col hover:scale-101 items-center">
               <img
                 src={sectionData.images[1]}
                 className="h-[8rem] w-[8rem] object-cover rounded-full"
@@ -219,7 +189,9 @@ function ElectionPage() {
             </div>
           </div>
         </div>
-        <div className="h-[60vh] w-full bg-[#151515] my-5 rounded-lg" />
+        <div className="h-[60vh] w-full my-5 mb-[4rem] rounded-lg">
+          <UsMapCard />
+        </div>
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center space-x-2.5">
             <Split color="white" height={"2rem"} strokeWidth={3} />

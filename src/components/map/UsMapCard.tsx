@@ -3,7 +3,7 @@ import { UsMapChart } from "./UsMapChart";
 
 export function UsMapCard() {
   return (
-    <Card className="max-h-[500px]">
+    <Card className="max-h-[635px] rounded-lg">
       <UsMapChart />
     </Card>
   );

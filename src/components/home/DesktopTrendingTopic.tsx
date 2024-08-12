@@ -38,7 +38,7 @@ export function DesktopTrendingTopics({
       <div className="flex flex-col pt-6 h-full">
         <Link
           href={{
-            pathname: topicId === 1 ? "/Elections" : getTopicPath(topicId),
+            pathname: topicId === "1" ? "/Elections" : getTopicPath(topicId),
             query: {
               id: topicId,
               name: title,
@@ -65,7 +65,8 @@ export function DesktopTrendingTopics({
             </div>
             <Link
               href={{
-                pathname: topicId === 1 ? "/Elections" : getTopicPath(topicId),
+                pathname:
+                  topicId === "1" ? "/Elections" : getTopicPath(topicId),
                 query: {
                   id: topicId,
                   name: title,
