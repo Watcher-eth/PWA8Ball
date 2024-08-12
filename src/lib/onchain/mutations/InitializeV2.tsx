@@ -49,6 +49,8 @@ async function initialize(props: {
       ROOT_OPERATOR_ADDRESS,
       ROOT_OPERATOR_ADDRESS,
       account,
+      options[0],
+      options[1],
       BigInt(initialProb),
       props.title,
       props.description,

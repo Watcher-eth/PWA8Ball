@@ -28,18 +28,20 @@ const Button = ({ text, icon: Icon, onClick }) => (
   </div>
 );
 
-const CandidateSection = ({ image, name, odds, change }) => (
+const CandidateSection = ({ image, name, odds, change, side }) => (
   <div className="flex flex-row items-center z-1">
-    <div className="flex flex-col hover:scale-101 items-center">
-      <img
-        src={image}
-        className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
-      />
-      <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
-        {name}
+    {side === 1 && (
+      <div className="flex flex-col hover:scale-101 items-center">
+        <img
+          src={image}
+          className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+        />
+        <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
+          {name}
+        </div>
       </div>
-    </div>
-    <div className="flex flex-col -space-y-4 ml-5">
+    )}
+    <div className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}>
       <div className="text-[4.5rem] font-[600] text-white">{odds}%</div>
       <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
         <ChevronDown
@@ -51,6 +53,17 @@ const CandidateSection = ({ image, name, odds, change }) => (
         {change}%
       </div>
     </div>
+    {side === 2 && (
+      <div className="flex flex-col hover:scale-101 items-center">
+        <img
+          src={image}
+          className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+        />
+        <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
+          {name}
+        </div>
+      </div>
+    )}
   </div>
 );
 
@@ -89,7 +102,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
           {sectionData.names[0]}
         </div>
       </div>
-      <div className="flex flex-col items-end z-2">
+      <div className="flex flex-col items-end z-2 ">
         <div className="flex flex-row space-x-4 items-center">
           <div className="text-[3rem] flex flex-row text-white items-baseline font-[600]">
             {state.odds[1]}
@@ -100,7 +113,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
             className="h-[4rem] w-[4rem] object-cover rounded-full"
           />
         </div>
-        <div className="text-xl text-[lightgray] font-[600]">
+        <div className="text-xl  text-[lightgray] font-[600]">
           {sectionData.names[1]}
         </div>
       </div>
@@ -136,7 +149,7 @@ export function ElectionPage() {
         />
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col">
-            <div className="text-[3rem] leading-[3rem] text-white font-[Aeonik-Bold]">
+            <div className="  md:text-[3rem] md:leading-[3rem] text-white font-[Aeonik-Bold]">
               2024 US Election Forecast
             </div>
             <div className="text-[1.3rem] text-[lightgray] md:mt-0 -mt-3 font-[500]">
@@ -175,6 +188,7 @@ export function ElectionPage() {
             name={sectionData.names[0]}
             odds={sectionData.odds[0]}
             change={1}
+            side={1}
           />
           <div className="flex flex-col items-center -space-y-1 z-1"></div>
           <CandidateSection
@@ -182,6 +196,7 @@ export function ElectionPage() {
             name={sectionData.names[1]}
             odds={sectionData.odds[1]}
             change={1}
+            side={2}
           />
         </div>
         <div className="h-[60vh] w-full my-5 mb-[4rem] rounded-lg">

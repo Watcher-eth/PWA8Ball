@@ -32,7 +32,7 @@ export const EightballV1ABI = [
     type: "function",
     name: "addLiquidity",
     inputs: [
-      { name: "_Amount", type: "uint256", internalType: "uint256" },
+      { name: "_amount", type: "uint256", internalType: "uint256" },
       { name: "_marketId", type: "uint256", internalType: "uint256" },
     ],
     outputs: [],
@@ -96,7 +96,8 @@ export const EightballV1ABI = [
       { name: "_operator", type: "address", internalType: "address" },
       { name: "_creator", type: "address", internalType: "address" },
       { name: "_initProb", type: "uint256", internalType: "uint256" },
-      { name: "_fullNames", type: "string[2]", internalType: "string[2]" },
+      { name: "outcomeA", type: "string", internalType: "string" },
+      { name: "outcomeB", type: "string", internalType: "string" },
       { name: "title", type: "string", internalType: "string" },
       { name: "question", type: "string", internalType: "string" },
     ],
@@ -174,7 +175,7 @@ export const EightballV1ABI = [
     type: "function",
     name: "removeLiquidity",
     inputs: [
-      { name: "_Amount", type: "uint256", internalType: "uint256" },
+      { name: "_amount", type: "uint256", internalType: "uint256" },
       { name: "_marketId", type: "uint256", internalType: "uint256" },
     ],
     outputs: [],
@@ -221,6 +222,37 @@ export const EightballV1ABI = [
   },
   {
     type: "event",
+    name: "AddLQ",
+    inputs: [
+      {
+        name: "marketId",
+        type: "uint256",
+        indexed: true,
+        internalType: "uint256",
+      },
+      {
+        name: "_amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "_liquidity",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "user",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
     name: "Cashout",
     inputs: [
       {
@@ -258,37 +290,6 @@ export const EightballV1ABI = [
         type: "uint16",
         indexed: false,
         internalType: "uint16",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "MarketBoosted",
-    inputs: [
-      {
-        name: "marketId",
-        type: "uint256",
-        indexed: true,
-        internalType: "uint256",
-      },
-      {
-        name: "_Amount",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "_liquidity",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "user",
-        type: "address",
-        indexed: false,
-        internalType: "address",
       },
     ],
     anonymous: false,
@@ -390,13 +391,6 @@ export const EightballV1ABI = [
         indexed: false,
         internalType: "uint256",
       },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "PredictionMetadata",
-    inputs: [
       { name: "title", type: "string", indexed: false, internalType: "string" },
       {
         name: "question",
@@ -405,10 +399,16 @@ export const EightballV1ABI = [
         internalType: "string",
       },
       {
-        name: "fullNames",
-        type: "string[2]",
+        name: "outcomeA",
+        type: "string",
         indexed: false,
-        internalType: "string[2]",
+        internalType: "string",
+      },
+      {
+        name: "outcomeB",
+        type: "string",
+        indexed: false,
+        internalType: "string",
       },
     ],
     anonymous: false,
@@ -443,7 +443,7 @@ export const EightballV1ABI = [
         internalType: "uint256",
       },
       {
-        name: "_Amount",
+        name: "_amount",
         type: "uint256",
         indexed: false,
         internalType: "uint256",
