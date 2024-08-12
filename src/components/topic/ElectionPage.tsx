@@ -15,6 +15,8 @@ import {
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { DesktopTopicItem, DesktopTopicItemSkeleton } from "./DesktopTopic";
 import { sectionDataMap, SwingStates } from "@/constants/Elections";
+import Link from "next/link";
+import { getMarketPath } from "@/utils/urls";
 
 const renderDesktopTopicItems = (items, size, count) => {
   const placeholders = Array.from({ length: count - items.length });
@@ -107,7 +109,7 @@ function ElectionPage() {
   const sectionData = sectionDataMap[section];
 
   return (
-    <StandardPageWrapper className="h-full flex flex-col">
+    <StandardPageWrapper className="h-full flex flex-col ">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">
@@ -121,7 +123,7 @@ function ElectionPage() {
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
 
-      <div className="w-full bg-[#080808] z-2 flex flex-col sm:px-3 px-80">
+      <div className="w-full bg-[#080808] z-2 flex flex-col md:px-60 lg:px-80 sm:px-3">
         <img
           className=" w-[13rem] object-cover -mt-11 mb-3"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1280px-Flag_of_the_United_States.png"
@@ -257,9 +259,10 @@ function ElectionPage() {
           </div>
         </div>
         {markets?.slice(0, 5).map((item) => (
-          <div
+          <Link
+            href={getMarketPath(String(item.id))}
             key={item.id}
-            className="w-full flex flex-row items-center justify-between mt-0 border-b-2 border-[#212121] py-4"
+            className="w-full flex flex-row active:scale-99 items-center justify-between mt-0 border-b-2 border-[#212121] py-4"
           >
             <div className="flex flex-row items-center">
               <img
@@ -280,7 +283,7 @@ function ElectionPage() {
                 {item?.outcomea / 100}%{" "}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </StandardPageWrapper>
