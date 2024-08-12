@@ -18,6 +18,42 @@ import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
 import { UsMapCard } from "../map/UsMapCard";
 
+const Button = ({ text, icon: Icon, onClick }) => (
+  <div
+    onClick={onClick}
+    className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212] cursor-pointer"
+  >
+    <div className="text-lg font-[500] text-[#999999] mr-1">{text}</div>
+    <Icon color="#999999" size={"1rem"} strokeWidth={3.5} />
+  </div>
+);
+
+const CandidateSection = ({ image, name, odds, change }) => (
+  <div className="flex flex-row items-center z-1">
+    <div className="flex flex-col hover:scale-101 items-center">
+      <img
+        src={image}
+        className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+      />
+      <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
+        {name}
+      </div>
+    </div>
+    <div className="flex flex-col -space-y-4 ml-5">
+      <div className="text-[4.5rem] font-[600] text-white">{odds}%</div>
+      <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
+        <ChevronDown
+          color="#FF0050"
+          strokeWidth={3}
+          fill="#FF0050"
+          size={"1.2rem"}
+        />{" "}
+        {change}%
+      </div>
+    </div>
+  </div>
+);
+
 const SwingStateComponent = ({ sectionData, state }) => (
   <div className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
     <div
@@ -72,14 +108,14 @@ const SwingStateComponent = ({ sectionData, state }) => (
   </div>
 );
 
-function ElectionPage() {
+export function ElectionPage() {
   const [section, setSection] = useState("Presidency");
   const endDate = new Date("2024-11-04T23:59:59");
   const { data: markets } = useGetMarketsForTopic("1");
   const sectionData = sectionDataMap[section];
 
   return (
-    <StandardPageWrapper className="h-full flex flex-col ">
+    <StandardPageWrapper className="h-full w-full flex flex-col ">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">
@@ -93,7 +129,7 @@ function ElectionPage() {
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
 
-      <div className="w-full bg-[#080808] z-2 flex flex-col md:px-10 lg:px-20 xl:px-40 2xl:px-80   sm:px-3">
+      <div className="w-full bg-[#080808] z-2 flex flex-col md:px-10 lg:px-20 xl:px-40 2xl:px-80 sm:px-3">
         <img
           className=" w-[13rem] object-cover -mt-[5rem] mb-3"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1280px-Flag_of_the_United_States.png"
@@ -123,10 +159,7 @@ function ElectionPage() {
               </div>
             ))}
           </div>
-          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-md border-2 border-[#212121] bg-[#121212]">
-            <ShareIcon color="#999999" size={"1rem"} strokeWidth={3.5} />
-            <div className="text-lg font-[500] text-[#999999] ml-1">Share</div>
-          </div>
+          <Button text="Share" icon={ShareIcon} />
         </div>
         <div className="flex flex-row p-8 bg-[#151515] rounded-lg my-6 justify-between items-center relative">
           <div
@@ -137,57 +170,19 @@ function ElectionPage() {
             className="absolute z-0 h-full bg-gradient-to-l from-[#FF0050]/[10%] rounded-r-lg to-[#FF0050]/[0%] right-0"
             style={{ width: `${sectionData.odds[1]}%` }}
           />
-          <div className="flex flex-row items-center z-1">
-            <div className="flex flex-col hover:scale-101 items-center">
-              <img
-                src={sectionData.images[0]}
-                className="h-[8rem] w-[8rem] object-cover rounded-full"
-              />
-              <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
-                {sectionData.names[0]}
-              </div>
-            </div>
-            <div className="flex flex-col -space-y-4 ml-5">
-              <div className="text-[4.5rem] font-[600] text-white">
-                {sectionData.odds[0]}%
-              </div>
-              <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
-                <ChevronDown
-                  color="#FF0050"
-                  strokeWidth={3}
-                  fill="#FF0050"
-                  size={"1.2rem"}
-                />{" "}
-                1%
-              </div>
-            </div>
-          </div>
+          <CandidateSection
+            image={sectionData.images[0]}
+            name={sectionData.names[0]}
+            odds={sectionData.odds[0]}
+            change={1}
+          />
           <div className="flex flex-col items-center -space-y-1 z-1"></div>
-          <div className="flex flex-row items-center z-1">
-            <div className="flex flex-col -space-y-4 mr-5">
-              <div className="text-[4.5rem] font-[600] text-white">
-                {sectionData.odds[1]}%
-              </div>
-              <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#0050FF]">
-                <ChevronUp
-                  color="#0050FF"
-                  strokeWidth={3}
-                  fill="#0050FF"
-                  size={"1.2rem"}
-                />{" "}
-                1%
-              </div>
-            </div>
-            <div className="flex flex-col hover:scale-101 items-center">
-              <img
-                src={sectionData.images[1]}
-                className="h-[8rem] w-[8rem] object-cover rounded-full"
-              />
-              <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
-                {sectionData.names[1]}
-              </div>
-            </div>
-          </div>
+          <CandidateSection
+            image={sectionData.images[1]}
+            name={sectionData.names[1]}
+            odds={sectionData.odds[1]}
+            change={1}
+          />
         </div>
         <div className="h-[60vh] w-full my-5 mb-[4rem] rounded-lg">
           <UsMapCard />
@@ -199,12 +194,7 @@ function ElectionPage() {
               Swing States
             </div>
           </div>
-          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212]">
-            <div className="text-lg font-[500] text-[#999999] mr-1">
-              See all
-            </div>
-            <ChevronDown color="#999999" size={"1rem"} strokeWidth={3.5} />
-          </div>
+          <Button text="See all" icon={ChevronDown} />
         </div>
         <div className="grid grid-cols-2 gap-5 mb-8">
           {SwingStates.map((state) => (
@@ -227,12 +217,7 @@ function ElectionPage() {
               Trending Today
             </div>
           </div>
-          <div className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212]">
-            <div className="text-lg font-[500] text-[#999999] mr-1">
-              See all
-            </div>
-            <ChevronDown color="#999999" size={"1rem"} strokeWidth={3.5} />
-          </div>
+          <Button text="See all" icon={ChevronDown} />
         </div>
         {markets?.slice(0, 5).map((item) => (
           <Link
@@ -265,5 +250,3 @@ function ElectionPage() {
     </StandardPageWrapper>
   );
 }
-
-export default ElectionPage;
