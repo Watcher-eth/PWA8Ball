@@ -48,7 +48,7 @@ export function DesktopProfilePage({ userId, userC }) {
   const { user } = useUserStore();
   // const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
   const { orders: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
-  const ordersData = ordersData2
+  const ordersData = ordersData2;
   const aggregatedOrdersData = aggregatePredictedItems(ordersData ?? []);
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
@@ -312,7 +312,7 @@ export const ProfileSection = ({ userC, user }) => {
   ];
 
   return (
-    <Card className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-4 px-8 relative">
+    <div className="flex flex-col md:w-1/3 bg-[#121212] border-0 rounded-[1.5rem] p-4 px-8 relative">
       {/* <img
         src={userC?.pfp}
         alt="Profile Header"
@@ -352,7 +352,7 @@ export const ProfileSection = ({ userC, user }) => {
         )}
         <SocialsSection {...userC?.socials} />
       </div>
-      <div className="flex justify-between text-white mb-4 px-2">
+      <div className="flex justify-between text-white mb-4 px-4">
         <TextWithSuffix value={totalFollowers} suffix="Followers" />
         <TextWithSuffix value={"555"} suffix="Following" />
         <TextWithSuffix value={"12"} suffix="Predictions" />
@@ -382,8 +382,8 @@ export const ProfileSection = ({ userC, user }) => {
             />
           </div>
           <div className="flex-col space-y-2 text-sm">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month{" "}
+            <div className="flex items-center gap-2 text-[white] font-medium leading-none">
+              Up 5.2% this month{" "}
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
             <div className="leading-none text-gray-400">
@@ -409,7 +409,7 @@ export const ProfileSection = ({ userC, user }) => {
             </div>
           ))}
       </div>
-    </Card>
+    </div>
   );
 };
 

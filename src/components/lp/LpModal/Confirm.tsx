@@ -14,6 +14,7 @@ import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { toast } from "sonner";
+import { DialogClose } from "@/components/ui/dialog";
 
 export function RemoveLPConfirmationScreen(props: {
   setStep: (num: number) => void;
@@ -109,22 +110,22 @@ export function RemoveLPConfirmationScreen(props: {
         <span className="text-[21px] leading-[23px] text-white mt-3.5 font-semibold">
           Are you sure you want to withdraw your Boost?
         </span>
-        <span className="text-[15px] text-lightgray mt-2 font-normal">
+        <span className="text-[15px] text-[lightgray] mt-2 font-normal">
           If you keep your boost till after the market resolves you earn 3x
           Points
         </span>
-        <div className="flex flex-row items-center mt-7 mb-1.5">
+        <div className="flex flex-row items-center mt-8 mb-1.5">
           <Clock color={"white"} strokeWidth={3.5} height={19} />
           <span className="text-[18px] font-semibold text-white ml-1">
             Hold and earn 3x
           </span>
         </div>
-        <div className="flex flex-col p-3.5 rounded-[15px] mt-2.5 bg-[#1C1C1C]">
+        <div className="flex flex-col p-3.5 rounded-[15px] mt-4 bg-[#1C1C1C]">
           <div className="flex flex-row items-center mb-2.5 justify-between">
-            <span className="text-[16.5px] text-lightgray font-normal">
+            <span className="text-[16.5px] text-[lightgray] font-normal">
               Now
             </span>
-            <span className="text-[16.5px] text-lightgray font-normal">
+            <span className="text-[16.5px] text-[lightgray] font-normal">
               {(props.points / 10 ** 5).toFixed(0)} $Cred
             </span>
           </div>
@@ -133,27 +134,33 @@ export function RemoveLPConfirmationScreen(props: {
               After Resolution
             </span>
             <span className="text-[20px] text-white font-medium">
-              {(props.points / 10 ** 5).toFixed(0)} $Cred
+              {((props.points / 10 ** 5) * 3).toFixed(0)} $Cred
             </span>
           </div>
         </div>
       </motion.div>
-      <div className="flex flex-row items-center gap-1.5  mt-5 w-full">
-        <motion.button
-          onClick={onClose}
-          whileTap={{ scale: 0.95 }}
-          className="mt-3 p-2.5 rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none"
-        >
-          <span className="text-[20px] text-[#D9D9D9] font-extrabold">
-            Hold
-          </span>
-        </motion.button>
+      <div className="flex flex-row items-center gap-1.5  mt-8 w-full">
+        <DialogClose asChild>
+          <motion.button
+            onClick={() =>
+              setTimeout(() => {
+                props?.setStep(1);
+              }, 200)
+            }
+            whileTap={{ scale: 0.95 }}
+            className="mt-3 p-[0.75rem] rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none"
+          >
+            <span className="text-[20px] text-[#D9D9D9] font-extrabold">
+              Hold
+            </span>
+          </motion.button>
+        </DialogClose>
         <motion.button
           onClick={() => {
             success ? () => {} : userRemoveLP();
           }}
           whileTap={{ scale: 0.95 }}
-          className="mt-3 flex flex-row ml-4 p-2 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
+          className="mt-3 flex flex-row ml-4 p-[0.7rem] rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
         >
           {loading ? (
             <motion.div
