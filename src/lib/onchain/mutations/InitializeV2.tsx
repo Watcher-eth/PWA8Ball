@@ -44,7 +44,7 @@ async function initialize(props: {
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     });
-    // Boost the market
+    // Initialize the market
     const hash = await contract.write.initializeMarket([
       ROOT_OPERATOR_ADDRESS,
       ROOT_OPERATOR_ADDRESS,

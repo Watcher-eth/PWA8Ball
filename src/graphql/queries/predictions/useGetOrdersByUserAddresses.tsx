@@ -4,27 +4,28 @@ import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_ORDERS_BY_USER_ADDRESSES = gql`
-  query UserOrders(
-    $userAddresses: [String!]
-  ) {
-    orders(where: { userAddress_in: $userAddresses }, limit: 1) {
+  query FriendsOrders($userAddress_in: [String]!) {
+    positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
       items {
-        amount
         marketId
         option
-        price
-        timestamp
         tokensOwned
         market {
           id
+          initialProb
           marketId
+          outcomeA
+          outcomeB
+          outcomeOddsA
+          outcomeOddsB
           question
           title
+          usdcStake
         }
         user {
+          externalAuthProviderUserId
           name
           pfp
-          externalAuthProviderUserId
         }
       }
     }
@@ -32,18 +33,17 @@ const GET_ORDERS_BY_USER_ADDRESSES = gql`
 `;
 
 export function useGetOrdersByUserAddresses(userAddresses: string[]) {
-  const {
-    data,
-    loading,
-    error,
-  } = useApolloQuery(GET_ORDERS_BY_USER_ADDRESSES, {
-    variables: {
-      userAddresses:
-        userAddresses.length > 0
-          ? userAddresses?.map(getChecksummedAddress)
-          : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"]
-    },
-  });
+  const { data, loading, error } = useApolloQuery(
+    GET_ORDERS_BY_USER_ADDRESSES,
+    {
+      variables: {
+        userAddresses:
+          userAddresses.length > 0
+            ? userAddresses?.map(getChecksummedAddress)
+            : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"],
+      },
+    }
+  );
 
   return {
     orders: data?.orders?.items ?? [],

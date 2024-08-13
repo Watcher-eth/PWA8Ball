@@ -3,12 +3,10 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_LP_POSITION_VALUES = gql`
-  query MyQuery2($userAddress: String = "") {
+  query getUserLpPositionsValues($userAddress: String!) {
     lpPositionValues(where: { userAddress: $userAddress }) {
       items {
-        id
         marketId
-        userAddress
         timestamp
         value
       }

@@ -1,23 +1,29 @@
-
-
 import { useQuery as useApolloQuery, gql } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
 const GET_ORDERS_BY_USER = gql`
-  query GetOrdersByUser($userAddress: String) {
-    orders(where: { userAddress: $userAddress }, limit: 1) {
+  query GetOrdersByUser($userAddress: String!) {
+    positions(where: { userAddress: $userAddress }, limit: 1) {
       items {
-        amount
         marketId
         option
-        price
-        timestamp
         tokensOwned
         market {
+          id
+          initialProb
+          marketId
+          outcomeA
+          outcomeB
+          outcomeOddsA
+          outcomeOddsB
           question
           title
-          id
-          marketId
+          usdcStake
+        }
+        user {
+          externalAuthProviderUserId
+          name
+          pfp
         }
       }
     }
@@ -30,18 +36,14 @@ export function useGetOrdersByUser(userAddress: string) {
   );
   console.log(userAddress);
 
-  const {
-    data,
-    loading,
-    error
-  } = useApolloQuery(GET_ORDERS_BY_USER, {
+  const { data, loading, error } = useApolloQuery(GET_ORDERS_BY_USER, {
     variables: {
-      userAddress: getChecksummedAddress(userAddress)
+      userAddress: getChecksummedAddress(userAddress),
     },
     skip: !Boolean(userAddress),
   });
   console.log("orderData", {
-    shown:!Boolean(userAddress),
+    shown: !Boolean(userAddress),
     data,
     loading,
     error,

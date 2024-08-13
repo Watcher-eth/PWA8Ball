@@ -42,7 +42,7 @@ import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
-import { useGetOrdersByUser } from "@/graphql/queries/users/useGetOrdersByUser";
+import { useGetOrdersByUser } from "@/graphql/queries/predictions/useGetOrdersByUser";
 
 export function DesktopProfilePage({ userId, userC }) {
   const { user } = useUserStore();

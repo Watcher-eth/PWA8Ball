@@ -4,18 +4,17 @@ import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
 const GET_USER_LP = gql`
-  query UserLp($userAddress: String) {
+  query getMarketById($userAddress: String!) {
     lps(where: { userAddress: $userAddress }) {
       items {
         amount
-        id
         lpAmount
-        userAddress
         marketId
         timestamp
         market {
-          liquidityTotalSupply
-          liquidityUSDC
+          liquidityTotal
+          title
+          question
         }
       }
     }

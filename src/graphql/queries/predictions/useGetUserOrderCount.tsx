@@ -1,39 +1,35 @@
-// import { gql, useQuery } from "@apollo/client";
+//@ts-nocheck
 
-// // Define the GraphQL query
-// const COUNT_ORDERS_QUERY = gql`
-//   query CountOrders($userAddress: String!) {
-//     orders_aggregate(where: { sender: { _eq: $userAddress } }) {
-//       aggregate {
-//         count
-//       }
-//     }
-//   }
-// `;
+import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-// // Define TypeScript interfaces for the query result and variables
-// interface CountOrdersData {
-//   orders_aggregate: {
-//     aggregate: {
-//       count: number;
-//     };
-//   };
-// }
+const GET_USER_ORDER_COUNT = gql`
+  query UserOrderCount($userAddress: String = "") {
+    positions(where: { userAddress: $userAddress }) {
+      items {
+        marketId
+        amount
+      }
+    }
+  }
+`;
 
-// interface CountOrdersVars {
-//   userAddress: string;
-// }
+export function useGetUserOrderCount(userAddress: string) {
+  const {
+    data: orderData,
+    loading: orderLoading,
+    error: orderError,
+  } = useApolloQuery(GET_USER_ORDER_COUNT, {
+    variables: { userAddress },
+  });
 
-// // Create a custom hook to use the GraphQL query
-// export const useGetUserOrderCount = (userAddress: string) => {
-//   const { data, loading, error } = useQuery<CountOrdersData, CountOrdersVars>(
-//     COUNT_ORDERS_QUERY,
-//     {
-//       variables: { userAddress },
-//     }
-//   );
+  const orderCount = orderData?.orders?.items.length || 0;
 
-//   const orderCount = data?.orders_aggregate.aggregate.count || 0;
-
-//   return { orderCount, loading, error };
-// };
+  return {
+    data: {
+      count: orderCount,
+      orders: orderData?.orders?.items || [],
+    },
+    loading: orderLoading,
+    error: orderError,
+  };
+}

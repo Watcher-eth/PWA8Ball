@@ -3,26 +3,19 @@ import { gql, useQuery } from "@apollo/client";
 // Define the GraphQL query
 const GET_ORDER_BY_ID = gql`
   query OrderById($id: String!) {
-    order(id: $id) {
-      amount
+    position(id: $id) {
       marketId
+      option
+      tokensOwned
+      userAddress
       market {
+        title
+        question
+        usdcStake
         outcomeA
         outcomeB
-        marketId
-        marketDetail {
-          image
-          question
-          title
-        }
-      }
-      price
-      option
-      timestamp
-      tokensOwned
-      user {
-        name
-        pfp
+        outcomeOddsA
+        outcomeOddsB
       }
     }
   }
