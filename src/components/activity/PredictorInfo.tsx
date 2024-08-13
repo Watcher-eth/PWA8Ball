@@ -5,7 +5,7 @@ export function PredictorInfo({
   user_id,
   name,
   pfp,
-  total_amount,
+  totalAmountUsdc,
   index,
 }: {
   user_id: string;
@@ -13,6 +13,7 @@ export function PredictorInfo({
   pfp: string;
   total_amount: number;
   index: number;
+  totalAmountUsdc: number;
 }) {
   return (
     <Link href={getProfilePath(user_id)}>
@@ -20,14 +21,18 @@ export function PredictorInfo({
         <div className="flex flex-row items-center">
           <p className="text-white font-bold">{index + 1}</p>
           <img
-            src={pfp}
+            src={
+              pfp
+                ? pfp
+                : "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6"
+            }
             alt="Profile"
             className="size-[30px] rounded-full object-cover ml-2.5 mr-3"
           />
           <p className="text-white text-[17px] font-semibold">{name}</p>
         </div>
         <p className="text-[lightgray] text-[15px] font-medium">
-          ${(total_amount / 1000000).toFixed(2)}
+          ${(totalAmountUsdc / 1000000).toFixed(2)}
         </p>
       </div>
     </Link>

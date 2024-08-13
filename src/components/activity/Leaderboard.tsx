@@ -4,10 +4,13 @@ import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPre
 
 import { AltSkeleton } from "@/components/ui/Skeleton";
 import { PredictorInfo } from "./PredictorInfo";
+import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard";
 
 export function Leaderboard() {
   const { data: topPredictors, isLoading } = useGetTopPredictors();
+  const data = useGetGlobalLeaderboard();
 
+  console.log("new data2", data);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,10 +23,10 @@ export function Leaderboard() {
           <h2 className="text-white text-[15px] font-bold">Name</h2>
           <h2 className="text-white text-[15px] font-bold">At stake</h2>
         </div>
-        {topPredictors?.map((predictor, index) => (
+        {data?.map((predictor, index) => (
           <PredictorInfo key={index} {...predictor} index={index} />
         )) ??
-          (isLoading ? (
+          (!data ? (
             <LoadingSkeleton />
           ) : (
             <p className="text-white">No predictors found</p>

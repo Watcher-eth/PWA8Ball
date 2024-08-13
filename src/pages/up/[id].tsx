@@ -2,6 +2,7 @@
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { Receipt } from "@/components/share/UserPosition.tsx";
+import { useGetOrderById } from "@/graphql/queries/predictions/useGetOrderById";
 
 export default function MarketPage({
   params,
@@ -11,6 +12,10 @@ export default function MarketPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { id } = params ?? {};
+  const { data } = useGetOrderById(
+    "10-0x8512B8f41a6D1f2Aa0D09ae710b705498735F265-0"
+  );
+  console.log("posiio2n", data, data?.position.market?.outcomeOddsB);
   // const metadata = generateMetadata({ params, searchParams });
   return (
     <div className="flex justify-center items-center h-[100vh]">
@@ -22,25 +27,39 @@ export default function MarketPage({
       <MobiTop
         desktop={
           <Receipt
-            title="Base 10mil Mau"
-            points={3920}
+            title={data?.position?.market?.title}
+            points={
+              data?.position?.tokensOwned * data?.position?.option === 0
+                ? data?.position?.market?.outcomeOddsB / 1000
+                : data?.position?.market?.outcomeOddsA / 1000
+            }
             image="https://rockstarintel.com/wp-content/uploads/2024/03/GTA-VI-article-image-illustration-2.webp"
-            options={["Yes", "No"]}
-            option={1}
-            id={11}
+            options={[
+              data?.position?.market?.outcomeA,
+              data?.position?.market?.outcomeB,
+            ]}
+            option={data?.position?.option}
+            id={data?.position.marketId}
             isDesktop
-            question="Will Base reach 10 million monthly active wallets during onchain summer?"
+            question={data?.position?.market?.question}
           />
         }
         mobile={
           <Receipt
-            title="Base 10mil Mau"
-            points={3920}
+            title={data?.position?.market?.title}
+            points={
+              data?.position?.tokensOwned * data?.position?.option === 0
+                ? data?.position?.market?.outcomeOddsB / 1000
+                : data?.position?.market?.outcomeOddsA / 1000
+            }
             image="https://rockstarintel.com/wp-content/uploads/2024/03/GTA-VI-article-image-illustration-2.webp"
-            options={["Yes", "No"]}
-            option={1}
-            id={11}
-            question="Will Base reach 10 million monthly active wallets during onchain summer?"
+            options={[
+              data?.position?.market?.outcomeA,
+              data?.position?.market?.outcomeB,
+            ]}
+            option={data?.position?.option}
+            id={data?.position.marketId}
+            question={data?.position?.market?.question}
           />
         }
       />

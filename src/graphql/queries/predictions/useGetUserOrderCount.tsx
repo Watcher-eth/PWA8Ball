@@ -1,5 +1,6 @@
 //@ts-nocheck
 
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_USER_ORDER_COUNT = gql`
@@ -19,15 +20,17 @@ export function useGetUserOrderCount(userAddress: string) {
     loading: orderLoading,
     error: orderError,
   } = useApolloQuery(GET_USER_ORDER_COUNT, {
-    variables: { userAddress },
+    variables: {
+      userAddress: getChecksummedAddress(userAddress),
+    },
   });
 
-  const orderCount = orderData?.orders?.items.length || 0;
+  const orderCount = orderData?.positions?.items.length || 0;
 
   return {
     data: {
       count: orderCount,
-      orders: orderData?.orders?.items || [],
+      orders: orderData?.positions?.items || [],
     },
     loading: orderLoading,
     error: orderError,

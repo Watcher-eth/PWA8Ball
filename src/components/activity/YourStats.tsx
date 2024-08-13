@@ -1,10 +1,10 @@
+import { useGetUserOrderCount } from "@/graphql/queries/predictions/useGetUserOrderCount";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetOrderCountForUser } from "@/supabase/queries/user/useGetOrderCountForUser";
 
 export function YourStats() {
   const { user } = useUserStore();
-  const { data: count } = useGetOrderCountForUser(user?.walletaddress!);
-
+  const { data } = useGetUserOrderCount(user?.walletaddress);
+  console.log("count", data.count);
   return (
     <div className="flex flex-row items-center justify-between p-3 px-8 rounded-lg border border-[#212121] my-3">
       <StatSection
@@ -12,7 +12,7 @@ export function YourStats() {
         value={user?.liquiditypoints}
         divider={false}
       />
-      <StatSection label="Total" value={count ?? 0} />
+      <StatSection label="Total" value={data?.count ? data?.count : 0} />
       <StatSection label="Accuracy" value="0%" />
     </div>
   );

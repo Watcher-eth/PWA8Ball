@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 import { Heart, UserPlus, MessageSquareText, Bell } from "lucide-react";
 
 export function NotificationCard({
@@ -44,7 +45,7 @@ export function NotificationCard({
       >
         <img
           className="size-11 rounded-full mr-2.5"
-          src={user?.pfp}
+          src={user?.pfp ?? DEFAULT_PFP_PLACEHOLDER}
           alt="Profile"
         />
 
@@ -53,7 +54,7 @@ export function NotificationCard({
             <>
               <div className="flex items-baseline">
                 <span className="font-semibold text-white mr-1">
-                  {user?.name}{" "}
+                  {user?.name ?? "Anon"}{" "}
                 </span>
                 <span className="text-white text-base">
                   {" "}
@@ -67,16 +68,16 @@ export function NotificationCard({
           )}
           {type === "follow" && (
             <>
-              <span className="font-bold  text-white text-lg">{message}</span>
+              <span className="font-semibold  text-white">{message}</span>
               <p className="text-[#777] text-base">
-                {user?.name} started following you
+                {user?.name ?? "Anon"} started following you
               </p>
             </>
           )}
           {type === "reply" && (
             <>
-              <span className="font-bold  text-white text-lg">
-                {user?.name} {message}
+              <span className="font-semibold  text-white ">
+                {user?.name ?? "Anon"} {message}
               </span>
               <p className="text-[#777] text-base line-clamp-2">
                 {comment && comment.content}

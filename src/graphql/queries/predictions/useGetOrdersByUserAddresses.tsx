@@ -46,7 +46,7 @@ export function useGetOrdersByUserAddresses(userAddresses: string[]) {
   );
 
   return {
-    orders: data?.orders?.items ?? [],
+    orders: data?.positions?.items ?? [],
     loading,
     error,
   };

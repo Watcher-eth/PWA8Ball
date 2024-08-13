@@ -1,6 +1,8 @@
 import { ActivityChartType } from "@/types/AcitivityTypes";
 
 export const DEFAULT_USER_ID = "did:privy:clutganzs01rz2oqk4vvlwtih";
+export const DEFAULT_PFP_PLACEHOLDER =
+  "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6";
 
 export const TEST_BET_MODAL_DATA = {
   question: "Will Oppenheimer win best picture at the 2024 Academy Awards",

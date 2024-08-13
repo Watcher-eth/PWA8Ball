@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Link from "next/link";
-import { Bell, Search } from "lucide-react";
+import { ActivityIcon, Bell, Search } from "lucide-react";
 import { HOME_PATH } from "@/utils/urls";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -46,6 +46,9 @@ export function DesktopNavBar() {
             <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
+            <Link href={"/activity"}>
+              <NavIconButton IconComponent={ActivityIcon} />
+            </Link>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>

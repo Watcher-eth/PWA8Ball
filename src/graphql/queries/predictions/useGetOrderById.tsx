@@ -17,6 +17,10 @@ const GET_ORDER_BY_ID = gql`
         outcomeOddsA
         outcomeOddsB
       }
+      user {
+        name
+        pfp
+      }
     }
   }
 `;

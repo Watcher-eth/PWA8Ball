@@ -54,7 +54,7 @@ export function DesktopProfilePage({ userId, userC }) {
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
   ];
 
-  console.log("orders", ordersData2);
+  console.log("ordersData2", ordersData);
   return (
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808] px-8">
       <ProfileSection userC={userC} user={user} />
@@ -383,8 +383,7 @@ export const ProfileSection = ({ userC, user }) => {
           </div>
           <div className="flex-col space-y-2 text-sm">
             <div className="flex items-center gap-2 text-[white] font-medium leading-none">
-              Up 5.2% this month{" "}
-              <TrendingUp className="h-4 w-4 text-white" />
+              Up 5.2% this month <TrendingUp className="h-4 w-4 text-white" />
             </div>
             <div className="leading-none text-gray-400">
               Showing accuracy for the last 6 months
