@@ -36,7 +36,6 @@ export function useGetUsersForMarket(id: number) {
     variables: { id: BigInt(id) },
   });
 
-  //TODO: Get Topic
 
   return {
     data: marketUsers.positions.items,
