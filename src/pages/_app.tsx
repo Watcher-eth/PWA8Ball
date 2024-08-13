@@ -47,6 +47,7 @@ export const wagmiConfig = getDefaultConfig({
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
   // console.log({pageProps})
+  // this breaks the next build... monke sooooooo shocked
   // amplitude.init("3b52857bdc943ed9b3ec5ac60e5dbba1", {
   //   autocapture: { elementInteractions: true },
   // });
