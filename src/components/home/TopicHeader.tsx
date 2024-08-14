@@ -3,10 +3,7 @@ import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 import { TEST_TOPICS } from "@/constants/testData";
 
-
-
 export function TopicHeader({ setSelectedTopic, selectedTopic }) {
-
   return (
     <div
       className={`
@@ -41,8 +38,7 @@ export function TopicHeader({ setSelectedTopic, selectedTopic }) {
       </Marquee>
     </div>
   );
-};
-
+}
 
 function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
   function onTopicPress() {
@@ -63,7 +59,7 @@ function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
       <button
         onClick={onTopicPress}
         className={`px-4 py-2 text-base font-semibold rounded-full mr-4
-        border-[0.5px] border-transparent active:scale-95 transition-all
+        border-[0.5px] border-transparent active:scale-95 hover:scale-102 transition-all
         ${
           selectedTopic === item
             ? "bg-white hover:bg-white/90 active:bg-white/80 text-[#1B1B1E]"

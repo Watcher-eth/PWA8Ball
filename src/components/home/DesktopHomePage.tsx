@@ -30,7 +30,7 @@ export function DesktopHomePage({ trendingMarkets }) {
       <motion.div
         layout
         transition={{ duration: 0.2 }}
-        className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-3 overflow-y-visible"
+        className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-6 overflow-y-visible"
       >
         {enrichedFeedData?.map((bet, index) => {
           return <FeedCard {...bet} key={index} />;
