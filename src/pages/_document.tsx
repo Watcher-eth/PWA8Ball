@@ -1,8 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { APP_DESCRIPTION, APP_NAME } from "@/constants";
 
-
-
 export default function Document() {
   return (
     <Html lang="en">
@@ -26,6 +24,8 @@ export default function Document() {
         />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="https://crypto-js.stripe.com/crypto-onramp-outer.js"></script>
       </Head>
 
       <body>
