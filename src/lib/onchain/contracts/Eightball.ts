@@ -71,16 +71,6 @@ export const EightballV1ABI = [
   },
   {
     type: "function",
-    name: "getMultiplier",
-    inputs: [
-      { name: "_preferYes", type: "uint16", internalType: "uint16" },
-      { name: "_marketId", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [{ name: "multiplier", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "getOdds",
     inputs: [{ name: "_marketId", type: "uint256", internalType: "uint256" }],
     outputs: [
@@ -96,10 +86,18 @@ export const EightballV1ABI = [
       { name: "_operator", type: "address", internalType: "address" },
       { name: "_creator", type: "address", internalType: "address" },
       { name: "_initProb", type: "uint256", internalType: "uint256" },
-      { name: "outcomeA", type: "string", internalType: "string" },
-      { name: "outcomeB", type: "string", internalType: "string" },
-      { name: "title", type: "string", internalType: "string" },
-      { name: "question", type: "string", internalType: "string" },
+      {
+        name: "params",
+        type: "tuple",
+        internalType: "struct IEightBall.MarketInitializationParams",
+        components: [
+          { name: "topicId", type: "uint32", internalType: "uint32" },
+          { name: "outcomeA", type: "string", internalType: "string" },
+          { name: "outcomeB", type: "string", internalType: "string" },
+          { name: "title", type: "string", internalType: "string" },
+          { name: "question", type: "string", internalType: "string" },
+        ],
+      },
     ],
     outputs: [
       {
@@ -390,6 +388,12 @@ export const EightballV1ABI = [
         type: "uint256",
         indexed: false,
         internalType: "uint256",
+      },
+      {
+        name: "topicId",
+        type: "uint32",
+        indexed: false,
+        internalType: "uint32",
       },
       { name: "title", type: "string", indexed: false, internalType: "string" },
       {

@@ -49,11 +49,14 @@ async function initialize(props: {
       ROOT_OPERATOR_ADDRESS,
       ROOT_OPERATOR_ADDRESS,
       account,
-      options[0],
-      options[1],
       BigInt(initialProb),
-      props.title,
-      props.description,
+      {
+        topicId: Number(props.topicId),
+        outcomeA: props.options[0],
+        outcomeB: props.options[1],
+        title: props.title,
+        question: props.description,
+      },
     ]);
 
     console.log("hash", hash);
