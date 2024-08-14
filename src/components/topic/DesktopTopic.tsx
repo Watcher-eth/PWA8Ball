@@ -141,10 +141,10 @@ function DesktopTopic({
         <div className="text-[2.1rem] mb-2.5 text-[white] font-[Aeonik-Bold]">
           Top Predictions
         </div>
-        <div className="flex flex-row space-x-8 mb-8">
+        <div className="flex flex-row space-x-4 mb-8">
           {renderDesktopTopicItems(markets?.slice(0, 3) || [], "large", 3)}
         </div>
-        <div className="flex flex-row space-x-5 mb-20">
+        <div className="flex flex-row space-x-3 mb-20">
           {renderDesktopTopicItems(markets?.slice(0, 5) || [], "small", 5)}
         </div>
         <StandardBleedOverlay>
@@ -175,7 +175,7 @@ function DesktopTopic({
           <div className="text-[1.65rem] my-3 text-white font-[700]">
             Popular Today
           </div>
-          <div className="flex flex-row space-x-5">
+          <div className="flex flex-row pt-1 space-x-3">
             {renderDesktopTopicItems(markets?.slice(0, 4) || [], "medium", 4)}
           </div>
         </div>
@@ -262,11 +262,6 @@ export function DesktopTopicItem(props: DesktopItemProps) {
             ).toFixed(0)}%`,
           ]}
         />
-        <div className="h-[0.05rem] mt-3 mb-1.5 w-full bg-[#313131]" />
-
-        <div className={`text-[lightgray] py-1 px-5 ${selectedSize.date}`}>
-          1h ago - 323 Predictors
-        </div>
       </div>
     </Link>
   );
@@ -282,7 +277,7 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
   const validPercentage = Math.min(Math.max(percentage, 1), 100);
 
   return (
-    <div className="relative m-2 mx-4 bg-[#151515] h-11 rounded-md flex items-center text-white">
+    <div className="relative m-2 mx-4 bg-[#151515] h-10 rounded-md flex items-center text-white">
       <div
         className="absolute left-0 h-full rounded-l-md"
         style={{
@@ -299,7 +294,7 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
         }}
       ></div>
       <div
-        className="h-14 w-1.5 bg-white/[80%] rounded-md absolute z-2"
+        className="h-12 w-1.5 bg-white/[80%] rounded-md absolute z-2"
         style={{
           left: `${validPercentage}%`,
           transform: "translateX(-50%)",
