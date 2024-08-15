@@ -86,11 +86,11 @@ export function DesktopChart(props: {
             <span className="text-white text-lg font-semibold">
               {prices
                 ? props.optionNumber === 1
-                  ? currentPrices[currentPrices.length - 1].value
+                  ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                   : currentPrices.length > 0
-                  ? currentPrices[currentPrices.length - 1].value
-                  : 100 - props.price
-                : props.price / 10000}
+                  ? currentPrices[currentPrices.length - 1].value.toFixed(2)
+                  : (100 - props.price).toFixed(2)
+                : (props.price / 10000).toFixed(2)}
               % {props.options[props?.option === 1 ? 0 : 1]?.name}
             </span>
             <span
@@ -101,7 +101,7 @@ export function DesktopChart(props: {
             >
               {percentageDifference && percentageDifference >= 0
                 ? `+${percentageDifference}`
-                : `-${percentageDifference}`}
+                : `${percentageDifference}`}
               %
             </span>
           </div>

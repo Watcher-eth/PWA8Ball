@@ -42,6 +42,8 @@ async function predict(props: PredictParams) {
       ROOT_OPERATOR_ADDRESS,
       990,
     ];
+    console.log("Prediction hash", contractArgs);
+
     const { request } = await contract.simulate.predict(contractArgs);
 
     const hash = await contract.write.predict(contractArgs);
