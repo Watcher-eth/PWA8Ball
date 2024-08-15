@@ -55,7 +55,7 @@ export function DesktopPredictComponent(props: {
           )}
 
           {step === 0 && (
-            <div className="flex flex-col w-full py-4 md:px-4 px-6 gap-4">
+            <div className="flex flex-col w-full  -mt-6 py-4 md:px-6 px-6 gap-4">
               <Input
                 onChange={(e) => setAmount(Number(e.target.value))}
                 type="numeric"

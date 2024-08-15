@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   ChartConfig,
@@ -12,10 +12,12 @@ import { generateChartConfig } from "./generateChartConfig";
 
 export function GenericAreaChart({
   chartData,
+  domain,
   xAxisKey = "month",
   xAxisTickFormatter = (value) => value,
   customConfig,
 }: {
+  domain: number[];
   chartData: any[];
   xAxisKey?: string;
   xAxisTickFormatter?: (value: string) => string;
@@ -46,6 +48,8 @@ export function GenericAreaChart({
           tickMargin={8}
           tickFormatter={xAxisTickFormatter}
         />
+        <YAxis tick={false} hide axisLine={false} domain={domain} />
+
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
         <defs>
           {_.keys(chartConfig).map((key) => (

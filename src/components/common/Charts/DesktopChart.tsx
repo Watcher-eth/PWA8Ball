@@ -6,7 +6,7 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { ChartConfig } from "@/components/ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 
-import { processPrices } from "@/utils/chartUtils";
+import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
@@ -46,6 +46,8 @@ export function DesktopChart(props: {
     timeframe
   );
 
+  const minMax = getMinMaxValues(currentPrices);
+
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
@@ -55,7 +57,7 @@ export function DesktopChart(props: {
 
   return (
     <div>
-      <div className="flex flex-row items-center space-x-3  mt-6">
+      <div className="flex flex-row items-center space-x-3  mt-4">
         <div
           onClick={() => {
             props.onClose();
@@ -120,8 +122,9 @@ export function DesktopChart(props: {
         </div>
       </div>
 
-      <div className="h-[25vh] min-h-[280px] pb-2">
+      <div className="h-[25vh] min-h-[280px] pb-2 pt-2">
         <GenericAreaChart
+          domain={[minMax.min, minMax.max]}
           chartData={chartData}
           xAxisKey="month"
           xAxisTickFormatter={(value) => value.slice(0, 3)}
@@ -132,26 +135,31 @@ export function DesktopChart(props: {
         timeframe={timeframe}
         setTimeframe={setTimeframe}
       />
-      <div className="flex flex-row items-center justify-between -mb-6">
-        <div className="flex flex-col items-start">
-          <span className="text-xs text-white/70">You voted</span>
-          <span className="text-white text-lg font-semibold">
-            {props.options[props?.userOwns?.highest_option === 1 ? 0 : 1]?.name}
-          </span>
-        </div>
-        <div className="flex flex-col items-end">
-          <span className="text-xs text-white/70">Prediction Value</span>
-          {prices && (
+      {props?.userOwns && (
+        <div className="flex flex-row items-center justify-between -mb-6">
+          <div className="flex flex-col items-start">
+            <span className="text-xs text-white/70">You voted</span>
             <span className="text-white text-lg font-semibold">
-              $
-              {(
-                props?.userOwns?.highest_amount *
-                (currentPrices[currentPrices.length - 1]?.value / 1000000)
-              ).toFixed(2)}
+              {
+                props.options[props?.userOwns?.highest_option === 1 ? 0 : 1]
+                  ?.name
+              }
             </span>
-          )}
+          </div>
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-white/70">Prediction Value</span>
+            {prices && (
+              <span className="text-white text-lg font-semibold">
+                $
+                {(
+                  props?.userOwns?.highest_amount *
+                  (currentPrices[currentPrices.length - 1]?.value / 1000000)
+                ).toFixed(2)}
+              </span>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

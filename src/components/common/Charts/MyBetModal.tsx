@@ -72,7 +72,7 @@ export const MobileMyBetModal = (props: {
       className={`flex flex-col ${
         props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
       } self-center pb-[30px] gap-[2px] ${
-        props?.isDesktop ? "p-[5px]" : "p-[15px]"
+        props?.isDesktop ? "p-[8px]" : "p-[15px]"
       } pt-[10px] rounded-t-[30px] w-full`}
     >
       <div className="flex flex-row items-center justify-between my-[5px]">

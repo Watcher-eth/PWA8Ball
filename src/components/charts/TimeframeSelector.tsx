@@ -11,7 +11,7 @@ export function TimeframeSelector({
     <div
       className={`
         flex flex-row items-center justify-between self-center
-        mb-3.5 px-12
+        mb-3.5  px-12
       `}
     >
       {timeframes.map((item, index) => (
