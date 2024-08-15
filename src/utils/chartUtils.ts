@@ -107,21 +107,21 @@ export const processPrices = (
   return { currentPrices, percentageDifference };
 };
 
-export const getMinMaxValues = (prices: Price[]) => {
+export const getMinMaxValues = (prices: ProcessedPrice[]) => {
   if (!prices || prices.length === 0) {
     return { min: null, max: null };
   }
 
   return prices.reduce(
     (acc, price) => {
-      if (price.price < acc.min) {
-        acc.min = price.price;
+      if (price.value < acc.min) {
+        acc.min = price.value;
       }
-      if (price.price > acc.max) {
-        acc.max = price.price;
+      if (price.value > acc.max) {
+        acc.max = price.value;
       }
       return acc;
     },
-    { min: prices[0].price, max: prices[0].price }
+    { min: prices[0].value, max: prices[0].value }
   );
 };

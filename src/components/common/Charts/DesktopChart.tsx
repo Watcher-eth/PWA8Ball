@@ -47,7 +47,7 @@ export function DesktopChart(props: {
   );
 
   const minMax = getMinMaxValues(currentPrices);
-
+  console.log("minMax", minMax);
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
@@ -85,13 +85,17 @@ export function DesktopChart(props: {
           <div className="flex flex-row items-center justify-between mt-1">
             <span className="text-white text-lg font-semibold">
               {prices
-                ? props.optionNumber === 1
+                ? props?.userOwns?.highest_option === 1
                   ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                   : currentPrices.length > 0
                   ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                   : (100 - props.price).toFixed(2)
                 : (props.price / 10000).toFixed(2)}
-              % {props.options[props?.option === 1 ? 0 : 1]?.name}
+              %{" "}
+              {
+                props.options[props?.userOwns?.highest_option === 0 ? 1 : 0]
+                  ?.name
+              }
             </span>
             <span
               className={`
@@ -124,7 +128,10 @@ export function DesktopChart(props: {
 
       <div className="h-[25vh] min-h-[280px] pb-2 pt-2">
         <GenericAreaChart
-          domain={[minMax.min, minMax.max]}
+          domain={[
+            minMax.min - (minMax.max - minMax.min) / 4,
+            minMax.max + (minMax.max - minMax.min) / 4,
+          ]}
           chartData={chartData}
           xAxisKey="month"
           xAxisTickFormatter={(value) => value.slice(0, 3)}
