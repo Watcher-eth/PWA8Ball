@@ -3,9 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-import {
-  ChartConfig,
-} from "@/components/ui/chart";
+import { ChartConfig } from "@/components/ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 
 import { processPrices } from "@/utils/chartUtils";
@@ -57,7 +55,7 @@ export function DesktopChart(props: {
 
   return (
     <div>
-      <div className="flex flex-row items-center justify-between mt-6">
+      <div className="flex flex-row items-center space-x-3  mt-6">
         <div
           onClick={() => {
             props.onClose();
@@ -76,54 +74,52 @@ export function DesktopChart(props: {
           }}
         >
           <img
-            className="size-9 rounded-full object-cover"
+            className="w-10 h-10 rounded-full object-cover"
             src={props.image}
             alt="Market image"
           />
         </div>
-      </div>
-      <div className="flex flex-row items-center justify-between mt-1">
-        <span className="text-white text-lg font-semibold">
-          {prices
-            ? props.optionNumber === 1
-              ? currentPrices[currentPrices.length - 1].value
-              : currentPrices.length > 0
-              ? currentPrices[currentPrices.length - 1].value
-              : 100 - props.price
-            : props.price / 10000}
-          % {props.options[props?.option === 1 ? 0 : 1]?.name}
-        </span>
-        <span
-          className={`
+        <div className="flex flex-col w-full  -space-y-1">
+          <div className="flex flex-row items-center justify-between mt-1">
+            <span className="text-white text-lg font-semibold">
+              {prices
+                ? props.optionNumber === 1
+                  ? currentPrices[currentPrices.length - 1].value
+                  : currentPrices.length > 0
+                  ? currentPrices[currentPrices.length - 1].value
+                  : 100 - props.price
+                : props.price / 10000}
+              % {props.options[props?.option === 1 ? 0 : 1]?.name}
+            </span>
+            <span
+              className={`
             text-white text-lg font-semibold
             ${props.optionNumber === 0 ? "text-red-500" : "text-blue-500"}
           `}
-        >
-          {percentageDifference && percentageDifference >= 0
-            ? `+${percentageDifference}`
-            : `-${percentageDifference}`}
-          %
-        </span>
+            >
+              {percentageDifference && percentageDifference >= 0
+                ? `+${percentageDifference}`
+                : `-${percentageDifference}`}
+              %
+            </span>
+          </div>
+          <div className="flex flex-row items-center justify-between pb-1">
+            <span className="text-base text-white/80 font-semibold">
+              {props.title}
+            </span>
+            <span className="text-base text-white/80 font-semibold">
+              {timeframe === "1D"
+                ? "Today"
+                : timeframe === "1W"
+                ? "This Week"
+                : timeframe === "1H"
+                ? "This Hour"
+                : "This Month"}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-row items-center justify-between pb-1">
-        <span className="text-base text-white/80 font-semibold">
-          {props.title}
-        </span>
-        <span className="text-base text-white/80 font-semibold">
-          {timeframe === "1D"
-            ? "Today"
-            : timeframe === "1W"
-            ? "This Week"
-            : timeframe === "1H"
-            ? "This Hour"
-            : "This Month"}
-        </span>
-      </div>
-      <TimeframeSelector
-        timeframes={timeframes}
-        timeframe={timeframe}
-        setTimeframe={setTimeframe}
-      />
+
       <div className="h-[25vh] min-h-[280px] pb-2">
         <GenericAreaChart
           chartData={chartData}
@@ -131,7 +127,11 @@ export function DesktopChart(props: {
           xAxisTickFormatter={(value) => value.slice(0, 3)}
         />
       </div>
-
+      <TimeframeSelector
+        timeframes={timeframes}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
+      />
       <div className="flex flex-row items-center justify-between -mb-6">
         <div className="flex flex-col items-start">
           <span className="text-xs text-white/70">You voted</span>
@@ -155,5 +155,3 @@ export function DesktopChart(props: {
     </div>
   );
 }
-
-

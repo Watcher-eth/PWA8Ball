@@ -59,7 +59,7 @@ export function DesktopProfilePage({ userId, userC }) {
     <div className="flex flex-col md:flex-row gap-4 p-4 bg-[#080808] px-8">
       <ProfileSection userC={userC} user={user} />
 
-      <div className="flex flex-col md:w-1/3 bg-[#121212] rounded-[1.5rem] p-8">
+      <div className="flex flex-col md:w-1/3 bg-[#121212] border-2 border-[#202020] rounded-[1.5rem] p-8">
         <div className="w-full flex flex-row justify-between ">
           <div>
             <h2 className="text-white text-2xl font-semibold">
@@ -152,18 +152,19 @@ export function DesktopProfilePage({ userId, userC }) {
       </div>
 
       <div className="flex flex-col md:w-1/3  ">
-        <div className="mb-4 bg-[#121212] rounded-lg p-5 pb-4 ">
+        <div className="mb-4 bg-[#121212] rounded-lg p-5 pb-4 border-2 border-[#202020] ">
           <div className="flex flex-row justify-between">
             <div className="inline-block">
               <h2 className="text-white text-xl font-bold">
                 Resolved Predictions
               </h2>
               <h2 className="text-[#999999] text-sm">
-                2 Predictions ready to redeem
+                {mergedData.length} Predictions ready to redeem
               </h2>
             </div>
             <Stars
-              className="inline-block mt-2 transform rotate-12	 text-white"
+              size={30}
+              className="inline-block mt-2 mr-3 transform rotate-12	 text-white"
               strokeWidth={3}
             />
           </div>
@@ -217,10 +218,12 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
     return filteredPositions.reduce((acc, item) => acc + item.amount, 0);
   }, [filteredPositions]);
   return (
-    <div className="bg-[#121212] rounded-[1.5rem] min-h-[53vh] p-5 pt-6">
+    <div className="bg-[#121212] rounded-[1.5rem] border-2 border-[#202020] min-h-[53vh] p-5 pt-6">
       <div className="mb-4">
         <div className="flex items-center mb-4">
-          <div className="bg-[#171717] h-24 w-24 mr-3 rounded-lg"></div>
+          <div className="bg-[#171717] border-2 border-[#202020] h-24 w-24 mr-3 rounded-lg flex justify-center items-center">
+            <div className="text-[3.3rem]">🏛️</div>
+          </div>
           <div className="text-white">
             <div className="-space-y-1">
               <p className="text-[#999999] text-[0.7rem]">Total locked</p>
@@ -240,7 +243,7 @@ const DesktopUserBoostOverview = (props: { address: string }) => {
             </div>
           </div>
         </div>
-        <h3 className="text-white -ml-1 flex flex-row items-center text-lg font-semibold mb-4">
+        <h3 className="text-white -ml-1 flex flex-row items-center text-lg font-semibold mb-2 mt-4">
           <BarChart strokeWidth={2.8} className="h-[1.13rem] " color="white" />{" "}
           Your active Boosts
         </h3>

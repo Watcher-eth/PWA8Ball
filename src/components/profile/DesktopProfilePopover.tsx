@@ -35,6 +35,7 @@ import { Dialog } from "@/components/ui/dialog";
 import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 
 export function DesktopProfilePopover({
   children,
@@ -44,17 +45,19 @@ export function DesktopProfilePopover({
   const { user } = useUserStore();
   const { disconnectUser } = useDisconnectUser();
   const { displayName } = useMyEns();
+  const userBalance = useUserUsdcBalance();
 
   const displayUsername =
     !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
 
+  console.log("balance", userBalance);
   return (
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div>{children}</div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-[#080808]/80 mr-2 mt-2 rounded-lg backdrop-blur-lg border w-56 border-white/10">
+        <DropdownMenuContent className="bg-[#909090]/20 mr-2 mt-2 rounded-lg backdrop-blur-xl border w-56 border-white/10">
           <DropdownMenuLabel className="flex  flex-row items-center">
             {user?.pfp ? (
               <img className="size-6 rounded-full mr-2" src={user?.pfp} />
@@ -64,7 +67,17 @@ export function DesktopProfilePopover({
                 strokeWidth={2.2}
               />
             )}
-            <div>{displayUsername}</div>
+            <div className="text-[1rem] font-[Aeonik-Bold]">
+              {displayUsername}
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel className="flex  flex-row items-center justify-between">
+            <div>Balance:</div>
+            <div className="flex flex-row items-center space-x-1">
+              <div>${(Number(userBalance) / 10 ** 6).toFixed(2)}</div>{" "}
+              <Wallet color="white" size={16} strokeWidth={2.8} />{" "}
+            </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>

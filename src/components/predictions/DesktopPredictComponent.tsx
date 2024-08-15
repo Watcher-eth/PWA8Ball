@@ -37,7 +37,7 @@ export function DesktopPredictComponent(props: {
   return (
     <div
       className={`
-        border-2  rounded-[1.5rem] border-white/10 text-white h-auto overflow-hidden
+        border-2  rounded-[1.5rem] border-white/5 text-white h-auto overflow-hidden
       `}
     >
       <motion.div
@@ -61,7 +61,7 @@ export function DesktopPredictComponent(props: {
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full  rounded-md py-6 text-md border-none
+                    w-full font-[600]  rounded-md py-6 text-md border-none
                     bg-slate-400/10 hover:bg-slate-400/20
                     focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
                   `}
