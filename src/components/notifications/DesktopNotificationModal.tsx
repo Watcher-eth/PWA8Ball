@@ -27,7 +27,7 @@ export function DesktopNotificationModal({
       subtitle="You have 3 unread messages."
       cardClassName=""
       dialogContentClassName=" backdrop-blur-lg "
-      cardContentClassName="px-0 min-h-[50vh] "
+      cardContentClassName="px-0  min-h-[50vh] "
       dialogClassName=""
       content={
         <div className="overflow-y-auto">
