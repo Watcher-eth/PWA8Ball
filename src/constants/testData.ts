@@ -121,6 +121,19 @@ export const TEST_TOPICS = [
   "🥊 Jake Paul",
   "🎮 GTA 6",
   "⚽ UEFA European Cup",
+  "🎮 Esports",
+  "🕌 Middle East",
+  "🇹🇼 Taiwan",
+  "𝕏 Crypto Twitter",
+  "💡 Elon Musk",
+  "🏈 Superbowl 2025",
+  "🚀 ISS",
+  "🦠 Monkeypox",
+  "💸 Crypto",
+  "🏦 Federal Reserve",
+  "🪖 Ukraine",
+  "📹 Twitch",
+  "🎤 KPop",
 ];
 
 export const TEST_COMMENTS_DATA = [
