@@ -17,16 +17,13 @@ export function BettersOverview({
   users,
 }) {
   return (
-    <div
-      className={`flex flex-col rounded-2xl p-4 sm:p-0 `}
-
-    >
+    <div className={`flex flex-col rounded-2xl p-4 sm:p-0 `}>
       <div className="flex flex-row items-center ">
         <img
           src={image}
           className="h-14 w-14 rounded-md object-cover overflow-hidden mr-2"
         />
-        <div className="max-w-[70%]">
+        <div className="max-w-[80%]">
           <div
             style={{
               fontFamily: "Aeonik-Bold",
@@ -38,11 +35,10 @@ export function BettersOverview({
           </div>
           <div
             style={{
-              fontFamily: "Aeonik-Bold",
-              fontSize: "12px",
+              fontWeight: "500",
+              fontSize: "14px",
               color: "lightgray",
             }}
-            className="line-clamp-2"
           >
             {question}
           </div>
@@ -60,7 +56,7 @@ export function BettersOverview({
       >
         <p
           style={{
-            fontFamily: "Aeonik-Bold",
+            fontWeight: "600",
             fontSize: "15px",
             color: "white",
           }}
@@ -69,7 +65,7 @@ export function BettersOverview({
         </p>
         <p
           style={{
-            fontFamily: "Aeonik-Bold",
+            fontWeight: "600",
             fontSize: "15px",
             color: "white",
           }}

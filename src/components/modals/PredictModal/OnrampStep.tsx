@@ -139,7 +139,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
   const { user } = useUserStore();
   new RampInstantSDK({
     hostAppName: "Glimpse",
-    hostApiKey: ""
+    hostApiKey: "",
     hostLogoUrl:
       "https://media.decentralized-content.com/-/rs:fit:1920:1920/aHR0cHM6Ly9tYWdpYy5kZWNlbnRyYWxpemVkLWNvbnRlbnQuY29tL2lwZnMvUW1kMWVWaHZZWHRBUnhCSFZNVkF3aDJUS1RFdHBuMld3RUtBemhUTXBBa1M1Zg",
     enabledFlows: ["ONRAMP"],

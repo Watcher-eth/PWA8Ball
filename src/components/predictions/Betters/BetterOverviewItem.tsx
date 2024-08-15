@@ -3,7 +3,6 @@ import { UserCircle } from "lucide-react";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { getProfilePath } from "@/utils/urls";
 
-
 export function BettersOverviewItem({
   name,
   walletaddress,
@@ -33,7 +32,7 @@ export function BettersOverviewItem({
           border border-transparent
           hover:border-white/10 active:border-white/20
           hover:bg-slate-400/10 active:bg-slate-400/20
-          px-1 rounded-lg transition-all
+          px-0 rounded-lg transition-all
         `}
       >
         <div className="flex flex-row items-center">
@@ -50,9 +49,7 @@ export function BettersOverviewItem({
             />
           )}
 
-          <div
-            className="flex flex-col ml-2 max-w-[70%]"
-          >
+          <div className="flex flex-col ml-2 max-w-[70%]">
             <p
               style={{
                 fontFamily: "Aeonik-Bold",

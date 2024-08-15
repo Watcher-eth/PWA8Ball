@@ -86,7 +86,7 @@ export function DesktopMarketPage({ users, market, id }) {
                   </div>
                   <DesktopBettersModal
                     title={market?.title}
-                    question={market?.description}
+                    question={market?.question}
                     image={market?.image}
                     optionA={{
                       multiplier: 1, // Dummy value, adjust as necessary
