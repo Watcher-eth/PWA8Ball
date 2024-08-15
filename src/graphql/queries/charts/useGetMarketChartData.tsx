@@ -3,13 +3,13 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_MARKET_CHART_DATA = gql`
-  query getMarketChartData($id: String!) {
-    prices(where: { id: $id }) {
+  query getMarketChartData($marketId: BigInt = "1") {
+    prices(where: { marketId: $marketId }) {
       items {
-        outcome
+        id
+        marketId
         price
         timestamp
-        marketId
       }
     }
   }

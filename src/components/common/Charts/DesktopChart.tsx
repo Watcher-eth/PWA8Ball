@@ -10,6 +10,7 @@ import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
+import { useGetMarketChartData } from "@/graphql/queries/charts/useGetMarketChartData";
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -33,21 +34,23 @@ export function DesktopChart(props: {
 }) {
   const [timeframe, setTimeframe] = useState("1M");
 
-  const { data: prices, error: priceError } = useGetPricesForMarket(
-    props?.id,
-    timeframe
-  );
+  // const { data: prices, error: priceError } = useGetPricesForMarket(
+  //   props?.id,
+  //   timeframe
+  // );
+
+  const { data: prices2 } = useGetMarketChartData(props?.id);
 
   const userOutcome = props?.optionNumber;
   const { currentPrices, percentageDifference } = processPrices(
-    prices,
+    prices2,
     userOutcome,
     props?.initialProb,
     timeframe
   );
 
   const minMax = getMinMaxValues(currentPrices);
-  console.log("minMax", minMax);
+
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
@@ -84,7 +87,7 @@ export function DesktopChart(props: {
         <div className="flex flex-col w-full  -space-y-1">
           <div className="flex flex-row items-center justify-between mt-1">
             <span className="text-white text-lg font-semibold">
-              {prices
+              {prices2
                 ? props?.userOwns?.highest_option === 1
                   ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                   : currentPrices.length > 0
@@ -155,7 +158,7 @@ export function DesktopChart(props: {
           </div>
           <div className="flex flex-col items-end">
             <span className="text-xs text-white/70">Prediction Value</span>
-            {prices && (
+            {prices2 && (
               <span className="text-white text-lg font-semibold">
                 $
                 {(
