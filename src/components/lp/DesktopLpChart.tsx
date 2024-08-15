@@ -1,17 +1,16 @@
 // @ts-nocheck
 
-
-
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { GenericLineChart, DEFAULT_CHART_CONFIG } from "@/components/charts/GenericLineChart";
+import {
+  GenericLineChart,
+  DEFAULT_CHART_CONFIG,
+} from "@/components/charts/GenericLineChart";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
-
-
 
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -31,12 +30,6 @@ const data = [
 export function DesktopLpChart() {
   return (
     // <GenericLineChart chartData={chartData}  />
-    <GenericAreaChart
-      chartData={data}
-      xAxisKey="date"
-      customConfig={{
-        sales: { label: "Total Sales", color: "hsl(var(--chart-5))" },
-      }}
-    />
+    <GenericAreaChart chartData={data} xAxisKey="date" />
   );
 }

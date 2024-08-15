@@ -17,6 +17,7 @@ import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWa
 import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
 import { processPrices } from "@/utils/chartUtils";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
+import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -61,9 +62,9 @@ export const MobileMyBetModal = (props: {
 
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
-    month: price.date.toLocaleString(), // Format the date as needed
-    [`${props.options[0]?.name}`]: 100 - price.value,
-    [`${props.options[1]?.name}`]: price.value,
+    date: price.date.toLocaleString(), // Format the date as needed
+    [`${props.options[0]}`]: 100 - price.value,
+    [`${props.options[1]}`]: price.value,
     // desktop: price.value,
     // mobile: 100 - price.value,
   }));
@@ -71,9 +72,9 @@ export const MobileMyBetModal = (props: {
     <div
       className={`flex flex-col ${
         props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
-      } self-center pb-[30px] gap-[2px] ${
-        props?.isDesktop ? "p-[8px]" : "p-[15px]"
-      } pt-[10px] rounded-t-[30px] w-full`}
+      } self-center pb-[20px] gap-[2px] ${
+        props?.isDesktop ? "p-[6px]" : "p-[15px]"
+      } pt-[8px] rounded-t-[30px] w-full`}
     >
       <div className="flex flex-row items-center justify-between my-[5px]">
         <motion.div
@@ -95,19 +96,19 @@ export const MobileMyBetModal = (props: {
         >
           <img
             src={props.image}
-            className="h-[38px] w-[38px] rounded-full object-cover"
+            className="h-[40px] w-[40px] rounded-full object-cover"
             alt="Market image"
           />
         </motion.div>
       </div>
-      <div className="flex flex-row items-center justify-between mt-[5px]">
+      <div className="flex flex-row items-center justify-between mt-[3px]">
         <span className="text-[19px] text-white font-bold">
           {prices
             ? props.optionNumber === 1
-              ? currentPrices[currentPrices.length - 1].value
+              ? currentPrices[currentPrices.length - 1].value.toFixed(2)
               : currentPrices.length > 0
-              ? 100 - currentPrices[currentPrices.length - 1].value
-              : 100 - props.price
+              ? (100 - currentPrices[currentPrices.length - 1].value).toFixed(2)
+              : (100 - props.price).toFixed(2)
             : props.price / 10000}
           %{" "}
           {props.options[props?.optionNumber === 1 ? 0 : 1]?.name
@@ -141,141 +142,21 @@ export const MobileMyBetModal = (props: {
       </div>
       {prices ? (
         <div className="h-[23vh] my-4">
-          <ChartContainer className="h-full w-full" config={chartConfig}>
-            <AreaChart
-              accessibilityLayer
-              data={chartData}
-              margin={{
-                left: 0,
-                right: 0,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <defs>
-                <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-                <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-mobile)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-mobile)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="mobile"
-                type="natural"
-                fill="url(#fillMobile)"
-                fillOpacity={0.4}
-                stroke="var(--color-mobile)"
-                stackId="a"
-              />
-              <Area
-                dataKey="desktop"
-                type="natural"
-                fill="url(#fillDesktop)"
-                fillOpacity={0.4}
-                stroke="var(--color-desktop)"
-                stackId="a"
-              />
-            </AreaChart>
-          </ChartContainer>
+          <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       ) : (
         <div>
-          <ChartContainer className="h-[25vh] w-full" config={chartConfig}>
-            <AreaChart
-              accessibilityLayer
-              data={chartData}
-              margin={{
-                left: 12,
-                right: 12,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <defs>
-                <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-desktop)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-                <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-mobile)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-mobile)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="mobile"
-                type="natural"
-                fill="url(#fillMobile)"
-                fillOpacity={0.4}
-                stroke="var(--color-mobile)"
-                stackId="a"
-              />
-              <Area
-                dataKey="desktop"
-                type="natural"
-                fill="url(#fillDesktop)"
-                fillOpacity={0.4}
-                stroke="var(--color-desktop)"
-                stackId="a"
-              />
-            </AreaChart>
-          </ChartContainer>
+          <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       )}
-      <TimeframeSelector
-        timeframes={timeframes}
-        timeframe={timeframe}
-        setTimeframe={setTimeframe}
-      />
-      <div className="w-[101%] h-[1px] bg-[rgba(100,100,100,0.3)] my-[15px] mt-[20px]" />
+      <div className="w-full">
+        <TimeframeSelector
+          timeframes={timeframes}
+          timeframe={timeframe}
+          setTimeframe={setTimeframe}
+        />
+      </div>
+      <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
       {props.ownedAmount === undefined ? (
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col items-start">
@@ -354,23 +235,7 @@ export const MobileMyBetModal = (props: {
         </motion.div>
         <motion.div
           onClick={() => {
-            if (props.name) {
-              props.onClose();
-              router.push({
-                pathname: "[id]",
-                query: {
-                  id: props.betId,
-                  name: props.title,
-                  description: props.question,
-                  icon: "icon",
-                  image: props.image,
-                  topic: props.topic,
-                  option: props.option,
-                },
-              });
-            } else {
-              props.setStep(4);
-            }
+            props.setStep(4);
           }}
           className="mt-[11px] flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >

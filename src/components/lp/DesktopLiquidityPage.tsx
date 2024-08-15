@@ -44,9 +44,9 @@ export function DesktopLiquidityPage() {
           </div>
         </div>
         <div className="h-[30%]">
-          <Card className="border-0 h-[35vh] px-4 my-10 ">
+          <div className="border-0 border-[transparent] h-[35vh] mx-10 my-10 ">
             <DesktopLpChart />
-          </Card>
+          </div>
         </div>
         <div className="text-[white] text-2xl  mb-4  px-10 font-[Aeonik-Bold]">
           Your Boosts

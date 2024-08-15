@@ -46,6 +46,7 @@ export function ConfirmPrediction(props: {
           option={props.option}
           loading={loading}
           success={success}
+          setStep={setStep}
         />
       ) : (
         <motion.div className="flex flex-col items-center w-full bg-[#080808] px-6  rounded-lg">
@@ -137,7 +138,6 @@ export function ConfirmPrediction(props: {
         {!success && (
           <motion.button
             onClick={() => {
-
               props.setStep(1);
             }}
             className={`
@@ -162,9 +162,8 @@ export function ConfirmPrediction(props: {
                   marketId,
                   options,
                 });
-
           }}
-          className="mt-3 py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
+          className="mt-3  py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
           initial={{ width: "40vw" }}
           animate={{
             width: success ? "80vw" : "40vw",

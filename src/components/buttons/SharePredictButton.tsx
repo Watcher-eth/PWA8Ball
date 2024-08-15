@@ -12,8 +12,8 @@ export function SharePredictButton({ success }: { success: boolean }) {
     label = "Predict";
   }
   return (
-    <>
-      <IconComponent className="text-black" strokeWidth={3} size={23} />
+    <div className="self-center flex flex-row items-center w-full gap-2">
+      <IconComponent className="text-black" strokeWidth={3} size={20} />
       <motion.span
         initial={{ opacity: success ? 0 : 1 }}
         animate={{ opacity: 1 }}
@@ -21,6 +21,6 @@ export function SharePredictButton({ success }: { success: boolean }) {
       >
         {label}
       </motion.span>
-    </>
+    </div>
   );
 }

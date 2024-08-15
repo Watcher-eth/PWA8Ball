@@ -72,61 +72,45 @@ export function ShareBetContent({
         prediction
       </p>
       <AnimatePresence>
-        {!isDesktop ? (
-          <div
-            className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
-          >
-            <div className="flex flex-row items-center mb-4 mt-2">
-              <img
-                src={image}
-                alt={title}
-                className="h-11 w-11 rounded-[4px] mr-2.5 object-cover"
-              />
-              <div>
-                <h2 className="text-lg text-white">{title}</h2>
-                <p className="text-base -mt-1 text-[lightgrey]">/{topic}</p>
-              </div>
-            </div>
-            <h2
-              style={{ lineHeight: "1.8rem" }}
-              className="text-[1.4rem] text-white font-semibold leading-none"
-            >
-              {question}
-            </h2>
-            <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
-              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#FF0050] gap-1">
-                <span className="text-xl text-white font-medium">
-                  {options[0]?.name}
-                </span>
-                <span className="text-sm font-medium text-[white]/[0.8]">
-                  /{options[0]?.odds / 100}%
-                </span>
-              </button>
-              <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#0050FF] gap-1">
-                <span className="text-xl text-white font-medium">
-                  {options[1].name}
-                </span>
-                <span className="text-sm font-medium text-[white]/[0.8]">
-                  /{options[1].odds / 100}%
-                </span>
-              </button>
+        <div
+          className={`w-full rounded-[20px] bg-[#121212] shadow-lg flex flex-col p-5 mt-16`}
+        >
+          <div className="flex flex-row items-center mb-4 mt-2">
+            <img
+              src={image}
+              alt={title}
+              className="h-11 w-11 rounded-[4px] mr-2.5 object-cover"
+            />
+            <div>
+              <h2 className="text-lg text-white">{title}</h2>
+              <p className="text-base -mt-1 text-[lightgrey]">/{topic}</p>
             </div>
           </div>
-        ) : (
-          <CashoutConfirmScreen
-            option={1}
-            options={options}
-            image={image}
-            question={question}
-            title={title}
-            setStep={() => {}}
-            id={id}
-            isDesktop={true}
-            multiplier={3}
-            points={2}
-            odds={options[0]?.value / 100}
-          />
-        )}
+          <h2
+            style={{ lineHeight: "1.8rem" }}
+            className="text-[1.4rem] text-white font-semibold leading-none"
+          >
+            {question}
+          </h2>
+          <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
+            <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#FF0050] gap-1">
+              <span className="text-xl text-white font-medium">
+                {options[0]?.name}
+              </span>
+              <span className="text-sm font-medium text-[white]/[0.8]">
+                /{options[0]?.odds / 100}%
+              </span>
+            </button>
+            <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#0050FF] gap-1">
+              <span className="text-xl text-white font-medium">
+                {options[1].name}
+              </span>
+              <span className="text-sm font-medium text-[white]/[0.8]">
+                /{options[1].odds / 100}%
+              </span>
+            </button>
+          </div>
+        </div>
       </AnimatePresence>
       <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
         <button

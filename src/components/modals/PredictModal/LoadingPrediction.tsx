@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 import { Spinner } from "./Spinner";
+import { X } from "lucide-react";
 
 export function MobileLoadingPrediction({
   image,
@@ -32,6 +33,7 @@ export function MobileLoadingPrediction({
             "linear-gradient(to bottom, transparent, rgba(13, 13, 13, 0.8), #131313)",
         }}
       />
+
       <motion.img
         src={image}
         alt="Prediction"
@@ -39,6 +41,7 @@ export function MobileLoadingPrediction({
         animate={controls}
         initial={{ height: 0, width: 0 }}
       />
+
       <motion.p
         className="text-lg font-bold text-white z-10"
         animate={{ opacity: 1 }}
@@ -73,12 +76,14 @@ export function DesktopLoadingPrediction({
   answer,
   loading,
   success,
+  setStep,
 }: {
   image: string;
   question: string;
   answer: string;
   loading: boolean;
   success: boolean;
+  setStep: (value: number) => void;
 }) {
   const controls = useLoadingAnimationControls();
 
@@ -88,9 +93,9 @@ export function DesktopLoadingPrediction({
       <motion.img
         src={image}
         alt="Prediction"
-        className="rounded-md rounded-t-lg object-cover mt-0 z-10"
+        className="rounded-md w-full h-full absolute rounded-t-lg object-cover mt-0 "
       />
-      <motion.div className="absolute rounded-t-[30px]  w-full h-full backdrop-blur-xl " />
+      <motion.div className=" rounded-t-[30px]  w-full h-full absolute backdrop-blur-xl " />
       <motion.div
         className="absolute  w-full h-full rounded-t-lg"
         style={{
@@ -100,6 +105,13 @@ export function DesktopLoadingPrediction({
           borderTopRightRadius: "30px",
         }}
       />
+      <motion.div
+        onClick={() => setStep(0)}
+        whileTap={{ scale: 0.9 }}
+        className=" p-2 z-3 absolute  top-6 right-6 rounded-full self-start bg-[#282828]/30"
+      >
+        <X size={15} className="stroke-[lightgray]" strokeWidth={5} />
+      </motion.div>
       <motion.img
         src={image}
         alt="Prediction"
