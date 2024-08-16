@@ -9,7 +9,6 @@ import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment
 import { CommentHeader } from "./CommentHeader";
 import { LikeDislikeSection } from "./LikeDislikeSection";
 
-
 export function Comment({
   id,
   user,
@@ -21,10 +20,10 @@ export function Comment({
   setReply,
   handleComment,
 }: BetComment & {
-  created_at: string
-  setReply: (name: string) => void
-  handleComment: () => void
-  user2: User
+  created_at: string;
+  setReply: (name: string) => void;
+  handleComment: () => void;
+  user2: User;
 }) {
   const { mutate: deleteComment } = useDeleteComment();
 
@@ -66,8 +65,7 @@ export function Comment({
         </button>
         <LikeDislikeSection />
       </div>
-      <div className="w-full self-center h-0 border-b border-white/20 mt-3 z-20" />
+      <div className="w-full self-center h-0 border-b border-[#303030] mt-3 z-20" />
     </motion.div>
   );
 }
-

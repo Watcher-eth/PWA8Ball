@@ -65,7 +65,7 @@ export function CommentSection({
     <div
       className={`
         flex flex-col
-        ${isDesktop ? "px-3" : "p-5"}
+        ${isDesktop ? "px-0" : "p-5"}
         ${isDesktop ? "w-full" : "w-[96vw]"}
         pb-20`}
     >
