@@ -1,38 +1,42 @@
-import { Client } from 'pg';
+import { Client } from "pg";
+import dotenv from "dotenv";
 
-// PostgreSQL client configuration
+dotenv.config({ path: ".env.local" });
+
 const client = new Client({
-  user: 'your_db_user',
-  host: 'your_db_host',
-  database: 'your_db_name',
-  password: 'your_db_password',
-  port: 5432, // Default PostgreSQL port
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: parseInt(process.env.PG_PORT || "5432", 10),
 });
 
-async function updateUser(userId: string, updates: Partial<Record<string, any>>) {
+async function updateUser(
+  userId: string,
+  updates: Record<string, any>
+): Promise<void> {
   try {
     await client.connect();
 
     const setClause = Object.keys(updates)
       .map((key, index) => `${key} = $${index + 2}`)
-      .join(', ');
+      .join(", ");
 
     const values = [userId, ...Object.values(updates)];
 
     const query = `
       UPDATE users
       SET ${setClause}, updated_at = current_timestamp
-      WHERE external_auth_provider_user_id = $1
+      WHERE external_auth_provider_user_id = ${userId}
       RETURNING *;
     `;
 
-    const result = await client.query(query, values);
-    console.log('User updated:', result.rows[0]);
+    const res = await client.query(query, values);
+
+    console.log("Updated User:", res.rows[0]);
   } catch (err) {
-    console.error('Error updating user:', err);
+    console.error("Error executing query", err);
   } finally {
     await client.end();
   }
 }
-
-// Example usage: updateUser('some_unique_id', { name: 'Jane Doe', theme: 'light' });

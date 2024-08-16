@@ -1,6 +1,11 @@
 # Ignore .next directory
 .next/
 .DS_Store
+
+# Ignore .env
+.env
+.env.local
+
 # Ignore node_modules directory
 node_modules/
 
