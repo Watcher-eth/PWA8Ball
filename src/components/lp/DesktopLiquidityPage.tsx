@@ -18,7 +18,7 @@ export function DesktopLiquidityPage() {
     data: positions,
     loading: isLoading,
     error,
-  } = useGetUserLp("0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591");
+  } = useGetUserLp(user?.walletaddress);
 
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
   const totalAmount = filteredPositions.reduce(

@@ -69,8 +69,8 @@ const newUser: User = {
   liquiditypoints: 0,
   rewardpoints: 0,
   walletaddress: "0x1234567890abcdef1234567890abcdef12345678",
-  socials: '{"twitter": "@newuser", "discord": "newuser#1234"}', // Example JSON string for socials
-  friends: ["friend1", "friend2", "friend3"], // Example friends array
+  socials: '{"twitter": "@newuser", "discord": "newuser#1234"}',
+  friends: ["friend1", "friend2", "friend3"],
   theme: "dark",
   name: "New User",
   pfp: "https://example.com/path/to/profile-pic.jpg",
