@@ -6,16 +6,16 @@ import { User } from "@/types/UserTypes";
 import { timeAgo } from "@/utils/datetime/timeAgo";
 import { parseOption } from "@/utils/predictions/parseOption";
 import { getProfilePath } from "@/utils/urls";
-
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
 
 export function CommentHeader({
   user,
   user2,
-  created_at
+  created_at,
 }: {
-  user?: User
-  user2?: User
-  created_at?: string
+  user?: User;
+  user2?: User;
+  created_at?: string;
 }) {
   return (
     <div className="flex flex-row w-full items-center justify-between">
@@ -26,7 +26,9 @@ export function CommentHeader({
       >
         <div className="flex flex-row items-center">
           <div className="mr-2">
-            <UserPfpIcon pfp={user?.pfp} />
+            <ProfileToolTip user={user}>
+              <UserPfpIcon pfp={user?.pfp} />
+            </ProfileToolTip>
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row items-center">
@@ -64,7 +66,6 @@ export function CommentHeader({
   );
 }
 
-
 function UserPfpIcon({ pfp }: { pfp?: string }) {
   if (pfp?.length > 0) {
     return (
@@ -75,6 +76,6 @@ function UserPfpIcon({ pfp }: { pfp?: string }) {
       />
     );
   } else {
-    return <UserCircle2Icon color="gray" size={40}  />;
+    return <UserCircle2Icon color="gray" size={40} />;
   }
 }

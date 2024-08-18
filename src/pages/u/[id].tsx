@@ -7,6 +7,7 @@ import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollower
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
 import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
+import { DesktopProfilePage2 } from "@/components/profile/DesktopProfile";
 
 export default function ProfilePage({
   userId,
@@ -17,7 +18,6 @@ export default function ProfilePage({
   totalFollowers: number;
   userC: User;
 }) {
-
   return (
     <MobiTop
       mobile={
@@ -28,7 +28,7 @@ export default function ProfilePage({
         />
       }
       desktop={
-        <DesktopProfilePage
+        <DesktopProfilePage2
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}

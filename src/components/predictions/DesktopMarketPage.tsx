@@ -112,7 +112,7 @@ export function DesktopMarketPage({ users, market, id }) {
                       <Avatar>
                         <AvatarImage src={userImages[1]} />
                       </Avatar>
-                      <Avatar className="border border-white">
+                      <Avatar className="">
                         <AvatarImage src={userImages[2]} />
                       </Avatar>
                     </div>

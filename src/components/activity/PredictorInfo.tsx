@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getProfilePath } from "@/utils/urls";
+import { ProfileToolTip } from "../profile/ProfileToolTip";
 
 export function PredictorInfo({
   user_id,
@@ -20,15 +21,23 @@ export function PredictorInfo({
       <div className="flex flex-row items-center justify-between my-1.5">
         <div className="flex flex-row items-center">
           <p className="text-white font-bold">{index + 1}</p>
-          <img
-            src={
-              pfp
-                ? pfp
-                : "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6"
-            }
-            alt="Profile"
-            className="size-[30px] rounded-full object-cover ml-2.5 mr-3"
-          />
+          <ProfileToolTip
+            user={{
+              name: name,
+              pfp: pfp,
+              external_auth_provider_user_id: user_id,
+            }}
+          >
+            <img
+              src={
+                pfp
+                  ? pfp
+                  : "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6"
+              }
+              alt="Profile"
+              className="size-[30px] rounded-full object-cover ml-2.5 mr-3"
+            />
+          </ProfileToolTip>
           <p className="text-white text-[17px] font-semibold">{name}</p>
         </div>
         <p className="text-[lightgray] text-[15px] font-medium">
