@@ -34,7 +34,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
       no-scrollbar flex flex-col
 
       p-5 pt-[30px]
-      ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
+      ${isDesktop ? "w-full bg-[transparent]" : "w-full bg-[#101010]"}
     `}
       >
         <div
@@ -89,7 +89,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
         no-scrollbar flex flex-col
 
         p-5 pt-[30px]
-        ${isDesktop ? "w-[41vw] bg-[transparent]" : "w-full bg-[#101010]"}
+        ${isDesktop ? "w-full bg-[transparent]" : "w-full bg-[#101010]"}
       `}
     >
       <div

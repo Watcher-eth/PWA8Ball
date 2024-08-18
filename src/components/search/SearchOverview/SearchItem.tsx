@@ -15,10 +15,7 @@ export function MarketItem({
   currentIdx,
 }) {
   return (
-    <Link
-      href={getMarketPath(id)}
-      prefetch={true}
-    >
+    <Link href={getMarketPath(id)} prefetch={true}>
       <SearchItem
         title={title}
         subtitle={subtitle}
@@ -44,10 +41,7 @@ export function TopicItem({
   currentIdx,
 }) {
   return (
-    <Link
-      href={getTopicPath(topidId)}
-      prefetch={true}
-    >
+    <Link href={getTopicPath(topidId)} prefetch={true}>
       <SearchItem
         title={title}
         subtitle={subtitle}
@@ -63,9 +57,9 @@ export function TopicItem({
   );
 }
 
-export function FriendItem({ name, handle, time, image, idx, currentIdx }) {
+export function FriendItem({ name, handle, time, image, idx, currentIdx, id }) {
   return (
-    <Link href={getProfilePath(handle)} prefetch={true}>
+    <Link href={getProfilePath(id)} prefetch={true}>
       <SearchItem
         title={name}
         subtitle={handle}

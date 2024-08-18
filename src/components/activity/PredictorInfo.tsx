@@ -38,9 +38,9 @@ export function PredictorInfo({
               className="size-[30px] rounded-full object-cover ml-2.5 mr-3"
             />
           </ProfileToolTip>
-          <p className="text-white text-[17px] font-semibold">{name}</p>
+          <p className="text-white text-[19px] font-semibold">{name}</p>
         </div>
-        <p className="text-[lightgray] text-[15px] font-medium">
+        <p className="text-[lightgray] text-[17px] font-medium">
           ${(totalAmountUsdc / 1000000).toFixed(2)}
         </p>
       </div>

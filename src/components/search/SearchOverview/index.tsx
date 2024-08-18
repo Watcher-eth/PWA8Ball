@@ -125,6 +125,7 @@ export function SearchOverview() {
                         handle={user.handle}
                         time={user.time}
                         image={user.pfp}
+                        id={user.external_auth_provider_user_id}
                       />
                     ))}
                   </Section>

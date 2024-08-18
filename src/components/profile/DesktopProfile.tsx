@@ -81,10 +81,18 @@ export function DesktopProfilePage2({ userId, userC }) {
             ...item,
             type: "predicted",
           })),
-          ...createdMarketsData?.map((item) => ({ ...item, type: "created" })),
+          ...(createdMarketsData ?? []).map((item) => ({
+            ...item,
+            type: "created",
+          })),
         ]
       : filter === "Created"
-      ? [...createdMarketsData?.map((item) => ({ ...item, type: "created" }))]
+      ? [
+          ...(createdMarketsData ?? []).map((item) => ({
+            ...item,
+            type: "created",
+          })),
+        ]
       : [];
 
   console.log("user", mergedData);
@@ -184,7 +192,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           >
             <div>All</div>
             <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-              <div>{ordersData.length}</div>
+              <div>{ordersData?.length}</div>
             </div>
           </div>
           <div
@@ -206,7 +214,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           >
             <div>Created</div>
             <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-              <div>0</div>
+              <div>{createdMarketsData?.length}</div>
             </div>
           </div>
         </div>
