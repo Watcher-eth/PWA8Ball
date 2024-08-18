@@ -18,6 +18,7 @@ import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutCo
 import { processPrices } from "@/utils/chartUtils";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -161,16 +162,18 @@ export const MobileMyBetModal = (props: {
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col items-start">
             <span className="text-[12px] text-[lightgray]">Created by</span>
-            <div className="flex flex-row items-center mt-[5px]">
-              <img
-                src={props.icon}
-                className="h-[22px] w-[22px] rounded-full mr-[5px]"
-                alt="Creator"
-              />
-              <span className="text-white text-[19px] font-semibold">
-                {props.name}
-              </span>
-            </div>
+            <ProfileToolTip user={props}>
+              <div className="flex flex-row items-center mt-[5px]">
+                <img
+                  src={props.icon}
+                  className="h-[22px] w-[22px] rounded-full mr-[5px]"
+                  alt="Creator"
+                />
+                <span className="text-white text-[19px] font-semibold">
+                  {props.name}
+                </span>
+              </div>
+            </ProfileToolTip>
           </div>
           <div className="flex flex-col items-end">
             <span className="text-[12px] text-[lightgray]">

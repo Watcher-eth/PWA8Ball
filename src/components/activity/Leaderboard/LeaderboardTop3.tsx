@@ -1,3 +1,4 @@
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
 import React from "react";
 
 interface LeaderBoardTopUser {
@@ -18,11 +19,13 @@ const UserCard: React.FC<{
     className={`flex flex-col items-center ${showMarginTop ? "mt-2.5" : ""}`}
   >
     {user.image ? (
-      <img
-        src={user.image}
-        alt={user.name}
-        className="h-20 w-20 rounded-full"
-      />
+      <ProfileToolTip user={{ pfp: user?.image, name: user?.name }}>
+        <img
+          src={user.image}
+          alt={user.name}
+          className="h-20 w-20 rounded-full"
+        />
+      </ProfileToolTip>
     ) : (
       <div className="h-20 w-20 rounded-full bg-gray-300 animate-pulse"></div>
     )}

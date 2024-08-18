@@ -7,10 +7,6 @@ import { FindFriendsModal } from "@/components/modals/FindFriendsModal";
 
 export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
   const controls = useAnimation();
-  const { height, width } = {
-    height: window.innerHeight,
-    width: window.innerWidth,
-  };
 
   useEffect(() => {
     controls.start((i) => ({
@@ -26,12 +22,9 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
 
   return (
     <div
-      className={`flex flex-col items-center ${
+      className={`flex h-full flex-col items-center ${
         props?.isDesktop ? "rounded-[1.5rem]" : "pt-[50px]"
       } bg-[#101010]`}
-      style={{
-        height: height,
-      }}
     >
       <motion.h1
         custom={1}

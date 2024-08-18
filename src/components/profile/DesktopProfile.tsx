@@ -98,7 +98,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   console.log("user", mergedData);
 
   return (
-    <StandardPageWrapper className="h-full flex flex-col">
+    <StandardPageWrapper className="h-full min-h-screen flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">
