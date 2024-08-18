@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Input } from "@/components/ui/Input";
-import { Phone } from "lucide-react";
+import { Lock, Phone, Share } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
 import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -9,6 +9,7 @@ import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons";
 import DesktopCreateProfile from "./DesktopCreateProfile";
 import { useUserStore } from "@/lib/stores/UserStore";
+import { useState } from "react";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
@@ -43,7 +44,7 @@ export function DesktopOnboardingModal({
   );
 }
 
-function DesktopOnboarding() {
+export function DesktopOnboarding() {
   const { ready, authenticated, login } = usePrivy();
 
   return (
@@ -61,7 +62,7 @@ function DesktopOnboarding() {
         <Input
           type="email"
           placeholder="Email"
-          className="mb-4 w-full bg-[#212121] text-white"
+          className="mb-4 w-full bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
         />
         <div className="flex justify-between w-full  rounded-[0.5rem]  mb-4">
           <SocialOnboardButton IconComponent={GoogleIcon} onClick={login} />
@@ -130,7 +131,7 @@ function SocialOnboardButton({
     <div
       className={`
         hover:scale-105 active:scale-98 transition-all
-        p-3 bg-[#212121] border-2 border-[#272727]
+        p-3 bg-[#151515] border-2 border-[#181818]
         w-[5vw] justify-center items-center
         flex rounded-[0.4rem] text-white cursor-pointer
       `}
@@ -166,7 +167,7 @@ function WalletOnboardButton({
           >
             <div
               variant="outline"
-              className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
+              className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
             >
               <img src={iconSrc} className="size-5 mr-2" />
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
@@ -232,7 +233,7 @@ export const CustomConnectButton = ({
                   >
                     <div
                       variant="outline"
-                      className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#272727] bg-[#212121] text-white"
+                      className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
                     >
                       <img src={iconSrc} className="size-5 mr-2" />
                       All Wallets
@@ -247,3 +248,68 @@ export const CustomConnectButton = ({
     </ConnectButton.Custom>
   );
 };
+
+export function InviteScreen() {
+  const { ready, authenticated, login } = usePrivy();
+  const [invite, setInvite] = useState("");
+  return (
+    <div className="flex overflow-hidden rounded-lg shadow-lg sm:w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[55vw] ">
+      <div className="flex flex-col items-center justify-center w-1/2  p-10 pt-20 text-white">
+        <div className="h-[6rem] w-[6rem] flex items-center justify-center my-5 rounded-full bg-[#191919]">
+          <div className="text-[3.4rem] rotate-6">🔓</div>
+        </div>
+        <p className="text-center mb-6 font-[500] px-6 text-[lightgray]">
+          Glimpse is currently in closed beta. You need an invite code to use
+          the app.
+        </p>
+        <Input
+          type="email"
+          height={20}
+          onChange={setInvite}
+          placeholder="Your invite code"
+          className="mb-4 w-full   bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
+        />
+        {invite !== "" && (
+          <div className="py-2 animate-fade-in mb-4 hover:scale-101 active:scale-98  w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
+            <Lock color="white" strokeWidth={2.8} size={16} />{" "}
+            <div>Verify invite</div>
+          </div>
+        )}
+        <div className="flex items-center mb-4 mt-0 justify-between w-full">
+          <div className="h-[0.1rem] w-full bg-[#212121]" />
+          <p className="text-center mx-4 font-[500] text-[lightgray]">OR</p>
+          <div className="h-[0.1rem] w-full bg-[#212121]" />
+        </div>
+        <div className="py-2 hover:scale-101 active:scale-98 mb-20 w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
+          <Share color="white" strokeWidth={2.8} size={16} />{" "}
+          <div>Share to enter the waitlist</div>
+        </div>
+
+        <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
+          <a href="#" className="hover:underline">
+            Privacy
+          </a>
+          <a href="#" className="hover:underline">
+            Terms
+          </a>
+          <a href="#" className="hover:underline">
+            Download
+          </a>
+          <a href="#" className="hover:underline">
+            Twitter
+          </a>
+          <a href="#" className="hover:underline">
+            Discord
+          </a>
+        </div>
+      </div>
+      <div className="w-1/2">
+        <img
+          src="/images/Invite.jpg"
+          alt="Onboarding illustration"
+          className="object-cover w-full h-full"
+        />
+      </div>
+    </div>
+  );
+}

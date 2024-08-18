@@ -60,6 +60,8 @@ import { shortenAddress } from "@/utils/address/shortenAddress";
 import { FollowButton } from "./FollowButton";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
+import { copyToClipboard } from "@/utils/copyToClipboard";
+import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
@@ -155,7 +157,10 @@ export function DesktopProfilePage2({ userId, userC }) {
           </div>
         </div>
         <div className="flex flex-row space-x-3 items-center mt-3">
-          <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]">
+          <div
+            onClick={() => copyToClipboard(userC?.walletaddress)}
+            className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
+          >
             <div>
               {userC?.walletaddress
                 ? shortenAddress(userC?.walletaddress)
@@ -164,7 +169,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             <Copy size={16} color="white" strokeWidth={2.5} />
           </div>
           {userC?.name === user?.name ? (
-            <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
+            <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
               <div>Edit Profile</div>
             </div>
           ) : (
@@ -188,7 +193,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             onClick={() => setFilter("All")}
             className={`py-2 px-3 rounded-full ${
               filter === "All" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex hover:scale-101 active:scale:98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
+            } space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
           >
             <div>All</div>
             <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -199,7 +204,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             onClick={() => setFilter("Resolved")}
             className={`py-2 px-3 rounded-full ${
               filter === "Resolved" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex flex-row hover:scale-101 active:scale:98 items-center text-white  text-[0.9rem] font-[600]`}
+            } space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
           >
             <div>Resolved</div>
             <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -210,7 +215,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             onClick={() => setFilter("Created")}
             className={`py-2 px-3 rounded-full ${
               filter === "Created" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex flex-row hover:scale-101 active:scale:98 items-center text-white  text-[0.9rem] font-[600]`}
+            } space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
           >
             <div>Created</div>
             <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -241,6 +246,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           </div>
         )}
       </div>
+      {user && <BlurOverlay />}{" "}
     </StandardPageWrapper>
   );
 }
