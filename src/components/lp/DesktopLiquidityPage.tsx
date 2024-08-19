@@ -11,6 +11,7 @@ import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholde
 import { DesktopLiquidityPosition } from "./LiquidityPosition";
 import { DesktopLpChart } from "./DesktopLpChart";
 import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPositionsByUser";
+import { getLatestLpUsdcSum } from "@/utils/predictions/getLatestLpUSDCValue";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
@@ -26,12 +27,15 @@ export function DesktopLiquidityPage() {
     loading: lpPositionsLoading,
     error: lpPositionsError,
   } = useGetLpPositionsByUser(user?.walletaddress);
+
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
   const totalAmount = filteredPositions.reduce(
     (acc, item) => acc + item.amount,
     0
   );
 
+  const totalWithFees = getLatestLpUsdcSum(lpPositionsData);
+  const feesEarned = totalWithFees - totalAmount;
   console.log("pos", lpPositionsData);
   return (
     <StandardPageWrapper>
@@ -39,10 +43,10 @@ export function DesktopLiquidityPage() {
         <div className="flex flex-col -space-y-3 px-10">
           <div className="flex flex-row items-baseline">
             <div className="text-white text-[3.5rem] font-semibold font-[Aeonik-Bold]">
-              ${(totalAmount / 1000000).toFixed(2)}
+              ${(totalWithFees / 1000000).toFixed(2)}
             </div>
             <div className="text-[lightgray] text-2xl ml-2 mb-3  font-[Aeonik]">
-              +12.5%
+              +{feesEarned / totalAmount}%
             </div>
           </div>
           <div className="text-[lightgray] text-xl  font-[Aeonik]">
