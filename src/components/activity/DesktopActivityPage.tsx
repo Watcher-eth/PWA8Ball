@@ -17,7 +17,6 @@ export function DesktopActivityPage({ userC }: { userC: IUser }) {
 
   return (
     <div className="flex flex-col bg-[#080808]">
-      {user && <BlurOverlay />}{" "}
       <div className="flex flex-row pt-3 px-8 space-x-5 items-center">
         <ActivityIcon size={"2.3rem"} color="white" strokeWidth={3} />
         <div className="text-[2.5rem]  text-white font-[Aeonik-Bold]">

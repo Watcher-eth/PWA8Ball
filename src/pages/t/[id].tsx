@@ -36,6 +36,7 @@ export default function TopicPage({ topicData }: { topicData: any }) {
 
     return (
       <div>
+        
         <MobiTop
           mobile={
             <Topic

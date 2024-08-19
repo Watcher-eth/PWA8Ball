@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Input } from "@/components/ui/Input";
-import { Lock, Phone, Share } from "lucide-react";
+import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react";
 import { usePrivy } from "@privy-io/react-auth";
 import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -9,7 +9,11 @@ import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons";
 import DesktopCreateProfile from "./DesktopCreateProfile";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInviteUsed";
+import { debounce } from "lodash";
+import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite";
+import { toast } from "sonner";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
@@ -250,8 +254,68 @@ export const CustomConnectButton = ({
 };
 
 export function InviteScreen() {
-  const { ready, authenticated, login } = usePrivy();
   const [invite, setInvite] = useState("");
+  const [debouncedInvite, setDebouncedInvite] = useState("");
+  const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite);
+  const { mutate: useInvite } = useUseInvite();
+  // Debounce the invite input to avoid calling the API too often
+  const debouncedChange = useCallback(
+    debounce((nextValue) => setDebouncedInvite(nextValue), 500),
+    []
+  );
+  console.log("daa", data);
+
+  // Update invite state and trigger debounce
+  const handleInviteChange = (event) => {
+    const nextValue = event.target.value;
+    setInvite(nextValue);
+    debouncedChange(nextValue);
+  };
+
+  async function verifyInvite() {
+    if (data === true) {
+      useInvite(debouncedInvite);
+
+      toast(
+        <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 text-white flex flex-row items-center p-2">
+          <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
+            <CheckCircle strokeWidth={3} className="text-white h-[0.95rem]" />
+          </div>
+          Successfully used invite!
+        </div>,
+        {
+          unstyled: true,
+          classNames: {
+            title: "text-red-400 text-2xl",
+            description: "text-red-400",
+            actionButton: "bg-zinc-400",
+            cancelButton: "bg-orange-400",
+            closeButton: "bg-lime-400",
+          },
+        }
+      );
+      //TODO: Integrate ponder update user endpoint
+    } else {
+      toast(
+        <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+          <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
+            <Ban strokeWidth={3} className="text-[#FF0050] h-[0.95rem]" />
+          </div>
+          Invalid code!{" "}
+        </div>,
+        {
+          unstyled: true,
+          classNames: {
+            title: "text-red-400 text-2xl",
+            description: "text-red-400",
+            actionButton: "bg-zinc-400",
+            cancelButton: "bg-orange-400",
+            closeButton: "bg-lime-400",
+          },
+        }
+      );
+    }
+  }
   return (
     <div className="flex overflow-hidden rounded-lg shadow-lg sm:w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[55vw] ">
       <div className="flex flex-col items-center justify-center w-1/2  p-10 pt-20 text-white">
@@ -262,15 +326,36 @@ export function InviteScreen() {
           Glimpse is currently in closed beta. You need an invite code to use
           the app.
         </p>
-        <Input
-          type="email"
-          height={20}
-          onChange={setInvite}
-          placeholder="Your invite code"
-          className="mb-4 w-full   bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
-        />
+        <div className="flex flex-row w-full items-center relative">
+          <Input
+            type="email"
+            height={20}
+            placeholder="Your invite code"
+            onChange={handleInviteChange}
+            value={invite}
+            className="mb-4 w-full   bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
+          />
+          {data === true ? (
+            <Check
+              color="#5ACE5A"
+              strokeWidth={3.5}
+              size={20}
+              className="absolute top-2.5 right-3"
+            />
+          ) : (
+            <Ban
+              size={20}
+              color="#FF0050"
+              strokeWidth={3}
+              className="absolute top-2.5 right-3"
+            />
+          )}{" "}
+        </div>
         {invite !== "" && (
-          <div className="py-2 animate-fade-in mb-4 hover:scale-101 active:scale-98  w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
+          <div
+            onClick={verifyInvite}
+            className="py-2 animate-fade-in mb-4 hover:scale-101 active:scale-98  w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md"
+          >
             <Lock color="white" strokeWidth={2.8} size={16} />{" "}
             <div>Verify invite</div>
           </div>
@@ -284,7 +369,6 @@ export function InviteScreen() {
           <Share color="white" strokeWidth={2.8} size={16} />{" "}
           <div>Share to enter the waitlist</div>
         </div>
-
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy

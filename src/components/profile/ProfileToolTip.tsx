@@ -29,7 +29,7 @@ export function ProfileToolTip(props: {
               src={props.user?.pfp}
             />
             <FollowButton
-              profileId={props.user.external_auth_provider_user_id}
+              profileId={props?.user?.external_auth_provider_user_id}
             />
           </div>
           <div className="text-[2rem] my-4 text-white font-[Aeonik-Bold]">

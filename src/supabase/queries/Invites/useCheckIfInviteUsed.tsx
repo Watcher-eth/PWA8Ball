@@ -15,7 +15,7 @@ const checkIfInviteUsed = async (inviteId: string) => {
     throw new Error(error.message);
   }
 
-  return data?.status === "used";
+  return data?.status === "unused";
 };
 
 export function useCheckIfInviteUsed(inviteId: string) {
@@ -23,6 +23,5 @@ export function useCheckIfInviteUsed(inviteId: string) {
     queryKey: ["isInviteUsed", inviteId],
     queryFn: () => checkIfInviteUsed(inviteId),
     enabled: !!inviteId, // This query will only run if inviteId is truthy
-    staleTime: 1000 * 60 * 5, // Optional: Adjust based on how frequently you expect invite statuses to change
   });
 }

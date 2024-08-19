@@ -17,10 +17,10 @@ export function BlurOverlay() {
   return (
     <div className="fixed inset-0 z-[50] flex items-center justify-center">
       {/* Full-Screen Blur Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-xl animate-fade-in"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-xl animate-fade-in"></div>
 
       {/* Centered Card */}
-      <div className="relative z-10 bg-[#101010]/50 border-2 border-[#121212] backdrop-blur-xl animate-fade-in-delayed rounded-lg shadow-lg ">
+      <div className="relative z-10 bg-[#101010]/80 border-2 border-[#121212] backdrop-blur-xl animate-fade-in-delayed rounded-lg shadow-lg ">
         {!user ? (
           <InviteScreen />
         ) : user?.name.startsWith("0x") ? (

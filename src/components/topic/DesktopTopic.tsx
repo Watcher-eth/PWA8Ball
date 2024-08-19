@@ -18,6 +18,7 @@ import { Comment } from "../predictions/CommentSection/Comment";
 import JoinTopicButton from "./JoinTopicButton";
 import { motion } from "framer-motion";
 import { skeletonVariants } from "../ui/Skeleton";
+import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
 
 function DesktopTopic({
   name,
@@ -85,6 +86,8 @@ function DesktopTopic({
 
   return (
     <StandardPageWrapper className="h-full flex flex-col">
+      {user && <BlurOverlay />}
+
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-80 relative">

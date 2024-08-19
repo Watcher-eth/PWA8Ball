@@ -9,7 +9,7 @@ const createInvites = async (userAddress: string) => {
   }));
 
   const { data, error } = await supabase.from("invites").insert(invites);
-
+  console.log("ccreaated");
   if (error) throw new Error(error.message);
   return data;
 };
