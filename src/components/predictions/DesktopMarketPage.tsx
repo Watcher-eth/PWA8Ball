@@ -25,14 +25,23 @@ import { DesktopBettersModal } from "./Betters/DesktopBettersModal";
 import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
 import { useState } from "react";
 import { RulesCollapsible } from "./BetDetails/RulesCollapsible";
+import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { hardMarkets } from "@/constants/markets";
+import { hardTopics } from "@/constants/topics";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
+  const { data: newMarket } = useGetMarketById(id);
   const userImages = fillUserImages(users, 3);
   const [comments, setComments] = useState([]);
-
+  const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
+    newMarket?.market,
+    hardMarkets,
+    hardTopics
+  );
   return (
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
@@ -41,13 +50,13 @@ export function DesktopMarketPage({ users, market, id }) {
             <img
               className="w-full transform rotate-180 object-cover h-80 relative -mt-24"
               alt="CoverImage"
-              src={market?.image}
+              src={enhancedMarket?.image}
             />
             <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
             <InverseBleedOverlay>
               <img
                 className="size-28 md:size-32 lg:size-36 xl:size-40 ml-3 absolute -bottom-12 object-cover  rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
-                src={market?.image}
+                src={enhancedMarket?.image}
               />
             </InverseBleedOverlay>
           </div>
@@ -63,15 +72,15 @@ export function DesktopMarketPage({ users, market, id }) {
                     fontFamily: "Benzin-Bold",
                     lineHeight: "2rem",
                     fontSize:
-                      market?.title?.length < 14
+                      enhancedMarket?.title?.length < 14
                         ? 35
-                        : market?.title?.length < 21
+                        : enhancedMarket?.title?.length < 21
                         ? 32
                         : 26,
                   }}
                   className="pr-10 text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white font-bold"
                 >
-                  {market?.title}
+                  {enhancedMarket?.title}
                 </div>
                 <div className="flex justify-between mt-4 items-center mx-5">
                   <div className="flex flex-col">
@@ -80,23 +89,24 @@ export function DesktopMarketPage({ users, market, id }) {
                     </div>
                     <div className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center font-semibold">
                       <div>
-                        ${((market?.usdcstake ?? 0) / 100000).toFixed(2)}
+                        $
+                        {((enhancedMarket?.usdcstake ?? 0) / 100000).toFixed(2)}
                       </div>
                     </div>
                   </div>
                   <DesktopBettersModal
-                    title={market?.title}
-                    question={market?.question}
-                    image={market?.image}
+                    title={enhancedMarket?.title}
+                    question={enhancedMarket?.question}
+                    image={enhancedMarket?.image}
                     optionA={{
                       multiplier: 1, // Dummy value, adjust as necessary
-                      name: market?.options[1].name, // Assuming options array is not empty
-                      odds: market?.outcomea || 50, // Dummy odds, calculate or adjust as necessary
+                      name: enhancedMarket?.options[1].name, // Assuming options array is not empty
+                      odds: enhancedMarket?.outcomeOddsA || 50, // Dummy odds, calculate or adjust as necessary
                     }}
                     optionB={{
                       multiplier: 1, // Dummy value, adjust as necessary
-                      name: market?.options[0].name, // Assuming options array is not empty
-                      odds: market?.outcomeb || 50, // Dummy odds, calculate or adjust as necessary
+                      name: enhancedMarket?.options[0].name, // Assuming options array is not empty
+                      odds: enhancedMarket?.outcomeOddsB || 50, // Dummy odds, calculate or adjust as necessary
                     }}
                     odds={75}
                     marketId={id}
@@ -124,19 +134,19 @@ export function DesktopMarketPage({ users, market, id }) {
                   <div> Question</div>
                 </div>
                 <div className="text-[1.2rem] font-medium line-clamp-2 mb-0 mt-1 text-start text-[#fefefe] max-w-full ml-5 leading-[1.35rem]">
-                  {market?.question}
+                  {enhancedMarket?.question}
                 </div>
                 <BetDetails
                   endDate={"12th September, 2024"}
-                  icon={market?.topic_image}
+                  icon={enhancedMarket?.topic_image}
                   multiplier={2}
-                  topicId={market?.topic_id}
-                  members={market?.members}
+                  topicId={enhancedMarket?.topic_id}
+                  members={enhancedMarket?.members}
                   handleBoost={() => {}}
                   joined={false}
-                  question={market?.topic_description}
-                  image={market?.image}
-                  topic={market?.topic_title}
+                  question={enhancedMarket?.topic_description}
+                  image={enhancedMarket?.image}
+                  topic={enhancedMarket?.topic_title}
                   id={id}
                   isDesktop={true}
                 />
@@ -146,31 +156,31 @@ export function DesktopMarketPage({ users, market, id }) {
             <Col xs={4} lg={3}>
               <div className="pt-3 xl:px-4 pb-1 rounded-[1.5rem] ">
                 <DesktopPredictComponent
-                  id={market?.id}
-                  question={market?.question}
-                  title={market?.title}
-                  image={market?.image}
-                  initialProb={market?.initialprob}
+                  id={enhancedMarket?.id}
+                  question={enhancedMarket?.question}
+                  title={enhancedMarket?.title}
+                  image={enhancedMarket?.image}
+                  initialProb={enhancedMarket?.initialprob}
                   userOwns={userOwns}
                   options={[
                     {
-                      name: market?.options[0].name,
-                      value: market?.outcomea,
+                      name: enhancedMarket?.options[0].name,
+                      value: enhancedMarket?.outcomeOddsA,
                     },
                     {
-                      name: market?.options[1].name,
-                      value: market?.outcomeb,
+                      name: enhancedMarket?.options[1].name,
+                      value: enhancedMarket?.outcomeOddsB,
                     },
                   ]}
-                  topic={market?.topic_title}
+                  topic={enhancedMarket?.topic_title}
                 />
               </div>
             </Col>
             <Col xs={5} className=" p-4 rounded-lg mt-1">
               <CommentSection
-                topic_id={market?.topic_id}
+                topic_id={enhancedMarket?.topic_id}
                 users={users}
-                totalComments={market?.total_comments}
+                totalComments={enhancedMarket?.total_comments}
                 marketId={id}
                 isDesktop={true}
               />
@@ -179,8 +189,8 @@ export function DesktopMarketPage({ users, market, id }) {
               <div className="mx-4 mt-2 rounded-lg">
                 <RelatedMarkets
                   isDesktop={true}
-                  topicId={market?.topic_id}
-                  id={market?.id}
+                  topicId={enhancedMarket?.topic_id}
+                  id={enhancedMarket?.id}
                 />
               </div>
             </Col>

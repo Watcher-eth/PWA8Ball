@@ -32,7 +32,7 @@ export async function fetchUsersByMarketId(
   // Create a Map to aggregate the amounts for each user
   const userMap = new Map<string, IUserWithBet>();
 
-  data.forEach((item) => {
+  data?.forEach((item) => {
     const userId = item.users.external_auth_provider_user_id;
     if (userMap.has(userId)) {
       // If the user already exists in the map, aggregate the amounts

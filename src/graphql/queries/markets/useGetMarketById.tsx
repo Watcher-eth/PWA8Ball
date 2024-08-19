@@ -3,7 +3,7 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_ONCHAIN_MARKET = gql`
-  query getMarketById($id: BigInt) {
+  query getMarketById($id: BigInt = "24") {
     market(id: $id) {
       id
       createdAt
@@ -11,23 +11,26 @@ const GET_ONCHAIN_MARKET = gql`
       liquidityTotal
       outcomeA
       outcomeB
+      outcomeOddsA
+      outcomeOddsB
       outcome
       proposedAt
       question
       proposedOutcome
       title
       usdcStake
+      topicId
     }
   }
 `;
 
-export function useGetMarketById(id: number) {
+export function useGetMarketById(id: string) {
   const {
     data: marketData,
     loading: marketLoading,
     error: marketError,
   } = useApolloQuery(GET_ONCHAIN_MARKET, {
-    variables: { id: BigInt(id) },
+    variables: { id: String(id) },
   });
 
   //TODO: Get Topic

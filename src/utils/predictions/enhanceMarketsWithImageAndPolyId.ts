@@ -35,6 +35,7 @@ export function enhanceMarketsWithImageAndPolyId(
         topic_description: matchingTopic?.description || null,
         topic_image: matchingTopic?.image,
         icon: matchingTopic?.image,
+        id: market?.marketId,
       };
     }
 
@@ -49,6 +50,7 @@ export function enhanceMarketsWithImageAndPolyId(
       topic_description: matchingTopic?.description || null,
       icon: matchingTopic?.image || null,
       description: market.question,
+      id: market?.marketId,
     };
   });
 }
@@ -60,35 +62,38 @@ export function enhanceSingleMarketWithImageAndPolyId(
 ) {
   // Find the matching market in the constant data
   const matchingMarket = constantData.find(
-    (item) => item.id === parseInt(market.marketId, 10)
+    (item) => item.id === parseInt(market?.id, 10)
   );
 
   // Find the matching topic in the hardTopics data
   const matchingTopic = hardTopics.find(
-    (topic) => topic.id === market.topicId.toString()
+    (topic) => topic.id === market?.topicId?.toString()
   );
 
+  console.log("matchingTopic", market);
   // Create the options array
   const options = [
-    { name: market.outcomeA, value: market.outcomeOddsA },
-    { name: market.outcomeB, value: market.outcomeOddsB },
+    { name: market?.outcomeA, value: market?.outcomeOddsA },
+    { name: market?.outcomeB, value: market?.outcomeOddsB },
   ];
+  console.log("options", options);
 
   // If a matching market is found, add the image, PolyId, options, and topic data
   if (matchingMarket) {
     return {
       ...market,
-      image: matchingMarket.image,
-      PolyId: matchingMarket.PolyId,
+      image: matchingMarket?.image,
+      PolyId: matchingMarket?.PolyId,
       options,
-      description: market.question,
-      optionA: { name: market.outcomeA, value: market.outcomeOddsA },
-      optionB: { name: market.outcomeB, value: market.outcomeOddsB },
+      question: market?.question,
+      optionA: { name: market?.outcomeA, value: market?.outcomeOddsA },
+      optionB: { name: market?.outcomeB, value: market?.outcomeOddsB },
       topic_id: matchingTopic?.id || null,
       topic_title: matchingTopic?.title || null,
       topic_description: matchingTopic?.description || null,
       topic_image: matchingTopic?.image,
       icon: matchingTopic?.image,
+      id: market?.marketId,
     };
   }
 
@@ -96,12 +101,14 @@ export function enhanceSingleMarketWithImageAndPolyId(
   return {
     ...market,
     options,
-    optionA: { name: market.outcomeA, value: market.outcomeOddsA },
-    optionB: { name: market.outcomeB, value: market.outcomeOddsB },
+    optionA: { name: market?.outcomeA, value: market?.outcomeOddsA },
+    optionB: { name: market?.outcomeB, value: market?.outcomeOddsB },
     topic_id: matchingTopic?.id || null,
     topic_title: matchingTopic?.title || null,
     topic_description: matchingTopic?.description || null,
     icon: matchingTopic?.image || null,
-    description: market.question,
+    question: market?.question,
+    id: market?.marketId,
+    image: matchingMarket?.image,
   };
 }

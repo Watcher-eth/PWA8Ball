@@ -5,7 +5,6 @@ import { ArrowLeft, Share } from "lucide-react";
 
 import { HOME_PATH } from "@/utils/urls";
 import { fillUserImages } from "@/utils/fillUserImages";
-import { formatMarket } from "@/utils/markets/formatMarketArr";
 
 import { useModalStore } from "@/lib/stores/ModalStore";
 
@@ -22,23 +21,32 @@ import { MobileBettersModal } from "@/components/predictions/Betters/MobileBette
 import { CommentSection } from "@/components/predictions/CommentSection";
 import { BetDetails } from "@/components/predictions/BetDetails";
 import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
+import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
+import { hardMarkets } from "@/constants/markets";
+import { hardTopics } from "@/constants/topics";
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { formatMarket } from "@/utils/markets/formatMarketArr";
 
-
-
-export function MobileMarketPage({ market, users }) {
+export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
+  const { data: newMarket } = useGetMarketById(id);
+  const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
+    newMarket,
+    hardMarkets,
+    hardTopics
+  );
 
   return (
     <MobileDrawerContainer>
       <MobileMarketContent
         setIsDrawerOpen={() => {}}
         users={users}
-        market={market}
+        market={enhancedMarket}
         userImages={userImages}
         openLoginModal={openLoginModal}
         handleOpen={() => {}}
-        {...formatMarket(market)}
+        {...formatMarket(enhancedMarket)}
       />
     </MobileDrawerContainer>
   );
