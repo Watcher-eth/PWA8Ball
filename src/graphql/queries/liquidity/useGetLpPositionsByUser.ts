@@ -2,24 +2,26 @@
 
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_LP_POSITION_VALUES = gql`
-  query getUserLpPositionsValues($userAddress: String!) {
-    lpPositionValues(where: { userAddress: $userAddress }) {
+const GET_LP_CHART_DATA = gql`
+  query getLpPositionsData($userAddress: String!) {
+    lpPositionInfos(where: { userAddress: $userAddress }) {
       items {
+        amountLp
+        amountUsdc
         marketId
+        id
         timestamp
-        value
+        userAddress
       }
     }
   }
 `;
-
 export function useGetLpPositionsByUser(userAddress: string) {
   const {
     data: lpData,
     loading: lpLoading,
     error: lpError,
-  } = useApolloQuery(GET_LP_POSITION_VALUES, {
+  } = useApolloQuery(GET_LP_CHART_DATA, {
     variables: { userAddress },
   });
 

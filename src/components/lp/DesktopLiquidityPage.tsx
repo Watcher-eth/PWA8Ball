@@ -10,6 +10,7 @@ import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholde
 
 import { DesktopLiquidityPosition } from "./LiquidityPosition";
 import { DesktopLpChart } from "./DesktopLpChart";
+import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPositionsByUser";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
@@ -20,13 +21,18 @@ export function DesktopLiquidityPage() {
     error,
   } = useGetUserLp(user?.walletaddress);
 
+  const {
+    data: lpPositionsData,
+    loading: lpPositionsLoading,
+    error: lpPositionsError,
+  } = useGetLpPositionsByUser(user?.walletaddress);
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
   const totalAmount = filteredPositions.reduce(
     (acc, item) => acc + item.amount,
     0
   );
 
-  console.log("pos", positions);
+  console.log("pos", lpPositionsData);
   return (
     <StandardPageWrapper>
       <div className="pt-10 flex flex-col h-full min-h-screen bg-[#080808] w-full ">
