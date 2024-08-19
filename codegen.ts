@@ -1,7 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 
 const GRAPH_ENDPOINT_URL =
-  "https://glimpse-dev.up.railway.app/";
+  "https://glimpse-main.up.railway.app/";
 
 const config: CodegenConfig = {
   schema: GRAPH_ENDPOINT_URL,
