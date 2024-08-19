@@ -19,6 +19,10 @@ import JoinTopicButton from "./JoinTopicButton";
 import { motion } from "framer-motion";
 import { skeletonVariants } from "../ui/Skeleton";
 import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { hardMarkets } from "@/constants/markets";
+import { hardTopics } from "@/constants/topics";
 
 function DesktopTopic({
   name,
@@ -35,8 +39,15 @@ function DesktopTopic({
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
   const { data: markets } = useGetMarketsForTopic(id);
+  const { data: newMarkets } = useGetAllMarketsForTopic(Number(id));
   const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
   const { user } = useUserStore();
+
+  const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
+    newMarkets?.markets?.items,
+    hardMarkets,
+    hardTopics
+  );
 
   const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
     []
@@ -53,7 +64,7 @@ function DesktopTopic({
 
   const handleComment = () => {};
   const setReply = () => {};
-
+  console.log("markets2", enhancedMarkets);
   const renderDesktopTopicItems = (items, size, count) => {
     const placeholders = Array.from({ length: count - items.length });
     return (
@@ -68,8 +79,8 @@ function DesktopTopic({
             size={size}
             id={item.id}
             outcomes={[
-              { name: item.options[0].name, value: item.outcomea },
-              { name: item.options[1].name, value: item.outcomeb },
+              { name: item.options[0].name, value: item.outcomeOddsA / 100 },
+              { name: item.options[1].name, value: item.outcomeOddsB / 100 },
             ]}
           />
         ))}
@@ -86,7 +97,7 @@ function DesktopTopic({
 
   return (
     <StandardPageWrapper className="h-full flex flex-col">
-      {user && <BlurOverlay />}
+      {/* {user && <BlurOverlay />} */}
 
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
@@ -145,10 +156,18 @@ function DesktopTopic({
           Top Predictions
         </div>
         <div className="flex flex-row space-x-4 mb-8">
-          {renderDesktopTopicItems(markets?.slice(0, 3) || [], "large", 3)}
+          {renderDesktopTopicItems(
+            enhancedMarkets?.slice(0, 3) || [],
+            "large",
+            3
+          )}
         </div>
         <div className="flex flex-row space-x-3 mb-20">
-          {renderDesktopTopicItems(markets?.slice(0, 5) || [], "small", 5)}
+          {renderDesktopTopicItems(
+            enhancedMarkets?.slice(3, 8) || [],
+            "small",
+            5
+          )}
         </div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
