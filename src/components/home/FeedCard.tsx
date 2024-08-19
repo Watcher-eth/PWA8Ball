@@ -9,9 +9,10 @@ export function FeedCard({
   description,
   icon,
   id,
-  outcomea,
+  outcomeA,
   optionA,
 }) {
+  console.log("props", optionA);
   return (
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>
@@ -21,8 +22,8 @@ export function FeedCard({
           description={description}
           icon={icon}
           setIsDrawerOpen={() => {}}
-          odds={outcomea}
-          optionA={optionA.name}
+          odds={optionA?.value}
+          optionA={optionA?.name}
         />
       </Link>
     </div>
@@ -54,7 +55,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         style={{ fontFamily: "Aeonik-Bold" }}
         className="absolute top-4 z-3 right-3 text-[0.95rem] bg-[#181818]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
       >
-        {(odds / 100).toFixed(0)}% {optionA !== "Yes" ? optionA : "Chance"}
+        {(odds / 10000).toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div
         style={{

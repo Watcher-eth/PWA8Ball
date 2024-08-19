@@ -246,7 +246,6 @@ export function DesktopProfilePage2({ userId, userC }) {
           </div>
         )}
       </div>
-      {user && <BlurOverlay />}{" "}
     </StandardPageWrapper>
   );
 }
