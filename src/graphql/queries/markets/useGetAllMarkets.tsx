@@ -1,8 +1,9 @@
 //@ts-nocheck
 
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { gql } from "@/__generated__";
+import { useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_ALL_MARKETS = gql`
+const GET_ALL_MARKETS = gql(/* GraphQL */ `
   query AllMarkets {
     markets {
       items {
@@ -18,7 +19,7 @@ const GET_ALL_MARKETS = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetAllMarkets() {
   const {

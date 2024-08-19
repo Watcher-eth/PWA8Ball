@@ -1,9 +1,10 @@
 //@ts-nocheck
 
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { gql } from "@/__generated__";
+import { useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_ONCHAIN_MARKET = gql`
-  query getMarketById($id: BigInt = "24") {
+const GET_ONCHAIN_MARKET = gql(/* GraphQL */ `
+  query getMarketById($id: BigInt!) {
     market(id: $id) {
       id
       createdAt
@@ -22,7 +23,7 @@ const GET_ONCHAIN_MARKET = gql`
       topicId
     }
   }
-`;
+`);
 
 export function useGetMarketById(id: string) {
   const {

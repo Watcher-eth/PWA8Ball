@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery } from "@apollo/client";
 import { supabase } from "@/supabase/supabaseClient";
+import { gql } from "@/__generated__";
 
 // GraphQL query to fetch orders by user addresses
-const GET_ORDERS_BY_USER_ADDRESSES = gql`
+const GET_ORDERS_BY_USER_ADDRESSES = gql(/* GraphQL */ `
   query FriendsOrders($userAddress_in: [String]!) {
     positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
       items {
@@ -31,7 +32,7 @@ const GET_ORDERS_BY_USER_ADDRESSES = gql`
       }
     }
   }
-`;
+`);
 
 // Function to fetch the IDs of users that a specific user follows
 const fetchFollowingIds = async (userId: string): Promise<string[]> => {

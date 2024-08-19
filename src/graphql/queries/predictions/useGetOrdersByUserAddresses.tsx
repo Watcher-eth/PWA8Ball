@@ -1,9 +1,10 @@
 //@ts-nocheck
 
+import { gql } from "@/__generated__";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_ORDERS_BY_USER_ADDRESSES = gql`
+const GET_ORDERS_BY_USER_ADDRESSES = gql(/* GraphQL */ `
   query FriendsOrders($userAddress_in: [String]!) {
     positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
       items {
@@ -30,7 +31,7 @@ const GET_ORDERS_BY_USER_ADDRESSES = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetOrdersByUserAddresses(userAddresses: string[]) {
   const { data, loading, error } = useApolloQuery(

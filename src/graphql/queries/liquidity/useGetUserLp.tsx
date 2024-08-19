@@ -1,11 +1,12 @@
 //@ts-nocheck
 
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
+import { gql } from "@/__generated__";
 
-const GET_USER_LP = gql`
-  query getMarketById($userAddress: String!) {
-    lps(where: { userAddress: $userAddress }) {
+const GET_USER_LP = gql(/* GraphQL */ `
+  query getUserLp($userAddress: String!) {
+    lpPositions(where: { userAddress: $userAddress }) {
       items {
         amount
         lpAmount
@@ -19,7 +20,7 @@ const GET_USER_LP = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetUserLp(userAddress: string) {
   const {

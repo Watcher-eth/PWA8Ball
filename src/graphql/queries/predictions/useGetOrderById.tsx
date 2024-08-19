@@ -1,7 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@/__generated__";
+import { useQuery } from "@apollo/client";
 
 // Define the GraphQL query
-const GET_ORDER_BY_ID = gql`
+const GET_ORDER_BY_ID = gql(/* GraphQL */ `
   query OrderById($id: String!) {
     position(id: $id) {
       marketId
@@ -23,7 +24,7 @@ const GET_ORDER_BY_ID = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetOrderById(id: string) {
   const { data, loading, error } = useQuery(GET_ORDER_BY_ID, {
