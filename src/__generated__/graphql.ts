@@ -19,29 +19,47 @@ export type Scalars = {
   JSON: { input: any; output: any; }
 };
 
-export type Lp = {
-  __typename?: 'Lp';
-  amount: Scalars['BigInt']['output'];
+export type LpPosition = {
+  __typename?: 'LpPosition';
+  amountLp: Scalars['BigInt']['output'];
+  amountUsdc: Scalars['BigInt']['output'];
+  createdAt: Scalars['BigInt']['output'];
   id: Scalars['String']['output'];
-  lpAmount: Scalars['BigInt']['output'];
-  market: OnchainMarket;
+  market: Market;
   marketId: Scalars['BigInt']['output'];
-  timestamp: Scalars['BigInt']['output'];
+  totalSupply: Scalars['BigInt']['output'];
+  updatedAt: Scalars['BigInt']['output'];
   user: User;
   userAddress: Scalars['String']['output'];
 };
 
-export type LpFilter = {
-  AND?: InputMaybe<Array<InputMaybe<LpFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<LpFilter>>>;
-  amount?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  amount_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_not?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+export type LpPositionFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LpPositionFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LpPositionFilter>>>;
+  amountLp?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountLp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  createdAt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  createdAt_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_not?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   id?: InputMaybe<Scalars['String']['input']>;
   id_contains?: InputMaybe<Scalars['String']['input']>;
   id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -52,14 +70,6 @@ export type LpFilter = {
   id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   id_starts_with?: InputMaybe<Scalars['String']['input']>;
-  lpAmount?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  lpAmount_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_not?: InputMaybe<Scalars['BigInt']['input']>;
-  lpAmount_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   marketId?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_gt?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -68,14 +78,22 @@ export type LpFilter = {
   marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  timestamp?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  timestamp_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  totalSupply?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  totalSupply_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_not?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  updatedAt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  updatedAt_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_not?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   userAddress?: InputMaybe<Scalars['String']['input']>;
   userAddress_contains?: InputMaybe<Scalars['String']['input']>;
   userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -88,24 +106,41 @@ export type LpFilter = {
   userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type LpPage = {
-  __typename?: 'LpPage';
-  items: Array<Lp>;
+export type LpPositionPage = {
+  __typename?: 'LpPositionPage';
+  items: Array<LpPosition>;
   pageInfo: PageInfo;
 };
 
-export type LpPositionValue = {
-  __typename?: 'LpPositionValue';
+export type LpPositionPrice = {
+  __typename?: 'LpPositionPrice';
+  amountLp: Scalars['BigInt']['output'];
+  amountUsdc: Scalars['BigInt']['output'];
   id: Scalars['String']['output'];
   marketId: Scalars['BigInt']['output'];
   timestamp: Scalars['BigInt']['output'];
   userAddress: Scalars['String']['output'];
-  value: Scalars['BigInt']['output'];
 };
 
-export type LpPositionValueFilter = {
-  AND?: InputMaybe<Array<InputMaybe<LpPositionValueFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<LpPositionValueFilter>>>;
+export type LpPositionPriceFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LpPositionPriceFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LpPositionPriceFilter>>>;
+  amountLp?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountLp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   id?: InputMaybe<Scalars['String']['input']>;
   id_contains?: InputMaybe<Scalars['String']['input']>;
   id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -142,44 +177,138 @@ export type LpPositionValueFilter = {
   userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
-  value?: InputMaybe<Scalars['BigInt']['input']>;
-  value_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  value_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  value_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  value_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  value_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  value_not?: InputMaybe<Scalars['BigInt']['input']>;
-  value_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
 };
 
-export type LpPositionValuePage = {
-  __typename?: 'LpPositionValuePage';
-  items: Array<LpPositionValue>;
+export type LpPositionPricePage = {
+  __typename?: 'LpPositionPricePage';
+  items: Array<LpPositionPrice>;
   pageInfo: PageInfo;
 };
 
-export type OnchainMarket = {
-  __typename?: 'OnchainMarket';
-  createdAt: Scalars['BigInt']['output'];
-  id: Scalars['BigInt']['output'];
-  initialProb?: Maybe<Scalars['BigInt']['output']>;
-  liquidityTotalSupply?: Maybe<Scalars['BigInt']['output']>;
-  liquidityUSDC?: Maybe<Scalars['BigInt']['output']>;
-  outcome?: Maybe<Scalars['String']['output']>;
-  outcomeA?: Maybe<Scalars['BigInt']['output']>;
-  outcomeB?: Maybe<Scalars['BigInt']['output']>;
-  pairAddress?: Maybe<Scalars['String']['output']>;
-  proposedAt?: Maybe<Scalars['BigInt']['output']>;
-  proposedOutcome?: Maybe<Scalars['String']['output']>;
-  resolved?: Maybe<Scalars['Boolean']['output']>;
-  resolvedAt?: Maybe<Scalars['BigInt']['output']>;
-  updatedAt?: Maybe<Scalars['BigInt']['output']>;
-  usdcStake: Scalars['BigInt']['output'];
+export type LpTrade = {
+  __typename?: 'LpTrade';
+  amountLp: Scalars['BigInt']['output'];
+  amountUsdc: Scalars['BigInt']['output'];
+  id: Scalars['String']['output'];
+  market: Market;
+  marketId: Scalars['BigInt']['output'];
+  timestamp: Scalars['BigInt']['output'];
+  totalSupply: Scalars['BigInt']['output'];
+  txHash: Scalars['String']['output'];
+  user: User;
+  userAddress: Scalars['String']['output'];
 };
 
-export type OnchainMarketFilter = {
-  AND?: InputMaybe<Array<InputMaybe<OnchainMarketFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<OnchainMarketFilter>>>;
+export type LpTradeFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LpTradeFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LpTradeFilter>>>;
+  amountLp?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountLp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountLp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  id_contains?: InputMaybe<Scalars['String']['input']>;
+  id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not?: InputMaybe<Scalars['String']['input']>;
+  id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  marketId?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  marketId_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  timestamp?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  totalSupply?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  totalSupply_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_not?: InputMaybe<Scalars['BigInt']['input']>;
+  totalSupply_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  txHash?: InputMaybe<Scalars['String']['input']>;
+  txHash_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress?: InputMaybe<Scalars['String']['input']>;
+  userAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LpTradePage = {
+  __typename?: 'LpTradePage';
+  items: Array<LpTrade>;
+  pageInfo: PageInfo;
+};
+
+export type Market = {
+  __typename?: 'Market';
+  createdAt: Scalars['BigInt']['output'];
+  id: Scalars['BigInt']['output'];
+  initialProb: Scalars['BigInt']['output'];
+  liquidityBalanceUsdc: Scalars['BigInt']['output'];
+  liquidityTotal?: Maybe<Scalars['BigInt']['output']>;
+  marketId: Scalars['BigInt']['output'];
+  outcome?: Maybe<Scalars['String']['output']>;
+  outcomeA: Scalars['String']['output'];
+  outcomeB: Scalars['String']['output'];
+  outcomeOddsA: Scalars['BigInt']['output'];
+  outcomeOddsB: Scalars['BigInt']['output'];
+  pairAddress: Scalars['String']['output'];
+  proposedAt?: Maybe<Scalars['BigInt']['output']>;
+  proposedOutcome?: Maybe<Scalars['String']['output']>;
+  question: Scalars['String']['output'];
+  resolved?: Maybe<Scalars['Boolean']['output']>;
+  resolvedAt?: Maybe<Scalars['BigInt']['output']>;
+  title: Scalars['String']['output'];
+  topicId: Scalars['Int']['output'];
+  updatedAt?: Maybe<Scalars['BigInt']['output']>;
+  usdcStake: Scalars['BigInt']['output'];
+  userAddress: Scalars['String']['output'];
+};
+
+export type MarketFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MarketFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<MarketFilter>>>;
   createdAt?: InputMaybe<Scalars['BigInt']['input']>;
   createdAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
   createdAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -204,39 +333,67 @@ export type OnchainMarketFilter = {
   initialProb_lte?: InputMaybe<Scalars['BigInt']['input']>;
   initialProb_not?: InputMaybe<Scalars['BigInt']['input']>;
   initialProb_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  liquidityTotalSupply?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  liquidityTotalSupply_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_not?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityTotalSupply_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  liquidityUSDC?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  liquidityUSDC_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_not?: InputMaybe<Scalars['BigInt']['input']>;
-  liquidityUSDC_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  liquidityBalanceUsdc?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  liquidityBalanceUsdc_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_not?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityBalanceUsdc_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  liquidityTotal?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  liquidityTotal_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_not?: InputMaybe<Scalars['BigInt']['input']>;
+  liquidityTotal_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  marketId?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  marketId_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  outcomeA?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  outcomeA_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_not?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeA_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  outcomeB?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  outcomeB_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_not?: InputMaybe<Scalars['BigInt']['input']>;
-  outcomeB_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  outcomeA?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_contains?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_ends_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  outcomeA_not?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_not_contains?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  outcomeA_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeA_starts_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeB?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_contains?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_ends_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  outcomeB_not?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_not_contains?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  outcomeB_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeB_starts_with?: InputMaybe<Scalars['String']['input']>;
+  outcomeOddsA?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  outcomeOddsA_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_not?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsA_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  outcomeOddsB?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  outcomeOddsB_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_not?: InputMaybe<Scalars['BigInt']['input']>;
+  outcomeOddsB_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   outcome_contains?: InputMaybe<Scalars['String']['input']>;
   outcome_ends_with?: InputMaybe<Scalars['String']['input']>;
   outcome_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -274,6 +431,16 @@ export type OnchainMarketFilter = {
   proposedOutcome_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   proposedOutcome_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   proposedOutcome_starts_with?: InputMaybe<Scalars['String']['input']>;
+  question?: InputMaybe<Scalars['String']['input']>;
+  question_contains?: InputMaybe<Scalars['String']['input']>;
+  question_ends_with?: InputMaybe<Scalars['String']['input']>;
+  question_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  question_not?: InputMaybe<Scalars['String']['input']>;
+  question_not_contains?: InputMaybe<Scalars['String']['input']>;
+  question_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  question_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  question_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  question_starts_with?: InputMaybe<Scalars['String']['input']>;
   resolved?: InputMaybe<Scalars['Boolean']['input']>;
   resolvedAt?: InputMaybe<Scalars['BigInt']['input']>;
   resolvedAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
@@ -286,6 +453,24 @@ export type OnchainMarketFilter = {
   resolved_in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
   resolved_not?: InputMaybe<Scalars['Boolean']['input']>;
   resolved_not_in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_ends_with?: InputMaybe<Scalars['String']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  title_starts_with?: InputMaybe<Scalars['String']['input']>;
+  topicId?: InputMaybe<Scalars['Int']['input']>;
+  topicId_gt?: InputMaybe<Scalars['Int']['input']>;
+  topicId_gte?: InputMaybe<Scalars['Int']['input']>;
+  topicId_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  topicId_lt?: InputMaybe<Scalars['Int']['input']>;
+  topicId_lte?: InputMaybe<Scalars['Int']['input']>;
+  topicId_not?: InputMaybe<Scalars['Int']['input']>;
+  topicId_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   updatedAt?: InputMaybe<Scalars['BigInt']['input']>;
   updatedAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
   updatedAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -302,38 +487,56 @@ export type OnchainMarketFilter = {
   usdcStake_lte?: InputMaybe<Scalars['BigInt']['input']>;
   usdcStake_not?: InputMaybe<Scalars['BigInt']['input']>;
   usdcStake_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  userAddress?: InputMaybe<Scalars['String']['input']>;
+  userAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type OnchainMarketPage = {
-  __typename?: 'OnchainMarketPage';
-  items: Array<OnchainMarket>;
+export type MarketPage = {
+  __typename?: 'MarketPage';
+  items: Array<Market>;
   pageInfo: PageInfo;
 };
 
-export type Order = {
-  __typename?: 'Order';
-  amount: Scalars['BigInt']['output'];
-  id: Scalars['String']['output'];
-  market: OnchainMarket;
-  marketId: Scalars['BigInt']['output'];
-  option: Scalars['Int']['output'];
-  price: Scalars['BigInt']['output'];
-  sender: Scalars['String']['output'];
-  timestamp: Scalars['BigInt']['output'];
-  tokensOwned: Scalars['BigInt']['output'];
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-export type OrderFilter = {
-  AND?: InputMaybe<Array<InputMaybe<OrderFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<OrderFilter>>>;
-  amount?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  amount_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_not?: InputMaybe<Scalars['BigInt']['input']>;
-  amount_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+export type Position = {
+  __typename?: 'Position';
+  createdAt: Scalars['BigInt']['output'];
+  id: Scalars['String']['output'];
+  market: Market;
+  marketId: Scalars['BigInt']['output'];
+  option: Scalars['Int']['output'];
+  tokensOwned: Scalars['BigInt']['output'];
+  updatedAt?: Maybe<Scalars['BigInt']['output']>;
+  user: User;
+  userAddress: Scalars['String']['output'];
+};
+
+export type PositionFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PositionFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PositionFilter>>>;
+  createdAt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  createdAt_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_not?: InputMaybe<Scalars['BigInt']['input']>;
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   id?: InputMaybe<Scalars['String']['input']>;
   id_contains?: InputMaybe<Scalars['String']['input']>;
   id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -360,32 +563,6 @@ export type OrderFilter = {
   option_lte?: InputMaybe<Scalars['Int']['input']>;
   option_not?: InputMaybe<Scalars['Int']['input']>;
   option_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  price?: InputMaybe<Scalars['BigInt']['input']>;
-  price_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  price_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  price_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  price_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  price_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  price_not?: InputMaybe<Scalars['BigInt']['input']>;
-  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  sender?: InputMaybe<Scalars['String']['input']>;
-  sender_contains?: InputMaybe<Scalars['String']['input']>;
-  sender_ends_with?: InputMaybe<Scalars['String']['input']>;
-  sender_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  sender_not?: InputMaybe<Scalars['String']['input']>;
-  sender_not_contains?: InputMaybe<Scalars['String']['input']>;
-  sender_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  sender_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  sender_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  sender_starts_with?: InputMaybe<Scalars['String']['input']>;
-  timestamp?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  timestamp_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
-  timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   tokensOwned?: InputMaybe<Scalars['BigInt']['input']>;
   tokensOwned_gt?: InputMaybe<Scalars['BigInt']['input']>;
   tokensOwned_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -394,34 +571,54 @@ export type OrderFilter = {
   tokensOwned_lte?: InputMaybe<Scalars['BigInt']['input']>;
   tokensOwned_not?: InputMaybe<Scalars['BigInt']['input']>;
   tokensOwned_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  updatedAt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  updatedAt_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_not?: InputMaybe<Scalars['BigInt']['input']>;
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  userAddress?: InputMaybe<Scalars['String']['input']>;
+  userAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type OrderPage = {
-  __typename?: 'OrderPage';
-  items: Array<Order>;
+export type PositionPage = {
+  __typename?: 'PositionPage';
+  items: Array<Position>;
   pageInfo: PageInfo;
-};
-
-export type PageInfo = {
-  __typename?: 'PageInfo';
-  endCursor?: Maybe<Scalars['String']['output']>;
-  hasNextPage: Scalars['Boolean']['output'];
-  hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 export type Price = {
   __typename?: 'Price';
+  blockNumber: Scalars['BigInt']['output'];
   id: Scalars['String']['output'];
   marketId: Scalars['BigInt']['output'];
-  outcome: Scalars['BigInt']['output'];
   price: Scalars['BigInt']['output'];
   timestamp: Scalars['BigInt']['output'];
+  trade?: Maybe<Trade>;
+  txHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type PriceFilter = {
   AND?: InputMaybe<Array<InputMaybe<PriceFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PriceFilter>>>;
+  blockNumber?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  blockNumber_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_not?: InputMaybe<Scalars['BigInt']['input']>;
+  blockNumber_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   id?: InputMaybe<Scalars['String']['input']>;
   id_contains?: InputMaybe<Scalars['String']['input']>;
   id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -440,14 +637,6 @@ export type PriceFilter = {
   marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
   marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  outcome?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_gt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_gte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
-  outcome_lt?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_lte?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_not?: InputMaybe<Scalars['BigInt']['input']>;
-  outcome_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
   price?: InputMaybe<Scalars['BigInt']['input']>;
   price_gt?: InputMaybe<Scalars['BigInt']['input']>;
   price_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -464,6 +653,16 @@ export type PriceFilter = {
   timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
   timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
   timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  txHash?: InputMaybe<Scalars['String']['input']>;
+  txHash_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PricePage = {
@@ -475,78 +674,97 @@ export type PricePage = {
 export type Query = {
   __typename?: 'Query';
   _meta?: Maybe<_Meta>;
-  lp?: Maybe<Lp>;
-  lpPositionValue?: Maybe<LpPositionValue>;
-  lpPositionValues: LpPositionValuePage;
-  lps: LpPage;
-  onchainMarket?: Maybe<OnchainMarket>;
-  onchainMarkets: OnchainMarketPage;
-  order?: Maybe<Order>;
-  orders: OrderPage;
+  lpPosition?: Maybe<LpPosition>;
+  lpPositionPrice?: Maybe<LpPositionPrice>;
+  lpPositionPrices: LpPositionPricePage;
+  lpPositions: LpPositionPage;
+  lpTrade?: Maybe<LpTrade>;
+  lpTrades: LpTradePage;
+  market?: Maybe<Market>;
+  markets: MarketPage;
+  position?: Maybe<Position>;
+  positions: PositionPage;
   price?: Maybe<Price>;
   prices: PricePage;
+  trade?: Maybe<Trade>;
+  trades: TradePage;
   user?: Maybe<User>;
   users: UserPage;
 };
 
 
-export type QueryLpArgs = {
+export type QueryLpPositionArgs = {
   id: Scalars['String']['input'];
 };
 
 
-export type QueryLpPositionValueArgs = {
+export type QueryLpPositionPriceArgs = {
   id: Scalars['String']['input'];
 };
 
 
-export type QueryLpPositionValuesArgs = {
+export type QueryLpPositionPricesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Scalars['String']['input']>;
   orderDirection?: InputMaybe<Scalars['String']['input']>;
-  where?: InputMaybe<LpPositionValueFilter>;
+  where?: InputMaybe<LpPositionPriceFilter>;
 };
 
 
-export type QueryLpsArgs = {
+export type QueryLpPositionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Scalars['String']['input']>;
   orderDirection?: InputMaybe<Scalars['String']['input']>;
-  where?: InputMaybe<LpFilter>;
+  where?: InputMaybe<LpPositionFilter>;
 };
 
 
-export type QueryOnchainMarketArgs = {
+export type QueryLpTradeArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryLpTradesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Scalars['String']['input']>;
+  orderDirection?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<LpTradeFilter>;
+};
+
+
+export type QueryMarketArgs = {
   id: Scalars['BigInt']['input'];
 };
 
 
-export type QueryOnchainMarketsArgs = {
+export type QueryMarketsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Scalars['String']['input']>;
   orderDirection?: InputMaybe<Scalars['String']['input']>;
-  where?: InputMaybe<OnchainMarketFilter>;
+  where?: InputMaybe<MarketFilter>;
 };
 
 
-export type QueryOrderArgs = {
+export type QueryPositionArgs = {
   id: Scalars['String']['input'];
 };
 
 
-export type QueryOrdersArgs = {
+export type QueryPositionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Scalars['String']['input']>;
   orderDirection?: InputMaybe<Scalars['String']['input']>;
-  where?: InputMaybe<OrderFilter>;
+  where?: InputMaybe<PositionFilter>;
 };
 
 
@@ -565,6 +783,21 @@ export type QueryPricesArgs = {
 };
 
 
+export type QueryTradeArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryTradesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Scalars['String']['input']>;
+  orderDirection?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<TradeFilter>;
+};
+
+
 export type QueryUserArgs = {
   id: Scalars['String']['input'];
 };
@@ -577,6 +810,130 @@ export type QueryUsersArgs = {
   orderBy?: InputMaybe<Scalars['String']['input']>;
   orderDirection?: InputMaybe<Scalars['String']['input']>;
   where?: InputMaybe<UserFilter>;
+};
+
+export type Trade = {
+  __typename?: 'Trade';
+  amountTokens: Scalars['BigInt']['output'];
+  amountUsdc: Scalars['BigInt']['output'];
+  id: Scalars['String']['output'];
+  market: Market;
+  marketId: Scalars['BigInt']['output'];
+  netAmount: Scalars['BigInt']['output'];
+  option: Scalars['Int']['output'];
+  price: Scalars['BigInt']['output'];
+  timestamp: Scalars['BigInt']['output'];
+  tradeType: Scalars['String']['output'];
+  txHash: Scalars['String']['output'];
+  user: User;
+  userAddress: Scalars['String']['output'];
+};
+
+export type TradeFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TradeFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TradeFilter>>>;
+  amountTokens?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountTokens_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountTokens_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  amountUsdc_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not?: InputMaybe<Scalars['BigInt']['input']>;
+  amountUsdc_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  id_contains?: InputMaybe<Scalars['String']['input']>;
+  id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not?: InputMaybe<Scalars['String']['input']>;
+  id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  marketId?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  marketId_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  netAmount?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  netAmount_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_not?: InputMaybe<Scalars['BigInt']['input']>;
+  netAmount_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  option?: InputMaybe<Scalars['Int']['input']>;
+  option_gt?: InputMaybe<Scalars['Int']['input']>;
+  option_gte?: InputMaybe<Scalars['Int']['input']>;
+  option_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  option_lt?: InputMaybe<Scalars['Int']['input']>;
+  option_lte?: InputMaybe<Scalars['Int']['input']>;
+  option_not?: InputMaybe<Scalars['Int']['input']>;
+  option_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  price?: InputMaybe<Scalars['BigInt']['input']>;
+  price_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  price_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  price_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  price_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  price_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  price_not?: InputMaybe<Scalars['BigInt']['input']>;
+  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  timestamp?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  tradeType?: InputMaybe<Scalars['String']['input']>;
+  tradeType_contains?: InputMaybe<Scalars['String']['input']>;
+  tradeType_ends_with?: InputMaybe<Scalars['String']['input']>;
+  tradeType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  tradeType_not?: InputMaybe<Scalars['String']['input']>;
+  tradeType_not_contains?: InputMaybe<Scalars['String']['input']>;
+  tradeType_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  tradeType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  tradeType_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  tradeType_starts_with?: InputMaybe<Scalars['String']['input']>;
+  txHash?: InputMaybe<Scalars['String']['input']>;
+  txHash_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress?: InputMaybe<Scalars['String']['input']>;
+  userAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TradePage = {
+  __typename?: 'TradePage';
+  items: Array<Trade>;
+  pageInfo: PageInfo;
 };
 
 export type User = {
@@ -703,44 +1060,90 @@ export type _Meta = {
   status?: Maybe<Scalars['JSON']['output']>;
 };
 
-export type GetLpByUserQueryVariables = Exact<{
+export type GetMarketChartDataQueryVariables = Exact<{
+  marketId?: InputMaybe<Scalars['BigInt']['input']>;
+}>;
+
+
+export type GetMarketChartDataQuery = { __typename?: 'Query', prices: { __typename?: 'PricePage', items: Array<{ __typename?: 'Price', id: string, marketId: any, price: any, timestamp: any }> } };
+
+export type FriendsOrdersQueryVariables = Exact<{
+  userAddress_in: Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type FriendsOrdersQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null } }> } };
+
+export type GetLpPositionsDataQueryVariables = Exact<{
   userAddress: Scalars['String']['input'];
 }>;
 
 
-export type GetLpByUserQuery = { __typename?: 'Query', lps: { __typename?: 'LpPage', items: Array<{ __typename?: 'Lp', amount: any, id: string, lpAmount: any, marketId: any, timestamp: any, userAddress: string }> } };
+export type GetLpPositionsDataQuery = { __typename?: 'Query', lpPositionPrices: { __typename?: 'LpPositionPricePage', items: Array<{ __typename?: 'LpPositionPrice', amountLp: any, amountUsdc: any, marketId: any, id: string, timestamp: any, userAddress: string }> } };
 
-export type OnchainMarketQueryVariables = Exact<{
+export type GetUserLpQueryVariables = Exact<{
+  userAddress: Scalars['String']['input'];
+}>;
+
+
+export type GetUserLpQuery = { __typename?: 'Query', lpPositions: { __typename?: 'LpPositionPage', items: Array<{ __typename?: 'LpPosition', amountLp: any, amountUsdc: any, marketId: any, createdAt: any, updatedAt: any, market: { __typename?: 'Market', liquidityTotal?: any | null, title: string, question: string } }> } };
+
+export type AllMarketsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllMarketsQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', marketId: any, outcomeB: string, outcomeA: string, outcomeOddsB: any, outcomeOddsA: any, question: string, title: string, topicId: number, usdcStake: any }> } };
+
+export type GetMarketByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
 }>;
 
 
-export type OnchainMarketQuery = { __typename?: 'Query', onchainMarket?: { __typename?: 'OnchainMarket', id: any, outcomeA?: any | null, outcomeB?: any | null, usdcStake: any, liquidityUSDC?: any | null, resolved?: boolean | null, outcome?: string | null, proposedOutcome?: string | null, initialProb?: any | null, createdAt: any, updatedAt?: any | null, resolvedAt?: any | null, proposedAt?: any | null } | null };
+export type GetMarketByIdQuery = { __typename?: 'Query', market?: { __typename?: 'Market', id: any, createdAt: any, initialProb: any, liquidityTotal?: any | null, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, outcome?: string | null, proposedAt?: any | null, question: string, proposedOutcome?: string | null, title: string, usdcStake: any, topicId: number } | null };
 
-export type OrdersQueryVariables = Exact<{
-  userAddress: Scalars['String']['input'];
+export type GetUsersForMarketQueryVariables = Exact<{
+  id: Scalars['String']['input'];
 }>;
 
 
-export type OrdersQuery = { __typename?: 'Query', orders: { __typename?: 'OrderPage', items: Array<{ __typename?: 'Order', id: string, marketId: any, sender: string, amount: any, price: any, option: number, timestamp: any, tokensOwned: any, market: { __typename?: 'OnchainMarket', initialProb?: any | null } }> } };
+export type GetUsersForMarketQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, market: { __typename?: 'Market', id: any, question: string, title: string, outcomeOddsB: any, outcomeOddsA: any, outcomeB: string, outcomeA: string, initialProb: any }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null } }> } };
+
+export type OrderByIdQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type OrderByIdQuery = { __typename?: 'Query', position?: { __typename?: 'Position', marketId: any, option: number, tokensOwned: any, userAddress: string, market: { __typename?: 'Market', title: string, question: string, usdcStake: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any }, user: { __typename?: 'User', name?: string | null, pfp?: string | null } } | null };
 
 export type GetOrdersByUserQueryVariables = Exact<{
-  sender: Scalars['String']['input'];
+  userAddress?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetOrdersByUserQuery = { __typename?: 'Query', orders: { __typename?: 'OrderPage', items: Array<{ __typename?: 'Order', amount: any, marketId: any, option: number, price: any, timestamp: any, tokensOwned: any }> } };
+export type GetOrdersByUserQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null } }> } };
 
-export type ExampleOnchainMarketQueryVariables = Exact<{
-  id: Scalars['BigInt']['input'];
+export type UserOrderCountQueryVariables = Exact<{
+  userAddress?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ExampleOnchainMarketQuery = { __typename?: 'Query', onchainMarket?: { __typename?: 'OnchainMarket', id: any, outcomeA?: any | null, outcomeB?: any | null, usdcStake: any, liquidityUSDC?: any | null, resolved?: boolean | null, outcome?: string | null, proposedOutcome?: string | null, initialProb?: any | null, createdAt: any, updatedAt?: any | null, resolvedAt?: any | null, proposedAt?: any | null } | null };
+export type UserOrderCountQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, tokensOwned: any }> } };
+
+export type GetMarketsForTopicQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export const GetLpByUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLpByUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lps"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lpAmount"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"userAddress"}}]}}]}}]}}]} as unknown as DocumentNode<GetLpByUserQuery, GetLpByUserQueryVariables>;
-export const OnchainMarketDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OnchainMarket"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"onchainMarket"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}},{"kind":"Field","name":{"kind":"Name","value":"liquidityUSDC"}},{"kind":"Field","name":{"kind":"Name","value":"resolved"}},{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"proposedOutcome"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"resolvedAt"}},{"kind":"Field","name":{"kind":"Name","value":"proposedAt"}}]}}]}}]} as unknown as DocumentNode<OnchainMarketQuery, OnchainMarketQueryVariables>;
-export const OrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Orders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"sender"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"initialProb"}}]}},{"kind":"Field","name":{"kind":"Name","value":"sender"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}}]}}]}}]}}]} as unknown as DocumentNode<OrdersQuery, OrdersQueryVariables>;
-export const GetOrdersByUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrdersByUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sender"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"sender"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sender"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}}]}}]}}]}}]} as unknown as DocumentNode<GetOrdersByUserQuery, GetOrdersByUserQueryVariables>;
-export const ExampleOnchainMarketDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ExampleOnchainMarket"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"onchainMarket"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}},{"kind":"Field","name":{"kind":"Name","value":"liquidityUSDC"}},{"kind":"Field","name":{"kind":"Name","value":"resolved"}},{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"proposedOutcome"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"resolvedAt"}},{"kind":"Field","name":{"kind":"Name","value":"proposedAt"}}]}}]}}]} as unknown as DocumentNode<ExampleOnchainMarketQuery, ExampleOnchainMarketQueryVariables>;
+export type GetMarketsForTopicQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', outcome?: string | null, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, title: string, question: string, topicId: number }> } };
+
+
+export const GetMarketChartDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketChartData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"marketId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}},"defaultValue":{"kind":"StringValue","value":"1","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"prices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"marketId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"marketId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}}]}}]}}]} as unknown as DocumentNode<GetMarketChartDataQuery, GetMarketChartDataQueryVariables>;
+export const FriendsOrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FriendsOrders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress_in"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"positions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress_in"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FriendsOrdersQuery, FriendsOrdersQueryVariables>;
+export const GetLpPositionsDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLpPositionsData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lpPositionPrices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amountLp"}},{"kind":"Field","name":{"kind":"Name","value":"amountUsdc"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"userAddress"}}]}}]}}]}}]} as unknown as DocumentNode<GetLpPositionsDataQuery, GetLpPositionsDataQueryVariables>;
+export const GetUserLpDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserLp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lpPositions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amountLp"}},{"kind":"Field","name":{"kind":"Name","value":"amountUsdc"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"liquidityTotal"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"question"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserLpQuery, GetUserLpQueryVariables>;
+export const AllMarketsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllMarkets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markets"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"topicId"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}}]}}]}}]}}]} as unknown as DocumentNode<AllMarketsQuery, AllMarketsQueryVariables>;
+export const GetMarketByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"market"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}},{"kind":"Field","name":{"kind":"Name","value":"liquidityTotal"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"proposedAt"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"proposedOutcome"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}},{"kind":"Field","name":{"kind":"Name","value":"topicId"}}]}}]}}]} as unknown as DocumentNode<GetMarketByIdQuery, GetMarketByIdQueryVariables>;
+export const GetUsersForMarketDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsersForMarket"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"positions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersForMarketQuery, GetUsersForMarketQueryVariables>;
+export const OrderByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OrderById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"position"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}},{"kind":"Field","name":{"kind":"Name","value":"userAddress"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}}]}}]}}]}}]} as unknown as DocumentNode<OrderByIdQuery, OrderByIdQueryVariables>;
+export const GetOrdersByUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOrdersByUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"positions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"option"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"initialProb"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"usdcStake"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOrdersByUserQuery, GetOrdersByUserQueryVariables>;
+export const UserOrderCountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UserOrderCount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"positions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"userAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"tokensOwned"}}]}}]}}]}}]} as unknown as DocumentNode<UserOrderCountQuery, UserOrderCountQueryVariables>;
+export const GetMarketsForTopicDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketsForTopic"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"topicId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"topicId"}}]}}]}}]}}]} as unknown as DocumentNode<GetMarketsForTopicQuery, GetMarketsForTopicQueryVariables>;

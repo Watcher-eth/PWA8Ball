@@ -4,7 +4,7 @@ import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_LP_CHART_DATA = gql`
   query getLpPositionsData($userAddress: String!) {
-    lpPositionValues(where: { userAddress: $userAddress }) {
+    lpPositionPrices(where: { userAddress: $userAddress }) {
       items {
         amountLp
         amountUsdc
