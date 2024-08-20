@@ -10,8 +10,6 @@ import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 export const GRAPH_ENDPOINT_DEV_URL = "https://glimpse-main.up.railway.app/";
 
 export const GRAPH_ENDPOINT_URL = "https://glimpse-main.up.railway.app/";
-  //."https://prysmindexer-production.up.railway.app/";
-
 export const APOLLO_CLIENT = new ApolloClient({
   uri: GRAPH_ENDPOINT_URL,
   cache: new InMemoryCache({

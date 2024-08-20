@@ -1,9 +1,9 @@
 //@ts-nocheck
 
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_USER_ORDER_COUNT = gql(/* GraphQL */ `
+const GET_USER_ORDER_COUNT = gql`
   query UserOrderCount($userAddress: String = "") {
     positions(where: { userAddress: $userAddress }) {
       items {
@@ -12,7 +12,7 @@ const GET_USER_ORDER_COUNT = gql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
 export function useGetUserOrderCount(userAddress: string) {
   const {

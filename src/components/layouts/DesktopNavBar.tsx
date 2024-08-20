@@ -11,6 +11,7 @@ import { DesktopNotificationModal } from "@/components/notifications/DesktopNoti
 import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
 import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
+import { DesktopActivityModal } from "../activity/DesktopActivityModal";
 
 export function DesktopNavBar() {
   const { user } = useUserStore();
@@ -46,9 +47,9 @@ export function DesktopNavBar() {
             <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
-            <Link href={"/activity"}>
+            <DesktopActivityModal>
               <NavIconButton IconComponent={ActivityIcon} />
-            </Link>
+            </DesktopActivityModal>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>

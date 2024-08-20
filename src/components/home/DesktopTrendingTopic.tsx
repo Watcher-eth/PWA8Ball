@@ -28,7 +28,7 @@ export function DesktopTrendingTopics({
   const { data: markets } = useGetMarketsForTopic(topicId);
 
   return (
-    <div className="relative w-full flex align-center shadow-inner justify-between h-[56vh] py-8 flex-row items-center   overflow-hidden">
+    <div className="relative mx-8 rounded-lg flex align-center shadow-inner justify-between h-[56vh] py-8 flex-row items-center   overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
-  InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
@@ -18,7 +17,6 @@ import { Comment } from "../predictions/CommentSection/Comment";
 import JoinTopicButton from "./JoinTopicButton";
 import { motion } from "framer-motion";
 import { skeletonVariants } from "../ui/Skeleton";
-import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
 import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
@@ -38,7 +36,6 @@ function DesktopTopic({
   const scrollRef = useRef(null);
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { data: markets } = useGetMarketsForTopic(id);
   const { data: newMarkets } = useGetAllMarketsForTopic(Number(id));
   const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
   const { user } = useUserStore();
@@ -62,8 +59,6 @@ function DesktopTopic({
     setOptimisticComments([comment, ...optimisticComments]);
   }
 
-  const handleComment = () => {};
-  const setReply = () => {};
   console.log("markets2", enhancedMarkets);
   const renderDesktopTopicItems = (items, size, count) => {
     const placeholders = Array.from({ length: count - items.length });
@@ -198,7 +193,11 @@ function DesktopTopic({
             Popular Today
           </div>
           <div className="flex flex-row pt-1 space-x-3">
-            {renderDesktopTopicItems(markets?.slice(0, 4) || [], "medium", 4)}
+            {renderDesktopTopicItems(
+              enhancedMarkets?.slice(8, 12) || [],
+              "medium",
+              4
+            )}
           </div>
         </div>
       </div>

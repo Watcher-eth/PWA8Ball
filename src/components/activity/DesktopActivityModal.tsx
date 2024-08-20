@@ -1,37 +1,41 @@
 // @ts-nocheck
-import { MobileActivityPage } from "@/components/activity/MobileActivityPage";
-import { DesktopUserActivity } from "@/components/profile/DesktopUserActivity";
-import { ProfileSection } from "@/components/profile/DesktopProfilePage";
+
 import { ActivityIcon } from "lucide-react";
-import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
+import { useUserStore } from "@/lib/stores/UserStore";
 import { IUser } from "@/supabase/types";
-import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder";
-import { ActivityField } from "./ActivityField";
+import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
 import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
 import { parseOptionJSON } from "@/utils/predictions/parseOption";
-import { Leaderboard } from "./Leaderboard";
-import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder";
+import { ActivityField } from "./ActivityField";
 
-export function DesktopActivityPage({ userC }: { userC: IUser }) {
-  const user = userC;
-
+export function DesktopActivityModal({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { user } = useUserStore();
   return (
-    <div className="flex flex-col bg-[#080808]">
-      <div className="flex flex-row pt-3 px-8 space-x-5 items-center">
-        <ActivityIcon size={"2.3rem"} color="white" strokeWidth={3} />
-        <div className="text-[2.5rem]  text-white font-[Aeonik-Bold]">
-          Activity
+    <DesktopCardModal
+      title="Activity"
+      subtitle="See what your friends have been upto"
+      cardClassName=""
+      dialogContentClassName=" backdrop-blur-lg "
+      cardContentClassName="px-0  min-h-[50vh] "
+      dialogClassName=""
+      content={
+        <div className="flex flex-col w-full -mt-4  ">
+          <div className=" gap-5 w-full   ">
+            <div className="  px-6 h-full">
+              <DesktopFriendActivity user={user} />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 grid-cols-2 gap-5 w-full  pt-3 px-3">
-        <div className="col-span-1 pr-14  border-r-[0.1rem] border-[#181818] px-4 h-full">
-          <DesktopFriendActivity user={user} />
-        </div>
-        <div className=" px-9   h-full">
-          <Leaderboard isDesktop />
-        </div>
-      </div>
-    </div>
+      }
+    >
+      {children}
+    </DesktopCardModal>
   );
 }
 
@@ -55,9 +59,9 @@ function DesktopFriendActivity(props: { user: IUser }) {
                 <div key={dateKey}>
                   <h2
                     className={`
-              font-extrabold text-[1.5rem] text-white -mb-px
-              ${index === 0 ? "mt-4" : "mt-[22px]"}
-            `}
+                font-medium text-[1.1rem] text-[lightgray] -mb-1
+                ${index === 0 ? "mt-5" : "mt-[25px]"}
+              `}
                   >
                     {dateKey}
                   </h2>
