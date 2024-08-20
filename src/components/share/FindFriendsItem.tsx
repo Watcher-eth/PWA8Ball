@@ -7,7 +7,6 @@ export function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
 
   const shareLink = async () => {
     try {
-
       const result = await navigator.share({
         message: "Follow me on Glimpse to see my predictions for the future",
         url: "https://tryglimpse.xyz",
@@ -41,7 +40,7 @@ export function FindFriendsItem({ name, pfp, handle, isFollowing, type }) {
           type === 1 ? console.log("follow") : shareLink();
         }}
         className={`
-          font-bold text-sm p-2.5 rounded-lg overflow-hidden
+          font-bold text-sm p-3 py-2 rounded-full overflow-hidden
           ${isFollowing ? "text-gray-500" : "text-[rgb(22,22,22)]"}
           ${isFollowing ? "bg-gray-300" : "bg-white"}
           border-none cursor-pointer

@@ -10,6 +10,7 @@ import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { Spinner } from "@/components/modals/PredictModal/Spinner";
 
 import { FindFriendsItem } from "./FindFriendsItem";
+import { DialogClose } from "../ui/dialog";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");
@@ -118,7 +119,6 @@ export const FindFriends = ({ type }) => {
     );
   }
 
-
   const dataToRender =
     text === "" ? data?.SocialFollowings?.Following : results;
   const router = useRouter();
@@ -130,7 +130,7 @@ export const FindFriends = ({ type }) => {
     >
       <p
         className={`
-          text-[19px] pt-[58px] text-white font-bold -mt-5 relative -top-2.5
+          text-[23px] pt-[58px] text-white font-bold -mt-5 relative -top-2.5
         `}
       >
         {type === 1 ? "Find your friends" : "Invite your friends"}
@@ -142,8 +142,8 @@ export const FindFriends = ({ type }) => {
         className={`
           flex
           text-[18px] w-[90%]
-          p-2.5 mt-[15px] mx-[10px] mb-0
-          bg-[rgb(24,24,24)] text-[lightgray] rounded-[20px]
+          p-2.5 px-4 mt-[15px] mx-[10px] mb-0
+          bg-[rgb(17,17,17)] text-[lightgray] rounded-full
         `}
         onChange={(e) => handleTextChange(e.target.value)}
         value={text}
@@ -161,7 +161,7 @@ export const FindFriends = ({ type }) => {
       <div
         className={`
           flex flex-row items-center justify-between
-          w-[90%] rounded-[20px] bg-[rgb(24,24,24)]
+          w-[90%] rounded-[20px] bg-[rgb(17,17,17)]
           px-[15px] py-2
           h-20
         `}
@@ -261,7 +261,7 @@ export const FindFriends = ({ type }) => {
       </div>
       <div
         className={`
-          w-full h-[30px]
+          w-full h-[45px]
           absolute bottom-20
         `}
         style={{
@@ -269,7 +269,7 @@ export const FindFriends = ({ type }) => {
             "linear-gradient(rgba(10,10,10,0), rgba(10,10,10,0.6), #080808)",
         }}
       />
-      <div
+      <DialogClose
         className={`
           h-20 absolute bottom-0
           flex items-center justify-center
@@ -290,12 +290,10 @@ export const FindFriends = ({ type }) => {
         >
           <p className="text-[16px] text-white font-semibold">Done</p>
         </button>
-      </div>
+      </DialogClose>
     </div>
   );
 };
-
-
 
 const DFFAULT_ONCHAIN_FOLLOWING_QUERY = `query MyQuery {
     SocialFollowings(

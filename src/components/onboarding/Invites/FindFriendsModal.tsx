@@ -11,6 +11,7 @@ import {
 import { FindFriends } from "@/components/share/FindFriends";
 
 export function FindFriendsModal({ children }: { children: React.ReactNode }) {
+  
   return (
     <div>
       <Drawer>

@@ -25,6 +25,7 @@ import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { shortenAddress } from "@/utils/address/shortenAddress";
+import Link from "next/link";
 
 export function SettingsPage() {
   const initialSettings = {
@@ -67,13 +68,13 @@ export function SettingsPage() {
   };
 
   return (
-    <div className="container p-0 w-full h-full">
+    <div className="container pt-6 md:pt-0 p-0 w-full h-full z-[10]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="order-last bg-[#080808] space-y-9 flex flex-col md:order-first rounded-md p-5  relative">
-          <div className="text-white font-semibold text-3xl -mb-5 -mt-3">
+        <div className="order-first  bg-[#101010] space-y-9 flex flex-col md:order-first rounded-md p-5 md:ml-4 relative">
+          <div className="text-white font-semibold text-3xl -mb-5 ">
             Settings
           </div>
-          <div className="w-full p-4 rounded-md bg-[#151515] flex flex-row items-center justify-between">
+          <div className="w-full p-4 rounded-md bg-[#181818] flex flex-row items-center justify-between">
             <div className="text-white font-semibold text-[0.95rem] flex flex-row items-center">
               <img
                 className="h-[1.5rem] w-[1.5rem] oject-cover rounded-full mr-2"
@@ -85,7 +86,7 @@ export function SettingsPage() {
               Edit
             </div>
           </div>
-          <div className="flex flex-col px-4 bg-[#151515] rounded-md">
+          <div className="flex flex-col px-4 bg-[#181818] rounded-md">
             <div className="w-full py-4 flex flex-row items-center justify-between">
               <div className="text-white text-[0.95rem]">
                 Push Notifications
@@ -122,16 +123,22 @@ export function SettingsPage() {
               />
             </div>
           </div>
-          <div className="flex flex-col px-4 bg-[#151515] rounded-md">
-            <div className="w-full py-4  flex flex-row items-center justify-between">
+          <div className="flex flex-col px-4 bg-[#181818] rounded-md">
+            <Link
+              href={"/privacy"}
+              className="w-full py-4  flex flex-row items-center justify-between"
+            >
               <div className="text-white text-[0.95rem]">Privacy</div>
               <ChevronRight className="text-white h-[1rem]" strokeWidth={3} />
-            </div>
+            </Link>
             <div className="h-[0.1rem] w-full  bg-[#212121]" />
-            <div className="w-full py-4  flex flex-row items-center justify-between">
+            <Link
+              href={"/tos"}
+              className="w-full py-4  flex flex-row items-center justify-between"
+            >
               <div className="text-white text-[0.95rem]">Terms of Service</div>
               <ChevronRight className="text-white h-[1rem]" strokeWidth={3} />
-            </div>
+            </Link>
             <div className="h-[0.1rem] w-full  bg-[#212121]" />
             <div className="w-full py-4  flex flex-row items-center justify-between">
               <div className="text-white text-[0.95rem]">Region</div>
@@ -140,14 +147,14 @@ export function SettingsPage() {
               </div>
             </div>
           </div>
-          <div className="p-7 bg-[#151515] rounded-md flex flex-row justify-between">
+          <div className="p-7 bg-[#181818] rounded-md flex flex-row justify-between">
             <div className="flex flex-col">
               <div className="text-lg text-white font-semibold">
-                Invite your friends and earn cred
+                Invite and earn
               </div>
               <div className="text-md max-w-[55a%] text-[lightgray]">
-                Invite your friends to 8Ball and receive cred every time they
-                make a prediction. For life!
+                Invite your friends to Glimpse and receive a share of their
+                points for life!
               </div>
               <div className="h-[0.1rem] mt-4 my-5 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
@@ -163,64 +170,6 @@ export function SettingsPage() {
                 <div className="text-md text-[#909090]">0 referrals</div>
               </div>
             </div>
-            <CardContent className="flex-1 w-[30%] ">
-              <ChartContainer
-                config={chartConfig}
-                className="mx-auto aspect-square max-h-[250px]"
-              >
-                <RadialBarChart
-                  data={chartData}
-                  startAngle={0}
-                  endAngle={250}
-                  innerRadius={80}
-                  outerRadius={110}
-                >
-                  <PolarGrid
-                    gridType="circle"
-                    radialLines={false}
-                    stroke="none"
-                    className="first:fill-muted last:fill-background"
-                    polarRadius={[86, 74]}
-                  />
-                  <RadialBar dataKey="visitors" background cornerRadius={10} />
-                  <PolarRadiusAxis
-                    tick={false}
-                    tickLine={false}
-                    axisLine={false}
-                  >
-                    <Label
-                      content={({ viewBox }) => {
-                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                          return (
-                            <text
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              textAnchor="middle"
-                              dominantBaseline="middle"
-                            >
-                              <tspan
-                                x={viewBox.cx}
-                                y={viewBox.cy}
-                                className="fill-foreground text-4xl font-bold"
-                              >
-                                {chartData[0].visitors.toLocaleString()}
-                              </tspan>
-                              <tspan
-                                x={viewBox.cx}
-                                y={(viewBox.cy || 0) + 24}
-                                className="fill-muted-foreground"
-                              >
-                                Visitors
-                              </tspan>
-                            </text>
-                          );
-                        }
-                      }}
-                    />
-                  </PolarRadiusAxis>
-                </RadialBarChart>
-              </ChartContainer>
-            </CardContent>
           </div>
           {showSaveButton && (
             <button
@@ -234,8 +183,8 @@ export function SettingsPage() {
             </button>
           )}
         </div>
-        <div className="order-first md:order-last rounded-md bg-[#080808] p-4">
-          <div className="flex flex-col rounded-md bg-[#181818] p-5 px-8">
+        <div className="order-last md:order-last rounded-md  p-4 -my-4 z-10">
+          <div className="flex flex-col rounded-md bg-[#101010] p-5 px-8">
             <div className="flex flex-row items-center justify-between w-full">
               <div className="flex flex-col -space-y-2">
                 <div className="text-white text-[2rem] font-bold">
@@ -297,7 +246,14 @@ export function SettingsPage() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col rounded-md bg-[#181818] p-5 px-8 mt-10">
+          <div className="flex flex-col rounded-md bg-[#101010] p-5 px-8 mt-8">
+            <div className="text-white text-[1.35rem] font-[600]">
+              Your Glimpse Wallet
+            </div>
+            <div className="text-[lightgray] text-[1rem] font-[400]">
+              You have complete control of your wallet and can use it in other
+              apps.
+            </div>
             <img className="w-full h-full" src="/images/Wallet.png" />
             <div className="h-[0.1rem] w-full bg-[#222222] mb-5 mt-1.5" />
             <div className="flex flex-row items-center justify-between">
@@ -310,7 +266,7 @@ export function SettingsPage() {
                 />
                 {user?.walletaddress && shortenAddress(user?.walletaddress)}
               </button>
-              <button className="px-2 space-x-5 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+              <button className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
                 <Download
                   color="white"
                   className="mr-1"

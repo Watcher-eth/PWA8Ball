@@ -1,11 +1,13 @@
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { FindFriends } from "./FindFriends";
+import { useState } from "react";
 
 export function DesktopInviteFriends({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [step, setStep] = useState(1);
   return (
     <DesktopCardModal
       dialogContentClassName="rounded-[1.5rem] "
