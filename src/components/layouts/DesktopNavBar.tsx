@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Link from "next/link";
-import { ActivityIcon, Bell, Search } from "lucide-react";
+import { ActivityIcon, Bell, Search, Trophy } from "lucide-react";
 import { HOME_PATH } from "@/utils/urls";
 import { useUserStore } from "@/lib/stores/UserStore";
 
@@ -12,6 +12,7 @@ import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
 import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
 import { DesktopActivityModal } from "../activity/DesktopActivityModal";
+import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal";
 
 export function DesktopNavBar() {
   const { user } = useUserStore();
@@ -47,9 +48,13 @@ export function DesktopNavBar() {
             <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
+          
             <DesktopLeaderboardModal>
-              <NavIconButton IconComponent={ActivityIcon} />
+              <NavIconButton IconComponent={Trophy} />
             </DesktopLeaderboardModal>
+            <DesktopActivityModal>
+              <NavIconButton IconComponent={ActivityIcon} />
+            </DesktopActivityModal>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>

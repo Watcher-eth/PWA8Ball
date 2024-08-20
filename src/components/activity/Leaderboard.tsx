@@ -41,11 +41,11 @@ export function Leaderboard(props: { isDesktop: boolean }) {
             <h2 className="text-white text-[15px] font-bold">Name</h2>
             <h2 className="text-white text-[15px] font-bold">At stake</h2>
           </div>
-          {data?.map((predictor, index) => (
+          {remainingPredictors?.map((predictor, index) => (
             <PredictorInfo key={index} {...predictor} index={index} />
           )) ??
-            (!data ? (
-              <LoadingSkeleton />
+            (!remainingPredictors ? (
+              <LoadingLeaderboardSkeleton />
             ) : (
               <p className="text-white">No predictors found</p>
             ))}
@@ -55,7 +55,7 @@ export function Leaderboard(props: { isDesktop: boolean }) {
   }
 }
 
-function LoadingSkeleton() {
+export function LoadingLeaderboardSkeleton() {
   return [1, 2, 3, 4].map((index) => (
     <motion.div
       key={index}

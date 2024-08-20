@@ -23,7 +23,7 @@ const UserCard: React.FC<{
         <img
           src={user.image}
           alt={user.name}
-          className="h-20 w-20 rounded-full"
+          className="h-20 hover:scale-102 w-20 rounded-full"
         />
       </ProfileToolTip>
     ) : (
