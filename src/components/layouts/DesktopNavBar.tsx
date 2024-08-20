@@ -47,9 +47,9 @@ export function DesktopNavBar() {
             <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
-            <DesktopActivityModal>
+            <DesktopLeaderboardModal>
               <NavIconButton IconComponent={ActivityIcon} />
-            </DesktopActivityModal>
+            </DesktopLeaderboardModal>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
