@@ -8,10 +8,11 @@ const GET_USER_LP = gql(/* GraphQL */ `
   query getUserLp($userAddress: String!) {
     lpPositions(where: { userAddress: $userAddress }) {
       items {
-        amountUsdc
         amountLp
+        amountUsdc
         marketId
         createdAt
+        updatedAt
         market {
           liquidityTotal
           title
