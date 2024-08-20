@@ -7,7 +7,7 @@ import {
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 // import { relayStylePagination } from "@apollo/client/utilities"
 
-export const GRAPH_ENDPOINT_DEV_URL = "https://glimpse-main.up.railway.app/";
+export const GRAPH_ENDPOINT_DEV_URL = "https://glimpse-dev.up.railway.app/";
 
 export const GRAPH_ENDPOINT_URL = "https://glimpse-main.up.railway.app/";
 export const APOLLO_CLIENT = new ApolloClient({

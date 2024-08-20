@@ -26,6 +26,9 @@ import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnramp
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import Link from "next/link";
+import { copyToClipboard } from "@/utils/copyToClipboard";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
 export function SettingsPage() {
   const initialSettings = {
@@ -65,6 +68,28 @@ export function SettingsPage() {
       ...prevSettings,
       [key]: value,
     }));
+  };
+
+  const { upsertUser } = useUpsertUser();
+
+  const handleUpdateUser = async () => {
+    const userId = getChecksummedAddress(
+      "0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591"
+    );
+    const updatedUserData = {
+      id: userId,
+      name: "watcherofwavs",
+      updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+    };
+
+    try {
+      const result = await upsertUser(updatedUserData);
+      console.log("User updated successfully:", result);
+      // Handle success, e.g., show a notification or update the UI
+    } catch (error) {
+      console.error("Error updating user:", error);
+      // Handle error, e.g., show an error message
+    }
   };
 
   return (
@@ -257,7 +282,10 @@ export function SettingsPage() {
             <img className="w-full h-full" src="/images/Wallet.png" />
             <div className="h-[0.1rem] w-full bg-[#222222] mb-5 mt-1.5" />
             <div className="flex flex-row items-center justify-between">
-              <button className="px-2 space-x-5 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+              <button
+                onClick={() => copyToClipboard(user?.walletaddress)}
+                className="px-2 space-x-5 hover:scale-101 actice:scale:98 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
+              >
                 <Wallet
                   color="white"
                   className="mr-1"
@@ -266,7 +294,10 @@ export function SettingsPage() {
                 />
                 {user?.walletaddress && shortenAddress(user?.walletaddress)}
               </button>
-              <button className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]">
+              <button
+                onClick={handleUpdateUser}
+                className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
+              >
                 <Download
                   color="white"
                   className="mr-1"
