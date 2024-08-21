@@ -54,7 +54,7 @@ async function predict(props: PredictParams) {
     console.log("Prediction hash", hash);
 
     const { prediction, updatedUser } = await managePrediction(
-      props.userId,
+      props.address,
       props.marketId,
       props.amount,
       props.option

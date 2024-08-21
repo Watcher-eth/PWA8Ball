@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-
 import { useMutation } from "@tanstack/react-query";
 import { EightballV1ABI } from "../contracts/Eightball";
 import { WalletClient, getContract, Address } from "viem";
@@ -30,7 +29,7 @@ async function cashoutPrediction(props: {
     const hash = await contract.write.redeem([BigInt(props.marketId)]);
     console.log("Redeemed", hash);
 
-    await updateLiquidityPoints(props.userId, 50);
+    await updateLiquidityPoints(props.address, 50);
   } catch (error) {
     console.error("Error during cashout", error);
     throw error;

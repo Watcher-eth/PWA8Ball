@@ -6,17 +6,17 @@ import { useQuery } from "@airstack/airstack-react";
 import { useRouter } from "next/router";
 import { useLinkAccount } from "@privy-io/react-auth";
 
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { Spinner } from "@/components/modals/PredictModal/Spinner";
 
 import { FindFriendsItem } from "./FindFriendsItem";
 import { DialogClose } from "../ui/dialog";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
   const { width, height } = { width: 800, height: 600 }; // Example dimensions
-  const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
+  const { upsertUser } = useUpsertUser();
   const { data, loading } = useQuery(
     DFFAULT_ONCHAIN_FOLLOWING_QUERY,
     {},
@@ -56,17 +56,17 @@ export const FindFriends = ({ type }) => {
             "_normal",
             "_400x400"
           );
-          await updateUserProfile({
-            userId,
-            updates: {
-              name: twitterAccount.name,
-              pfp: profilePictureUrl,
-              socials: {
-                twitter: {
-                  username: twitterAccount.username,
-                  name: twitterAccount.name,
-                  pfp: profilePictureUrl,
-                },
+
+          //TODO: Get wallet addys
+          await upsertUser({
+            id: user,
+            name: twitterAccount.name,
+            pfp: profilePictureUrl,
+            socials: {
+              twitter: {
+                username: twitterAccount.username,
+                name: twitterAccount.name,
+                pfp: profilePictureUrl,
               },
             },
           });
@@ -84,19 +84,18 @@ export const FindFriends = ({ type }) => {
       );
       try {
         const userId = user.id;
-        await updateUserProfile({
-          userId,
-          updates: {
-            name: farcasterAcc.display_name,
-            pfp: farcasterAcc.profile_picture,
-            socials: {
-              farcaster: {
-                fid: farcasterAcc.fid,
-                username: farcasterAcc.username,
-                name: farcasterAcc.display_name,
-                owner_address: farcasterAcc.owner_address,
-                pfp: farcasterAcc.profile_picture,
-              },
+        //TODO: Get wallet addys
+        await upsertUser({
+          id: user,
+          name: farcasterAcc.display_name,
+          pfp: farcasterAcc.profile_picture,
+          socials: {
+            farcaster: {
+              fid: farcasterAcc.fid,
+              username: farcasterAcc.username,
+              name: farcasterAcc.display_name,
+              owner_address: farcasterAcc.owner_address,
+              pfp: farcasterAcc.profile_picture,
             },
           },
         });

@@ -44,7 +44,6 @@ import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserBy
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";

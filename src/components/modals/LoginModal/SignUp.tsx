@@ -6,24 +6,26 @@ import { Wallet } from "lucide-react";
 import { useConnectWallet, useLogin } from "@privy-io/react-auth";
 
 import { useCreateUser } from "@/supabase/mutations/useCreateUser";
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { NewUser } from "@/lib/supabase/types";
 
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export function SignUp({ setStep }: { setStep: (step: number) => void }) {
-  const createUserMutation = useCreateUser();
-  const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
+  const { upsertUser, error: isError } = useUpsertUser();
 
   const handleCreateUser = async (userData: NewUser) => {
     try {
       const newUser = {
-        external_auth_provider_user_id: userData.id, // Use the ID from the user object
+        id: userData.id, // Use the ID from the user object
+        liquiditypoints: 0,
+        rewardpoints: 0,
+        created_at: BigInt(Math.floor(Date.now() / 1000)),
       };
 
-      const response = await createUserMutation.mutateAsync(newUser);
+      const responseUpsert = await upsertUser(newUser);
       console.log("User created successfully", response);
     } catch (error) {
       console.error("Error creating user:", error);
@@ -65,20 +67,21 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
             const pfp = profilePictureUrl;
 
             const userId = user?.id;
-            updateUserProfile({
-              userId,
-              updates: {
-                name,
-                pfp,
-                socials: {
-                  twitter: {
-                    username: twitterAccount.username,
-                    name: name,
-                    pfp: profilePictureUrl,
-                  },
+
+            const updatedUserData = {
+              id: userId,
+              name,
+              pfp,
+              socials: {
+                twitter: {
+                  username: twitterAccount.username,
+                  name: name,
+                  pfp: profilePictureUrl,
                 },
               },
-            });
+              updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+            };
+            await upsertUser(updatedUserData);
           }
         }
       } catch (error) {
@@ -113,8 +116,8 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
       {!isEmail && (
         <>
           <div className="text-[lightgray] flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2  mx-[1.65rem]">
-            Sign in to Glimpse using your web3 wallet or with your email or social
-            accounts.
+            Sign in to Glimpse using your web3 wallet or with your email or
+            social accounts.
           </div>
           <div className="h-[0.05rem] w-[80vw] my-6 bg-gray-300 mx-6 rounded-full" />
 

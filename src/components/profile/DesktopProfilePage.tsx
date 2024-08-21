@@ -37,12 +37,12 @@ import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserBy
 import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
 import { useGetOrdersByUser } from "@/graphql/queries/predictions/useGetOrdersByUser";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export function DesktopProfilePage({ userId, userC }) {
   const { user } = useUserStore();
@@ -298,7 +298,8 @@ export const ProfileSection = ({ userC, user }) => {
   const [userName, setUsername] = useState<string>();
   const [pfp, setPfp] = useState<string>();
   const fileInputRef = useRef(null);
-  const { mutate: updateUserProfile } = useUpdateUserProfile();
+  const { upsertUser } = useUpsertUser();
+
   const { data: totalFollowers } = useGetTotalFollowers(
     userC?.external_auth_provider_user_id
   );
@@ -397,12 +398,10 @@ export const ProfileSection = ({ userC, user }) => {
           (pfp?.length > 0 && (
             <div
               onClick={() => {
-                updateUserProfile({
-                  userId: user?.external_auth_provider_user_id,
-                  updates: {
-                    name: userName?.length > 0 ? userName : user?.name,
-                    pfp: pfp?.length > 0 ? pfp : user?.pfp,
-                  },
+                upsertUser({
+                  id: user?.walletaddress,
+                  name: userName?.length > 0 ? userName : user?.name,
+                  pfp: pfp?.length > 0 ? pfp : user?.pfp,
                 });
               }}
               className="w-full bg-[#151515] hover:scale-102 active:scale-98 p-3 text-white font-semibold rounded-md flex justify-center items-center"

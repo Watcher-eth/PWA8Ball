@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Ban, ImagePlus } from "lucide-react";
-import { useUpdateUserProfile } from "@/supabase/mutations/updateUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { toast } from "sonner";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 function DesktopCreateProfile() {
   const fileInputRef = useRef(null);
   const [username, setUsername] = useState("");
   const [pfpUrl, setPfpUrl] = useState("");
-  const { mutate: updateUserProfile, isError } = useUpdateUserProfile();
+  const { upsertUser } = useUpsertUser();
+
   const { user, setUser } = useUserStore();
   const handleImageUploadClick = () => {
     fileInputRef.current.click();
@@ -46,13 +47,7 @@ function DesktopCreateProfile() {
       return;
     }
 
-    await updateUserProfile({
-      userId,
-      updates: {
-        name: username,
-        pfp: pfpUrl,
-      },
-    });
+    await upsertUser({ id: user?.walletaddress, name: username, pfp: pfpUrl });
   }
 
   return (
