@@ -1,8 +1,9 @@
 //@ts-nocheck
 
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { tgql } from "@/__generated__/gql";
 
-const GET_ALL_MARKETS = gql`
+const GET_ALL_MARKETS = tgql(/* GraphQL */`
   query AllMarkets {
     markets {
       items {
@@ -18,18 +19,18 @@ const GET_ALL_MARKETS = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetAllMarkets() {
   const {
-    data: marketsData,
-    loading: marketsLoading,
-    error: marketsError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_ALL_MARKETS);
 
   return {
-    data: marketsData,
-    loading: marketsLoading,
-    error: marketsError,
+    data,
+    loading,
+    error,
   };
 }

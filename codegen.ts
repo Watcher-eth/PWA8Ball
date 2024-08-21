@@ -12,7 +12,7 @@ const config: CodegenConfig = {
       preset: 'client',
       plugins: [],
       presetConfig: {
-        gqlTagName: 'gql',
+        gqlTagName: 'tgql',
       }
     }
   },
