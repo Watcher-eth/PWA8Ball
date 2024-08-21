@@ -4,16 +4,17 @@ import {
 } from "@/providers/GraphQlProvider";
 import { IUser } from "@/supabase/types";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
+import { serialize } from "@wagmi/core";
 
 export function useUpsertUser() {
   async function upsertUser(userData: Partial<IUser>) {
     try {
-      const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}user/upsert`, {
+      const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}/user/upsert`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: serialize(userData),//JSON.stringify(userData),
       });
 
       if (!response.ok) {
