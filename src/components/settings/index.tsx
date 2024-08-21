@@ -80,7 +80,7 @@ export function SettingsPage() {
     const updatedUserData = {
       id: userId,
       name: "watcherofwavs",
-      updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+      updatedAt: Number(Math.floor(Date.now() / 1000)), // Example of using BigInt
     };
 
     try {
