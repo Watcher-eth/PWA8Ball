@@ -1,9 +1,8 @@
 //@ts-nocheck
 
-import { gql } from "@/__generated__";
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_MARKET_CHART_DATA = gql(/* GraphQL */ `
+const GET_MARKET_CHART_DATA = gql`
   query getMarketChartData($marketId: BigInt = "1") {
     prices(where: { marketId: $marketId }) {
       items {
@@ -14,7 +13,7 @@ const GET_MARKET_CHART_DATA = gql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
 export function useGetMarketChartData(id: string) {
   const {

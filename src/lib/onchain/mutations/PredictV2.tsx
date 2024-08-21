@@ -21,9 +21,11 @@ interface PredictParams {
 
 async function predict(props: PredictParams) {
   const { managePrediction } = useUserPrediction();
+  console.log("predict props:", props);
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");
   }
+
   try {
     const preferYesNum = props.preferYes ? 1 : 0;
     const contract = getContract({
@@ -36,15 +38,16 @@ async function predict(props: PredictParams) {
     // Execute User Prediction
 
     const contractArgs = [
-      BigInt(props.amount / 10),
+      BigInt(props.amount),
       preferYesNum,
       BigInt(props.marketId),
       ROOT_OPERATOR_ADDRESS,
       990,
     ];
-    console.log("Prediction hash", contractArgs);
+    console.log("Args", contractArgs);
 
-    const { request } = await contract.simulate.predict(contractArgs);
+    // const { request } = await contract.simulate.predict(contractArgs);
+    // console.log("Request", request);
 
     const hash = await contract.write.predict(contractArgs);
 

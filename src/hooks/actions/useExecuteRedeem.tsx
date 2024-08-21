@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useRedeem } from "@/lib/onchain/mutations/Redeem";
 import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { Check, CheckCircle } from "lucide-react";
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
@@ -56,15 +56,24 @@ export function useExecuteRedeem() {
       setTimeout(() => {
         setLoading(false);
         setSuccess(true);
-        toast.success("Redeem successful!", {
-          icon: <CheckCircle height="15px" />,
-          style: {
-            backgroundColor: "rgba(21, 21, 21, 0.75)",
-            backdropFilter: "blur(20px)",
-            color: "white",
-            border: "0px",
-          },
-        });
+        toast(
+          <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+            <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
+              <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
+            </div>
+            Redeemed successfully!
+          </div>,
+          {
+            unstyled: true,
+            classNames: {
+              title: "text-red-400 text-2xl",
+              description: "text-red-400",
+              actionButton: "bg-zinc-400",
+              cancelButton: "bg-orange-400",
+              closeButton: "bg-lime-400",
+            },
+          }
+        );
       }, 3500);
     } catch (error) {
       console.error("Failed to redeem:", error);

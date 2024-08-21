@@ -34,7 +34,6 @@ export function DesktopPredictComponent(props: {
   const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
-  console.log("proos", props);
   return (
     <div
       className={`

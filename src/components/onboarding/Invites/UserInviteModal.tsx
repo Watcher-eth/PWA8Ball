@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
+import { useGetUserInvites } from "@/supabase/queries/Invites/useGetUserInvites";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 const invites = [
   { code: "gl-eiasjdk", status: false },
@@ -12,8 +14,9 @@ const invites = [
 ];
 
 function UserInviteModal({ children }) {
+  const { user } = useUserStore();
   const usedInvitesCount = invites.filter((invite) => invite.status).length;
-
+  const { data: Invites } = useGetUserInvites(user?.walletaddress);
   return (
     <Dialog>
       <DialogTrigger>

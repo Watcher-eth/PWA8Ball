@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { Check, CheckCircle } from "lucide-react";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
@@ -44,11 +44,24 @@ export function useExecuteBoost() {
         address,
       });
 
-      toast.success("Boosted successfully!", {
-        icon: <CheckCircle />,
-        style: { backgroundColor: "#5ACE5A", color: "white" },
-      });
-
+      toast(
+        <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+          <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
+          <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
+          </div>
+          Boosted successfully!
+        </div>,
+        {
+          unstyled: true,
+          classNames: {
+            title: "text-red-400 text-2xl",
+            description: "text-red-400",
+            actionButton: "bg-zinc-400",
+            cancelButton: "bg-orange-400",
+            closeButton: "bg-lime-400",
+          },
+        }
+      );
       setTimeout(() => {
         setLoading(false);
         setSuccess(true);
