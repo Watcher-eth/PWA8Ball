@@ -1,8 +1,8 @@
-import { gql } from "@/__generated__";
+import { tgql } from "@/__generated__";
 import { useQuery } from "@apollo/client";
 
 // Define the GraphQL query
-const GET_ORDER_BY_ID = gql(/* GraphQL */ `
+const GET_ORDER_BY_ID = tgql(/* GraphQL */ `
   query OrderById($id: String!) {
     position(id: $id) {
       marketId
