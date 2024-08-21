@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { Vote } from "lucide-react";
-
+import MotionNumber from "motion-number";
 import { formatWithCommas } from "@/utils/string/formatWithCommas";
 import { useVotingStore } from "@/lib/stores/VotingStore";
 import { useUserStore } from "@/lib/stores/UserStore";
@@ -111,7 +111,6 @@ export function PredictModal({
   }
 
   function handleContinue() {
-    
     confirmSelection(2);
     setStep(2);
   }
@@ -200,12 +199,16 @@ export function PredictModal({
                   <div className="p-2 py-1 rounded-xl w-full border border-dashed border-orange-500 mb-4">
                     <span className="text-lg font-bold text-orange-500 text-center block">
                       Possible Payout: $
-                      {(
-                        parseFloat(sliderValue.replace(/,/g, "")) *
-                        (option === 0
-                          ? 100 / multiplier
-                          : 100 / (99 - multiplier))
-                      ).toFixed(2) || "0.00"}
+                      <MotionNumber
+                        value={
+                          (
+                            parseFloat(sliderValue.replace(/,/g, "")) *
+                            (option === 0
+                              ? 100 / multiplier
+                              : 100 / (99 - multiplier))
+                          ).toFixed(2) || "0.00"
+                        }
+                      />
                     </span>
                   </div>
                   <NumericKeypad
