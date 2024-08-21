@@ -112,3 +112,16 @@ export function enhanceSingleMarketWithImageAndPolyId(
     image: matchingMarket?.image,
   };
 }
+
+export function enhancePositionsWithImages(filteredPositions, hardMarkets) {
+  return filteredPositions.map((position) => {
+    const matchingMarket = hardMarkets.find(
+      (market) => market.id === parseInt(position.marketId, 10)
+    );
+
+    return {
+      ...position,
+      image: matchingMarket?.image || null, // Add the image if found, otherwise null
+    };
+  });
+}

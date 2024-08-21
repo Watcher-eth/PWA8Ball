@@ -12,6 +12,8 @@ import { DesktopLiquidityPosition } from "./LiquidityPosition";
 import { DesktopLpChart } from "./DesktopLpChart";
 import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPositionsByUser";
 import { getLatestLpUsdcSum } from "@/utils/predictions/getLatestLpUSDCValue";
+import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { hardMarkets } from "@/constants/markets";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
@@ -28,25 +30,30 @@ export function DesktopLiquidityPage() {
     error: lpPositionsError,
   } = useGetLpPositionsByUser(user?.walletaddress);
 
-  const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
+  const filteredPositions =
+    enhancePositionsWithImages(
+      positions?.filter((item) => item.amountUsdc > 0),
+      hardMarkets
+    ) ?? [];
   const totalAmount = filteredPositions.reduce(
-    (acc, item) => acc + item.amount,
+    (acc, item) => acc + item.amountUsdc,
     0
   );
 
-  const totalWithFees = getLatestLpUsdcSum(lpPositionsData);
-  const feesEarned = totalWithFees - totalAmount;
-  console.log("pos", lpPositionsData);
+  console.log("pos", filteredPositions, positions);
+  // const totalWithFees = getLatestLpUsdcSum(lpPositionsData);
+  // const feesEarned = totalWithFees - totalAmount;
+  // console.log("pos", lpPositionsData);
   return (
     <StandardPageWrapper>
       <div className="pt-10 flex flex-col h-full min-h-screen bg-[#080808] w-full ">
         <div className="flex flex-col -space-y-3 px-10">
           <div className="flex flex-row items-baseline">
             <div className="text-white text-[3.5rem] font-semibold font-[Aeonik-Bold]">
-              ${(totalWithFees / 1000000).toFixed(2)}
+              ${(totalAmount / 1000000).toFixed(2)}
             </div>
             <div className="text-[lightgray] text-2xl ml-2 mb-3  font-[Aeonik]">
-              +{feesEarned / totalAmount}%
+              +{totalAmount}%
             </div>
           </div>
           <div className="text-[lightgray] text-xl  font-[Aeonik]">
@@ -67,9 +74,9 @@ export function DesktopLiquidityPage() {
               {filteredPositions.map((item, index: number) => (
                 <DesktopLiquidityPosition
                   key={index}
-                  amount={item.amount / 10 ** 6}
+                  amount={item.amountUsdc / 10 ** 6}
                   image={item.image}
-                  title={item.title}
+                  title={item.market?.title}
                   id={item.marketId}
                 />
               ))}

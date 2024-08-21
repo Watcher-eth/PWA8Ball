@@ -34,7 +34,7 @@ export function DesktopBoostContent(props: {
       <BoostInfoRow label="Cred Bonus" content="150 Cred" />
       <Input
         onChange={(e) => setAmount(e.target.value)}
-        className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-[1rem]"
+        className=" my-5 actvive:border-0 border-[#212121] rounded-md text-white p-6 bg-[#151515] font-medium px-3 text-[1.15rem]"
         placeholder="Amount"
         type="number"
       />
@@ -74,10 +74,8 @@ export function DesktopBoostModal({
   image: string;
   id: string;
 }) {
-
   return (
     <DesktopCardModal
-    
       cardClassName="w-full"
       dialogContentClassName="w-[30vw] min-w-[400px]"
       cardContentClassName="w-[30vw] min-w-[400px]"

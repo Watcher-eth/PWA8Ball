@@ -29,6 +29,7 @@ import {
   ArrowDownToLine,
   Key,
   Users,
+  Copy,
 } from "lucide-react";
 
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
@@ -39,6 +40,8 @@ import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import UserInviteModal from "../onboarding/Invites/UserInviteModal";
+import { shortenAddress } from "@/utils/address/shortenAddress";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 
 export function DesktopProfilePopover({
   children,
@@ -82,6 +85,7 @@ export function DesktopProfilePopover({
               <Wallet color="white" size={16} strokeWidth={2.8} />{" "}
             </div>
           </DropdownMenuLabel>
+
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownItem
@@ -89,6 +93,7 @@ export function DesktopProfilePopover({
               IconComponent={User}
               href={getProfilePath(user?.external_auth_provider_user_id)}
             />
+
             <DesktopOnrampModal>
               <DropdownItem label="Fund your account" IconComponent={Wallet} />
             </DesktopOnrampModal>
@@ -112,7 +117,11 @@ export function DesktopProfilePopover({
             <UserInviteModal>
               <DropdownItem label="Find your Friends" />
             </UserInviteModal>
-
+            <DropdownItem
+              label={"Copy Address"}
+              IconComponent={Copy}
+              onClick={() => copyToClipboard(user?.walletaddress)}
+            />
             <DropdownMenuSub>
               <DropdownMenuSubTrigger className="hover:!bg-slate-400/20 rounded-md active:!bg-slate-400/30">
                 Share Glimpse
@@ -136,6 +145,7 @@ export function DesktopProfilePopover({
                     label="Instagram"
                     iconSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"
                   />
+
                   <DropdownItem
                     label="TikTok"
                     iconSrc="https://cdn.pixabay.com/photo/2021/01/30/06/42/tiktok-5962992_1280.png"
@@ -144,14 +154,14 @@ export function DesktopProfilePopover({
                   <DropdownItem label="More..." />
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
-              <DropdownItem
-                label="Download on IOS"
-                IconComponent={ArrowDownToLine}
-                href={"https://testflight.apple.com/join/xBbJ2OPO"}
-              />
             </DropdownMenuSub>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
+          <DropdownItem
+            label="Download on IOS"
+            IconComponent={ArrowDownToLine}
+            href={"https://testflight.apple.com/join/xBbJ2OPO"}
+          />
           <DropdownItem
             disabled={true}
             label="Support"

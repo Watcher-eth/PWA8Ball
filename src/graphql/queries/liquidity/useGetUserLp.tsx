@@ -1,10 +1,9 @@
 //@ts-nocheck
 
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery, gql } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { gql } from "@/__generated__";
 
-const GET_USER_LP = gql(/* GraphQL */ `
+const GET_USER_LP = gql`
   query getUserLp($userAddress: String!) {
     lpPositions(where: { userAddress: $userAddress }) {
       items {
@@ -21,7 +20,7 @@ const GET_USER_LP = gql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
 export function useGetUserLp(userAddress: string) {
   const {
@@ -38,7 +37,7 @@ export function useGetUserLp(userAddress: string) {
   console.log("lpData", lpData);
 
   return {
-    data: lpData?.lps?.items ?? [],
+    data: lpData?.lpPositions?.items ?? [],
     loading: lpLoading,
     error: lpError,
   };
