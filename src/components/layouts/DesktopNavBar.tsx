@@ -9,7 +9,7 @@ import { NavIconButton } from "@/components/buttons/NavIconButton";
 
 import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal";
 import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
-import { DesktopProfilePopover } from "@/components/profile/DesktopProfilePopover";
+import { DesktopProfilePopover } from "@/components/layouts/DesktopProfilePopover";
 import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
 import { DesktopActivityModal } from "../activity/DesktopActivityModal";
 import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal";

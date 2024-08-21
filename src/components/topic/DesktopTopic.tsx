@@ -21,6 +21,7 @@ import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMark
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
+import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
 
 function DesktopTopic({
   name,
@@ -59,6 +60,8 @@ function DesktopTopic({
     setOptimisticComments([comment, ...optimisticComments]);
   }
 
+  const handleComment = () => {};
+  const setReply = () => {};
   console.log("markets2", enhancedMarkets);
   const renderDesktopTopicItems = (items, size, count) => {
     const placeholders = Array.from({ length: count - items.length });
@@ -92,7 +95,7 @@ function DesktopTopic({
 
   return (
     <StandardPageWrapper className="h-full flex flex-col">
-      {/* {user && <BlurOverlay />} */}
+      {user && <BlurOverlay />}
 
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>

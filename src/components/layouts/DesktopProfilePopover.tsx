@@ -27,6 +27,8 @@ import {
   Wallet,
   UserCircle,
   ArrowDownToLine,
+  Key,
+  Users,
 } from "lucide-react";
 
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
@@ -36,6 +38,7 @@ import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
+import UserInviteModal from "../onboarding/Invites/UserInviteModal";
 
 export function DesktopProfilePopover({
   children,
@@ -104,12 +107,15 @@ export function DesktopProfilePopover({
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DesktopInviteFriends>
-              <DropdownItem label="Your Friends" />
+              <DropdownItem label="Invites" IconComponent={Key} />
             </DesktopInviteFriends>
+            <UserInviteModal>
+              <DropdownItem label="Find your Friends" />
+            </UserInviteModal>
 
             <DropdownMenuSub>
               <DropdownMenuSubTrigger className="hover:!bg-slate-400/20 rounded-md active:!bg-slate-400/30">
-                Invite users
+                Share Glimpse
               </DropdownMenuSubTrigger>
               <DropdownMenuPortal>
                 <DropdownMenuSubContent
@@ -146,12 +152,20 @@ export function DesktopProfilePopover({
             </DropdownMenuSub>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownItem label="Support" IconComponent={HelpCircle} />
-          <DropdownItem label="Terms of Service" IconComponent={FileText} />
+          <DropdownItem
+            disabled={true}
+            label="Support"
+            IconComponent={HelpCircle}
+          />
+          <DropdownItem
+            href="/tos"
+            label="Terms of Service"
+            IconComponent={FileText}
+          />
           <DropdownItem
             label="Privacy"
+            href="/privacy"
             IconComponent={GlobeLock}
-            disabled={true}
           />
           <DropdownMenuSeparator />
           <DropdownItem

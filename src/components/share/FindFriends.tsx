@@ -111,9 +111,17 @@ export const FindFriends = ({ type }) => {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="top-20">
+      <div className="w-full h-[75vh]  flex self-center items-center justify-center">
+        <div className="top-80 flex space-y-10 flex-col items-center">
           <Spinner loading={true} />
+          <div className="flex flex-col space-y-0 items-center">
+            <div className="text-[1.1rem] text-white font-[500]">
+              Finding your friends
+            </div>
+            <div className="text-[0.9rem] text-[lightgray] font-[400]">
+              This shouldn't take long
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -162,7 +170,7 @@ export const FindFriends = ({ type }) => {
         className={`
           flex flex-row items-center justify-between
           w-[90%] rounded-[20px] bg-[rgb(17,17,17)]
-          px-[15px] py-2
+          px-[15px] pt-1.5
           h-20
         `}
       >

@@ -29,6 +29,7 @@ import Link from "next/link";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
+import UserInviteModal from "../onboarding/Invites/UserInviteModal";
 
 export function SettingsPage() {
   const initialSettings = {
@@ -183,7 +184,7 @@ export function SettingsPage() {
               </div>
               <div className="h-[0.1rem] mt-4 my-5 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
-                <DesktopInviteFriends>
+                <UserInviteModal>
                   <button className="px-3 text-white text-md flex items-center flex-row py-1 rounded-md bg-[#262626]">
                     <UserPlus
                       className="text-white mr-1 h-[1rem]"
@@ -191,7 +192,7 @@ export function SettingsPage() {
                     />{" "}
                     Invite Friends
                   </button>
-                </DesktopInviteFriends>
+                </UserInviteModal>
                 <div className="text-md text-[#909090]">0 referrals</div>
               </div>
             </div>

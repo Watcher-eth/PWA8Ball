@@ -258,14 +258,11 @@ export function InviteScreen() {
   const [debouncedInvite, setDebouncedInvite] = useState("");
   const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite);
   const { mutate: useInvite } = useUseInvite();
-  // Debounce the invite input to avoid calling the API too often
   const debouncedChange = useCallback(
     debounce((nextValue) => setDebouncedInvite(nextValue), 500),
     []
   );
-  console.log("daa", data);
 
-  // Update invite state and trigger debounce
   const handleInviteChange = (event) => {
     const nextValue = event.target.value;
     setInvite(nextValue);
@@ -370,10 +367,10 @@ export function InviteScreen() {
           <div>Share to enter the waitlist</div>
         </div>
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
-          <a href="#" className="hover:underline">
+          <a href="/privacy" className="hover:underline">
             Privacy
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/tos" className="hover:underline">
             Terms
           </a>
           <a href="#" className="hover:underline">
