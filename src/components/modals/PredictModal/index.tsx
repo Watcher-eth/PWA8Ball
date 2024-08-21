@@ -163,7 +163,7 @@ export function PredictModal({
                         $
                       </span>
                       <motion.span
-                        className="font-bold text-gray-400"
+                        className="font-bold text-white"
                         animate={{ fontSize }}
                         transition={{ duration: 0.3 }}
                       >
@@ -206,7 +206,7 @@ export function PredictModal({
                             (option === 0
                               ? 100 / multiplier
                               : 100 / (99 - multiplier))
-                          ).toFixed(2) || "0.00"
+                          ).toFixed(2) ?? "0.00"
                         }
                       />
                     </span>
