@@ -1,7 +1,7 @@
 //@ts-nocheck
 
 import { useQuery as useApolloQuery } from "@apollo/client";
-import { tgql } from "@/__generated__/gql";
+import { tgql } from "@/__generated__";
 
 const GET_ONCHAIN_MARKET = tgql(/* GraphQL */`
   query getMarketById($id: BigInt!) {

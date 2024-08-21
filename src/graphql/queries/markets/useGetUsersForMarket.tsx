@@ -1,8 +1,9 @@
 //@ts-nocheck
 
+import { tgql } from "@/__generated__";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_USERS_FOR_MARKET = gql`
+const GET_USERS_FOR_MARKET = tgql(/* GraphQL */`
   query getUsersForMarket($id: String!) {
     positions(limit: 1, where: { id: $id }) {
       items {
@@ -25,7 +26,7 @@ const GET_USERS_FOR_MARKET = gql`
       }
     }
   }
-`;
+`)
 
 export function useGetUsersForMarket(id: number) {
   const {

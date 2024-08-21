@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useRouter } from "next/router";
@@ -37,12 +38,12 @@ function DesktopTopic({
   const scrollRef = useRef(null);
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { data: newMarkets } = useGetAllMarketsForTopic(Number(id));
+  const { marketsForTopic } = useGetAllMarketsForTopic(Number(id));
   const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
   const { user } = useUserStore();
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
-    newMarkets?.markets?.items,
+    marketsForTopic,
     hardMarkets,
     hardTopics
   );

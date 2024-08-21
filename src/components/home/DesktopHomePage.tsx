@@ -16,10 +16,10 @@ import { hardTopics } from "@/constants/topics";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
-  const { data: markets } = useGetAllMarkets();
+  const { markets } = useGetAllMarkets();
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
-    markets?.markets?.items,
+    markets,
     hardMarkets,
     hardTopics
   );

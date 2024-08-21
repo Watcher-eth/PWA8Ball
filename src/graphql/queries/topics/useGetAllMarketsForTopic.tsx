@@ -22,16 +22,16 @@ const GET_ALL_MARKETS = gql`
 
 export function useGetAllMarketsForTopic(id: number) {
   const {
-    data: marketsData,
-    loading: marketsLoading,
-    error: marketsError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_ALL_MARKETS, {
     variables: { id: id },
   });
 
   return {
-    data: marketsData,
-    loading: marketsLoading,
-    error: marketsError,
+    marketsForTopic: data?.markets?.items ?? [],
+    loading,
+    error,
   };
 }
