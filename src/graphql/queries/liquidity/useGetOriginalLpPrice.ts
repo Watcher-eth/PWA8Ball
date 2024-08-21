@@ -1,10 +1,11 @@
 //@ts-nocheck
 
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
 const GET_LP_CHART_DATA = gql`
-  query getLpPositionOriginalValueUSDC($userAddress: String!, $marketId: BigInt!) {
-    lpTrades(where: { userAddress: $userAddress, marketId: $marketId }) {
+  query getLpPositionOriginalValueUSDC($userAddress: String!) {
+    lpTrades(where: { userAddress: $userAddress }) {
       items {
         amountLp
         amountUsdc
@@ -13,17 +14,18 @@ const GET_LP_CHART_DATA = gql`
     }
   }
 `;
-export function useGetOriginalLpPrice(userAddress: string, marketId: string) {
+export function useGetOriginalLpPrice(userAddress: string) {
   const {
     data: lpData,
     loading: lpLoading,
     error: lpError,
   } = useApolloQuery(GET_LP_CHART_DATA, {
-    variables: { userAddress, marketId },
+    variables: { userAddress: getChecksummedAddress(userAddress) },
   });
 
+  console.log("data", lpData);
   return {
-    data: lpData?.lpPositionValues?.items || [],
+    data: lpData?.lpTrades?.items || [],
     loading: lpLoading,
     error: lpError,
   };

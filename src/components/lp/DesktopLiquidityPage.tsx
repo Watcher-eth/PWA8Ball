@@ -14,6 +14,7 @@ import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPos
 import { getLatestLpUsdcSum } from "@/utils/predictions/getLatestLpUSDCValue";
 import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
+import { useGetOriginalLpPrice } from "@/graphql/queries/liquidity/useGetOriginalLpPrice";
 
 export function DesktopLiquidityPage() {
   const router = useRouter();
@@ -30,20 +31,24 @@ export function DesktopLiquidityPage() {
     error: lpPositionsError,
   } = useGetLpPositionsByUser(user?.walletaddress);
 
+  const { data: originalLpValues } = useGetOriginalLpPrice(user?.walletaddress);
+
   const filteredPositions =
     enhancePositionsWithImages(
       positions?.filter((item) => item.amountUsdc > 0),
       hardMarkets
     ) ?? [];
+
   const totalAmount = filteredPositions.reduce(
-    (acc, item) => acc + item.amountUsdc,
+    (acc, item) => acc + Number(item.amountUsdc),
     0
   );
+  const originalAmount = originalLpValues.reduce(
+    (acc, item) => acc + Number(item.amountUsdc),
+    0
+  );
+  const percentageDif = (totalAmount - originalAmount + 1) / originalAmount;
 
-  console.log("pos", filteredPositions, positions);
-  // const totalWithFees = getLatestLpUsdcSum(lpPositionsData);
-  // const feesEarned = totalWithFees - totalAmount;
-  // console.log("pos", lpPositionsData);
   return (
     <StandardPageWrapper>
       <div className="pt-10 flex flex-col h-full min-h-screen bg-[#080808] w-full ">
@@ -53,7 +58,8 @@ export function DesktopLiquidityPage() {
               ${(totalAmount / 1000000).toFixed(2)}
             </div>
             <div className="text-[lightgray] text-2xl ml-2 mb-3  font-[Aeonik]">
-              +{totalAmount}%
+              {percentageDif > 0 && "+"}
+              {percentageDif}%
             </div>
           </div>
           <div className="text-[lightgray] text-xl  font-[Aeonik]">
