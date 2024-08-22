@@ -32,7 +32,7 @@ export function useGetOrderById(id: string) {
   });
 
   return {
-    data,
+    position: data?.position,
     loading,
     error,
   };

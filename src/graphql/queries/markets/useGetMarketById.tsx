@@ -37,7 +37,7 @@ export function useGetMarketById(id: string) {
   //TODO: Get Topic
 
   return {
-    data,
+    market: data?.market,
     loading,
     error,
   };

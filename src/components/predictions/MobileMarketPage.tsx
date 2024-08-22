@@ -30,9 +30,9 @@ import { formatMarket } from "@/utils/markets/formatMarketArr";
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
-  const { data: newMarket } = useGetMarketById(id);
+  const { market } = useGetMarketById(id);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
-    newMarket,
+    market,
     hardMarkets,
     hardTopics
   );

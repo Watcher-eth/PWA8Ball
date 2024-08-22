@@ -27,8 +27,8 @@ export function useGetOriginalLpPrice(userAddress: string) {
 
   console.log("data");
   return {
-    data: data?.lpTrades?.items ?? [],
-    loading: lpLoading,
-    error: lpError,
+    lpTrades: data?.lpTrades?.items ?? [],
+    loading,
+    error,
   };
 }

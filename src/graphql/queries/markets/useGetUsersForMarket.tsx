@@ -30,17 +30,17 @@ const GET_USERS_FOR_MARKET = tgql(/* GraphQL */`
 
 export function useGetUsersForMarket(id: number) {
   const {
-    data: marketUsers,
-    loading: marketUsersLoading,
-    error: marketUsersError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_USERS_FOR_MARKET, {
     variables: { id: BigInt(id) },
   });
 
 
   return {
-    data: marketUsers.positions.items,
-    loading: marketUsersLoading,
-    error: marketUsersError,
+    positions: data?.positions?.items ?? [],
+    loading,
+    error,
   };
 }

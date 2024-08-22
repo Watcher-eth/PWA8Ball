@@ -20,22 +20,16 @@ export function DesktopLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
   const {
-    data: positions,
-    loading: isLoading,
-    error,
+    lpPositions,
   } = useGetUserLp(user?.walletaddress);
 
-  const {
-    data: lpPositionsData,
-    loading: lpPositionsLoading,
-    error: lpPositionsError,
-  } = useGetLpPositionsByUser(user?.walletaddress);
+  const { lpPositionsData } = useGetLpPositionsByUser(user?.walletaddress);
 
-  const { data: originalLpValues } = useGetOriginalLpPrice(user?.walletaddress);
+  const { lpTrades: originalLpValues } = useGetOriginalLpPrice(user?.walletaddress);
 
   const filteredPositions =
     enhancePositionsWithImages(
-      positions?.filter((item) => item.amountUsdc > 0),
+      lpPositions?.filter((item) => item.amountUsdc > 0),
       hardMarkets
     ) ?? [];
 

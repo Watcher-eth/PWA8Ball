@@ -18,16 +18,16 @@ const GET_MARKET_CHART_DATA = tgql(/* GraphQL */`
 
 export function useGetMarketChartData(id: string) {
   const {
-    data: chartData,
-    loading: chartLoading,
-    error: chartError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_MARKET_CHART_DATA, {
     variables: { id },
   });
 
   return {
-    data: chartData?.prices?.items || [],
-    loading: chartLoading,
-    error: chartError,
+    data: data?.prices?.items ?? [],
+    loading,
+    error,
   };
 }

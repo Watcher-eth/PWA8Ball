@@ -19,16 +19,16 @@ const GET_LP_CHART_DATA = tgql(/* GraphQL */`
 
 export function useGetLpPositionsByUser(userAddress: string) {
   const {
-    data: lpData,
-    loading: lpLoading,
-    error: lpError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_LP_CHART_DATA, {
     variables: { userAddress },
   });
 
   return {
-    data: lpData?.lpPositionValues?.items || [],
-    loading: lpLoading,
-    error: lpError,
+    lpPositionsData: data?.lpPositionPrices?.items ?? [],
+    loading,
+    error,
   };
 }

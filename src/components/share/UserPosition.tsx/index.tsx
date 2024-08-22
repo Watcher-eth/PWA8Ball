@@ -18,10 +18,10 @@ export function Receipt(props: {
   onClose?: () => void;
 }) {
   const { user } = useUserStore();
-  const { data, loading, error } = useGetOrderById(
+  const { position, loading, error } = useGetOrderById(
     "10-0x870b7F3f229D08918d33F8b09766eaB412aBEebf-1"
   );
-  console.log("order", data);
+  console.log("order", position);
   const shareLink = async () => {
     if (navigator.share) {
       try {
@@ -85,10 +85,10 @@ export function Receipt(props: {
 
   return (
     <div
-      className={`relative flex self-center shadow-lg  pb-0 flex-col items-center 
+      className={`relative flex self-center shadow-lg  pb-0 flex-col items-center
        bg-[#121212]
        ${props.isDesktop ? "p-5 w-[27%] m-3 xl:w-[25%]" : "p-6 -ml-0 m-6  w-full"}
-    
+
       `}
     >
       <div className={`absolute w-full`} style={roughEdgeTop}></div>
@@ -111,8 +111,8 @@ export function Receipt(props: {
           <motion.div
             onClick={() =>
               props.isDesktop
-                ? props.changeStep(4)
-                : props.onClose && props.onClose()
+                ? props.changeStep?.(4)
+                : props.onClose?.()
             }
             className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
           >
