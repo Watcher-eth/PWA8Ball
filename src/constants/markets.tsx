@@ -279,9 +279,9 @@ export const hardMarkets = [
   },
   {
     id: 15, // China invade Taiwan
-    title: "China invade Taiwan",
+    title: "Taylor Engaged",
     image:
-      "https://www.periodicolea.com.ar/wp-content/uploads/2023/04/mundo-taiwan.jpg",
+      "https://www.the-sun.com/wp-content/uploads/sites/6/2024/08/taylor-swift-travis-kelce-dinner-905778574.jpg",
     options: [
       {
         name: "Yes",
@@ -296,10 +296,10 @@ export const hardMarkets = [
       "52287423279052340323111685764277673409191123156147187259751026695134171759296",
   },
   {
-    id: 16, // Ukraine war end
-    title: "Ukraine war end",
+    id: 16, // Hezbollah invade Israel attack Lebanon
+    title: "Hezbollah invade Israel",
     image:
-      "https://www.dlr.de/en/images/2022/02/maurer-eva1/@@images/image-1200-54cdcab4226dad7cbc703eec71f4851d.jpeg",
+      "https://dialogo-americas.com/wp-content/uploads/2024/03/LAT-Embeded-Hezbola-COLLAGE.jpg",
 
     options: [
       {
@@ -314,10 +314,10 @@ export const hardMarkets = [
     PolyId: "",
   },
   {
-    id: 17, // Stranded Astronauts return
-    title: "Stranded Astronauts return",
+    id: 17, // Hezbollah invade Israel
+    title: "Israel attack Lebanon",
     image:
-      "https://www.dlr.de/en/images/2022/02/maurer-eva1/@@images/image-1200-54cdcab4226dad7cbc703eec71f4851d.jpeg",
+      "https://qcdmlllkzdjajrdtmthk.supabase.co/storage/v1/object/public/images/MWdSsourPjdXAatqwbET4.jpg",
     options: [
       {
         name: "Yes",
@@ -332,10 +332,10 @@ export const hardMarkets = [
       "102196533154190109539525085448877337118749628938176910646320272765634004189489",
   },
   {
-    id: 18, // Kai Cenat Twitch Ban
-    title: "Kai Cenat Twitch Ban",
+    id: 18, // Georgia
+    title: "Georgia",
     image:
-      "https://www.rollingstone.com/wp-content/uploads/2024/08/TaylorSwift-1.jpg?w=1581&h=1054&crop=1",
+      "https://www.gpb.org/sites/default/files/styles/three_two_702x468/public/npr_story_images/2024/05/10/state-md-8ffebd8e4e6709f12e9c6f0269cb7d77ec9861cd.png?h=d295de4e&itok=7KF5auEr",
     options: [
       {
         name: "Yes",
@@ -349,22 +349,22 @@ export const hardMarkets = [
     PolyId: "",
   },
   {
-    id: 19, // Taylor visit DNC
-    title: "Taylor visit DNC",
+    id: 19, // Arizona
+    title: "Arizona",
     image:
-      "https://www.rollingstone.com/wp-content/uploads/2024/08/TaylorSwift-1.jpg?w=1581&h=1054&crop=1",
+      "https://www.gannett-cdn.com/indepth-static-assets/uploads/master/10399041002/3eee88ae-47f7-4a2b-b6e7-ef341849dc06-gettyimages-1420487709.jpg?width=2160",
     options: [
       {
-        name: "Yes",
+        name: "Kamala",
         address: "0x0000000000000000000000000000000000000000",
       },
       {
-        name: "No",
+        name: "Trump",
         address: "0x0000000000000000000000000000000000000000",
       },
     ],
     PolyId:
-      "74755687674470340898657866727408829348735272103464245119133362345021882284337",
+      "113706817137934173084113171765841465765345118947726422900042392575724414672344",
   },
   {
     id: 20, // Nevada
@@ -385,7 +385,7 @@ export const hardMarkets = [
       "18451662766052921550337197202319358927639757816615225507586069380328523693166",
   },
   {
-    id: 21, // Wisconsin
+    id: 22, // Wisconsin
     title: "Wisconsin",
     image:
       "https://media.npr.org/assets/img/2022/10/17/wisconsin_wide-911fe141cc633324863b79a6182842820ddeae5a.png?s=1100&c=50&f=png",
@@ -403,7 +403,7 @@ export const hardMarkets = [
       "9957028331163987805873971753654507302936617692682833719706803039129302643823",
   },
   {
-    id: 22, // Michigan
+    id: 23, // Michigan
     title: "Michigan",
     image:
       "https://media.npr.org/assets/img/2020/10/27/michigan_wide-e5ffbcea3e830cd6282b4d07aabeed5ff0c6c31f.png?s=1100&c=50&f=png",
@@ -421,7 +421,7 @@ export const hardMarkets = [
       "85882747446059283518997350779572616984413802718247398490010754008042064685948",
   },
   {
-    id: 23, // Pennsylvania
+    id: 21, // Pennsylvania
     title: "Pennsylvania",
     image:
       "https://www.democracydocket.com/wp-content/uploads/2021/01/2020-PA-Elections-WEB-1024x577.png",
@@ -439,26 +439,7 @@ export const hardMarkets = [
       "67089287271692871221799799486468743524636060540186332703509386944410510992981",
   },
   {
-    id: 24, // Israel attack Lebanon
-    title: "Israel attack Lebanon",
-    image:
-      "https://www.periodicolea.com.ar/wp-content/uploads/2023/04/mundo-taiwan.jpg",
-
-    options: [
-      {
-        name: "Yes",
-        address: "0x2Dc82C1af3A0501ADE68eA363d601851A7550093",
-      },
-      {
-        name: "No",
-        address: "0xcc3B985b12914915Ba8eEE977D8CDefC5dD80474",
-      },
-    ],
-    PolyId:
-      "22490313048049366158147598617066001187939329462496607620431619473794691840098",
-  },
-  {
-    id: 25, // China invade Taiwan
+    id: 24, // China invade Taiwan
     title: "China invade Taiwan",
     image:
       "https://www.periodicolea.com.ar/wp-content/uploads/2023/04/mundo-taiwan.jpg",
@@ -476,7 +457,7 @@ export const hardMarkets = [
       "52287423279052340323111685764277673409191123156147187259751026695134171759296",
   },
   {
-    id: 26, // Ukraine war end
+    id: 25, // Ukraine war end
     title: "Ukraine war end",
     image:
       "https://www.ft.com/__origami/service/image/v2/images/raw/ftcms%3A0ebd51c5-0305-4d83-8744-629c6d53f1d2?source=next-article&fit=scale-down&quality=highest&width=1440&dpr=1",
@@ -493,10 +474,10 @@ export const hardMarkets = [
     PolyId: "",
   },
   {
-    id: 27, // Stranded Astronauts return
+    id: 26, // Stranded Astronauts return
     title: "Stranded Astronauts return",
     image:
-      "https://www.rollingstone.com/wp-content/uploads/2024/08/TaylorSwift-1.jpg?w=1581&h=1054&crop=1",
+      "https://www.dlr.de/en/images/2022/02/maurer-eva1/@@images/image-1200-54cdcab4226dad7cbc703eec71f4851d.jpeg",
     options: [
       {
         name: "Yes",
@@ -511,7 +492,7 @@ export const hardMarkets = [
       "102196533154190109539525085448877337118749628938176910646320272765634004189489",
   },
   {
-    id: 28, // Kai Cenat Twitch Ban
+    id: 27, // Kai Cenat Twitch Ban
     title: "Kai Cenat Twitch Ban",
     image:
       "https://www.rollingstone.com/wp-content/uploads/2023/08/who-is-kai-cenat.jpg?w=1581&h=1054&crop=1",
@@ -526,5 +507,23 @@ export const hardMarkets = [
       },
     ],
     PolyId: "",
+  },
+  {
+    id: 28, // Taylor visit DNC
+    title: "Taylor visit DNC",
+    image:
+      "https://www.rollingstone.com/wp-content/uploads/2024/08/TaylorSwift-1.jpg?w=1581&h=1054&crop=1",
+    options: [
+      {
+        name: "Yes",
+        address: "0x0000000000000000000000000000000000000000",
+      },
+      {
+        name: "No",
+        address: "0x0000000000000000000000000000000000000000",
+      },
+    ],
+    PolyId:
+      "74755687674470340898657866727408829348735272103464245119133362345021882284337",
   },
 ];
