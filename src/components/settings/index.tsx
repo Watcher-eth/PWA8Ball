@@ -1,5 +1,5 @@
 // @ts-nocheck
-
+import _ from "lodash"
 import {
   ChevronRight,
   CreditCard,
@@ -10,16 +10,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import {
-  Label,
-  PolarGrid,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-} from "recharts";
-import { CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
@@ -41,26 +32,9 @@ export function SettingsPage() {
   const userBalance = useUserUsdcBalance();
   const [settings, setSettings] = useState(initialSettings);
   const [showSaveButton, setShowSaveButton] = useState(false);
-  const chartData = [
-    { browser: "safari", visitors: 12, fill: "var(--color-safari)" },
-  ];
-  const chartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    safari: {
-      label: "Safari",
-      color: "hsl(var(--chart-2))",
-    },
-  } satisfies ChartConfig;
 
   useEffect(() => {
-    const hasChanges =
-      settings.pushNotifications !== initialSettings.pushNotifications ||
-      settings.personalizedRecommendations !==
-        initialSettings.personalizedRecommendations ||
-      settings.publicProfile !== initialSettings.publicProfile;
-
+    const hasChanges = _.isEqual(settings, initialSettings);
     setShowSaveButton(hasChanges);
   }, [settings]);
 
