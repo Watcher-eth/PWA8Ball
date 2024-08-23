@@ -47,7 +47,12 @@ function DesktopCreateProfile() {
       return;
     }
 
-    await upsertUser({ id: user?.walletaddress, name: username, pfp: pfpUrl });
+    await upsertUser({
+      id: user?.walletaddress,
+      name: username,
+      pfp: pfpUrl,
+      updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+    });
   }
 
   return (

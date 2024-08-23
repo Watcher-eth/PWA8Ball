@@ -33,7 +33,7 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
   };
 
   const { login } = useLogin({
-    onComplete: (
+    onComplete: async (
       user,
       isNewUser,
       wasAlreadyAuthenticated,
