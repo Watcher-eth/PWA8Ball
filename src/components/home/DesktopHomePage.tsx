@@ -13,6 +13,7 @@ import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
+import { AltSkeleton, Skeleton } from "../ui/Skeleton";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
@@ -42,9 +43,21 @@ export function DesktopHomePage({ trendingMarkets }) {
           transition={{ duration: 0.2 }}
           className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full px-8 gap-6 py-6 overflow-y-visible"
         >
-          {enrichedFeedData?.map((bet, index) => {
-            return <FeedCard {...bet} key={index} />;
-          })}
+          {enrichedFeedData
+            ? enrichedFeedData?.map((bet, index) => {
+                return <FeedCard {...bet} key={index} />;
+              })
+            : [1, 2, 3, 4, 5, 6].map((index) => (
+                <div
+                  style={{
+                    marginVertical: index === 0 ? 20 : 8,
+                    alignSelf: "center",
+                    marginTop: index === 0 ? 25 : 8,
+                  }}
+                >
+                  <Skeleton className=" rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
+                </div>
+              ))}
         </motion.div>
         <DesktopTrendingTopics
           title="US Elections"

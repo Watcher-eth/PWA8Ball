@@ -7,7 +7,7 @@ export function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
+      className={cn("animate-pulse rounded-md bg-[#252525]", className)}
       {...props}
     />
   );
@@ -15,14 +15,14 @@ export function Skeleton({
 
 export function AltSkeleton({
   className,
-  children
+  children,
 }: {
-  className?: string
-  children?: React.ReactNode
+  className?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <motion.div
-      className={`bg-[#252525] rounded-xl ${className}`}
+      className={`bg-[#252525] animate-pulse rounded-xl ${className}`}
       variants={skeletonVariants}
       initial="initial"
       animate="pulse"
