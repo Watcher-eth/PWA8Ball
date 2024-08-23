@@ -100,7 +100,7 @@ export function SearchItem({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 0 }}
       className={`
-        flex items-center justify-between p-2 rounded-md
+        flex items-center w-full justify-between p-2 rounded-md
          ransition-all duration-150 cursor-pointer
         ring-1 ring-transparent
         hover:!bg-[#151515]/80 hover:!ring-white/10 hover:!scale-101

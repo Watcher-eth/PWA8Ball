@@ -11,10 +11,10 @@ const SUCCESS_COLOR = "#4CAF50";
 
 export function Spinner({
   loading,
-  success
+  success,
 }: {
-  loading: boolean
-  success: boolean
+  loading: boolean;
+  success: boolean;
 }) {
   const controls = useAnimation();
   const morphControls = useAnimation();

@@ -8,6 +8,7 @@ import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarkets
 import { useOverlaySearch } from "@/hooks/useOverlaySearch";
 import { MarketItem, TopicItem, FriendItem } from "./SearchItem";
 import { SearchInputSection } from "./SearchInputSection";
+import { Spinner } from "@/components/modals/PredictModal/Spinner";
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
@@ -16,10 +17,14 @@ const friends = [
 
 export function SearchOverview() {
   const [debouncedText, setDebouncedText] = useState("");
-  const { data: trendingMarkets } = useGetTrendingMarkets();
-  const { data: users } = useGetUsersByName(debouncedText);
-  const { data: searchMarkets } = useGetMarketsByQuestion(debouncedText);
+  const { data: trendingMarkets, isLoading: loadingMarkets } =
+    useGetTrendingMarkets();
+  const { data: users, isLoading: loadingUsers } =
+    useGetUsersByName(debouncedText);
+  const { data: searchMarkets, isLoading: loadingQuestion } =
+    useGetMarketsByQuestion(debouncedText);
 
+  const isLoading = loadingUsers || loadingMarkets || loadingQuestion;
   const displayedSearchMarkets =
     searchMarkets?.slice(0, 5).map((obj, idx) => ({
       ...obj,
@@ -86,16 +91,27 @@ export function SearchOverview() {
       <SearchInputSection value={searchStr} onChange={handleSearch} />
       <AnimatePresence>
         <div
-          className={`transition-all duration-300`}
+          className={`transition-all flex flex-col justify-center items-center min-h-[45vh] duration-300`}
           style={{
             height: `calc(${masterList.length * 60}px+60px)`,
           }}
         >
           {searchStr &&
-            (masterList.length == 0 ? (
-              <div className="text-center text-gray-400 text-sm">
-                No results found
+            (masterList.length == 0 && !isLoading ? (
+              <div className="flex flex-col items-center">
+                <img
+                  src="https://media.tenor.com/vpCPcxEuI-cAAAAj/john-tr.gif"
+                  className="h-[15vh] "
+                />
+                <div className="text-center mt-4 text-white text-lg font-[Aeonik-Bold]">
+                  This future hasn't been predicted yet
+                </div>
+                <div className="text-center text-[lightgray] text-md font-[Aeonik]">
+                  Try searching for something else...
+                </div>
               </div>
+            ) : isLoading ? (
+              <Spinner loading={isLoading} />
             ) : (
               <>
                 {searchMarkets?.length > 0 && (
@@ -186,9 +202,9 @@ export function SearchOverview() {
 
 function Section({ title, children }) {
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <h3 className="text-gray-400 text-sm mb-2">{title}</h3>
-      <div className="-ml-1">{children}</div>
+      <div className="-ml-1 w-full">{children}</div>
     </div>
   );
 }

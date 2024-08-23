@@ -22,7 +22,7 @@ export function DesktopActivityModal({
       subtitle="See what your friends have been upto"
       cardClassName=""
       dialogContentClassName=" backdrop-blur-lg "
-      cardContentClassName="px-0  min-h-[50vh] "
+      cardContentClassName="px-0 max-h-[70vh] min-h-[50vh] "
       dialogClassName=""
       content={
         <div className="flex flex-col w-full -mt-4  ">
@@ -31,6 +31,7 @@ export function DesktopActivityModal({
               <DesktopFriendActivity user={user} />
             </div>
           </div>
+          <div className="bg-gradient-to-b h-20 w-full from-[transparent] rounded-lg via-[#080808]/60 to-[#080808] absolute bottom-0" />
         </div>
       }
     >
@@ -50,7 +51,7 @@ function DesktopFriendActivity(props: { user: IUser }) {
   const groupedPredictions = groupPredictionsByDate(predictions);
 
   return (
-    <div>
+    <div className="max-h-[68.5vh] flex flex-col overflow-scroll">
       {predictions?.length > 0 ? (
         <div>
           {Object.entries(groupedPredictions).map(
@@ -60,7 +61,7 @@ function DesktopFriendActivity(props: { user: IUser }) {
                   <h2
                     className={`
                 font-medium text-[1.1rem] text-[lightgray] -mb-1
-                ${index === 0 ? "mt-5" : "mt-[25px]"}
+                ${index === 0 ? "mt-2" : "mt-[25px]"}
               `}
                   >
                     {dateKey}
