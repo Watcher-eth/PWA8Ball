@@ -61,6 +61,7 @@ import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
+import AnimatedBackground from "../common/Animated/AnimatedSelector";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
@@ -187,40 +188,43 @@ export function DesktopProfilePage2({ userId, userC }) {
           </Link>
         )}
         <div className="h-[0.1rem] w-full bg-[#222222] my-3" />
-        <div className="flex flex-row items-center space-x-3">
-          <div
-            onClick={() => setFilter("All")}
-            className={`py-2 px-3 rounded-full ${
-              filter === "All" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
+        <div className="flex flex-row">
+          <AnimatedBackground
+            defaultValue={filter}
+            onValueChange={(value) => setFilter(value)}
+            className="bg-[#1B1B1E] space-x-3 rounded-full flex flex-row"
           >
-            <div>All</div>
-            <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-              <div>{ordersData?.length}</div>
+            <div
+              data-id="All"
+              onClick={() => setFilter("All")}
+              className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
+            >
+              <div>All</div>
+              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                <div>{ordersData?.length}</div>
+              </div>
             </div>
-          </div>
-          <div
-            onClick={() => setFilter("Resolved")}
-            className={`py-2 px-3 rounded-full ${
-              filter === "Resolved" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
-          >
-            <div>Resolved</div>
-            <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-              <div>0</div>
+            <div
+              data-id="Resolved"
+              onClick={() => setFilter("Resolved")}
+              className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+            >
+              <div>Resolved</div>
+              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                <div>0</div>
+              </div>
             </div>
-          </div>
-          <div
-            onClick={() => setFilter("Created")}
-            className={`py-2 px-3 rounded-full ${
-              filter === "Created" ? "bg-[#1B1B1E]" : "bg-[transparent]"
-            } space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
-          >
-            <div>Created</div>
-            <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-              <div>{createdMarketsData?.length}</div>
+            <div
+              data-id="Created"
+              onClick={() => setFilter("Created")}
+              className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+            >
+              <div>Created</div>
+              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                <div>{createdMarketsData?.length}</div>
+              </div>
             </div>
-          </div>
+          </AnimatedBackground>
         </div>
         {mergedData.length > 0 ? (
           <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
