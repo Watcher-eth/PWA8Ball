@@ -121,7 +121,7 @@ function DesktopCreateProfile() {
       </div>
       <div className="w-1/2">
         <img
-          src="/images/CreateProfik.jpg"
+          src="https://pbs.twimg.com/media/GUTMi52WgAAf3OS?format=jpg&name=4096x4096"
           alt="Onboarding illustration"
           className="object-cover w-full h-full"
         />

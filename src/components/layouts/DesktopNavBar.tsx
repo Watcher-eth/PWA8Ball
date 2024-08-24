@@ -48,7 +48,7 @@ export function DesktopNavBar() {
             <DesktopSearchModal userId={userId}>
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
-          
+
             <DesktopLeaderboardModal>
               <NavIconButton IconComponent={Trophy} />
             </DesktopLeaderboardModal>

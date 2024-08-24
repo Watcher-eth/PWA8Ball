@@ -113,7 +113,7 @@ export function DesktopOnboarding() {
       </div>
       <div className="w-1/2">
         <img
-          src="/images/OnboardingImage.png"
+          src="/images/Futura.JPG"
           alt="Onboarding illustration"
           className="object-cover w-full h-full"
         />
@@ -386,7 +386,7 @@ export function InviteScreen() {
       </div>
       <div className="w-1/2">
         <img
-          src="/images/Invite.jpg"
+          src="https://pbs.twimg.com/media/GUL-CprbkAAcHOE?format=jpg&name=4096x4096"
           alt="Onboarding illustration"
           className="object-cover w-full h-full"
         />
