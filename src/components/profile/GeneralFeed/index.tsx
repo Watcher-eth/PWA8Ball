@@ -2,8 +2,6 @@
 
 import React, { useEffect } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-
-import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
@@ -29,7 +27,7 @@ export function GeneralFeed({
     data: ordersData,
     isLoading: isOrdersLoading,
     refetch: refetchOrders,
-  } = useGetOrdersForUser(walletAddress);
+  } = useGetPositionsByWallet(walletAddress);
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,

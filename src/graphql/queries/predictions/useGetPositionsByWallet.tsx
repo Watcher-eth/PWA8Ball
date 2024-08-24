@@ -1,9 +1,9 @@
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { tgql } from "@/__generated__";
 
-const GET_ORDERS_BY_USER = tgql(/* GraphQL */ `
-  query GetOrdersByUser($userAddress: String) {
+const GET_POSITIONS_BY_WALLET = gql`
+  query getPositionsByWallet($userAddress: String!) {
     positions(where: { userAddress: $userAddress }, limit: 1) {
       items {
         marketId
@@ -29,26 +29,19 @@ const GET_ORDERS_BY_USER = tgql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
-export function useGetOrdersByUser(userAddress: string) {
-  const { data, loading, error } = useApolloQuery(GET_ORDERS_BY_USER, {
+export function useGetPositionsByWallet(userAddress: string) {
+  const { data, loading, error, refetch } = useApolloQuery(GET_POSITIONS_BY_WALLET, {
     variables: {
       userAddress: getChecksummedAddress(userAddress),
     },
-    skip: !Boolean(userAddress),
-  });
-
-  console.log("orderData", {
-    shown: !Boolean(userAddress),
-    data,
-    loading,
-    error,
   });
 
   return {
     orders: data?.positions?.items,
     loading,
     error,
+    refetch,
   };
 }

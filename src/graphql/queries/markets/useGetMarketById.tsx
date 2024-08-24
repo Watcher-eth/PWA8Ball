@@ -3,7 +3,7 @@
 import { useQuery as useApolloQuery } from "@apollo/client";
 import { tgql } from "@/__generated__";
 
-const GET_ONCHAIN_MARKET = tgql(/* GraphQL */`
+const GET_ONCHAIN_MARKET = tgql(/* GraphQL */ `
   query getMarketById($id: BigInt!) {
     market(id: $id) {
       id
@@ -26,19 +26,16 @@ const GET_ONCHAIN_MARKET = tgql(/* GraphQL */`
 `);
 
 export function useGetMarketById(id: string) {
-  const {
-    data,
-    loading,
-    error,
-  } = useApolloQuery(GET_ONCHAIN_MARKET, {
+  const { data, loading, error, refetch } = useApolloQuery(GET_ONCHAIN_MARKET, {
     variables: { id: String(id) },
   });
 
   //TODO: Get Topic
 
   return {
-    market: data?.market,
+    data,
     loading,
     error,
+    refetch,
   };
 }

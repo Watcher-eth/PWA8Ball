@@ -4,7 +4,7 @@ import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { tgql } from "@/__generated__";
 
 const GET_MARKET_CHART_DATA = tgql(/* GraphQL */`
-  query getMarketChartData($marketId: BigInt = "1") {
+  query getMarketPrices($marketId: BigInt) {
     prices(where: { marketId: $marketId }) {
       items {
         id
@@ -16,7 +16,7 @@ const GET_MARKET_CHART_DATA = tgql(/* GraphQL */`
   }
 `)
 
-export function useGetMarketChartData(id: string) {
+export function useGetMarketPrices(id: string) {
   const {
     data,
     loading,

@@ -14,6 +14,8 @@ import { LoginModal } from "@/components/modals/LoginModal";
 import { FeedCard } from "./FeedCard";
 import { TopicHeader } from "./TopicHeader";
 import { AppBanner } from "../common/AppBanner";
+import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { INVITES_ACTIVE } from "@/constants";
 
 export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();
@@ -81,3 +83,8 @@ export function MobileHomePage({ trendingMarkets }) {
     </div>
   );
 }
+
+export const WrappedMobileHomePage = withBlurOverlay(
+  MobileHomePage,
+  INVITES_ACTIVE
+);

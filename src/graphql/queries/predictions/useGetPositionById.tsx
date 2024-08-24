@@ -2,7 +2,7 @@ import { tgql } from "@/__generated__";
 import { useQuery } from "@apollo/client";
 
 // Define the GraphQL query
-const GET_ORDER_BY_ID = tgql(/* GraphQL */ `
+const GET_POSITION_BY_ID = tgql(/* GraphQL */ `
   query OrderById($id: String!) {
     position(id: $id) {
       marketId
@@ -26,13 +26,13 @@ const GET_ORDER_BY_ID = tgql(/* GraphQL */ `
   }
 `);
 
-export function useGetOrderById(id: string) {
-  const { data, loading, error } = useQuery(GET_ORDER_BY_ID, {
+export function useGetPositionById(id: string) {
+  const { data, loading, error } = useQuery(GET_POSITION_BY_ID, {
     variables: { id },
   });
 
   return {
-    data,
+    position: data?.position,
     loading,
     error,
   };

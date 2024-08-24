@@ -3,7 +3,7 @@
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_USER_ORDER_COUNT = gql`
+const GET_USER_POSITION_COUNT = gql`
   query UserOrderCount($userAddress: String = "") {
     positions(where: { userAddress: $userAddress }) {
       items {
@@ -14,7 +14,7 @@ const GET_USER_ORDER_COUNT = gql`
   }
 `;
 
-export function useGetUserOrderCount(userAddress: string) {
+export function useGetUserPositionsCount(userAddress: string) {
   const {
     data,
     loading,

@@ -7,6 +7,8 @@ import { FollowButton } from "@/components/profile/FollowButton";
 
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
+import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { INVITES_ACTIVE } from "@/constants";
 
 
 export function MobileProfilePage({
@@ -102,3 +104,8 @@ function AbsoluteBlurIcon({
     </div>
   );
 }
+
+export const WrappedMobileProfile = withBlurOverlay(
+  MobileProfilePage,
+  INVITES_ACTIVE
+);

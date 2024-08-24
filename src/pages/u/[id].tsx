@@ -5,9 +5,8 @@ import { fetchUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByE
 import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
-import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
-import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
-import { DesktopProfilePage2 } from "@/components/profile/DesktopProfile";
+import { WrappedMobileProfile } from "@/components/profile/MobileProfilePage";
+import { WrappedDesktopProfile } from "@/components/profile/DesktopProfile";
 
 export default function ProfilePage({
   userId,
@@ -21,14 +20,14 @@ export default function ProfilePage({
   return (
     <MobiTop
       mobile={
-        <MobileProfilePage
+        <WrappedMobileProfile
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}
         />
       }
       desktop={
-        <DesktopProfilePage2
+        <WrappedDesktopProfile
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}

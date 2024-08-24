@@ -26,6 +26,8 @@ import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { formatMarket } from "@/utils/markets/formatMarketArr";
+import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { INVITES_ACTIVE } from "@/constants";
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
@@ -262,3 +264,8 @@ function MobileMarketContent({
     </motion.div>
   );
 }
+
+export const WrappedMobileMarketPage = withBlurOverlay(
+  MobileMarketPage,
+  INVITES_ACTIVE
+);

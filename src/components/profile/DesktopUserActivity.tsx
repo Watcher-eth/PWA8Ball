@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
-import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton";
@@ -21,7 +20,7 @@ export function DesktopUserActivity({
     data: ordersData,
     isLoading: isOrdersLoading,
     refetch: refetchOrders,
-  } = useGetOrdersForUser(walletAddress);
+  } = useGetPositionsByWallet(walletAddress);
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,

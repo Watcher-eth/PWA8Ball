@@ -1,6 +1,7 @@
+import { tgql } from "@/__generated__";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_MARKET_USERS = gql`
+const GET_MARKET_USERS = tgql(/* GraphQL */ `
   query MarketUsers($marketId: BigInt!) {
     positions(where: { marketId: $marketId }) {
       items {
@@ -17,7 +18,7 @@ const GET_MARKET_USERS = gql`
       }
     }
   }
-`;
+`);
 
 export function useGetMarketUsers(marketId: string) {
   const {
@@ -30,9 +31,7 @@ export function useGetMarketUsers(marketId: string) {
   });
 
   return {
-    data: marketUsersData.positions.items,
-    loading: marketUsersLoading,
-    error: marketUsersError,
+    data: marketUsersData?.positions?.items,
     refetch,
   };
 }

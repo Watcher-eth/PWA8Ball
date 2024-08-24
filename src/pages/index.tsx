@@ -1,9 +1,8 @@
 // @ts-nocheck
-import { DesktopHomePage } from "@/components/home/DesktopHomePage";
-import { MobileHomePage } from "@/components/home/MobileHomePage";
+import { WrappedDesktopHomePage } from "@/components/home/DesktopHomePage";
+import { WrappedMobileHomePage } from "@/components/home/MobileHomePage";
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { fetchTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
-
 
 export async function getServerSideProps({ req, res }) {
   res.setHeader(
@@ -17,12 +16,12 @@ export async function getServerSideProps({ req, res }) {
       trendingMarkets,
     },
   };
-};
+}
 export default function Home({ trendingMarkets }) {
   return (
     <MobiTop
-      mobile={<MobileHomePage trendingMarkets={trendingMarkets} />}
-      desktop={<DesktopHomePage trendingMarkets={trendingMarkets} />}
+      mobile={<WrappedMobileHomePage trendingMarkets={trendingMarkets} />}
+      desktop={<WrappedDesktopHomePage trendingMarkets={trendingMarkets} />}
     />
   );
 }

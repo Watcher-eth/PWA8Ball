@@ -29,7 +29,6 @@ const fetchOrdersForMarketAndSender = async (
   return data;
 };
 
-
 export function useGetOrdersForMarketAndSender(
   marketId: number,
   senderAddress: string

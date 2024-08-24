@@ -1,8 +1,7 @@
 //@ts-nocheck
-import { tgql } from "@/__generated__";
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { gql, useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_LP_CHART_DATA = tgql(/* GraphQL */`
+const GET_LP_CHART_DATA = gql(`
   query getLpPositionsData($userAddress: String!) {
     lpPositionPrices(where: { userAddress: $userAddress }) {
       items {
@@ -19,16 +18,16 @@ const GET_LP_CHART_DATA = tgql(/* GraphQL */`
 
 export function useGetLpPositionsByUser(userAddress: string) {
   const {
-    data,
-    loading,
-    error,
+    data: lpData,
+    loading: lpLoading,
+    error: lpError,
   } = useApolloQuery(GET_LP_CHART_DATA, {
     variables: { userAddress },
   });
 
   return {
-    lpPositionsData: data?.lpPositionPrices?.items ?? [],
-    loading,
-    error,
+    data: lpData?.lpPositionValues?.items || [],
+    loading: lpLoading,
+    error: lpError,
   };
 }
