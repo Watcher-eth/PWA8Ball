@@ -10,7 +10,6 @@ import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
-import { useGetMarketChartData } from "@/graphql/queries/charts/useGetMarketChartData";
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -39,7 +38,7 @@ export function DesktopChart(props: {
   //   timeframe
   // );
 
-  const { data: prices2 } = useGetMarketChartData(props?.id);
+  const { data: prices2 } = useGetPricesForMarket(props?.id);
 
   const userOutcome = props?.optionNumber;
   const { currentPrices, percentageDifference } = processPrices(

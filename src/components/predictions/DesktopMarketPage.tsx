@@ -34,11 +34,11 @@ export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
-  const { market } = useGetMarketById(id);
+  const { market: market2 } = useGetMarketById(id);
   const userImages = fillUserImages(users, 3);
   const [comments, setComments] = useState([]);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
-    market,
+    market2,
     hardMarkets,
     hardTopics
   );

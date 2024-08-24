@@ -14,6 +14,8 @@ import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMar
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { AltSkeleton, Skeleton } from "../ui/Skeleton";
+import { INVITES_ACTIVE } from "@/constants";
+import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
@@ -69,3 +71,8 @@ export function DesktopHomePage({ trendingMarkets }) {
       </>
     );
 }
+
+export const WrappedDesktopHomePage = withBlurOverlay(
+  DesktopHomePage,
+  INVITES_ACTIVE
+);

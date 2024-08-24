@@ -1,6 +1,5 @@
 // Yeah im not touching this file with a 10 meter pole till monke knows what its trying 2 do
 
-import { useQuery } from "@tanstack/react-query";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { tgql } from "@/__generated__";
@@ -53,8 +52,7 @@ async function fetchFollowingIds(userId: string) {
   return data?.map((row) => row.following_id) ?? []
 };
 
-// Hook to combine fetching following IDs and querying orders by those IDs
-export const useGetFriendsOrders = (userId: string) => {
+export const useGetFriendsPositions = (userId: string) => {
   const [followingIds, setFollowingIds] = useState([])
   async function getAndSetFollowingIds() {
     const arr = await fetchFollowingIds(userId);

@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetOrderById } from "@/graphql/queries/predictions/useGetOrderById";
+import { useGetPositionById } from "@/graphql/queries/predictions/useGetPositionById";
 
 export function Receipt(props: {
   question: string;
@@ -18,7 +18,7 @@ export function Receipt(props: {
   onClose?: () => void;
 }) {
   const { user } = useUserStore();
-  const { position, loading, error } = useGetOrderById(
+  const { position, loading, error } = useGetPositionById(
     "10-0x870b7F3f229D08918d33F8b09766eaB412aBEebf-1"
   );
   console.log("order", position);

@@ -6,7 +6,7 @@ import { DEFAULT_USER_ID } from "@/constants/testData";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
-import { MobileMarketPage } from "@/components/predictions/MobileMarketPage";
+import { MobileMarketPage, WrappedMobileMarketPage } from "@/components/predictions/MobileMarketPage";
 
 import { IUserWithBet } from "@/supabase/types";
 import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
@@ -24,7 +24,7 @@ export default function MarketPage({
   return (
     <>
       <MobiTop
-        mobile={<MobileMarketPage users={users} market={market} id={id} />}
+        mobile={<WrappedMobileMarketPage users={users} market={market} id={id} />}
         desktop={<DesktopMarketPage users={users} market={market} id={id} />}
       />
     </>

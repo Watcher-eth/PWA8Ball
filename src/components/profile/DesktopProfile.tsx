@@ -41,14 +41,12 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
-import { useGetOrdersForUser } from "@/supabase/queries/user/useGetOrdersForUser";
+import { useGetPositionsByWallet } from "@/supabase/queries/user/useGetPositionsByWallet";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
-import { useGetUserOrders } from "@/graphql/queries/predictions/useGetUserOrders";
-import { useGetOrdersByUser } from "@/graphql/queries/predictions/useGetOrdersByUser";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
   InverseBleedOverlay,
@@ -60,15 +58,15 @@ import { FollowButton } from "./FollowButton";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { copyToClipboard } from "@/utils/copyToClipboard";
-import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
+import { BlurOverlay, withBlurOverlay } from "../onboarding/Invites/InviteBlur";
 import AnimatedBackground from "../common/Animated/AnimatedSelector";
+import { INVITES_ACTIVE } from "@/constants";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
   const balance = useUserUsdcBalance();
   const [filter, setFilter] = useState("All");
-  const { data: ordersData } = useGetOrdersForUser(userC?.walletaddress);
-  const { orders: ordersData2 } = useGetOrdersByUser(userC?.walletaddress);
+  const { data: ordersData } = useGetPositionsByWallet(userC?.walletaddress);
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -311,3 +309,8 @@ function ProfilePositionCard(
     </div>
   );
 }
+
+export const WrappedDesktopProfile = withBlurOverlay(
+  DesktopProfilePage2,
+  INVITES_ACTIVE
+);

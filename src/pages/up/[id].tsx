@@ -2,7 +2,7 @@
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { Receipt } from "@/components/share/UserPosition.tsx";
-import { useGetOrderById } from "@/graphql/queries/predictions/useGetOrderById";
+import { useGetPositionById } from "@/graphql/queries/predictions/useGetPositionById";
 
 export default function MarketPage({
   params,
@@ -12,7 +12,7 @@ export default function MarketPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const { id } = params ?? {};
-  const { data } = useGetOrderById(
+  const { data } = useGetPositionById(
     "10-0x8512B8f41a6D1f2Aa0D09ae710b705498735F265-0"
   );
   console.log("posiio2n", data, data?.position.market?.outcomeOddsB);

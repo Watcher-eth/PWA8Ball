@@ -2,17 +2,15 @@
 
 import { useQuery as useApolloQuery, gql } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { tgql } from "@/__generated__";
 
-const GET_USER_LP = tgql(/* GraphQL */`
+const GET_USER_LP = gql`
   query getUserLp($userAddress: String!) {
     lpPositions(where: { userAddress: $userAddress }) {
       items {
-        amountLp
         amountUsdc
+        amountLp
         marketId
         createdAt
-        updatedAt
         market {
           liquidityTotal
           title
@@ -21,13 +19,14 @@ const GET_USER_LP = tgql(/* GraphQL */`
       }
     }
   }
-`)
+`;
 
 export function useGetUserLp(userAddress: string) {
   const {
-    data,
-    loading,
-    error,
+    data: lpData,
+    loading: lpLoading,
+    error: lpError,
+    refetch,
   } = useApolloQuery(GET_USER_LP, {
     variables: { userAddress: getChecksummedAddress(userAddress) },
     skip: !Boolean(userAddress),
@@ -35,11 +34,11 @@ export function useGetUserLp(userAddress: string) {
   // console.log(
   //   getChecksummedAddress("0x9fefd0bb2d175b039c8c72c55eea11bc66452591")
   // );
-  console.log("lpData", data);
 
   return {
-    lpPositions: data?.lpPositions?.items ?? [],
-    loading,
-    error,
+    data: lpData?.lpPositions?.items ?? [],
+    loading: lpLoading,
+    error: lpError,
+    refetch,
   };
 }

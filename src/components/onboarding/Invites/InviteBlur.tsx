@@ -1,10 +1,11 @@
-import { useUserStore } from "@/lib/stores/UserStore";
 import React, { useEffect } from "react";
+import { useUserStore } from "@/lib/stores/UserStore";
 import { DesktopOnboarding, InviteScreen } from "../DesktopOnboardingModal";
 import DesktopCreateProfile from "../DesktopCreateProfile";
 
-export function BlurOverlay() {
+function BlurOverlay() {
   const { user } = useUserStore();
+
   useEffect(() => {
     // Disable scrolling when the overlay is active
     document.body.classList.add("no-scroll");
@@ -14,6 +15,7 @@ export function BlurOverlay() {
       document.body.classList.remove("no-scroll");
     };
   }, []);
+
   return (
     <div className="fixed inset-0 z-[50] flex items-center justify-center">
       {/* Full-Screen Blur Overlay */}
@@ -32,3 +34,20 @@ export function BlurOverlay() {
     </div>
   );
 }
+
+
+
+export function withBlurOverlay(Component, shouldShowOverlay) {
+  return function WrappedComponent(props) {
+    if (shouldShowOverlay) {
+      return (
+        <>
+          <BlurOverlay />
+          <Component {...props} />
+        </>
+      );
+    }
+    return <Component {...props} />;
+  };
+}
+
