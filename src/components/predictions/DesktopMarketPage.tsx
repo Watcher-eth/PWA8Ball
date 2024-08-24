@@ -30,7 +30,7 @@ import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhan
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 
-export function DesktopMarketPage({ users, market, id }) {
+export function DesktopMarketPage({ users, /*market,*/ id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);

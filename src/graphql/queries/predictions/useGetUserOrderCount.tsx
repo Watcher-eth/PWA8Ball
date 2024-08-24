@@ -16,23 +16,23 @@ const GET_USER_ORDER_COUNT = gql`
 
 export function useGetUserOrderCount(userAddress: string) {
   const {
-    data: orderData,
-    loading: orderLoading,
-    error: orderError,
+    data,
+    loading,
+    error,
   } = useApolloQuery(GET_USER_ORDER_COUNT, {
     variables: {
       userAddress: getChecksummedAddress(userAddress),
     },
   });
 
-  const orderCount = orderData?.positions?.items.length || 0;
+  const orders = data?.positions?.items ?? []
 
   return {
     data: {
-      count: orderCount,
-      orders: orderData?.positions?.items || [],
+      count: orders.length,
+      orders: orders,
     },
-    loading: orderLoading,
-    error: orderError,
+    loading,
+    error,
   };
 }
