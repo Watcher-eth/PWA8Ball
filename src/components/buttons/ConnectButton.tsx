@@ -1,10 +1,11 @@
 import { IUser } from "@/supabase/types";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { UserCircle } from "lucide-react";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function ConnectButton({ user }: { user: IUser }) {
   const { displayName } = useMyEns();
-  console.log("userName", user?.name, displayName);
+
   return (
     <div
       className={`
@@ -22,7 +23,7 @@ export function ConnectButton({ user }: { user: IUser }) {
         : "Connect"}
       {user?.pfp ? (
         <img
-          src={user?.pfp}
+          src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
           alt={user?.name}
           className="size-6 rounded-full  ml-2 -mr-1 inline"
         />
