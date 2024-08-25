@@ -10,6 +10,7 @@ import { MobileMarketPage, WrappedMobileMarketPage } from "@/components/predicti
 
 import { IUserWithBet } from "@/supabase/types";
 import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
+import { getMarketById } from "@/graphql/queries/markets/useGetMarketById";
 
 
 export default function MarketPage({
@@ -35,7 +36,8 @@ export async function getServerSideProps(context) {
   const { id } = context.params as { id: string };
 
   const [market, users] = await Promise.all([
-    fetchMarketById(id, DEFAULT_USER_ID),
+    // fetchMarketById(id, DEFAULT_USER_ID),
+    getMarketById(id),
     fetchUsersByMarketId(id),
   ]);
 

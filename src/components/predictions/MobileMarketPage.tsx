@@ -32,7 +32,7 @@ import { INVITES_ACTIVE } from "@/constants";
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
-  const { market } = useGetMarketById(id);
+  // const { market } = useGetMarketById(id);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     hardMarkets,
