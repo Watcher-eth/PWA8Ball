@@ -12,7 +12,6 @@ export function FeedCard({
   outcomeA,
   optionA,
 }) {
-  console.log("props2", optionA.odds);
   return (
     <div>
       <Link href={getMarketPath(id)} prefetch={true}>

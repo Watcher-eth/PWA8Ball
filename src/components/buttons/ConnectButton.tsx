@@ -4,7 +4,7 @@ import { UserCircle } from "lucide-react";
 
 export function ConnectButton({ user }: { user: IUser }) {
   const { displayName } = useMyEns();
-
+  console.log("userName", user?.name, displayName);
   return (
     <div
       className={`
@@ -15,7 +15,11 @@ export function ConnectButton({ user }: { user: IUser }) {
         px-4 py-2 rounded-lg flex flex-row items-center
       `}
     >
-      {displayName ? displayName : user?.name ? user?.name : "Connect"}
+      {!displayName?.startsWith("0x")
+        ? displayName
+        : user?.name
+        ? user?.name
+        : "Connect"}
       {user?.pfp ? (
         <img
           src={user?.pfp}

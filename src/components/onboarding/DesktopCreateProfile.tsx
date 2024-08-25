@@ -2,14 +2,12 @@ import React, { useRef, useState } from "react";
 import { Ban, ImagePlus } from "lucide-react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { toast } from "sonner";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 function DesktopCreateProfile() {
   const fileInputRef = useRef(null);
+
   const [username, setUsername] = useState("");
   const [pfpUrl, setPfpUrl] = useState("");
-  const { upsertUser } = useUpsertUser();
-
   const { user, setUser } = useUserStore();
   const handleImageUploadClick = () => {
     fileInputRef.current.click();
@@ -18,6 +16,9 @@ function DesktopCreateProfile() {
   const handleImageChange = (event: { target: { files: any[] } }) => {
     const file = event.target.files[0];
     if (file) {
+      const fileUrl = URL.createObjectURL(file); // Create a temporary URL for the file
+
+      setPfpUrl(fileUrl);
       // TODO: Add ipfs upload
       console.log("Uploaded file:", file);
     }
@@ -25,6 +26,7 @@ function DesktopCreateProfile() {
 
   async function uploadProfileData() {
     const userId = user?.external_auth_provider_user_id!;
+    console.log("username", username, user?.walletaddress);
     if (!username) {
       toast(
         <div className="w-full rounded-full bg-[#101010] font-[600] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
@@ -47,12 +49,35 @@ function DesktopCreateProfile() {
       return;
     }
 
-    await upsertUser({
-      id: user?.walletaddress,
-      name: username,
-      pfp: pfpUrl,
-      updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-    });
+    if (user?.walletType === "eoa") {
+      setUser({
+        id: user?.walletaddress,
+        name: username,
+        pfp: pfpUrl,
+        walletaddress: user?.walletaddress,
+        createdAt: BigInt(Math.floor(Date.now() / 1000)),
+        externalAuthProviderUserId: user?.external_auth_provider_user_id,
+        updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+      });
+    } else if (user?.walletaddress) {
+      setUser({
+        id: user?.walletaddress,
+        name: username,
+        pfp: pfpUrl,
+        walletaddress: user?.walletaddress,
+        createdAt: BigInt(Math.floor(Date.now() / 1000)),
+        externalAuthProviderUserId: user?.external_auth_provider_user_id,
+        updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+      });
+    } else {
+      setUser({
+        name: username,
+        pfp: pfpUrl,
+        createdAt: BigInt(Math.floor(Date.now() / 1000)),
+        externalAuthProviderUserId: user?.external_auth_provider_user_id,
+        updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+      });
+    }
   }
 
   return (
@@ -69,16 +94,23 @@ function DesktopCreateProfile() {
         </p>
         <div className="rounded-lg md:min-w-[23vw]  bg-[#101010] flex flex-col justify-between p-5 mt-5 shadow-lg h-[14.5rem] border-2 border-[#181818] w-full mx-3">
           <div className="flex flex-row items-start justify-between">
-            <div
-              className="h-[5rem] hover:scale-101 active:scale-97 w-[5rem] bg-gradient-to-b from-[#161616] to-[#111111] rounded-full border-2 border-[#212121] flex justify-center items-center cursor-pointer"
-              onClick={handleImageUploadClick}
-            >
-              <ImagePlus
-                color="#383838"
-                className="hover:scale-103 active:scale-97"
-                strokeWidth={2.5}
+            {pfpUrl ? (
+              <img
+                src={pfpUrl}
+                className="h-[5rem] hover:scale-101 active:scale-97 w-[5rem] bg-gradient-to-b from-[#161616] to-[#111111] rounded-full border-2 border-[#212121] flex justify-center items-center cursor-pointer"
               />
-            </div>
+            ) : (
+              <div
+                className="h-[5rem] hover:scale-101 active:scale-97 w-[5rem] bg-gradient-to-b from-[#161616] to-[#111111] rounded-full border-2 border-[#212121] flex justify-center items-center cursor-pointer"
+                onClick={handleImageUploadClick}
+              >
+                <ImagePlus
+                  color="#383838"
+                  className="hover:scale-103 active:scale-97"
+                  strokeWidth={2.5}
+                />
+              </div>
+            )}
             <div className="text-lg mt-1 color-[lightgray] font-[Benzin-Bold]">
               Beginner
             </div>

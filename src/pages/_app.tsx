@@ -52,7 +52,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
   //   autocapture: { elementInteractions: true },
   // });
   useServiceWorker(); // Use the custom hook
-  
 
   return (
     <>
@@ -61,7 +60,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         position="top-center"
         className="bg-[#121212] rounded-xl z-100"
       />
-      <WagmiProvider config={wagmiConfig}>
+      <WagmiProvider useConfig={wagmiConfig} config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
           <AirstackProvider
             apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}

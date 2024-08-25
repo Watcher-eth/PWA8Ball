@@ -1,12 +1,12 @@
-import { GRAPH_ENDPOINT_DEV_URL } from "@/Providers/GraphQLProvider";
+import { GRAPH_ENDPOINT_DEV_URL } from "@/providers/GraphQlProvider";
 import { IUser } from "@/supabase/types";
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { serialize } from "@wagmi/core";
+import { serialize, deserialize } from "@wagmi/core";
 
 export function useUpsertUser() {
   async function upsertUser(userData: Partial<IUser>) {
+    console.log("upsertData", serialize(userData));
     try {
-      const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}user/upsert`, {
+      const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}/user/upsert`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,6 +23,7 @@ export function useUpsertUser() {
       }
 
       const result = await response.json();
+      console.log("success upsert", response);
       return result;
     } catch (error) {
       console.error("Error during fetch:", error);

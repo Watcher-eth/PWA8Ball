@@ -11,6 +11,9 @@ import {
 } from "@/supabase/userApi";
 import { useAccount } from "wagmi";
 import { v5 as uuidv5 } from "uuid";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
+import { serialize } from "@wagmi/core";
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7"; // Define a static namespace for generating UUIDs
 const DEFAULT_PFP =
@@ -21,27 +24,50 @@ export function useInitializeUser() {
   const { user, setUser, setWalletType } = useUserStore();
   const { smartAccountAddress } = useSmartAccount();
   const { address: eoaAddress, isConnected } = useAccount();
+  const { upsertUser } = useUpsertUser();
 
   async function fetchUser() {
+    console.log(
+      "before init User",
+      eoaAddress,
+      isConnected,
+      smartAccountAddress
+    );
+
     if (ready && authenticated && privyUser) {
       // Handle Privy smart wallet user
-      const dbUser = await getUserFromDB(privyUser?.id);
+      const dbUser = await getUserFromDB(smartAccountAddress);
+      console.log("during init User", dbUser);
+
       if (dbUser) {
         console.log({ dbUser });
         setUser({
           ...dbUser,
           walletType: "smartwallet",
         });
-      } else {
-        const newUser = await createUserInDB(privyUser.id);
-        newUser.pfp = DEFAULT_PFP;
+      } else if (smartAccountAddress && user?.walletType !== "eoa") {
+        const update = {
+          id: smartAccountAddress,
+          walletAddress: smartAccountAddress,
+          name: user?.name,
+          pfp: user?.pfp,
+          socials: user?.socials,
+          externalAuthProviderUserId: privyUser?.id,
+          updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+          createdAt: BigInt(Math.floor(Date.now() / 1000)),
+        };
 
-        setUser({ ...newUser, walletType: "smartwallet" });
+        const newUser = await upsertUser(update);
+
+        newUser.pfp = DEFAULT_PFP;
+        console.log("new User", newUser);
+        setUser({ ...update, walletType: "smartwallet" });
       }
     } else if (isConnected && eoaAddress) {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
-      const dbUser = await getUserFromDB(eoaUUID);
+      const dbUser = false; //await getUserFromDB(eoaAddress);
+      console.log("eoa user", dbUser);
       if (dbUser) {
         dbUser.pfp = DEFAULT_PFP;
 
@@ -50,11 +76,22 @@ export function useInitializeUser() {
           walletType: "eoa",
         });
       } else {
-        const newUser = await createUserFromEOAInDB(eoaUUID, eoaAddress);
+        const update = {
+          id: getChecksummedAddress(eoaAddress),
+          walletAddress: getChecksummedAddress(eoaAddress),
+          name: user?.name,
+          pfp: user?.pfp,
+          externalAuthProviderUserId: eoaUUID,
+          updatedAt: BigInt(Math.floor(Date.now() / 1000)),
+          createdAt: BigInt(Math.floor(Date.now() / 1000)),
+        };
+        console.log("new User eoa", update);
+
+        const newUser = await upsertUser(update);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
 
         setUser({
-          ...newUser,
+          ...update,
           walletType: "eoa",
           name: eoaAddress,
         });

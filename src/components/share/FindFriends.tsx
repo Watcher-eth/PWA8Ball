@@ -69,6 +69,7 @@ export const FindFriends = ({ type }) => {
                 pfp: profilePictureUrl,
               },
             },
+            updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
           });
         } catch (error) {
           console.error("Error updating user profile:", error);
@@ -98,6 +99,7 @@ export const FindFriends = ({ type }) => {
               pfp: farcasterAcc.profile_picture,
             },
           },
+          updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
         });
       } catch (error) {
         console.error("Error creating user:", error);

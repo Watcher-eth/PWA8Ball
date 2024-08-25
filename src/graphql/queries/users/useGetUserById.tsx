@@ -1,7 +1,7 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { tgql } from "@/__generated__";
 
-const GET_USER_BY_ID = gql`
+export const GET_USER_BY_ID = gql`
   query getUserById($id: String = "") {
     user(id: $id) {
       externalAuthProviderUserId

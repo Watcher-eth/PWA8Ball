@@ -14,6 +14,7 @@ import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInvit
 import { debounce } from "lodash";
 import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite";
 import { toast } from "sonner";
+import { useAccount } from "wagmi";
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
@@ -28,6 +29,14 @@ export function DesktopOnboardingModal({
   children: React.ReactNode;
 }) {
   const { user } = useUserStore();
+  const { account, isConnected, address } = useAccount();
+  console.log(
+    "user3",
+    user?.name,
+    user?.name?.startsWith("0x"),
+    address,
+    isConnected
+  );
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] bg-[#080808]/[0.8]"
@@ -36,7 +45,9 @@ export function DesktopOnboardingModal({
       content={
         !user ? (
           <DesktopOnboarding />
-        ) : user?.name.startsWith("0x") ? (
+        ) : user?.name?.startsWith("0x") ? (
+          <DesktopCreateProfile />
+        ) : address && !user?.name ? (
           <DesktopCreateProfile />
         ) : (
           <DesktopOnboarding />
