@@ -16,7 +16,7 @@ export function useUpsertUser() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userDataWithBigInt), //serialize,
+        body: JSON.stringify(userDataWithBigInt), //serialize(userData),
       });
 
       if (!response.ok) {
