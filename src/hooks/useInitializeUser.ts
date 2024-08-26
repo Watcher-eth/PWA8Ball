@@ -64,6 +64,7 @@ export function useInitializeUser() {
       if (dbUser) {
         setUser({
           ...dbUser,
+          name: dbUser?.name ? dbUser?.name : "Anon",
           pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
           walletType: "eoa",
         });

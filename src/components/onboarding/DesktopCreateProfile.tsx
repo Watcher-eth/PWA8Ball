@@ -26,7 +26,7 @@ function DesktopCreateProfile() {
 
   async function uploadProfileData() {
     const userId = user?.external_auth_provider_user_id!;
-    console.log("username", username, user?.walletaddress);
+
     if (!username) {
       toast(
         <div className="w-full rounded-full bg-[#101010] font-[600] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">

@@ -13,7 +13,7 @@ export const useReferralStore = create<ReferralState>(
       setReferralId: (id: string) => set({ referralId: id }),
     }),
     {
-      name: "referral-storage", // Name of the local storage item
+      name: "referral-storage", 
     }
   )
 );
