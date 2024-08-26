@@ -29,12 +29,13 @@ import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
+import { useCheckReferral } from "@/hooks/useCheckReferral";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
-  // const { market: market2 } = useGetMarketById(id);
+  useCheckReferral();
   const userImages = fillUserImages(users, 3);
   const [comments, setComments] = useState([]);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(

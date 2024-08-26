@@ -6,12 +6,14 @@ import { DEFAULT_USER_ID } from "@/constants/testData";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
-import { MobileMarketPage, WrappedMobileMarketPage } from "@/components/predictions/MobileMarketPage";
+import {
+  MobileMarketPage,
+  WrappedMobileMarketPage,
+} from "@/components/predictions/MobileMarketPage";
 
 import { IUserWithBet } from "@/supabase/types";
 import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
 import { getMarketById } from "@/graphql/queries/markets/useGetMarketById";
-
 
 export default function MarketPage({
   users,
@@ -25,7 +27,7 @@ export default function MarketPage({
   return (
     <>
       <MobiTop
-        mobile={<WrappedMobileMarketPage users={users} market={market} id={id} />}
+        mobile={<MobileMarketPage users={users} market={market} id={id} />}
         desktop={<DesktopMarketPage users={users} market={market} id={id} />}
       />
     </>
@@ -48,4 +50,4 @@ export async function getServerSideProps(context) {
       users,
     },
   };
-};
+}

@@ -26,13 +26,17 @@ import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { formatMarket } from "@/utils/markets/formatMarketArr";
-import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import {
+  BlurOverlayWrapper,
+  withBlurOverlay,
+} from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
+import { useCheckReferral } from "@/hooks/useCheckReferral";
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
   const userImages = fillUserImages(users, 3);
-  // const { market } = useGetMarketById(id);
+  useCheckReferral();
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     hardMarkets,
@@ -40,17 +44,19 @@ export function MobileMarketPage({ market, users, id }) {
   );
 
   return (
-    <MobileDrawerContainer>
-      <MobileMarketContent
-        setIsDrawerOpen={() => {}}
-        users={users}
-        market={enhancedMarket}
-        userImages={userImages}
-        openLoginModal={openLoginModal}
-        handleOpen={() => {}}
-        {...formatMarket(enhancedMarket)}
-      />
-    </MobileDrawerContainer>
+    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+      <MobileDrawerContainer>
+        <MobileMarketContent
+          setIsDrawerOpen={() => {}}
+          users={users}
+          market={enhancedMarket}
+          userImages={userImages}
+          openLoginModal={openLoginModal}
+          handleOpen={() => {}}
+          {...formatMarket(enhancedMarket)}
+        />
+      </MobileDrawerContainer>
+    </BlurOverlayWrapper>
   );
 }
 
@@ -264,8 +270,3 @@ function MobileMarketContent({
     </motion.div>
   );
 }
-
-export const WrappedMobileMarketPage = withBlurOverlay(
-  MobileMarketPage,
-  INVITES_ACTIVE
-);

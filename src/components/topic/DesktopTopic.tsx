@@ -22,7 +22,11 @@ import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMark
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
-import { BlurOverlay } from "../onboarding/Invites/InviteBlur";
+import {
+  BlurOverlay,
+  BlurOverlayWrapper,
+} from "../onboarding/Invites/InviteBlur";
+import { INVITES_ACTIVE } from "@/constants";
 
 function DesktopTopic({
   name,
@@ -95,117 +99,117 @@ function DesktopTopic({
   };
 
   return (
-    <StandardPageWrapper className="h-full flex flex-col">
-      {user && <BlurOverlay />}
-
-      <StandardBleedOverlay>
-        <InverseVerticalBleedOverlay>
-          <div className="w-full h-80 relative">
-            <img
-              className="w-full transform object-cover h-80 relative -mt-40"
-              alt="CoverImage"
-              src={image}
-            />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
-          </div>
-        </InverseVerticalBleedOverlay>
-      </StandardBleedOverlay>
-      <div className="full h-full overflow-y-auto z-20 -mt-2 px-5 flex flex-col">
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-col -space-y-3 mt-2">
-            <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
-              {name}
-            </div>
-            <div className="text-[1.2rem] text-[white]/[0.9] font-[400]">
-              {description}
-            </div>
-          </div>
-          <div className="flex flex-col items-end">
-            <div className="flex flex-row space-x-2 items-center">
-              <JoinTopicButton
-                topicId={id}
-                userId={user?.external_auth_provider_user_id}
-                showToast={() => {}}
-              />
-              <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
-                <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
-              </div>
-            </div>
-            <div className="flex items-center mt-1 space-x-2 -mb-1 ml-[-0.2rem]">
-              <div className="flex mt-1 -space-x-2">
-                {membersProfiles?.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image.pfp}
-                    alt={`Avatar ${index}`}
-                    className="size-8 hover:scale-103 active:scale-97 rounded-full border-2 border-[#151515]"
-                  />
-                ))}
-              </div>{" "}
-              <span className="text-[lightgray] text-[1.15rem] ml-1 font-[500]">
-                {membersProfiles?.length > 0
-                  ? `${`${members} Members`}`
-                  : `Be the first to join ${name}`}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="h-[0.12rem] w-full bg-[#212121] mt-3.5 mb-8" />
-        <div className="text-[2.1rem] mb-2.5 text-[white] font-[Aeonik-Bold]">
-          Top Predictions
-        </div>
-        <div className="flex flex-row space-x-4 mb-8">
-          {renderDesktopTopicItems(
-            enhancedMarkets?.slice(0, 3) || [],
-            "large",
-            3
-          )}
-        </div>
-        <div className="flex flex-row space-x-3 mb-20">
-          {renderDesktopTopicItems(
-            enhancedMarkets?.slice(3, 8) || [],
-            "small",
-            5
-          )}
-        </div>
+    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+      <StandardPageWrapper className="h-full flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full relative py-7 px-[3.3rem] mt-20 ">
-              <div className="text-[1.65rem] text-white font-[700]">
-                Community
-              </div>
-
-              <div>
-                {allComments.map((item) => {
-                  const commentUser = {};
-                  return (
-                    <Comment
-                      key={item.id}
-                      {...item}
-                      setReply={setReply}
-                      handleComment={handleComment}
-                      user2={commentUser}
-                    />
-                  );
-                })}
-              </div>
+            <div className="w-full h-80 relative">
+              <img
+                className="w-full transform object-cover h-80 relative -mt-40"
+                alt="CoverImage"
+                src={image}
+              />
+              <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="flex flex-col py-7">
-          <div className="text-[1.65rem] my-3 text-white font-[700]">
-            Popular Today
+        <div className="full h-full overflow-y-auto z-20 -mt-2 px-5 flex flex-col">
+          <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-col -space-y-3 mt-2">
+              <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
+                {name}
+              </div>
+              <div className="text-[1.2rem] text-[white]/[0.9] font-[400]">
+                {description}
+              </div>
+            </div>
+            <div className="flex flex-col items-end">
+              <div className="flex flex-row space-x-2 items-center">
+                <JoinTopicButton
+                  topicId={id}
+                  userId={user?.external_auth_provider_user_id}
+                  showToast={() => {}}
+                />
+                <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+                  <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
+                </div>
+              </div>
+              <div className="flex items-center mt-1 space-x-2 -mb-1 ml-[-0.2rem]">
+                <div className="flex mt-1 -space-x-2">
+                  {membersProfiles?.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image.pfp}
+                      alt={`Avatar ${index}`}
+                      className="size-8 hover:scale-103 active:scale-97 rounded-full border-2 border-[#151515]"
+                    />
+                  ))}
+                </div>{" "}
+                <span className="text-[lightgray] text-[1.15rem] ml-1 font-[500]">
+                  {membersProfiles?.length > 0
+                    ? `${`${members} Members`}`
+                    : `Be the first to join ${name}`}
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-row pt-1 space-x-3">
+          <div className="h-[0.12rem] w-full bg-[#212121] mt-3.5 mb-8" />
+          <div className="text-[2.1rem] mb-2.5 text-[white] font-[Aeonik-Bold]">
+            Top Predictions
+          </div>
+          <div className="flex flex-row space-x-4 mb-8">
             {renderDesktopTopicItems(
-              enhancedMarkets?.slice(8, 12) || [],
-              "medium",
-              4
+              enhancedMarkets?.slice(0, 3) || [],
+              "large",
+              3
             )}
           </div>
+          <div className="flex flex-row space-x-3 mb-20">
+            {renderDesktopTopicItems(
+              enhancedMarkets?.slice(3, 8) || [],
+              "small",
+              5
+            )}
+          </div>
+          <StandardBleedOverlay>
+            <InverseVerticalBleedOverlay>
+              <div className="w-full relative py-7 px-[3.3rem] mt-20 ">
+                <div className="text-[1.65rem] text-white font-[700]">
+                  Community
+                </div>
+
+                <div>
+                  {allComments.map((item) => {
+                    const commentUser = {};
+                    return (
+                      <Comment
+                        key={item.id}
+                        {...item}
+                        setReply={setReply}
+                        handleComment={handleComment}
+                        user2={commentUser}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </InverseVerticalBleedOverlay>
+          </StandardBleedOverlay>
+          <div className="flex flex-col py-7">
+            <div className="text-[1.65rem] my-3 text-white font-[700]">
+              Popular Today
+            </div>
+            <div className="flex flex-row pt-1 space-x-3">
+              {renderDesktopTopicItems(
+                enhancedMarkets?.slice(8, 12) || [],
+                "medium",
+                4
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </StandardPageWrapper>
+      </StandardPageWrapper>
+    </BlurOverlayWrapper>
   );
 }
 

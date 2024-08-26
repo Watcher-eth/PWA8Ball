@@ -56,7 +56,11 @@ import { FollowButton } from "./FollowButton";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { copyToClipboard } from "@/utils/copyToClipboard";
-import { BlurOverlay, withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import {
+  BlurOverlay,
+  BlurOverlayWrapper,
+  withBlurOverlay,
+} from "../onboarding/Invites/InviteBlur";
 import AnimatedBackground from "../common/Animated/AnimatedSelector";
 import { INVITES_ACTIVE } from "@/constants";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
@@ -97,156 +101,158 @@ export function DesktopProfilePage2({ userId, userC }) {
   console.log("user", mergedData);
 
   return (
-    <StandardPageWrapper className="h-full min-h-screen flex flex-col">
-      <StandardBleedOverlay>
-        <InverseVerticalBleedOverlay>
-          <div className="w-full h-80 relative">
-            <img
-              className="w-full transform rotate-180 object-cover h-60 relative -mt-24"
-              alt="CoverImage"
-              src={userC?.pfp}
-            />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
-            <InverseBleedOverlay>
+    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+      <StandardPageWrapper className="h-full min-h-screen flex flex-col">
+        <StandardBleedOverlay>
+          <InverseVerticalBleedOverlay>
+            <div className="w-full h-80 relative">
               <img
-                className="size-28 md:size-30 lg:size-32 xl:size-36 ml-3 absolute -bottom-0 object-cover  rounded-full mb-4 border-8 border-[#080808] z-20"
+                className="w-full transform rotate-180 object-cover h-60 relative -mt-24"
+                alt="CoverImage"
                 src={userC?.pfp}
               />
-            </InverseBleedOverlay>
+              <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
+              <InverseBleedOverlay>
+                <img
+                  className="size-28 md:size-30 lg:size-32 xl:size-36 ml-3 absolute -bottom-0 object-cover  rounded-full mb-4 border-8 border-[#080808] z-20"
+                  src={userC?.pfp}
+                />
+              </InverseBleedOverlay>
+            </div>
+          </InverseVerticalBleedOverlay>
+        </StandardBleedOverlay>
+        <div className="flex flex-col  gap-4 p-0 bg-[#080808] px-6 ">
+          <div className="flex flex-row  items-center justify-between">
+            <div className="flex flex-col">
+              <div className="text-[2.6rem] font-[Aeonik-Bold] text-white">
+                {userC.name}
+              </div>
+              <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
+                <SocialsSection {...userC?.socials} />
+              </div>
+            </div>
+            <div className="flex flex-row items-center space-x-6 mt-2">
+              <div className="flex flex-col space-y-0">
+                <div className="text-[1rem] text-[lightgray] font-[600]">
+                  Accuracy
+                </div>
+                <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
+                  66%
+                </div>
+              </div>
+              <div className="flex flex-col space-y-0">
+                <div className="text-[1rem] text-[lightgray] font-[600]">
+                  Followers
+                </div>
+                <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
+                  222
+                </div>
+              </div>
+              <div className="flex flex-col space-y-0">
+                <div className="text-[1rem] text-[lightgray] font-[600]">
+                  Following
+                </div>
+                <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
+                  669
+                </div>
+              </div>
+            </div>
           </div>
-        </InverseVerticalBleedOverlay>
-      </StandardBleedOverlay>
-      <div className="flex flex-col  gap-4 p-0 bg-[#080808] px-6 ">
-        <div className="flex flex-row  items-center justify-between">
-          <div className="flex flex-col">
-            <div className="text-[2.6rem] font-[Aeonik-Bold] text-white">
-              {userC.name}
+          <div className="flex flex-row space-x-3 items-center mt-3">
+            <div
+              onClick={() => copyToClipboard(userC?.walletaddress)}
+              className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
+            >
+              <div>
+                {userC?.walletaddress
+                  ? shortenAddress(userC?.walletaddress)
+                  : userC?.walletaddress}
+              </div>
+              <Copy size={16} color="white" strokeWidth={2.5} />
             </div>
-            <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
-              <SocialsSection {...userC?.socials} />
-            </div>
+            {userC?.name === user?.name ? (
+              <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
+                <div>Edit Profile</div>
+              </div>
+            ) : (
+              <FollowButton profileId={userC?.external_auth_provider_user_id} />
+            )}
           </div>
-          <div className="flex flex-row items-center space-x-6 mt-2">
-            <div className="flex flex-col space-y-0">
-              <div className="text-[1rem] text-[lightgray] font-[600]">
-                Accuracy
+          {userC?.name === user?.name && balance < 1 && (
+            <Link
+              href={"/settings"}
+              className="flex flex-row space-x-3 items-center "
+            >
+              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]">
+                <Wallet size={16} color="white" strokeWidth={3} />
+                <div>Fund your account</div>
               </div>
-              <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
-                66%
+            </Link>
+          )}
+          <div className="h-[0.1rem] w-full bg-[#222222] my-3" />
+          <div className="flex flex-row">
+            <AnimatedBackground
+              defaultValue={filter}
+              onValueChange={(value) => setFilter(value)}
+              className="bg-[#1B1B1E] space-x-3 rounded-full flex flex-row"
+            >
+              <div
+                data-id="All"
+                onClick={() => setFilter("All")}
+                className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
+              >
+                <div>All</div>
+                <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                  <div>{ordersData?.length}</div>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col space-y-0">
-              <div className="text-[1rem] text-[lightgray] font-[600]">
-                Followers
+              <div
+                data-id="Resolved"
+                onClick={() => setFilter("Resolved")}
+                className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+              >
+                <div>Resolved</div>
+                <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                  <div>0</div>
+                </div>
               </div>
-              <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
-                222
+              <div
+                data-id="Created"
+                onClick={() => setFilter("Created")}
+                className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+              >
+                <div>Created</div>
+                <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
+                  <div>{createdMarketsData?.length}</div>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col space-y-0">
-              <div className="text-[1rem] text-[lightgray] font-[600]">
-                Following
-              </div>
-              <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
-                669
-              </div>
-            </div>
+            </AnimatedBackground>
           </div>
-        </div>
-        <div className="flex flex-row space-x-3 items-center mt-3">
-          <div
-            onClick={() => copyToClipboard(userC?.walletaddress)}
-            className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
-          >
-            <div>
-              {userC?.walletaddress
-                ? shortenAddress(userC?.walletaddress)
-                : userC?.walletaddress}
-            </div>
-            <Copy size={16} color="white" strokeWidth={2.5} />
-          </div>
-          {userC?.name === user?.name ? (
-            <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
-              <div>Edit Profile</div>
+          {mergedData.length > 0 ? (
+            <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {mergedData?.map((item, index) => {
+                return (
+                  <ProfilePositionCard
+                    userName={userC?.name}
+                    pfp={userC?.pfp}
+                    {...item}
+                  />
+                );
+              })}
             </div>
           ) : (
-            <FollowButton profileId={userC?.external_auth_provider_user_id} />
+            <div className="w-full flex flex-col items-center">
+              <div className="text-[2.2rem] mt-[8%] font-[Aeonik-Bold] text-white">
+                Nothing here yet
+              </div>
+              <div className="text-[1.1rem]  font-[500] mt-0.5 text-[lightgray]">
+                Make your first prediction and level up your accuracy score
+              </div>
+            </div>
           )}
         </div>
-        {userC?.name === user?.name && balance < 1 && (
-          <Link
-            href={"/settings"}
-            className="flex flex-row space-x-3 items-center "
-          >
-            <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]">
-              <Wallet size={16} color="white" strokeWidth={3} />
-              <div>Fund your account</div>
-            </div>
-          </Link>
-        )}
-        <div className="h-[0.1rem] w-full bg-[#222222] my-3" />
-        <div className="flex flex-row">
-          <AnimatedBackground
-            defaultValue={filter}
-            onValueChange={(value) => setFilter(value)}
-            className="bg-[#1B1B1E] space-x-3 rounded-full flex flex-row"
-          >
-            <div
-              data-id="All"
-              onClick={() => setFilter("All")}
-              className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
-            >
-              <div>All</div>
-              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-                <div>{ordersData?.length}</div>
-              </div>
-            </div>
-            <div
-              data-id="Resolved"
-              onClick={() => setFilter("Resolved")}
-              className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
-            >
-              <div>Resolved</div>
-              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-                <div>0</div>
-              </div>
-            </div>
-            <div
-              data-id="Created"
-              onClick={() => setFilter("Created")}
-              className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
-            >
-              <div>Created</div>
-              <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
-                <div>{createdMarketsData?.length}</div>
-              </div>
-            </div>
-          </AnimatedBackground>
-        </div>
-        {mergedData.length > 0 ? (
-          <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            {mergedData?.map((item, index) => {
-              return (
-                <ProfilePositionCard
-                  userName={userC?.name}
-                  pfp={userC?.pfp}
-                  {...item}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div className="w-full flex flex-col items-center">
-            <div className="text-[2.2rem] mt-[8%] font-[Aeonik-Bold] text-white">
-              Nothing here yet
-            </div>
-            <div className="text-[1.1rem]  font-[500] mt-0.5 text-[lightgray]">
-              Make your first prediction and level up your accuracy score
-            </div>
-          </div>
-        )}
-      </div>
-    </StandardPageWrapper>
+      </StandardPageWrapper>
+    </BlurOverlayWrapper>
   );
 }
 
@@ -308,8 +314,3 @@ function ProfilePositionCard(
     </div>
   );
 }
-
-export const WrappedDesktopProfile = withBlurOverlay(
-  DesktopProfilePage2,
-  INVITES_ACTIVE
-);

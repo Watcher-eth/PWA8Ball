@@ -34,6 +34,7 @@ export function useInitializeUser() {
         console.log({ dbUser });
         setUser({
           ...dbUser,
+          pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
           walletType: "smartwallet",
         });
       } else if (smartAccountAddress && user?.walletType !== "eoa") {
@@ -61,10 +62,9 @@ export function useInitializeUser() {
       console.log("dbuser2", dbUser, eoaAddress);
 
       if (dbUser) {
-        dbUser.pfp = dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP;
-
         setUser({
           ...dbUser,
+          pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
           walletType: "eoa",
         });
       } else {

@@ -15,7 +15,10 @@ import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { AltSkeleton, Skeleton } from "../ui/Skeleton";
 import { INVITES_ACTIVE } from "@/constants";
-import { withBlurOverlay } from "../onboarding/Invites/InviteBlur";
+import {
+  BlurOverlayWrapper,
+  withBlurOverlay,
+} from "../onboarding/Invites/InviteBlur";
 
 export function DesktopHomePage({ trendingMarkets }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
@@ -33,7 +36,7 @@ export function DesktopHomePage({ trendingMarkets }) {
 
   if (enhancedMarkets)
     return (
-      <>
+      <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
         <div className="-mt-4">
           <TopicHeader
             setSelectedTopic={setSelectedTopic}
@@ -68,11 +71,6 @@ export function DesktopHomePage({ trendingMarkets }) {
           amount={"260,032"}
           topicId="1"
         />
-      </>
+      </BlurOverlayWrapper>
     );
 }
-
-export const WrappedDesktopHomePage = withBlurOverlay(
-  DesktopHomePage,
-  INVITES_ACTIVE
-);

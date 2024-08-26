@@ -35,19 +35,11 @@ function BlurOverlay() {
   );
 }
 
-
-
-export function withBlurOverlay(Component, shouldShowOverlay) {
-  return function WrappedComponent(props) {
-    if (shouldShowOverlay) {
-      return (
-        <>
-          <BlurOverlay />
-          <Component {...props} />
-        </>
-      );
-    }
-    return <Component {...props} />;
-  };
+export function BlurOverlayWrapper({ children, shouldShowOverlay }) {
+  return (
+    <>
+      {shouldShowOverlay && <BlurOverlay />}
+      {children}
+    </>
+  );
 }
-

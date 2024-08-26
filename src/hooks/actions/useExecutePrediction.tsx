@@ -8,10 +8,13 @@ import { Check, CheckCircle } from "lucide-react";
 
 import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
+import { useReferralStore } from "@/lib/stores/ReferralStore";
 
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const referralId = useReferralStore((state) => state.referralId);
+
   const { user: userCon } = useUserStore();
   const { mutate: predictV2 } = usePredictV2();
   const { client, address } = useClientAddress();
@@ -36,12 +39,12 @@ export function useExecutePrediction() {
       options,
     });
     try {
-      //   if (smartAccountReady) { you dont need smart account ready in order to use EoA
       if (!address) {
         throw new Error("Address is required");
       }
 
       approveToken();
+      //TODO: Referall pass in once redeploy
       predictV2({
         client,
         address,
@@ -59,7 +62,7 @@ export function useExecutePrediction() {
         toast(
           <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
             <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
-            <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
+              <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
             </div>
             Prediction successfull
           </div>,
