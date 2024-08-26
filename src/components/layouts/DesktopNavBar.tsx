@@ -60,7 +60,7 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
-              {user?.name?.startsWith("0x") && user ? (
+              {!user?.name?.startsWith("0x") && user ? (
                 <DesktopProfilePopover>
                   <ConnectButton user={user} />
                 </DesktopProfilePopover>

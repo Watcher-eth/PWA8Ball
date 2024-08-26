@@ -60,7 +60,7 @@ export function useInitializeUser() {
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaAddress);
 
-      if (dbUser) {
+      if (!dbUser) {
         setUser({
           ...dbUser,
           name: dbUser?.name ? dbUser?.name : "Anon",
