@@ -154,7 +154,7 @@ function SocialOnboardButton({
       `}
       onClick={onClick}
     >
-      <IconComponent className="" />
+      <IconComponent className="w-5 h-5 sm:w-10" />
     </div>
   );
 }
@@ -186,7 +186,7 @@ function WalletOnboardButton({
               variant="outline"
               className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
             >
-              <img src={iconSrc} className="w-5 h-5 mr-2" />
+              <img src={iconSrc} className="size-5 mr-2" />
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
             </div>
           </button>
