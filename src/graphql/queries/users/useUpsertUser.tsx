@@ -1,17 +1,11 @@
 import _ from "lodash"
 import { User } from "@/__generated__/graphql";
 import { GRAPH_ENDPOINT_DEV_URL } from "@/providers/GraphQlProvider";
-// import { serialize as wagmiSerialize, deserialize } from "@wagmi/core";
-import { wagmiSerialize } from "@/utils/wagmiSerialize";
-console.log(wagmiSerialize);
+import { serialize as wagmiSerialize, deserialize } from "@wagmi/core";
+// import { wagmiSerialize } from "@/utils/wagmiSerialize";
+// console.log(wagmiSerialize);
 export function useUpsertUser() {
   async function upsertUser(userData: Partial<User>) {
-    // const userDataWithBigInt = {
-    //   ...userData,
-    //   createdAt: { __type: "bigint", value: userData.createdAt.toString() },
-    //   updatedAt: { __type: "bigint", value: userData.updatedAt.toString() },
-    // };
-
     try {
       // for (const [key,value] of _.entries(userData)) {
       //   console.log({
@@ -20,11 +14,11 @@ export function useUpsertUser() {
       //     isTypeOfValueBigInt: typeof value === 'bigint'
       //   })
       // }
-      console.log({
-        raw: userData,
-        serialized: wagmiSerialize(userData),
-        serializeFunc: wagmiSerialize.toString()
-      })
+      // console.log({
+      //   raw: userData,
+      //   serialized: wagmiSerialize(userData),
+      //   serializeFunc: wagmiSerialize.toString()
+      // })
       const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}/user/upsert`, {
         method: "POST",
         headers: {

@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { IUser } from "@/supabase/types";
-import { User } from "@/__generated__/graphql";
+import { replaceBigInts } from "@/utils/replaceBigInts";
 
-interface ExtendedUser extends User {
+interface ExtendedUser extends IUser {
   walletType?: "smartwallet" | "eoa";
   invited?: boolean;
 }
@@ -24,7 +24,7 @@ export const useUserStore = create<UserState>(
         set({
           user: user
             ? {
-                ...user,
+                ...replaceBigInts(user),
                 invited: isDevelopment ? true : user.invited ?? false,
               }
             : null,
@@ -37,7 +37,8 @@ export const useUserStore = create<UserState>(
     }),
     {
       name: "user-storage",
-      getStorage: () => localStorage,
+      // getStorage: () => localStorage,
     }
   )
 );
+

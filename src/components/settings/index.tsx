@@ -249,7 +249,7 @@ export function SettingsPage() {
                 {user?.walletaddress && shortenAddress(user?.walletaddress)}
               </button>
               <button
-              
+
                 className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
               >
                 <Download
