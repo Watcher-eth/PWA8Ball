@@ -52,8 +52,9 @@ const DialogContent = React.forwardRef<
           disabled:pointer-events-none
           data-[state=open]:bg-accent data-[state=open]:text-muted-foreground
           backdrop-blur-sm
-        `}>
-        <X className="size-5" />
+        `}
+      >
+        <X className="size-5" color="rgba(255, 255, 255, 0.8)" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

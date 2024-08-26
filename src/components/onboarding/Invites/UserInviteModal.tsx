@@ -32,7 +32,7 @@ function UserInviteModal({ children }) {
           layout
           transition={{ duration: 0.2 }}
           className={`
-          bg-[#121212]/60 rounded-[2rem] backdrop border-2 border-[#151515]
+          bg-[#101010]/70 rounded-[2rem] backdrop border-2 border-[#151515]
           h-full mb-5  relative w-[90%]
         `}
         >

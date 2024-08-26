@@ -59,7 +59,6 @@ export function useInitializeUser() {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaAddress);
-      console.log("dbuser2", dbUser, eoaAddress);
 
       if (dbUser) {
         setUser({
@@ -85,7 +84,7 @@ export function useInitializeUser() {
         setUser({
           ...update,
           walletType: "eoa",
-          name: eoaAddress,
+          name: user?.name,
         });
       }
     }

@@ -65,8 +65,8 @@ export function DesktopOnboarding() {
   const { ready, authenticated, login } = usePrivy();
 
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg w-[55vw] max-w-[55vw]">
-      <div className="flex flex-col items-center justify-center w-1/2 p-10 pt-6 text-white">
+    <div className="flex overflow-hidden rounded-lg ">
+      <div className="flex flex-col items-center justify-center sm:w-1/2 w-full p-10 pt-6 text-white">
         <img
           src={"/images/OrbLogo.png"}
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
@@ -124,7 +124,7 @@ export function DesktopOnboarding() {
           </a>
         </div>
       </div>
-      <div className="w-1/2">
+      <div className="hidden sm:block sm:w-1/2">
         <img
           src="/images/Futura.JPG"
           alt="Onboarding illustration"
@@ -186,7 +186,7 @@ function WalletOnboardButton({
               variant="outline"
               className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
             >
-              <img src={iconSrc} className="size-5 mr-2" />
+              <img src={iconSrc} className="w-5 h-5 mr-2" />
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
             </div>
           </button>
@@ -327,7 +327,7 @@ export function InviteScreen() {
     }
   }
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg sm:w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[55vw] ">
+    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] ">
       <div className="flex flex-col items-center justify-center w-1/2  p-10 pt-20 text-white">
         <div className="h-[6rem] w-[6rem] flex items-center justify-center my-5 rounded-full bg-[#191919]">
           <div className="text-[3.4rem] rotate-6">🔓</div>
