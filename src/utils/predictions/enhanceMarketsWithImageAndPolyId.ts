@@ -20,7 +20,7 @@ export function enhanceMarketsWithImageAndPolyId(
       { name: market.outcomeA, value: market.outcomeOddsA },
       { name: market.outcomeB, value: market.outcomeOddsB },
     ];
-    console.log("mrk", matchingMarket);
+    // console.log("mrk", matchingMarket);
     // If a matching market is found, add the image, PolyId, options, and topic data
     if (matchingMarket) {
       return {

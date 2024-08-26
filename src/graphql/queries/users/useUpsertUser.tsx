@@ -1,22 +1,36 @@
+import _ from "lodash"
 import { User } from "@/__generated__/graphql";
 import { GRAPH_ENDPOINT_DEV_URL } from "@/providers/GraphQlProvider";
-import { serialize, deserialize } from "@wagmi/core";
-
+// import { serialize as wagmiSerialize, deserialize } from "@wagmi/core";
+import { wagmiSerialize } from "@/utils/wagmiSerialize";
+console.log(wagmiSerialize);
 export function useUpsertUser() {
   async function upsertUser(userData: Partial<User>) {
-    const userDataWithBigInt = {
-      ...userData,
-      createdAt: { __type: "bigint", value: userData.createdAt.toString() },
-      updatedAt: { __type: "bigint", value: userData.updatedAt.toString() },
-    };
+    // const userDataWithBigInt = {
+    //   ...userData,
+    //   createdAt: { __type: "bigint", value: userData.createdAt.toString() },
+    //   updatedAt: { __type: "bigint", value: userData.updatedAt.toString() },
+    // };
 
     try {
+      // for (const [key,value] of _.entries(userData)) {
+      //   console.log({
+      //     key, value,
+      //     typeOfValue: typeof value,
+      //     isTypeOfValueBigInt: typeof value === 'bigint'
+      //   })
+      // }
+      console.log({
+        raw: userData,
+        serialized: wagmiSerialize(userData),
+        serializeFunc: wagmiSerialize.toString()
+      })
       const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}/user/upsert`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userDataWithBigInt), //serialize(userData),
+        body: wagmiSerialize(userData), // JSON.stringify(userDataWithBigInt), //
       });
 
       if (!response.ok) {
@@ -24,6 +38,7 @@ export function useUpsertUser() {
         console.log("url", `${GRAPH_ENDPOINT_DEV_URL}/user/upsert`);
         console.error("Response status:", response.status);
         console.error("Response body:", errorText);
+        console.error(response)
         throw new Error("Network response was not ok");
       }
 
@@ -38,3 +53,5 @@ export function useUpsertUser() {
 
   return { upsertUser };
 }
+
+

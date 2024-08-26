@@ -12,7 +12,7 @@ import {
 import { useAccount } from "wagmi";
 import { v5 as uuidv5 } from "uuid";
 import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
-import { serialize } from "@wagmi/core";
+
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7"; // Define a static namespace for generating UUIDs

@@ -11,7 +11,7 @@ import { init, AirstackProvider } from "@airstack/airstack-react";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { PrivyProvider } from "@privy-io/react-auth";
 // import * as amplitude from "@amplitude/analytics-browser";
-import "../utils/path";
+import "../utils/patch";
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
 
 import { AuthChecker } from "@/providers/AuthProvider";

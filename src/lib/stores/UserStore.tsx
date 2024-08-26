@@ -35,7 +35,7 @@ export const useUserStore = create<UserState>(
         })),
     }),
     {
-      name: "user-storage", 
+      name: "user-storage",
       getStorage: () => localStorage,
     }
   )
