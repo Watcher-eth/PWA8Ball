@@ -34,12 +34,13 @@ export function DesktopOnboardingModal({
     "user3",
     user?.name,
     user?.name?.startsWith("0x"),
+    user?.pfp,
     address,
     isConnected
   );
   return (
     <DesktopCardModal
-      dialogContentClassName="min-w-[55vw] bg-[#080808]/[0.8]"
+      dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
       content={

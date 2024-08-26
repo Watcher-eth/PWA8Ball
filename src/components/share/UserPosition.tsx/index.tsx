@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetPositionById } from "@/graphql/queries/predictions/useGetPositionById";
+import { useGetPositionById } from "@/graphql/queries/positions/useGetPositionById";
 
 export function Receipt(props: {
   question: string;
@@ -87,7 +87,11 @@ export function Receipt(props: {
     <div
       className={`relative flex self-center shadow-lg  pb-0 flex-col items-center
        bg-[#121212]
-       ${props.isDesktop ? "p-5 w-[27%] m-3 xl:w-[25%]" : "p-6 -ml-0 m-6  w-full"}
+       ${
+         props.isDesktop
+           ? "p-5 w-[27%] m-3 xl:w-[25%]"
+           : "p-6 -ml-0 m-6  w-full"
+       }
 
       `}
     >
@@ -110,9 +114,7 @@ export function Receipt(props: {
           </div>
           <motion.div
             onClick={() =>
-              props.isDesktop
-                ? props.changeStep?.(4)
-                : props.onClose?.()
+              props.isDesktop ? props.changeStep?.(4) : props.onClose?.()
             }
             className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
           >

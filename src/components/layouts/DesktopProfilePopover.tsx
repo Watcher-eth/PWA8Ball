@@ -56,7 +56,7 @@ export function DesktopProfilePopover({
   const displayUsername =
     !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
 
-  console.log("balance", user?.pfp);
+  console.log("balance", user?.name);
   return (
     <Dialog>
       <DropdownMenu>
@@ -91,7 +91,7 @@ export function DesktopProfilePopover({
             <DropdownItem
               label="Profile"
               IconComponent={User}
-              href={getProfilePath(user?.external_auth_provider_user_id)}
+              href={getProfilePath(user?.externalAuthProviderUserId)}
             />
 
             <DesktopOnrampModal>

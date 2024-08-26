@@ -4,7 +4,7 @@ import { gql } from "@/__generated__";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_POSITION_BY_USER_ADDRESSES = gql(/* GraphQL */ `
+export const GET_POSITION_BY_USER_ADDRESSES = gql(/* GraphQL */ `
   query FriendsOrders($userAddress_in: [String]!) {
     positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
       items {

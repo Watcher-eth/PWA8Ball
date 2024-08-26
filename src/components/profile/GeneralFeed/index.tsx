@@ -11,15 +11,11 @@ import { PredictionPositionModal } from "../../modals/PredictionPositionModal";
 
 import { UserPrediction, CreatedPrediction } from "./UserPrediction";
 import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 
-
-export function GeneralFeed({
-  walletAddy,
-  id,
-  onParentRefresh,
-}) {
+export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
-
+  console.log("user", user);
   const walletAddress = walletAddy || user?.walletaddress;
   const userId = id || user?.external_auth_provider_user_id;
 
@@ -114,4 +110,4 @@ export function GeneralFeed({
       )}
     </div>
   );
-};
+}

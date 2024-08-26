@@ -27,11 +27,9 @@ export function useInitializeUser() {
   const { upsertUser } = useUpsertUser();
 
   async function fetchUser() {
-    if (ready && authenticated && privyUser) {
+    if (ready && authenticated && privyUser && !eoaAddress) {
       // Handle Privy smart wallet user
       const dbUser = await getUserFromDB(smartAccountAddress);
-   
-
       if (dbUser) {
         console.log({ dbUser });
         setUser({
@@ -60,9 +58,10 @@ export function useInitializeUser() {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaAddress);
-    
+      console.log("dbuser2", dbUser, eoaAddress);
+
       if (dbUser) {
-        dbUser.pfp = DEFAULT_PFP;
+        dbUser.pfp = dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP;
 
         setUser({
           ...dbUser,
@@ -78,7 +77,6 @@ export function useInitializeUser() {
           updatedAt: BigInt(Math.floor(Date.now() / 1000)),
           createdAt: BigInt(Math.floor(Date.now() / 1000)),
         };
-        console.log("new User eoa", update);
 
         const newUser = await upsertUser(update);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;

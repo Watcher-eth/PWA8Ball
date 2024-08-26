@@ -40,8 +40,6 @@ import { ChartConfig } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
-import { useGetUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
-import { useGetPositionsByWallet } from "@/supabase/queries/user/useGetPositionsByWallet";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
@@ -61,6 +59,7 @@ import { copyToClipboard } from "@/utils/copyToClipboard";
 import { BlurOverlay, withBlurOverlay } from "../onboarding/Invites/InviteBlur";
 import AnimatedBackground from "../common/Animated/AnimatedSelector";
 import { INVITES_ACTIVE } from "@/constants";
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();

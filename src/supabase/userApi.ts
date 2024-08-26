@@ -13,7 +13,7 @@ export async function getUserFromDB(userId: string) {
     query: GET_USER_BY_ID,
     variables: { id: getChecksummedAddress(userId) },
   });
-
+  console.log("ppUser", data, userId, getChecksummedAddress(userId));
   return data?.user as User;
 }
 

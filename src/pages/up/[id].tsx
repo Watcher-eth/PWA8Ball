@@ -2,7 +2,7 @@
 
 import { MobiTop } from "@/components/layouts/MobiTop";
 import { Receipt } from "@/components/share/UserPosition.tsx";
-import { useGetPositionById } from "@/graphql/queries/predictions/useGetPositionById";
+import { useGetPositionById } from "@/graphql/queries/positions/useGetPositionById";
 
 export default function MarketPage({
   params,

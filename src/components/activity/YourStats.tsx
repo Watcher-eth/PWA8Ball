@@ -1,4 +1,4 @@
-import { useGetUserPositionsCount } from "@/graphql/queries/predictions/useGetUserPositionsCount";
+import { useGetUserPositionsCount } from "@/graphql/queries/positions/useGetUserPositionsCount";
 import { useUserStore } from "@/lib/stores/UserStore";
 
 export function YourStats() {

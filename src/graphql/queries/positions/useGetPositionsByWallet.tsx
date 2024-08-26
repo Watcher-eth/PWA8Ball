@@ -2,7 +2,7 @@ import { gql, useQuery as useApolloQuery } from "@apollo/client";
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { tgql } from "@/__generated__";
 
-const GET_POSITIONS_BY_WALLET = gql`
+export const GET_POSITIONS_BY_WALLET = gql`
   query getPositionsByWallet($userAddress: String!) {
     positions(where: { userAddress: $userAddress }, limit: 1) {
       items {

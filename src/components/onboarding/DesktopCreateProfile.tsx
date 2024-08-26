@@ -81,7 +81,7 @@ function DesktopCreateProfile() {
   }
 
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg w-[55vw] max-w-[55vw]">
+    <div className="flex overflow-hidden rounded-lg shadow-lg w-full">
       <div className="flex flex-col items-center justify-center w-1/2 p-10 py-8 text-white">
         <img
           src={"/images/OrbLogo.png"}
