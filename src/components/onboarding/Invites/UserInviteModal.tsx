@@ -6,17 +6,20 @@ import { Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useGetUserInvites } from "@/supabase/queries/Invites/useGetUserInvites";
 import { useUserStore } from "@/lib/stores/UserStore";
-
-const invites = [
-  { code: "gl-eiasjdk", status: false },
-  { code: "gl-hsdahss", status: true },
-  { code: "gl-asdasje", status: false },
-];
+import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites";
 
 function UserInviteModal({ children }) {
   const { user } = useUserStore();
-  const usedInvitesCount = invites.filter((invite) => invite.status).length;
-  const { data: Invites } = useGetUserInvites(user?.walletaddress);
+  const {
+    data: invites,
+    isLoading,
+    error,
+  } = useFetchOrCreateUserInvites(user?.walletAddress);
+  const usedInvitesCount = invites?.filter(
+    (invite) => invite.status === "used"
+  ).length;
+
+  console.log("invites", usedInvitesCount);
   return (
     <Dialog>
       <DialogTrigger>
@@ -29,7 +32,7 @@ function UserInviteModal({ children }) {
           layout
           transition={{ duration: 0.2 }}
           className={`
-          bg-[#121212]/60 rounded-[2rem] backdrop border-2 border-[#151515]
+          bg-[#101010]/70 rounded-[2rem] backdrop border-2 border-[#151515]
           h-full mb-5  relative w-[90%]
         `}
         >
@@ -39,7 +42,7 @@ function UserInviteModal({ children }) {
                 <div className="text-[3.4rem] rotate-6">🎟️</div>
               </div>
               <div className="p-1 px-4 rounded-full bg-[#191919] border-2  border-[#212121] my-1 font-[600] text-lg text-white">
-                #{invites?.length - usedInvitesCount} invites left
+                {invites?.length - usedInvitesCount} invites left
               </div>
               <p className="text-center mb-6 font-[500] mt-3 px-6 mb-3 text-[lightgray]">
                 Glimpse is currently in closed beta. You received 3 invites for
@@ -72,7 +75,7 @@ function UserInviteModal({ children }) {
                         }
                       )
                     }
-                    code={item.code}
+                    code={item.id}
                     status={item.status}
                   />
                 );
@@ -98,12 +101,12 @@ function UserInvite({ code, status, setToastVisible }) {
       <div className="flex items-center justify-between">
         <p
           className={`text-lg font-bold ${
-            status ? "text-[gray] line-through" : "text-white"
+            status === "used" ? "text-[gray] line-through" : "text-white"
           }`}
         >
           {code}
         </p>
-        {status ? (
+        {status === "used" ? (
           <p className="text-lg font-[600] text-italic text-[gray]">Used</p>
         ) : (
           <button onClick={handleCopy} className="focus:outline-none">

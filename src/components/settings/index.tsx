@@ -45,25 +45,6 @@ export function SettingsPage() {
     }));
   };
 
-  const { upsertUser } = useUpsertUser();
-
-  const handleUpdateUser = async () => {
-    const userId = getChecksummedAddress(
-      "0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591"
-    );
-    const updatedUserData = {
-      id: userId,
-      name: "watcherofwavs",
-      updatedAt: BigInt(Math.floor(Date.now() / 1000)), 
-    };
-
-    try {
-      const result = await upsertUser(updatedUserData);
-      console.log("User updated successfully:", result);
-    } catch (error) {
-      console.error("Error updating user:", error);
-    }
-  };
 
   return (
     <div className="container pt-6 md:pt-0 p-0 w-full h-full z-[10]">
@@ -268,7 +249,7 @@ export function SettingsPage() {
                 {user?.walletaddress && shortenAddress(user?.walletaddress)}
               </button>
               <button
-                onClick={handleUpdateUser}
+              
                 className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
               >
                 <Download

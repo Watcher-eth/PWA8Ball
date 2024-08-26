@@ -26,7 +26,7 @@ function DesktopCreateProfile() {
 
   async function uploadProfileData() {
     const userId = user?.external_auth_provider_user_id!;
-    console.log("username", username, user?.walletaddress);
+
     if (!username) {
       toast(
         <div className="w-full rounded-full bg-[#101010] font-[600] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
@@ -81,7 +81,7 @@ function DesktopCreateProfile() {
   }
 
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg w-full">
+    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw]">
       <div className="flex flex-col items-center justify-center w-1/2 p-10 py-8 text-white">
         <img
           src={"/images/OrbLogo.png"}

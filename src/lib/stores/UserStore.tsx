@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { IUser } from "@/supabase/types";
+import { User } from "@/__generated__/graphql";
 
-interface ExtendedUser extends IUser {
+interface ExtendedUser extends User {
   walletType?: "smartwallet" | "eoa";
   invited?: boolean;
 }
