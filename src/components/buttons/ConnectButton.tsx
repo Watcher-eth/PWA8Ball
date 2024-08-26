@@ -5,7 +5,10 @@ import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function ConnectButton({ user }: { user: IUser }) {
   const { displayName } = useMyEns();
-
+  const buttonText =
+    displayName && !displayName.startsWith("0x")
+      ? displayName
+      : user?.name || (displayName ? displayName : "Connect");
   return (
     <div
       className={`
@@ -16,11 +19,7 @@ export function ConnectButton({ user }: { user: IUser }) {
         px-4 py-2 rounded-lg flex flex-row items-center
       `}
     >
-      {!displayName?.startsWith("0x")
-        ? displayName
-        : user?.name
-        ? user?.name
-        : "Connect"}
+      {buttonText}
       {user?.pfp ? (
         <img
           src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}

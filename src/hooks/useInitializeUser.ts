@@ -60,7 +60,7 @@ export function useInitializeUser() {
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
       const dbUser = await getUserFromDB(eoaAddress);
 
-      if (!dbUser) {
+      if (dbUser) {
         setUser({
           ...dbUser,
           name: dbUser?.name ? dbUser?.name : "Anon",
@@ -77,7 +77,7 @@ export function useInitializeUser() {
           updatedAt: BigInt(Math.floor(Date.now() / 1000)),
           createdAt: BigInt(Math.floor(Date.now() / 1000)),
         };
-
+        console.log("updaze eoa", update);
         const newUser = await upsertUser(update);
         newUser.pfp = newUser?.pfp ?? DEFAULT_PFP;
 

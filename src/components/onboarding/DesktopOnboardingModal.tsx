@@ -39,6 +39,8 @@ export function DesktopOnboardingModal({
     address,
     isConnected
   );
+
+  
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"

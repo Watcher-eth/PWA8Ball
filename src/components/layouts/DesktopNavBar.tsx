@@ -17,7 +17,7 @@ import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardM
 export function DesktopNavBar() {
   const { user } = useUserStore();
   const userId = user?.external_auth_provider_user_id;
-  console.log("user");
+  console.log("user", user?.name);
   return (
     <div className="w-full absolute z-50 top-0">
       <div
@@ -60,7 +60,7 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
-              {!user?.name?.startsWith("0x") && user ? (
+              {user?.name && !user?.name?.startsWith("0x") && user ? (
                 <DesktopProfilePopover>
                   <ConnectButton user={user} />
                 </DesktopProfilePopover>

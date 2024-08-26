@@ -25,8 +25,6 @@ function DesktopCreateProfile() {
   };
 
   async function uploadProfileData() {
-    const userId = user?.external_auth_provider_user_id!;
-
     if (!username) {
       toast(
         <div className="w-full rounded-full bg-[#101010] font-[600] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
@@ -51,6 +49,7 @@ function DesktopCreateProfile() {
 
     if (user?.walletType === "eoa") {
       setUser({
+        ...user,
         id: user?.walletaddress,
         name: username,
         pfp: pfpUrl,
@@ -61,6 +60,7 @@ function DesktopCreateProfile() {
       });
     } else if (user?.walletaddress) {
       setUser({
+        ...user,
         id: user?.walletaddress,
         name: username,
         pfp: pfpUrl,
@@ -71,6 +71,7 @@ function DesktopCreateProfile() {
       });
     } else {
       setUser({
+        ...user,
         name: username,
         pfp: pfpUrl,
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
