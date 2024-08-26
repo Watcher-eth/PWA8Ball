@@ -27,17 +27,10 @@ export function useInitializeUser() {
   const { upsertUser } = useUpsertUser();
 
   async function fetchUser() {
-    console.log(
-      "before init User",
-      eoaAddress,
-      isConnected,
-      smartAccountAddress
-    );
-
     if (ready && authenticated && privyUser) {
       // Handle Privy smart wallet user
       const dbUser = await getUserFromDB(smartAccountAddress);
-      console.log("during init User", dbUser);
+   
 
       if (dbUser) {
         console.log({ dbUser });
@@ -60,14 +53,14 @@ export function useInitializeUser() {
         const newUser = await upsertUser(update);
 
         newUser.pfp = DEFAULT_PFP;
-        console.log("new User", newUser);
+
         setUser({ ...update, walletType: "smartwallet" });
       }
     } else if (isConnected && eoaAddress) {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
-      const dbUser = false; //await getUserFromDB(eoaAddress);
-      console.log("eoa user", dbUser);
+      const dbUser = await getUserFromDB(eoaAddress);
+    
       if (dbUser) {
         dbUser.pfp = DEFAULT_PFP;
 

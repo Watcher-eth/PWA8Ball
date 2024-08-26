@@ -1,17 +1,22 @@
+import { User } from "@/__generated__/graphql";
 import { GRAPH_ENDPOINT_DEV_URL } from "@/providers/GraphQlProvider";
-import { IUser } from "@/supabase/types";
 import { serialize, deserialize } from "@wagmi/core";
 
 export function useUpsertUser() {
-  async function upsertUser(userData: Partial<IUser>) {
-    console.log("upsertData", serialize(userData));
+  async function upsertUser(userData: Partial<User>) {
+    const userDataWithBigInt = {
+      ...userData,
+      createdAt: { __type: "bigint", value: userData.createdAt.toString() },
+      updatedAt: { __type: "bigint", value: userData.updatedAt.toString() },
+    };
+
     try {
       const response = await fetch(`${GRAPH_ENDPOINT_DEV_URL}/user/upsert`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: serialize(userData), //JSON.stringify(userData),
+        body: JSON.stringify(userDataWithBigInt), //serialize,
       });
 
       if (!response.ok) {
