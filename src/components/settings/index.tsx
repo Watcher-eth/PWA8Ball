@@ -54,16 +54,14 @@ export function SettingsPage() {
     const updatedUserData = {
       id: userId,
       name: "watcherofwavs",
-      updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+      updatedAt: BigInt(Math.floor(Date.now() / 1000)), 
     };
 
     try {
       const result = await upsertUser(updatedUserData);
       console.log("User updated successfully:", result);
-      // Handle success, e.g., show a notification or update the UI
     } catch (error) {
       console.error("Error updating user:", error);
-      // Handle error, e.g., show an error message
     }
   };
 

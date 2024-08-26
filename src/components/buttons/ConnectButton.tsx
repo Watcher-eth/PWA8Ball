@@ -1,6 +1,7 @@
 import { IUser } from "@/supabase/types";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { UserCircle } from "lucide-react";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function ConnectButton({ user }: { user: IUser }) {
   const { displayName } = useMyEns();
@@ -15,10 +16,14 @@ export function ConnectButton({ user }: { user: IUser }) {
         px-4 py-2 rounded-lg flex flex-row items-center
       `}
     >
-      {displayName ? displayName : user?.name ? user?.name : "Connect"}
+      {!displayName?.startsWith("0x")
+        ? displayName
+        : user?.name
+        ? user?.name
+        : "Connect"}
       {user?.pfp ? (
         <img
-          src={user?.pfp}
+          src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
           alt={user?.name}
           className="size-6 rounded-full  ml-2 -mr-1 inline"
         />

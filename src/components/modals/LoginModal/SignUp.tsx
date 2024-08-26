@@ -11,27 +11,8 @@ import { NewUser } from "@/lib/supabase/types";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export function SignUp({ setStep }: { setStep: (step: number) => void }) {
-  const { upsertUser, error: isError } = useUpsertUser();
-
-  const handleCreateUser = async (userData: NewUser) => {
-    try {
-      const newUser = {
-        id: userData.id, // Use the ID from the user object
-        liquiditypoints: 0,
-        rewardpoints: 0,
-        created_at: BigInt(Math.floor(Date.now() / 1000)),
-      };
-
-      const responseUpsert = await upsertUser(newUser);
-      console.log("User created successfully", response);
-    } catch (error) {
-      console.error("Error creating user:", error);
-    }
-  };
-
   const { login } = useLogin({
     onComplete: async (
       user,
@@ -43,11 +24,7 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
       try {
         console.log("login completed", user);
         if (isNewUser) {
-          handleCreateUser({
-            id: user.id,
-            liquiditypoints: 0,
-            rewardpoints: 0,
-          });
+          setUser(user);
           const hasTwitterLinked = user.linkedAccounts.some(
             (account) => account.type === "twitter_oauth"
           );
@@ -65,23 +42,6 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
             );
             const name = twitterAccount.name;
             const pfp = profilePictureUrl;
-
-            const userId = user?.id;
-
-            const updatedUserData = {
-              id: userId,
-              name,
-              pfp,
-              socials: {
-                twitter: {
-                  username: twitterAccount.username,
-                  name: name,
-                  pfp: profilePictureUrl,
-                },
-              },
-              updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
-            };
-            await upsertUser(updatedUserData);
           }
         }
       } catch (error) {
