@@ -6,10 +6,10 @@ import { DesktopNavBar } from "@/components/layouts/DesktopNavBar";
 
 export function MobiTop({
   mobile,
-  desktop
+  desktop,
 }: {
-  mobile: React.ReactNode
-  desktop: React.ReactNode
+  mobile: React.ReactNode;
+  desktop: React.ReactNode;
 }) {
   return (
     <>

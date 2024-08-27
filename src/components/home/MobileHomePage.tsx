@@ -19,16 +19,26 @@ import {
   withBlurOverlay,
 } from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
+import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { hardMarkets } from "@/constants/markets";
+import { hardTopics } from "@/constants/topics";
 
 export function MobileHomePage({ trendingMarkets }) {
   const { user } = useUserStore();
+  const { markets } = useGetAllMarkets();
 
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
+  const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
+    markets,
+    hardMarkets,
+    hardTopics
+  );
   const enrichedFeedData = formatMarketArr({
-    markets: trendingMarkets,
+    markets: enhancedMarkets,
     selectedTopic,
   });
-
+  console.log("feed", enrichedFeedData);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleOpenLoginModal = () => {
@@ -41,32 +51,18 @@ export function MobileHomePage({ trendingMarkets }) {
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
-      <div className="w-screen flex flex-col  no-scrollbar py-0 min-h-screen bg-[#101010]">
+      <div className=" flex flex-col w-full  no-scrollbar py-0 min-h-screen bg-[#080808]">
         <AppBanner />
         <TopicHeader
           setSelectedTopic={setSelectedTopic}
           selectedTopic={selectedTopic}
         />
-        <div className="px-3 flex flex-col items-center no-scrollbar mt-2 space-y-6">
-          {!enrichedFeedData
+        <div className="px-5 flex flex-col w-full items-center no-scrollbar mt-2 space-y-6">
+          {enrichedFeedData
             ? enrichedFeedData?.map((bet, index) => {
                 return (
                   <div key={index}>
-                    <FeedCard
-                      {...bet}
-                      image={bet.image!}
-                      icon={bet?.icon}
-                      description={bet?.description}
-                      title={bet.name}
-                      subject={bet?.topic}
-                      id={bet?.marketId}
-                      stake={bet?.stake}
-                      multiplier={bet?.multiplier}
-                      topicId={bet?.topicId}
-                      optionA={bet?.optionA}
-                      optionB={bet?.optionB}
-                      topicBio={bet?.topicBio}
-                    />
+                    <FeedCard {...bet} />
                   </div>
                 );
               })
@@ -87,4 +83,3 @@ export function MobileHomePage({ trendingMarkets }) {
     </BlurOverlayWrapper>
   );
 }
-

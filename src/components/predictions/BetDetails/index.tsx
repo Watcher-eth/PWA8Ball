@@ -32,12 +32,12 @@ export function BetDetails({
 
 
   return (
-    <div className="flex flex-col w-full p-4 pb-2 mb-2 space-y-4">
+    <div className="flex flex-col w-full p-4 pb-2 mb-2 space-y-2">
       <DetailRow
         icon={
           <>
             <span className="text-xs font-bold text-[#FF0050]">{month}</span>
-            <span className="text-3xl font-bold mt-[-2] text-white">
+            <span className="text-3xl font-bold mt-[-3] text-white">
               {day}
             </span>
           </>

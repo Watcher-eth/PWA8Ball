@@ -33,7 +33,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
   return (
     <div
       className={`
-        flex items-start flex-col rounded-lg w-[88vw]  max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
+        flex items-start flex-col rounded-lg w-full md:min-w-[21rem]  max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
          shadow-md hover:scale-101 active:scale-98 transition-all
         cursor-pointer font-[Aeonik-Bold]
       `}
@@ -45,7 +45,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       />
       <div
         className={`
-          h-[50vw] w-[88vw] max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem]  max-h-[21.5rem]
+          h-[50vw] w-full max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem]  max-h-[21.5rem]
           rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent
           absolute bottom-0 z-2 
         `}
@@ -69,7 +69,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       <div
         className={`
           z-2
-          rounded-b-lg w-[88vw] max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem] items-center p-3 px-3
+          rounded-b-lg w-full max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem] items-center p-3 px-3
           bg-gray-800/20
           backdrop-blur-lg flex
           border-[0.5px] border-white/5

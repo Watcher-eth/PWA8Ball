@@ -121,9 +121,10 @@ const SwingStateComponent = ({ sectionData, state }) => (
   </div>
 );
 
+export const ElectionndDate = new Date("2024-11-04T23:59:59");
+
 export function ElectionPage() {
   const [section, setSection] = useState("Presidency");
-  const endDate = new Date("2024-11-04T23:59:59");
   const { data: markets } = useGetMarketsForTopic("1");
   const sectionData = sectionDataMap[section];
 
@@ -156,7 +157,7 @@ export function ElectionPage() {
               Live forecasts for the 2024 US Elections
             </div>
           </div>
-          <Countdown endDate={endDate} />
+          <Countdown endDate={ElectionndDate} />
         </div>
         <div className="flex flex-row items-center justify-between mt-8">
           <div className="flex flex-row space-x-3 items-center">

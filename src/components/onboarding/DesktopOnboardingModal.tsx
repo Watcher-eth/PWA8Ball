@@ -137,7 +137,7 @@ export function DesktopOnboarding() {
   );
 }
 
-function SocialOnboardButton({
+export function SocialOnboardButton({
   IconComponent,
   onClick,
   label,

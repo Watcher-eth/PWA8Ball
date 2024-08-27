@@ -128,7 +128,7 @@ function MobileMarketContent({
       </div>
       <div
         className={`
-          pr-10 mt-[-3.8rem]  mb-[-0.7rem] pl-5 pb-0 p-3
+          pr-7 mt-[-3.8rem]  mb-[-0.7rem] pl-5 pb-0 p-3
           text-white text-bold leading-[2.4rem]
           self-start text-start z-2 font-[Benzin-Bold]
           ${
@@ -155,7 +155,7 @@ function MobileMarketContent({
           </div>
           <div
             className={`
-              text-[1.6rem] mt-[-0.25rem] text-white flex items-center
+              text-[1.45rem] mt-[-0.35rem] text-white flex items-center
               font-[Aeonik-Bold] z-2
             `}
           >
@@ -188,19 +188,21 @@ function MobileMarketContent({
           </div>
         </MobileBettersModal>
       </div>
-      <div className="h-2 w-full text-gray-300 bg-[gray] mx-5 rounded-full z-20" />
-
+      <div className="h-[0.06rem] bg-[#252525] w-[91%] my-1 z-1 self-center">
+        h
+      </div>
       <div
         className={`
-          text-[1.05rem] self-start
+          text-[1.02rem] self-start
           -mb-px mt-2 ml-5
-          text-start text-[lightgray] max-w-[88vw]
+          text-start text-[lightgray] max-w-full
            z-2 font-[Aeonik-Bold] leading-[1.35rem]
         `}
       >
         {description}
       </div>
-      <div className="flex items-center justify-around mx-4 z-2 space-x-4">
+
+      <div className="flex items-center justify-between z-2 space-x-4 px-4 ">
         <PredictModal
           handleOpen={handleOpen}
           image={image}
@@ -212,7 +214,7 @@ function MobileMarketContent({
           marketId={id}
           options={[optionB.name, optionA.name]}
         >
-          <div className="mt-4 hover:scale-101 active:scale-95 transition-all w-full">
+          <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
             <OutcomeButton
               text={optionB?.name}
               multiplier={optionB.odds / 100}
@@ -231,7 +233,7 @@ function MobileMarketContent({
           marketId={id}
           options={[optionB.name, optionA.name]}
         >
-          <div className="mt-4 hover:scale-101 active:scale-95 transition-all w-full">
+          <div className="mt-4 hover:scale-101 active:scale-95 transition-all ">
             <OutcomeButton
               text={optionA?.name}
               multiplier={optionA.odds / 100}

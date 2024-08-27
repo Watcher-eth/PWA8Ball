@@ -50,9 +50,9 @@ export function OutcomeButton({
 
 function getClassNameFromOption(option: string | number) {
   if (option == 0) {
-    return "bg-rose-600 hover:!bg-rose-700 active:bg-rose-800" as const; // red
+    return "bg-[#171717] hover:!bg-[#121212] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const; // red
   } else if (option == 1) {
-    return "bg-blue-600 hover:!bg-blue-700 active:bg-blue-800" as const;
+    return "bg-[#171717] hover:!bg-[#121212] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const;
   } else {
     return "";
   }

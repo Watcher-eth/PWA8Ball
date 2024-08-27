@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { DesktopHome } from "@/components/home/DesktopHome";
 import { DesktopHomePage } from "@/components/home/DesktopHomePage";
 import { MobileHomePage } from "@/components/home/MobileHomePage";
 import { MobiTop } from "@/components/layouts/MobiTop";
@@ -21,7 +22,7 @@ export default function Home({ trendingMarkets }) {
   return (
     <MobiTop
       mobile={<MobileHomePage trendingMarkets={trendingMarkets} />}
-      desktop={<DesktopHomePage trendingMarkets={trendingMarkets} />}
+      desktop={<DesktopHome trendingMarkets={trendingMarkets} />}
     />
   );
 }
