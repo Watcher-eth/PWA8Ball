@@ -16,13 +16,12 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
-import { FeedCard } from "./FeedCard";
-import { AllMarketsQuery } from "@/__generated__/graphql";
 import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsWithMemberCount";
 import Countdown from "../common/CountDown";
 import { ElectionndDate } from "../topic/ElectionPage";
 import { SocialOnboardButton } from "../onboarding/DesktopOnboardingModal";
 import { AppleIcon, GoogleIcon, XIcon } from "../onboarding/AuthIcons";
+import { Stars } from "lucide-react";
 
 export function DesktopHome() {
   const { markets } = useGetAllMarkets();
@@ -53,7 +52,7 @@ export function DesktopHome() {
         </div>
         <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
 
-        <div className="pt-12 pb-[9rem] flex flex-row px-5">
+        <div className="pt-12 pb-[8rem] flex flex-row px-5">
           <TrendingCommunities />
         </div>
         <div className="h-[0.08rem] w-full bg-[#212121] px-5" />
@@ -325,7 +324,7 @@ function TrendingCommunityItem(props: {
   return (
     <Link
       href={`t/${props.id}`}
-      className="relative w-full hover:scale-101 active:scale-99 h-[29vw] rounded-md bg-black bg-opacity-75"
+      className="relative w-full hover:scale-[100.3%] active:scale-99 h-[29vw] rounded-md bg-black bg-opacity-75"
     >
       <img
         src={props?.image}
@@ -343,7 +342,7 @@ function TrendingCommunityItem(props: {
 
         <h2 className="text-4xl font-bold mb-6 mt-4">{props?.title}</h2>
 
-        <div className="flex justify-center space-x-6 mt-14">
+        <div className="flex justify-center space-x-6 mt-12">
           <div className="text-center flex flex-col items-center -space-y-0">
             <p className="text-lg font-semibold">Members</p>
             <div className="flex items-center justify-center space-x-2 mt-2">
@@ -450,25 +449,25 @@ export function DesktopFooter() {
                 Resources
               </div>
               <Link
-                href={""}
+                href={"/privacy"}
                 className="text-[lightgray] font-[400] text-[1rem]"
               >
                 Privacy
               </Link>
               <Link
-                href={""}
+                href={"/tos"}
                 className="text-[lightgray] font-[400] text-[1rem]"
               >
                 Terms of Use
               </Link>
               <Link
-                href={""}
+                href={"https://testflight.apple.com/join/xBbJ2OPO"}
                 className="text-[lightgray] font-[400] text-[1rem]"
               >
                 Download
               </Link>
               <Link
-                href={""}
+                href={"/support"}
                 className="text-[lightgray] font-[400] text-[1rem]"
               >
                 Contact
@@ -497,7 +496,7 @@ export function MarketCard({
   return (
     <Link
       href={`/p/${item?.marketId}`}
-      className={`flex flex-col hover:scale-101 active:scale-99 ${
+      className={`flex flex-col hover:scale-[100.4%] active:scale-99 ${
         isTwoCards ? "w-1/2" : "w-1/3"
       }`}
     >
@@ -508,6 +507,15 @@ export function MarketCard({
         src={item?.image}
         alt={item?.title}
       />
+      <div
+        className={`px-3 py-1 absolute z-[20] rounded-full bg-[#353535]/30 backdrop-blur-lg text-white ${
+          isTwoCards
+            ? "text-[1rem] top-5 right-5 "
+            : "text-[0.9rem] top-4 right-4 "
+        } font-[500]`}
+      >
+        {item?.outcomeOddsA / 100}% {item?.outcomeA}
+      </div>
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3">
           <div className="text-white text-[1.6rem] font-[600]">
@@ -518,8 +526,9 @@ export function MarketCard({
           </div>
         </div>
         {isTwoCards && (
-          <div className="py-1 px-3.5 rounded-full bg-[#181818] text-white flex flex-row space-x-2 items-center">
+          <div className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] text-white flex items-center flex-row space-x-0.5 self-start mt-4">
             <div className="text-[1rem] font-[500]">Predict</div>
+            <Stars height={"0.9rem"} color="white" strokeWidth={2.8} />
           </div>
         )}
       </div>
