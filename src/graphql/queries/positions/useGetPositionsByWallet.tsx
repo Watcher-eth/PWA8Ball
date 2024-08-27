@@ -32,11 +32,14 @@ export const GET_POSITIONS_BY_WALLET = gql`
 `;
 
 export function useGetPositionsByWallet(userAddress: string) {
-  const { data, loading, error, refetch } = useApolloQuery(GET_POSITIONS_BY_WALLET, {
-    variables: {
-      userAddress: getChecksummedAddress(userAddress),
-    },
-  });
+  const { data, loading, error, refetch } = useApolloQuery(
+    GET_POSITIONS_BY_WALLET,
+    {
+      variables: {
+        userAddress: getChecksummedAddress(userAddress),
+      },
+    }
+  );
 
   return {
     orders: data?.positions?.items,

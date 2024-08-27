@@ -222,10 +222,10 @@ function FeaturedSegment() {
     hardMarkets,
     hardTopics
   );
-  console.log("market", enhancedMarkets);
+
   return (
     <div className="w-full flex flex-col">
-      <div className="relative w-full h-[80vh]">
+      <div className="relative w-full h-[55vh]">
         <img
           src={enhancedMarkets?.image}
           alt="Background"
@@ -284,10 +284,8 @@ function FeaturedSegment() {
 }
 
 function TrendingCommunities() {
-  //Get Topics
   const { data: topics } = useGetTopicsWithMembers(["4", "2"]);
 
-  console.log("topics", topics);
   if (topics?.length > 0)
     return (
       <div className=" flex flex-col w-full">
@@ -521,7 +519,7 @@ export function MarketCard({
           <div className="text-white text-[1.6rem] font-[600]">
             {item?.title}
           </div>
-          <div className="text-[lightgray] max-w-[90%] text-[1.1rem] font-[400]">
+          <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-[400]">
             {item?.question}
           </div>
         </div>

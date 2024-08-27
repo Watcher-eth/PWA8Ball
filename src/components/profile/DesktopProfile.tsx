@@ -69,7 +69,11 @@ export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
   const balance = useUserUsdcBalance();
   const [filter, setFilter] = useState("All");
-  const { data: ordersData } = useGetPositionsByWallet(userC?.walletaddress);
+
+  const { data: ordersData } = useGetPositionsByWallet(
+    user?.id === userId ? user?.walletaddress : userC?.walletaddress
+  );
+
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -97,8 +101,6 @@ export function DesktopProfilePage2({ userId, userC }) {
           })),
         ]
       : [];
-
-  console.log("user", mergedData);
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
