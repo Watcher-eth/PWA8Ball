@@ -1,7 +1,7 @@
 import { tgql } from "@/__generated__";
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
+import { useQuery as useApolloQuery } from "@apollo/client";
 
-const GET_MARKET_USERS = tgql(/* GraphQL */ `
+const GET_MARKET_USERS = tgql(/* GraphQL */`
   query MarketUsers($marketId: BigInt!) {
     positions(where: { marketId: $marketId }) {
       items {
