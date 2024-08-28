@@ -163,6 +163,7 @@ export function DesktopProfilePopover({
             href={"https://testflight.apple.com/join/xBbJ2OPO"}
           />
           <DropdownItem
+            href="https://t.me/GlimpseSupport"
             disabled={true}
             label="Support"
             IconComponent={HelpCircle}

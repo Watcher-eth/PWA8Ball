@@ -432,7 +432,7 @@ export function DesktopFooter() {
                 Download
               </Link>
               <Link
-                href={"/support"}
+                href={"https://t.me/GlimpseSupport"}
                 className="text-[lightgray] font-[400] text-[1rem]"
               >
                 Contact
