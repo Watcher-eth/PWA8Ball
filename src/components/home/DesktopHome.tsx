@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
 import {
   enhanceMarketsWithImageAndPolyId,
@@ -21,10 +21,20 @@ import Countdown from "../common/CountDown";
 import { ElectionndDate } from "../topic/ElectionPage";
 import { SocialOnboardButton } from "../onboarding/DesktopOnboardingModal";
 import { AppleIcon, GoogleIcon, XIcon } from "../onboarding/AuthIcons";
-import { Stars } from "lucide-react";
+import { LineChart, Stars, Users } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
+import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
+import { chartConfig } from "../common/Charts/DesktopChart";
+import { Line } from "recharts";
+import { GenericAreaChart } from "../charts/GenericAreaChart";
+import { GenericLineChart } from "../charts/GenericLineChart";
+import { TopicHeader } from "./TopicHeader";
 
 export function DesktopHome() {
   const { markets } = useGetAllMarkets();
+  const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
@@ -32,27 +42,36 @@ export function DesktopHome() {
     hardTopics
   );
 
+  const enrichedFeedData = formatMarketArr({
+    markets: enhancedMarkets,
+    selectedTopic,
+  });
+
   return (
     <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
       <div className="flex flex-col">
-        <StandardBleedOverlay>
-          <InverseVerticalBleedOverlay>
-            <div className=" pb-10 flex flex-row">
-              <FeaturedSegment />
-            </div>
-          </InverseVerticalBleedOverlay>
-        </StandardBleedOverlay>
+        <div className=" pb-8 flex flex-row">
+          <TopMarket />
+        </div>
+        <TopicHeader
+          setSelectedTopic={setSelectedTopic}
+          selectedTopic={selectedTopic}
+        />
+        <div className="h-[0.08rem] mt-4 w-full bg-[#212121] px-8" />
 
-        <div className="pt-6 pb-12 flex flex-row px-5">
-          <DesktopHomeNews markets={enhancedMarkets} />
+        <div className="pt-6 pb-8 flex flex-row px-5">
+          <DesktopHomeNews amount={4} markets={enrichedFeedData} />
+        </div>
+        <div className="pt-6 pb-8 flex flex-row px-5">
+          <DesktopHomeNews amount={3} markets={enhancedMarkets} />
         </div>
         <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
-        <div className="pt-12 pb-[7rem] flex flex-row px-6">
+        <div className="pt-12 pb-[6rem] flex flex-row px-6">
           <DesktopHomeFeaturedMarketsSection markets={enhancedMarkets} />
         </div>
         <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
 
-        <div className="pt-12 pb-[8rem] flex flex-row px-5">
+        <div className="pt-12 pb-[6.5rem] flex flex-row px-5">
           <TrendingCommunities />
         </div>
         <div className="h-[0.08rem] w-full bg-[#212121] px-5" />
@@ -68,44 +87,54 @@ export function DesktopHome() {
   );
 }
 
-function DesktopHomeNews({ markets }) {
-  const enrichedFeedData = formatMarketArr({
-    markets,
-    selectedTopic: "🔥 Trending",
-  });
-
+function DesktopHomeNews({ markets, amount }) {
   return (
     <div className="w-full flex flex-col">
-      <div className="text-[2rem] text-white font-[Aeonik-Bold] flex flex-row items-center space-x-2">
-        <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
-        <div className="">Breaking News</div>
+      <div className="text-[2rem] text-white font-[500] flex flex-row items-center space-x-2">
+        {amount === 4 && (
+          <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
+        )}
+        <div className="">
+          {amount === 4 ? "Breaking News" : "New Predictions"}
+        </div>
       </div>
       <div className="flex flex-row items-center space-x-3">
-        <motion.div
-          layout
-          transition={{ duration: 0.2 }}
-          className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6 overflow-y-visible"
-        >
-          {enrichedFeedData
-            ? enrichedFeedData?.map((item, index) => {
-                if (index > 2 && index < 6)
-                  return (
-                    <MarketCard key={index} item={item} isTwoCards={false} />
-                  );
-              })
-            : [1, 2, 3, 4, 5, 6].map((index) => (
-                <div
-                  style={{
-                    marginVertical: index === 0 ? 20 : 8,
-                    alignSelf: "center",
-                    marginTop: index === 0 ? 25 : 8,
-                  }}
-                  key={index}
-                >
-                  <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-                </div>
-              ))}
-        </motion.div>
+        <Carousel className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6 overflow-y-visible">
+          <CarouselContent>
+            {markets
+              ? markets?.map((item, index) => {
+                  if (
+                    (amount === 4 && index > 0 && index < 9) ||
+                    (amount === 3 && index > 4)
+                  )
+                    return (
+                      <CarouselItem
+                        className={`${
+                          amount === 4 ? "basis-1/4 w-1/4" : "basis-1/3 w-1/3"
+                        }`}
+                      >
+                        <MarketCard
+                          key={index}
+                          item={item}
+                          isTwoCards={false}
+                        />
+                      </CarouselItem>
+                    );
+                })
+              : [1, 2, 3, 4, 5, 6].map((index) => (
+                  <div
+                    style={{
+                      marginVertical: index === 0 ? 20 : 8,
+                      alignSelf: "center",
+                      marginTop: index === 0 ? 25 : 8,
+                    }}
+                    key={index}
+                  >
+                    <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
+                  </div>
+                ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </div>
   );
@@ -122,12 +151,18 @@ function DesktopHomeFeaturedMarketsSection({ markets }) {
       <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
         Trending Today
       </div>
-      <div className="flex flex-row space-x-7">
-        {enrichedFeedData.map((item, index) => {
-          if (index > 24 && index < 27)
-            return <MarketCard key={index} item={item} isTwoCards={true} />;
-        })}
-      </div>
+      <Carousel className="flex flex-row space-x-7">
+        <CarouselContent>
+          {enrichedFeedData.map((item, index) => {
+            if (index > 24)
+              return (
+                <CarouselItem className="basis-1/2 w-1/2">
+                  <MarketCard key={index} item={item} isTwoCards={true} />
+                </CarouselItem>
+              );
+          })}
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 }
@@ -225,7 +260,7 @@ function FeaturedSegment() {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="relative w-full h-[55vh]">
+      <div className="relative w-full h-[35vh]">
         <img
           src={enhancedMarkets?.image}
           alt="Background"
@@ -284,7 +319,7 @@ function FeaturedSegment() {
 }
 
 function TrendingCommunities() {
-  const { data: topics } = useGetTopicsWithMembers(["4", "2"]);
+  const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
 
   if (topics?.length > 0)
     return (
@@ -335,7 +370,7 @@ function TrendingCommunityItem(props: {
         <img
           src={props?.image}
           alt="Topic image"
-          className="inset-0 w-20 h-20 rounded-lg"
+          className="inset-0 object-cover w-20 h-20 rounded-lg"
         />
 
         <h2 className="text-4xl font-bold mb-6 mt-4">{props?.title}</h2>
@@ -494,25 +529,24 @@ export function MarketCard({
   return (
     <Link
       href={`/p/${item?.marketId}`}
-      className={`flex flex-col hover:scale-[100.4%] active:scale-99 ${
-        isTwoCards ? "w-1/2" : "w-1/3"
-      }`}
+      className={`flex flex-col w-full relative hover:scale-[100.4%] active:scale-99 `}
     >
       <img
         className={`${
           isTwoCards ? "h-[29vw]" : "h-[21vw]"
-        } w-full object-cover rounded-md`}
+        } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
         src={item?.image}
         alt={item?.title}
       />
       <div
-        className={`px-3 py-1 absolute z-[20] rounded-full bg-[#353535]/30 backdrop-blur-lg text-white ${
+        className={`px-2.5 py-1 absolute z-[20] border-[0.09rem] border-[#efefef]/10 rounded-full bg-[#353535]/20 backdrop-blur-md text-white ${
           isTwoCards
-            ? "text-[1rem] top-5 right-5 "
-            : "text-[0.9rem] top-4 right-4 "
-        } font-[500]`}
+            ? "text-[0.9rem] top-5 right-5 "
+            : "text-[0.8rem] top-4 right-4 "
+        } font-[600]`}
       >
-        {item?.outcomeOddsA / 100}% {item?.outcomeA}
+        {(item?.outcomeOddsA / 100).toFixed(1)}%{" "}
+        {item?.outcomeA === "Yes" ? "Chance" : item?.outcomeA}
       </div>
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3">
@@ -534,5 +568,100 @@ export function MarketCard({
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
+  );
+}
+
+function TopMarket() {
+  const { market } = useGetMarketById("25");
+  const enhancedMarkets = enhanceSingleMarketWithImageAndPolyId(
+    market,
+    hardMarkets,
+    hardTopics
+  );
+
+  const { data: prices2 } = useGetPricesForMarket("25");
+
+  const userOutcome = 0;
+  const { currentPrices, percentageDifference } = processPrices(
+    prices2,
+    userOutcome,
+    enhancedMarkets?.initialProb,
+    "1M"
+  );
+
+  const minMax = getMinMaxValues(currentPrices);
+
+  // Format data for AreaChart
+  const chartData = currentPrices?.map((price) => ({
+    month: price.date.toLocaleString(), // Format the date as needed
+    [`${enhancedMarkets?.outcomeA}`]: 100 - price.value,
+    [`${enhancedMarkets?.outcomeB}`]: price.value,
+  }));
+
+  return (
+    <div className="w-full flex  flex-row pl-5 mt-7 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
+      <div className="flex flex-col w-[30%] pr-3 pr-5 z-1 pt-2">
+        <img
+          className="h-[6rem] w-[6rem] object-cover mt-0 rounded-md"
+          src={enhancedMarkets?.image}
+        />
+        <div className="text-white text-3xl mt-6 font-[600]">
+          {enhancedMarkets?.title}
+        </div>
+        <div className="text-[lightgray] mt-2 text-lg font-[400]">
+          {enhancedMarkets?.question}
+        </div>
+        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[500]">
+          <Users size="16" strokeWidth={2.7} color="gray" />
+          <div>354+ Predictors</div>
+        </div>
+      </div>
+      <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
+        <div className="text-[gray] text-md font-[400]">
+          {enhancedMarkets?.title}
+        </div>
+        <div className="flex flex-row justify-between items-center">
+          <div className="text-3xl font-[500] my-1 text-white">
+            {enhancedMarkets?.outcomeOddsA / 100}%{" "}
+            {enhancedMarkets?.outcomeA !== "Yes"
+              ? enhancedMarkets?.outcomeA
+              : "Chance"}
+          </div>
+          <div className="text-3xl text-white/20 font-[Aeonik-Bold]">
+            Glimpse
+          </div>
+        </div>
+        <div className="w-full h-[9rem] my-3 rounded-md ">
+          <GenericLineChart
+            domain={[
+              minMax.min - (minMax.max - minMax.min) / 6,
+              minMax.max + (minMax.max - minMax.min) / 6,
+            ]}
+            chartData={chartData}
+            xAxisKey="month"
+            xAxisTickFormatter={(value) => value.slice(0, 3)}
+          />
+        </div>
+        <div className="flex flex-row justify-between -mb-3 items-center">
+          <div className="text-md text-[gray]">
+            ${enhancedMarkets?.usdcStake} at Stake
+          </div>
+          <div className="flex flex-row  space-x-3  items-center ">
+            <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
+              {enhancedMarkets?.outcomeA}
+              <p className="text-[0.75rem] text-[lightgray] ml-1">
+                {enhancedMarkets?.outcomeOddsA / 100}%
+              </p>
+            </div>
+            <div className="px-6 py-1.5 text-[1.1rem] font-[500]  flex items-baseline rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
+              {enhancedMarkets?.outcomeB}
+              <p className="text-[0.75rem] text-[lightgray] ml-1">
+                {enhancedMarkets?.outcomeOddsB / 100}%
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
