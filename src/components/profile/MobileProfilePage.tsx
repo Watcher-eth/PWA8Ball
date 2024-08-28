@@ -66,7 +66,7 @@ export function MobileProfilePage({
               <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl mx-2 font-medium">
                 {totalFollowers} Followers
               </p>
-              <FollowButton profileId={userC?.external_auth_provider_user_id} />
+              <FollowButton profileId={userC?.walletaddress} />
             </div>
           </div>
         </div>

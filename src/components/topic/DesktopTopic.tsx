@@ -127,7 +127,7 @@ function DesktopTopic({
               <div className="flex flex-row space-x-2 items-center">
                 <JoinTopicButton
                   topicId={id}
-                  userId={user?.external_auth_provider_user_id}
+                  userId={user?.walletaddress}
                   showToast={() => {}}
                 />
                 <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">

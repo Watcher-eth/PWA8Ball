@@ -56,7 +56,7 @@ export function AddComment({
     const result = await addComment({
       market_id: id,
       content: content!,
-      created_by: user?.external_auth_provider_user_id,
+      created_by: user?.walletaddress,
       topic_id: topic_id,
       parent_id: "words[1]",
     });

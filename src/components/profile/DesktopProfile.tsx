@@ -177,7 +177,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 <div>Edit Profile</div>
               </div>
             ) : (
-              <FollowButton profileId={userC?.external_auth_provider_user_id} />
+              <FollowButton profileId={userC?.walletaddress} />
             )}
           </div>
           {userC?.name === user?.name && balance < 1 && (
