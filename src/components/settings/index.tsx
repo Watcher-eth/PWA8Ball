@@ -12,14 +12,12 @@ import {
 import { useState, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
 import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import Link from "next/link";
 import { copyToClipboard } from "@/utils/copyToClipboard";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
+
 import UserInviteModal from "../onboarding/Invites/UserInviteModal";
 
 export function SettingsPage() {

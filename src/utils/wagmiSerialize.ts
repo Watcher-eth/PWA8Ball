@@ -1,13 +1,13 @@
 export function wagmiSerialize(obj: any) {
 
     return JSON.stringify(obj, (key, value_) => {
-      console.log("stringifying wagmi serializer")
+    //   console.log("stringifying wagmi serializer")
       let value = value_;
       if (typeof value === "bigint") {
-        console.log("BIGINT DETECTED")
+        // console.log("BIGINT DETECTED")
 
         value = { __type: "bigint", value: value_.toString() };
-        console.log({value, value_});
+        // console.log({value, value_});
 
       }
       if (value instanceof Map) {
