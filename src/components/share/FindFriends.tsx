@@ -270,19 +270,19 @@ export const FindFriends = ({ type }) => {
       </div>
       <div
         className={`
-          w-full h-[45px]
-          absolute bottom-20
+          w-full h-[145px]
+          absolute -bottom-5
         `}
         style={{
           backgroundImage:
-            "linear-gradient(rgba(10,10,10,0), rgba(10,10,10,0.6), #080808)",
+            "linear-gradient(transparent, rgba(8,8,8, 0.9),   #080808)",
         }}
       />
       <DialogClose
         className={`
-          h-20 absolute bottom-0
+          h-20 absolute -bottom-5
           flex items-center justify-center
-          p-2.5 pb-[45px] bg-[#080808]
+          p-2.5 pb-[45px]
           w-full
           rounded-b-lg
         `}
@@ -294,7 +294,7 @@ export const FindFriends = ({ type }) => {
           className={`
            w-[90%] h-[50px] rounded-[28px]
             overflow-hidden flex items-center justify-center
-            bg-[rgb(17,17,17)] mt-[15px]
+            bg-[rgb(17,17,17)] mt-[25px]
           `}
         >
           <p className="text-[16px] text-white font-semibold">Done</p>

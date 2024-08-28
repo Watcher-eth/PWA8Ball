@@ -27,7 +27,61 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     refetch,
   } = useGetFollowingPredictions(user?.external_auth_provider_user_id);
 
-  if (isLoading || predictions === undefined) {
+  if (predictions === undefined) {
+    return (
+      <div
+        className={`
+    no-scrollbar flex flex-col
+
+    p-5 pt-[30px]
+    ${isDesktop ? "w-full bg-[transparent]" : "w-full bg-[#080808]"}
+  `}
+      >
+        <div
+          className={`
+      fixed w-screen h-[125px] bottom-0 rounded-t-lg
+      z-2
+    `}
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, rgba(8, 8, 8, 0.8))",
+          }}
+        />
+        <div
+          className={`
+      flex flex-row w-full justify-between items-center
+      mb-2.5 ${isDesktop ? "bg-[transparent]" : "bg-[#080808]"}
+    `}
+        >
+          <motion.button
+            className={`p-2 rounded-[20px] ${
+              page ? "bg-[#FF0050]" : "bg-[#1C1C1E]"
+            }`}
+            onClick={() => setPage(!page)}
+          >
+            {page ? (
+              <Globe color="white" strokeWidth={3} size={18} />
+            ) : (
+              <Users color="white" strokeWidth={3} size={18} />
+            )}
+          </motion.button>
+          <h1 className="text-[20px] text-white font-bold">
+            {page ? "Global" : "Your Friends"}
+          </h1>
+          <NotificationsModal isDesktop={isDesktop}>
+            <motion.button className="p-1.5 rounded-[20px] bg-[#1C1C1E]">
+              <Bell color="white" strokeWidth={3} size={20} />
+            </motion.button>
+          </NotificationsModal>
+        </div>
+
+        <div>
+          <InviteFriendsPlaceholder />;
+        </div>
+      </div>
+    );
+  }
+  if (isLoading) {
     return (
       <div
         className={`

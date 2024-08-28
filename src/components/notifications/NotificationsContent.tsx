@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
 
-
 import { registerForPushNotificationsAsync } from "@/utils/registerPushNotifs";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
@@ -44,34 +43,39 @@ export function NotificationsContent({ isDesktop }: { isDesktop?: boolean }) {
           width: isDesktop ? "25vw" : "100vw",
           height: isDesktop ? "60vh" : "90vh",
           top: 0,
-          backgroundColor: "#101010",
+          backgroundColor: "#080808",
         }}
       >
         <img
           style={styles.image}
           src={"./images/Notifications.png"}
           alt="Notifications"
+          className="object-cover"
         />
-        <h1 style={styles.header}>
-          Don’t miss out on what your friends are up to
-        </h1>
-        <p style={styles.subheader}>Never miss a new prediction again</p>
-        <button
-          style={styles.buttonPrimary}
-          onClick={handlePressTurnOnNotifications}
-        >
-          Turn on notifications
-        </button>
-        <button
-          style={styles.buttonSecondary}
-          onClick={() => window.history.back()}
-        >
-          Another time
-        </button>
+        <div className="flex flex-col w-full items-center justify-center bg-[#080808] h-40" />
+
+        <div className="flex flex-col items-center justify-center bg-gradient-to-b from-[rgba(8, 8, 8, 1)] via-[rgba(8, 8, 8, 0.8)] to-[#080808]">
+          <h1 style={styles.header}>
+            Don’t miss out on what your friends are up to
+          </h1>
+          <p style={styles.subheader}>Never miss a new prediction again</p>
+          <button
+            style={styles.buttonPrimary}
+            onClick={handlePressTurnOnNotifications}
+          >
+            Turn on notifications
+          </button>
+          <button
+            style={styles.buttonSecondary}
+            onClick={() => window.history.back()}
+          >
+            Another time
+          </button>
+        </div>
       </div>
     );
   }
-};
+}
 
 const styles = {
   image: {
@@ -84,7 +88,7 @@ const styles = {
     fontWeight: "700",
     textAlign: "center",
     padding: "0 40px",
-    marginTop: "16px",
+    marginTop: "-12px",
   },
   subheader: {
     fontSize: "15px",
@@ -92,14 +96,14 @@ const styles = {
     fontWeight: "500",
     textAlign: "center",
     paddingHorizontal: "60px",
-    marginTop: "15px",
+    marginTop: "12px",
   },
   buttonPrimary: {
     padding: "8px 18px",
     paddingVertical: "10px",
     backgroundColor: "white",
     borderRadius: "21px",
-    marginTop: "25px",
+    marginTop: "20px",
     fontSize: "14px",
     color: "black",
     textAlign: "center",

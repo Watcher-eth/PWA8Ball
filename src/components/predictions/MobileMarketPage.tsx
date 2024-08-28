@@ -135,7 +135,7 @@ function MobileMarketContent({
             title?.length < 14
               ? "text-[35px]"
               : title?.length < 21
-              ? "text-[32px]"
+              ? "text-[31px]"
               : "text-[26.5px]"
           }
         `}
@@ -182,7 +182,7 @@ function MobileMarketContent({
             <Avatar>
               <AvatarImage src={userImages[1]} />
             </Avatar>
-            <Avatar className="border border-white">
+            <Avatar>
               <AvatarImage src={userImages[2]} />
             </Avatar>
           </div>
@@ -202,7 +202,7 @@ function MobileMarketContent({
         {description}
       </div>
 
-      <div className="flex items-center justify-between z-2 space-x-4 px-4 ">
+      <div className="flex items-center  justify-between z-2 space-x-4 px-4 ">
         <PredictModal
           handleOpen={handleOpen}
           image={image}

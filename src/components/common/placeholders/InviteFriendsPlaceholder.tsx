@@ -24,7 +24,7 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
     <div
       className={`flex h-full flex-col items-center ${
         props?.isDesktop ? "rounded-[1.5rem]" : "pt-[50px]"
-      } bg-[#101010]`}
+      } bg-[#080808]`}
     >
       <motion.h1
         custom={1}
