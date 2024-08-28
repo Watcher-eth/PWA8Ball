@@ -196,7 +196,11 @@ export const SmartAccountProvider = ({
     if (walletType === "smartwallet" && embeddedWallet) {
       createSmartWallet(embeddedWallet);
     } else if (walletType === "eoa" && isConnected && eoaAddress) {
-      createEOAWallet();
+      try {
+        createEOAWallet()
+      } catch (error) {
+        console.error(error)
+      }
     }
   }, [
     walletType,

@@ -47,16 +47,26 @@ export function DesktopMarketPage({ users, market, id }) {
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
-          <div className="w-full h-80 relative">
+          <div className="w-full h-60 relative">
             <img
-              className="w-full transform rotate-180 object-cover h-80 relative -mt-24"
+              className="w-full transform rotate-180 object-cover h-60 relative"
               alt="CoverImage"
               src={enhancedMarket?.image}
             />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
+            <div
+              className={`
+                h-60 w-full
+                bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent
+                backdrop-blur-lg absolute bottom-0
+              `}
+            />
             <InverseBleedOverlay>
               <img
-                className="size-28 md:size-32 lg:size-36 xl:size-40 ml-3 absolute -bottom-12 object-cover  rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20"
+                className={`
+                  size-28 md:size-32 lg:size-36 xl:size-40
+                  ml-3 absolute -bottom-12 object-cover
+                  rounded-[0.5rem] mb-4 border-2 border-[#080808] z-20
+                `}
                 src={enhancedMarket?.image}
               />
             </InverseBleedOverlay>

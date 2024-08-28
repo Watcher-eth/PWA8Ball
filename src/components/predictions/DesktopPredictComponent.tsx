@@ -37,7 +37,7 @@ export function DesktopPredictComponent(props: {
   return (
     <div
       className={`
-        border-2  rounded-[1.5rem] border-white/5 text-white h-auto overflow-hidden
+        border  rounded-[1.5rem] border-white/10 text-white h-auto overflow-hidden
       `}
     >
       <motion.div
@@ -315,7 +315,7 @@ function DesktopConfirmPrediction({
                 className={`
                   mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
                   font-bold flex items-center justify-center gap-1 self-center
-                  hover:scale-101 active:scale-98 transition-all w-full 
+                  hover:scale-101 active:scale-98 transition-all w-full
                 `}
               >
                 <div className="flex items-center justify-around gap-2">

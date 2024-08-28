@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import { fetchUsersByMarketId } from "@/supabase/queries/markets/useGetUsersByMarketId";
-import { fetchMarketById } from "@/supabase/queries/useGetMarketById";
 import { DEFAULT_USER_ID } from "@/constants/testData";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
