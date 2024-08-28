@@ -17,7 +17,7 @@ export function SearchInputSection({
         type="text"
         value={value}
         onChange={onChange}
-        placeholder="Search for predictions..."
+        placeholder="Search the future..."
         className={`
             w-full outline-none border-0
             py-2 px-4

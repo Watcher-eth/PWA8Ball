@@ -250,74 +250,6 @@ function ElectionFooter({ markets }) {
   );
 }
 
-function FeaturedSegment() {
-  const { market } = useGetMarketById("28");
-  const enhancedMarkets = enhanceSingleMarketWithImageAndPolyId(
-    market,
-    hardMarkets,
-    hardTopics
-  );
-
-  return (
-    <div className="w-full flex flex-col">
-      <div className="relative w-full h-[35vh]">
-        <img
-          src={enhancedMarkets?.image}
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover z-0 "
-        />
-
-        <div className="bg-gradient-to-b from-[transparent] via-[#080808]/60 to-[#080808]/80 h-[20vh] w-full absolute bottom-0  " />
-        <div className="absolute inset-0 bg-[#212121]/30 z-10"></div>
-
-        <div className="relative z-20 flex flex-col w-full  -space-y-2 md:flex-row items-end h-full pb-3 justify-start px-7 mx-5">
-          <div className="text-white p-6 w-full">
-            <div className="flex items-center w-full justify-between">
-              <div className="flex flex-col">
-                <h1 className="text-4xl md:text-5xl font-bold mb-1">
-                  {enhancedMarkets?.title}
-                </h1>
-
-                <p className="text-2xl md:text-2xl mb-3">
-                  {enhancedMarkets?.question}
-                </p>
-              </div>
-              <div className="flex flex-col justify-end items-end pr-3">
-                <h1 className="text-4xl md:text-4xl font-bold mb-1">
-                  {enhancedMarkets?.outcomeOddsA / 100}%{" "}
-                  {enhancedMarkets?.outcomeA}
-                </h1>
-
-                <p className="text-xl md:text-xl mb-3">
-                  ${Number(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)} at
-                  stake
-                </p>
-              </div>
-            </div>
-            <div className="flex w-full items-center justify-between">
-              <div className="flex items-center space-x-2 mb-3">
-                <span className="bg-[#151515]/30 space-x-1.5 flex items-center  backdrop-blur-md border-[0.01rem] border-[#909090]/30 text-sm py-1.5 pl-2 px-3 rounded-full">
-                  <img
-                    className="h-5 w-5 rounded-full"
-                    src={enhancedMarkets?.topic_image}
-                  />
-                  <div>{enhancedMarkets?.topic_title}</div>
-                </span>
-                <span className="bg-[#151515]/30 backdrop-blur-md border-[0.01rem] border-[#909090]/30 text-sm py-1.5 px-3 rounded-full">
-                  16+ Predictions
-                </span>
-              </div>
-              <div className="px-8 py-1.5 -mt-4 text-white text-lg bg-[#151515]/30 space-x-1.5 flex items-center  backdrop-blur-md border-[0.01rem] border-[#909090]/30 rounded-md mr-2">
-                Predict
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function TrendingCommunities() {
   const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
 
@@ -572,14 +504,14 @@ export function MarketCard({
 }
 
 function TopMarket() {
-  const { market } = useGetMarketById("25");
+  const { market } = useGetMarketById("1");
   const enhancedMarkets = enhanceSingleMarketWithImageAndPolyId(
     market,
     hardMarkets,
     hardTopics
   );
 
-  const { data: prices2 } = useGetPricesForMarket("25");
+  const { data: prices2 } = useGetPricesForMarket("1");
 
   const userOutcome = 0;
   const { currentPrices, percentageDifference } = processPrices(
@@ -644,7 +576,7 @@ function TopMarket() {
         </div>
         <div className="flex flex-row justify-between -mb-3 items-center">
           <div className="text-md text-[gray]">
-            ${enhancedMarkets?.usdcStake} at Stake
+            ${(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)} at Stake
           </div>
           <div className="flex flex-row  space-x-3  items-center ">
             <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
