@@ -3,7 +3,7 @@ import Link from "next/link";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
 
-export const RelatedMarkets = ({
+export function RelatedMarkets({
   topicId,
   id,
   isDesktop,
@@ -11,7 +11,7 @@ export const RelatedMarkets = ({
   topicId: string;
   id: number;
   isDesktop?: boolean;
-}) => {
+}) {
   // Get Markets from topic
   const { data: markets } = useGetRelatedMarkets(topicId);
 

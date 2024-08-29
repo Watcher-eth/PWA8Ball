@@ -23,9 +23,8 @@ import { DesktopPredictComponent } from "./DesktopPredictComponent";
 import { AlignLeft } from "lucide-react";
 import { DesktopBettersModal } from "./Betters/DesktopBettersModal";
 import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
-import { useState } from "react";
+
 import { RulesCollapsible } from "./BetDetails/RulesCollapsible";
-import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
@@ -37,7 +36,6 @@ export function DesktopMarketPage({ users, market, id }) {
   const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
   useCheckReferral();
   const userImages = fillUserImages(users, 3);
-  const [comments, setComments] = useState([]);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     hardMarkets,
