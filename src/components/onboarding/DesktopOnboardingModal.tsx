@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Input } from "@/components/ui/Input";
 import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react";
-import { usePrivy } from "@privy-io/react-auth";
+import { useLoginWithOAuth, usePrivy } from "@privy-io/react-auth";
 import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
@@ -40,7 +40,6 @@ export function DesktopOnboardingModal({
     isConnected
   );
 
-  
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
@@ -65,7 +64,7 @@ export function DesktopOnboardingModal({
 
 export function DesktopOnboarding() {
   const { ready, authenticated, login } = usePrivy();
-
+  const { loginWithOAuth, initOAuth } = useLoginWithOAuth();
   return (
     <div className="flex overflow-hidden rounded-lg ">
       <div className="flex flex-col items-center justify-center sm:w-1/2 w-full p-10 pt-6 text-white">
@@ -84,13 +83,22 @@ export function DesktopOnboarding() {
           className="mb-4 w-full bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
         />
         <div className="flex justify-between w-full  rounded-[0.5rem]  mb-4">
-          <SocialOnboardButton IconComponent={GoogleIcon} onClick={login} />
-          <SocialOnboardButton IconComponent={XIcon} onClick={login} />
-          <SocialOnboardButton IconComponent={AppleIcon} onClick={login} />
+          <SocialOnboardButton
+            IconComponent={GoogleIcon}
+            onClick={() => initOAuth({ provider: "google" })}
+          />
+          <SocialOnboardButton
+            IconComponent={XIcon}
+            onClick={() => initOAuth({ provider: "twitter" })}
+          />
+          <SocialOnboardButton
+            IconComponent={AppleIcon}
+            onClick={() => initOAuth({ provider: "apple" })}
+          />
           <SocialOnboardButton
             label={"Farcaster"}
             IconComponent={Phone}
-            onClick={login}
+            onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
         <WalletOnboardButton
