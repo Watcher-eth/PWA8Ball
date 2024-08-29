@@ -48,15 +48,15 @@ export function Comment({
       className="flex flex-col w-full pt-5"
     >
       <CommentHeader user={user} user2={user2} created_at={created_at} />
-      <p className="my-2 text-base text-white ml-12">{content}</p>
-      <div className="flex flex-row items-center justify-between mb-1.5 ml-10">
+      <p className="my-1  text-base text-white ">{content}</p>
+      <div className="flex flex-row items-center justify-between mb-1.5 ">
         <button
           onClick={() => {
             setReply(user?.name ?? name);
             handleComment();
           }}
           className={`
-            text-xs text-white/60 hover:text-white/80 py-1 px-2 rounded-full
+            text-sm text-white/60 hover:text-white/80   rounded-full
             ring-1 ring-transparent hover:ring-white/10 active:ring-white/20
             bg-none border-none cursor-pointer
           `}
@@ -65,7 +65,7 @@ export function Comment({
         </button>
         <LikeDislikeSection />
       </div>
-      <div className="w-full self-center h-0 border-b border-[#303030] mt-3 z-20" />
+      <div className="w-full self-center h-0 border-b border-[#303030] mt-3 z-1" />
     </motion.div>
   );
 }

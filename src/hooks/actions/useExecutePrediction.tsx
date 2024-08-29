@@ -45,7 +45,7 @@ export function useExecutePrediction() {
 
       approveToken();
       //TODO: Referall pass in once redeploy
-      predictV2({
+      const res = predictV2({
         client,
         address,
         userId: userCon?.external_auth_provider_user_id!,
@@ -56,28 +56,29 @@ export function useExecutePrediction() {
         isBuy: true,
       });
 
-      setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
-        toast(
-          <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
-            <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
-              <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
-            </div>
-            Prediction successfull
-          </div>,
-          {
-            unstyled: true,
-            classNames: {
-              title: "text-red-400 text-2xl",
-              description: "text-red-400",
-              actionButton: "bg-zinc-400",
-              cancelButton: "bg-orange-400",
-              closeButton: "bg-lime-400",
-            },
-          }
-        );
-      }, 3500);
+      if (res)
+        setTimeout(() => {
+          setLoading(false);
+          setSuccess(true);
+          toast(
+            <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+              <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
+                <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
+              </div>
+              Prediction successfull
+            </div>,
+            {
+              unstyled: true,
+              classNames: {
+                title: "text-red-400 text-2xl",
+                description: "text-red-400",
+                actionButton: "bg-zinc-400",
+                cancelButton: "bg-orange-400",
+                closeButton: "bg-lime-400",
+              },
+            }
+          );
+        }, 3500);
       //   }
     } catch (error) {
       console.error("Failed to make prediction:", error);

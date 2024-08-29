@@ -1,6 +1,6 @@
 import { supabase } from "../../supabaseClient";
-import { getUserById } from "@/graphql/queries/users/useGetUserById";
 import { getMarketById } from "@/graphql/queries/markets/useGetMarketById";
+import { getUserById } from "@/graphql/queries/users/useUserById";
 
 interface IUser {
   name: string;
@@ -18,7 +18,7 @@ export interface IComment {
   parent_id?: string; // Optional parent ID for replies
   user: IUser; // Nested user object to hold related user data
   userLiked?: boolean; // Indicates if the user liked the comment
-  market_title?: string; // Included in the transformed data
+  market_title?: string; // Included in the trarnsformed data
   market_image?: string; // Included in the transformed data
   market_question?: string; // Included in the transformed data
   replies?: IComment[]; // Nested comments (replies)
@@ -47,7 +47,7 @@ const fetchCommentsForMarket = async (
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error fetching comments:", error.message);
+    console.error("Error fetching comments:", error.message, marketId);
     throw new Error(error.message);
   }
 
@@ -72,10 +72,6 @@ const fetchCommentsForMarket = async (
     likesLookup[like.comment_id].push(like.liked_by);
   });
 
-  // Fetch market details
-  const market = await getMarketById(String(marketId));
-  if (!market) throw new Error("Market not found");
-
   // Transform the data to include market details and user liked status
   const commentsWithDetails = await Promise.all(
     data.map(async (comment: any) => {
@@ -85,9 +81,6 @@ const fetchCommentsForMarket = async (
 
       return {
         ...comment,
-        market_title: market.title,
-        market_image: market.image,
-        market_question: market.question,
         user: {
           name: user.name,
           pfp: user.pfp,
@@ -106,7 +99,6 @@ const fetchCommentsForMarket = async (
       };
     })
   );
-
   // Filter out replies from the top-level comments
   return commentsWithDetails.filter((comment: any) => !comment.parent_id);
 };

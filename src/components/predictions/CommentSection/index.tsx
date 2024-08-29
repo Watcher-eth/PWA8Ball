@@ -5,11 +5,11 @@ import { useUserStore } from "@/lib/stores/UserStore";
 
 import { BetComment } from "@/types/PostTypes";
 import { IUserWithBet } from "@/supabase/types";
-import { useGetAllCommentsForMarket } from "@/supabase/queries/useGetAllCommentsForMarket";
 
 import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders";
 import { AddComment } from "./AddComment";
 import { Comment } from "./Comment";
+import { useGetAllCommentsForMarket } from "@/supabase/queries/comments/getCommentsForMarket";
 
 export function findUserByExternalAuthId(externalAuthId: string, users) {
   if (users)
@@ -40,15 +40,13 @@ export function CommentSection({
     error,
     isLoading,
     refetch, // Method to refetch the data
-  } = useGetAllCommentsForMarket(
-    marketId,
-    user?.external_auth_provider_user_id
-  );
-
+  } = useGetAllCommentsForMarket(Number(marketId), user?.walletAddress);
+  console.log("ccomment", comments, marketId);
   const allComments = _.uniqBy(
     [...optimisticComments, ...(comments || [])],
     (comment) => comment.id
   );
+  console.log("ccommen2t", allComments);
 
   function addOptimisticComment(comment: BetComment) {
     setOptimisticComments([comment, ...optimisticComments]);
@@ -73,7 +71,7 @@ export function CommentSection({
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
       <AddComment user={user} addOptimisticComment={addOptimisticComment} />
-      <div>
+      <div className="-mt-10 -mb-1.5">
         {allComments.length > 0 &&
           allComments.map((item) => {
             const commentUser = findUserByExternalAuthId(

@@ -19,7 +19,7 @@ export function RelatedMarkets({
     return (
       <div
         className={`
-          flex flex-col
+          flex flex-col z-20
           ${isDesktop ? "bg-transparent" : "bg-[#101010] p-4 pt-6"}
         `}
       >
@@ -49,7 +49,7 @@ export function RelatedMarkets({
     );
 
   return null;
-};
+}
 
 function RelatedMarketQuestion({
   id,
@@ -63,10 +63,7 @@ function RelatedMarketQuestion({
   isDesktop,
 }) {
   return (
-    <Link
-      href={`/p/${id}`}
-      prefetch={true}
-    >
+    <Link href={`/p/${id}`} prefetch={true}>
       <div
         className={`
           flex flex-row items-center

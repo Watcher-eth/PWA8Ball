@@ -120,7 +120,7 @@ export function DesktopProfilePopover({
             <DropdownItem
               label={"Copy Address"}
               IconComponent={Copy}
-              onClick={() => copyToClipboard(user?.walletaddress)}
+              onClick={() => copyToClipboard(user?.walletAddress)}
             />
             <DropdownMenuSub>
               <DropdownMenuSubTrigger className="hover:!bg-slate-400/20 rounded-md active:!bg-slate-400/30">

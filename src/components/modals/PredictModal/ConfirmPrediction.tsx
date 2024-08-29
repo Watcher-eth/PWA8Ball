@@ -22,6 +22,7 @@ export function ConfirmPrediction(props: {
   const { executePrediction, loading, success } = useExecutePrediction();
 
   const amount = useVotingStore((state) => state.amount);
+  const option = useVotingStore((state) => state.option);
 
   const shareLink = async () => {
     try {
@@ -36,6 +37,7 @@ export function ConfirmPrediction(props: {
       console.error("Error during sharing", error);
     }
   };
+  console.log("option", props.option, props.options);
   return (
     <div className="flex flex-col items-center w-full bg-[#080808] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
       {loading || success ? (
@@ -43,10 +45,10 @@ export function ConfirmPrediction(props: {
           image={props.image}
           question={props.question}
           answer={props.options[props.option]}
-          option={props.option}
+          option={option}
           loading={loading}
           success={success}
-          setStep={setStep}
+          setStep={props.setStep}
         />
       ) : (
         <motion.div className="flex flex-col items-center w-full bg-[#080808] px-6  rounded-lg">
@@ -80,8 +82,8 @@ export function ConfirmPrediction(props: {
                   }`}
                 >
                   {Number(props.option) === 1
-                    ? props.options[props.option]
-                    : props.options[props.option]}
+                    ? props.options[1]
+                    : props.options[0]}
                 </span>
               </div>
             </div>
@@ -158,9 +160,9 @@ export function ConfirmPrediction(props: {
               ? shareLink()
               : executePrediction({
                   amount,
-                  option,
-                  marketId,
-                  options,
+                  option: props.option,
+                  marketId: props?.id,
+                  options: props?.options,
                 });
           }}
           className="mt-3  py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"

@@ -83,6 +83,7 @@ export function enhanceSingleMarketWithImageAndPolyId(
   if (matchingMarket) {
     return {
       ...market,
+      id: market?.id,
       image: matchingMarket?.image,
       PolyId: matchingMarket?.PolyId,
       options,
@@ -94,7 +95,6 @@ export function enhanceSingleMarketWithImageAndPolyId(
       topic_description: matchingTopic?.description || null,
       topic_image: matchingTopic?.image,
       icon: matchingTopic?.image,
-      id: market?.marketId,
     };
   }
 

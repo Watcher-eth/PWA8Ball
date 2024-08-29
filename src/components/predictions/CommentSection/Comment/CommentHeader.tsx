@@ -32,7 +32,7 @@ export function CommentHeader({
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row items-center">
-              <p className="text-base text-white hover:text-white/80">
+              <p className="text-base text-white font-[Aeonik-Bold] hover:text-white/80">
                 {user?.name}
               </p>
               {user2 && (
@@ -72,7 +72,7 @@ function UserPfpIcon({ pfp }: { pfp?: string }) {
       <img
         src={pfp}
         alt="profile"
-        className="size-10 rounded-[50%] overflow-hidden object-cover "
+        className="size-12 rounded-[50%] overflow-hidden object-cover "
       />
     );
   } else {

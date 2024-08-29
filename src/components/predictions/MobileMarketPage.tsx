@@ -42,13 +42,15 @@ export function MobileMarketPage({ market, users, id }) {
     hardMarkets,
     hardTopics
   );
-
+  console.log("iid", market?.id, id);
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <MobileDrawerContainer>
         <MobileMarketContent
           setIsDrawerOpen={() => {}}
           users={users}
+          id={market?.id}
+          marketId={id}
           market={enhancedMarket}
           userImages={userImages}
           openLoginModal={openLoginModal}
@@ -79,7 +81,9 @@ function MobileMarketContent({
   topicBio,
   handleOpen,
   topic,
+  marketId,
 }) {
+  console.log("market", id, marketId, market);
   return (
     <motion.div
       onClick={() => setIsDrawerOpen(false)}
@@ -111,9 +115,9 @@ function MobileMarketContent({
             />
           </MobileShareBetModal>
         </div>
-        <motion.div className="w-screen h-[42vh] relative">
+        <motion.div className="w-screen h-[44vh] -mt-5 relative">
           <img
-            className="w-screen object-cover h-[42vh] relative"
+            className="w-screen object-cover h-[44vh] relative"
             alt="CoverImage"
             src={image}
           />
@@ -206,18 +210,18 @@ function MobileMarketContent({
         <PredictModal
           handleOpen={handleOpen}
           image={image}
-          multiplier={optionB.odds / 100}
+          multiplier={market?.outcomeOddsB / 100}
           option={0}
-          text={optionB?.name}
+          text={market?.outcomeB}
           question={description}
-          odds={market?.outcomea / 100}
+          odds={market?.outcomeOddsA / 100}
           marketId={id}
-          options={[optionB.name, optionA.name]}
+          options={[market?.outcomeB, market?.outcomeA]}
         >
           <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
             <OutcomeButton
-              text={optionB?.name}
-              multiplier={optionB.odds / 100}
+              text={market?.outcomeB}
+              multiplier={market?.outcomeOddsB / 100}
               option={0}
             />
           </div>
@@ -225,18 +229,18 @@ function MobileMarketContent({
         <PredictModal
           handleOpen={handleOpen}
           image={image}
-          multiplier={optionA.odds / 100}
+          multiplier={market?.outcomeOddsA / 100}
           option={1}
-          text={optionA?.name}
+          text={market?.outcomeA}
           question={description}
-          odds={market?.outcomea / 100}
+          odds={market?.outcomeOddsA / 100}
           marketId={id}
-          options={[optionB.name, optionA.name]}
+          options={[market?.outcomeB, market?.outcomeA]}
         >
           <div className="mt-4 hover:scale-101 active:scale-95 transition-all ">
             <OutcomeButton
-              text={optionA?.name}
-              multiplier={optionA.odds / 100}
+              text={market?.outcomeA}
+              multiplier={market?.outcomeOddsA / 100}
               option={1}
             />
           </div>
@@ -263,7 +267,7 @@ function MobileMarketContent({
           topicId={topicId}
           users={users}
           totalComments={market?.total_comments}
-          marketId={id}
+          marketId={market?.id}
         />
       </div>
       <div className="-mt-20">
