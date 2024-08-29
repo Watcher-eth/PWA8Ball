@@ -2,16 +2,13 @@
 
 import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import {
-  getUserFromDB,
-  createUserInDB,
-  createUserFromEOAInDB,
-} from "@/supabase/userApi";
 import { useAccount } from "wagmi";
 import { v5 as uuidv5 } from "uuid";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { useSmartAccount } from "@/lib/onchain/SmartAccount";
+
 import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
+import { getUserById } from "@/graphql/queries/users/useUserById";
 
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 
@@ -29,7 +26,7 @@ export function useInitializeUser() {
   async function fetchUser() {
     if (ready && authenticated && privyUser && !eoaAddress) {
       // Handle Privy smart wallet user
-      const dbUser = await getUserFromDB(smartAccountAddress);
+      const dbUser = await getUserById(smartAccountAddress);
       if (dbUser) {
         console.log({ dbUser });
         setUser({
@@ -58,7 +55,7 @@ export function useInitializeUser() {
     } else if (isConnected && eoaAddress) {
       // Handle EOA user
       const eoaUUID = uuidv5(eoaAddress, NAMESPACE);
-      const dbUser = await getUserFromDB(eoaAddress);
+      const dbUser = await getUserById(eoaAddress);
 
       if (dbUser) {
         setUser({

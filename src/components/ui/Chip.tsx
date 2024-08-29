@@ -9,7 +9,9 @@ export function Chip({
     <div
       className={`
         bg-slate-400/10
-        rounded-full ring-1 ring-white/10 px-3 py-1 backdrop-blur-xl ${className}`}
+        rounded-full ring-1 ring-white/10 px-3 py-1 backdrop-blur-xl ${className}
+        items-center
+      `}
     >
       {children}
     </div>

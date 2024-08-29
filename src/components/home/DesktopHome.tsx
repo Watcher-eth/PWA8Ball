@@ -31,9 +31,11 @@ import { Line } from "recharts";
 import { GenericAreaChart } from "../charts/GenericAreaChart";
 import { GenericLineChart } from "../charts/GenericLineChart";
 import { TopicHeader } from "./TopicHeader";
+import { Market } from "@/__generated__/graphql";
+import { Chip } from "../ui/Chip";
 
-export function DesktopHome() {
-  const { markets } = useGetAllMarkets();
+export function DesktopHome({ markets }: { markets: Market[]}) {
+  // const { markets } = useGetAllMarkets();
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
@@ -124,7 +126,6 @@ function DesktopHomeNews({ markets, amount }) {
               : [1, 2, 3, 4, 5, 6].map((index) => (
                   <div
                     style={{
-                      marginVertical: index === 0 ? 20 : 8,
                       alignSelf: "center",
                       marginTop: index === 0 ? 25 : 8,
                     }}
@@ -532,7 +533,7 @@ function TopMarket() {
 
   return (
     <div className="w-full flex  flex-row pl-5 mt-7 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
-      <div className="flex flex-col w-[30%] pr-3 pr-5 z-1 pt-2">
+      <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
           className="h-[6rem] w-[6rem] object-cover mt-0 rounded-md"
           src={enhancedMarkets?.image}
@@ -543,10 +544,26 @@ function TopMarket() {
         <div className="text-[lightgray] mt-2 text-lg font-[400]">
           {enhancedMarkets?.question}
         </div>
-        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[500]">
-          <Users size="16" strokeWidth={2.7} color="gray" />
-          <div>354+ Predictors</div>
+        <div className="flex pt-2 space-x-2">
+          <Chip className="flex-shrink space-x-2 pt-0.5">
+            <Users
+              size="16"
+              strokeWidth={2.7}
+              color="gray"
+              className="inline -mt-0.5"
+            />
+            <div className="inline-block text-sm">354+ Predictors</div>
+          </Chip>
+          <Chip className="flex-shrink space-x-2 pt-1 text-sm">
+            $
+            <span className="font-semibold">
+              {(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)}
+            </span>
+            <div className="inline-block text-sm text-white/60">at Stake</div>
+          </Chip>
         </div>
+
+        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[500]"></div>
       </div>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
         <div className="text-[gray] text-md font-[400]">
@@ -575,8 +592,7 @@ function TopMarket() {
           />
         </div>
         <div className="flex flex-row justify-between -mb-3 items-center">
-          <div className="text-md text-[gray]">
-            ${(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)} at Stake
+          <div>
           </div>
           <div className="flex flex-row  space-x-3  items-center ">
             <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">

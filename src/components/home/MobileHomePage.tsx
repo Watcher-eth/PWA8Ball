@@ -23,10 +23,11 @@ import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
+import { Market } from "@/__generated__/graphql";
 
-export function MobileHomePage({ trendingMarkets }) {
+export function MobileHomePage({ markets }: { markets: Market[] }) {
   const { user } = useUserStore();
-  const { markets } = useGetAllMarkets();
+  // const { markets } = useGetAllMarkets();
 
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(

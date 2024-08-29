@@ -1,6 +1,6 @@
 // utils/userApi.ts
 import { User } from "@/__generated__/graphql";
-import { GET_USER_BY_ID } from "@/graphql/queries/users/useGetUserById";
+import { GET_USER_BY_ID } from "@/graphql/queries/users/useUserById";
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider";
 import { supabase } from "@/supabase/supabaseClient"; // Import your Supabase client
 import { IUser } from "@/supabase/types";
@@ -8,14 +8,7 @@ import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { checksumAddress } from "viem";
 
-export async function getUserFromDB(userId: string) {
-  const { data } = await APOLLO_CLIENT.query({
-    query: GET_USER_BY_ID,
-    variables: { id: getChecksummedAddress(userId) },
-  });
-  console.log("ppUser", data, userId, getChecksummedAddress(userId));
-  return data?.user as User;
-}
+
 
 export async function createUserInDB(userId: string) {
   const { data, error } = await supabase

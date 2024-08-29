@@ -77,17 +77,8 @@ export function DesktopMarketPage({ users, market, id }) {
             <Col xs={4} lg={5}>
               <div className="flex flex-col mt-[2.5rem] z-10">
                 <div
-                  style={{
-                    fontFamily: "Benzin-Bold",
-                    lineHeight: "2rem",
-                    fontSize:
-                      enhancedMarket?.title?.length < 14
-                        ? 35
-                        : enhancedMarket?.title?.length < 21
-                        ? 32
-                        : 26,
-                  }}
-                  className="pr-10 text-start mb-[-0.7rem] pl-5 pb-0 p-3 text-white font-bold"
+                  className="font-[Aeonik]"
+                  className="text-4xl pr-10 text-start pl-5 pb-0 p-3 text-white font-bold"
                 >
                   {enhancedMarket?.title}
                 </div>
