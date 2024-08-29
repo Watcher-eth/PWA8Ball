@@ -41,10 +41,12 @@ export default function ProfilePage({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string };
-  const [totalFollowers, userC] = await Promise.all([
-    getUserById(id),
-    fetchUserByExternalAuthId(id),
-  ]);
+  // const [totalFollowers, userC] = await Promise.all([
+  //   getUserById(id),
+  //   fetchUserByExternalAuthId(id),
+  // ]);
+  const totalFollowers = 0 // this should be temp
+  const userC = await getUserById(id);
 
   return {
     props: {

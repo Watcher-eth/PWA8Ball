@@ -1,48 +1,17 @@
 // @ts-nocheck
-import { useMemo, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { useState } from "react";
 import Link from "next/link";
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
-import {
-  DropdownMenu,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
-import { DesktopLpModal } from "@/components/lp/LpModal/DesktopLpModal";
 
-import { DesktopMyBetModal } from "@/components/common/Charts/MyBetModal";
 
 import {
-  Banknote,
-  BarChart,
-  BellDot,
-  ClipboardList,
   Copy,
-  Filter,
-  Pen,
-  Pencil,
-  PenLine,
-  PiggyBank,
-  Share,
-  SlidersHorizontal,
-  Stars,
-  TrendingUp,
-  UserPlus,
   Wallet,
 } from "lucide-react";
 
-import { Card } from "@/components/ui/tailwind/Card";
-import { ChartConfig } from "@/components/ui/chart";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
-import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
-import { GenericPolarChart } from "@/components/charts/GenericPolarChart";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
