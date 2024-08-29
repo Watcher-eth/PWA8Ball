@@ -7,7 +7,7 @@ import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import { motion } from "framer-motion";
-import { AltSkeleton, Skeleton } from "../ui/Skeleton";
+import { Skeleton } from "../ui/Skeleton";
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import Link from "next/link";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
@@ -22,12 +22,9 @@ import { SocialOnboardButton } from "../onboarding/DesktopOnboardingModal";
 import { AppleIcon, GoogleIcon, XIcon } from "../onboarding/AuthIcons";
 import { LineChart, Stars, Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
-import { chartConfig } from "../common/Charts/DesktopChart";
-import { Line } from "recharts";
-import { GenericAreaChart } from "../charts/GenericAreaChart";
+
 import { GenericLineChart } from "../charts/GenericLineChart";
 import { TopicHeader } from "./TopicHeader";
 import { Market } from "@/__generated__/graphql";
@@ -125,10 +122,7 @@ function DesktopHomeNews({ markets, amount }) {
                 })
               : [1, 2, 3, 4, 5, 6].map((index) => (
                   <div
-                    style={{
-                      alignSelf: "center",
-                      marginTop: index === 0 ? 25 : 8,
-                    }}
+                    className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
                     key={index}
                   >
                     <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
@@ -202,10 +196,7 @@ function ElectionFooter({ markets }) {
               })
             : [1, 2, 3, 4, 5, 6].map((index) => (
                 <div
-                  style={{
-                    alignSelf: "center",
-                    marginTop: index === 0 ? 25 : 8,
-                  }}
+                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
                   key={index}
                 >
                   <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
@@ -272,19 +263,24 @@ function TrendingCommunities() {
     );
 }
 
-function TrendingCommunityItem(props: {
-  image: string;
-  title: string;
-  description: string;
-  id: string;
+function TrendingCommunityItem({
+  id,
+  title,
+  description,
+  image,
+}: {
+  id: string
+  title: string
+  description: string
+  image: string
 }) {
   return (
     <Link
-      href={getTopicPath(props.id)}
+      href={getTopicPath(id)}
       className="relative w-full hover:scale-[100.3%] active:scale-99 h-[29vw] rounded-md bg-black bg-opacity-75"
     >
       <img
-        src={props?.image}
+        src={image}
         alt="Gallery Background"
         className="absolute inset-0 w-full rounded-md  h-[29vw] object-cover"
       />
@@ -292,12 +288,12 @@ function TrendingCommunityItem(props: {
 
       <div className="relative z-10 flex flex-col mt-14  items-center justify-center h-full text-white">
         <img
-          src={props?.image}
+          src={image}
           alt="Topic image"
           className="inset-0 object-cover w-20 h-20 rounded-lg"
         />
 
-        <h2 className="text-4xl font-bold mb-6 mt-4">{props?.title}</h2>
+        <h2 className="text-4xl font-bold mb-6 mt-4">{title}</h2>
 
         <div className="flex justify-center space-x-6 mt-12">
           <div className="text-center flex flex-col items-center -space-y-0">
