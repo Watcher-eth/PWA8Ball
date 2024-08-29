@@ -32,7 +32,7 @@ import { GenericLineChart } from "../charts/GenericLineChart";
 import { TopicHeader } from "./TopicHeader";
 import { Market } from "@/__generated__/graphql";
 import { Chip } from "@/components/ui/Chip";
-import { getMarketPath } from "@/utils/urls";
+import { getMarketPath, getTopicPath } from "@/utils/urls";
 
 export function DesktopHome({ markets }: { markets: Market[]}) {
   // const { markets } = useGetAllMarkets();
@@ -280,7 +280,7 @@ function TrendingCommunityItem(props: {
 }) {
   return (
     <Link
-      href={`t/${props.id}`}
+      href={getTopicPath(props.id)}
       className="relative w-full hover:scale-[100.3%] active:scale-99 h-[29vw] rounded-md bg-black bg-opacity-75"
     >
       <img
