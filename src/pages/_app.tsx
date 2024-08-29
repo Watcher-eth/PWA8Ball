@@ -21,6 +21,7 @@ import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/layouts/CustomHead";
 import { RootLayout } from "@/components/layouts/RootLayout";
+import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 
 export const queryClient = new QueryClient();
 
@@ -69,15 +70,15 @@ export default function App({ Component, pageProps, router }: AppProps) {
               appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
               config={PRIVY_CONFIG}
             >
-              <AuthChecker>
-                <RainbowKitProvider coolMode>
-                  <GraphQlProvider>
-                    <RootLayout>
+              <RainbowKitProvider coolMode>
+                <GraphQlProvider>
+                  <RootLayout>
+                    <AuthChecker>
                       <Component {...pageProps} />
-                    </RootLayout>
-                  </GraphQlProvider>
-                </RainbowKitProvider>
-              </AuthChecker>
+                    </AuthChecker>
+                  </RootLayout>
+                </GraphQlProvider>
+              </RainbowKitProvider>
             </PrivyProvider>
           </AirstackProvider>
         </QueryClientProvider>

@@ -91,7 +91,7 @@ export function DesktopProfilePopover({
             <DropdownItem
               label="Profile"
               IconComponent={User}
-              href={getProfilePath(user?.externalAuthProviderUserId)}
+              href={getProfilePath(user?.walletAddress)}
             />
 
             <DesktopOnrampModal>

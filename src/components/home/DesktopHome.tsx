@@ -31,7 +31,7 @@ import { Market } from "@/__generated__/graphql";
 import { Chip } from "@/components/ui/Chip";
 import { getMarketPath, getTopicPath } from "@/utils/urls";
 
-export function DesktopHome({ markets }: { markets: Market[]}) {
+export function DesktopHome({ markets }: { markets: Market[] }) {
   // const { markets } = useGetAllMarkets();
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
@@ -252,9 +252,7 @@ function TrendingCommunities() {
                 return <TrendingCommunityItem {...topic} key={index} />;
               })
             : [1, 2].map((index) => (
-                <div
-                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                >
+                <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
                   <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
                 </div>
               ))}
@@ -269,10 +267,10 @@ function TrendingCommunityItem({
   description,
   image,
 }: {
-  id: string
-  title: string
-  description: string
-  image: string
+  id: string;
+  title: string;
+  description: string;
+  image: string;
 }) {
   return (
     <Link
@@ -406,10 +404,10 @@ export function DesktopFooter() {
 
 function FooterColumn({
   title,
-  children
+  children,
 }: {
-  title: string
-  children: React.ReactNode
+  title: string;
+  children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col space-y-2">
@@ -423,15 +421,18 @@ function FooterLink({
   href,
   label,
   children,
-  className=""
+  className = "",
 }: {
   href?: string;
   label?: string;
   children?: React.ReactNode;
-  className?: string
+  className?: string;
 }) {
   return (
-    <Link href={href ?? ""} className={`text-[lightgray] font-normal text-[1rem] ${className}`}>
+    <Link
+      href={href ?? ""}
+      className={`text-[lightgray] font-normal text-[1rem] ${className}`}
+    >
       {label}
       {children}
     </Link>
@@ -518,7 +519,7 @@ function TopMarket() {
   }));
 
   return (
-    <div className="w-full flex  flex-row pl-5 mt-7 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
+    <div className="w-full flex  flex-row pl-5 mt-2 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
       <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
           className="h-[6rem] w-[6rem] object-cover mt-0 rounded-md"
@@ -578,8 +579,7 @@ function TopMarket() {
           />
         </div>
         <div className="flex flex-row justify-between -mb-3 items-center">
-          <div>
-          </div>
+          <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
             <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
               {enhancedMarkets?.outcomeA}

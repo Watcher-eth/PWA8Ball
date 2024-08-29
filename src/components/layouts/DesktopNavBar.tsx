@@ -22,13 +22,13 @@ export function DesktopNavBar() {
     <div className="w-full absolute z-50 top-0">
       <div
         className={`
-            pb-8 pt-3 px-8 text-white z-50 fixed w-full
+  text-white z-50 fixed w-full
         `}
       >
         <div
           className={`
-            flex justify-between items-center w-full p-2 ring-1 rounded-lg
-            ring-white/20 backdrop-blur bg-slate-400/10
+            flex justify-between items-center w-full p-3  px-6
+             backdrop-blur bg-[#080808]/50
           `}
         >
           <Link href={HOME_PATH}>

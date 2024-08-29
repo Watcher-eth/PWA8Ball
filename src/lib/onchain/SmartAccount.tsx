@@ -28,7 +28,10 @@ import { useAccount } from "wagmi";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getWalletClient } from "@wagmi/core";
 import { wagmiConfig } from "@/pages/_app";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS, BASE_SEPOLIA_USDC_ADDRESS } from "@/constants/onchain";
+import {
+  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+  BASE_SEPOLIA_USDC_ADDRESS,
+} from "@/constants/onchain";
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985";
@@ -59,10 +62,6 @@ const SmartAccountContext = React.createContext<SmartAccountInterface>({
   eoaAddress: undefined,
 });
 
-export const useSmartAccount = () => {
-  return useContext(SmartAccountContext);
-};
-
 export const SmartAccountProvider = ({
   children,
 }: {
@@ -72,7 +71,6 @@ export const SmartAccountProvider = ({
   const { address: eoaAddress, isConnected } = useAccount();
   const { user } = useUserStore();
   const { walletType } = user || {};
-  console.log("wallets", wallets);
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   );
@@ -144,6 +142,11 @@ export const SmartAccountProvider = ({
     console.log("Step 2.5", smartAccountClient);
     const account = smartAccountClient.account?.address;
     console.log("Step 3", account);
+
+    setSmartAccountClient(smartAccountClient);
+    setSmartAccountAddress(account);
+    setSmartAccountReady(true);
+
     const allowance = await publicClient.readContract({
       address: BASE_SEPOLIA_USDC_ADDRESS,
       abi: USDC_ABI,
@@ -197,25 +200,27 @@ export const SmartAccountProvider = ({
       createSmartWallet(embeddedWallet);
     } else if (walletType === "eoa" && isConnected && eoaAddress) {
       try {
-        createEOAWallet()
+        createEOAWallet();
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
   }, [
     walletType,
+    smartAccountAddress,
     embeddedWallet?.address,
     embeddedWallet,
     eoaAddress,
     isConnected,
   ]);
 
+  console.log("smartWallet2", smartAccountAddress);
   return (
     <SmartAccountContext.Provider
       value={{
         smartAccountReady,
         smartAccountClient,
-        smartAccountAddress,
+        smartAccountAddress: smartAccountAddress,
         eoaClient,
         eoaAddress,
         eoa,
@@ -224,4 +229,8 @@ export const SmartAccountProvider = ({
       {children}
     </SmartAccountContext.Provider>
   );
+};
+
+export const useSmartAccount = () => {
+  return useContext(SmartAccountContext);
 };

@@ -19,14 +19,24 @@ const DEFAULT_PFP =
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy();
   const { user, setUser, setWalletType } = useUserStore();
-  const { smartAccountAddress } = useSmartAccount();
+  const { smartAccountAddress, smartAccountClient } = useSmartAccount();
   const { address: eoaAddress, isConnected } = useAccount();
   const { upsertUser } = useUpsertUser();
+
+  console.log("addyy", smartAccountAddress, smartAccountClient);
 
   async function fetchUser() {
     if (ready && authenticated && privyUser && !eoaAddress) {
       // Handle Privy smart wallet user
+
       const dbUser = await getUserById(smartAccountAddress);
+      console.log("privyUser", privyUser, dbUser, smartAccountAddress);
+
+      if (privyUser) {
+        setUser({
+          walletType: "smartwallet",
+        });
+      }
       if (dbUser) {
         console.log({ dbUser });
         setUser({
