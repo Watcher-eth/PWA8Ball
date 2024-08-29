@@ -227,7 +227,7 @@ export function SettingsPage() {
             <div className="text-white text-[1.35rem] font-[600]">
               Your Glimpse Wallet
             </div>
-            <div className="text-[lightgray] text-[1rem] font-[400]">
+            <div className="text-[lightgray] text-[1rem] font-normal">
               You have complete control of your wallet and can use it in other
               apps.
             </div>

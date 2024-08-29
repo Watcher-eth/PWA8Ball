@@ -41,7 +41,7 @@ function DesktopLeaderboardModal({ children }) {
         backdrop-blur-xl
         border-2 border-[#191919]
         h-[80%]
-       
+
       `}
         >
           <div className="flex flex-col p-8">
@@ -50,7 +50,7 @@ function DesktopLeaderboardModal({ children }) {
                 <div className="text-white text-2xl font-[600]">
                   Global Leaderboard
                 </div>
-                <div className="text-[lightgray] text-md font-[400]">
+                <div className="text-[lightgray] text-md font-normal">
                   All users last 24 hours
                 </div>
               </div>

@@ -41,7 +41,7 @@ export function ProfileToolTip(props: {
               : props.user?.walletaddress}{" "}
             0x273rfi...rtf
           </div>
-          <div className="text-[0.85rem] text-[lightgray] -mb-4 font-[400]">
+          <div className="text-[0.85rem] text-[lightgray] -mb-4 font-normal">
             Not followed by anyone you follow
           </div>
           <div className="w-full h-[0.1rem] bg-[#222222] my-8" />

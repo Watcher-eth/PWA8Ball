@@ -19,7 +19,6 @@ import {
   withBlurOverlay,
 } from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
-import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
@@ -69,11 +68,7 @@ export function MobileHomePage({ markets }: { markets: Market[] }) {
               })
             : [1, 2, 3, 4, 5, 6].map((index, item) => (
                 <div
-                  style={{
-                    marginVertical: index === 0 ? 20 : 20,
-                    alignSelf: "center",
-                    marginTop: index === 0 ? 25 : 20,
-                  }}
+                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
                 >
                   <Skeleton className="w-[90vw] h-[65vh] rounded-[1.5rem]" />
                 </div>

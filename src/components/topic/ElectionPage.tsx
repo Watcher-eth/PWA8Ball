@@ -81,7 +81,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
       <img className="w-[7rem] rounded-md" src={state.flag} />
       <div className="flex flex-col ml-3 -space-y-1.5">
         <div className="text-[2rem] text-white font-[600]">{state.name}</div>
-        <div className="text-xl text-[lightgray] font-[400]">
+        <div className="text-xl text-[lightgray] font-normal">
           {state.votes} Electoral votes at stake
         </div>
       </div>
@@ -250,7 +250,7 @@ export function ElectionPage() {
                 <div className="text-[1.35rem] text-white font-[600]">
                   {item.title}
                 </div>
-                <div className="text-[1.1rem] text-[lightgray] font-[400]">
+                <div className="text-[1.1rem] text-[lightgray] font-normal">
                   {item.question}
                 </div>
               </div>

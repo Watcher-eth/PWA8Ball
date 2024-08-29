@@ -119,7 +119,7 @@ function DesktopTopic({
               <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
                 {name}
               </div>
-              <div className="text-[1.2rem] text-[white]/[0.9] font-[400]">
+              <div className="text-[1.2rem] text-[white]/[0.9] font-normal">
                 {description}
               </div>
             </div>

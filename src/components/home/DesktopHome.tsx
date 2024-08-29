@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
 import {
   enhanceMarketsWithImageAndPolyId,
   enhanceSingleMarketWithImageAndPolyId,
@@ -32,7 +31,8 @@ import { GenericAreaChart } from "../charts/GenericAreaChart";
 import { GenericLineChart } from "../charts/GenericLineChart";
 import { TopicHeader } from "./TopicHeader";
 import { Market } from "@/__generated__/graphql";
-import { Chip } from "../ui/Chip";
+import { Chip } from "@/components/ui/Chip";
+import { getMarketPath } from "@/utils/urls";
 
 export function DesktopHome({ markets }: { markets: Market[]}) {
   // const { markets } = useGetAllMarkets();
@@ -176,13 +176,13 @@ function ElectionFooter({ markets }) {
 
   return (
     <div className="px-4 mt-[6.5rem] flex flex-col w-full">
-      <div className="px-4 flex flex-col w-full px-14">
+      <div className="flex flex-col w-full px-14">
         <div className="flex items-center justify-between">
           <div className="flex flex-col space-y-0 mb-3">
             <div className="text-[1.9rem] text-white font-[Aeonik-Bold] space-x-2">
               🇺🇸 2024 US Elections
             </div>
-            <div className="text-[1.05rem] text-[lightgray] font-[400] flex flex-col space-x-2">
+            <div className="text-[1.05rem] text-[lightgray] font-normal flex flex-col space-x-2">
               Get the latest forecasts about the 2024 US Federal Elections
             </div>
           </div>{" "}
@@ -203,7 +203,6 @@ function ElectionFooter({ markets }) {
             : [1, 2, 3, 4, 5, 6].map((index) => (
                 <div
                   style={{
-                    marginVertical: index === 0 ? 20 : 8,
                     alignSelf: "center",
                     marginTop: index === 0 ? 25 : 8,
                   }}
@@ -230,11 +229,7 @@ function ElectionFooter({ markets }) {
               })
             : [1, 2, 3, 4, 5, 6].map((index) => (
                 <div
-                  style={{
-                    marginVertical: index === 0 ? 20 : 8,
-                    alignSelf: "center",
-                    marginTop: index === 0 ? 25 : 8,
-                  }}
+                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
                   key={index}
                 >
                   <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
@@ -267,11 +262,7 @@ function TrendingCommunities() {
               })
             : [1, 2].map((index) => (
                 <div
-                  style={{
-                    marginVertical: index === 0 ? 20 : 8,
-                    alignSelf: "center",
-                    marginTop: index === 0 ? 25 : 8,
-                  }}
+                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
                 >
                   <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
                 </div>
@@ -368,7 +359,7 @@ function TrendingCommunityItem(props: {
 
 export function DesktopFooter() {
   return (
-    <div className="flex flex-col w-full mt-10 -mb-[8rem]">
+    <div className="flex flex-col w-full mt-10 -mb-32">
       <div className="flex flex-col py-10 px-10 space-y-8 bg-[#121212]">
         <div className="flex flex-row w-full justify-between ">
           <div className="flex flex-col w-1/2">
@@ -379,66 +370,31 @@ export function DesktopFooter() {
                 Glimpse
               </div>
             </div>
-            <div className="text-[lightgray] font-[400] mt-3 text-[1rem]">
+            <div className="text-[lightgray] font-normal mt-3 text-[1rem]">
               To see a World in a Grain of Sand, a Heaven in a Wild Flower
             </div>
-            <div className="text-[lightgray] font-[400] text-[1rem]">
+            <div className="text-[lightgray] font-normal text-[1rem]">
               Hold Infinity in the palm of your hand And Eternity in an hour
             </div>
           </div>
           <div className="flex flex-row w-1/2 space-x-12 justify-end mt-1">
-            <div className="flex flex-col space-y-2">
-              <div className="text-white font-[600] text-[1.05rem]">
-                Developers
-              </div>
-              <Link
-                href={""}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Graph
-              </Link>
-              <Link
-                href={""}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Protocol
-              </Link>
-              <Link
-                href={""}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Build on Glimpse
-              </Link>
-            </div>
-            <div className="flex flex-col space-y-2 ">
-              <div className="text-white font-[600] text-[1.05rem]">
-                Resources
-              </div>
-              <Link
-                href={"/privacy"}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Privacy
-              </Link>
-              <Link
-                href={"/tos"}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Terms of Use
-              </Link>
-              <Link
+            <FooterColumn title="Developers">
+              <FooterLink href={""} label="Graph" />
+              <FooterLink href={""} label="Protocol" />
+              <FooterLink href={""} label="Build on Glimpse" />
+            </FooterColumn>
+            <FooterColumn title="Resources">
+              <FooterLink href={"/privacy"} label="Privacy" />
+              <FooterLink href={"/tos"} label="Terms of Use" />
+              <FooterLink
                 href={"https://testflight.apple.com/join/xBbJ2OPO"}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Download
-              </Link>
-              <Link
+                label="Download"
+              />
+              <FooterLink
                 href={"https://t.me/GlimpseSupport"}
-                className="text-[lightgray] font-[400] text-[1rem]"
-              >
-                Contact
-              </Link>
-            </div>
+                label="Contact"
+              />
+            </FooterColumn>
           </div>
         </div>
         <div className="flex flex-row space-x-3">
@@ -452,6 +408,40 @@ export function DesktopFooter() {
   );
 }
 
+function FooterColumn({
+  title,
+  children
+}: {
+  title: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="text-white font-[600] text-[1.05rem]">{title}</div>
+      {children}
+    </div>
+  );
+}
+
+function FooterLink({
+  href,
+  label,
+  children,
+  className=""
+}: {
+  href?: string;
+  label?: string;
+  children?: React.ReactNode;
+  className?: string
+}) {
+  return (
+    <Link href={href ?? ""} className={`text-[lightgray] font-normal text-[1rem] ${className}`}>
+      {label}
+      {children}
+    </Link>
+  );
+}
+
 export function MarketCard({
   item,
   isTwoCards,
@@ -461,7 +451,7 @@ export function MarketCard({
 }) {
   return (
     <Link
-      href={`/p/${item?.marketId}`}
+      href={getMarketPath(item?.marketId)}
       className={`flex flex-col w-full relative hover:scale-[100.4%] active:scale-99 `}
     >
       <img
@@ -486,7 +476,7 @@ export function MarketCard({
           <div className="text-white text-[1.6rem] font-[600]">
             {item?.title}
           </div>
-          <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-[400]">
+          <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-normal">
             {item?.question}
           </div>
         </div>
@@ -497,7 +487,7 @@ export function MarketCard({
           </div>
         )}
       </div>
-      <div className="text-[gray] mt-2 text-[0.9rem] font-[400]">
+      <div className="text-[gray] mt-2 text-[0.9rem] font-normal">
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
@@ -541,7 +531,7 @@ function TopMarket() {
         <div className="text-white text-3xl mt-6 font-[600]">
           {enhancedMarkets?.title}
         </div>
-        <div className="text-[lightgray] mt-2 text-lg font-[400]">
+        <div className="text-[lightgray] mt-2 text-lg font-normal">
           {enhancedMarkets?.question}
         </div>
         <div className="flex pt-2 space-x-2">
@@ -566,7 +556,7 @@ function TopMarket() {
         <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[500]"></div>
       </div>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
-        <div className="text-[gray] text-md font-[400]">
+        <div className="text-[gray] text-md font-normal">
           {enhancedMarkets?.title}
         </div>
         <div className="flex flex-row justify-between items-center">
