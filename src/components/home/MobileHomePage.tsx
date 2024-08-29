@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
 
-import { useUserStore } from "@/lib/stores/UserStore";
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import {
   AltSkeleton,
@@ -25,9 +24,6 @@ import { hardTopics } from "@/constants/topics";
 import { Market } from "@/__generated__/graphql";
 
 export function MobileHomePage({ markets }: { markets: Market[] }) {
-  const { user } = useUserStore();
-  // const { markets } = useGetAllMarkets();
-
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     markets,

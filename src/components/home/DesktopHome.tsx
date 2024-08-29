@@ -32,7 +32,6 @@ import { Chip } from "@/components/ui/Chip";
 import { getMarketPath, getTopicPath } from "@/utils/urls";
 
 export function DesktopHome({ markets }: { markets: Market[] }) {
-  // const { markets } = useGetAllMarkets();
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
