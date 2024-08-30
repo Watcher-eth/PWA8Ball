@@ -46,11 +46,11 @@ export function NotificationsPlaceholder({ isUser }) {
       ))}
 
       <div className="flex flex-col items-center mt-5 self-center">
-        <div className="text-white text-xl font-bold mb-2">
+        <div className="text-white text-2xl font-bold mb-2">
           No notifications yet
         </div>
         <div className="text-[lightgray] text-sm text-center px-5">
-          Start joining topics and make predictions to receive notifications{" "}
+          Start joining topics and follow other predictors to get notifications{" "}
         </div>
       </div>
       <Link href={HOME_PATH}>
@@ -209,7 +209,7 @@ export const NotificationSkelleton = ({ index }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="flex mx-6 items-center self-center w-[27vw] max-w-[28vw] justify-between p-2 rounded-lg bg-[#080808]/[0.9] my-2"
+    className="flex mx-6 items-center self-center w-full px-4 justify-between p-2 rounded-lg bg-[#080808]/[0.9] mb-2 "
   >
     <div className="flex items-center gap-2">
       <motion.div

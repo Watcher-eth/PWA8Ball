@@ -498,7 +498,7 @@ function TopMarket() {
     hardTopics
   );
 
-  const { data: prices2 } = useGetPricesForMarket("1");
+  const { data: prices2 } = useGetPricesForMarket("1", "1M");
 
   const userOutcome = 0;
   const { currentPrices, percentageDifference } = processPrices(
@@ -521,7 +521,7 @@ function TopMarket() {
     <div className="w-full flex  flex-row pl-5 mt-2 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
       <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
-          className="h-[6rem] w-[6rem] object-cover mt-0 rounded-md"
+          className="h-[6rem] w-[6rem] object-cover -mb-2 rounded-md"
           src={enhancedMarkets?.image}
         />
         <div className="text-white text-3xl mt-6 font-semibold">
@@ -538,14 +538,16 @@ function TopMarket() {
               color="gray"
               className="inline -mt-0.5"
             />
-            <div className="inline-block text-sm">354+ Predictors</div>
+            <div className="inline-block text-[lightgray] text-sm">
+              354+ Predictors
+            </div>
           </Chip>
-          <Chip className="flex-shrink space-x-2 pt-1 text-sm">
+          <Chip className="flex-shrink space-x-1 text-[lightgray] pt-1 text-sm">
             $
-            <span className="font-semibold">
+            <span className="font-semibold text-[lightgray]">
               {(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)}
             </span>
-            <div className="inline-block text-sm text-white/60">at Stake</div>
+            <div className="inline-block  text-sm text-white/60">at Stake</div>
           </Chip>
         </div>
 

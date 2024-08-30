@@ -30,7 +30,7 @@ export function DesktopNotificationModal({
       cardContentClassName="px-0  min-h-[50vh] "
       dialogClassName=""
       content={
-        <div className="overflow-y-auto">
+        <div className="overflow-y-auto w-full">
           {notifications?.length > 0 ? (
             notifications?.map((item, index) => (
               <NotificationCard
