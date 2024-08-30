@@ -15,9 +15,8 @@ import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPosit
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
-  console.log("user", user);
-  const walletAddress = walletAddy || user?.walletaddress;
-  const userId = id || user?.external_auth_provider_user_id;
+  const walletAddress = walletAddy || user?.walletAddress;
+  const userId = id || user?.externalAuthProviderUserId;
 
   const {
     data: ordersData,
@@ -36,10 +35,11 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
       refetchCreated();
     }
   }, [onParentRefresh, refetchOrders, refetchCreated]);
+  console.log("user55", ordersData, createdMarketsData);
 
   if (isOrdersLoading || isCreatedMarketsLoading) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col px-4 items-center">
         <UserPredictionSkeleton index={0} />
         <UserPredictionSkeleton index={1} />
       </div>

@@ -26,11 +26,11 @@ export function LiquidityPosition({
         />
 
         <div className="flex flex-row justify-between items-center mb-[25px] relative z-2">
-          <div className="flex flex-col">
+          <div className="flex flex-col items-start">
             <span className="text-[18.5px] text-[rgba(250,250,250,0.9)] font-['Aeonik-Bold']">
               {title}
             </span>
-            <span className="text-[14.5px] text-white font-['Aeonik-Regular'] mt-0">
+            <span className="text-[14.5px] text-white font-[Aeonik] mt-0">
               +{(amount / 11).toFixed(2)}$ Fees earned
             </span>
           </div>

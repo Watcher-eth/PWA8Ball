@@ -84,7 +84,7 @@ function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
         mt-2 mb-2.5 p-2 !px-3
         rounded-lg overflow-hidden items-center
         hover:scale-105 active:scale-95 transition-all
-        ${isDark ? "bg-[#1B1B1E]" : "bg-white"}
+        ${isDark ? "bg-[#181818]" : "bg-white"}
       `}
     >
       {IconComponent && (

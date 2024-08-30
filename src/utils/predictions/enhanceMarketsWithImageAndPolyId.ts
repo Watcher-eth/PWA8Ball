@@ -115,7 +115,7 @@ export function enhanceSingleMarketWithImageAndPolyId(
 }
 
 export function enhancePositionsWithImages(filteredPositions, hardMarkets) {
-  return filteredPositions.map((position) => {
+  return filteredPositions?.map((position) => {
     const matchingMarket = hardMarkets.find(
       (market) => market.id === parseInt(position.marketId, 10)
     );

@@ -10,18 +10,18 @@ import { AltSkeleton } from "@/components/ui/Skeleton";
 
 export function NewPlaceholder({ isUser }) {
   return (
-    <div className="flex flex-col items-center w-[94%] p-2 mt-2 mx-auto">
+    <div className="flex flex-col items-center w-full px-5  mx-auto">
       {[...Array(3)].map((_, index) => (
         <UserPredictionSkeleton index={index} />
       ))}
       <div
-        className="w-full -mt-[230px] h-[225px]"
+        className="w-full -mt-[105px]  h-[105px]"
         style={{
           background:
-            "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.5) 50%, rgba(10, 10, 10, 0.7) 70%, #101010 100%)",
+            "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.3) 50%,  #101010 100%)",
         }}
       />
-      <div className="flex flex-col items-center mt-10">
+      <div className="flex flex-col items-center mt-3">
         <div className="text-white text-lg font-bold mb-2">
           There's nothing here, yet
         </div>
@@ -30,7 +30,7 @@ export function NewPlaceholder({ isUser }) {
         </div>
       </div>
       <Link href={HOME_PATH} className="w-[85%]">
-        <button className="w-full mt-5 py-3 rounded-full bg-[#212121] text-white font-bold text-lg transition-all active:scale-95">
+        <button className="w-full mt-5 py-2 border-[0.1rem] border-[#202020] rounded-full bg-[#181818] text-white font-bold text-lg transition-all active:scale-95">
           {isUser ? "Make your first Prediction" : "Come back later"}
         </button>
       </Link>

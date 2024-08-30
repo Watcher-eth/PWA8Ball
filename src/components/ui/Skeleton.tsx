@@ -22,7 +22,7 @@ export function AltSkeleton({
 }) {
   return (
     <motion.div
-      className={`bg-[#252525] animate-pulse rounded-xl ${className}`}
+      className={`bg-[#272727] animate-pulse rounded-xl ${className}`}
       variants={skeletonVariants}
       initial="initial"
       animate="pulse"

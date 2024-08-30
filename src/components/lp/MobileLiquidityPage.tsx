@@ -14,7 +14,7 @@ export function MobileLiquidityPage() {
     data: positions,
     isLoading,
     refetch,
-  } = useGetLPForUser(user?.walletaddress);
+  } = useGetLPForUser(user?.walletAddress);
 
   const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
 

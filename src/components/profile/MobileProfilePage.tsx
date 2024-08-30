@@ -20,17 +20,17 @@ export function MobileProfilePage({
   userC: User;
 }) {
   const balance = useUsdcBalance({
-    address: userC?.walletaddress,
+    address: userC?.walletAddress,
   });
-
+  console.log("user34", userC, userId);
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
-      <div className="flex flex-col items-center min-h-screen bg-[#101010] relative">
+      <div className="flex flex-col items-center  bg-[#101010] relative">
         <div className="w-full relative">
           <img
             src={userC?.pfp}
             alt="Profile Header"
-            className="w-full h-[250px] object-cover"
+            className="w-full h-[250px]  object-cover"
           />
           <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-transparent via-[#101010]/80 to-[#101010]" />
           <div className="absolute top-0 left-0 right-0 h-[250px] backdrop-blur-lg bg-opacity-50" />
@@ -40,30 +40,30 @@ export function MobileProfilePage({
           <Link href="/lp">
             <AbsoluteBlurIcon
               IconComponent={PieChart}
-              className="top-6 left-6"
+              className="top-4 left-6"
             />
           </Link>
           <AbsoluteBlurIcon
             IconComponent={CircleEllipsis}
-            className="top-5 right-6"
+            className="top-4 right-6"
           />
           <img
             src={userC?.pfp}
-            className="size-[5rem] rounded-full border-4 border-[#202020] "
+            className="size-[5rem] -mt-2.5 rounded-full border-4 border-[#202020] "
             alt="Profile"
           />
-          <div className="text-white text-sm absolute top-[4rem] p-1 bg-[#202020] rounded-full font-bold mt-3">
+          <div className="text-white text-sm absolute top-[3rem] p-1 bg-[#202020] rounded-full font-bold mt-3">
             0%
           </div>
-          <p className="text-white text-xl font-bold mt-6">{userC?.name}</p>
+          <p className="text-white text-xl font-bold mt-5">{userC?.name}</p>
 
           <div className="flex flex-col items-center mt-0">
             <SocialsSection {...userC?.socials} />
             <div className="flex items-center mt-2 font-medium">
-              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl">
+              <p className="text-gray-100 text-sm bg-[#181818] py-2 px-4 rounded-2xl">
                 ${(Number(balance) / 10 ** 6).toFixed(2)}
               </p>
-              <p className="text-gray-100 text-sm bg-[#1B1B1E] py-2 px-4 rounded-2xl mx-2 font-medium">
+              <p className="text-gray-100 text-sm bg-[#181818] py-2 px-4 rounded-2xl mx-2 font-medium">
                 {totalFollowers} Followers
               </p>
               <FollowButton profileId={userC?.walletaddress} />
@@ -97,7 +97,7 @@ function AbsoluteBlurIcon({
   return (
     <div
       className={`
-        absolute p-2 bg-[rgba(22, 22, 22, 0.5) backdrop-blur-lg rounded-[25px]
+        absolute p-2 bg-[rgba(18, 18, 18, 0.9) backdrop-blur-xl border-[0.05rem] border-[#202020]/20 rounded-[25px]
         ${className}
       `}
     >
