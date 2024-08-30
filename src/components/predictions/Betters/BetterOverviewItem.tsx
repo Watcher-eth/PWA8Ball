@@ -21,7 +21,7 @@ export function BettersOverviewItem({
   onClose: () => void;
 }) {
   return (
-    <Link href={getProfilePath(external_auth_provider_user_id)}>
+    <Link href={getProfilePath(walletaddress)}>
       <div
         onClick={() => {
           onClose();

@@ -21,7 +21,7 @@ export function CommentHeader({
     <div className="flex flex-row w-full items-center justify-between">
       <Link
         className="cursor-pointer group"
-        href={getProfilePath(user2?.external_auth_provider_user_id)}
+        href={getProfilePath(user2?.walletaddress)} // why is this walletaddress & not walletAddress?  need to find out
         prefetch={true}
       >
         <div className="flex flex-row items-center">

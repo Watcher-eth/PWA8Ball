@@ -77,7 +77,7 @@ export function useCashOutPrediction() {
       setTimeout(() => {
         router.push({
           // @ts-ignore
-          pathname: getProfilePath(userCon?.external_auth_provider_user_id),
+          pathname: getProfilePath(userCon?.walletAddress),
         });
       }, 6500);
     } catch (error) {

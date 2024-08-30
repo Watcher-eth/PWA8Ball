@@ -34,7 +34,7 @@ export function MobileNavBar() {
             <Link href={ACTIVITY_PATH}>
               <MobileNavBtn IconComponent={ActivityIcon} />
             </Link>
-            <Link href={getProfilePath(user.external_auth_provider_user_id)}>
+            <Link href={getProfilePath(user.walletAddress)}>
               <MobileNavBtn iconSrc={user?.pfp} IconComponent={UserCircle}/>
             </Link>
           </>
