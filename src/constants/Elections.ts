@@ -1,4 +1,4 @@
-export const sectionDataMap = {
+export const SECTION_DATA_MAP = {
   Presidency: {
     images: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Kamala_Harris_Vice_Presidential_Portrait.jpg/1200px-Kamala_Harris_Vice_Presidential_Portrait.jpg",
@@ -23,7 +23,7 @@ export const sectionDataMap = {
     names: ["Democrats", "Republicans"],
     odds: [36, 64],
   },
-};
+} as const
 
 export const SwingStates = [
   {

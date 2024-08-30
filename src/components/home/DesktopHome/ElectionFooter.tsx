@@ -7,15 +7,16 @@ import {
   StandardBleedOverlay,
 } from "@/components/layouts/StandardBleedOverlay";
 import Countdown from "@/components/common/CountDown";
-import { ElectionndDate } from "@/components/topic/ElectionPage";
+import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
 
 import { MarketCard } from "./MarketCard";
 import { DesktopFooter } from "./DesktopFooter";
 
 
 
-export function ElectionFooter({ markets }) {
+export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
+    // @ts-ignore
     markets,
     selectedTopic: "🇺🇸 2024 US Elections",
   });
@@ -32,49 +33,13 @@ export function ElectionFooter({ markets }) {
               Get the latest forecasts about the 2024 US Federal Elections
             </div>
           </div>{" "}
-          <Countdown endDate={ElectionndDate} />
+          <Countdown endDate={ELECTION_END_DATE} />
         </div>
-        <motion.div
-          layout
-          transition={{ duration: 0.2 }}
-          className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-7"
-        >
-          {enrichedFeedData
-            ?.slice(0, 3)
-            ?.map((item, index) => (
-              <MarketCard key={index} item={item} isTwoCards={false} />
-            )) ??
-            [1, 2, 3, 4, 5, 6].map((index) => (
-              <div
-                className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                key={index}
-              >
-                <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-              </div>
-            ))}
-        </motion.div>
+        <MarketCardSection feedDataArr={enrichedFeedData?.slice(0, 3)} />
         <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2">
           Latest News
         </div>
-        <motion.div
-          layout
-          transition={{ duration: 0.2 }}
-          className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-40"
-        >
-          {enrichedFeedData
-            ?.slice(4, 6)
-            ?.map((item, index) => (
-              <MarketCard key={index} item={item} isTwoCards={true} />
-            )) ??
-            [1, 2, 3, 4, 5, 6].map((index) => (
-              <div
-                className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                key={index}
-              >
-                <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-              </div>
-            ))}
-        </motion.div>
+        <MarketCardSection feedDataArr={enrichedFeedData?.slice(4, 6)} />
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
             <DesktopFooter />
@@ -88,14 +53,14 @@ export function ElectionFooter({ markets }) {
 
 
 
-function MarketCardSection({ feedDataArr }) {
+function MarketCardSection<T>({ feedDataArr }: { feedDataArr?: T[] }) {
   return (
     <motion.div
       layout
       transition={{ duration: 0.2 }}
       className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-7"
     >
-      {feedDataArr?.map((item, index) => (
+      {feedDataArr?.map((item: T, index: number) => (
         <MarketCard key={index} item={item} isTwoCards={false} />
       )) ??
         [1, 2, 3, 4, 5, 6].map((index) => (

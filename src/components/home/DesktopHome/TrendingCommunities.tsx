@@ -8,7 +8,6 @@ import { getTopicPath } from "@/utils/urls";
 
 
 
-
 export function TrendingCommunities() {
   const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
 
