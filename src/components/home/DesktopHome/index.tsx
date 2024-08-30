@@ -4,6 +4,7 @@ import {
 } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
+import { Market } from "@/__generated__/graphql";
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
@@ -12,14 +13,13 @@ import {
   StandardBleedOverlay,
 } from "@/components/layouts/StandardBleedOverlay";
 import { TopicHeader } from "@/components/home/TopicHeader";
-import { Market } from "@/__generated__/graphql";
 
 import { TrendingCommunities } from "./TrendingCommunities"
-
 import { ElectionFooter } from "./ElectionFooter";
 import { TopMarket } from "./TopMarket";
 import { DesktopHomeNews } from "./DesktopHomeNews";
 import { FeaturedMarketsSection } from "./FeaturedMarketsSection";
+
 
 export function DesktopHome({ markets }: { markets: Market[] }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic

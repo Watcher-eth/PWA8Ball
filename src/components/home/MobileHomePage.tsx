@@ -10,18 +10,20 @@ import {
 
 import { LoginModal } from "@/components/modals/LoginModal";
 
-import { FeedCard } from "./FeedCard";
-import { TopicHeader } from "./TopicHeader";
-import { AppBanner } from "../common/AppBanner";
+
+import { AppBanner } from "@/components/common/AppBanner";
 import {
   BlurOverlayWrapper,
   withBlurOverlay,
-} from "../onboarding/Invites/InviteBlur";
+} from "@/components/onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { hardMarkets } from "@/constants/markets";
 import { hardTopics } from "@/constants/topics";
 import { Market } from "@/__generated__/graphql";
+
+import { FeedCard } from "./FeedCard";
+import { TopicHeader } from "./TopicHeader";
 
 export function MobileHomePage({ markets }: { markets: Market[] }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
@@ -53,21 +55,21 @@ export function MobileHomePage({ markets }: { markets: Market[] }) {
           selectedTopic={selectedTopic}
         />
         <div className="px-5 flex flex-col w-full items-center no-scrollbar mt-2 space-y-6">
-          {enrichedFeedData
-            ? enrichedFeedData?.map((bet, index) => {
-                return (
-                  <div key={index}>
-                    <FeedCard {...bet} />
-                  </div>
-                );
-              })
-            : [1, 2, 3, 4, 5, 6].map((index, item) => (
-                <div
-                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                >
-                  <Skeleton className="w-[90vw] h-[65vh] rounded-[1.5rem]" />
+          {
+            enrichedFeedData?.map((bet, index) => {
+              return (
+                <div key={index}>
+                  <FeedCard {...bet} />
                 </div>
-              ))}
+              );
+            }) ??
+            [1, 2, 3, 4, 5, 6].map((index, item) => (
+              <div
+                className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
+              >
+                <Skeleton className="w-[90vw] h-[65vh] rounded-[1.5rem]" />
+              </div>
+            ))}
         </div>
         <LoginModal isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
       </div>
