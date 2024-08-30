@@ -9,18 +9,18 @@ import {
   WrappedMobileMarketPage,
 } from "@/components/predictions/MobileMarketPage";
 
-import { IUserWithBet } from "@/supabase/types";
-import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
 import { getMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { getUsersByMarketId } from "@/graphql/queries/markets/useUsersByMarketId";
+import { Market } from "@/__generated__/graphql";
+import { User } from "@privy-io/react-auth";
 
 export default function MarketPage({
   users,
   market,
   id,
 }: {
-  users: IUserWithBet[];
-  market: IMarketWithTopicDetails;
+  users: User[];
+  market: Market;
   id: string;
 }) {
   return (
