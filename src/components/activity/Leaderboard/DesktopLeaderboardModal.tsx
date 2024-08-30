@@ -47,16 +47,16 @@ function DesktopLeaderboardModal({ children }) {
           <div className="flex flex-col p-8">
             <div className="flex items-center space-x-3 mb-2 justify-between">
               <div className="flex flex-col">
-                <div className="text-white text-2xl font-[600]">
+                <div className="text-white text-2xl font-semibold">
                   Global Leaderboard
                 </div>
                 <div className="text-[lightgray] text-md font-normal">
                   All users last 24 hours
                 </div>
               </div>
-              <DialogClose>
+              {/* <DialogClose>
                 <X color="#909090" className="z-[20]" strokeWidth={2.5} />
-              </DialogClose>
+              </DialogClose> */}
             </div>
 
             <LeaderBoardTop3 users={top3Users} />

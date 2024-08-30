@@ -27,7 +27,7 @@ function DesktopCreateProfile() {
   async function uploadProfileData() {
     if (!username) {
       toast(
-        <div className="w-full rounded-full bg-[#101010] font-[600] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#101010] font-semibold text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#FF0050] mr-2 flex justify-center items-center">
             <Ban strokeWidth={3} className="text-white h-[1rem]" />
           </div>
@@ -132,7 +132,7 @@ function DesktopCreateProfile() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <div className="text-lg text-[#262626] font-[600]">0xrf724sda3</div>
+            <div className="text-lg text-[#262626] font-semibold">0xrf724sda3</div>
           </div>
         </div>
 

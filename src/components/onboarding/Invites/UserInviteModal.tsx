@@ -41,7 +41,7 @@ function UserInviteModal({ children }) {
               <div className="h-[6rem] w-[6rem] flex items-center justify-center my-5 rounded-full bg-[#191919]">
                 <div className="text-[3.4rem] rotate-6">🎟️</div>
               </div>
-              <div className="p-1 px-4 rounded-full bg-[#191919] border-2  border-[#212121] my-1 font-[600] text-lg text-white">
+              <div className="p-1 px-4 rounded-full bg-[#191919] border-2  border-[#212121] my-1 font-semibold text-lg text-white">
                 {invites?.length - usedInvitesCount} invites left
               </div>
               <p className="text-center mb-6 font-[500] mt-3 px-6 mb-3 text-[lightgray]">
@@ -107,7 +107,7 @@ function UserInvite({ code, status, setToastVisible }) {
           {code}
         </p>
         {status === "used" ? (
-          <p className="text-lg font-[600] text-italic text-[gray]">Used</p>
+          <p className="text-lg font-semibold text-italic text-[gray]">Used</p>
         ) : (
           <button onClick={handleCopy} className="focus:outline-none">
             <Copy className="text-[white]" strokeWidth={3} size={20} />

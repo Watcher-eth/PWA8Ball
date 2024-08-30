@@ -61,7 +61,7 @@ export function DesktopPredictComponent(props: {
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full font-[600]  rounded-md py-6 text-md border-none
+                    w-full font-semibold  rounded-md py-6 text-md border-none
                     bg-slate-400/10 hover:bg-slate-400/20
                     focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
                   `}

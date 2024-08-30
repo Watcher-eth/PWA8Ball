@@ -104,7 +104,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
             <div className="flex flex-row items-center space-x-6 mt-2">
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-[600]">
+                <div className="text-[1rem] text-[lightgray] font-semibold">
                   Accuracy
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -112,7 +112,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 </div>
               </div>
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-[600]">
+                <div className="text-[1rem] text-[lightgray] font-semibold">
                   Followers
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -120,7 +120,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 </div>
               </div>
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-[600]">
+                <div className="text-[1rem] text-[lightgray] font-semibold">
                   Following
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -142,7 +142,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <Copy size={16} color="white" strokeWidth={2.5} />
             </div>
             {userC?.name === user?.name ? (
-              <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
+              <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
                 <div>Edit Profile</div>
               </div>
             ) : (
@@ -170,7 +170,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="All"
                 onClick={() => setFilter("All")}
-                className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-[600]`}
+                className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-semibold`}
               >
                 <div>All</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -180,7 +180,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Resolved"
                 onClick={() => setFilter("Resolved")}
-                className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+                className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-semibold`}
               >
                 <div>Resolved</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -190,7 +190,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Created"
                 onClick={() => setFilter("Created")}
-                className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-[600]`}
+                className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-semibold`}
               >
                 <div>Created</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -250,7 +250,7 @@ function ProfilePositionCard(
             src={image.image}
             className="h-20 w-20 object-cover  rounded-lg"
           />
-          <div className="py-2 border-2 border-[#212121] h-10 px-3 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
+          <div className="py-2 border-2 border-[#212121] h-10 px-3 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
             38% Chance
           </div>
         </div>
@@ -265,7 +265,7 @@ function ProfilePositionCard(
         )}
         <div className="text-[1rem] -mt-1 font-[500] text-[lightgray]">
           {image.type === "created" ? (
-            <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-[600]">
+            <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
               <img src={image.pfp} className="h-7 w-7 rounded-full " />{" "}
               <div className="text-[1.02rem] font-[500]">{image.userName}</div>
             </div>

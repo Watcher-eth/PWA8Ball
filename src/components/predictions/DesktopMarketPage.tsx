@@ -87,7 +87,7 @@ export function DesktopMarketPage({ users, market, id }) {
                     <div className="text-[0.85rem] text-[lightgray] font-semibold">
                       At stake
                     </div>
-                    <div className="text-[1.6rem] mt-[-0.25rem] text-white flex items-center font-semibold">
+                    <div className="text-[1.6rem] -mt-1 text-white flex items-center font-semibold">
                       <div>
                         $
                         {((enhancedMarket?.usdcstake ?? 0) / 100000).toFixed(2)}

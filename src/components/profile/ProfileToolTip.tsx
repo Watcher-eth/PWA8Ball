@@ -35,7 +35,7 @@ export function ProfileToolTip(props: {
           <div className="text-[2rem] my-4 text-white font-[Aeonik-Bold]">
             {props.user?.name}
           </div>
-          <div className="text-[1.1rem] my-2 text-[lightgray] font-[600]">
+          <div className="text-[1.1rem] my-2 text-[lightgray] font-semibold">
             {props.user?.walletaddress
               ? shortenAddress(props.user?.walletaddress)
               : props.user?.walletaddress}{" "}
@@ -50,7 +50,7 @@ export function ProfileToolTip(props: {
               <div className="text-[1.4rem] text-white font-[Aeonik-Bold]">
                 222
               </div>
-              <div className="text-[0.8rem] text-[lightgray] font-[600]">
+              <div className="text-[0.8rem] text-[lightgray] font-semibold">
                 Followers
               </div>
             </div>
@@ -58,7 +58,7 @@ export function ProfileToolTip(props: {
               <div className="text-[1.4rem] text-white font-[Aeonik-Bold]">
                 669
               </div>
-              <div className="text-[0.8rem] text-[lightgray] font-[600]">
+              <div className="text-[0.8rem] text-[lightgray] font-semibold">
                 Following
               </div>
             </div>

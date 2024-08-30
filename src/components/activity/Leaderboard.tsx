@@ -31,7 +31,7 @@ export function Leaderboard(props: { isDesktop: boolean }) {
         className="flex h-screen flex-col mt-2"
       >
         {props.isDesktop && (
-          <div className="text-[1.8rem] text-white font-[600]">
+          <div className="text-[1.8rem] text-white font-semibold">
             Global Leaderboard
           </div>
         )}

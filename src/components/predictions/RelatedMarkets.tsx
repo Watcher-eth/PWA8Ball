@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { StarHalf } from "lucide-react";
 import { useGetRelatedMarkets } from "@/supabase/queries/reccomendations/useGetRelatedMarkets";
+import { getMarketPath } from "@/utils/urls";
 
 export function RelatedMarkets({
   topicId,
@@ -63,7 +64,7 @@ function RelatedMarketQuestion({
   isDesktop,
 }) {
   return (
-    <Link href={`/p/${id}`} prefetch={true}>
+    <Link href={getMarketPath(id)} prefetch={true}>
       <div
         className={`
           flex flex-row items-center

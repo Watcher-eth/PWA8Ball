@@ -410,7 +410,7 @@ function FooterColumn({
 }) {
   return (
     <div className="flex flex-col space-y-2">
-      <div className="text-white font-[600] text-[1.05rem]">{title}</div>
+      <div className="text-white font-semibold text-[1.05rem]">{title}</div>
       {children}
     </div>
   );
@@ -462,14 +462,14 @@ export function MarketCard({
           isTwoCards
             ? "text-[0.9rem] top-5 right-5 "
             : "text-[0.8rem] top-4 right-4 "
-        } font-[600]`}
+        } font-semibold`}
       >
         {(item?.outcomeOddsA / 100).toFixed(1)}%{" "}
         {item?.outcomeA === "Yes" ? "Chance" : item?.outcomeA}
       </div>
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3">
-          <div className="text-white text-[1.6rem] font-[600]">
+          <div className="text-white text-[1.6rem] font-semibold">
             {item?.title}
           </div>
           <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-normal">
@@ -524,7 +524,7 @@ function TopMarket() {
           className="h-[6rem] w-[6rem] object-cover mt-0 rounded-md"
           src={enhancedMarkets?.image}
         />
-        <div className="text-white text-3xl mt-6 font-[600]">
+        <div className="text-white text-3xl mt-6 font-semibold">
           {enhancedMarkets?.title}
         </div>
         <div className="text-[lightgray] mt-2 text-lg font-normal">

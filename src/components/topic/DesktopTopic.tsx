@@ -274,7 +274,7 @@ export function DesktopTopicItem(props: DesktopItemProps) {
           {props.title}
         </div>
         <div
-          className={`text-white font-[600] ${selectedSize.lineHeight} my-1 px-5 ${selectedSize.question}`}
+          className={`text-white font-semibold ${selectedSize.lineHeight} my-1 px-5 ${selectedSize.question}`}
         >
           {props.question}
         </div>
@@ -398,7 +398,7 @@ export function DesktopTopicItemSkeleton(props: {
           animate="pulse"
         />
         <motion.div
-          className={`text-white font-[600] w-[70%] my-1 mx-2 ${selectedSize.lineHeight} my-1 px-5 ${selectedSize.question} bg-[#212121] h-[20px] rounded-full`}
+          className={`text-white font-semibold w-[70%] my-1 mx-2 ${selectedSize.lineHeight} my-1 px-5 ${selectedSize.question} bg-[#212121] h-[20px] rounded-full`}
           variants={skeletonVariants}
           initial="initial"
           animate="pulse"

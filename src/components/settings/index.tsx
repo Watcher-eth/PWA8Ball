@@ -224,7 +224,7 @@ export function SettingsPage() {
             </div>
           </div>
           <div className="flex flex-col rounded-md bg-[#101010] p-5 px-8 mt-8">
-            <div className="text-white text-[1.35rem] font-[600]">
+            <div className="text-white text-[1.35rem] font-semibold">
               Your Glimpse Wallet
             </div>
             <div className="text-[lightgray] text-[1rem] font-normal">

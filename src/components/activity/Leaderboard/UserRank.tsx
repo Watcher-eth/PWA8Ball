@@ -9,19 +9,19 @@ function UserRank() {
       <img src={user?.pfp} className="w-12 h-12 rounded-full" />
       <div className="flex flex-col space-y-0">
         <div className="text-[lightgray] text-[0.9rem] font-[500]">Name</div>
-        <div className="text-white text-[1.1rem] font-[600]">{user?.name}</div>
+        <div className="text-white text-[1.1rem] font-semibold">{user?.name}</div>
       </div>
       <div className="flex flex-col space-y-0">
         <div className="text-[lightgray] text-[0.9rem] font-[500]">
           Your Rank
         </div>
-        <div className="text-white text-[1.1rem] font-[600]">🎖️4.</div>
+        <div className="text-white text-[1.1rem] font-semibold">🎖️4.</div>
       </div>
       <div className="flex flex-col mr-2 space-y-0">
         <div className="text-[lightgray] text-[0.9rem] font-[500]">
           Accuracy
         </div>
-        <div className="text-white text-[1.1rem] font-[600]">64%</div>
+        <div className="text-white text-[1.1rem] font-semibold">64%</div>
       </div>
     </div>
   );

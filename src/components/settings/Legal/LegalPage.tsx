@@ -13,7 +13,7 @@ const PageTitle = ({ title, subtitle }) => {
 const Section = ({ title, lastModified, paragraphs }) => {
   return (
     <div className="mb-10 z-10 relative">
-      <h3 className="text-2xl text-white font-[600] mb-1">{title}</h3>
+      <h3 className="text-2xl text-white font-semibold mb-1">{title}</h3>
       {lastModified && (
         <p className="italic text-[lightgray] text-md mb-4">{lastModified}</p>
       )}

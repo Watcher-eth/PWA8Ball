@@ -42,7 +42,7 @@ const CandidateSection = ({ image, name, odds, change, side }) => (
       </div>
     )}
     <div className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}>
-      <div className="text-[4.5rem] font-[600] text-white">{odds}%</div>
+      <div className="text-[4.5rem] font-semibold text-white">{odds}%</div>
       <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
         <ChevronDown
           color="#FF0050"
@@ -80,7 +80,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
     <div className="flex flex-row items-center z-2">
       <img className="w-[7rem] rounded-md" src={state.flag} />
       <div className="flex flex-col ml-3 -space-y-1.5">
-        <div className="text-[2rem] text-white font-[600]">{state.name}</div>
+        <div className="text-[2rem] text-white font-semibold">{state.name}</div>
         <div className="text-xl text-[lightgray] font-normal">
           {state.votes} Electoral votes at stake
         </div>
@@ -93,18 +93,18 @@ const SwingStateComponent = ({ sectionData, state }) => (
             src={sectionData.images[0]}
             className="h-[4rem] w-[4rem] object-cover rounded-full"
           />
-          <div className="text-[3rem] text-white flex flex-row items-baseline font-[600]">
+          <div className="text-[3rem] text-white flex flex-row items-baseline font-semibold">
             {state.odds[0]}
             <p className="text-[2rem]">%</p>
           </div>
         </div>
-        <div className="text-xl text-[lightgray] font-[600]">
+        <div className="text-xl text-[lightgray] font-semibold">
           {sectionData.names[0]}
         </div>
       </div>
       <div className="flex flex-col items-end z-2 ">
         <div className="flex flex-row space-x-4 items-center">
-          <div className="text-[3rem] flex flex-row text-white items-baseline font-[600]">
+          <div className="text-[3rem] flex flex-row text-white items-baseline font-semibold">
             {state.odds[1]}
             <p className="text-[2rem]">%</p>
           </div>
@@ -113,7 +113,7 @@ const SwingStateComponent = ({ sectionData, state }) => (
             className="h-[4rem] w-[4rem] object-cover rounded-full"
           />
         </div>
-        <div className="text-xl  text-[lightgray] font-[600]">
+        <div className="text-xl  text-[lightgray] font-semibold">
           {sectionData.names[1]}
         </div>
       </div>
@@ -206,7 +206,7 @@ export function ElectionPage() {
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center space-x-2.5">
             <Split color="white" height={"2rem"} strokeWidth={3} />
-            <div className="text-white font-[600] text-[1.8rem] my-3">
+            <div className="text-white font-semibold text-[1.8rem] my-3">
               Swing States
             </div>
           </div>
@@ -229,7 +229,7 @@ export function ElectionPage() {
               height={"3.8rem"}
               strokeWidth={3}
             />
-            <div className="text-white font-[600] text-[1.8rem] my-3">
+            <div className="text-white font-semibold text-[1.8rem] my-3">
               Trending Today
             </div>
           </div>
@@ -247,7 +247,7 @@ export function ElectionPage() {
                 src={item.image}
               />
               <div className="flex flex-col -space-y-0.5 ml-3.5">
-                <div className="text-[1.35rem] text-white font-[600]">
+                <div className="text-[1.35rem] text-white font-semibold">
                   {item.title}
                 </div>
                 <div className="text-[1.1rem] text-[lightgray] font-normal">
@@ -256,7 +256,7 @@ export function ElectionPage() {
               </div>
             </div>
             <div className="flex flex-row items-baseline">
-              <div className="text-[2.1rem] text-white font-[600]">
+              <div className="text-[2.1rem] text-white font-semibold">
                 {item?.outcomea / 100}%{" "}
               </div>
             </div>
