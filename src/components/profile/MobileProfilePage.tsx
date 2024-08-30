@@ -24,14 +24,14 @@ export function MobileProfilePage({
   });
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
-      <div className="flex flex-col items-center  bg-[#101010] relative">
+      <div className="flex flex-col items-center  bg-[#080808] relative">
         <div className="w-full relative">
           <img
             src={userC?.pfp}
             alt="Profile Header"
             className="w-full h-[250px]  object-cover"
           />
-          <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-transparent via-[#101010]/80 to-[#101010]" />
+          <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-transparent via-[#080808]/80 to-[#080808]" />
           <div className="absolute top-0 left-0 right-0 h-[250px] backdrop-blur-lg bg-opacity-50" />
         </div>
 

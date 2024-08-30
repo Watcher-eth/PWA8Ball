@@ -17,7 +17,6 @@ export const aggregatePredictions = (predictions) => {
   return Object.values(aggregated);
 };
 
-
 export const aggregatePredictedItems = (orders: any) => {
   const aggregated = {};
 
@@ -27,6 +26,32 @@ export const aggregatePredictedItems = (orders: any) => {
       aggregated[key].amount += item.amount;
     } else {
       aggregated[key] = { ...item };
+    }
+  });
+
+  return Object.values(aggregated);
+};
+
+export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
+  const aggregated: { [key: string]: any } = {};
+
+  orders.forEach((item: any) => {
+    const marketIdFromOrder = parseInt(item.market.marketId, 10); // Ensure it's an integer
+    console.log("marketId", marketIdFromOrder);
+    const market = Markets.find((m: any) => m.id === marketIdFromOrder);
+    if (market) {
+      const updatedItem = {
+        ...item,
+        image: market.image,
+      };
+
+      const key = `${item.market.marketId}-${item.option}`;
+
+      if (aggregated[key]) {
+        aggregated[key].amount += updatedItem.amount;
+      } else {
+        aggregated[key] = { ...updatedItem };
+      }
     }
   });
 

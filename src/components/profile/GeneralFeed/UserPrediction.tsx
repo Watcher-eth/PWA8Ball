@@ -25,8 +25,8 @@ export function UserPrediction({
       rightContent={
         <div
           className={`
-            py-1 rounded-full text-white font-bold
-            ${option === "No" ? "px-3" : "px-2"}
+            py-1 rounded-full text-white text-[0.95rem] font-[600]
+            ${option === "No" ? "px-3" : "px-2.5"}
             ${optional === 1 ? "bg-[#0050FF]" : "bg-[#FF0050]"}
           `}
         >

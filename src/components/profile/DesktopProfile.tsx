@@ -6,7 +6,6 @@ import { Copy, Wallet } from "lucide-react";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
-import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
@@ -28,6 +27,7 @@ import {
 import AnimatedBackground from "../common/Animated/AnimatedSelector";
 import { INVITES_ACTIVE } from "@/constants";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
+import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
@@ -66,7 +66,7 @@ export function DesktopProfilePage2({ userId, userC }) {
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
-      <StandardPageWrapper className="h-full min-h-screen flex flex-col">
+      <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
             <div className="w-full h-80 relative">

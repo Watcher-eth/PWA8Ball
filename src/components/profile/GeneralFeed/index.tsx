@@ -4,7 +4,10 @@ import React, { useEffect } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 
-import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
+import {
+  aggregatePredictedItems,
+  aggregatePredictedItemsWithImage,
+} from "@/utils/predictions/aggregatePredictions";
 
 import { NewPlaceholder } from "../../common/placeholders/NewPlaceholders";
 import { PredictionPositionModal } from "../../modals/PredictionPositionModal";
@@ -13,6 +16,7 @@ import { UserPrediction, CreatedPrediction } from "./UserPrediction";
 import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
+import { hardMarkets } from "@/constants/markets";
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
@@ -46,15 +50,19 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
     );
   }
 
-  const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
+  const aggregatedOrdersData = aggregatePredictedItemsWithImage(
+    ordersData || [],
+    hardMarkets
+  );
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
     ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
       []),
   ];
 
+  console.log("aggrea", mergedData);
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center -mt-3">
       {mergedData.length < 1 ? (
         <NewPlaceholder isUser={userId === user?.externalAuthProviderUserId} />
       ) : (
@@ -62,34 +70,43 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
           item.type === "predicted" ? (
             <PredictionPositionModal
               key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
-              title={item.title}
-              image={item.image}
-              price={item.amount}
-              ownedAmount={item.amount / 100000}
-              options={item.options}
+              title={item.market?.title}
+              image={item?.image}
+              price={item.tokensOwned}
+              ownedAmount={item.tokensOwned}
+              options={[
+                {
+                  name: item?.market?.outcomeA,
+                  odds: item?.market?.outcomeOddsA,
+                },
+                {
+                  name: item?.market?.outcomeB,
+                  odds: item?.market?.outcomeOddsB,
+                },
+              ]}
               percentage={item.percentage}
-              betId={item.market_id}
-              topic={item.market_id}
+              betId={item.marketId}
+              topic={item.marketId}
               icon={item.icon}
-              question={item.question}
+              question={item.market?.question}
               option={item.option}
-              optionNumber={item.optionNumber}
+              optionNumber={item.option}
               isExternal={item.isExternal}
             >
               <UserPrediction
-                key={`predicted-${item.id}-${item.option}`}
+                key={`predicted-${item.marketId}-${item.option}`}
                 option={
                   item.option === 0
-                    ? item.options[item.option + 1]?.name
-                    : item.options[item.option - 1]?.name
+                    ? item?.market?.outcomeB
+                    : item?.market?.outcomeA
                 }
-                betId={item?.market_id}
+                betId={item?.marketId}
                 optional={item?.option}
                 index={index}
-                title={item?.title}
-                question={item?.question}
+                title={item.market?.title}
+                question={item?.market?.question}
                 image={item?.image}
-                amount={String(item?.amount / 100000)}
+                amount={String(item?.tokensOwned / 100000)}
               />
             </PredictionPositionModal>
           ) : (
