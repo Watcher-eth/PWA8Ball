@@ -5,6 +5,7 @@ interface LeaderBoardTopUser {
   name: string;
   image: string;
   score: number;
+  walletAddress: string;
 }
 
 interface LeaderboardTopProps {
@@ -19,7 +20,13 @@ const UserCard: React.FC<{
     className={`flex flex-col items-center ${showMarginTop ? "mt-2.5" : ""}`}
   >
     {user.image ? (
-      <ProfileToolTip user={{ pfp: user?.image, name: user?.name }}>
+      <ProfileToolTip
+        user={{
+          pfp: user?.image,
+          name: user?.name,
+          walletAddress: user?.walletAddress,
+        }}
+      >
         <img
           src={user.image}
           alt={user.name}

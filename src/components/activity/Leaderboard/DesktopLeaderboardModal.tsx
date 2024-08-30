@@ -11,6 +11,7 @@ import { PredictorInfo } from "../PredictorInfo";
 import { LoadingLeaderboardSkeleton } from "../Leaderboard";
 import UserRank from "./UserRank";
 import { Trophy, X } from "lucide-react";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 function DesktopLeaderboardModal({ children }) {
   const { data: topPredictors, isLoading } = useGetTopPredictors();
@@ -22,8 +23,10 @@ function DesktopLeaderboardModal({ children }) {
   if (topPredictors) {
     const top3Users = topPredictors?.slice(0, 3).map((predictor) => ({
       name: predictor.name?.length > 0 ? predictor?.name : "Anon",
-      image: predictor.pfp?.length > 0 ? predictor.pfp : defaultAvatar,
+      image:
+        predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
       score: predictor.total_amount / 1000000,
+      walletAddress: predictor?.walletAddress,
     }));
 
     const remainingPredictors = topPredictors?.slice(3);
@@ -68,6 +71,7 @@ function DesktopLeaderboardModal({ children }) {
               {remainingPredictors?.map((predictor, index) => (
                 <PredictorInfo
                   key={index}
+                  totalAmountUsdc={predictor.total_amount}
                   {...predictor}
                   address={predictor?.walletAddress}
                   index={index}

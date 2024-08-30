@@ -8,9 +8,10 @@ import {
 import { FollowButton } from "./FollowButton";
 import { IUser } from "@/supabase/types";
 import { shortenAddress } from "@/utils/address/shortenAddress";
+import { User } from "@/__generated__/graphql";
 
 export function ProfileToolTip(props: {
-  user: IUser;
+  user: User;
   children: React.ReactNode;
 }) {
   const { children } = props;
@@ -28,17 +29,15 @@ export function ProfileToolTip(props: {
               className="h-[4rem] w-[4rem] rounded-full"
               src={props.user?.pfp}
             />
-            <FollowButton
-              profileId={props?.user?.walletaddress}
-            />
+            <FollowButton profileId={props?.user?.walletAddress} />
           </div>
           <div className="text-[2rem] my-4 text-white font-[Aeonik-Bold]">
             {props.user?.name}
           </div>
           <div className="text-[1.1rem] my-2 text-[lightgray] font-semibold">
-            {props.user?.walletaddress
-              ? shortenAddress(props.user?.walletaddress)
-              : props.user?.walletaddress}{" "}
+            {props.user?.walletAddress
+              ? shortenAddress(props.user?.walletAddress)
+              : props.user?.walletAddress}{" "}
             0x273rfi...rtf
           </div>
           <div className="text-[0.85rem] text-[lightgray] -mb-4 font-normal">

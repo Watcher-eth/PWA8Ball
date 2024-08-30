@@ -40,6 +40,7 @@ export function FollowButton({ profileId }: { profileId: string }) {
 
   const isUser = user?.external_auth_provider_user_id === profileId;
 
+  console.log("params follow", user?.external_auth_provider_user_id, profileId);
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <DisplayFollowButton

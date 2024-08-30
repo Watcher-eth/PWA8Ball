@@ -10,9 +10,10 @@ import LeaderBoardTop3 from "./Leaderboard/LeaderboardTop3";
 export function Leaderboard(props: { isDesktop: boolean }) {
   const { data: topPredictors, isLoading } = useGetTopPredictors();
   const data = useGetGlobalLeaderboard();
-
   if (isLoading) {
   }
+
+  console.log("predictors2", topPredictors);
 
   if (topPredictors) {
     const top3Users = topPredictors?.slice(0, 3).map((predictor) => ({

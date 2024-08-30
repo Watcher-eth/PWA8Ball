@@ -27,6 +27,7 @@ export function PredictorInfo({
             user={{
               name: name,
               pfp: pfp,
+              walletAddress: address,
               external_auth_provider_user_id: user_id,
             }}
           >
