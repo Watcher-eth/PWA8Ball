@@ -14,12 +14,9 @@ import { Chip } from "@/components/ui/Chip";
 
 
 
-
-
-
 export function TopMarket() {
   const { market } = useGetMarketById("1");
-  const enhancedMarkets = enhanceSingleMarketWithImageAndPolyId(
+  const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     hardMarkets,
     hardTopics
@@ -31,7 +28,7 @@ export function TopMarket() {
   const { currentPrices, percentageDifference } = processPrices(
     prices2,
     userOutcome,
-    enhancedMarkets?.initialProb,
+    enhancedMarket?.initialProb,
     "1M"
   );
 
@@ -40,8 +37,8 @@ export function TopMarket() {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    [`${enhancedMarkets?.outcomeA}`]: 100 - price.value,
-    [`${enhancedMarkets?.outcomeB}`]: price.value,
+    [`${enhancedMarket?.outcomeA}`]: 100 - price.value,
+    [`${enhancedMarket?.outcomeB}`]: price.value,
   }));
 
   return (
@@ -49,13 +46,13 @@ export function TopMarket() {
       <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
           className="h-[6rem] w-[6rem] object-cover -mb-2 rounded-md"
-          src={enhancedMarkets?.image}
+          src={enhancedMarket?.image}
         />
         <div className="text-white text-3xl mt-6 font-semibold">
-          {enhancedMarkets?.title}
+          {enhancedMarket?.title}
         </div>
         <div className="text-[lightgray] mt-2 text-lg font-normal">
-          {enhancedMarkets?.question}
+          {enhancedMarket?.question}
         </div>
         <div className="flex pt-2 space-x-2">
           <Chip className="flex-shrink space-x-2 pt-0.5">
@@ -72,7 +69,7 @@ export function TopMarket() {
           <Chip className="flex-shrink space-x-1 text-[lightgray] pt-1 text-sm">
             $
             <span className="font-semibold text-[lightgray]">
-              {(enhancedMarkets?.usdcStake / 10 ** 6).toFixed(2)}
+              {(enhancedMarket?.usdcStake / 10 ** 6).toFixed(2)}
             </span>
             <div className="inline-block  text-sm text-white/60">at Stake</div>
           </Chip>
@@ -82,13 +79,13 @@ export function TopMarket() {
       </div>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
         <div className="text-[gray] text-md font-normal">
-          {enhancedMarkets?.title}
+          {enhancedMarket?.title}
         </div>
         <div className="flex flex-row justify-between items-center">
           <div className="text-3xl font-[500] my-1 text-white">
-            {enhancedMarkets?.outcomeOddsA / 100}%{" "}
-            {enhancedMarkets?.outcomeA !== "Yes"
-              ? enhancedMarkets?.outcomeA
+            {enhancedMarket?.outcomeOddsA / 100}%{" "}
+            {enhancedMarket?.outcomeA !== "Yes"
+              ? enhancedMarket?.outcomeA
               : "Chance"}
           </div>
           <div className="text-3xl text-white/20 font-[Aeonik-Bold]">
@@ -110,15 +107,15 @@ export function TopMarket() {
           <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
             <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
-              {enhancedMarkets?.outcomeA}
+              {enhancedMarket?.outcomeA}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
-                {enhancedMarkets?.outcomeOddsA / 100}%
+                {enhancedMarket?.outcomeOddsA / 100}%
               </p>
             </div>
             <div className="px-6 py-1.5 text-[1.1rem] font-[500]  flex items-baseline rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
-              {enhancedMarkets?.outcomeB}
+              {enhancedMarket?.outcomeB}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
-                {enhancedMarkets?.outcomeOddsB / 100}%
+                {enhancedMarket?.outcomeOddsB / 100}%
               </p>
             </div>
           </div>

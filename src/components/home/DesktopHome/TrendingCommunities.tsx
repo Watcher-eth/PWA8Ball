@@ -12,25 +12,24 @@ import { getTopicPath } from "@/utils/urls";
 export function TrendingCommunities() {
   const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
 
-  if (topics?.length > 0)
-    return (
-      <div className=" flex flex-col w-full">
-        <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
-          Popular Communities
-        </div>
-        <div className="flex flex-row space-x-7">
-          {topics
-            ? topics?.map((topic, index) => {
-                return <TrendingCommunityItem {...topic} key={index} />;
-              })
-            : [1, 2].map((index) => (
-                <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
-                  <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
-                </div>
-              ))}
-        </div>
+  return (
+    <div className=" flex flex-col w-full">
+      <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
+        Popular Communities
       </div>
-    );
+      <div className="flex flex-row space-x-7">
+        {
+          topics?.map((topic, index) => {
+            return <TrendingCommunityItem {...topic} key={index} />;
+          }) ??
+          [1, 2].map((index) => (
+              <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
+                <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
+              </div>
+            ))}
+      </div>
+    </div>
+  );
 }
 
 function TrendingCommunityItem({
