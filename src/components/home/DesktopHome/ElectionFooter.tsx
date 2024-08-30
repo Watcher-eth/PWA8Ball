@@ -37,23 +37,21 @@ export function ElectionFooter({ markets }) {
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6 overflow-y-visible"
+          className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-7"
         >
           {enrichedFeedData
-            ? enrichedFeedData?.map((item, index) => {
-                if (index < 3)
-                  return (
-                    <MarketCard key={index} item={item} isTwoCards={false} />
-                  );
-              })
-            : [1, 2, 3, 4, 5, 6].map((index) => (
-                <div
-                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                  key={index}
-                >
-                  <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-                </div>
-              ))}
+            ?.slice(0, 3)
+            ?.map((item, index) => (
+              <MarketCard key={index} item={item} isTwoCards={false} />
+            )) ??
+            [1, 2, 3, 4, 5, 6].map((index) => (
+              <div
+                className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
+                key={index}
+              >
+                <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
+              </div>
+            ))}
         </motion.div>
         <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2">
           Latest News
@@ -61,23 +59,21 @@ export function ElectionFooter({ markets }) {
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="flex flex-row overflow-x-auto no-scrollbar mb-40 w-full gap-6 py-6 overflow-y-visible"
+          className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-40"
         >
           {enrichedFeedData
-            ? enrichedFeedData?.map((item, index) => {
-                if (index > 3 && index < 6)
-                  return (
-                    <MarketCard key={index} item={item} isTwoCards={true} />
-                  );
-              })
-            : [1, 2, 3, 4, 5, 6].map((index) => (
-                <div
-                  className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-                  key={index}
-                >
-                  <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-                </div>
-              ))}
+            ?.slice(4, 6)
+            ?.map((item, index) => (
+              <MarketCard key={index} item={item} isTwoCards={true} />
+            )) ??
+            [1, 2, 3, 4, 5, 6].map((index) => (
+              <div
+                className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
+                key={index}
+              >
+                <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
+              </div>
+            ))}
         </motion.div>
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
@@ -92,4 +88,24 @@ export function ElectionFooter({ markets }) {
 
 
 
-
+function MarketCardSection({ feedDataArr }) {
+  return (
+    <motion.div
+      layout
+      transition={{ duration: 0.2 }}
+      className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-7"
+    >
+      {feedDataArr?.map((item, index) => (
+        <MarketCard key={index} item={item} isTwoCards={false} />
+      )) ??
+        [1, 2, 3, 4, 5, 6].map((index) => (
+          <div
+            className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
+            key={index}
+          >
+            <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
+          </div>
+        ))}
+    </motion.div>
+  );
+}
