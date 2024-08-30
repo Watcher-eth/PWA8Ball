@@ -40,7 +40,7 @@ export function useGetPositionsByWallet(userAddress: string) {
       },
     }
   );
-
+  console.log("orders3", data?.positions?.items);
   return {
     orders: data?.positions?.items,
     loading,

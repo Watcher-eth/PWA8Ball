@@ -5,10 +5,9 @@ import { fetchUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByE
 import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
-import { WrappedMobileProfile } from "@/components/profile/MobileProfilePage";
-import { WrappedDesktopProfile } from "@/components/profile/DesktopProfile";
+import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
+import { DesktopProfilePage2 } from "@/components/profile/DesktopProfile";
 import { getUserById } from "@/graphql/queries/users/useUserById";
-
 
 export default function ProfilePage({
   userId,
@@ -22,14 +21,14 @@ export default function ProfilePage({
   return (
     <MobiTop
       mobile={
-        <WrappedMobileProfile
+        <MobileProfilePage
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}
         />
       }
       desktop={
-        <WrappedDesktopProfile
+        <DesktopProfilePage2
           userId={userId}
           totalFollowers={totalFollowers}
           userC={userC}
@@ -45,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   getUserById(id),
   //   fetchUserByExternalAuthId(id),
   // ]);
-  const totalFollowers = 0 // this should be temp
+  const totalFollowers = 0; // this should be temp
   const userC = await getUserById(id);
 
   return {

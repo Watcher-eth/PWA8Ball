@@ -42,7 +42,12 @@ export function Leaderboard(props: { isDesktop: boolean }) {
             <h2 className="text-white text-[15px] font-bold">At stake</h2>
           </div>
           {remainingPredictors?.map((predictor, index) => (
-            <PredictorInfo key={index} {...predictor} index={index} />
+            <PredictorInfo
+              key={index}
+              {...predictor}
+              address={predictor?.walletAddress}
+              index={index}
+            />
           )) ??
             (!remainingPredictors ? (
               <LoadingLeaderboardSkeleton />

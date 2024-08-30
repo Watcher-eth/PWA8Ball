@@ -2,16 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 
-
-import {
-  Copy,
-  Wallet,
-} from "lucide-react";
+import { Copy, Wallet } from "lucide-react";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 import { SocialsSection } from "@/components/common/SocialsSection";
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-
 
 import { ContrastButton } from "@/components/buttons/ContrastButton";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
@@ -39,15 +34,13 @@ export function DesktopProfilePage2({ userId, userC }) {
   const balance = useUserUsdcBalance();
   const [filter, setFilter] = useState("All");
 
-  const { data: ordersData } = useGetPositionsByWallet(
-    user?.id === userId ? user?.walletaddress : userC?.walletaddress
-  );
+  const { data: ordersData } = useGetPositionsByWallet(userId);
 
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetMarketsCreatedByUser(userC.external_auth_provider_user_id);
+  } = useGetMarketsCreatedByUser(userC?.externalAuthProviderUserId);
 
   const aggregatedOrdersData = aggregatePredictedItems(ordersData ?? []);
   const mergedData =
@@ -70,6 +63,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           })),
         ]
       : [];
+  console.log("id2", ordersData, aggregatedOrdersData);
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
@@ -135,9 +129,9 @@ export function DesktopProfilePage2({ userId, userC }) {
               className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
             >
               <div>
-                {userC?.walletaddress
-                  ? shortenAddress(userC?.walletaddress)
-                  : userC?.walletaddress}
+                {userC?.walletAddress
+                  ? shortenAddress(userC?.walletAddress)
+                  : userC?.walletAddress}
               </div>
               <Copy size={16} color="white" strokeWidth={2.5} />
             </div>

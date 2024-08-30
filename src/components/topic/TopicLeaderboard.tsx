@@ -6,7 +6,6 @@ import { useGetLeaderboardForTopic } from "@/supabase/queries/leaderboard/useGet
 
 import { PredictorInfo } from "../activity/PredictorInfo";
 
-
 const Leaderboard = ({ topicId }) => {
   const {
     data: topPredictors,
@@ -27,7 +26,11 @@ const Leaderboard = ({ topicId }) => {
           <span className="text-white">An error occurred: {error.message}</span>
         )}
         {topPredictors?.map((predictor, index) => (
-          <PredictorInfo {...predictor} index={index} />
+          <PredictorInfo
+            {...predictor}
+            address={predictor?.walletAddress}
+            index={index}
+          />
         )) ?? <LeaderboardSkeleton />}
       </div>
     </div>
@@ -63,9 +66,7 @@ export const TopicLeaderboard = ({ image, name, topicId }) => {
         className="absolute top-0 w-full h-[88px]"
         style={{ width: width }}
       />
-      <div
-        className="absolute top-0 w-full h-[88px] backdrop-blur-[20px]"
-      />
+      <div className="absolute top-0 w-full h-[88px] backdrop-blur-[20px]" />
       <div
         className="absolute top-0 w-full h-[88px]"
         style={{
@@ -73,9 +74,7 @@ export const TopicLeaderboard = ({ image, name, topicId }) => {
             "linear-gradient(0deg, #101010 0%, rgba(10,10,10,0.9) 25%, rgba(10,10,10,0.8) 50%, rgba(10,10,10,0.7) 75%, transparent 100%)",
         }}
       />
-      <div
-        className="w-full flex flex-row items-center justify-between mb-[10px] gap-[7]"
-      >
+      <div className="w-full flex flex-row items-center justify-between mb-[10px] gap-[7]">
         <div
           className="p-[6px] rounded-[20px] bg-[#1C1C1E] cursor-pointer"
           onClick={() => router.back()}
