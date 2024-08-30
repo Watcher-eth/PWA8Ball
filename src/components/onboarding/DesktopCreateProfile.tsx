@@ -20,7 +20,6 @@ function DesktopCreateProfile() {
 
       setPfpUrl(fileUrl);
       // TODO: Add ipfs upload
-      console.log("Uploaded file:", file);
     }
   };
 

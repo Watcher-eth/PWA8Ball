@@ -41,12 +41,11 @@ export function CommentSection({
     isLoading,
     refetch, // Method to refetch the data
   } = useGetAllCommentsForMarket(Number(marketId), user?.walletAddress);
-  console.log("ccomment", comments, marketId);
+
   const allComments = _.uniqBy(
     [...optimisticComments, ...(comments || [])],
     (comment) => comment.id
   );
-  console.log("ccommen2t", allComments);
 
   function addOptimisticComment(comment: BetComment) {
     setOptimisticComments([comment, ...optimisticComments]);

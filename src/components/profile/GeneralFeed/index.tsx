@@ -12,6 +12,7 @@ import { PredictionPositionModal } from "../../modals/PredictionPositionModal";
 import { UserPrediction, CreatedPrediction } from "./UserPrediction";
 import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
+import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
@@ -19,7 +20,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const userId = id || user?.externalAuthProviderUserId;
 
   const {
-    data: ordersData,
+    orders: ordersData,
     isLoading: isOrdersLoading,
     refetch: refetchOrders,
   } = useGetPositionsByWallet(walletAddress);
@@ -27,7 +28,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetMarketsCreatedByUser(userId);
+  } = useGetCreatedMarketsByUser(walletAddress);
 
   useEffect(() => {
     if (onParentRefresh) {
@@ -35,7 +36,6 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
       refetchCreated();
     }
   }, [onParentRefresh, refetchOrders, refetchCreated]);
-  console.log("user55", ordersData, createdMarketsData);
 
   if (isOrdersLoading || isCreatedMarketsLoading) {
     return (
@@ -56,14 +56,12 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   return (
     <div className="flex flex-col items-center">
       {mergedData.length < 1 ? (
-        <NewPlaceholder
-          isUser={userId === user?.external_auth_provider_user_id}
-        />
+        <NewPlaceholder isUser={userId === user?.externalAuthProviderUserId} />
       ) : (
         mergedData.map((item, index) =>
           item.type === "predicted" ? (
             <PredictionPositionModal
-              key={`predicted-${item.id}-${item.option}`}
+              key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
               title={item.title}
               image={item.image}
               price={item.amount}

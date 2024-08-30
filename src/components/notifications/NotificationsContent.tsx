@@ -22,7 +22,6 @@ export function NotificationsContent({ isDesktop }: { isDesktop?: boolean }) {
   if (hasToken && notifications?.length === 0) {
     return <NotificationsPlaceholder />;
   }
-  console.log(notifications?.length, isDesktop);
   if (notifications?.length > 0) {
     return (
       <UserNotifications

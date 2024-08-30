@@ -63,7 +63,6 @@ export function DesktopProfilePage2({ userId, userC }) {
           })),
         ]
       : [];
-  console.log("id2", ordersData, aggregatedOrdersData);
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
@@ -231,7 +230,6 @@ function ProfilePositionCard(
   optionA,
   userName
 ) {
-  console.log("item", image, userName);
   return (
     <div className="w-full h-[50vh] border-2 border-[#121212] bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
       <img

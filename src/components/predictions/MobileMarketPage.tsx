@@ -42,7 +42,6 @@ export function MobileMarketPage({ market, users, id }) {
     hardMarkets,
     hardTopics
   );
-  console.log("iid", market?.id, id);
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <MobileDrawerContainer>
@@ -83,7 +82,6 @@ function MobileMarketContent({
   topic,
   marketId,
 }) {
-  console.log("market", id, marketId, market);
   return (
     <motion.div
       onClick={() => setIsDrawerOpen(false)}

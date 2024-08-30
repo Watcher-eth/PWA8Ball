@@ -22,7 +22,6 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
       loginAccount
     ) => {
       try {
-        console.log("login completed", user);
         if (isNewUser) {
           setUser(user);
           const hasTwitterLinked = user.linkedAccounts.some(

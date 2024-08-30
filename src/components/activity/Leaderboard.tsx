@@ -13,7 +13,6 @@ export function Leaderboard(props: { isDesktop: boolean }) {
   if (isLoading) {
   }
 
-  console.log("predictors2", topPredictors);
 
   if (topPredictors) {
     const top3Users = topPredictors?.slice(0, 3).map((predictor) => ({

@@ -19,7 +19,6 @@ function UserInviteModal({ children }) {
     (invite) => invite.status === "used"
   ).length;
 
-  console.log("invites", usedInvitesCount);
   return (
     <Dialog>
       <DialogTrigger>

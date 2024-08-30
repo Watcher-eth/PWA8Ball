@@ -17,7 +17,6 @@ import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardM
 export function DesktopNavBar() {
   const { user } = useUserStore();
   const userId = user?.external_auth_provider_user_id;
-  console.log("user", user?.name);
   return (
     <div className="w-full absolute z-50 top-0">
       <div

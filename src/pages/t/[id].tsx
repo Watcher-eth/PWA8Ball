@@ -28,7 +28,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function TopicPage({ topicData }: { topicData: any }) {
-  console.log({ topicData });
 
   if (topicData) {
     const { id, name, description, image, title, icon, topic, type, members } =

@@ -18,7 +18,6 @@ export function MobileNavBar() {
   const { user } = useUserStore();
   const { isLoginModalOpen, openLoginModal, closeLoginModal } =
     useAuthModalStore();
-  console.log("nav", user?.walletAddress);
   return (
     <div
       className={`

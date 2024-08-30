@@ -13,7 +13,7 @@ async function deleteComment(commentId: string): Promise<IComment[] | null> {
   if (error) {
     throw new Error(error.message);
   }
-  return data; // Now returning data or null, consistent with Supabase's response
+  return data; 
 };
 
 

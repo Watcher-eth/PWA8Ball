@@ -28,7 +28,7 @@ export function PredictorInfo({
               name: name,
               pfp: pfp,
               walletAddress: address,
-              external_auth_provider_user_id: user_id,
+              externalAuthProviderUserId: user_id,
             }}
           >
             <img

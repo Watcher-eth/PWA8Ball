@@ -30,15 +30,6 @@ export function DesktopOnboardingModal({
 }) {
   const { user } = useUserStore();
   const { account, isConnected, address } = useAccount();
-  console.log(
-    "user35",
-    !!user,
-    user?.name,
-    user?.name?.startsWith("0x"),
-    user?.pfp,
-    address,
-    isConnected
-  );
 
   return (
     <DesktopCardModal

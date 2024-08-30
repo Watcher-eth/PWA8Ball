@@ -9,6 +9,7 @@ import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDa
 import { parseOptionJSON } from "@/utils/predictions/parseOption";
 import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder";
 import { ActivityField } from "./ActivityField";
+import { User } from "@/__generated__/graphql";
 
 export function DesktopActivityModal({
   children,
@@ -40,13 +41,13 @@ export function DesktopActivityModal({
   );
 }
 
-function DesktopFriendActivity(props: { user: IUser }) {
+function DesktopFriendActivity(props: { user: User }) {
   const {
     data: predictions,
     error,
     isLoading,
     refetch,
-  } = useGetFollowingPredictions(props?.user?.external_auth_provider_user_id);
+  } = useGetFollowingPredictions(props?.user?.externalAuthProviderUserId);
 
   const groupedPredictions = groupPredictionsByDate(predictions);
 

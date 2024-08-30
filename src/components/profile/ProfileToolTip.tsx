@@ -15,7 +15,6 @@ export function ProfileToolTip(props: {
   children: React.ReactNode;
 }) {
   const { children } = props;
-  console.log("user", props.user);
   return (
     <TooltipProvider>
       <Tooltip>

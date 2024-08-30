@@ -37,7 +37,6 @@ export function Comment({
       },
     });
   };
-  console.log("date", created_at, date);
 
   return (
     <motion.div

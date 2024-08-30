@@ -21,7 +21,6 @@ export function Receipt(props: {
   const { position, loading, error } = useGetPositionById(
     "10-0x870b7F3f229D08918d33F8b09766eaB412aBEebf-1"
   );
-  console.log("order", position);
   const shareLink = async () => {
     if (navigator.share) {
       try {

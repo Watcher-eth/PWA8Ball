@@ -34,7 +34,6 @@ export function MobileHomePage({ markets }: { markets: Market[] }) {
     markets: enhancedMarkets,
     selectedTopic,
   });
-  console.log("feed", enrichedFeedData);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleOpenLoginModal = () => {

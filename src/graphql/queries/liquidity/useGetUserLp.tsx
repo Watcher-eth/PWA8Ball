@@ -31,9 +31,6 @@ export function useGetUserLp(userAddress: string) {
     variables: { userAddress: getChecksummedAddress(userAddress) },
     skip: !Boolean(userAddress),
   });
-  // console.log(
-  //   getChecksummedAddress("0x9fefd0bb2d175b039c8c72c55eea11bc66452591")
-  // );
 
   return {
     data: lpData?.lpPositions?.items ?? [],

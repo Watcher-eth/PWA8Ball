@@ -259,7 +259,6 @@ export function DesktopTopicItem(props: DesktopItemProps) {
   };
 
   const selectedSize = sizeClasses[props.size];
-  console.log("outcomes", props.outcomes);
   return (
     <Link
       href={`/p/${props.id}`}

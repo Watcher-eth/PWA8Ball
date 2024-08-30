@@ -96,7 +96,6 @@ export const SmartAccountProvider = ({
       chain: baseSepolia,
       transport: custom(eip1193provider),
     });
-    console.log("Step 0", privyClient);
 
     const customSigner = walletClientToSmartAccountSigner(privyClient);
 
@@ -163,13 +162,11 @@ export const SmartAccountProvider = ({
           client: { public: rpcClient, wallet: smartAccountClient },
         });
 
-        console.log("contract", contract);
 
         const hash = await contract.write.approve([
           BASE_SEPOLIA_EIGHTBALL_ADDRESS,
           10000000000n,
         ]);
-        console.log("hash", hash);
       } catch (error) {
         console.error("Failed to send transaction:", error);
         throw error;
@@ -187,7 +184,6 @@ export const SmartAccountProvider = ({
       chain: baseSepolia,
     });
 
-    console.log("Creating eoa client", walletClient);
 
     setEoaClient(walletClient);
     setEoa(eoaAddress);
@@ -214,7 +210,6 @@ export const SmartAccountProvider = ({
     isConnected,
   ]);
 
-  console.log("smartWallet2", smartAccountAddress);
   return (
     <SmartAccountContext.Provider
       value={{

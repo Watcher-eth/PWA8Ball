@@ -37,7 +37,6 @@ export function ConfirmPrediction(props: {
       console.error("Error during sharing", error);
     }
   };
-  console.log("option", props.option, props.options);
   return (
     <div className="flex flex-col items-center w-full bg-[#080808] py-4 pt-0 mt-5 rounded-lg min-h-[585px]">
       {loading || success ? (

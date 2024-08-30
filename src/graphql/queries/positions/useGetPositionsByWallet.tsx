@@ -4,7 +4,7 @@ import { tgql } from "@/__generated__";
 
 export const GET_POSITIONS_BY_WALLET = gql`
   query getPositionsByWallet($userAddress: String!) {
-    positions(where: { userAddress: $userAddress }, limit: 1) {
+    positions(where: { userAddress: $userAddress }, limit: 15) {
       items {
         marketId
         option
@@ -40,7 +40,6 @@ export function useGetPositionsByWallet(userAddress: string) {
       },
     }
   );
-  console.log("orders3", data?.positions?.items);
   return {
     orders: data?.positions?.items,
     loading,

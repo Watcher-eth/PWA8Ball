@@ -15,8 +15,7 @@ export default function MarketPage({
   const { data } = useGetPositionById(
     "10-0x8512B8f41a6D1f2Aa0D09ae710b705498735F265-0"
   );
-  console.log("posiio2n", data, data?.position.market?.outcomeOddsB);
-  // const metadata = generateMetadata({ params, searchParams });
+
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <img

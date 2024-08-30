@@ -25,7 +25,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     error,
     isLoading,
     refetch,
-  } = useGetFollowingPredictions(user?.external_auth_provider_user_id);
+  } = useGetFollowingPredictions(user?.externalAuthProviderUserId);
 
   if (predictions === undefined) {
     return (

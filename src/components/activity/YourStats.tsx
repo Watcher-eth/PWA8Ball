@@ -4,7 +4,6 @@ import { useUserStore } from "@/lib/stores/UserStore";
 export function YourStats() {
   const { user } = useUserStore();
   const { data } = useGetUserPositionsCount(user?.walletaddress);
-  console.log("count", data.count);
   return (
     <div className="flex flex-row items-center justify-between p-3 px-8 rounded-lg border border-[#212121] my-3">
       <StatSection

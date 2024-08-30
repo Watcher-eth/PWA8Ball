@@ -37,7 +37,6 @@ export function ShareBetContent({
       console.error("Error during sharing", error);
     }
   };
-  console.log("options", options);
   return (
     <div
       className={`

@@ -54,7 +54,7 @@ export function RemoveLPConfirmationScreen(props: {
         setLoading(true);
         if (userCon?.walletType === "smartwallet")
           removeLP({
-            userId: userCon?.external_auth_provider_user_id!,
+            userId: userCon?.externalAuthProviderUserId!,
             marketId: props.id,
             client: smartAccountClient,
             address: smartAccountAddress!,
@@ -62,7 +62,7 @@ export function RemoveLPConfirmationScreen(props: {
 
         if (userCon?.walletType === "eoa")
           removeLP({
-            userId: userCon?.external_auth_provider_user_id!,
+            userId: userCon?.externalAuthProviderUserId!,
             marketId: props.id,
             client: eoaClient,
             address: eoa?.address!,

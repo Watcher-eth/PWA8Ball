@@ -24,7 +24,6 @@ export function useGetOriginalLpPrice(userAddress: string) {
     variables: { userAddress: getChecksummedAddress(userAddress) },
   });
 
-  console.log("data");
   return {
     data: data?.lpTrades?.items ?? [],
     loading: loading,

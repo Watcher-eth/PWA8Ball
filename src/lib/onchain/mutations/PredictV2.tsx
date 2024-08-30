@@ -21,7 +21,6 @@ interface PredictParams {
 
 async function predict(props: PredictParams) {
   const { managePrediction } = useUserPrediction();
-  console.log("predict props:", props);
   if (!props.amount || !props.marketId) {
     throw new Error("All fields must be provided");
   }

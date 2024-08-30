@@ -56,7 +56,6 @@ export function DesktopProfilePopover({
   const displayUsername =
     !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
 
-  console.log("balance", user?.name);
   return (
     <Dialog>
       <DropdownMenu>
