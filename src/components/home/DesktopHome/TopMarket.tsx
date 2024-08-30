@@ -94,7 +94,7 @@ export function TopMarket() {
         </div>
         <div className="w-full h-[9rem] my-3 rounded-md ">
           <GenericLineChart
-            domain={[
+            domain={minMax.max && [
               minMax.min - (minMax.max - minMax.min) / 6,
               minMax.max + (minMax.max - minMax.min) / 6,
             ]}

@@ -19,6 +19,7 @@ export function TrendingCommunities() {
       <div className="flex flex-row space-x-7">
         {
           topics?.map((topic, index) => {
+            // @ts-ignore
             return <TrendingCommunityItem {...topic} key={index} />;
           }) ??
           [1, 2].map((index) => (
@@ -37,10 +38,10 @@ function TrendingCommunityItem({
   description,
   image,
 }: {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
+  id: string
+  title: string
+  description: string
+  image?: string
 }) {
   return (
     <Link

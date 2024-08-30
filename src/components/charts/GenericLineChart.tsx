@@ -17,11 +17,13 @@ export function GenericLineChart({
   xAxisKey = "month",
   xAxisTickFormatter = (value) => value,
   customConfig,
+  domain
 }: {
-  chartData: any[];
-  xAxisKey?: string;
-  xAxisTickFormatter?: (value: string) => string;
-  customConfig?: Partial<ChartConfig>;
+  chartData: any[]
+  xAxisKey?: string
+  xAxisTickFormatter?: (value: string) => string
+  customConfig?: Partial<ChartConfig>
+  domain?: number[] | null | 0
 }) {
   const chartConfig = generateChartConfig({
     data: chartData,
