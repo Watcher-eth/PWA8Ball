@@ -10,7 +10,6 @@ import { MarketCard } from "./MarketCard";
 
 
 
-
 export function DesktopHomeNews({ markets, amount }) {
   return (
     <div className="w-full flex flex-col">

@@ -1,43 +1,9 @@
-import React, { useState } from "react";
-import {
-  enhanceMarketsWithImageAndPolyId,
-  enhanceSingleMarketWithImageAndPolyId,
-} from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
-import { formatMarketArr } from "@/utils/markets/formatMarketArr";
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
-import Link from "next/link";
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
-import {
-  InverseVerticalBleedOverlay,
-  StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay";
-import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsWithMemberCount";
-import Countdown from "@/components/common/CountDown";
-import { ElectionndDate } from "@/components/topic/ElectionPage";
-import { SocialOnboardButton } from "@/components/onboarding/DesktopOnboardingModal";
-import {
-  AppleIcon,
-  GoogleIcon,
-  XIcon,
-} from "@/components/onboarding/AuthIcons";
-import { LineChart, Stars, Users } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
-import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 
-import { GenericLineChart } from "@/components/charts/GenericLineChart";
-import { TopicHeader } from "@/components/home/TopicHeader";
-import { Market } from "@/__generated__/graphql";
-import { Chip } from "@/components/ui/Chip";
-import { getMarketPath, getTopicPath } from "@/utils/urls";
+import Link from "next/link";
+
+import { Stars } from "lucide-react";
+
+import { getMarketPath } from "@/utils/urls";
 
 export function MarketCard({
   item,
