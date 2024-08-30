@@ -4,8 +4,8 @@ import {
   enhanceMarketsWithImageAndPolyId,
   enhanceSingleMarketWithImageAndPolyId,
 } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 
 import {
   getMarketById,
@@ -55,8 +55,8 @@ const fetchCommentsWithDetails = async (
 
       const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
         market,
-        hardMarkets,
-        hardTopics
+        HARD_MARKETS,
+        HARD_TOPICS
       );
 
       return {

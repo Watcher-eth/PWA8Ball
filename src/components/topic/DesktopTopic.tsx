@@ -20,8 +20,8 @@ import { motion } from "framer-motion";
 import { skeletonVariants } from "../ui/Skeleton";
 import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import {
   BlurOverlay,
   BlurOverlayWrapper,
@@ -48,8 +48,8 @@ function DesktopTopic({
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     marketsForTopic,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
 
   const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(

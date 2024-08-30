@@ -4,8 +4,8 @@ import { supabase } from "@/supabase/supabaseClient";
 import { getUserById } from "@/graphql/queries/users/useUserById";
 import { getMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 
 interface ICommentWithMarket extends IComment {
   market_title: string;
@@ -41,8 +41,8 @@ const fetchCommentsWithDetails = async (): Promise<ICommentWithMarket[]> => {
 
       const enhancedMarket = enhanceMarketsWithImageAndPolyId(
         market,
-        hardMarkets,
-        hardTopics
+        HARD_MARKETS,
+        HARD_TOPICS
       );
 
       return {

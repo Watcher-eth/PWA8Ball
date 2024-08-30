@@ -1,6 +1,11 @@
 // @ts-nocheck
 import { useState } from "react";
 
+import { INVITES_ACTIVE } from "@/constants";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
+import { Market } from "@/__generated__/graphql";
+
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import {
   AltSkeleton,
@@ -16,11 +21,8 @@ import {
   BlurOverlayWrapper,
   withBlurOverlay,
 } from "@/components/onboarding/Invites/InviteBlur";
-import { INVITES_ACTIVE } from "@/constants";
+
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
-import { Market } from "@/__generated__/graphql";
 
 import { FeedCard } from "./FeedCard";
 import { TopicHeader } from "./TopicHeader";
@@ -29,8 +31,8 @@ export function MobileHomePage({ markets }: { markets: Market[] }) {
   const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
   const enrichedFeedData = formatMarketArr({
     markets: enhancedMarkets,

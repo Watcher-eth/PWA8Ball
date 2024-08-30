@@ -13,7 +13,7 @@ import { DesktopLpChart } from "./DesktopLpChart";
 import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPositionsByUser";
 import { getLatestLpUsdcSum } from "@/utils/predictions/getLatestLpUSDCValue";
 import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
+import { HARD_MARKETS } from "@/constants/markets";
 import { useGetOriginalLpPrice } from "@/graphql/queries/liquidity/useGetOriginalLpPrice";
 
 export function DesktopLiquidityPage() {
@@ -30,7 +30,7 @@ export function DesktopLiquidityPage() {
   const filteredPositions =
     enhancePositionsWithImages(
       lpPositions?.filter((item) => item.amountUsdc > 0),
-      hardMarkets
+      HARD_MARKETS
     ) ?? [];
 
   const totalAmount = filteredPositions?.reduce(

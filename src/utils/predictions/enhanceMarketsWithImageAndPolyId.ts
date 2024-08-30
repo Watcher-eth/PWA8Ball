@@ -2,7 +2,7 @@
 export function enhanceMarketsWithImageAndPolyId(
   marketsData,
   constantData,
-  hardTopics
+  HARD_TOPICS
 ) {
   return marketsData?.map((market) => {
     // Find the matching market in the constant data
@@ -10,8 +10,8 @@ export function enhanceMarketsWithImageAndPolyId(
       (item) => item.id === parseInt(market.marketId, 10)
     );
 
-    // Find the matching topic in the hardTopics data
-    const matchingTopic = hardTopics.find(
+    // Find the matching topic in the HARD_TOPICS data
+    const matchingTopic = HARD_TOPICS.find(
       (topic) => topic.id === market.topicId.toString()
     );
 
@@ -59,15 +59,15 @@ export function enhanceMarketsWithImageAndPolyId(
 export function enhanceSingleMarketWithImageAndPolyId(
   market,
   constantData,
-  hardTopics
+  HARD_TOPICS
 ) {
   // Find the matching market in the constant data
   const matchingMarket = constantData.find(
     (item) => item.id === parseInt(market?.id, 10)
   );
 
-  // Find the matching topic in the hardTopics data
-  const matchingTopic = hardTopics.find(
+  // Find the matching topic in the HARD_TOPICS data
+  const matchingTopic = HARD_TOPICS.find(
     (topic) => topic.id === market?.topicId?.toString()
   );
 
@@ -114,9 +114,9 @@ export function enhanceSingleMarketWithImageAndPolyId(
   };
 }
 
-export function enhancePositionsWithImages(filteredPositions, hardMarkets) {
+export function enhancePositionsWithImages(filteredPositions, HARD_MARKETS) {
   return filteredPositions?.map((position) => {
-    const matchingMarket = hardMarkets.find(
+    const matchingMarket = HARD_MARKETS.find(
       (market) => market.id === parseInt(position.marketId, 10)
     );
 

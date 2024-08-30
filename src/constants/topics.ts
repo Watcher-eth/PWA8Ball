@@ -1,4 +1,4 @@
-export const hardTopics = [
+export const HARD_TOPICS = [
     {
       "id": "1",
       "title": "2024 US Elections",

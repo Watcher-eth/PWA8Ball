@@ -1,8 +1,8 @@
 import {
   enhanceSingleMarketWithImageAndPolyId,
 } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { Users } from "lucide-react";
 
@@ -18,8 +18,8 @@ export function TopMarket() {
   const { market } = useGetMarketById("1");
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
 
   const { data: prices2 } = useGetPricesForMarket("1", "1M");

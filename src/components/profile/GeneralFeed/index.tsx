@@ -16,7 +16,7 @@ import { UserPrediction, CreatedPrediction } from "./UserPrediction";
 import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
-import { hardMarkets } from "@/constants/markets";
+import { HARD_MARKETS } from "@/constants/markets";
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
@@ -52,7 +52,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
 
   const aggregatedOrdersData = aggregatePredictedItemsWithImage(
     ordersData || [],
-    hardMarkets
+    HARD_MARKETS
   );
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),

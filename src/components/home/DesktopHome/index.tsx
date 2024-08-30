@@ -2,8 +2,8 @@ import { useState } from "react";
 import {
   enhanceMarketsWithImageAndPolyId,
 } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import { Market } from "@/__generated__/graphql";
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 
@@ -26,8 +26,8 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
 
   const enrichedFeedData = formatMarketArr({

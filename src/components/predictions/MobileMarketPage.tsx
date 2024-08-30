@@ -22,8 +22,8 @@ import { CommentSection } from "@/components/predictions/CommentSection";
 import { BetDetails } from "@/components/predictions/BetDetails";
 import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { formatMarket } from "@/utils/markets/formatMarketArr";
 import {
@@ -39,8 +39,8 @@ export function MobileMarketPage({ market, users, id }) {
   useCheckReferral();
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>

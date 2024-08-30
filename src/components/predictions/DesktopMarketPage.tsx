@@ -26,8 +26,8 @@ import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighe
 
 import { RulesCollapsible } from "./BetDetails/RulesCollapsible";
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { hardMarkets } from "@/constants/markets";
-import { hardTopics } from "@/constants/topics";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import { useCheckReferral } from "@/hooks/useCheckReferral";
 
 export function DesktopMarketPage({ users, market, id }) {
@@ -38,8 +38,8 @@ export function DesktopMarketPage({ users, market, id }) {
   const userImages = fillUserImages(users, 3);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
-    hardMarkets,
-    hardTopics
+    HARD_MARKETS,
+    HARD_TOPICS
   );
   return (
     <StandardPageWrapper className="h-full flex flex-col">

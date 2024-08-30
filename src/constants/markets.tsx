@@ -1,4 +1,4 @@
-export const hardMarkets = [
+export const HARD_MARKETS = [
   {
     id: 0, // Senate Majority
     title: "Senate Majority",
