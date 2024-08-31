@@ -29,7 +29,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
     refetch: refetchOrders,
   } = useGetPositionsByWallet(walletAddress);
   const {
-    data: createdMarketsData,
+    markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
   } = useGetCreatedMarketsByUser(walletAddress);

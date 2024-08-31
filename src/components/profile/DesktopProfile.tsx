@@ -17,7 +17,6 @@ import {
 import { shortenAddress } from "@/utils/address/shortenAddress";
 import { FollowButton } from "./FollowButton";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 import {
   BlurOverlay,
@@ -27,22 +26,31 @@ import {
 import AnimatedBackground from "../common/Animated/AnimatedSelector";
 import { INVITES_ACTIVE } from "@/constants";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
-import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
+import {
+  aggregatePredictedItems,
+  aggregatePredictedItemsWithImage,
+} from "@/utils/predictions/aggregatePredictions";
+import { HARD_MARKETS } from "@/constants/markets";
+import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
+import { PredictionPositionModal } from "../modals/PredictionPositionModal";
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
   const balance = useUserUsdcBalance();
   const [filter, setFilter] = useState("All");
 
-  const { data: ordersData } = useGetPositionsByWallet(userId);
+  const { orders: ordersData } = useGetPositionsByWallet(userId);
 
   const {
-    data: createdMarketsData,
+    markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetMarketsCreatedByUser(userC?.externalAuthProviderUserId);
-
-  const aggregatedOrdersData = aggregatePredictedItems(ordersData ?? []);
+  } = useGetCreatedMarketsByUser(userId);
+  const aggregatedOrdersData = aggregatePredictedItemsWithImage(
+    ordersData ?? [],
+    HARD_MARKETS
+  );
   const mergedData =
     filter === "All"
       ? [
@@ -195,13 +203,51 @@ export function DesktopProfilePage2({ userId, userC }) {
           {mergedData.length > 0 ? (
             <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
               {mergedData?.map((item, index) => {
-                return (
-                  <ProfilePositionCard
-                    userName={userC?.name}
-                    pfp={userC?.pfp}
-                    {...item}
-                  />
-                );
+                console.log("item", item);
+                if (item.type === "created")
+                  return (
+                    <ProfilePositionCard
+                      userName={userC?.name}
+                      pfp={userC?.pfp}
+                      {...item}
+                    />
+                  );
+                else
+                  return (
+                    <DesktopMyBetModal
+                      key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
+                      title={item.market?.title}
+                      image={item?.image}
+                      price={item.tokensOwned}
+                      ownedAmount={item.tokensOwned}
+                      options={
+                        item.option === 1
+                          ? {
+                              name: item?.market?.outcomeA,
+                              odds: item?.market?.outcomeOddsA,
+                            }
+                          : {
+                              name: item?.market?.outcomeB,
+                              odds: item?.market?.outcomeOddsB,
+                            }
+                      }
+                      percentage={item.percentage}
+                      betId={item.marketId}
+                      topic={item.marketId}
+                      icon={item.icon}
+                      question={item.market?.question}
+                      option={item.option}
+                      optionNumber={item.option}
+                      isExternal={false}
+                      initialProb={item?.market?.initialProb / 100}
+                    >
+                      <ProfilePositionCard
+                        userName={userC?.name}
+                        pfp={userC?.pfp}
+                        {...item}
+                      />
+                    </DesktopMyBetModal>
+                  );
               })}
             </div>
           ) : (
@@ -221,7 +267,7 @@ export function DesktopProfilePage2({ userId, userC }) {
 }
 
 function ProfilePositionCard(
-  image,
+  item,
   title,
   description,
   icon,
@@ -239,39 +285,53 @@ function ProfilePositionCard(
       <div className="flex flex-col z-[10] pt-6 px-6">
         <div className="flex flex-row justify-between">
           <img
-            src={image.image}
+            src={item.image}
             className="h-20 w-20 object-cover  rounded-lg"
           />
           <div className="py-2 border-2 border-[#212121] h-10 px-3 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
-            38% Chance
+            {(
+              (Number(item.option) === 1
+                ? item?.market?.outcomeOddsA
+                : item?.market?.outcomeOddsB) / 100
+            ).toFixed(1)}
+            % Chance
           </div>
         </div>
-        {image.type === "created" ? (
+        {item.type === "created" ? (
           <div className="text-[1.8rem] mt-3 mb-2 font-[Aeonik-Bold] text-white">
             Created by
           </div>
         ) : (
           <div className="text-[2.6rem] mt-3 font-[Aeonik-Bold] text-white">
-            {image.options[Number(image.option) === 1 ? 0 : 1].name}
+            {Number(item.option) === 1
+              ? item?.market?.outcomeA
+              : item?.market?.outcomeB}
           </div>
         )}
         <div className="text-[1rem] -mt-1 font-[500] text-[lightgray]">
-          {image.type === "created" ? (
+          {item.type === "created" ? (
             <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
-              <img src={image.pfp} className="h-7 w-7 rounded-full " />{" "}
-              <div className="text-[1.02rem] font-[500]">{image.userName}</div>
+              <img src={item.pfp} className="h-7 w-7 rounded-full " />{" "}
+              <div className="text-[1.02rem] font-[500]">{item.userName}</div>
             </div>
           ) : (
-            `$${(Number(image.amount) / 10 ** 6).toFixed(2)} at stake`
+            `$${(
+              (Number(item.tokensOwned) *
+                ((Number(item.option) === 1
+                  ? item?.market?.outcomeOddsA
+                  : item?.market?.outcomeOddsB) /
+                  100)) /
+              10 ** 8
+            ).toFixed(2)} at stake`
           )}
         </div>
       </div>
       <div className="flex flex-col z-[10] px-6 pb-7">
         <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
-          {image.title}
+          {item.type === "created" ? item.title : item?.market?.title}
         </div>
         <div className="text-[1rem]  font-[500] text-[lightgray]">
-          {image.question}
+          {item.type === "created" ? item.question : item?.market?.question}
         </div>
       </div>
     </div>

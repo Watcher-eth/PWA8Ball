@@ -42,7 +42,7 @@ export function useGetCreatedMarketsByUser(userAddress: string) {
   //TODO: Get Topic
 
   return {
-    market: data?.markets?.items,
+    markets: data?.markets?.items,
     loading,
     error,
     refetch,

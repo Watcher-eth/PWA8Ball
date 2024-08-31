@@ -19,6 +19,7 @@ import { processPrices } from "@/utils/chartUtils";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
+import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -47,7 +48,7 @@ export const MobileMyBetModal = (props: {
 }) => {
   const [timeframe, setTimeframe] = useState("1M");
 
-  const { data: prices, error: priceError } = useGetPricesForMarket(
+  const { data: prices, error: priceError } = useGetMarketPrices(
     props.betId,
     timeframe
   );
@@ -69,6 +70,7 @@ export const MobileMyBetModal = (props: {
     // desktop: price.value,
     // mobile: 100 - price.value,
   }));
+
   return (
     <div
       className={`flex flex-col ${
@@ -104,27 +106,22 @@ export const MobileMyBetModal = (props: {
       </div>
       <div className="flex flex-row items-center justify-between mt-[3px]">
         <span className="text-[19px] text-white font-bold">
-          {prices
-            ? props.optionNumber === 1
-              ? currentPrices[currentPrices.length - 1].value.toFixed(2)
-              : currentPrices.length > 0
-              ? (100 - currentPrices[currentPrices.length - 1].value).toFixed(2)
-              : (100 - props.price).toFixed(2)
-            : props.price / 10000}
-          %{" "}
+          {currentPrices[currentPrices.length - 1].value.toFixed(2)}%{" "}
           {props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             ? props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             : props.options?.name}
         </span>
         <span
           className={`text-[20px] font-bold ${
-            props.optionNumber === 0 ? "text-[#FF0050]" : "text-[#0050FF]"
+            percentageDifference < 0
+              ? "text-[#FF0050]"
+              : percentageDifference === 0
+              ? "text-[lightgray]"
+              : "text-[#28cd41]"
           }`}
         >
-          {percentageDifference && percentageDifference >= 0
-            ? `+${percentageDifference}`
-            : `${percentageDifference}`}
-          %
+          {percentageDifference > 0 && "+"}
+          {percentageDifference}%
         </span>
       </div>
       <div className="flex flex-row items-center justify-between pb-1">
@@ -184,7 +181,7 @@ export const MobileMyBetModal = (props: {
                 $
                 {(
                   props.ownedAmount *
-                  (prices[prices.length - 1].value / 1000000)
+                  (currentPrices[currentPrices.length - 1]?.value / 100000000)
                 ).toFixed(2)}
               </span>
             )}
@@ -209,7 +206,7 @@ export const MobileMyBetModal = (props: {
                 $
                 {(
                   props.ownedAmount *
-                  (prices[prices.length - 1]?.value / 1000000)
+                  (currentPrices[currentPrices.length - 1]?.value / 100000000)
                 ).toFixed(2)}
               </span>
             )}
@@ -315,8 +312,8 @@ export function DesktopMyBetModal({
   return (
     <DesktopCardModal
       cardClassName="w-full rounded-[1.5rem]"
-      dialogContentClassName="w-[30vw] bg-[#080808] rounded-[1.5rem] min-w-[400px]"
-      cardContentClassName="w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[400px]"
+      dialogContentClassName=" w-[40vw] lg:w-[30vw] bg-[#080808] rounded-[1.5rem] min-w-[450px]"
+      cardContentClassName="w-[40vw] lg:w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[450px]"
       dialogClassName="w-full bg-[#080808] rounded-[1.5rem]"
       content={
         step === 1 ? (
@@ -324,7 +321,7 @@ export function DesktopMyBetModal({
             title={title}
             image={image}
             price={price}
-            ownedAmount={ownedAmount}
+            ownedAmount={Number(ownedAmount)}
             options={options}
             percentage={percentage}
             betId={betId}

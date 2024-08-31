@@ -7,7 +7,7 @@ import { WalletClient, getContract, Address } from "viem";
 import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
 
-async function cashoutPrediction(props: {
+async function redeemPrediction(props: {
   marketId: number;
   outcomeTokenAddress: Address;
   userId: string;
@@ -36,7 +36,7 @@ async function cashoutPrediction(props: {
   }
 }
 
-export const useCashout = () => {
+export const useRedeem = () => {
   return useMutation({
     mutationFn: cashoutPrediction,
     onSuccess: () => {
