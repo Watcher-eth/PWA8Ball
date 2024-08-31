@@ -16,7 +16,7 @@ export default async function GET(request: Request) {
     const fontData = await aeonikFontDataPromise;
     const user = await fetchUserByExternalAuthId(id);
 
-    const level = getLevel(user?.liquiditypoints!);
+    const level = getLevel(user?.liquidityPoints!);
     return new ImageResponse(
       (
         <div
@@ -35,7 +35,7 @@ export default async function GET(request: Request) {
           }}
         >
           <img
-            src={user?.pfp}
+            src={"../images/ProfileMetaBg.png"}
             alt="Background"
             style={{
               position: "absolute",

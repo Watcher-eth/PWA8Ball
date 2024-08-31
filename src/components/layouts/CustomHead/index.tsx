@@ -12,8 +12,10 @@ import { NextSeo } from "next-seo";
 
 export function CustomHead({ topicData, userId, router, ...rest }) {
   let headSeo;
-  if (topicData) {
+  if (topicData && topicData?.id !== 1) {
     headSeo = <TopicSeo {...topicData} />;
+  } else if (topicData && topicData?.id === 1) {
+    headSeo = <ElectionSeo {...topicData} />;
   } else if (userId) {
     headSeo = <ProfileSeo userId={userId} />;
   } else if (router?.query?.id) {
@@ -72,6 +74,38 @@ function TopicSeo({
         images: [
           {
             url: ogUrl,
+            width: 1200,
+            height: 630,
+            alt: "Topic Cover Image",
+          },
+        ],
+      }}
+      twitter={DEFAULT_TWITTER_INFO}
+    />
+  );
+}
+
+function ElectionSeo({
+  id,
+  name,
+  description,
+  image,
+  title,
+  icon,
+  topic,
+  type,
+  members,
+}) {
+  return (
+    <NextSeo
+      openGraph={{
+        title: title,
+        description: description,
+        type: "website",
+        url: getTopicUrl(id),
+        images: [
+          {
+            url: "../../../../public/images/ElectionsMeta.png",
             width: 1200,
             height: 630,
             alt: "Topic Cover Image",
