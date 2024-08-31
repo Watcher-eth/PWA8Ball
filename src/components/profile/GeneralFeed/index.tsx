@@ -73,25 +73,27 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
               title={item.market?.title}
               image={item?.image}
               price={item.tokensOwned}
-              ownedAmount={item.tokensOwned}
-              options={[
-                {
-                  name: item?.market?.outcomeA,
-                  odds: item?.market?.outcomeOddsA,
-                },
-                {
-                  name: item?.market?.outcomeB,
-                  odds: item?.market?.outcomeOddsB,
-                },
-              ]}
+              ownedAmount={Number(item.tokensOwned)}
+              options={
+                item.option === 1
+                  ? {
+                      name: item?.market?.outcomeA,
+                      odds: item?.market?.outcomeOddsA,
+                    }
+                  : {
+                      name: item?.market?.outcomeB,
+                      odds: item?.market?.outcomeOddsB,
+                    }
+              }
               percentage={item.percentage}
               betId={item.marketId}
               topic={item.marketId}
+              initialProb={item?.market?.initialProb / 100}
               icon={item.icon}
               question={item.market?.question}
               option={item.option}
               optionNumber={item.option}
-              isExternal={item.isExternal}
+              isExternal={false}
             >
               <UserPrediction
                 key={`predicted-${item.marketId}-${item.option}`}

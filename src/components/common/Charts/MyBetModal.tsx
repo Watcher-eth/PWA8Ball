@@ -71,6 +71,10 @@ export const MobileMyBetModal = (props: {
     // mobile: 100 - price.value,
   }));
 
+  const percentageDif =
+    ((currentPrices[currentPrices.length - 1].value - currentPrices[0].value) /
+      currentPrices[0].value) *
+    100;
   return (
     <div
       className={`flex flex-col ${

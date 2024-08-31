@@ -19,7 +19,6 @@ export function PredictionPositionModal({
   price,
   ownedAmount,
   options,
-  percentage,
   betId,
   topic,
   icon,
@@ -29,6 +28,7 @@ export function PredictionPositionModal({
   option,
   optionNumber,
   isExternal,
+  initialProb,
   onClose,
   openCashout,
   handleReceipt,
@@ -39,7 +39,6 @@ export function PredictionPositionModal({
   price: number;
   ownedAmount: number;
   options: string[];
-  percentage: number;
   betId: string;
   topic: string;
   icon: string;
@@ -49,6 +48,7 @@ export function PredictionPositionModal({
   option?: number;
   optionNumber?: number;
   isExternal?: boolean;
+  initialProb?: number;
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
@@ -98,9 +98,9 @@ export function PredictionPositionModal({
                   price={price}
                   ownedAmount={ownedAmount}
                   options={options}
-                  percentage={percentage}
                   betId={betId}
                   topic={topic}
+                  initialProb={initialProb}
                   icon={icon}
                   question={question}
                   name={name}
