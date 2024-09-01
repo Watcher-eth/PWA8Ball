@@ -6,16 +6,18 @@ import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
 export const GET_USER_BY_ID = tgql(/* GraphQL */ `
   query getUserById($id: String = "") {
     user(id: $id) {
-      externalAuthProviderUserId
-      createdAt
       name
       pfp
+      id
       socials
+      theme
       walletAddress
+      updatedAt
+      liquidityPoints
+      rewardPoints
     }
   }
 `);
-
 
 export async function getUserById(userId: string) {
   const { data } = await APOLLO_CLIENT.query({
@@ -24,8 +26,6 @@ export async function getUserById(userId: string) {
   });
   return data?.user as User;
 }
-
-
 
 export function useUserById(id: string) {
   const { data, loading, error, refetch } = useApolloQuery(GET_USER_BY_ID, {

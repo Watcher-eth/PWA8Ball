@@ -19,7 +19,7 @@ export function useGetUserPositionsCount(userAddress: string) {
     data,
     loading,
     error,
-  } = useApolloQuery(GET_USER_ORDER_COUNT, {
+  } = useApolloQuery(GET_USER_POSITION_COUNT, {
     variables: {
       userAddress: getChecksummedAddress(userAddress),
     },

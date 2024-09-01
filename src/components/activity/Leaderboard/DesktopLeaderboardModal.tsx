@@ -14,8 +14,7 @@ import { Trophy, X } from "lucide-react";
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 function DesktopLeaderboardModal({ children }) {
-  const data = useGetGlobalLeaderboard();
-  console.log("predicotrs3", data);
+  const { data } = useGetGlobalLeaderboard();
 
   if (data) {
     const top3Users = data?.slice(0, 3).map((predictor) => ({

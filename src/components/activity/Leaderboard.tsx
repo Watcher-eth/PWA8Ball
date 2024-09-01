@@ -2,26 +2,28 @@
 import { motion } from "framer-motion";
 import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors";
 
-import { AltSkeleton } from "@/components/ui/Skeleton";
+import { AltSkeleton, Skeleton } from "@/components/ui/Skeleton";
 import { PredictorInfo } from "./PredictorInfo";
 import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard";
 import LeaderBoardTop3 from "./Leaderboard/LeaderboardTop3";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function Leaderboard(props: { isDesktop: boolean }) {
-  const { data: topPredictors, isLoading } = useGetTopPredictors();
-  const data = useGetGlobalLeaderboard();
+  const { data, isLoading } = useGetGlobalLeaderboard();
   if (isLoading) {
+    return <LoadingLeaderboardSkeleton />;
   }
 
-
-  if (topPredictors) {
-    const top3Users = topPredictors?.slice(0, 3).map((predictor) => ({
+  if (data) {
+    const top3Users = data?.slice(0, 3).map((predictor) => ({
       name: predictor.name?.length > 0 ? predictor?.name : "Anon",
-      image: predictor.pfp?.length > 0 ? predictor.pfp : defaultAvatar,
-      score: predictor.total_amount / 1000000,
+      image:
+        predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
+      score: predictor.totalAmountUsdc / 1000000,
+      walletAddress: predictor?.walletAddress,
     }));
 
-    const remainingPredictors = topPredictors?.slice(3);
+    const remainingPredictors = data?.slice(3);
 
     return (
       <motion.div
@@ -61,19 +63,19 @@ export function Leaderboard(props: { isDesktop: boolean }) {
 }
 
 export function LoadingLeaderboardSkeleton() {
-  return [1, 2, 3, 4].map((index) => (
+  return [1, 2, 3, 4, 5, 6, 7].map((index) => (
     <motion.div
       key={index}
-      className="flex flex-row items-center justify-between my-1.25"
+      className="flex flex-row items-center justify-between my-3"
     >
       <div className="flex flex-row items-center">
-        <span className="text-white font-bold">{index + 1}</span>
+        <span className="text-white font-bold">{index}</span>
         <div className="mx-3 ml-2.5">
-          <AltSkeleton className="h-7.5 w-7.5 !rounded-full !bg-gray-900" />
+          <Skeleton className="h-7 w-7 !rounded-full " />
         </div>
-        <AltSkeleton className="h-4.25 w-10 !bg-gray-900" />
+        <Skeleton className="h-4 w-40 " />
       </div>
-      <AltSkeleton className="h-3.5 w-6.25 bg-gray-900" />
+      <Skeleton className="h-5 w-14 " />
     </motion.div>
   ));
 }

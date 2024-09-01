@@ -66,7 +66,7 @@ export function PredictionPositionModal({
           setSnap(`${window.innerHeight * 0.85}px`);
         }}
         snapPoints={[
-          `${window.innerHeight * 0.83}px`,
+          `${window.innerHeight * 0.85}px`,
           `${window.innerHeight * 1}px`,
         ]}
         activeSnapPoint={snap}

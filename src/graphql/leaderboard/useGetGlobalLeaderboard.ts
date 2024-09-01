@@ -1,7 +1,7 @@
-import { useApiEndpoint } from "@/graphql/useApiEndpoint"
+import { useApiEndpoint } from "@/graphql/useApiEndpoint";
 
 export function useGetGlobalLeaderboard() {
-  const { data } = useApiEndpoint("/leaderboard");
+  const { data, isLoading } = useApiEndpoint("/leaderboard");
 
-  return data;
+  return { data: data, isLoading };
 }

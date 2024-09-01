@@ -21,11 +21,11 @@ export function MobileNavBar() {
   return (
     <div
       className={`
-      bg-black/20 items-center justify-center p-[0.9rem] rounded-full backdrop-blur-sm
-      z-3 self-center border-[0.5px] border-[rgba(255,255,255,0.4)] filter-[saturate(100%)_blur(35px)]
+      bg-[#212121]/20 items-center mb-1 justify-center p-[0.9rem] rounded-full backdrop-blur-sm
+      z-3 self-center border-[0.5px] border-[rgba(200,200,200,0.2)] backdrop-blur-lg
     `}
     >
-      <div className="w-[65vw] max-w-[17rem] flex px-2 justify-between items-center mx-auto">
+      <div className="w-[60vw] max-w-[17rem] flex px-2  justify-between items-center mx-auto">
         <MobileNavBtn IconComponent={Home} href={HOME_PATH} />
         <MobileNavBtn IconComponent={Search} href={ACTIVITY_PATH} />
 
