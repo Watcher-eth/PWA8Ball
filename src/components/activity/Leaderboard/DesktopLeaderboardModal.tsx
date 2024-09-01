@@ -35,10 +35,10 @@ function DesktopLeaderboardModal({ children }) {
         <DialogContent
           className={`
         p-0 bg-transparent  border-0
-        rounded-2xl
-        bg-[#101010]/80
+        rounded-3xl
+        bg-[#090909]/85
         backdrop-blur-xl
-        border-2 border-[#191919]
+        border-[0.08rem] border-[#212121]
         h-[80%]
 
       `}

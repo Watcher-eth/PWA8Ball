@@ -319,8 +319,8 @@ export function DesktopMyBetModal({
         setStep(1);
       }}
       cardClassName="w-full rounded-[1.5rem]"
-      dialogContentClassName=" w-[40vw] lg:w-[30vw] bg-[#080808] rounded-[1.5rem] min-w-[450px]"
-      cardContentClassName="w-[40vw] lg:w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[450px]"
+      dialogContentClassName=" w-[40vw] lg:w-[30vw] xl:w-[25vw] bg-[#080808] rounded-[1.5rem] min-w-[450px]"
+      cardContentClassName="w-[40vw] lg:w-[30vw] xl:w-[25vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[450px]"
       dialogClassName="w-full bg-[#080808] rounded-[1.5rem]"
       content={
         step === 1 ? (

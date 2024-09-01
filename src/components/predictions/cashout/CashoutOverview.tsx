@@ -47,7 +47,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
       </div>
       <div
         className={`flex flex-col p-5 rounded-[20px] items-center justify-center w-full ${
-          props?.isDesktop ? "bg-[#171717]" : "bg-[#1C1C1C]"
+          props?.isDesktop ? "bg-[#121212]" : "bg-[#121212]"
         } mt-2.5`}
       >
         <span className="text-[50px] text-white font-extrabold">

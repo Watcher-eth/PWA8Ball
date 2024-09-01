@@ -65,7 +65,7 @@ export function CashoutWarningScreen({
             Hold and earn more
           </span>
         </div>
-        <div className="flex flex-col p-[16px] rounded-[15px] mt-[8px] bg-[#1C1C1C]">
+        <div className="flex flex-col p-[16px] rounded-[15px] mt-[8px] bg-[#121212]">
           <div className="flex flex-row items-center mb-[7px] justify-between">
             <span className="text-[16.5px] text-[#D3D3D3] font-medium">
               Now
@@ -94,7 +94,7 @@ export function CashoutWarningScreen({
             isDesktop ? changeStep(4) : changeStep(1);
           }}
           className={`
-            mt-[12px] py-2.5 rounded-[24px] overflow-hidden bg-[#1C1C1C]
+            mt-[12px] py-2.5 rounded-[24px] overflow-hidden bg-[#151515]
             ${isDesktop ? "w-1/2" : `w-[${width / 2.5}px]`}
             flex items-center justify-center cursor-pointer
           `}
