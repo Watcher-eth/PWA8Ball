@@ -14,22 +14,19 @@ import { Trophy, X } from "lucide-react";
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 function DesktopLeaderboardModal({ children }) {
-  const { data: topPredictors, isLoading } = useGetTopPredictors();
   const data = useGetGlobalLeaderboard();
+  console.log("predicotrs3", data);
 
-  if (isLoading) {
-  }
-
-  if (topPredictors) {
-    const top3Users = topPredictors?.slice(0, 3).map((predictor) => ({
+  if (data) {
+    const top3Users = data?.slice(0, 3).map((predictor) => ({
       name: predictor.name?.length > 0 ? predictor?.name : "Anon",
       image:
         predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
-      score: predictor.total_amount / 1000000,
+      score: predictor.totalAmountUsdc / 1000000,
       walletAddress: predictor?.walletAddress,
     }));
 
-    const remainingPredictors = topPredictors?.slice(3);
+    const remainingPredictors = data?.slice(3);
 
     return (
       <Dialog className={`!rounded-[1.5rem]`}>
@@ -74,7 +71,7 @@ function DesktopLeaderboardModal({ children }) {
                   totalAmountUsdc={predictor.total_amount}
                   {...predictor}
                   address={predictor?.walletAddress}
-                  index={index}
+                  index={index + 3}
                 />
               )) ??
                 (!remainingPredictors ? (

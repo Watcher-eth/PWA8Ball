@@ -61,12 +61,7 @@ export function CashoutConfirmScreen(props: {
               {props.options?.name}
             </span>
           </div>
-          <motion.div
-            onClick={() => (props.isDesktop ? props.changeStep(4) : onClose())}
-            className="py-[14.5px] px-[8.5px] rounded-[2px] cursor-pointer"
-          >
-            <X color={"#585858"} strokeWidth={5} height={18} />
-          </motion.div>
+          <div className="px-6" />
         </div>
         <div className="flex flex-row items-center justify-center">
           <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">

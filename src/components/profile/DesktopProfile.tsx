@@ -41,7 +41,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [filter, setFilter] = useState("All");
 
   const { orders: ordersData } = useGetPositionsByWallet(userId);
-
+  console.log("users", userC.walletAddress === user?.walletAddress);
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -133,7 +133,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           <div className="flex flex-row space-x-3 items-center mt-3">
             <div
               onClick={() => copyToClipboard(userC?.walletaddress)}
-              className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
+              className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
             >
               <div>
                 {userC?.walletAddress
@@ -142,12 +142,12 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
               <Copy size={16} color="white" strokeWidth={2.5} />
             </div>
-            {userC?.name === user?.name ? (
+            {userC?.walletAddress === user?.walletAddress ? (
               <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
                 <div>Edit Profile</div>
               </div>
             ) : (
-              <FollowButton profileId={userC?.walletaddress} />
+              <FollowButton profileId={userC?.walletAddress} />
             )}
           </div>
           {userC?.name === user?.name && balance < 1 && (
@@ -277,7 +277,7 @@ function ProfilePositionCard(
   userName
 ) {
   return (
-    <div className="w-full h-[50vh] border-2 border-[#121212] bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
+    <div className="w-full hover:scale-[100.5%] active:scale-99 h-[50vh] border-2 border-[#121212] bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
       <img
         src={"/images/Grid.png"}
         className="w-full h-full z-[1] object-cover rounded-lg absolute"

@@ -21,7 +21,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
 
   return (
     <div
-      className={`flex flex-col items-center ${
+      className={`flex flex-col  items-center ${
         props?.isDesktop
           ? "bg-transparent p-2.5 mt-2.5"
           : "bg-[#101010] p-[30px_20px] mt-[50px]"
@@ -34,12 +34,16 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           </div>
           <span className="ml-2 text-[22px] text-white">{props.title}</span>
         </div>
-        <motion.div
-          onClick={() => props.onClose()}
-          className="p-[8.5px_6px] rounded-[17px] overflow-hidden bg-[#1C1C1C] self-start cursor-pointer"
-        >
-          <X color={"#585858"} strokeWidth={5.5} height={18} />
-        </motion.div>
+        {props?.isDesktop ? (
+          <div className="p-[8.5px]" />
+        ) : (
+          <motion.div
+            onClick={() => onClose()}
+            className="p-[8.5px] rounded-[17px] overflow-hidden bg-[#1C1C1C] cursor-pointer"
+          >
+            <X color={"#585858"} strokeWidth={5} height={18} />
+          </motion.div>
+        )}
       </div>
       <div
         className={`flex flex-col p-5 rounded-[20px] items-center justify-center w-full ${
@@ -47,9 +51,9 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         } mt-2.5`}
       >
         <span className="text-[50px] text-white font-extrabold">
-          ${props?.totalPot?.toFixed(2)}
+          ${(props?.totalPot / 10 ** 6).toFixed(2)}
         </span>
-        <span className="text-[15px] text-lightgray font-medium mt-[-11px]">
+        <span className="text-[15px] text-[lightgray] font-medium mt-[-11px]">
           Unresolved
         </span>
       </div>
@@ -78,7 +82,6 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
       <div className="flex flex-row items-center gap-1 w-full mb-1 mt-2.5">
         <motion.div
           onClick={() => {
-
             props?.changeStep(1);
           }}
           className={`mt-3 flex flex-row p-${

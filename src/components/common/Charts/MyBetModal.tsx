@@ -79,9 +79,9 @@ export const MobileMyBetModal = (props: {
     <div
       className={`flex flex-col ${
         props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
-      } self-center pb-[20px] gap-[2px] ${
+      } self-center pb-[8px] gap-[2px] ${
         props?.isDesktop ? "p-[6px]" : "p-[15px]"
-      } pt-[8px] rounded-t-[30px] w-full`}
+      } pt-[5px] rounded-t-[30px] w-full`}
     >
       <div className="flex flex-row items-center justify-between my-[5px]">
         <motion.div
@@ -129,10 +129,10 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       <div className="flex flex-row items-center justify-between pb-1">
-        <span className="text-base text-white/80 font-semibold">
+        <span className="text-base text-white/70 font-[500]">
           {props.title}
         </span>
-        <span className="text-base text-white/80 font-semibold">
+        <span className="text-base text-white/80 font-[500]">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
@@ -151,7 +151,7 @@ export const MobileMyBetModal = (props: {
           <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       )}
-      <div className="w-full">
+      <div className="w-full -mb-4 -mt-1">
         <TimeframeSelector
           timeframes={timeframes}
           timeframe={timeframe}
@@ -226,7 +226,7 @@ export const MobileMyBetModal = (props: {
               props.setStep(2);
             }
           }}
-          className="mt-[11px] rounded-[25px] p-[10px] bg-[#1D1D1D] flex items-center justify-center flex-row gap-[3px] w-1/2"
+          className="mt-[10px] rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
         >
           {props.name ? (
             <User2 height={20} color={"#D9D9D9"} strokeWidth={3.3} />
@@ -241,7 +241,7 @@ export const MobileMyBetModal = (props: {
           onClick={() => {
             props.setStep(4);
           }}
-          className="mt-[11px] flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
+          className="mt-[10px] flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
           <span className="text-[20px] text-[#1D1D1D] font-bold ml-[3px]">
@@ -251,12 +251,12 @@ export const MobileMyBetModal = (props: {
       </div>
       <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
       <div className="flex flex-row items-center gap-[4px]">
-        <AlignLeft color="white" strokeWidth={3} size={17} />
-        <span className="text-white font-semibold text-[19px]">
+        <AlignLeft color="lightgray" strokeWidth={3} size={17} />
+        <span className="text-[lightgray] font-semibold text-[19px]">
           About {props.title}
         </span>
       </div>
-      <span className="text-white text-[16.5px] leading-[19px] mt-[5px]">
+      <span className="text-[white] text-[16.5px] leading-[19px] mt-[5px]">
         {props.question}
       </span>
       <div className="h-[1px] w-full bg-[rgba(100,100,100,0.3)] my-[14px] mt-[12px]" />
@@ -315,6 +315,9 @@ export function DesktopMyBetModal({
   const [step, setStep] = useState(1);
   return (
     <DesktopCardModal
+      onOpenChange={() => {
+        setStep(1);
+      }}
       cardClassName="w-full rounded-[1.5rem]"
       dialogContentClassName=" w-[40vw] lg:w-[30vw] bg-[#080808] rounded-[1.5rem] min-w-[450px]"
       cardContentClassName="w-[40vw] lg:w-[30vw] bg-[#080808] self-center rounded-[1.5rem] h-full min-w-[450px]"
@@ -352,8 +355,8 @@ export function DesktopMyBetModal({
             id={betId}
             odds={"20"}
             onClose={() => {}}
-            totalPot={ownedAmount}
-            amount={ownedAmount}
+            totalPot={Number(ownedAmount)}
+            amount={Number(ownedAmount)}
             isDesktop={true}
           />
         ) : step === 3 ? (
@@ -366,8 +369,8 @@ export function DesktopMyBetModal({
             changeStep={setStep}
             id={betId}
             multiplier={"2"}
-            points={ownedAmount}
-            amount={ownedAmount}
+            points={Number(ownedAmount)}
+            amount={Number(ownedAmount)}
             onClose={() => {}}
             isDesktop={true}
           />
@@ -383,8 +386,8 @@ export function DesktopMyBetModal({
             id={betId}
             odds={"20"}
             onClose={() => {}}
-            totalPot={ownedAmount}
-            points={ownedAmount}
+            totalPot={Number(ownedAmount)}
+            points={Number(ownedAmount)}
           />
         ) : null
       }

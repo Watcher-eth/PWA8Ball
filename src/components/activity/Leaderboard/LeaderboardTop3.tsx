@@ -1,4 +1,6 @@
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
+import { getProfilePath } from "@/utils/urls";
+import Link from "next/link";
 import React from "react";
 
 interface LeaderBoardTopUser {
@@ -27,11 +29,13 @@ const UserCard: React.FC<{
           walletAddress: user?.walletAddress,
         }}
       >
-        <img
-          src={user.image}
-          alt={user.name}
-          className="h-20 hover:scale-102 w-20 rounded-full"
-        />
+        <Link href={getProfilePath(user?.walletAddress)}>
+          <img
+            src={user.image}
+            alt={user.name}
+            className="h-20 hover:scale-102 w-20 rounded-full"
+          />
+        </Link>
       </ProfileToolTip>
     ) : (
       <div className="h-20 w-20 rounded-full bg-gray-300 animate-pulse"></div>

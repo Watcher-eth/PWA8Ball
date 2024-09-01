@@ -19,6 +19,7 @@ export function DesktopCardModal({
   cardClassName = "",
   cardContentClassName = "",
   dialogClassName = "",
+  onOpenChange = null,
 }: {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -28,9 +29,13 @@ export function DesktopCardModal({
   cardClassName?: string;
   cardContentClassName?: string;
   dialogClassName?: string;
+  onOpenChange?: () => {};
 }) {
   return (
-    <Dialog className={`!rounded-[1.5rem] ${dialogClassName}`}>
+    <Dialog
+      onOpenChange={onOpenChange}
+      className={`!rounded-[1.5rem] ${dialogClassName}`}
+    >
       <DialogTrigger asChild>
         <div>{children}</div>
       </DialogTrigger>

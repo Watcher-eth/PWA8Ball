@@ -28,7 +28,9 @@ export function useGetUserLp(userAddress: string) {
     error: lpError,
     refetch,
   } = useApolloQuery(GET_USER_LP, {
-    variables: { userAddress: getChecksummedAddress(userAddress) },
+    variables: {
+      userAddress: userAddress,
+    },
     skip: !Boolean(userAddress),
   });
 

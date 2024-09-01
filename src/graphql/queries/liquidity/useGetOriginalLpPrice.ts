@@ -13,15 +13,13 @@ const GET_LP_CHART_DATA = gql`
       }
     }
   }
-`
+`;
 
 export function useGetOriginalLpPrice(userAddress: string) {
-  const {
-    data,
-    loading,
-    error,
-  } = useApolloQuery(GET_LP_CHART_DATA, {
-    variables: { userAddress: getChecksummedAddress(userAddress) },
+  const { data, loading, error } = useApolloQuery(GET_LP_CHART_DATA, {
+    variables: {
+      userAddress: userAddress,
+    },
   });
 
   return {

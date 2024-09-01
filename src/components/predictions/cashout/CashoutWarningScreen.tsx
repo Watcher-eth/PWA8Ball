@@ -41,12 +41,16 @@ export function CashoutWarningScreen({
       >
         <div className="flex flex-row items-center justify-between w-full">
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
-          <motion.div
-            onClick={() => onClose()}
-            className="p-[8.5px] rounded-[17px] overflow-hidden bg-[#1C1C1C] cursor-pointer"
-          >
-            <X color={"#585858"} strokeWidth={5} height={18} />
-          </motion.div>
+          {isDesktop ? (
+            <div className="p-[8.5px]" />
+          ) : (
+            <motion.div
+              onClick={() => onClose()}
+              className="p-[8.5px] rounded-[17px] overflow-hidden bg-[#1C1C1C] cursor-pointer"
+            >
+              <X color={"#585858"} strokeWidth={5} height={18} />
+            </motion.div>
+          )}
         </div>
         <span className="text-[21px] text-white mt-[14px] font-semibold leading-[24px]">
           Are you sure you want to cash out prior to resolution?
@@ -67,7 +71,7 @@ export function CashoutWarningScreen({
               Now
             </span>
             <span className="text-[16.5px] text-[#D3D3D3] font-normal">
-              ${points?.toFixed(2)}
+              ${(points / 10 ** 6)?.toFixed(2)}
             </span>
           </div>
           <div className="flex flex-row items-center justify-between">
@@ -75,7 +79,7 @@ export function CashoutWarningScreen({
               Possible Payout
             </span>
             <span className="text-[20px] text-white font-semibold">
-              ${(points * 3).toFixed(2)}
+              ${((points * 3) / 10 ** 6).toFixed(2)}
             </span>
           </div>
         </div>
@@ -87,7 +91,6 @@ export function CashoutWarningScreen({
       >
         <motion.div
           onClick={() => {
-
             isDesktop ? changeStep(4) : changeStep(1);
           }}
           className={`
