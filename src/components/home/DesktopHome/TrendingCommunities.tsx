@@ -6,8 +6,6 @@ import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsW
 
 import { getTopicPath } from "@/utils/urls";
 
-
-
 export function TrendingCommunities() {
   const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
 
@@ -17,16 +15,15 @@ export function TrendingCommunities() {
         Popular Communities
       </div>
       <div className="flex flex-row space-x-7">
-        {
-          topics?.map((topic, index) => {
-            // @ts-ignore
-            return <TrendingCommunityItem {...topic} key={index} />;
-          }) ??
+        {topics?.map((topic, index) => {
+          // @ts-ignore
+          return <TrendingCommunityItem {...topic} key={index} />;
+        }) ??
           [1, 2].map((index) => (
-              <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
-                <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
-              </div>
-            ))}
+            <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
+              <Skeleton className=" rounded-lg w-1/2  h-[40vh]" />
+            </div>
+          ))}
       </div>
     </div>
   );
@@ -38,10 +35,10 @@ function TrendingCommunityItem({
   description,
   image,
 }: {
-  id: string
-  title: string
-  description: string
-  image?: string
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
 }) {
   return (
     <Link
@@ -53,9 +50,9 @@ function TrendingCommunityItem({
         alt="Gallery Background"
         className="absolute inset-0 w-full rounded-md  h-[29vw] object-cover"
       />
-      <div className="absolute inset-0 w-full  h-[29vw] rounded-md  bg-[#151515]/70" />
+      <div className="absolute inset-0 w-full h-[29vw]  rounded-md  bg-[#151515]/70" />
 
-      <div className="relative z-10 flex flex-col mt-14  items-center justify-center h-full text-white">
+      <div className="relative z-10 flex flex-col lg:mt-14   items-center justify-center h-full text-white">
         <img
           src={image}
           alt="Topic image"
@@ -64,7 +61,7 @@ function TrendingCommunityItem({
 
         <h2 className="text-4xl font-bold mb-6 mt-4">{title}</h2>
 
-        <div className="flex justify-center space-x-6 mt-12">
+        <div className="flex justify-center space-x-3 px-3 lg:px-0 lg:mt-12">
           <div className="text-center flex flex-col items-center -space-y-0">
             <p className="text-lg font-semibold">Members</p>
             <div className="flex items-center justify-center space-x-2 mt-2">
@@ -121,10 +118,3 @@ function TrendingCommunityItem({
     </Link>
   );
 }
-
-
-
-
-
-
-

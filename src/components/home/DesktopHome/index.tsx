@@ -42,7 +42,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
           setSelectedTopic={setSelectedTopic}
           selectedTopic={selectedTopic}
         />
-        <div className="h-[0.05rem] mt-4 w-full bg-[#212121] px-8" />
+        <div className="h-[0.05rem] mt-4 w-full bg-[#212121] px-9" />
 
         <div className="pt-11 pb-9 flex flex-row px-1">
           <DesktopHomeNews amount={4} markets={enrichedFeedData} />
