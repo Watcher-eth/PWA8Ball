@@ -79,7 +79,7 @@ export function PredictionPositionModal({
             {children}
           </div>
         </DrawerTrigger>
-        <DrawerContent className=" border-0 rounded-3xl self-center">
+        <DrawerContent className=" border-0 bg-[#0c0c0c] pb-10 rounded-t-[2rem] self-center">
           <motion.div
             layout
             transition={{ duration: 0.2 }}
@@ -88,7 +88,7 @@ export function PredictionPositionModal({
               alignSelf: "center",
               marginBottom: step !== 1 ? 15 : 0,
             }}
-            className="bg-[#121212] rounded-3xl   relative"
+            className="bg-[#0c0c0c] rounded-3xl   relative"
           >
             <AnimatePresence>
               {step === 1 && (

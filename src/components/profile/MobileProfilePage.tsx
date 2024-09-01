@@ -9,6 +9,8 @@ import { SocialsSection } from "@/components/common/SocialsSection";
 import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
 import { BlurOverlayWrapper } from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
+import { DesktopProfilePopover } from "../layouts/DesktopProfilePopover";
+import { MobileProfilePopover } from "../layouts/MobileProfilePopover";
 
 export function MobileProfilePage({
   userId,
@@ -24,7 +26,7 @@ export function MobileProfilePage({
   });
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
-      <div className="flex flex-col items-center  bg-[#080808] relative">
+      <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
         <div className="w-full relative">
           <img
             src={userC?.pfp}
@@ -42,10 +44,12 @@ export function MobileProfilePage({
               className="top-4 left-6"
             />
           </Link>
-          <AbsoluteBlurIcon
-            IconComponent={CircleEllipsis}
-            className="top-4 right-6"
-          />
+          <MobileProfilePopover>
+            <AbsoluteBlurIcon
+              IconComponent={CircleEllipsis}
+              className="top-4 right-6"
+            />
+          </MobileProfilePopover>
           <img
             src={userC?.pfp}
             className="size-[5rem] -mt-2.5 rounded-full border-4 border-[#202020] "
@@ -96,7 +100,7 @@ function AbsoluteBlurIcon({
   return (
     <div
       className={`
-        absolute p-2 bg-[rgba(18, 18, 18, 0.9) backdrop-blur-xl border-[0.05rem] border-[#202020]/20 rounded-[25px]
+        absolute p-2 bg-[rgba(18, 18, 18, 0.9) active:scale-93 backdrop-blur-xl border-[0.05rem] border-[#202020]/20 rounded-[25px]
         ${className}
       `}
     >

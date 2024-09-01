@@ -127,7 +127,9 @@ export function SearchOverview() {
                 </div>
               </div>
             ) : isLoading ? (
-              <Spinner loading={isLoading} />
+              <div className="h-full mt-40 flex justify-center items-center">
+                <Spinner loading={isLoading} />
+              </div>
             ) : (
               <>
                 {searchMarkets?.length > 0 && (

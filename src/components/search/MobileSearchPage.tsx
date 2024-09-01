@@ -101,7 +101,7 @@ export function MobileSearchPage() {
 
   console.log("markets", searchMarkets);
   return (
-    <div className="flex flex-col gap-6 p-6 py-10 sm:p-8">
+    <div className="flex flex-col gap-6 p-6 py-10 bg-[#080808] min-h-screen sm:p-8">
       <h2 className="text-3xl font-[600] text-white -mb-3">Search</h2>
 
       <div className="relative">
@@ -137,7 +137,9 @@ export function MobileSearchPage() {
                 </div>
               </div>
             ) : isLoading ? (
-              <Spinner success={!isLoading} loading={isLoading} />
+              <div className="h-full mt-40 flex justify-center items-center">
+                <Spinner success={!isLoading} loading={isLoading} />
+              </div>
             ) : (
               <>
                 {searchMarkets?.length > 0 && (
@@ -209,6 +211,7 @@ export function MobileSearchPage() {
                       name={friend.name}
                       handle={friend.handle}
                       time={friend.time}
+                      walletAddress={friend?.walletAddress}
                     />
                   ))}
                 </div>
@@ -247,7 +250,7 @@ function Section({ title, children }) {
   );
 }
 
-function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function SearchIcon(props: any) {
   return (
     <svg
       {...props}
