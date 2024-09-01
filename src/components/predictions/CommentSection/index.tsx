@@ -70,7 +70,7 @@ export function CommentSection({
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
       <AddComment user={user} addOptimisticComment={addOptimisticComment} />
-      <div className="-mt-10 -mb-1.5">
+      <div className="-mt-7 -mb-1.5">
         {allComments.length > 0 &&
           allComments.map((item) => {
             const commentUser = findUserByExternalAuthId(

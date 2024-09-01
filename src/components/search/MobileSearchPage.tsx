@@ -102,7 +102,7 @@ export function MobileSearchPage() {
   console.log("markets", searchMarkets);
   return (
     <div className="flex flex-col gap-6 p-6 py-10 sm:p-8">
-      <h2 className="text-3xl font-semibold text-white -mb-2">Search</h2>
+      <h2 className="text-3xl font-[600] text-white -mb-3">Search</h2>
 
       <div className="relative">
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -117,7 +117,7 @@ export function MobileSearchPage() {
 
       <AnimatePresence>
         <div
-          className={`transition-all flex flex-col  -mt-1 items-center min-h-[45vh] w-full duration-300`}
+          className={`transition-all flex flex-col  -mt-1 items-center min-h-[45vh] -gap-4 w-full duration-300`}
           style={{
             height: `calc(${masterList.length * 60}px+60px)`,
           }}
@@ -242,7 +242,7 @@ function Section({ title, children }) {
   return (
     <div className="mb-4 ml-4 w-[104%]">
       <h3 className="text-[lightgray] text-sm mb-1">{title}</h3>
-      <div className="-ml-1 w-full flex flex-col -gap-2">{children}</div>
+      <div className="-ml-1 w-full flex flex-col -my-1 -gap-2">{children}</div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export function useUserUsdcBalance() {
   const { address } = useAccount();
   console.log("address", address, user?.walletAddress);
   const balance = useUsdcBalance({
-    address: address ?? user?.walletaddress,
+    address: address ?? user?.walletAddress,
   });
   console.log("balane", balance);
   return balance;

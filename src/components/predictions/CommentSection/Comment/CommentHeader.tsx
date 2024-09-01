@@ -32,7 +32,7 @@ export function CommentHeader({
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row items-center">
-              <p className="text-base text-white font-[Aeonik-Bold] hover:text-white/80">
+              <p className="text-base text-white font-[Aeonik] hover:text-white/80">
                 {user?.name}
               </p>
               {user2 && (

@@ -26,8 +26,8 @@ export function MobileNavBar() {
   return (
     <div
       className={`
-      bg-[#212121]/20 items-center mb-1 justify-center p-[0.9rem] rounded-full backdrop-blur-sm
-      z-3 self-center border-[0.5px] border-[rgba(200,200,200,0.2)] backdrop-blur-lg
+      bg-[#212121]/20 items-center mb-1 justify-center p-[0.9rem] rounded-full 
+      z-3 self-center border-[0.5px] border-[rgba(90,90,90,0.2)] backdrop-blur-lg
     `}
     >
       <div className="w-[60vw] max-w-[17rem] flex px-2  justify-between items-center mx-auto">
@@ -73,7 +73,7 @@ function MobileNavBtn({
   href?: string;
 }) {
   const content = iconSrc ? (
-    <img className="size-6 rounded-full" src={iconSrc} />
+    <img className="size-7 object-cover rounded-full" src={iconSrc} />
   ) : (
     <IconComponent className="size-6 text-white" />
   );

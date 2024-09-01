@@ -19,10 +19,10 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       animate="animate"
       exit="exit"
     >
-      <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.3rem]">
+      <div className="text-white text-[1.5rem] font-semibold mt-3 mx-[1.3rem]">
         Prop up your account
       </div>
-      <div className="text-[#999999] text-base/5 text-[1.08rem] m-[-0.1rem]  font-bold mx-[1.3rem]">
+      <div className="text-[lightgray] text-base/5 text-[1.08rem] m-[-0.1rem]  font-[500] mx-[1.3rem]">
         You don't have enough funds. Please fund your account to continue.
       </div>
       <div className="h-px w-full my-6 mb-4 bg-[#383838] mx-6 rounded-full" />
@@ -47,7 +47,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         className="bg-green-400"
         onClick={() => setStep(4)}
       />
-      <div className="flex items-center mt-8 w-full space-x-4 mb-3  m-4 mx-6 justify-between mx-2">
+      <div className="flex items-center mt-5 max-w-full space-x-4  mb-6 m-4 mx-6 justify-between mx-2">
         <Button
           onClick={() => setStep(1)}
           className={`
@@ -88,7 +88,7 @@ function LabeledSectionWithIcon({
     <div
       onClick={onClick}
       className={`
-        flex mt-5 mb-2 w-full bg-[#1D1D1D] mx-6 rounded-md
+        flex mt-5 mb-2 max-w-full bg-[#1D1D1D] mx-6 rounded-md
         active:scale-96 hover:scale-101 transition-all
       `}
     >
@@ -99,7 +99,7 @@ function LabeledSectionWithIcon({
       </div>
       <div className=" flex flex-col space-y-[-0.15rem] font-bold mb-3 mt-2 mr-1 ml-3">
         <div className="text-white text-[1.1rem] font-bold">{title}</div>
-        <div className="text-[#989898]  text-base/4 text-[0.9rem]">
+        <div className="text-[#989898]  text-base/4 max-w-[98%] text-[0.9rem]">
           {description}
         </div>
       </div>

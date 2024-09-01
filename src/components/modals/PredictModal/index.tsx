@@ -45,9 +45,9 @@ export function PredictModal({
   const setVotingState = useVotingStore((state) => state.setState);
   const amount = useVotingStore((state) => state.amount);
   const { user } = useUserStore();
-  const userBalance = useUserUsdcBalance();
-
-  const baseFontSize = "4rem";
+  const userBalanceUnformatted = useUserUsdcBalance();
+  const userBalance = Number(userBalanceUnformatted) / 10 ** 6;
+  const baseFontSize = "5.3rem";
   const lengthAdjustmentThreshold = 3;
   const fontSizeAdjustmentFactor = 0.95;
 
@@ -133,7 +133,7 @@ export function PredictModal({
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#080808] rounded-3xl w-screen relative"
+            className="bg-[#080808] rounded-2xl w-screen relative"
           >
             <AnimatePresence>
               {step === 1 && (
@@ -145,13 +145,13 @@ export function PredictModal({
                       alt="Question"
                     />
                     <Marquee className="ml-2">
-                      <span className="text-lg font-bold text-gray-400 whitespace-nowrap">
+                      <span className="text-lg font-bold text-[lightgray] whitespace-nowrap">
                         {question}
                         {"   "}
                       </span>
                     </Marquee>
                   </div>
-                  <div className="flex flex-col items-center pt-[62px] pb-[55px]">
+                  <div className="flex flex-col items-center py-20 pb-20">
                     <motion.div
                       animate={{
                         x: shake ? [0, -10, 10, -10, 10, 0] : 0,
@@ -159,7 +159,7 @@ export function PredictModal({
                       transition={{ duration: 0.5 }}
                       className="flex flex-row items-center justify-center"
                     >
-                      <span className="text-3xl font-mono text-gray-400 mr-1">
+                      <span className="text-3xl font-mono text-[lightgray] mr-1">
                         $
                       </span>
                       <motion.span
@@ -174,7 +174,7 @@ export function PredictModal({
                     {parseFloat(sliderValue.replace(/,/g, "")) <=
                       (Number(userBalance) / 10 ** 6).toFixed(2) ||
                     sliderValue === "" ? (
-                      <div className="flex flex-row items-center mt-0">
+                      <div className="flex flex-row items-center -mt-2">
                         <div
                           className="p-1 bg-red-500 rounded-full"
                           style={{
@@ -189,14 +189,14 @@ export function PredictModal({
                         </span>
                       </div>
                     ) : (
-                      <div className="flex flex-row items-center mt-0">
+                      <div className="flex flex-row items-center -mt-2">
                         <span className="text-sm font-bold text-red-600 ml-2">
                           Bro you can't even afford a hair cut 😵‍💫
                         </span>
                       </div>
                     )}
                   </div>
-                  <div className="p-2 py-1 rounded-xl w-full border border-dashed border-orange-500 mb-4">
+                  <div className="p-2 py-1 rounded-xl w-full border border-dashed border-orange-500 mb-4 mt-5">
                     <span className="text-lg font-bold text-orange-500 text-center block">
                       Possible Payout: $
                       <MotionNumber
@@ -206,7 +206,7 @@ export function PredictModal({
                             (option === 0
                               ? 100 / multiplier
                               : 100 / (99 - multiplier))
-                          ).toFixed(2) ?? "0.00"
+                          ).toFixed(2) !== "NaN" ?? "0.00"
                         }
                       />
                     </span>
