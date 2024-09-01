@@ -1,4 +1,3 @@
-
 import { Skeleton } from "@/components/ui/Skeleton";
 
 import {
@@ -7,8 +6,6 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { MarketCard } from "./MarketCard";
-
-
 
 export function DesktopHomeNews({ markets, amount }) {
   return (
@@ -22,7 +19,7 @@ export function DesktopHomeNews({ markets, amount }) {
         </div>
       </div>
       <div className="flex flex-row items-center space-x-3">
-        <Carousel className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6 overflow-y-visible">
+        <Carousel className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6  overflow-y-visible">
           <CarouselContent>
             {markets
               ? markets?.map((item, index) => {

@@ -35,6 +35,7 @@ export function SearchOverview() {
     useSearchMarkets(debouncedText);
 
   const isLoading = loadingUsers || loadingMarkets || loadingQuestion;
+
   const displayedSearchMarkets =
     enhanceMarketsWithImageAndPolyId(searchMarkets, HARD_MARKETS, HARD_TOPICS)
       ?.slice(0, 5)
@@ -42,6 +43,7 @@ export function SearchOverview() {
         ...obj,
         idx,
       })) ?? [];
+
   const displayedUsers =
     users?.slice(0, 5).map((obj, idx) => ({
       ...obj,
@@ -53,11 +55,13 @@ export function SearchOverview() {
       ...obj,
       idx,
     })) ?? [];
+
   const displayedFriends =
     friends?.slice(0, 5).map((obj, idx) => ({
       ...obj,
       idx: displayedTrendingMarkets?.length + idx,
     })) ?? [];
+
   const displayedTrendingTopics =
     trendingMarkets?.slice(0, 3).map((obj, idx) => ({
       ...obj,
@@ -127,7 +131,7 @@ export function SearchOverview() {
             ) : (
               <>
                 {searchMarkets?.length > 0 && (
-                  <Section title="Suggested">
+                  <Section title="Predictions">
                     {displayedSearchMarkets?.map((market, index) => (
                       <MarketItem
                         key={index}
@@ -139,6 +143,7 @@ export function SearchOverview() {
                         option={market?.outcomeA}
                         type={market.type}
                         image={market.image}
+                        id={market?.marketId}
                       />
                     ))}
                   </Section>
@@ -147,6 +152,7 @@ export function SearchOverview() {
                   <Section title="Users">
                     {displayedUsers?.map((user, index) => (
                       <FriendItem
+                        walletAddress={user?.walletAddress}
                         key={index}
                         currentIdx={currentIdx}
                         idx={user.idx}
@@ -166,7 +172,6 @@ export function SearchOverview() {
               <Section title="Suggested">
                 {displayedTrendingMarkets.map((market, index) => (
                   <MarketItem
-                    id={market.id}
                     key={index}
                     currentIdx={currentIdx}
                     idx={market.idx}
@@ -176,6 +181,7 @@ export function SearchOverview() {
                     option={market?.outcomeA}
                     type={"market.type"}
                     image={market.image}
+                    id={market?.marketId}
                   />
                 ))}
               </Section>
@@ -188,6 +194,7 @@ export function SearchOverview() {
                     name={friend.name}
                     handle={friend.handle}
                     time={friend.time}
+                    walletAddress={friend?.walletAddress}
                   />
                 ))}
               </Section>

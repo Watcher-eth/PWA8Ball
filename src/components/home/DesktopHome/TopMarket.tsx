@@ -1,6 +1,4 @@
-import {
-  enhanceSingleMarketWithImageAndPolyId,
-} from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { HARD_MARKETS } from "@/constants/markets";
 import { HARD_TOPICS } from "@/constants/topics";
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
@@ -11,8 +9,6 @@ import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 
 import { GenericLineChart } from "@/components/charts/GenericLineChart";
 import { Chip } from "@/components/ui/Chip";
-
-
 
 export function TopMarket() {
   const { market } = useGetMarketById("1");
@@ -42,7 +38,7 @@ export function TopMarket() {
   }));
 
   return (
-    <div className="w-full flex  flex-row pl-5 mt-2 -mb-4  border-b-[0.1rem]  border-[#181818] pb-12 px-3  ">
+    <div className="w-full flex  flex-row pl-1 mt-2 -mb-5  border-b-[0.1rem]  border-[#181818] pb-12 p  ">
       <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
           className="h-[6rem] w-[6rem] object-cover -mb-2 rounded-md"
@@ -94,10 +90,12 @@ export function TopMarket() {
         </div>
         <div className="w-full h-[9rem] my-3 rounded-md ">
           <GenericLineChart
-            domain={minMax.max && [
-              minMax.min - (minMax.max - minMax.min) / 6,
-              minMax.max + (minMax.max - minMax.min) / 6,
-            ]}
+            domain={
+              minMax.max && [
+                minMax.min - (minMax.max - minMax.min) / 6,
+                minMax.max + (minMax.max - minMax.min) / 6,
+              ]
+            }
             chartData={chartData}
             xAxisKey="month"
             xAxisTickFormatter={(value) => value.slice(0, 3)}

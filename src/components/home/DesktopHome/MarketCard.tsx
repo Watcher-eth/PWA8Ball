@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 import { Stars } from "lucide-react";
@@ -19,7 +18,7 @@ export function MarketCard({
     >
       <img
         className={`${
-          isTwoCards ? "h-[29vw]" : "h-[21vw]"
+          isTwoCards ? "h-[29vw] h-[29vw]" : "min-h-[21vw] h-[21vw]"
         } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
         src={item?.image}
         alt={item?.title}

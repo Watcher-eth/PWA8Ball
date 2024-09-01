@@ -59,7 +59,16 @@ export function TopicItem({
   );
 }
 
-export function FriendItem({ name, handle, time, image, idx, currentIdx, id }) {
+export function FriendItem({
+  name,
+  handle,
+  time,
+  image,
+  idx,
+  currentIdx,
+  id,
+  walletAddress,
+}) {
   return (
     <Link href={getProfilePath(id)} prefetch={true}>
       <SearchItem
@@ -70,6 +79,7 @@ export function FriendItem({ name, handle, time, image, idx, currentIdx, id }) {
         isImgRounded={true}
         idx={idx}
         currentIdx={currentIdx}
+        walletAddress={walletAddress}
       />
     </Link>
   );

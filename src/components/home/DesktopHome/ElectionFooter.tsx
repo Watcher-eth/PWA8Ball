@@ -1,4 +1,3 @@
-
 import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import { motion } from "framer-motion";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -11,8 +10,6 @@ import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
 
 import { MarketCard } from "./MarketCard";
 import { DesktopFooter } from "./DesktopFooter";
-
-
 
 export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
@@ -35,11 +32,19 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           </div>{" "}
           <Countdown endDate={ELECTION_END_DATE} />
         </div>
-        <MarketCardSection feedDataArr={enrichedFeedData?.slice(0, 3)} />
+
+        <MarketCardSection
+          length={3}
+          feedDataArr={enrichedFeedData?.slice(0, 3)}
+        />
         <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2">
           Latest News
         </div>
-        <MarketCardSection feedDataArr={enrichedFeedData?.slice(4, 6)} />
+        <MarketCardSection
+          length={2}
+          feedDataArr={enrichedFeedData?.slice(4, 6)}
+        />
+        <div className="mb-40" />
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
             <DesktopFooter />
@@ -50,18 +55,21 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   );
 }
 
-
-
-
-function MarketCardSection<T>({ feedDataArr }: { feedDataArr?: T[] }) {
+function MarketCardSection<T>({
+  feedDataArr,
+  length,
+}: {
+  feedDataArr?: T[];
+  length: number;
+}) {
   return (
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 overflow-y-visible  mb-7"
+      className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6   mb-7"
     >
       {feedDataArr?.map((item: T, index: number) => (
-        <MarketCard key={index} item={item} isTwoCards={false} />
+        <MarketCard key={index} item={item} isTwoCards={length === 2} />
       )) ??
         [1, 2, 3, 4, 5, 6].map((index) => (
           <div
