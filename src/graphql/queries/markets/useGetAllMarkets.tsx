@@ -34,6 +34,7 @@ export function useGetAllMarkets() {
 
   return {
     markets: data?.markets?.items ?? [],
+    loading,
     error,
     refetch,
   };

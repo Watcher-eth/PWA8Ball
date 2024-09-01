@@ -13,6 +13,7 @@ export function MarketItem({
   image,
   idx,
   currentIdx,
+  option,
 }) {
   return (
     <Link href={getMarketPath(id)} prefetch={true}>
@@ -24,6 +25,7 @@ export function MarketItem({
         isImgRounded={false}
         type={type}
         idx={idx}
+        option={option}
         currentIdx={currentIdx}
       />
     </Link>
@@ -83,6 +85,7 @@ export function SearchItem({
   rightText,
   idx,
   currentIdx,
+  option,
 }: {
   title: string;
   subtitle: string;
@@ -93,6 +96,7 @@ export function SearchItem({
   rightText: string;
   idx: number;
   currentIdx: number;
+  option?: string;
 }) {
   return (
     <motion.div
@@ -127,14 +131,13 @@ export function SearchItem({
           <p className="text-white">{title}</p>
           <p className="text-[#909090] line-clamp-1 text-sm">{subtitle}</p>
         </div>
-        {type === "album" && (
-          <span className="px-2 py-1 text-xs bg-gray-700 rounded text-gray-300">
-            ALBUM
-          </span>
-        )}
       </div>
       <div className="flex flex-row items-center  min-w-20 justify-end pr-2">
-        <p className="text-[#909090] text-sm">{rightText}</p>
+        <p className="text-[#909090] text-sm">
+          {option?.length > 0
+            ? `${(Number(rightText) / 100).toFixed(0)}% ${option.slice(0, 3)}`
+            : rightText}
+        </p>
         {icon}
       </div>
     </motion.div>

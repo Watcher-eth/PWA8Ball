@@ -8,6 +8,7 @@ const PWA_URL = "https://pwa-8-ball.vercel.app"
 
 export const HOME_PATH = "/"
 export const ACTIVITY_PATH = "/activity"
+export const SEARCH_PATH = "/search"
 
 export const LEADERBOARD_PATH = "/leaderboard"
 

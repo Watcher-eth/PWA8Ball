@@ -9,6 +9,11 @@ import { useOverlaySearch } from "@/hooks/useOverlaySearch";
 import { MarketItem, TopicItem, FriendItem } from "./SearchItem";
 import { SearchInputSection } from "./SearchInputSection";
 import { Spinner } from "@/components/modals/PredictModal/Spinner";
+import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
+import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
@@ -17,19 +22,26 @@ const friends = [
 
 export function SearchOverview() {
   const [debouncedText, setDebouncedText] = useState("");
-  const { data: trendingMarkets, isLoading: loadingMarkets } =
-    useGetTrendingMarkets();
+  const { markets: allMarkets, loading: loadingMarkets } = useGetAllMarkets();
+
+  const trendingMarkets = enhanceMarketsWithImageAndPolyId(
+    allMarkets,
+    HARD_MARKETS,
+    HARD_TOPICS
+  );
   const { data: users, isLoading: loadingUsers } =
     useGetUsersByName(debouncedText);
-  const { data: searchMarkets, isLoading: loadingQuestion } =
-    useGetMarketsByQuestion(debouncedText);
+  const { markets: searchMarkets, loading: loadingQuestion } =
+    useSearchMarkets(debouncedText);
 
   const isLoading = loadingUsers || loadingMarkets || loadingQuestion;
   const displayedSearchMarkets =
-    searchMarkets?.slice(0, 5).map((obj, idx) => ({
-      ...obj,
-      idx,
-    })) ?? [];
+    enhanceMarketsWithImageAndPolyId(searchMarkets, HARD_MARKETS, HARD_TOPICS)
+      ?.slice(0, 5)
+      .map((obj, idx) => ({
+        ...obj,
+        idx,
+      })) ?? [];
   const displayedUsers =
     users?.slice(0, 5).map((obj, idx) => ({
       ...obj,
@@ -91,7 +103,7 @@ export function SearchOverview() {
       <SearchInputSection value={searchStr} onChange={handleSearch} />
       <AnimatePresence>
         <div
-          className={`transition-all flex flex-col justify-center items-center min-h-[45vh] duration-300`}
+          className={`transition-all flex flex-col  items-center min-h-[45vh] duration-300`}
           style={{
             height: `calc(${masterList.length * 60}px+60px)`,
           }}
@@ -123,7 +135,8 @@ export function SearchOverview() {
                         idx={market.idx}
                         title={market.title}
                         subtitle={market.question}
-                        time={3.22}
+                        time={market?.outcomeOddsA}
+                        option={market?.outcomeA}
                         type={market.type}
                         image={market.image}
                       />
@@ -159,7 +172,8 @@ export function SearchOverview() {
                     idx={market.idx}
                     title={market.title}
                     subtitle={market.question}
-                    time={3.22}
+                    time={market?.outcomeOddsA}
+                    option={market?.outcomeA}
                     type={"market.type"}
                     image={market.image}
                   />

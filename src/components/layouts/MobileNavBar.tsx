@@ -12,7 +12,12 @@ import Link from "next/link";
 
 import { useUserStore } from "@/lib/stores/UserStore";
 import { useAuthModalStore } from "@/lib/stores/ModalStore";
-import { ACTIVITY_PATH, HOME_PATH, getProfilePath } from "@/utils/urls";
+import {
+  ACTIVITY_PATH,
+  HOME_PATH,
+  SEARCH_PATH,
+  getProfilePath,
+} from "@/utils/urls";
 
 export function MobileNavBar() {
   const { user } = useUserStore();
@@ -27,7 +32,7 @@ export function MobileNavBar() {
     >
       <div className="w-[60vw] max-w-[17rem] flex px-2  justify-between items-center mx-auto">
         <MobileNavBtn IconComponent={Home} href={HOME_PATH} />
-        <MobileNavBtn IconComponent={Search} href={ACTIVITY_PATH} />
+        <MobileNavBtn IconComponent={Search} href={SEARCH_PATH} />
 
         {user?.walletAddress ? (
           <>
