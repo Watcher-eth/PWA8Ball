@@ -1,31 +1,59 @@
 import Link from "next/link";
-
 import { SocialOnboardButton } from "@/components/onboarding/DesktopOnboardingModal";
 import {
   AppleIcon,
   GoogleIcon,
   XIcon,
 } from "@/components/onboarding/AuthIcons";
-
+import { Instagram, Send } from "lucide-react";
 
 export function DesktopFooter() {
   return (
-    <div className="flex flex-col w-full mt-10 -mb-32">
-      <div className="flex flex-col py-10 px-10 space-y-8 bg-[#121212]">
+    <div className="relative w-full mt-10 -mb-32">
+      {/* Background with Grid Pattern */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 w-full h-full bg-[#090909] text-white/10">
+          <svg aria-hidden="true" className="absolute inset-0 h-full w-full">
+            <defs>
+              <pattern
+                id="grid-pattern"
+                width="128"
+                height="128"
+                patternUnits="userSpaceOnUse"
+                x="100%"
+                y="100%"
+                patternTransform="translate(112 64)"
+              >
+                <path
+                  d="M0 128V.5H128"
+                  fill="none"
+                  stroke="currentColor"
+                ></path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-pattern)"></rect>
+          </svg>
+        </div>
+      </div>
+
+      {/* Footer Content */}
+      <div className="relative z-10 flex flex-col w-full  py-10 px-10 space-y-8">
         <div className="flex flex-row w-full justify-between ">
           <div className="flex flex-col w-1/2">
-            <div className="flex flex-row items-center space-x-3 ">
+            <div className="flex flex-row items-center space-x-3">
               <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
-
               <div className="text-white text-[1.8rem] font-[Aeonik-Bold]">
                 Glimpse
               </div>
             </div>
             <div className="text-[lightgray] font-normal mt-3 text-[1rem]">
-              To see a World in a Grain of Sand, a Heaven in a Wild Flower
+              Destiny is no matter of chance. It is a matter of choice.
             </div>
             <div className="text-[lightgray] font-normal text-[1rem]">
-              Hold Infinity in the palm of your hand And Eternity in an hour
+              It is not a thing to be waited for, it is a thing to be achieved.
+            </div>
+            <div className="text-[gray] font-normal mt-1 text-[0.85rem]">
+              -William Jennings Bryan{" "}
             </div>
           </div>
           <div className="flex flex-row w-1/2 space-x-12 justify-end mt-1">
@@ -49,10 +77,9 @@ export function DesktopFooter() {
           </div>
         </div>
         <div className="flex flex-row space-x-3">
-          <SocialOnboardButton IconComponent={GoogleIcon} onClick={() => {}} />
+          <SocialOnboardButton IconComponent={Instagram} onClick={() => {}} />
           <SocialOnboardButton IconComponent={XIcon} onClick={() => {}} />
-          <SocialOnboardButton IconComponent={AppleIcon} onClick={() => {}} />
-          {/* <SocialOnboardButton label={"Farcaster"} onClick={() => {}} /> */}
+          <SocialOnboardButton IconComponent={Send} onClick={() => {}} />
         </div>
       </div>
     </div>
@@ -67,7 +94,7 @@ function FooterColumn({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2.5">
       <div className="text-white font-semibold text-[1.05rem]">{title}</div>
       {children}
     </div>
@@ -88,11 +115,10 @@ function FooterLink({
   return (
     <Link
       href={href ?? ""}
-      className={`text-[lightgray] font-normal text-[1rem] ${className}`}
+      className={`text-[lightgray] font-normal  text-[1rem] ${className}`}
     >
       {label}
       {children}
     </Link>
   );
 }
-
