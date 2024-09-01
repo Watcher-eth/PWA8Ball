@@ -41,7 +41,7 @@ export function DesktopNavBar() {
                   />
                 }
               />
-              <div className="pl-2 font-[500] text-2xl">Glimpse</div>
+              <div className="pl-2 font-[Aeonik-Bold] text-2xl">Glimpse</div>
             </div>
           </Link>
           <div className="flex items-center space-x-8">

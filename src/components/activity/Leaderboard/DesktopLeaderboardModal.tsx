@@ -36,7 +36,7 @@ function DesktopLeaderboardModal({ children }) {
           className={`
         p-0 bg-transparent  border-0
         rounded-2xl
-        bg-[#101010]/40
+        bg-[#101010]/80
         backdrop-blur-xl
         border-2 border-[#191919]
         h-[80%]
@@ -59,7 +59,7 @@ function DesktopLeaderboardModal({ children }) {
             </div>
 
             <LeaderBoardTop3 users={top3Users} />
-            <div className="flex flex-col ">
+            <div className="flex flex-col mt-3 ">
               <div className="flex flex-row items-center justify-between my-1.5">
                 <h2 className="text-white text-[15px] font-bold">Name</h2>
                 <h2 className="text-white text-[15px] font-bold">At stake</h2>

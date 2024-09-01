@@ -104,13 +104,13 @@ export function TopMarket() {
         <div className="flex flex-row justify-between -mb-3 items-center">
           <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
-            <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
+            <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
               {enhancedMarket?.outcomeA}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
                 {enhancedMarket?.outcomeOddsA / 100}%
               </p>
             </div>
-            <div className="px-6 py-1.5 text-[1.1rem] font-[500]  flex items-baseline rounded-md bg-[#808080]/10 text-white border-[0.1rem] border-[#202020]">
+            <div className="px-6 py-1.5 text-[1.1rem] font-[500]  flex items-baseline rounded-md hover:scale-101 active:scale-98 bg-[#1B1B1E]/70 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
               {enhancedMarket?.outcomeB}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
                 {enhancedMarket?.outcomeOddsB / 100}%

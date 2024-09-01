@@ -6,6 +6,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { MarketCard } from "./MarketCard";
+import PaginationDots from "./CarouselDotButton";
 
 export function DesktopHomeNews({ markets, amount }) {
   return (
@@ -19,13 +20,13 @@ export function DesktopHomeNews({ markets, amount }) {
         </div>
       </div>
       <div className="flex flex-row items-center space-x-3">
-        <Carousel className="flex flex-row overflow-x-auto no-scrollbar mb-7 w-full gap-6 py-6  overflow-y-visible">
-          <CarouselContent>
+        <Carousel className="flex flex-col  no-scrollbar mb-10 w-full gap-2   overflow-y-visible">
+          <CarouselContent className="flex flex-row  no-scrollbar  w-full gap-1 py-6  overflow-y-visible">
             {markets
               ? markets?.map((item, index) => {
                   if (
                     (amount === 4 && index > 0 && index < 9) ||
-                    (amount === 3 && index > 4)
+                    (amount === 3 && index > 10)
                   )
                     return (
                       <CarouselItem
@@ -50,6 +51,7 @@ export function DesktopHomeNews({ markets, amount }) {
                   </div>
                 ))}
           </CarouselContent>
+          <PaginationDots />
         </Carousel>
       </div>
     </div>

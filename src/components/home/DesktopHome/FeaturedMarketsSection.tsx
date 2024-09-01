@@ -19,7 +19,7 @@ export function FeaturedMarketsSection({ markets }) {
         Trending Today
       </div>
       <Carousel>
-        <CarouselContent className="flex flex-row space-x-7">
+        <CarouselContent className="flex flex-row space-x-3.5 w-full ">
           {enrichedFeedData.map((item, index) => {
             if (index <= 24) {
               // This was a correction, assuming you want to display these items

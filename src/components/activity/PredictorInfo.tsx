@@ -20,7 +20,7 @@ export function PredictorInfo({
 }) {
   return (
     <Link href={getProfilePath(address)}>
-      <div className="flex flex-row hover:scale-101 active:scale-98  items-center justify-between my-1.5">
+      <div className="flex flex-row hover:scale-[100.2%] active:scale-99  items-center justify-between my-1.5">
         <div className="flex flex-row items-center">
           <p className="text-white font-bold">{index + 1}</p>
           <ProfileToolTip
