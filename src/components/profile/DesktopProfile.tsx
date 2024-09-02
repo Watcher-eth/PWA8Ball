@@ -52,6 +52,7 @@ export function DesktopProfilePage2({ userId, userC }) {
     ordersData ?? [],
     HARD_MARKETS
   );
+  console.log("user", userC?.socials);
   const mergedData =
     filter === "All"
       ? [
@@ -100,9 +101,11 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div className="text-[2.6rem] font-[Aeonik-Bold] text-white">
                 {userC.name}
               </div>
-              <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
-                <SocialsSection {...userC?.socials} />
-              </div>
+              {userC?.socials !== {} && (
+                <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
+                  <SocialsSection {...userC?.socials} />
+                </div>
+              )}
             </div>
             <div className="flex flex-row items-center space-x-6 mt-2">
               <div className="flex flex-col space-y-0">
@@ -131,7 +134,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-row space-x-3 items-center mt-3">
+          <div className="flex flex-row space-x-3 items-center ">
             <div
               onClick={() => copyToClipboard(userC?.walletaddress)}
               className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"

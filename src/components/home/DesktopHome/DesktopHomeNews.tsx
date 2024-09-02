@@ -31,7 +31,8 @@ export function DesktopHomeNews({ markets, amount, topic }) {
             {markets
               ? markets?.map((item, index) => {
                   if (
-                    (amount === 3 && index < 10) ||
+                    (amount === 4 && index > 4) ||
+                    amount === 3 ||
                     (amount === 2 && index > 4)
                   )
                     return (

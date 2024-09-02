@@ -7,7 +7,7 @@ import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsW
 import { getTopicPath } from "@/utils/urls";
 
 export function TrendingCommunities() {
-  const { data: topics } = useGetTopicsWithMembers(["14", "7"]);
+  const { data: topics } = useGetTopicsWithMembers(["17", "18"]);
 
   return (
     <div className=" flex flex-col w-full">
