@@ -45,26 +45,30 @@ export function DesktopCardModal({
           rounded-2xl ${dialogContentClassName}
         `}
       >
-        <Card
-          className={`
+        <motion.div layout transition={{ duration: 0.3 }}>
+          <AnimatePresence>
+            <Card
+              className={`
             shadow-none !p-0 w-full
             rounded-2xl  !bg-[#080808]/85 ${cardClassName}
           `}
-        >
-          {(title || subtitle) && (
-            <CardHeader className="border-b border-[#212121]">
-              <CardTitle className="text-white">{title}</CardTitle>
-              <CardDescription className="text-[lightgray]">
-                {subtitle}
-              </CardDescription>
-            </CardHeader>
-          )}
-          <CardContent className={`p-6 rounded-2xl ${cardContentClassName}`}>
-            <motion.div layout transition={{ duration: 0.2 }}>
-              <AnimatePresence>{content}</AnimatePresence>
-            </motion.div>
-          </CardContent>
-        </Card>
+            >
+              {(title || subtitle) && (
+                <CardHeader className="border-b border-[#212121]">
+                  <CardTitle className="text-white">{title}</CardTitle>
+                  <CardDescription className="text-[lightgray]">
+                    {subtitle}
+                  </CardDescription>
+                </CardHeader>
+              )}
+              <CardContent
+                className={`p-6 rounded-2xl ${cardContentClassName}`}
+              >
+                {content}
+              </CardContent>
+            </Card>
+          </AnimatePresence>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );

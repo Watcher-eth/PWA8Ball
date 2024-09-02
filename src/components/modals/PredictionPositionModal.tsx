@@ -124,7 +124,7 @@ export function PredictionPositionModal({
                   title={title}
                   changeStep={setStep}
                   id={betId}
-                  odds={"20"}
+                  odds={20}
                   totalPot={ownedAmount}
                   amount={ownedAmount}
                 />

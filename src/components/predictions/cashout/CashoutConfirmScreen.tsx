@@ -42,7 +42,7 @@ export function CashoutConfirmScreen(props: {
     <div
       className={`flex flex-col items-center ${
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-      } mt-0 ${props.isDesktop ? "p-6" : "p-5"}  ${
+      } mt-0 ${props.isDesktop ? "p-1.5" : "p-5"}  ${
         props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"
       }`}
     >
@@ -54,7 +54,7 @@ export function CashoutConfirmScreen(props: {
         <div className="flex flex-row items-center justify-between w-full">
           <div className="w-[37px]"></div>
           <div className="flex flex-row items-center p-[5px] rounded-[15px] bg-[#212121]">
-            <div className="p-[5px] rounded-[10px] bg-green-500">
+            <div className="p-[5px] rounded-[10px] bg-gradient-to-r from-[#dcedc1]/50 to-[#a8e6cf]/70">
               <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
             </div>
             <span className="text-[17px] text-white mx-[6px] font-semibold">
@@ -64,11 +64,11 @@ export function CashoutConfirmScreen(props: {
           <div className="px-6" />
         </div>
         <div className="flex flex-row items-center justify-center">
-          <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-white to-[#a8e6cf] my-[10px]">
+          <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-[#a8e6cf] via-white via-[#dcedc1] via-white via-[#dcedc1] to-[#a8e6cf] my-[10px]">
             ${formatAmountWithCommas(props.points)}
           </div>
         </div>
-        <div className="border border-dashed border-[#D3D3D3] mb-[15px]"></div>
+        <div className="border border-dashed border-[#404040] mb-[15px]"></div>
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
           <div className="flex flex-row items-center">
@@ -111,16 +111,15 @@ export function CashoutConfirmScreen(props: {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center gap-[5px] my-[5px]">
+      <div className="flex flex-row w-full items-center gap-[5px] my-[5px]">
         <div
           onClick={shareLink}
-          className={`mt-[12px] flex flex-row p-[11px] rounded-[24px] overflow-hidden bg-[#D9D9D9] ${
-            props?.isDesktop ? "w-[24vw]" : `w-[${window.innerWidth / 1.25}px]`
-          } items-center justify-center cursor-pointer`}
+          className={`mt-[12px] flex flex-row p-[8px] rounded-[24px] overflow-hidden bg-[#D9D9D9]  w-full
+          items-center justify-center cursor-pointer`}
         >
           <div className="flex flex-row items-center justify-center">
-            <ShareIcon color="black" strokeWidth={3} height={23} />
-            <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-[3px]">
+            <ShareIcon color="#1D1D1D" strokeWidth={3.3} height={19} />
+            <span className="text-[20px] text-[#1D1D1D] font-[Aeonik-Bold] ml-[3px]">
               Share
             </span>
           </div>

@@ -80,7 +80,7 @@ export const MobileMyBetModal = (props: {
       className={`flex flex-col ${
         props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
       } self-center pb-[8px] gap-[2px] ${
-        props?.isDesktop ? "p-[6px]" : "p-[15px]"
+        props?.isDesktop ? "p-[6px]" : "p-[22px]"
       } pt-[5px] rounded-t-[30px] w-full`}
     >
       <div className="flex flex-row items-center justify-between my-[5px]">
@@ -353,7 +353,7 @@ export function DesktopMyBetModal({
             title={title}
             changeStep={setStep}
             id={betId}
-            odds={"20"}
+            odds={20}
             onClose={() => {}}
             totalPot={Number(ownedAmount)}
             amount={Number(ownedAmount)}
