@@ -13,12 +13,15 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay";
-import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { SECTION_DATA_MAP, SwingStates } from "@/constants/Elections";
 import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
 import { UsMapCard } from "../map/UsMapCard";
 import MotionNumber from "motion-number";
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 
 function Button({
   text,
@@ -69,7 +72,7 @@ function CandidateSection({
       <div
         className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}
       >
-        <div className="text-[4.5rem] font-semibold text-white">
+        <div className="text-[4rem] lg:text-[4.5rem] font-semibold text-white">
           <MotionNumber value={odds} />%
         </div>
         <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
@@ -165,8 +168,13 @@ export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59");
 
 export function ElectionPage() {
   const [section, setSection] = useState("Presidency");
-  const { data: markets } = useGetMarketsForTopic("1");
+  const { marketsForTopic } = useGetAllMarketsForTopic(1);
   // @ts-ignore
+  const markets = enhanceMarketsWithImageAndPolyId(
+    marketsForTopic,
+    HARD_MARKETS,
+    HARD_TOPICS
+  );
   const sectionData = SECTION_DATA_MAP[section];
 
   return (
@@ -177,7 +185,13 @@ export function ElectionPage() {
             <img
               className="w-full transform object-cover h-80 relative -mt-40"
               alt="CoverImage"
-              src="https://static.ffx.io/images/$zoom_0.56%2C$multiply_0.7725%2C$ratio_1.5%2C$width_756%2C$x_31%2C$y_0/t_crop_custom/q_86%2Cf_auto/33b09e58e76c18b28e8173421cfd765a46501415"
+              src={
+                section === "Presidency"
+                  ? "../images/ElectionsMeta.png"
+                  : section === "House"
+                  ? "https://cdn.britannica.com/66/164166-050-4FBB1C5A/Chamber-US-House-of-Representatives-Washington-DC.jpg"
+                  : "https://dornsife.usc.edu/news/wp-content/uploads/sites/7/2023/04/story-3526-768x432.jpg"
+              }
             />
             <div className="h-80 w-full bg-gradient-to-t from-[#080808] backdrop-blur-xl to-transparent absolute bottom-0" />
           </div>
@@ -191,7 +205,7 @@ export function ElectionPage() {
         />
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col">
-            <div className="  md:text-[3rem] md:leading-[3rem] text-white font-[Aeonik-Bold]">
+            <div className="text-[1.8rem]  lg:text-[3rem] md:leading-[3rem] text-white font-[Aeonik-Bold]">
               2024 US Election Forecast
             </div>
             <div className="text-[1.3rem] text-[lightgray] md:mt-0 -mt-3 font-[500]">
@@ -241,10 +255,10 @@ export function ElectionPage() {
             side={2}
           />
         </div>
-        <div className="h-[60vh] w-full my-5 mb-[4rem] rounded-lg">
+        <div className="h-full w-full my-5 mb-[2rem] rounded-lg">
           <UsMapCard />
         </div>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center mt-6 justify-between">
           <div className="flex flex-row items-center space-x-2.5">
             <Split color="white" height={"2rem"} strokeWidth={3} />
             <div className="text-white font-semibold text-[1.8rem] my-3">
@@ -298,7 +312,10 @@ export function ElectionPage() {
             </div>
             <div className="flex flex-row items-baseline">
               <div className="text-[2.1rem] text-white font-semibold">
-                {item?.outcomeA / 100}%{" "}
+                {item?.outcomeOddsA / 100}%{" "}
+                {item?.outcomeA?.length < 4
+                  ? item?.outcomeA
+                  : item?.outcomeA?.slice(0,3)}
               </div>
             </div>
           </Link>

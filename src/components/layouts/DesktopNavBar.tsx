@@ -27,7 +27,7 @@ export function DesktopNavBar() {
         <div
           className={`
             flex justify-between items-center w-full p-3  px-8
-             backdrop-blur bg-gradient-to-b from-[#080808]/10 to-[transparent] 
+             backdrop-blur bg-gradient-to-b from-[#080808]/8 to-[transparent] 
           `}
         >
           <Link href={HOME_PATH}>
