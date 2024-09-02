@@ -166,10 +166,7 @@ function DesktopTopic({
               />
             </div>
             <div className=" pb-[3rem]  flex flex-row">
-              <FeaturedMarketsSection
-                topic={true}
-                markets={enhancedMarkets.slice(1, 9)}
-              />
+              <FeaturedMarketsSection topic={true} markets={enhancedMarkets} />
             </div>
 
             <div className="h-[0.08rem] w-full bg-[#212121] px-8" />

@@ -31,8 +31,8 @@ export function DesktopHomeNews({ markets, amount, topic }) {
             {markets
               ? markets?.map((item, index) => {
                   if (
-                    (amount === 4 && index > 0 && index < 9) ||
-                    (amount === 3 && index > 10)
+                    (amount === 3 && index < 10) ||
+                    (amount === 2 && index > 4)
                   )
                     return (
                       <CarouselItem
@@ -41,6 +41,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
                         }`}
                       >
                         <MarketCard
+                          loading={true}
                           key={index}
                           item={item}
                           isTwoCards={false}

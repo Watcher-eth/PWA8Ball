@@ -1,24 +1,60 @@
 import Link from "next/link";
-
 import { Stars } from "lucide-react";
-
 import { getMarketPath } from "@/utils/urls";
+import { Skeleton } from "@/components/ui/Skeleton"; // Assuming you have a Skeleton component
 
 export function MarketCard({
   item,
   isTwoCards,
+  loading = false,
 }: {
   item: any;
   isTwoCards: boolean;
+  loading?: boolean;
 }) {
+  console.log("item", item)
+  if (!item) {
+    return (
+      <div className={`flex flex-col my-3 w-full relative`}>
+        {/* Image Skeleton */}
+        <Skeleton
+          className={`${
+            isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
+          } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]`}
+        />
+        {/* Odds Skeleton */}
+        <Skeleton
+          className={`px-9 py-3.5 absolute z-[20] border-[0.09rem] border-[#efefef]/10 rounded-full bg-[#353535]/20 backdrop-blur-md ${
+            isTwoCards
+              ? "text-[0.9rem] top-5 right-5 h-[1.5rem] w-[3rem]"
+              : "text-[0.8rem] top-4 right-4 h-[1.4rem] w-[3rem]"
+          }`}
+        />
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col mt-3">
+            {/* Title Skeleton */}
+            <Skeleton className="h-[1.4rem] w-[80%]" />
+            {/* Question Skeleton */}
+            <Skeleton className="mt-2 h-[1.1rem] w-[23vw] " />
+          </div>
+          {isTwoCards && (
+            <Skeleton className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] h-[2.2rem] w-[6.5rem] mt-4" />
+          )}
+        </div>
+        {/* Stake Skeleton */}
+        <Skeleton className="text-[gray] mt-2 h-[0.9rem] w-[15%]" />
+      </div>
+    );
+  }
+
   return (
     <Link
       href={getMarketPath(item?.marketId)}
-      className={`flex flex-col w-full relative hover:scale-[100.4%] active:scale-99 `}
+      className={`flex flex-col w-full relative hover:scale-[100.4%] active:scale-99`}
     >
       <img
         className={`${
-          isTwoCards ? "h-[29vw] h-[29vw]" : "min-h-[21vw] h-[21vw]"
+          isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
         } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
         src={item?.image}
         alt={item?.title}

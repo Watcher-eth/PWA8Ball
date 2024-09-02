@@ -27,7 +27,7 @@ export function FeaturedMarketsSection({ markets, topic }) {
               // This was a correction, assuming you want to display these items
               return (
                 <CarouselItem key={index} className="basis-1/2 w-1/2">
-                  <MarketCard item={item} isTwoCards={true} />
+                  <MarketCard item={item} isTwoCards={true} loading={true} />
                 </CarouselItem>
               );
             }
