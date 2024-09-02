@@ -35,14 +35,17 @@ import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCrea
 import { PredictionPositionModal } from "../modals/PredictionPositionModal";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export function DesktopProfilePage2({ userId, userC }) {
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
   const balance = useUserUsdcBalance();
   const [filter, setFilter] = useState("All");
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedName, setEditedName] = useState("");
+  const [editedPfp, setEditedPfp] = useState(userC.pfp);
+  const { upsertUser } = useUpsertUser();
   const { orders: ordersData } = useGetPositionsByWallet(userId);
-  console.log("users", userC.walletAddress === user?.walletAddress);
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -52,7 +55,6 @@ export function DesktopProfilePage2({ userId, userC }) {
     ordersData ?? [],
     HARD_MARKETS
   );
-  console.log("user", userC?.socials);
   const mergedData =
     filter === "All"
       ? [
@@ -74,6 +76,33 @@ export function DesktopProfilePage2({ userId, userC }) {
         ]
       : [];
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditedPfp(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  async function handleConfirm() {
+    setUser({
+      ...user,
+      name: editedName?.length > 2 ? editedName : user?.name,
+      pfp: editedPfp ?? user?.pfp,
+    });
+
+    await upsertUser({
+      id: user?.walletAddress,
+      name: editedName?.length > 2 ? editedName : user?.name,
+      pfp: editedPfp ?? user?.pfp,
+    });
+
+    setIsEditing(false);
+  }
+
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
@@ -83,24 +112,48 @@ export function DesktopProfilePage2({ userId, userC }) {
               <img
                 className="w-full transform rotate-180 object-cover h-60 relative -mt-24"
                 alt="CoverImage"
-                src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
+                src={editedPfp ? editedPfp : DEFAULT_PFP_PLACEHOLDER}
               />
               <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
               <InverseBleedOverlay>
-                <img
-                  className="size-28 md:size-30 lg:size-32 xl:size-36 ml-3 absolute -bottom-0 object-cover  rounded-full mb-4 border-8 border-[#080808] z-20"
-                  src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
-                />
+                <div className="relative">
+                  <img
+                    className="size-28 active:scale-99 md:size-30 lg:size-32 xl:size-36 ml-3 absolute -bottom-14 object-cover rounded-full mb-4 border-[0.3rem] border-[#080808] z-20"
+                    src={editedPfp ? editedPfp : DEFAULT_PFP_PLACEHOLDER}
+                    onClick={() =>
+                      isEditing && document.getElementById("fileInput").click()
+                    }
+                  />
+                  {isEditing && (
+                    <input
+                      id="fileInput"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                    />
+                  )}
+                </div>
               </InverseBleedOverlay>
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="flex flex-col  gap-4 p-0 bg-[#080808] px-6 ">
-          <div className="flex flex-row  items-center justify-between">
+        <div className="flex flex-col gap-4 p-0 min-h-screen bg-[#080808] z-[20] -mt-6 px-6">
+          <div className="flex flex-row items-center justify-between">
             <div className="flex flex-col">
-              <div className="text-[2.6rem] font-[Aeonik-Bold] text-white">
-                {userC.name}
-              </div>
+              {isEditing ? (
+                <input
+                  type="text"
+                  placeholder={user?.name}
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  className="text-[2.6rem] outline-none border-0 font-[Aeonik-Bold] text-[lightgray] bg-[transparent] rounded-lg "
+                />
+              ) : (
+                <div className="text-[2.6rem] font-[Aeonik-Bold] text-white">
+                  {user?.name}
+                </div>
+              )}
               {userC?.socials !== {} && (
                 <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
                   <SocialsSection {...userC?.socials} />
@@ -134,7 +187,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-row space-x-3 items-center ">
+          <div className="flex flex-row space-x-3 mt-3 items-center">
             <div
               onClick={() => copyToClipboard(userC?.walletaddress)}
               className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
@@ -146,9 +199,19 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
               <Copy size={16} color="white" strokeWidth={2.5} />
             </div>
-            {userC?.walletAddress === user?.walletAddress ? (
-              <div className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
-                <div>Edit Profile</div>
+            {isEditing ? (
+              <button
+                onClick={handleConfirm}
+                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-semibold"
+              >
+                {editedName.length > 1 ? "Confirm" : "Cancel"}
+              </button>
+            ) : userC?.walletAddress === user?.walletAddress ? (
+              <div
+                onClick={() => setIsEditing(true)}
+                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-semibold"
+              >
+                Edit Profile
               </div>
             ) : (
               <FollowButton profileId={userC?.walletAddress} />
@@ -157,7 +220,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           {userC?.name === user?.name && balance < 1 && (
             <Link
               href={"/settings"}
-              className="flex flex-row space-x-3 items-center "
+              className="flex flex-row space-x-3 items-center"
             >
               <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]">
                 <Wallet size={16} color="white" strokeWidth={3} />
@@ -175,7 +238,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="All"
                 onClick={() => setFilter("All")}
-                className={`py-2 px-3 rounded-full  space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white  text-[0.9rem] font-semibold`}
+                className="py-2 px-3 rounded-full space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white text-[0.9rem] font-semibold"
               >
                 <div>All</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -185,7 +248,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Resolved"
                 onClick={() => setFilter("Resolved")}
-                className={`py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-semibold`}
+                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-[0.9rem] font-semibold"
               >
                 <div>Resolved</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -195,7 +258,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Created"
                 onClick={() => setFilter("Created")}
-                className={`py-2 px-3 rounded-full  space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white  text-[0.9rem] font-semibold`}
+                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-[0.9rem] font-semibold"
               >
                 <div>Created</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -207,10 +270,10 @@ export function DesktopProfilePage2({ userId, userC }) {
           {mergedData.length > 0 ? (
             <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
               {mergedData?.map((item, index) => {
-                console.log("item", item);
                 if (item.type === "created")
                   return (
                     <ProfilePositionCard
+                      key={index}
                       userName={userC?.name}
                       pfp={userC?.pfp}
                       {...item}
@@ -242,10 +305,12 @@ export function DesktopProfilePage2({ userId, userC }) {
                       question={item.market?.question}
                       option={item.option}
                       optionNumber={item.option}
-                      isExternal={false}
+                      isExternal={userId !== user?.walletAddress}
                       initialProb={item?.market?.initialProb / 100}
+                      user={userC}
                     >
                       <ProfilePositionCard
+                        key={index}
                         userName={userC?.name}
                         pfp={userC?.pfp}
                         {...item}
@@ -259,7 +324,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div className="text-[2.2rem] mt-[8%] font-[Aeonik-Bold] text-white">
                 Nothing here yet
               </div>
-              <div className="text-[1.1rem]  font-[500] mt-0.5 text-[lightgray]">
+              <div className="text-[1.1rem] font-[500] mt-0.5 text-[lightgray]">
                 Make your first prediction and level up your accuracy score
               </div>
             </div>
@@ -269,7 +334,6 @@ export function DesktopProfilePage2({ userId, userC }) {
     </BlurOverlayWrapper>
   );
 }
-
 function ProfilePositionCard(
   item,
   title,

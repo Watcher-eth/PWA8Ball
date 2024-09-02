@@ -1,7 +1,14 @@
 // @ts-nocheck
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AlignLeft, ArrowLeftRight, Clock, Receipt, User2 } from "lucide-react";
+import {
+  AlignLeft,
+  ArrowLeftRight,
+  Clock,
+  Receipt,
+  Stars,
+  User2,
+} from "lucide-react";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
@@ -20,6 +27,8 @@ import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
 import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices";
+import { getMarketPath } from "@/utils/urls";
+import { User } from "@/__generated__/graphql";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -220,28 +229,28 @@ export const MobileMyBetModal = (props: {
       <div className="flex flex-row items-center mt-[8px] mb-[10px] self-center justify-between w-full space-x-4">
         <motion.div
           onClick={() => {
-            if (props.name) {
-              router.push({ pathname: `u/${props?.userId}` });
+            if (props.isExternal) {
+              router.push({ pathname: getMarketPath(props.betId) });
             } else {
               props.setStep(2);
             }
           }}
-          className="mt-[10px] rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
+          className="mt-[10px] hover:scale-[100.5%] active:scale-99 rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
         >
-          {props.name ? (
-            <User2 height={20} color={"#D9D9D9"} strokeWidth={3.3} />
+          {props.isExternal ? (
+            <Stars height={20} color={"#D9D9D9"} strokeWidth={3} />
           ) : (
             <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
           )}
           <span className="text-[20px] text-[#D9D9D9] font-bold">
-            {props.name ? "Profile" : "Cashout"}
+            {props.isExternal ? "Prediction" : "Cashout"}
           </span>
         </motion.div>
         <motion.div
           onClick={() => {
             props.setStep(4);
           }}
-          className="mt-[10px] flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
+          className="mt-[10px]  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
           <span className="text-[20px] text-[#1D1D1D] font-bold ml-[3px]">
@@ -293,6 +302,7 @@ export function DesktopMyBetModal({
   optionNumber,
   isExternal,
   initialProb,
+  user,
 }: {
   children: React.ReactNode;
   title: string;
@@ -311,8 +321,10 @@ export function DesktopMyBetModal({
   optionNumber?: number;
   initialProb?: number;
   isExternal?: boolean;
+  user: User;
 }) {
   const [step, setStep] = useState(1);
+  console.log("isexternal", user);
   return (
     <DesktopCardModal
       onOpenChange={() => {
@@ -376,6 +388,7 @@ export function DesktopMyBetModal({
           />
         ) : step === 4 ? (
           <CashoutConfirmScreen
+            user={user}
             isDesktop={true}
             option={option}
             options={options}

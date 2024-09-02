@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 export function FollowButton({ profileId }: { profileId: string }) {
   const { user } = useUserStore();
-  const followerId = user?.external_auth_provider_user_id;
+  const followerId = user?.walletAddress;
   const followingId = profileId;
   const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId);
   const [edit, setEdit] = useState<boolean>();
@@ -65,9 +65,9 @@ export function FollowButton({ profileId }: { profileId: string }) {
     toastUp("Unfollowed");
   };
 
-  const isUser = user?.external_auth_provider_user_id === profileId;
+  const isUser = user?.walletAddress === profileId;
 
-  console.log("params follow", user?.external_auth_provider_user_id, profileId);
+  console.log("params follow", user?.walletAddress, profileId);
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <DisplayFollowButton
@@ -82,7 +82,6 @@ export function FollowButton({ profileId }: { profileId: string }) {
     return (
       <DisplayFollowButton
         onClick={handleUnfollow}
-        IconComponent={UserMinus}
         label="Following"
         isDark={false}
       />

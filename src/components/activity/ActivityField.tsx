@@ -102,6 +102,7 @@ export function ActivityField({
         userId={userId}
         isExternal={true}
         initialProb={initialProb}
+        user={{ name: name, pfp: pfp, id: userId }}
       >
         <MotionDivContent />
       </MyBetModalComponent>

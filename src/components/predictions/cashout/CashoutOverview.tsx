@@ -128,13 +128,13 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </div>
         <h2 className="text-2xl text-white font-bold mb-2 self-start">
           {success
-            ? "Prediction Successful"
-            : `Confirm your prediction for: ${props.title}`}
+            ? "Cashed out succesfully!"
+            : `Cash out your prediction for: ${props.title}`}
         </h2>
 
         <div className="flex flex-col items-center w-full">
           <div className="flex items-center justify-between my-2 w-full">
-            <span className="text-lg text-[#424242] font-semibold">
+            <span className="text-lg text-[#626262] font-semibold">
               Your Prediction
             </span>
             <div
@@ -153,7 +153,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
             </div>
           </div>
           <div className="flex items-center justify-between my-2 w-full">
-            <span className="text-lg  text-[#424242] font-semibold">
+            <span className="text-lg  text-[#626262] font-semibold">
               Current value
             </span>
             <span className="text-lg text-white font-bold">
@@ -161,13 +161,13 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
             </span>
           </div>
           <div className="flex items-center justify-between my-2 w-full">
-            <span className="text-lg  text-[#424242] font-semibold">Fees</span>
+            <span className="text-lg  text-[#626262] font-semibold">Fees</span>
             <span className="text-lg text-white font-bold">
               ${((props?.totalPot / 10 ** 6) * 0.025).toPrecision(2)}
             </span>
           </div>
           <div className="flex items-center justify-between my-2 mb-2 w-full">
-            <span className="text-lg  text-[#424242] font-semibold">
+            <span className="text-lg  text-[#626262] font-semibold">
               Potential Payout
             </span>
             <span className="text-lg text-white font-bold">
@@ -188,7 +188,7 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
           <p className="text-md text-white font-medium mb-4 self-start">
             {props.question}
           </p>
-          <p className="text-sm text-[#424242] mt-3 font-medium text-center px-3">
+          <p className="text-sm text-[#525252] mt-3 font-medium text-center px-3">
             Review the above carefully before confirming. Cashing out is not
             reversible.
           </p>

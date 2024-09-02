@@ -68,6 +68,7 @@ export function DesktopUserActivity({
               option={Number(item?.option) === 0 ? 1 : 0}
               optionNumber={Number(item?.option) === 0 ? 1 : 0}
               initialProb={item?.initialprob}
+              user={item?.user}
             >
               <motion.div
                 whileHover={{ scale: 1.01 }}

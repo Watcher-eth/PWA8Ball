@@ -5,6 +5,7 @@ import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { formatAmountWithCommas } from "@/utils/markets/formatAmountWithCommas";
+import { User } from "@/__generated__/graphql";
 
 export function CashoutConfirmScreen(props: {
   changeStep: () => void;
@@ -17,10 +18,11 @@ export function CashoutConfirmScreen(props: {
   options: [];
   id: number;
   isDesktop?: boolean;
+  user?: User;
 }) {
   const { onClose } = props;
-  const { user } = useUserStore();
-
+  const { userC } = useUserStore();
+  const { user } = props;
   const shareLink = async () => {
     if (navigator.share) {
       try {
@@ -72,11 +74,11 @@ export function CashoutConfirmScreen(props: {
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
           <div className="flex flex-row items-center">
-            <span className="text-[20px] text-white mr-[9px]">
+            <span className="text-[20px] font-[500] text-white mr-[9px]">
               {props.title}
             </span>
             <img
-              className="h-[38px] object-cover w-[38px] rounded-[10px] overflow-hidden"
+              className="h-[38px] object-cover w-[38px] rounded-[8px] overflow-hidden"
               src={props?.image}
               alt="Market"
             />
@@ -85,9 +87,13 @@ export function CashoutConfirmScreen(props: {
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Predicted on</span>
           <div className="flex flex-row items-center">
-            <span className="text-[19px] text-[#D3D3D3] mr-[4px]">2024</span>
-            <span className="text-[19px] text-white mr-[7px]">Thursday</span>
-            <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[10px] bg-[#181818] items-center justify-center">
+            <span className="text-[19px] font-[500] text-[#D3D3D3] mr-[4px]">
+              2024
+            </span>
+            <span className="text-[19px] font-[500] text-white mr-[7px]">
+              Thursday
+            </span>
+            <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[8px] bg-[#181818] items-center justify-center">
               <span className="text-[8px] text-[#FF0050] mb-[-10px]">Sept</span>
               <span className="text-[25px] text-white">21</span>
             </div>
@@ -95,17 +101,19 @@ export function CashoutConfirmScreen(props: {
         </div>
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Tx Receipt</span>
-          <span className="text-[20px] text-white underline">
+          <span className="text-[20px] font-[500] text-white underline">
             0xrf724sda3...kja3
           </span>
         </div>
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
           <div className="flex flex-row items-center">
-            <span className="text-[20px] mr-[8px] text-white">{user.name}</span>
+            <span className="text-[20px] font-[500] mr-[10px] text-white">
+              {user?.name}
+            </span>
             <img
-              className="h-[38px] w-[38px] rounded-[10px] overflow-hidden"
-              src={user.pfp}
+              className="h-[38px] w-[38px] rounded-full overflow-hidden"
+              src={user?.pfp}
               alt="Pen"
             />
           </div>
