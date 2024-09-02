@@ -24,10 +24,11 @@ export const BetBigView = ({
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
       style={{ borderRadius: 20 }}
+      className="active:scale-99"
     >
       <motion.div
         style={{ borderRadius: 12 }}
-        className="flex flex-col w-full mx-auto my-2 relative cursor-pointer"
+        className="flex flex-col active:scale-98 w-full mx-auto my-2 relative cursor-pointer"
         onClick={() =>
           router.push({
             pathname: "/[id]",
@@ -49,7 +50,7 @@ export const BetBigView = ({
           className="w-full h-[30vh] rounded-lg object-cover"
         />
         <div
-          className="absolute top-[22.5vh] w-full h-16 bg-gradient-to-t from-black via-[rgba(7, 7, 7, 0.9)] to-transparent rounded-b-lg"
+          className="absolute top-[23vh] w-full h-16 bg-gradient-to-t from-[#101010] to-transparent rounded-b-lg"
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
         <div className="absolute top-3 right-3 flex items-center bg-white px-2 pr-1 p-1 rounded-lg z-10">
@@ -59,7 +60,7 @@ export const BetBigView = ({
         <h2 className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]">
           {title}
         </h2>
-        <p className="text-[1rem] text-white mt-2 ml-1 mb-[-0.1rem] z-10 leading-[1.2]">
+        <p className="text-[1rem] text-white mt-6 ml-1 mb-[-0.1rem] font-[500] z-10 leading-[1.2]">
           {question}
         </p>
         {option1.image ? (
@@ -99,9 +100,10 @@ export const BetSmallView = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
+      className="active:scale-98"
     >
       <motion.div
-        className="flex no-scrollbar mb-2 mt-[-0.48rem] flex-row p-2 py-2 bg-[#141414] rounded-lg w-[101%] mx-0 ml-[-0.15rem] my-0 items-center"
+        className="flex no-scrollbar active:scale-98 mb-2 mt-[-0.48rem] flex-row p-2 py-2 bg-[#141414] rounded-lg w-[101%] mx-0 ml-[-0.15rem] my-0 items-center"
         onClick={() =>
           router.push({
             pathname: "/[id]",
@@ -124,10 +126,10 @@ export const BetSmallView = ({
           className="w-24 h-24 rounded-lg object-cover"
         />
         <div className="flex flex-col ml-2 gap-1">
-          <span className="text-lightgray text-sm">Trending Today</span>
+          <span className="text-[lightgray] text-sm">Trending Today</span>
           <p
             style={{ lineClamp: 2 }}
-            className="text-white line-clamp-2 text-lg font-bold "
+            className="text-white line-clamp-2 text-lg font-[600] "
           >
             {question}
           </p>
@@ -143,9 +145,9 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
   const noPercentage = (noValue / total) * 100;
 
   return (
-    <div className="flex no-scrollbar items-center p-2 my-1 ml-[-0.1rem] w-[90vw]">
+    <div className="flex no-scrollbar items-center p-2 px-0.5 my-1  w-full">
       <motion.div
-        className="flex items-center h-10 justify-center bg-red-600 rounded-l-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-center bg-[#FF0050] rounded-l-lg p-2 text-white font-bold"
         style={{
           width: `${noPercentage}vw`,
           borderTopLeftRadius: 8,
@@ -157,7 +159,7 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
       </motion.div>
       <div className="w-[0.35em] bg-white h-12 mx-[0.3rem] rounded-full"></div>
       <motion.div
-        className="flex items-center h-10 justify-center bg-blue-600 rounded-r-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-center bg-[#0067E1] rounded-r-lg p-2 text-white font-bold"
         style={{
           width: `${yesPercentage}vw`,
           borderTopRightRadius: 8,
@@ -186,7 +188,7 @@ export const PollingComponentImage = ({
   return (
     <div className="flex items-center p-2 my-1">
       <motion.div
-        className="flex items-center h-10 justify-between bg-red-600 rounded-l-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-between bg-[#FF0050] rounded-l-lg p-2 text-white font-bold"
         style={{
           width: `${noPercentage}%`,
           borderTopLeftRadius: 8,
@@ -209,7 +211,7 @@ export const PollingComponentImage = ({
       </motion.div>
       <div className="w-1 bg-white h-12 mx-1 rounded-full"></div>
       <motion.div
-        className="flex items-center h-10 justify-between bg-blue-600 rounded-r-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-between bg-[#0067E1] rounded-r-lg p-2 text-white font-bold"
         style={{
           width: `${yesPercentage}%`,
           borderTopRightRadius: 8,
