@@ -8,18 +8,24 @@ import {
 import { MarketCard } from "./MarketCard";
 import PaginationDots from "./CarouselDotButton";
 
-export function DesktopHomeNews({ markets, amount }) {
+export function DesktopHomeNews({ markets, amount, topic }) {
   return (
     <div className="w-full flex flex-col">
-      <div className="text-[2rem] text-white font-[500] flex flex-row items-center space-x-2">
-        {amount === 4 && (
-          <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
-        )}
-        <div className="">
-          {amount === 4 ? "Breaking News" : "New Predictions"}
+      {!topic && (
+        <div className="text-[2rem] text-white font-[500] flex flex-row items-center space-x-2">
+          {amount === 4 && (
+            <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
+          )}
+          <div className="">
+            {amount === 4 ? "Breaking News" : "New Predictions"}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-row items-center space-x-3">
+      )}
+      <div
+        className={`flex flex-row items-center space-x-3 ${
+          topic === true && "-mt-10"
+        }`}
+      >
         <Carousel className="flex flex-col  no-scrollbar mb-10 w-full gap-2   overflow-y-visible">
           <CarouselContent className="flex flex-row  no-scrollbar  w-full gap-1 py-6  overflow-y-visible">
             {markets

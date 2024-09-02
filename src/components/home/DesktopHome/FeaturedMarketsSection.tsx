@@ -7,7 +7,7 @@ import {
 import { MarketCard } from "./MarketCard";
 import PaginationDots from "./CarouselDotButton";
 
-export function FeaturedMarketsSection({ markets }) {
+export function FeaturedMarketsSection({ markets, topic }) {
   const enrichedFeedData = formatMarketArr({
     markets,
     selectedTopic: "🔥 Trending",
@@ -15,9 +15,11 @@ export function FeaturedMarketsSection({ markets }) {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
-        Trending Today
-      </div>
+      {!topic && (
+        <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
+          Trending Today
+        </div>
+      )}
       <Carousel>
         <CarouselContent className="flex flex-row space-x-3.5 w-full ">
           {enrichedFeedData.map((item, index) => {

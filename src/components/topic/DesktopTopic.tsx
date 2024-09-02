@@ -27,6 +27,8 @@ import {
   BlurOverlayWrapper,
 } from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
+import { DesktopHomeNews } from "../home/DesktopHome/DesktopHomeNews";
+import { FeaturedMarketsSection } from "../home/DesktopHome/FeaturedMarketsSection";
 
 function DesktopTopic({
   name,
@@ -40,10 +42,10 @@ function DesktopTopic({
 }) {
   const router = useRouter();
   const scrollRef = useRef(null);
-
+  console.log("id", id);
   const { data: membersProfiles } = useGetMembersForTopic(id);
   const { marketsForTopic } = useGetAllMarketsForTopic(Number(id));
-  const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
+  // const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
   const { user } = useUserStore();
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
@@ -56,14 +58,14 @@ function DesktopTopic({
     []
   );
 
-  const allComments = _.uniqBy(
-    [...optimisticComments, ...(comments || [])],
-    (comment) => comment.id
-  );
+  // const allComments = _.uniqBy(
+  //   [...optimisticComments, ...(comments || [])],
+  //   (comment) => comment.id
+  // );
 
-  function addOptimisticComment(comment: BetComment) {
-    setOptimisticComments([comment, ...optimisticComments]);
-  }
+  // function addOptimisticComment(comment: BetComment) {
+  //   setOptimisticComments([comment, ...optimisticComments]);
+  // }
 
   const handleComment = () => {};
   const setReply = () => {};
@@ -103,18 +105,18 @@ function DesktopTopic({
       <StandardPageWrapper className="h-full flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full h-80 relative">
+            <div className="w-full h-60 relative">
               <img
-                className="w-full transform object-cover h-80 relative -mt-40"
+                className="w-full transform object-cover h-60 relative -mt-40"
                 alt="CoverImage"
                 src={image}
               />
-              <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
+              <div className="h-60 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="full h-full overflow-y-auto z-20 -mt-2 px-5 flex flex-col">
-          <div className="flex flex-row items-center justify-between">
+        <div className="full h-full overflow-y-auto z-20 -mt-2 px-0 flex flex-col">
+          <div className="flex flex-row items-center justify-between px-0">
             <div className="flex flex-col -space-y-3 mt-2">
               <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
                 {name}
@@ -153,58 +155,26 @@ function DesktopTopic({
               </div>
             </div>
           </div>
-          <div className="h-[0.12rem] w-full bg-[#212121] mt-3.5 mb-8" />
-          <div className="text-[2.1rem] mb-2.5 text-[white] font-[Aeonik-Bold]">
-            Top Predictions
-          </div>
-          <div className="flex flex-row space-x-4 mb-8">
-            {renderDesktopTopicItems(
-              enhancedMarkets?.slice(0, 3) || [],
-              "large",
-              3
-            )}
-          </div>
-          <div className="flex flex-row space-x-3 mb-20">
-            {renderDesktopTopicItems(
-              enhancedMarkets?.slice(3, 8) || [],
-              "small",
-              5
-            )}
-          </div>
-          <StandardBleedOverlay>
-            <InverseVerticalBleedOverlay>
-              <div className="w-full relative py-7 px-[3.3rem] mt-20 ">
-                <div className="text-[1.65rem] text-white font-[700]">
-                  Community
-                </div>
+          <div className="h-[0.08rem] w-full  bg-[#212121] mt-3.5  mb-8" />
 
-                <div>
-                  {allComments.map((item) => {
-                    const commentUser = {};
-                    return (
-                      <Comment
-                        key={item.id}
-                        {...item}
-                        setReply={setReply}
-                        handleComment={handleComment}
-                        user2={commentUser}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            </InverseVerticalBleedOverlay>
-          </StandardBleedOverlay>
-          <div className="flex flex-col py-7">
-            <div className="text-[1.65rem] my-3 text-white font-[700]">
-              Popular Today
+          <div className="flex flex-col ">
+            <div className="mt-10 -mb-6 ml-1.5 flex flex-row ">
+              <DesktopHomeNews
+                topic={true}
+                amount={3}
+                markets={enhancedMarkets}
+              />
             </div>
-            <div className="flex flex-row pt-1 space-x-3">
-              {renderDesktopTopicItems(
-                enhancedMarkets?.slice(8, 12) || [],
-                "medium",
-                4
-              )}
+            <div className=" pb-[3rem]  flex flex-row">
+              <FeaturedMarketsSection
+                topic={true}
+                markets={enhancedMarkets.slice(1, 9)}
+              />
+            </div>
+
+            <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
+            <div className="pt-12 pb-0 ml-1 flex flex-row ">
+              <DesktopHomeNews amount={3} markets={enhancedMarkets} />
             </div>
           </div>
         </div>
