@@ -10,6 +10,8 @@ import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
 
 import { MarketCard } from "./MarketCard";
 import { DesktopFooter } from "./DesktopFooter";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
@@ -37,13 +39,30 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           length={3}
           feedDataArr={enrichedFeedData?.slice(0, 3)}
         />
-        <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2">
-          Latest News
+        <div className="flex items-center justify-between">
+          <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2 hover:scale-[100.5%] active:scale-99">
+            Latest News
+          </div>
+          <Link href={"/Elections"} className="flex items-center gap-1">
+            <div className="text-[1.1rem] text-[gray] font-[Aeonik] space-x-2">
+              See all latest news
+            </div>
+            <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
+          </Link>
         </div>
         <MarketCardSection
           length={2}
           feedDataArr={enrichedFeedData?.slice(4, 6)}
         />
+        <Link
+          href={"/Elections"}
+          className="flex items-center justify-center gap-1 hover:scale-[100.5%] active:scale-99"
+        >
+          <div className="text-[1.2rem] text-[gray] font-[Aeonik] space-x-2">
+            See all {enrichedFeedData?.length}+ live Election forecasts
+          </div>
+          <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
+        </Link>
         <div className="mb-40" />
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>

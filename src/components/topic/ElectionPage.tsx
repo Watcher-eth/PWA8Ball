@@ -1,4 +1,4 @@
-import _ from "lodash"
+import _ from "lodash";
 import { useState } from "react";
 import Countdown from "../common/CountDown";
 import {
@@ -18,15 +18,16 @@ import { SECTION_DATA_MAP, SwingStates } from "@/constants/Elections";
 import Link from "next/link";
 import { getMarketPath } from "@/utils/urls";
 import { UsMapCard } from "../map/UsMapCard";
+import MotionNumber from "motion-number";
 
 function Button({
   text,
   IconComponent,
-  onClick
+  onClick,
 }: {
-  text: string
-  IconComponent: any
-  onClick?: any
+  text: string;
+  IconComponent: any;
+  onClick?: any;
 }) {
   return (
     <div
@@ -39,12 +40,18 @@ function Button({
   );
 }
 
-function CandidateSection({ image, name, odds, change, side }:{
-  image: string
-  name: string
-  odds: number
-  change: number
-  side: 1 | 2
+function CandidateSection({
+  image,
+  name,
+  odds,
+  change,
+  side,
+}: {
+  image: string;
+  name: string;
+  odds: number;
+  change: number;
+  side: 1 | 2;
 }) {
   return (
     <div className="flex flex-row items-center z-1">
@@ -59,8 +66,12 @@ function CandidateSection({ image, name, odds, change, side }:{
           </div>
         </div>
       )}
-      <div className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}>
-        <div className="text-[4.5rem] font-semibold text-white">{odds}%</div>
+      <div
+        className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}
+      >
+        <div className="text-[4.5rem] font-semibold text-white">
+          <MotionNumber value={odds} />%
+        </div>
         <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
           <ChevronDown
             color="#FF0050"
@@ -83,15 +94,15 @@ function CandidateSection({ image, name, odds, change, side }:{
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function SwingStateComponent({
   sectionData,
-  state
+  state,
 }: {
-  sectionData: any
-  state: any
+  sectionData: any;
+  state: any;
 }) {
   return (
     <div className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
@@ -106,7 +117,9 @@ function SwingStateComponent({
       <div className="flex flex-row items-center z-2">
         <img className="w-[7rem] rounded-md" src={state.flag} />
         <div className="flex flex-col ml-3 -space-y-1.5">
-          <div className="text-[2rem] text-white font-semibold">{state.name}</div>
+          <div className="text-[2rem] text-white font-semibold">
+            {state.name}
+          </div>
           <div className="text-xl text-[lightgray] font-normal">
             {state.votes} Electoral votes at stake
           </div>
@@ -145,7 +158,7 @@ function SwingStateComponent({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59");

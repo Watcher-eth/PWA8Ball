@@ -9,7 +9,7 @@ import { Instagram, Send } from "lucide-react";
 
 export function DesktopFooter() {
   return (
-    <div className="relative w-full mt-10 -mb-32">
+    <div className="relative w-full mt-10  -mb-32">
       {/* Background with Grid Pattern */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 w-full h-full bg-[#090909] text-white/10">
@@ -37,7 +37,7 @@ export function DesktopFooter() {
       </div>
 
       {/* Footer Content */}
-      <div className="relative z-10 flex flex-col w-full  py-10 px-10 space-y-8">
+      <div className="relative z-10 flex flex-col w-full  py-10 px-14 space-y-8">
         <div className="flex flex-row w-full justify-between ">
           <div className="flex flex-col w-1/2">
             <div className="flex flex-row items-center space-x-3">

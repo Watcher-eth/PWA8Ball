@@ -34,6 +34,7 @@ import { HARD_MARKETS } from "@/constants/markets";
 import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
 import { PredictionPositionModal } from "../modals/PredictionPositionModal";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user } = useUserStore();
@@ -81,13 +82,13 @@ export function DesktopProfilePage2({ userId, userC }) {
               <img
                 className="w-full transform rotate-180 object-cover h-60 relative -mt-24"
                 alt="CoverImage"
-                src={userC?.pfp}
+                src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
               />
               <div className="h-80 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent backdrop-blur-lg absolute bottom-0" />
               <InverseBleedOverlay>
                 <img
                   className="size-28 md:size-30 lg:size-32 xl:size-36 ml-3 absolute -bottom-0 object-cover  rounded-full mb-4 border-8 border-[#080808] z-20"
-                  src={userC?.pfp}
+                  src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
                 />
               </InverseBleedOverlay>
             </div>
