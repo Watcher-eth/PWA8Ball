@@ -55,7 +55,7 @@ export function CashoutWarningScreen({
         <span className="text-[21px] text-white mt-[14px] font-semibold leading-[24px]">
           Are you sure you want to cash out prior to resolution?
         </span>
-        <span className="text-[15px] text-[#D3D3D3] mt-[8px] font-normal">
+        <span className="text-[15px] text-[#D3D3D3] mt-2 font-normal">
           If you cash out now you will sell at the current probability and won't
           get any multiplier
         </span>
@@ -65,7 +65,7 @@ export function CashoutWarningScreen({
             Hold and earn more
           </span>
         </div>
-        <div className="flex flex-col p-[16px] rounded-[15px] mt-[8px] bg-[#121212]">
+        <div className="flex flex-col p-4 rounded-[15px] mt-2 bg-[#121212]">
           <div className="flex flex-row items-center mb-[7px] justify-between">
             <span className="text-[16.5px] text-[#D3D3D3] font-medium">
               Now

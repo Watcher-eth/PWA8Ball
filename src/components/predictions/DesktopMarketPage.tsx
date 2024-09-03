@@ -75,7 +75,7 @@ export function DesktopMarketPage({ users, market, id }) {
         <div className="">
           <Grid gap={4} cols={{ xs: 8 }}>
             <Col xs={4} lg={5}>
-              <div className="flex flex-col mt-[2.5rem] z-10">
+              <div className="flex flex-col mt-10 z-10">
                 <div
                   className="font-[Aeonik]"
                   className="text-4xl pr-10 text-start pl-5 pb-0 p-3 text-white font-bold"

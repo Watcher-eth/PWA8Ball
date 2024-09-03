@@ -226,7 +226,7 @@ export const MobileMyBetModal = (props: {
           </div>
         </div>
       )}
-      <div className="flex flex-row items-center mt-[8px] mb-[10px] self-center justify-between w-full space-x-4">
+      <div className="flex flex-row items-center mt-2 mb-2.5 self-center justify-between w-full space-x-4">
         <motion.div
           onClick={() => {
             if (props.isExternal) {
@@ -235,7 +235,7 @@ export const MobileMyBetModal = (props: {
               props.setStep(2);
             }
           }}
-          className="mt-[10px] hover:scale-[100.5%] active:scale-99 rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
+          className="mt-2.5 hover:scale-[100.5%] active:scale-99 rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
         >
           {props.isExternal ? (
             <Stars height={20} color={"#D9D9D9"} strokeWidth={3} />
@@ -250,7 +250,7 @@ export const MobileMyBetModal = (props: {
           onClick={() => {
             props.setStep(4);
           }}
-          className="mt-[10px]  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
+          className="mt-2.5  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
           <span className="text-[20px] text-[#1D1D1D] font-bold ml-[3px]">
