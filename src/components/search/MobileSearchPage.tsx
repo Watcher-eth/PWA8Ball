@@ -13,6 +13,7 @@ import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMar
 import { HARD_MARKETS } from "@/constants/markets";
 import { HARD_TOPICS } from "@/constants/topics";
 import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
+import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers";
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
@@ -27,8 +28,7 @@ export function MobileSearchPage() {
     HARD_MARKETS,
     HARD_TOPICS
   );
-  const { data: users, isLoading: loadingUsers } =
-    useGetUsersByName(debouncedText);
+  const { users: users, loading: loadingUsers } = useSearchUsers(debouncedText);
   const { markets: searchMarkets, loading: loadingQuestion } =
     useSearchMarkets(debouncedText);
 

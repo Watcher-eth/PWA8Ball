@@ -70,7 +70,7 @@ export function FriendItem({
   walletAddress,
 }) {
   return (
-    <Link href={getProfilePath(id)} prefetch={true}>
+    <Link href={getProfilePath(walletAddress)} prefetch={true}>
       <SearchItem
         title={name}
         subtitle={handle}

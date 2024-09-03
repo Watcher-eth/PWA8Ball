@@ -14,6 +14,7 @@ import { HARD_MARKETS } from "@/constants/markets";
 import { HARD_TOPICS } from "@/constants/topics";
 import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets";
 import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers";
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
@@ -29,8 +30,7 @@ export function SearchOverview() {
     HARD_MARKETS,
     HARD_TOPICS
   );
-  const { data: users, isLoading: loadingUsers } =
-    useGetUsersByName(debouncedText);
+  const { users, loading: loadingUsers } = useSearchUsers(debouncedText);
   const { markets: searchMarkets, loading: loadingQuestion } =
     useSearchMarkets(debouncedText);
 
@@ -102,6 +102,7 @@ export function SearchOverview() {
     []
   );
 
+  console.log("uiser", users);
   return (
     <div className="rounded-2xl p-2 w-full transition-all duration-300">
       <SearchInputSection value={searchStr} onChange={handleSearch} />
