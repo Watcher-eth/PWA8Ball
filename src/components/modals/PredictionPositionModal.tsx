@@ -11,6 +11,7 @@ import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";
 import { CashoutOverview } from "../predictions/cashout/CashoutOverview";
 import { CashoutWarningScreen } from "../predictions/cashout/CashoutWarningScreen";
 import { CashoutConfirmScreen } from "../predictions/cashout/CashoutConfirmScreen";
+import { RedeemModal } from "../predictions/Redeem/RedeemModal";
 
 export function PredictionPositionModal({
   children,
@@ -155,6 +156,14 @@ export function PredictionPositionModal({
                   odds={"20"}
                   totalPot={ownedAmount}
                   amount={ownedAmount}
+                />
+              )}
+              {step === 5 && (
+                <RedeemModal
+                  option={options}
+                  image={image}
+                  onClose={onClose}
+                  totalPot={ownedAmount}
                 />
               )}
             </AnimatePresence>

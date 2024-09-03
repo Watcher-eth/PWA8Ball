@@ -6,6 +6,7 @@ import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCrea
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
 import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton";
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 
 export function DesktopUserActivity({
   walletAddress,
@@ -69,6 +70,8 @@ export function DesktopUserActivity({
               optionNumber={Number(item?.option) === 0 ? 1 : 0}
               initialProb={item?.initialprob}
               user={item?.user}
+              resolved={item?.market?.resolved}
+              outcome={item?.market?.outcome}
             >
               <motion.div
                 whileHover={{ scale: 1.01 }}

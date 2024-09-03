@@ -38,7 +38,7 @@ async function redeemPrediction(props: {
 
 export const useRedeem = () => {
   return useMutation({
-    mutationFn: cashoutPrediction,
+    mutationFn: redeemPrediction,
     onSuccess: () => {
       console.log("Redeemed successfully");
     },

@@ -20,6 +20,8 @@ export const GET_POSITIONS_BY_WALLET = gql`
           question
           title
           usdcStake
+          outcome
+          resolved
         }
         user {
           externalAuthProviderUserId

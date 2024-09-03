@@ -279,44 +279,46 @@ export function DesktopProfilePage2({ userId, userC }) {
                       {...item}
                     />
                   );
-                else
-                  return (
-                    <DesktopMyBetModal
-                      key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
-                      title={item.market?.title}
-                      image={item?.image}
-                      price={item.tokensOwned}
-                      ownedAmount={item.tokensOwned}
-                      options={
-                        item.option === 1
-                          ? {
-                              name: item?.market?.outcomeA,
-                              odds: item?.market?.outcomeOddsA,
-                            }
-                          : {
-                              name: item?.market?.outcomeB,
-                              odds: item?.market?.outcomeOddsB,
-                            }
-                      }
-                      percentage={item.percentage}
-                      betId={item.marketId}
-                      topic={item.marketId}
-                      icon={item.icon}
-                      question={item.market?.question}
-                      option={item.option}
-                      optionNumber={item.option}
-                      isExternal={userId !== user?.walletAddress}
-                      initialProb={item?.market?.initialProb / 100}
-                      user={userC}
-                    >
-                      <ProfilePositionCard
-                        key={index}
-                        userName={userC?.name}
-                        pfp={userC?.pfp}
-                        {...item}
-                      />
-                    </DesktopMyBetModal>
-                  );
+                else console.log("item", item.market);
+                return (
+                  <DesktopMyBetModal
+                    key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
+                    title={item.market?.title}
+                    image={item?.image}
+                    price={item.tokensOwned}
+                    ownedAmount={item.tokensOwned}
+                    options={
+                      item.option === 1
+                        ? {
+                            name: item?.market?.outcomeA,
+                            odds: item?.market?.outcomeOddsA,
+                          }
+                        : {
+                            name: item?.market?.outcomeB,
+                            odds: item?.market?.outcomeOddsB,
+                          }
+                    }
+                    percentage={item.percentage}
+                    betId={item.marketId}
+                    topic={item.marketId}
+                    icon={item.icon}
+                    question={item.market?.question}
+                    option={item.option}
+                    optionNumber={item.option}
+                    isExternal={userId !== user?.walletAddress}
+                    initialProb={item?.market?.initialProb / 100}
+                    user={userC}
+                    resolved={item?.market?.resolved}
+                    outcome={item?.market?.outcome}
+                  >
+                    <ProfilePositionCard
+                      key={index}
+                      userName={userC?.name}
+                      pfp={userC?.pfp}
+                      {...item}
+                    />
+                  </DesktopMyBetModal>
+                );
               })}
             </div>
           ) : (

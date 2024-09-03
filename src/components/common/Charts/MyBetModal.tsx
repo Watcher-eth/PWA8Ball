@@ -29,6 +29,7 @@ import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
 import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices";
 import { getMarketPath } from "@/utils/urls";
 import { User } from "@/__generated__/graphql";
+import { RedeemModal } from "@/components/predictions/Redeem/RedeemModal";
 
 export const timeframes = ["1H", "1D", "1W", "1M"];
 
@@ -50,6 +51,8 @@ export const MobileMyBetModal = (props: {
   isExternal?: boolean;
   isDesktop?: boolean;
   initialProb?: number;
+  resolved?: boolean;
+  outcome?: number;
   onClose: () => void;
   openCashout: () => void;
   handleReceipt: () => void;
@@ -84,6 +87,8 @@ export const MobileMyBetModal = (props: {
     ((currentPrices[currentPrices.length - 1].value - currentPrices[0].value) /
       currentPrices[0].value) *
     100;
+
+  console.log("resolved", props?.resolved);
   return (
     <div
       className={`flex flex-col ${
@@ -109,6 +114,7 @@ export const MobileMyBetModal = (props: {
               },
             });
           }}
+          className="relative"
         >
           <img
             src={props.image}
@@ -231,19 +237,25 @@ export const MobileMyBetModal = (props: {
           onClick={() => {
             if (props.isExternal) {
               router.push({ pathname: getMarketPath(props.betId) });
+            } else if (props?.resolved) {
+              props.setStep(5);
             } else {
               props.setStep(2);
             }
           }}
           className="mt-2.5 hover:scale-[100.5%] active:scale-99 rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
         >
-          {props.isExternal ? (
+          {props.isExternal || props?.resolved ? (
             <Stars height={20} color={"#D9D9D9"} strokeWidth={3} />
           ) : (
             <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
           )}
           <span className="text-[20px] text-[#D9D9D9] font-bold">
-            {props.isExternal ? "Prediction" : "Cashout"}
+            {props?.resolved
+              ? "Redeem"
+              : props.isExternal
+              ? "Prediction"
+              : "Cashout"}
           </span>
         </motion.div>
         <motion.div
@@ -303,6 +315,9 @@ export function DesktopMyBetModal({
   isExternal,
   initialProb,
   user,
+  resolved,
+  outcome,
+  onClose,
 }: {
   children: React.ReactNode;
   title: string;
@@ -322,9 +337,10 @@ export function DesktopMyBetModal({
   initialProb?: number;
   isExternal?: boolean;
   user: User;
+  resolved?: boolean;
+  outcome?: number;
 }) {
   const [step, setStep] = useState(1);
-  console.log("isexternal", user);
   return (
     <DesktopCardModal
       onOpenChange={() => {
@@ -355,6 +371,8 @@ export function DesktopMyBetModal({
             isDesktop={true}
             setStep={setStep}
             initialProb={initialProb}
+            resolved={resolved}
+            outcome={outcome}
           />
         ) : step === 2 ? (
           <CashoutOverview
@@ -401,6 +419,13 @@ export function DesktopMyBetModal({
             onClose={() => {}}
             totalPot={Number(ownedAmount)}
             points={Number(ownedAmount)}
+          />
+        ) : step === 5 ? (
+          <RedeemModal
+            option={options}
+            image={image}
+            onClose={() => {}}
+            totalPot={ownedAmount}
           />
         ) : null
       }

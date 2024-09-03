@@ -19,6 +19,8 @@ export function ActivityField({
   id,
   initialProb,
   userId,
+  resolved,
+  outcome,
   onOpenBottomSheet,
 }: {
   index: number;
@@ -34,6 +36,8 @@ export function ActivityField({
   option: { name: string; value: number; index: number };
   id: string;
   initialProb: number;
+  resolved?: boolean;
+  outcome?: number;
   onOpenBottomSheet: () => void;
 }) {
   const MotionDivContent = () => (
@@ -102,6 +106,8 @@ export function ActivityField({
         userId={userId}
         isExternal={true}
         initialProb={initialProb}
+        resolved={resolved}
+        outcome={outcome}
         user={{ name: name, pfp: pfp, id: userId }}
       >
         <MotionDivContent />
