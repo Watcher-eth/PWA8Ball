@@ -42,7 +42,7 @@ export function NotificationsPlaceholder({ isUser }) {
   return (
     <div className="flex flex-col align-center items-center w-full p-2 mt-2  ">
       {[...Array(3)].map((_, index) => (
-        <NotificationSkelleton index={index} />
+        <NotificationSkeleton index={index} />
       ))}
 
       <div className="flex flex-col items-center mt-5 self-center">
@@ -62,7 +62,7 @@ export function NotificationsPlaceholder({ isUser }) {
   );
 }
 
-export const UserPredictionSkelleton = ({ index }) => (
+export const UserPredictionSkeleton = ({ index }) => (
   <motion.div
     className="flex flex-col p-4 bg-[#1B1B1E] rounded-lg my-2"
     initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ export const UserPredictionSkelleton = ({ index }) => (
   </motion.div>
 );
 
-export const UserLpSkelleton = ({ index }) => (
+export const UserLpSkeleton = ({ index }) => (
   <motion.div
     className="flex flex-col p-4 bg-[#171717] w-[90vw] rounded-2xl my-2"
     initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export const NewPlaceholderLp = ({ isUser }) => {
   return (
     <div className="flex flex-col items-center w-full p-2 mt-2 mx-auto">
       {[...Array(2)].map((_, index) => (
-        <UserLpSkelleton key={index} index={index} />
+        <UserLpSkeleton key={index} index={index} />
       ))}
       <div
         style={{
@@ -203,7 +203,7 @@ export const NewPlaceholderComment = ({ isUser, isPost, onOpen }) => (
   </div>
 );
 
-export const NotificationSkelleton = ({ index }) => (
+export const NotificationSkeleton = ({ index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
