@@ -22,7 +22,7 @@ export function OutcomeButton({
       className={`
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all
-            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-md items-center
+            text-[1.3rem] text-white font-bold h-[2.8rem] rounded-[0.6rem] items-center
             w-full
             ${className}
         `}
@@ -50,9 +50,9 @@ export function OutcomeButton({
 
 function getClassNameFromOption(option: string | number) {
   if (option == 0) {
-    return "bg-[#171717] hover:!bg-[#121212] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const; // red
+    return "bg-[#141414] hover:!bg-[#151515]  border-[0.12rem] border-[#212121] active:bg-[#181818]" as const; // red
   } else if (option == 1) {
-    return "bg-[#171717] hover:!bg-[#121212] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const;
+    return "bg-[#141414] hover:!bg-[#151515] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const;
   } else {
     return "";
   }

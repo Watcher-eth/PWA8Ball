@@ -9,7 +9,7 @@ export function DetailRow({
 }) {
   return (
     <div className="flex flex-row w-full items-center">
-      <div className="flex flex-col p-2.5 size-14 rounded-md bg-[#131313] items-center mr-3 justify-center">
+      <div className="flex flex-col p-2.5 size-14 rounded-md bg-[#121212] items-center mr-3 justify-center">
         {icon}
       </div>
       <div className="flex flex-col space-y-[-0.1rem]">

@@ -145,8 +145,8 @@ export const NewPlaceholderLp = ({ isUser }) => {
 
 const CommentSkeleton = ({ index }) => (
   <motion.div
-    className="flex flex-col p-4 bg-[#101010] py-6 rounded-[15px] my-2"
-    style={{ width: "95%", margin: "8px auto" }}
+    className="flex flex-col p-4 bg-[#101010] py-6 rounded-[20px]  my-2"
+    style={{ width: "99%", margin: "8px auto" }}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: 20 }}
@@ -170,10 +170,7 @@ const CommentSkeleton = ({ index }) => (
 );
 
 export const NewPlaceholderComment = ({ isUser, isPost, onOpen }) => (
-  <div className="flex flex-col items-center w-full p-2 mt-2 px-0 mb-32">
-    <div className="text-white text-2xl self-start font-bold mb-2 ml-4">
-      0 Comments
-    </div>
+  <div className="flex flex-col items-center w-full  mt-3 px-0 mb-32">
     {[...Array(1)].map((_, index) => (
       <CommentSkeleton key={index} index={index} />
     ))}

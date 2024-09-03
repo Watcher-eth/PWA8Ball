@@ -6,14 +6,13 @@ import type { User } from "@/types/UserTypes";
 import { useCreateComment } from "@/supabase/mutations/useCreateComment";
 
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 export function AddComment({
-  user,
   id,
   topic_id,
   addOptimisticComment,
 }: {
-  user: User;
   id: number;
   topic_id: string;
   addOptimisticComment: () => void;
@@ -23,12 +22,14 @@ export function AddComment({
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: addComment } = useCreateComment();
 
+  const { user } = useUserStore();
   const handleCancel = () => {
     if (inputRef.current) {
       inputRef.current.blur();
     }
   };
 
+  console.log("params", id, topic_id);
   const handleInput = () => {
     if (inputRef.current) {
       const lines = inputRef.current.value.split("\n").length;
@@ -46,6 +47,8 @@ export function AddComment({
       return;
     }
     addOptimisticComment({
+      user2: { name: user.name, pfp: user.pfp },
+      user: { name: user.name, pfp: user.pfp },
       name: user.name,
       pfp: user.pfp,
       content: content,
@@ -53,12 +56,13 @@ export function AddComment({
       extraComments: [],
       id: id,
     });
+
     const result = await addComment({
       market_id: id,
       content: content!,
-      created_by: user?.walletaddress,
+      created_by: user?.walletAddress,
       topic_id: topic_id,
-      parent_id: "words[1]",
+      parent_id: null,
     });
 
     toast.success("Commented successfully!", {
@@ -73,9 +77,9 @@ export function AddComment({
   }
 
   return (
-    <div className="flex flex-row w-full mb-1.5 mt-3">
+    <div className="flex flex-row w-full mb-4 mt-3">
       <img
-        className="h-12 min-w-12 rounded-[50%] overflow-hidden object-cover mr-2.5"
+        className="h-12 min-w-12  rounded-[50%] overflow-hidden object-cover mr-2.5"
         src={user?.pfp}
         alt="User Profile"
       />
@@ -86,15 +90,15 @@ export function AddComment({
           ref={inputRef}
           placeholder="Add a comment..."
           rows={1}
-          className={`pb-1 bg-[transparent] placeholder-[lightgray] w-7/10 border-[#303030] text-[lightgray] bg-transparentfocus:outline-none transition-all duration-300 resize-none
-          border-b-[0.8px] focus:border-b-2 focus:border-b-transparent outline-none overflow-hidden
+          className={`pb-1 bg-[transparent] placeholder-[lightgray] w-7/10 border-[#303030] text-[lightgray] bg-transparent focus:outline-none transition-all duration-300 resize-none
+          border-b-[0.8px] focus:border-b-1 focus:border-b-[lightgray] outline-none overflow-hidden
           `}
           onInput={handleInput}
         />
         <span
           className={`absolute left-0 w-7/10 h-[2px] transition-all duration-300
             group-focus-within:bg-[#505050] group-focus-within:scale-x-100
-            bg-transparentscale-x-0 transform origin-center
+            bg-transparent scale-x-0 transform origin-center
           `}
           style={{
             transformOrigin: "center",
@@ -105,7 +109,7 @@ export function AddComment({
         <div // hidden group-focus-within:flex
           className={`
             h-12 group-focus-within:h-12 flex flex-row  items-center space-x-3 justify-end
-            mt-0 group-focus-within:mt-2 overflow-y-hidden overflow-x-visible transition-all
+           mt-0 group-focus-within:mt-1  overflow-y-hidden overflow-x-visible transition-all
             opacity-0 group-focus-within:opacity-100 px-2
           `}
         >
@@ -120,8 +124,8 @@ export function AddComment({
           <CommentActionButton
             onClick={() => addUserComment()}
             className={`
-              text-white
-              bg-blue-600
+              text-black
+              bg-white
             `}
             label="Comment"
           />

@@ -190,15 +190,15 @@ function MobileMarketContent({
           </div>
         </MobileBettersModal>
       </div>
-      <div className="h-[0.06rem] bg-[#252525] w-[91%] my-1 z-1 self-center">
+      <div className="h-[0.06rem]  text-[0.01rem] bg-[#212121] w-[90%] my-1 z-1 self-center">
         h
       </div>
       <div
         className={`
-          text-[1.02rem] self-start
+          text-[1.05rem] self-start
           -mb-px mt-2 ml-5
           text-start text-[lightgray] max-w-full
-           z-2 font-[Aeonik-Bold] leading-[1.35rem]
+           z-2 font-[500] leading-[1.35rem]
         `}
       >
         {description}
@@ -262,7 +262,8 @@ function MobileMarketContent({
       </div>
       <div className="z-2">
         <CommentSection
-          topicId={topicId}
+        
+          topic_id={topicId}
           users={users}
           totalComments={market?.total_comments}
           marketId={market?.id}

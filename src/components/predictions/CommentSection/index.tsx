@@ -23,11 +23,13 @@ export function CommentSection({
   totalComments,
   users,
   isDesktop,
+  topic_id,
 }: {
   marketId: string;
   totalComments: number;
   users: IUserWithBet[];
   isDesktop?: boolean;
+  topic_id: string;
 }) {
   const { user } = useUserStore();
 
@@ -53,25 +55,26 @@ export function CommentSection({
 
   const handleComment = () => {};
   const setReply = () => {};
-  if (allComments?.length < 1) {
-    return (
-      <NewPlaceholderComment isUser={true} isPost={false} onOpen={() => {}} />
-    );
-  }
+
   return (
     <div
       className={`
         flex flex-col
         ${isDesktop ? "px-0" : "p-5"}
-        ${isDesktop ? "w-full" : "w-[96vw]"}
+        ${isDesktop ? "w-full" : "w-full"}
         pb-20`}
     >
       <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
         {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
       </p>
-      <AddComment user={user} addOptimisticComment={addOptimisticComment} />
+      <AddComment
+        id={marketId}
+        topic_id={topic_id}
+        user={user}
+        addOptimisticComment={addOptimisticComment}
+      />
       <div className="-mt-7 -mb-1.5">
-        {allComments.length > 0 &&
+        {allComments.length > 0 ? (
           allComments.map((item) => {
             const commentUser = findUserByExternalAuthId(
               item.created_by,
@@ -87,7 +90,14 @@ export function CommentSection({
                 user2={commentUser}
               />
             );
-          })}
+          })
+        ) : (
+          <NewPlaceholderComment
+            isUser={true}
+            isPost={false}
+            onOpen={() => {}}
+          />
+        )}
       </div>
     </div>
   );
