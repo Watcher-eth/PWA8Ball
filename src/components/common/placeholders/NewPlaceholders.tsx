@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { HOME_PATH } from "@/utils/urls";
 import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
-import { UserPredictionSkeleton } from "@/components/profile/GeneralFeed/UserPredictionSkeleton";
+import { UserPredictionSkeleton as GeneralFeedSkeleton } from "@/components/profile/GeneralFeed/UserPredictionSkeleton";
 
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
@@ -12,7 +12,7 @@ export function NewPlaceholder({ isUser }) {
   return (
     <div className="flex flex-col items-center w-full px-5  mx-auto">
       {[...Array(3)].map((_, index) => (
-        <UserPredictionSkeleton index={index} />
+        <GeneralFeedSkeleton index={index} />
       ))}
       <div
         className="w-full -mt-[105px]  h-[105px]"

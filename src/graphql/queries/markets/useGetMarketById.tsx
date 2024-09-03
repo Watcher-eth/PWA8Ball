@@ -7,6 +7,7 @@ const GET_ONCHAIN_MARKET = tgql(/* GraphQL */ `
   query getMarketById($id: BigInt!) {
     market(id: $id) {
       id
+      marketId
       createdAt
       initialProb
       liquidityTotal
