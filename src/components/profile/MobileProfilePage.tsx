@@ -24,6 +24,7 @@ export function MobileProfilePage({
   const balance = useUsdcBalance({
     address: userC?.walletAddress,
   });
+  console.log("userC", userC);
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
@@ -69,14 +70,14 @@ export function MobileProfilePage({
               <p className="text-gray-100 text-sm bg-[#181818] py-2 px-4 rounded-2xl mx-2 font-medium">
                 {totalFollowers} Followers
               </p>
-              <FollowButton profileId={userC?.walletaddress} />
+              <FollowButton profileId={userC?.walletAddress} />
             </div>
           </div>
         </div>
 
         <div className="w-full flex flex-col items-center -mt-[200px]">
           <GeneralFeed
-            walletAddy={userC?.walletaddress}
+            walletAddy={userC?.walletAddress}
             id={userId}
             onParentRefresh={() => console.log("Refreshed!")}
           />

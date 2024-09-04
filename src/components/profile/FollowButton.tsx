@@ -20,7 +20,7 @@ export function FollowButton({ profileId }: { profileId: string }) {
 
   const { mutate: followUser } = useFollowUser();
   const { mutate: unfollowUser } = useUnfollowUser();
-
+  console.log("follow ids", followerId, profileId);
   useEffect(() => {
     if (isFollowing2) {
       setFollowing(true);

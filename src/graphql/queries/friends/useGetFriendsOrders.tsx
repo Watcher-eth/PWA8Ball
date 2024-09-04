@@ -6,15 +6,15 @@ import { tgql } from "@/__generated__";
 import { supabase } from "@/supabase/supabaseClient";
 import { useEffect, useState } from "react";
 
-
 // GraphQL query to fetch orders by user addresses
 const GET_ORDERS_BY_USER_ADDRESSES = tgql(/* GraphQL */ `
   query FriendsOrdersByUser($userAddressArr: [String]!) {
-    positions(where: { userAddress_in: $userAddressArr }, limit: 1) {
+    positions(where: { userAddress_in: $userAddressArr }, limit: 15) {
       items {
         marketId
         option
         tokensOwned
+        createdAt
         market {
           id
           initialProb
@@ -31,6 +31,7 @@ const GET_ORDERS_BY_USER_ADDRESSES = tgql(/* GraphQL */ `
           externalAuthProviderUserId
           name
           pfp
+          walletAddress
         }
       }
     }
@@ -43,31 +44,32 @@ async function fetchFollowingIds(userId: string) {
     .from("user_follows")
     .select("following_id")
     .eq("follower_id", userId);
-
+  console.log("ids", userId, data);
   if (error) {
     console.error("Error fetching following IDs:", error.message);
     throw new Error(error.message);
   }
 
-  return data?.map((row) => row.following_id) ?? []
-};
+  return data?.map((row) => row.following_id) ?? [];
+}
 
 export const useGetFriendsPositions = (userId: string) => {
-  const [followingIds, setFollowingIds] = useState([])
+  const [followingIds, setFollowingIds] = useState([]);
   async function getAndSetFollowingIds() {
     const arr = await fetchFollowingIds(userId);
-    setFollowingIds(arr as any)
+    setFollowingIds(arr as any);
   }
-  useEffect(
-    () => {
-      getAndSetFollowingIds()
-    },
-    [userId]
-  )
-  const { data, error } = useApolloQuery(GET_ORDERS_BY_USER_ADDRESSES, {
-    variables: {
-      userAddressArr: followingIds.map(getChecksummedAddress),
-    },
-  });
-  return data?.positions?.items ?? [];
+  useEffect(() => {
+    getAndSetFollowingIds();
+  }, [userId]);
+  const { data, error, loading, refetch } = useApolloQuery(
+    GET_ORDERS_BY_USER_ADDRESSES,
+    {
+      variables: {
+        userAddressArr: followingIds.map(getChecksummedAddress),
+      },
+    }
+  );
+  console.log("data", data?.positions?.items);
+  return { data: data?.positions?.items, error, loading, refetch } ?? [];
 };

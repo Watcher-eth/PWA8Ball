@@ -13,9 +13,15 @@ import { NotificationsModal } from "@/components/notifications/NotificationsModa
 import { AltSkeleton } from "@/components/ui/Skeleton";
 
 import { FollowPredictionSkeleton } from "@/components/activity/FollowPredictionSkeleton";
-import { ActivityField } from "@/components/activity/ActivityField";
+import {
+  ActivityField,
+  ActivityFieldMobile,
+} from "@/components/activity/ActivityField";
 import { Leaderboard } from "@/components/activity/Leaderboard";
 import { YourStats } from "@/components/activity/YourStats";
+import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders";
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions";
+import { HARD_MARKETS } from "@/constants/markets";
 
 export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const [page, setPage] = useState<boolean>(false);
@@ -23,9 +29,9 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
   const {
     data: predictions,
     error,
-    isLoading,
+    loading: isLoading,
     refetch,
-  } = useGetFollowingPredictions(user?.externalAuthProviderUserId);
+  } = useGetFriendsPositions(user?.walletAddress);
 
   if (isLoading) {
     return (
@@ -82,7 +88,12 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     );
   }
 
-  const groupedPredictions = groupPredictionsByDate(predictions);
+  const aggregatedPredictions = predictions
+    ? aggregatePredictedItemsWithImage(predictions, HARD_MARKETS)
+    : [];
+
+  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions);
+  console.log("predictions", predictions, groupedPredictions);
   return (
     <div
       className={`
@@ -131,7 +142,7 @@ min-h-screen
       </div>
 
       <div>
-        <div>
+        <div className="px-1">
           {page ? (
             <Leaderboard />
           ) : (
@@ -145,31 +156,39 @@ min-h-screen
                         <div key={dateKey}>
                           <h2
                             className={`
-                          font-extrabold text-[20px] text-white -mb-px
+                          font-[700] text-[20px] text-white -mb-px
                           ${index === 0 ? "mt-4" : "mt-[22px]"}
                         `}
                           >
                             {dateKey}
                           </h2>
                           {predictions.map((item, idx) => {
-                            const option = parseOptionJSON(item.option);
                             return (
-                              <ActivityField
+                              <ActivityFieldMobile
                                 isDesktop={isDesktop}
                                 key={idx}
                                 index={idx}
-                                options={item.markets.options}
-                                question={item.markets.question}
-                                name={item.users.name}
-                                pfp={item.users.pfp}
-                                amount={(item.amount / 10 ** 6).toFixed(2)}
-                                title={item.markets.title}
-                                image={item.markets.image}
-                                option={option}
-                                id={item?.market_id}
+                                option={{
+                                  name:
+                                    item?.option === 1
+                                      ? item.market?.outcomeA
+                                      : item.market?.outcomeB,
+                                  index: item?.option,
+                                  value:
+                                    item?.option === 1
+                                      ? item.market?.outcomeOddsA
+                                      : item.market?.outcomeOddsB,
+                                }}
+                                question={item.market.question}
+                                name={item.user.name}
+                                pfp={item.user.pfp}
+                                amount={item.tokensOwned}
+                                title={item.market.title}
+                                image={item.image}
+                                id={item?.marketId}
                                 odds={12}
-                                userId={item?.user_id}
-                                initialProb={item.markets.initialProb}
+                                userId={item?.user?.walletAddress}
+                                initialProb={item.market.initialProb}
                                 onOpenBottomSheet={() => {}}
                               />
                             );
