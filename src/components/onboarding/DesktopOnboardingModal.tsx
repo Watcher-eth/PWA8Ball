@@ -333,7 +333,7 @@ export function InviteScreen() {
         <div className="h-[6rem] w-[6rem] flex items-center justify-center my-5 rounded-full bg-[#191919]">
           <div className="text-[3.4rem] rotate-6">🔓</div>
         </div>
-        <p className="text-center mb-6 font-[500] px-6 text-[lightgray]">
+        <p className="text-center mb-6 font-medium px-6 text-[lightgray]">
           Glimpse is currently in closed beta. You need an invite code to use
           the app.
         </p>
@@ -365,7 +365,7 @@ export function InviteScreen() {
         {invite !== "" && (
           <div
             onClick={verifyInvite}
-            className="py-2 animate-fade-in mb-4 hover:scale-101 active:scale-98  w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md"
+            className="py-2 animate-fade-in mb-4 hover:scale-101 active:scale-98  w-full font-medium space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md"
           >
             <Lock color="white" strokeWidth={2.8} size={16} />{" "}
             <div>Verify invite</div>
@@ -373,10 +373,10 @@ export function InviteScreen() {
         )}
         <div className="flex items-center mb-4 mt-0 justify-between w-full">
           <div className="h-[0.1rem] w-full bg-[#212121]" />
-          <p className="text-center mx-4 font-[500] text-[lightgray]">OR</p>
+          <p className="text-center mx-4 font-medium text-[lightgray]">OR</p>
           <div className="h-[0.1rem] w-full bg-[#212121]" />
         </div>
-        <div className="py-2 hover:scale-101 active:scale-98 mb-20 w-full font-[500] space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
+        <div className="py-2 hover:scale-101 active:scale-98 mb-20 w-full font-medium space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
           <Share color="white" strokeWidth={2.8} size={16} />{" "}
           <div>Share to enter the waitlist</div>
         </div>

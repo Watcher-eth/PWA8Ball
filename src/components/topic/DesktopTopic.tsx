@@ -147,7 +147,7 @@ function DesktopTopic({
                     />
                   ))}
                 </div>{" "}
-                <span className="text-[lightgray] text-[1.15rem] ml-1 font-[500]">
+                <span className="text-[lightgray] text-[1.15rem] ml-1 font-medium">
                   {membersProfiles?.length > 0
                     ? `${`${members} Members`}`
                     : `Be the first to join ${name}`}
@@ -296,8 +296,8 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
           opacity: validPercentage > 12 ? 1 : 0,
         }}
       />
-      <div className="absolute font-[500] left-2.5 ml-2">{labels[0]}</div>
-      <div className="absolute font-[500] right-2.5 mr-2">{labels[1]}</div>
+      <div className="absolute font-medium left-2.5 ml-2">{labels[0]}</div>
+      <div className="absolute font-medium right-2.5 mr-2">{labels[1]}</div>
     </div>
   );
 };

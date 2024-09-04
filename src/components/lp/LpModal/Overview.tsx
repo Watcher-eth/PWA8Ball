@@ -49,7 +49,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
         <span className="font-bold text-[52px] text-white">
           ${(props?.totalPot * 1.09).toFixed(2)}
         </span>
-        <span className="font-[500] text-[15px] text-[lightgray]">
+        <span className="font-medium text-[15px] text-[lightgray]">
           Your Boost
         </span>
       </div>
@@ -71,7 +71,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           <span className="font-normal text-[17.5px] text-[lightgray]">
             {item.label}
           </span>
-          <span className="font-[500] text-[19px] text-white">
+          <span className="font-medium text-[19px] text-white">
             {item.value}
           </span>
         </div>

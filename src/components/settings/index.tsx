@@ -200,7 +200,7 @@ export function SettingsPage() {
             </div>
             <div className="h-[0.1rem] w-full mb-4 mt-6 bg-[#212121]" />
             <div className="flex flex-row items-center justify-between">
-              <div className="text-[lightgray] text-[1rem] mt-1 font-[500]">
+              <div className="text-[lightgray] text-[1rem] mt-1 font-medium">
                 Joined May 2024
               </div>
               <div className="flex flex-row space-x-3 items-center">

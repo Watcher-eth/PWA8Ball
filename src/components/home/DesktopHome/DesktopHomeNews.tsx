@@ -12,7 +12,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
   return (
     <div className="w-full flex flex-col">
       {!topic && (
-        <div className="text-[2rem] text-white font-[500] flex flex-row items-center space-x-2">
+        <div className="text-[2rem] text-white font-medium flex flex-row items-center space-x-2">
           {amount === 4 && (
             <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
           )}

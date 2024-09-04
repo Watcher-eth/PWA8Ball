@@ -37,7 +37,7 @@ function Button({
       onClick={onClick}
       className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212] cursor-pointer"
     >
-      <div className="text-lg font-[500] text-[#999999] mr-1">{text}</div>
+      <div className="text-lg font-medium text-[#999999] mr-1">{text}</div>
       <IconComponent color="#999999" size={"1rem"} strokeWidth={3.5} />
     </div>
   );
@@ -75,7 +75,7 @@ function CandidateSection({
         <div className="text-[4rem] lg:text-[4.5rem] font-semibold text-white">
           <MotionNumber value={odds} />%
         </div>
-        <div className="text-[1.2rem] font-[500] flex flex-row items-center text-[#FF0050]">
+        <div className="text-[1.2rem] font-medium flex flex-row items-center text-[#FF0050]">
           <ChevronDown
             color="#FF0050"
             strokeWidth={3}
@@ -208,7 +208,7 @@ export function ElectionPage() {
             <div className="text-[1.8rem]  lg:text-[3rem] md:leading-[3rem] text-white font-[Aeonik-Bold]">
               2024 US Election Forecast
             </div>
-            <div className="text-[1.3rem] text-[lightgray] md:mt-0 -mt-3 font-[500]">
+            <div className="text-[1.3rem] text-[lightgray] md:mt-0 -mt-3 font-medium">
               Live forecasts for the 2024 US Elections
             </div>
           </div>
@@ -220,7 +220,7 @@ export function ElectionPage() {
               <div
                 key={key}
                 onClick={() => setSection(key)}
-                className={`text-xl hover:scale-101 active:scale-97 font-[500] ${
+                className={`text-xl hover:scale-101 active:scale-97 font-medium ${
                   section === key ? "text-white underline" : "text-[lightgray]"
                 }`}
               >

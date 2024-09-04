@@ -8,7 +8,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -18,17 +17,11 @@ import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser";
 import { useUserStore } from "@/lib/stores/UserStore";
 import {
   DoorOpen,
-  FileText,
-  GlobeLock,
-  HelpCircle,
-  Rocket,
   Settings,
-  User,
   Wallet,
   UserCircle,
   ArrowDownToLine,
   Key,
-  Users,
   Copy,
 } from "lucide-react";
 
@@ -39,8 +32,6 @@ import { DropdownItem } from "@/components/ui/DropdownItem";
 import { useMyEns } from "@/hooks/wallet/useMyEns";
 import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import UserInviteModal from "../onboarding/Invites/UserInviteModal";
-import { shortenAddress } from "@/utils/address/shortenAddress";
 import { copyToClipboard } from "@/utils/copyToClipboard";
 
 export function MobileProfilePopover({

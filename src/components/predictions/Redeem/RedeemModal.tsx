@@ -94,7 +94,7 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
       <h2 className="text-[1.4rem] text-white font-[600] mt-3 self-start">
         You were correct!
       </h2>
-      <p className="text-[1.05rem] font-[500] text-[lightgray] mt-0 self-start">
+      <p className="text-[1.05rem] font-medium text-[lightgray] mt-0 self-start">
         Congratulations, your prediction was correct. You can now redeem your
         winnings.
       </p>

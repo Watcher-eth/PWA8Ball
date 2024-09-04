@@ -116,7 +116,7 @@ export const FindFriends = ({ type }) => {
         <div className="top-80 flex space-y-10 flex-col items-center">
           <Spinner loading={true} />
           <div className="flex flex-col space-y-0 items-center">
-            <div className="text-[1.1rem] text-white font-[500]">
+            <div className="text-[1.1rem] text-white font-medium">
               Finding your friends
             </div>
             <div className="text-[0.9rem] text-[lightgray] font-normal">

@@ -60,7 +60,7 @@ export const BetBigView = ({
         <h2 className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]">
           {title}
         </h2>
-        <p className="text-[1rem] text-white mt-6 ml-1 mb-[-0.1rem] font-[500] z-10 leading-[1.2]">
+        <p className="text-[1rem] text-white mt-6 ml-1 mb-[-0.1rem] font-medium z-10 leading-[1.2]">
           {question}
         </p>
         {option1.image ? (

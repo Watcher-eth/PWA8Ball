@@ -74,7 +74,7 @@ export function CashoutConfirmScreen(props: {
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
           <div className="flex flex-row items-center">
-            <span className="text-[20px] font-[500] text-white mr-[9px]">
+            <span className="text-[20px] font-medium text-white mr-[9px]">
               {props.title}
             </span>
             <img
@@ -87,10 +87,10 @@ export function CashoutConfirmScreen(props: {
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Predicted on</span>
           <div className="flex flex-row items-center">
-            <span className="text-[19px] font-[500] text-[#D3D3D3] mr-[4px]">
+            <span className="text-[19px] font-medium text-[#D3D3D3] mr-[4px]">
               2024
             </span>
-            <span className="text-[19px] font-[500] text-white mr-[7px]">
+            <span className="text-[19px] font-medium text-white mr-[7px]">
               Thursday
             </span>
             <div className="flex flex-col p-[7px] py-[1px] w-[41px] h-[42px] rounded-[8px] bg-[#181818] items-center justify-center">
@@ -101,14 +101,14 @@ export function CashoutConfirmScreen(props: {
         </div>
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Tx Receipt</span>
-          <span className="text-[20px] font-[500] text-white underline">
+          <span className="text-[20px] font-medium text-white underline">
             0xrf724sda3...kja3
           </span>
         </div>
         <div className="flex flex-row items-center justify-between my-[15px] w-[99%]">
           <span className="text-[17.5px] text-[#D3D3D3]">Predictoor</span>
           <div className="flex flex-row items-center">
-            <span className="text-[20px] font-[500] mr-[10px] text-white">
+            <span className="text-[20px] font-medium mr-[10px] text-white">
               {user?.name}
             </span>
             <img

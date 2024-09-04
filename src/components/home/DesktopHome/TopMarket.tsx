@@ -3,12 +3,13 @@ import { HARD_MARKETS } from "@/constants/markets";
 import { HARD_TOPICS } from "@/constants/topics";
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
 import { Users } from "lucide-react";
-
+import { formatDate } from "@/utils/datetime/formatDate";
 import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 
 import { GenericLineChart } from "@/components/charts/GenericLineChart";
 import { Chip } from "@/components/ui/Chip";
+import { formatChartDateStr } from "@/utils/datetime/parseChartDate";
 
 export function TopMarket() {
   const { market } = useGetMarketById("1");
@@ -71,14 +72,14 @@ export function TopMarket() {
           </Chip>
         </div>
 
-        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[500]"></div>
+        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-medium"></div>
       </div>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
         <div className="text-[gray] text-md font-normal">
           {enhancedMarket?.title}
         </div>
         <div className="flex flex-row justify-between items-center">
-          <div className="text-3xl font-[500] my-1 text-white">
+          <div className="text-3xl font-medium my-1 text-white">
             {enhancedMarket?.outcomeOddsA / 100}%{" "}
             {enhancedMarket?.outcomeA !== "Yes"
               ? enhancedMarket?.outcomeA
@@ -98,19 +99,22 @@ export function TopMarket() {
             }
             chartData={chartData}
             xAxisKey="month"
-            xAxisTickFormatter={(value) => value.slice(0, 3)}
+            xAxisTickFormatter={(value, ...args) => {
+              console.log({value, args})
+              return formatChartDateStr(value)//.slice(0, 3);
+            }}
           />
         </div>
         <div className="flex flex-row justify-between -mb-3 items-center">
           <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
-            <div className="px-6 py-1.5  flex items-baseline font-[500] text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
+            <div className="px-6 py-1.5  flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
               {enhancedMarket?.outcomeA}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
                 {enhancedMarket?.outcomeOddsA / 100}%
               </p>
             </div>
-            <div className="px-6 py-1.5 text-[1.1rem] font-[500]  flex items-baseline rounded-md hover:scale-101 active:scale-98 bg-[#1B1B1E]/70 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
+            <div className="px-6 py-1.5 text-[1.1rem] font-medium  flex items-baseline rounded-md hover:scale-101 active:scale-98 bg-[#1B1B1E]/70 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
               {enhancedMarket?.outcomeB}
               <p className="text-[0.75rem] text-[lightgray] ml-1">
                 {enhancedMarket?.outcomeOddsB / 100}%
@@ -121,4 +125,23 @@ export function TopMarket() {
       </div>
     </div>
   );
+}
+
+function TopMarketOutcomeBtn({
+  outcome,
+  outcomeOdds
+}: {
+  outcome?: string
+  outcomeOdds?: number | bigint
+}) {
+  <div
+    className={`
+      px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]
+    `}
+  >
+    {outcome}
+    <p className="text-[0.75rem] text-[lightgray] ml-1">
+      {outcomeOdds / 100}%
+    </p>
+  </div>;
 }

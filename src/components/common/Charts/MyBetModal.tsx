@@ -144,10 +144,10 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       <div className="flex flex-row items-center justify-between pb-1">
-        <span className="text-base text-white/70 font-[500]">
+        <span className="text-base text-white/70 font-medium">
           {props.title}
         </span>
-        <span className="text-base text-white/80 font-[500]">
+        <span className="text-base text-white/80 font-medium">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"

@@ -155,7 +155,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 </div>
               )}
               {userC?.socials !== {} && (
-                <div className="text-[1.1rem] -mt-1 font-[500] text-[lightgray]">
+                <div className="text-[1.1rem] -mt-1 font-medium text-[lightgray]">
                   <SocialsSection {...userC?.socials} />
                 </div>
               )}
@@ -190,7 +190,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           <div className="flex flex-row space-x-3 mt-3 items-center">
             <div
               onClick={() => copyToClipboard(userC?.walletaddress)}
-              className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]"
+              className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-medium"
             >
               <div>
                 {userC?.walletAddress
@@ -222,7 +222,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               href={"/settings"}
               className="flex flex-row space-x-3 items-center"
             >
-              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-[500]">
+              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-medium">
                 <Wallet size={16} color="white" strokeWidth={3} />
                 <div>Fund your account</div>
               </div>
@@ -326,7 +326,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div className="text-[2.2rem] mt-[8%] font-[Aeonik-Bold] text-white">
                 Nothing here yet
               </div>
-              <div className="text-[1.1rem] font-[500] mt-0.5 text-[lightgray]">
+              <div className="text-[1.1rem] font-medium mt-0.5 text-[lightgray]">
                 Make your first prediction and level up your accuracy score
               </div>
             </div>
@@ -378,11 +378,11 @@ function ProfilePositionCard(
               : item?.market?.outcomeB}
           </div>
         )}
-        <div className="text-[1rem] -mt-1 font-[500] text-[lightgray]">
+        <div className="text-[1rem] -mt-1 font-medium text-[lightgray]">
           {item.type === "created" ? (
             <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
               <img src={item.pfp} className="h-7 w-7 rounded-full " />{" "}
-              <div className="text-[1.02rem] font-[500]">{item.userName}</div>
+              <div className="text-[1.02rem] font-medium">{item.userName}</div>
             </div>
           ) : (
             `$${(
@@ -400,7 +400,7 @@ function ProfilePositionCard(
         <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
           {item.type === "created" ? item.title : item?.market?.title}
         </div>
-        <div className="text-[1rem]  font-[500] text-[lightgray]">
+        <div className="text-[1rem]  font-medium text-[lightgray]">
           {item.type === "created" ? item.question : item?.market?.question}
         </div>
       </div>

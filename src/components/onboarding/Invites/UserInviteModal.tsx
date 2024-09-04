@@ -43,7 +43,7 @@ function UserInviteModal({ children }) {
               <div className="p-1 px-4 rounded-full bg-[#191919] border-2  border-[#212121] my-1 font-semibold text-lg text-white">
                 {invites?.length - usedInvitesCount} invites left
               </div>
-              <p className="text-center mb-6 font-[500] mt-3 px-6 mb-3 text-[lightgray]">
+              <p className="text-center mb-6 font-medium mt-3 px-6 mb-3 text-[lightgray]">
                 Glimpse is currently in closed beta. You received 3 invites for
                 your friends use them wisely.
               </p>

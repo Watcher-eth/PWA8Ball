@@ -146,7 +146,7 @@ function DesktopCreateProfile() {
             user.name = "Anon";
             setUser(user);
           }}
-          className="text-md mt-2.5 text-[#707070] underline font-[500]"
+          className="text-md mt-2.5 text-[#707070] underline font-medium"
         >
           Skip setup
         </div>

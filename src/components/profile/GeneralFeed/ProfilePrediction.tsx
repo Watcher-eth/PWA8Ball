@@ -37,7 +37,7 @@ export function ProfilePrediction({
           <Skeleton className="w-14 h-14 rounded-lg" />
         )}
         <div className="flex flex-col items-start -gap-3">
-          <p className="text-white text-md font-[500] font-[Aeonik-Bold] ">
+          <p className="text-white text-md font-medium font-[Aeonik-Bold] ">
             {title}
           </p>
           <p className="text-white/80 text-sm font-[400] text-start max-w-[55vw] line-clamp-2">

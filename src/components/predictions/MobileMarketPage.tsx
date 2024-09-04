@@ -198,7 +198,7 @@ function MobileMarketContent({
           text-[1.05rem] self-start
           -mb-px mt-2 ml-5
           text-start text-[lightgray] max-w-full
-           z-2 font-[500] leading-[1.35rem]
+           z-2 font-medium leading-[1.35rem]
         `}
       >
         {description}
@@ -262,7 +262,7 @@ function MobileMarketContent({
       </div>
       <div className="z-2">
         <CommentSection
-        
+
           topic_id={topicId}
           users={users}
           totalComments={market?.total_comments}
