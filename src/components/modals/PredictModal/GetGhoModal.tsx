@@ -99,7 +99,7 @@ function LabeledSectionWithIcon({
       </div>
       <div className=" flex flex-col space-y-[-0.15rem] font-bold mb-3 mt-2 mr-1 ml-3">
         <div className="text-white text-[1.1rem] font-bold">{title}</div>
-        <div className="text-[#989898]  text-base/4 max-w-[98%] text-[0.9rem]">
+        <div className="text-[#989898]  text-base/4 max-w-[98%] text-sm">
           {description}
         </div>
       </div>

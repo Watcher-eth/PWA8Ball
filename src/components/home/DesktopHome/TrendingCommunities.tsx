@@ -52,7 +52,7 @@ function TrendingCommunityItem({
       />
       <div className="absolute inset-0 w-full h-[29vw]  rounded-md  bg-[#151515]/70" />
 
-      <div className="relative z-10 flex flex-col lg:mt-14   items-center justify-center h-full text-white">
+      <div className="relative z-10 flex flex-col lg:mt-8   items-center justify-center h-full text-white">
         <img
           src={image}
           alt="Topic image"
@@ -85,7 +85,7 @@ function TrendingCommunityItem({
               </div>
             </div>
           </div>
-          <div className="h-full w-[0.05rem] py-1  bg-[lightgray]/40" />
+          <div className="h-full py-1 w-px bg-white/20" />
           <div className="text-center flex flex-col items-center -space-y-0">
             <p className="text-lg font-semibold">Live Predictions</p>
             <div className="flex items-center mt-2 space-x-2 justify-cemterr">
@@ -108,7 +108,7 @@ function TrendingCommunityItem({
               </div>
             </div>
           </div>
-          <div className="h-full py-1 w-[0.05rem] bg-[lightgray]/40" />
+          <div className="h-full py-1 w-px bg-white/20" />
           <div className="text-center flex flex-col items-center -space-y-0">
             <p className="text-lg font-semibold">Total Stake</p>
             <p className="text-2xl font-bold mt-2">$278,345.00</p>

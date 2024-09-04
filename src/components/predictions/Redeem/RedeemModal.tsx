@@ -99,10 +99,10 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
         winnings.
       </p>
       <div className="flex flex-col items-center justify-center p-5 border border-[#202020] bg-[#131313] rounded-2xl mt-6 mb-2 w-full">
-        <h1 className="text-[3rem] text-white font-[700]">
+        <h1 className="text-[3rem] text-white font-bold">
           ${(Number(props.totalPot) / 10 ** 6).toFixed(2)}
         </h1>
-        <p className="text-sm text-[lightgray] flex gap-1 font-[700] -mt-1.5">
+        <p className="text-sm text-[lightgray] flex gap-1 font-bold -mt-1.5">
           You predicted: <p className="text-white">{props.option?.name}</p>
         </p>
       </div>
@@ -118,13 +118,13 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
 
       <div className="flex flex-row items-center justify-between mt-3 w-full">
         <p className="text-lg text-[lightgray] font-[600]">Payout</p>
-        <p className="text-xl text-white font-[700]">
+        <p className="text-xl text-white font-bold">
           ${((props.totalPot * 3) / 10 ** 6).toFixed(2)}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between mt-3 w-full">
         <p className="text-lg text-[lightgray] font-[600]">Cred earned</p>
-        <p className="text-xl text-white font-[700]">
+        <p className="text-xl text-white font-bold">
           {((props.totalPot * 2) / 10 ** 6).toFixed(0)} $Cred
         </p>
       </div>

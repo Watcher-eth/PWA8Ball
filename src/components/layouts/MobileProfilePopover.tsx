@@ -63,7 +63,7 @@ export function MobileProfilePopover({
                 strokeWidth={2.2}
               />
             )}
-            <div className="text-[1rem] font-[Aeonik-Bold]">
+            <div className="text-base font-[Aeonik-Bold]">
               {displayUsername}
             </div>
           </DropdownMenuLabel>

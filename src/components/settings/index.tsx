@@ -167,7 +167,7 @@ export function SettingsPage() {
                 <div className="text-white text-[2rem] font-bold">
                   ${(Number(userBalance) / 10 ** 6).toFixed(2) ?? "0.00"}
                 </div>
-                <div className="text-white text-[1rem] font-semibold">
+                <div className="text-white text-base font-semibold">
                   Your balance
                 </div>
               </div>
@@ -193,14 +193,14 @@ export function SettingsPage() {
                   <div className={`h-[2rem] w-1 bg-[#212121]`} />
                   <div className={`h-[2rem] w-1 bg-[#212121]`} />
                 </div>
-                <div className="text-green-300 text-[1rem] mt-1 font-semibold">
+                <div className="text-green-300 text-base mt-1 font-semibold">
                   7 active predicitions
                 </div>
               </div>
             </div>
             <div className="h-[0.1rem] w-full mb-4 mt-6 bg-[#212121]" />
             <div className="flex flex-row items-center justify-between">
-              <div className="text-[lightgray] text-[1rem] mt-1 font-medium">
+              <div className="text-[lightgray] text-base mt-1 font-medium">
                 Joined May 2024
               </div>
               <div className="flex flex-row space-x-3 items-center">
@@ -227,7 +227,7 @@ export function SettingsPage() {
             <div className="text-white text-[1.35rem] font-semibold">
               Your Glimpse Wallet
             </div>
-            <div className="text-[lightgray] text-[1rem] font-normal">
+            <div className="text-[lightgray] text-base font-normal">
               You have complete control of your wallet and can use it in other
               apps.
             </div>

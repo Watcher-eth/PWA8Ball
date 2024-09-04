@@ -132,7 +132,7 @@ function DesktopTopic({
                   userId={user?.walletaddress}
                   showToast={() => {}}
                 />
-                <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-[700] rounded-full text-[1rem] text-white">
+                <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-bold rounded-full text-base text-white">
                   <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
                 </div>
               </div>
@@ -202,7 +202,7 @@ export function DesktopTopicItem(props: DesktopItemProps) {
     large: {
       container: "w-1/3",
       image: "h-[30vh]",
-      title: "text-[1rem]",
+      title: "text-base",
       question: "text-[1.3rem]",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.55rem]",
@@ -210,7 +210,7 @@ export function DesktopTopicItem(props: DesktopItemProps) {
     medium: {
       container: "w-1/4",
       image: "h-[22vh]",
-      title: "text-[1rem]",
+      title: "text-base",
       question: "text-[1.1rem]",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.35rem]",
@@ -218,8 +218,8 @@ export function DesktopTopicItem(props: DesktopItemProps) {
     small: {
       container: "w-1/5",
       image: "h-[15vh]",
-      title: "text-[1rem]",
-      question: "text-[1rem]",
+      title: "text-base",
+      question: "text-base",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.25rem]",
     },
@@ -310,7 +310,7 @@ export function DesktopTopicItemSkeleton(props: {
     large: {
       container: "w-1/3 h-full",
       image: "h-[30vh]",
-      title: "text-[1rem]",
+      title: "text-base",
       question: "text-[1.3rem]",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.55rem]",
@@ -318,7 +318,7 @@ export function DesktopTopicItemSkeleton(props: {
     medium: {
       container: "w-1/4 h-full",
       image: "h-[22vh]",
-      title: "text-[1rem]",
+      title: "text-base",
       question: "text-[1.1rem]",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.35rem]",
@@ -326,8 +326,8 @@ export function DesktopTopicItemSkeleton(props: {
     small: {
       container: "w-1/5 h-full",
       image: "h-[15vh]",
-      title: "text-[1rem]",
-      question: "text-[1rem]",
+      title: "text-base",
+      question: "text-base",
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.25rem]",
     },

@@ -81,7 +81,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
       </div>
       <div className="h-[0.05rem] w-full my-3 bg-[#212121] mx-6 rounded-full" />
       <div className="flex flex-col w-full ">
-        <div className="text-[lightgray] flex items-center space-x-[0.3rem] mt-3  text-[1rem] font-bold  mx-[1.65rem]">
+        <div className="text-[lightgray] flex items-center space-x-[0.3rem] mt-3  text-base font-bold  mx-[1.65rem]">
           Your Address
         </div>
         <div className="text-white flex items-center space-x-[0.35rem] w-full  text-[1.25rem] font-bold  mx-[1.65rem]">
@@ -99,7 +99,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
       </div>
 
       <div className="flex mt-3 w-full items-center justify-between">
-        <div className="text-[lightgray] text-[1rem]  m-[-0.2rem] font-bold mx-[1.65rem]">
+        <div className="text-[lightgray] text-base  m-[-0.2rem] font-bold mx-[1.65rem]">
           Network
         </div>
         <div className="text-white flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  mx-[1.65rem]">
@@ -113,7 +113,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         </div>
       </div>
       <div className="flex mb-7 mt-2  w-full items-center justify-between">
-        <div className="text-[lightgray] text-[1rem] m-[-0.2rem] font-bold mx-[1.65rem]">
+        <div className="text-[lightgray] text-base m-[-0.2rem] font-bold mx-[1.65rem]">
           Rec Minimum
         </div>
         <div className="text-[lightgray] flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  mx-[1.65rem]">
@@ -164,7 +164,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
       </div>
       <div
         style={{ lineHeight: "1.3rem" }}
-        className="text-[lightgray] flex text-base/[1rem] items-center px-1 text-[0.9rem] mb-4 mt-1 font-bold mx-6"
+        className="text-[lightgray] flex text-base/[1rem] items-center px-1 text-sm mb-4 mt-1 font-bold mx-6"
       >
         Buy USDC using your credit card or Apple or Google Pay. All Payments are
         facilitated by 3rd Parties.
@@ -179,7 +179,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
         </div>
         <div className="text-[#909090]">≈$1.00</div>
       </div>
-      <div className="text-[lightgray] flex w-full justify-between text-base/[1rem] items-center px-1 text-[1rem] mb-8 font-bold mx-6 mt-2">
+      <div className="text-[lightgray] flex w-full justify-between text-base/[1rem] items-center px-1 text-base mb-8 font-bold mx-6 mt-2">
         <div>Recommended Minimum</div>
         <div className="text-[#909090]">15$</div>
       </div>

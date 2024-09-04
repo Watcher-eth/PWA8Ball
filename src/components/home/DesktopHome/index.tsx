@@ -44,25 +44,24 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
             selectedTopic={selectedTopic}
           />
         </StandardBleedOverlay>
-        <div className="h-[0.05rem] mt-4 w-full bg-[#212121] px-9" />
-
+        <HomeDivider />
         <div className="pt-11 pb-9 flex flex-row px-1">
           <DesktopHomeNews amount={4} markets={enrichedFeedData} />
         </div>
-        <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
+        <HomeDivider />
         <div className="pt-10 pb-11 flex flex-row px-1">
           <DesktopHomeNews amount={3} markets={enhancedMarkets} />
         </div>
-        <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
+        <HomeDivider />
         <div className="pt-12 pb-[6rem] flex flex-row px-2">
           <FeaturedMarketsSection markets={enhancedMarkets} />
         </div>
-        <div className="h-[0.08rem] w-full bg-[#212121] px-8" />
+        <HomeDivider />
 
         <div className="pt-12 pb-[6.5rem] flex flex-row px-5">
           <TrendingCommunities />
         </div>
-        <div className="h-[0.08rem] w-full bg-[#212121] px-5" />
+        <HomeDivider />
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
             <div className="pt-12 flex flex-row">
@@ -73,4 +72,8 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
       </div>
     </StandardPageWrapper>
   );
+}
+
+function HomeDivider({ className="" }: { className?: string}) {
+  return <div className={`h-px w-full bg-[#212121] px-8 ${className}`} />;
 }

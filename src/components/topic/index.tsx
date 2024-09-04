@@ -83,7 +83,7 @@ export function Topic({
         >
           {name}
         </h1>
-        <p className="text-[1rem] text-[lightgray] font-medium z-10">
+        <p className="text-base text-[lightgray] font-medium z-10">
           {description}
         </p>
         <div className="flex items-center mt-1 ml-[-0.2rem]">

@@ -138,7 +138,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="flex flex-col gap-4 p-0 min-h-screen bg-[#080808] z-[20] -mt-6 px-6">
+        <div className="flex flex-col gap-4 p-0 min-h-screen bg-[#080808] z-20 -mt-6 px-6">
           <div className="flex flex-row items-center justify-between">
             <div className="flex flex-col">
               {isEditing ? (
@@ -162,7 +162,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
             <div className="flex flex-row items-center space-x-6 mt-2">
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-semibold">
+                <div className="text-base text-[lightgray] font-semibold">
                   Accuracy
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -170,7 +170,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 </div>
               </div>
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-semibold">
+                <div className="text-base text-[lightgray] font-semibold">
                   Followers
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -178,7 +178,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 </div>
               </div>
               <div className="flex flex-col space-y-0">
-                <div className="text-[1rem] text-[lightgray] font-semibold">
+                <div className="text-base text-[lightgray] font-semibold">
                   Following
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
@@ -190,7 +190,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           <div className="flex flex-row space-x-3 mt-3 items-center">
             <div
               onClick={() => copyToClipboard(userC?.walletaddress)}
-              className="py-2 hover:scale-[100.8%] active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-medium"
+              className="py-2 hover:scale-101 active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium"
             >
               <div>
                 {userC?.walletAddress
@@ -202,14 +202,14 @@ export function DesktopProfilePage2({ userId, userC }) {
             {isEditing ? (
               <button
                 onClick={handleConfirm}
-                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-semibold"
+                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-semibold"
               >
                 {editedName.length > 1 ? "Confirm" : "Cancel"}
               </button>
             ) : userC?.walletAddress === user?.walletAddress ? (
               <div
                 onClick={() => setIsEditing(true)}
-                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-semibold"
+                className="py-2 hover:scale-101 active:scale-98 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-semibold"
               >
                 Edit Profile
               </div>
@@ -222,7 +222,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               href={"/settings"}
               className="flex flex-row space-x-3 items-center"
             >
-              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-[0.9rem] font-medium">
+              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
                 <Wallet size={16} color="white" strokeWidth={3} />
                 <div>Fund your account</div>
               </div>
@@ -238,7 +238,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="All"
                 onClick={() => setFilter("All")}
-                className="py-2 px-3 rounded-full space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white text-[0.9rem] font-semibold"
+                className="py-2 px-3 rounded-full space-x-2 flex hover:scale-101 active:scale-98 flex-row items-center text-white text-sm font-semibold"
               >
                 <div>All</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -248,7 +248,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Resolved"
                 onClick={() => setFilter("Resolved")}
-                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-[0.9rem] font-semibold"
+                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-sm font-semibold"
               >
                 <div>Resolved</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -258,7 +258,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <div
                 data-id="Created"
                 onClick={() => setFilter("Created")}
-                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-[0.9rem] font-semibold"
+                className="py-2 px-3 rounded-full space-x-2 flex flex-row hover:scale-101 active:scale-98 items-center text-white text-sm font-semibold"
               >
                 <div>Created</div>
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
@@ -336,6 +336,8 @@ export function DesktopProfilePage2({ userId, userC }) {
     </BlurOverlayWrapper>
   );
 }
+
+
 function ProfilePositionCard(
   item,
   title,
@@ -352,13 +354,13 @@ function ProfilePositionCard(
         src={"/images/Grid.png"}
         className="w-full h-full z-[1] object-cover rounded-lg absolute"
       />
-      <div className="flex flex-col z-[10] pt-6 px-6">
+      <div className="flex flex-col z-10 pt-6 px-6">
         <div className="flex flex-row justify-between">
           <img
             src={item.image}
             className="h-20 w-20 object-cover  rounded-lg"
           />
-          <div className="py-2 border-2 border-[#212121] h-10 px-3 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
+          <div className="py-2 border-2 border-[#212121] h-10 px-3 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-sm font-semibold">
             {(
               (Number(item.option) === 1
                 ? item?.market?.outcomeOddsA
@@ -378,9 +380,9 @@ function ProfilePositionCard(
               : item?.market?.outcomeB}
           </div>
         )}
-        <div className="text-[1rem] -mt-1 font-medium text-[lightgray]">
+        <div className="text-base -mt-1 font-medium text-[lightgray]">
           {item.type === "created" ? (
-            <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-[0.9rem] font-semibold">
+            <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-sm font-semibold">
               <img src={item.pfp} className="h-7 w-7 rounded-full " />{" "}
               <div className="text-[1.02rem] font-medium">{item.userName}</div>
             </div>
@@ -396,11 +398,11 @@ function ProfilePositionCard(
           )}
         </div>
       </div>
-      <div className="flex flex-col z-[10] px-6 pb-7">
+      <div className="flex flex-col z-10 px-6 pb-7">
         <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
           {item.type === "created" ? item.title : item?.market?.title}
         </div>
-        <div className="text-[1rem]  font-medium text-[lightgray]">
+        <div className="text-base  font-medium text-[lightgray]">
           {item.type === "created" ? item.question : item?.market?.question}
         </div>
       </div>

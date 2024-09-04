@@ -74,7 +74,7 @@ export function SignUp({ setStep }: { setStep: (step: number) => void }) {
     >
       {!isEmail && (
         <>
-          <div className="text-[lightgray] flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4 mt-2  mx-[1.65rem]">
+          <div className="text-[lightgray] flex   text-base/[1.14rem]  items-center  text-base mb-4 mt-2  mx-[1.65rem]">
             Sign in to Glimpse using your web3 wallet or with your email or
             social accounts.
           </div>
@@ -136,7 +136,7 @@ function EmailLogin({
           <div className="text-gray-900 text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
             Sign in with email
           </div>
-          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4  font-bold mx-[1.65rem]">
+          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-base mb-4  font-bold mx-[1.65rem]">
             Sign in with your email to create your Glimpse account.
           </div>
           <div className="h-[0.05rem] w-[80vw] my-6 bg-gray-300 mx-6 rounded-full" />
@@ -182,7 +182,7 @@ function EmailLogin({
           <div className="text-gray-900 text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
             Verify your email
           </div>
-          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-[1rem] mb-4  font-bold mx-[1.65rem]">
+          <div className="text-gray-400 flex   text-base/[1.14rem]  items-center  text-base mb-4  font-bold mx-[1.65rem]">
             We sent you a verification code. Please copy it to verify your
             email.
           </div>

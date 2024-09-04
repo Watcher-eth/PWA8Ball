@@ -26,7 +26,7 @@ function DesktopCreateProfile() {
   async function uploadProfileData() {
     if (!username) {
       toast(
-        <div className="w-full rounded-full bg-[#101010] font-semibold text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#101010] font-semibold text-base px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#FF0050] mr-2 flex justify-center items-center">
             <Ban strokeWidth={3} className="text-white h-[1rem]" />
           </div>

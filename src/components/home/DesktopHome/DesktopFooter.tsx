@@ -21,14 +21,16 @@ export function DesktopFooter() {
                 Glimpse
               </div>
             </div>
-            <div className="text-[lightgray] font-normal mt-3 text-[1rem]">
-              Destiny is no matter of chance. It is a matter of choice.
+            <div className="text-[lightgray] font-normal mt-3 text-base">
+              {/*Destiny is no matter of chance. It is a matter of choice.*/}
             </div>
-            <div className="text-[lightgray] font-normal text-[1rem]">
-              It is not a thing to be waited for, it is a thing to be achieved.
+            <div className="text-[lightgray] font-normal text-base">
+              {/* It is not a thing to be waited for, it is a thing to be achieved. */}
+              There is no fate but what you make
             </div>
             <div className="text-[gray] font-normal mt-1 text-[0.85rem]">
-              -William Jennings Bryan{" "}
+              {/* -William Jennings Bryan{" "} */}
+              - Sarah Conner
             </div>
           </div>
           <div className="flex flex-row w-1/2 space-x-12 justify-end mt-1">
@@ -90,7 +92,7 @@ function FooterLink({
   return (
     <Link
       href={href ?? ""}
-      className={`text-[lightgray] font-normal  text-[1rem] ${className}`}
+      className={`text-[lightgray] font-normal  text-base ${className}`}
     >
       {label}
       {children}

@@ -288,7 +288,7 @@ export function InviteScreen() {
       useInvite(debouncedInvite);
 
       toast(
-        <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#101010] text-base px-3 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
             <CheckCircle strokeWidth={3} className="text-white h-[0.95rem]" />
           </div>
@@ -308,7 +308,7 @@ export function InviteScreen() {
       //TODO: Integrate ponder update user endpoint
     } else {
       toast(
-        <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
             <Ban strokeWidth={3} className="text-[#FF0050] h-[0.95rem]" />
           </div>

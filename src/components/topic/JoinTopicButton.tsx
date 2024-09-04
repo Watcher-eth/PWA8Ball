@@ -37,7 +37,7 @@ const JoinTopicButton: React.FC<JoinTopicButtonProps> = ({
         optimisticJoin || isMember
           ? "bg-white border-[#212121]  text-[#212121]"
           : "bg-[#151515] border-[#212121] text-white"
-      } font-[700] rounded-full text-[1rem] transition-transform duration-200`}
+      } font-bold rounded-full text-base transition-transform duration-200`}
     >
       <div>{optimisticJoin || isMember ? "Joined" : "Join"}</div>
     </button>

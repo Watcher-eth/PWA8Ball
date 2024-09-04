@@ -57,7 +57,7 @@ export function useExecuteRedeem() {
         setLoading(false);
         setSuccess(true);
         toast(
-          <div className="w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+          <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
             <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
               <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
             </div>

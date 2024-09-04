@@ -119,7 +119,7 @@ export const FindFriends = ({ type }) => {
             <div className="text-[1.1rem] text-white font-medium">
               Finding your friends
             </div>
-            <div className="text-[0.9rem] text-[lightgray] font-normal">
+            <div className="text-sm text-[lightgray] font-normal">
               This shouldn't take long
             </div>
           </div>

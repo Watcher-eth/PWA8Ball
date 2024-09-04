@@ -129,7 +129,7 @@ export function DesktopMarketPage({ users, market, id }) {
                   </DesktopBettersModal>
                 </div>
                 <div className="h-[0.1rem] mt-[0.55rem] bg-[#212121] mx-5  rounded-full" />
-                <div className="text-[1rem] font-medium line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">
+                <div className="text-base font-medium line-clamp-2 mb-0 mt-3 text-start flex flex-row items-center text-[lightgray] max-w-full ml-4 leading-[1.35rem]">
                   <AlignLeft className="h-[1rem]" strokeWidth={2.5} />
                   <div> Question</div>
                 </div>

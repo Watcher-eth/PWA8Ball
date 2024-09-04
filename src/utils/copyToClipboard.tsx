@@ -7,7 +7,7 @@ export function copyToClipboard(text: string) {
     .then(() => {
       console.log("Text copied to clipboard");
       toast(
-        <div className="w-[60vw] sm:w-full rounded-full bg-[#101010] text-[1rem] px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-[60vw] sm:w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
             <ClipboardList className="text-white h-[0.95rem]" />
           </div>

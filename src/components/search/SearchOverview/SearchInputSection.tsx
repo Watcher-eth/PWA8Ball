@@ -22,7 +22,7 @@ export function SearchInputSection({
             w-full outline-none border-0
             py-2 px-4
             bg-transparent text-white placeholder-[#707070]
-            text-[1rem] rounded-lg
+            text-base rounded-lg
           `}
       />
     </div>

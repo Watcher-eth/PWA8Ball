@@ -48,7 +48,7 @@ export function MobileBoostModal({
             <BoostInfoRow label="Cred Bonus" content="150 Cred" />
             <Input
               onChange={(e) => setAmount(Number(e.target.value))}
-              className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-[1rem]"
+              className=" my-5 border border-[#212121] rounded-md p-6 bg-[#151515] font-medium px-3 text-base"
               placeholder="Amount"
               type="number"
             />

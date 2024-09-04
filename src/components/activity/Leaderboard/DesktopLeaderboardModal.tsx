@@ -54,7 +54,7 @@ function DesktopLeaderboardModal({ children }) {
                 </div>
               </div>
               {/* <DialogClose>
-                <X color="#909090" className="z-[20]" strokeWidth={2.5} />
+                <X color="#909090" className="z-20" strokeWidth={2.5} />
               </DialogClose> */}
             </div>
 

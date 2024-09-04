@@ -91,13 +91,13 @@ export function DesktopUserActivity({
                         ? item.options[0].name
                         : item.options[1].name}
                     </div>
-                    <div className="text-[1rem]  line-clamp-1 text-white text-semibold">
+                    <div className="text-base  line-clamp-1 text-white text-semibold">
                       {item?.question}
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col -space-y-[0.1rem] -mt-[0.3rem]">
-                  <div className="text-[1rem]  text-white text-semibold">
+                  <div className="text-base  text-white text-semibold">
                     ${(item?.amount / 100000).toFixed(2)}
                   </div>
                   <div className="text-[0.85rem] text-[#909090]">+0.0%</div>

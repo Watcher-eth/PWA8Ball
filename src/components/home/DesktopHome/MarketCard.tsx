@@ -24,9 +24,9 @@ export function MarketCard({
         />
         {/* Odds Skeleton */}
         <Skeleton
-          className={`px-9 py-3.5 absolute z-[20] border-[0.09rem] border-[#efefef]/10 rounded-full bg-[#353535]/20 backdrop-blur-md ${
+          className={`px-9 py-3.5 absolute z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md ${
             isTwoCards
-              ? "text-[0.9rem] top-5 right-5 h-[1.5rem] w-[3rem]"
+              ? "text-sm top-5 right-5 h-[1.5rem] w-[3rem]"
               : "text-[0.8rem] top-4 right-4 h-[1.4rem] w-[3rem]"
           }`}
         />
@@ -67,8 +67,8 @@ export function MarketCard({
               {item?.title}
             </div>
             <div
-              className={`px-2.5 py-1  z-[20] border-[0.09rem] border-[#efefef]/10 rounded-full bg-[#353535]/20 backdrop-blur-md text-white ${
-                isTwoCards ? "text-[0.9rem] " : "text-[0.8rem]  "
+              className={`px-2.5 py-1  z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md text-white ${
+                isTwoCards ? "text-sm " : "text-[0.8rem]  "
               } font-semibold`}
             >
               {(item?.outcomeOddsA / 100).toFixed(1)}%{" "}
@@ -80,7 +80,7 @@ export function MarketCard({
           </div>
         </div>
       </div>
-      <div className="text-[gray] mt-2 text-[0.9rem] font-normal">
+      <div className="text-[gray] mt-2 text-sm font-normal">
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
