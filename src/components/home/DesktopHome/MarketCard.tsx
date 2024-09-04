@@ -67,7 +67,7 @@ export function MarketCard({
               {item?.title}
             </div>
             <div
-              className={`px-2.5 py-1  z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md text-white ${
+              className={`px-2.5 py-1 z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md text-white ${
                 isTwoCards ? "text-sm " : "text-[0.8rem]  "
               } font-semibold`}
             >
