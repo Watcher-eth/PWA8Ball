@@ -10,7 +10,11 @@ import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+import {
+  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+  BASE_SEPOLIA_STORAGE_ADDRESS,
+} from "@/constants/onchain";
+import { rpcClient } from "../rpcClient";
 
 async function removeLp(props: {
   userId: string;
@@ -26,14 +30,14 @@ async function removeLp(props: {
     const account = props.address;
     const currentPairId = BigInt(props.marketId);
 
-    const marketPair = await props.client.readContract({
-      address: EightBallStorageAddress,
+    const marketPair = await rpcClient.readContract({
+      address: BASE_SEPOLIA_STORAGE_ADDRESS,
       abi: EightballStorageV1ABI,
       args: [currentPairId],
       functionName: "getMarketPair",
     });
 
-    const liquidityTokens = await props.client.readContract({
+    const liquidityTokens = await rpcClient.readContract({
       address: marketPair.liquidityPool,
       abi: V2_PAIR_ABI,
       args: [account],
