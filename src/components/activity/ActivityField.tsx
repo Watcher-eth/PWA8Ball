@@ -76,13 +76,17 @@ export function ActivityField({
         </div>
       </div>
       <div className="flex flex-col items-end space-y-1">
-        <p className="text-[17px] text-white font-semibold">${amount}</p>
         <p
           className={`text-[14px] px-2 py-0 rounded-md ${
-            option?.index === 1 ? "bg-[#FF0050]" : "bg-[#0067E1]"
+            option?.index === 0 ? "bg-[#FF0050]" : "bg-[#0067E1]"
           } text-white font-semibold`}
         >
-          {option.name?.length < 8 ? option.name : option.name?.substring(0, 3)}
+          {option?.name.length < 8
+            ? option?.name
+            : option?.name.substring(0, 3)}
+        </p>
+        <p className="text-[16px] text-white font-[600]">
+          ${((amount * option?.value) / 10 ** 10).toFixed(2)}
         </p>
       </div>
     </motion.div>

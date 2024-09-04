@@ -93,7 +93,6 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     : [];
 
   const groupedPredictions = groupPredictionsByDate(aggregatedPredictions);
-  console.log("predictions", predictions, groupedPredictions);
   return (
     <div
       className={`

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { ActivityIcon } from "lucide-react";
+import { ActivityIcon, Calendar } from "lucide-react";
 import { DesktopCardModal } from "../modals/DesktopCardModal";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { IUser } from "@/supabase/types";
@@ -10,6 +10,10 @@ import { parseOptionJSON } from "@/utils/predictions/parseOption";
 import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder";
 import { ActivityField } from "./ActivityField";
 import { User } from "@/__generated__/graphql";
+import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders";
+import { HARD_MARKETS } from "@/constants/markets";
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions";
+import { Spinner } from "../modals/PredictModal/Spinner";
 
 export function DesktopActivityModal({
   children,
@@ -45,11 +49,22 @@ function DesktopFriendActivity(props: { user: User }) {
   const {
     data: predictions,
     error,
-    isLoading,
+    loading: isLoading,
     refetch,
-  } = useGetFollowingPredictions(props?.user?.externalAuthProviderUserId);
+  } = useGetFriendsPositions(props?.user?.walletAddress);
 
-  const groupedPredictions = groupPredictionsByDate(predictions);
+  const aggregatedPredictions = predictions
+    ? aggregatePredictedItemsWithImage(predictions, HARD_MARKETS)
+    : [];
+
+  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions);
+
+  if (isLoading)
+    return (
+      <div className="h-[40vh] bg-[transparent] flex justify-center items-center">
+        <Spinner loading={isLoading} />
+      </div>
+    );
 
   return (
     <div className="max-h-[68.5vh] flex flex-col overflow-scroll">
@@ -59,14 +74,20 @@ function DesktopFriendActivity(props: { user: User }) {
             ([dateKey, predictions], index) => {
               return (
                 <div key={dateKey}>
-                  <h2
-                    className={`
-                font-medium text-[1.1rem] text-[lightgray] -mb-1
-                ${index === 0 ? "mt-2" : "mt-[25px]"}
+                  <div className="flex items-center gap-2 mt-4 -mb-2">
+                    <Calendar
+                      color="lightgray"
+                      size={"1.1rem"}
+                      strokeWidth={2.5}
+                    />
+                    <h2
+                      className={`
+                font-medium text-[1.1rem] text-[lightgray]
               `}
-                  >
-                    {dateKey}
-                  </h2>
+                    >
+                      {dateKey}
+                    </h2>
+                  </div>
                   {predictions.map((item, idx) => {
                     const option = parseOptionJSON(item.option);
                     return (
@@ -74,18 +95,27 @@ function DesktopFriendActivity(props: { user: User }) {
                         isDesktop={true}
                         key={idx}
                         index={idx}
-                        options={item.markets.options}
-                        question={item.markets.question}
-                        name={item.users.name}
-                        pfp={item.users.pfp}
-                        amount={(item.amount / 10 ** 6).toFixed(2)}
-                        title={item.markets.title}
-                        image={item.markets.image}
-                        option={option}
-                        id={item?.market_id}
+                        option={{
+                          name:
+                            item?.option === 1
+                              ? item.market?.outcomeA
+                              : item.market?.outcomeB,
+                          index: item?.option,
+                          value:
+                            item?.option === 1
+                              ? item.market?.outcomeOddsA
+                              : item.market?.outcomeOddsB,
+                        }}
+                        question={item.market.question}
+                        name={item.user.name}
+                        pfp={item.user.pfp}
+                        amount={item.tokensOwned}
+                        title={item.market.title}
+                        image={item.image}
+                        id={item?.marketId}
                         odds={12}
-                        userId={item?.user_id}
-                        initialProb={item.markets.initialProb}
+                        userId={item?.user?.walletAddress}
+                        initialProb={item.market.initialProb}
                         onOpenBottomSheet={() => {}}
                       />
                     );
