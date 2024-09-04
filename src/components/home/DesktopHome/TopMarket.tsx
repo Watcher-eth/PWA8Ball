@@ -39,10 +39,10 @@ export function TopMarket() {
   }));
 
   return (
-    <div className="w-full flex  flex-row pl-1 mt-2 -mb-5  border-b-[0.1rem]  border-[#181818] pb-12 p  ">
+    <div className="w-full flex flex-row pl-1 mt-2 -mb-5  border-b-[0.1rem] border-[#181818] pb-12">
       <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
         <img
-          className="h-[6rem] w-[6rem] object-cover -mb-2 rounded-md"
+          className="size-24 object-cover -mb-2 rounded-md"
           src={enhancedMarket?.image}
         />
         <div className="text-white text-3xl mt-6 font-semibold">
@@ -100,26 +100,22 @@ export function TopMarket() {
             chartData={chartData}
             xAxisKey="month"
             xAxisTickFormatter={(value, ...args) => {
-              console.log({value, args})
-              return formatChartDateStr(value)//.slice(0, 3);
+              // console.log({ value, args });
+              return formatChartDateStr(value); //.slice(0, 3);
             }}
           />
         </div>
         <div className="flex flex-row justify-between -mb-3 items-center">
           <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
-            <div className="px-6 py-1.5  flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
-              {enhancedMarket?.outcomeA}
-              <p className="text-[0.75rem] text-[lightgray] ml-1">
-                {enhancedMarket?.outcomeOddsA / 100}%
-              </p>
-            </div>
-            <div className="px-6 py-1.5 text-[1.1rem] font-medium  flex items-baseline rounded-md hover:scale-101 active:scale-98 bg-[#1B1B1E]/70 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]">
-              {enhancedMarket?.outcomeB}
-              <p className="text-[0.75rem] text-[lightgray] ml-1">
-                {enhancedMarket?.outcomeOddsB / 100}%
-              </p>
-            </div>
+            <TopMarketOutcomeBtn
+              outcome={enhancedMarket?.outcomeA}
+              outcomeOdds={enhancedMarket?.outcomeOddsA}
+            />
+            <TopMarketOutcomeBtn
+              outcome={enhancedMarket?.outcomeB}
+              outcomeOdds={enhancedMarket?.outcomeOddsB}
+            />
           </div>
         </div>
       </div>
@@ -129,19 +125,21 @@ export function TopMarket() {
 
 function TopMarketOutcomeBtn({
   outcome,
-  outcomeOdds
+  outcomeOdds = 0
 }: {
   outcome?: string
-  outcomeOdds?: number | bigint
+  outcomeOdds?: number // | bigint
 }) {
-  <div
-    className={`
-      px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]
-    `}
-  >
-    {outcome}
-    <p className="text-[0.75rem] text-[lightgray] ml-1">
-      {outcomeOdds / 100}%
-    </p>
-  </div>;
+  return (
+    <div
+      className={`
+        px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]
+      `}
+    >
+      {outcome}
+      <p className="text-[0.75rem] text-[lightgray] ml-1">
+        {outcomeOdds / 100}%
+      </p>
+    </div>
+  )
 }

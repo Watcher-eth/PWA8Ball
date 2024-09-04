@@ -38,10 +38,12 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
         <div className=" pb-8  flex flex-row">
           <TopMarket />
         </div>
-        <TopicHeader
-          setSelectedTopic={setSelectedTopic}
-          selectedTopic={selectedTopic}
-        />
+        <StandardBleedOverlay>
+          <TopicHeader
+            setSelectedTopic={setSelectedTopic}
+            selectedTopic={selectedTopic}
+          />
+        </StandardBleedOverlay>
         <div className="h-[0.05rem] mt-4 w-full bg-[#212121] px-9" />
 
         <div className="pt-11 pb-9 flex flex-row px-1">

@@ -10,32 +10,7 @@ import { Instagram, Send } from "lucide-react";
 export function DesktopFooter() {
   return (
     <div className="relative w-full mt-10  -mb-32">
-      {/* Background with Grid Pattern */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 w-full h-full bg-[#090909] text-white/10">
-          <svg aria-hidden="true" className="absolute inset-0 h-full w-full">
-            <defs>
-              <pattern
-                id="grid-pattern"
-                width="128"
-                height="128"
-                patternUnits="userSpaceOnUse"
-                x="100%"
-                y="100%"
-                patternTransform="translate(112 64)"
-              >
-                <path
-                  d="M0 128V.5H128"
-                  fill="none"
-                  stroke="currentColor"
-                ></path>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid-pattern)"></rect>
-          </svg>
-        </div>
-      </div>
-
+      <div className="h-px w-full bg-[#212121] px-5" />
       {/* Footer Content */}
       <div className="relative z-10 flex flex-col w-full  py-10 px-14 space-y-8">
         <div className="flex flex-row w-full justify-between ">
