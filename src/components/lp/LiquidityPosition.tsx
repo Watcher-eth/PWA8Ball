@@ -68,16 +68,24 @@ export function DesktopLiquidityPosition({
   title,
   amount,
   id,
+  amountLp,
   onChange,
 }: {
   image: string;
   title: string;
   amount: number;
   id: number;
+  amountLp: number;
   onChange: () => void;
 }) {
   return (
-    <DesktopLpModal image={image} title={title} amount={amount} id={id}>
+    <DesktopLpModal
+      image={image}
+      title={title}
+      amount={amount}
+      id={id}
+      amountLp={amountLp}
+    >
       <motion.div className="flex min-h-[20vh] justify-between hover:scale-101 active:scale-97 flex-col p-3.5 pt-3 pb-3 rounded-[15px] bg-[rgba(49,49,49,0.78)] mb-[15px] relative cursor-pointer overflow-hidden">
         <img
           className="h-full  w-full rounded-[15px] object-cover absolute z-0 filter blur-[35px] scale-[1.2]"

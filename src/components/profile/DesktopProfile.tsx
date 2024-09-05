@@ -269,57 +269,60 @@ export function DesktopProfilePage2({ userId, userC }) {
           </div>
           {mergedData.length > 0 ? (
             <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-              {mergedData?.map((item, index) => {
-                if (item.type === "created")
-                  return (
-                    <ProfilePositionCard
-                      key={index}
-                      userName={userC?.name}
-                      pfp={userC?.pfp}
-                      {...item}
-                    />
-                  );
-                else console.log("item", item.market);
-                return (
-                  <DesktopMyBetModal
-                    key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
-                    title={item.market?.title}
-                    image={item?.image}
-                    price={item.tokensOwned}
-                    ownedAmount={item.tokensOwned}
-                    options={
-                      item.option === 1
-                        ? {
-                            name: item?.market?.outcomeA,
-                            odds: item?.market?.outcomeOddsA,
-                          }
-                        : {
-                            name: item?.market?.outcomeB,
-                            odds: item?.market?.outcomeOddsB,
-                          }
-                    }
-                    percentage={item.percentage}
-                    betId={item.marketId}
-                    topic={item.marketId}
-                    icon={item.icon}
-                    question={item.market?.question}
-                    option={item.option}
-                    optionNumber={item.option}
-                    isExternal={userId !== user?.walletAddress}
-                    initialProb={item?.market?.initialProb / 100}
-                    user={userC}
-                    resolved={item?.market?.resolved}
-                    outcome={item?.market?.outcome}
-                  >
-                    <ProfilePositionCard
-                      key={index}
-                      userName={userC?.name}
-                      pfp={userC?.pfp}
-                      {...item}
-                    />
-                  </DesktopMyBetModal>
-                );
-              })}
+              {mergedData
+                ?.filter((item) => Number(item.tokensOwned) > 0) // Filter out items with tokensOwned <= 0
+                .map((item, index) => {
+                  if (item.type === "created")
+                    return (
+                      <ProfilePositionCard
+                        key={index}
+                        userName={userC?.name}
+                        pfp={userC?.pfp}
+                        {...item}
+                      />
+                    );
+                  if (Number(item.tokensOwned) !== 0) {
+                    return (
+                      <DesktopMyBetModal
+                        key={`predicted-${item.id}-${item.option}-${item?.outcomeOddsB}`}
+                        title={item.market?.title}
+                        image={item?.image}
+                        price={item.tokensOwned}
+                        ownedAmount={item.tokensOwned}
+                        options={
+                          item.option === 1
+                            ? {
+                                name: item?.market?.outcomeA,
+                                odds: item?.market?.outcomeOddsA,
+                              }
+                            : {
+                                name: item?.market?.outcomeB,
+                                odds: item?.market?.outcomeOddsB,
+                              }
+                        }
+                        percentage={item.percentage}
+                        betId={item.marketId}
+                        topic={item.marketId}
+                        icon={item.icon}
+                        question={item.market?.question}
+                        option={item.option}
+                        optionNumber={item.option}
+                        isExternal={userId !== user?.walletAddress}
+                        initialProb={item?.market?.initialProb / 100}
+                        user={userC}
+                        resolved={item?.market?.resolved}
+                        outcome={item?.market?.outcome}
+                      >
+                        <ProfilePositionCard
+                          key={index}
+                          userName={userC?.name}
+                          pfp={userC?.pfp}
+                          {...item}
+                        />
+                      </DesktopMyBetModal>
+                    );
+                  }
+                })}
             </div>
           ) : (
             <div className="w-full flex flex-col items-center">
@@ -336,7 +339,6 @@ export function DesktopProfilePage2({ userId, userC }) {
     </BlurOverlayWrapper>
   );
 }
-
 
 function ProfilePositionCard(
   item,

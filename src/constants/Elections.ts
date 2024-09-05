@@ -6,6 +6,7 @@ export const SECTION_DATA_MAP = {
     ],
     names: ["Kamala", "Trump"],
     odds: [52, 48],
+    marketId: 2,
   },
   Senate: {
     images: [
@@ -14,6 +15,7 @@ export const SECTION_DATA_MAP = {
     ],
     names: ["Democrats", "Republicans"],
     odds: [30, 70],
+    marketId: 0,
   },
   House: {
     images: [
@@ -22,8 +24,9 @@ export const SECTION_DATA_MAP = {
     ],
     names: ["Democrats", "Republicans"],
     odds: [36, 64],
+    marketId: 6,
   },
-} as const
+} as const;
 
 export const SwingStates = [
   {
@@ -31,35 +34,42 @@ export const SwingStates = [
     flag: "https://media.istockphoto.com/id/1133085196/de/vektor/georgien-waving-flagge.jpg?s=612x612&w=0&k=20&c=ZxGKkKm-SAsOU2R7Py3elV20vwE5uPqRjY4PqlMLAfQ=",
     odds: [46, 54],
     votes: 16,
+    marketId: 18,
   },
   {
     name: "Arizona",
     flag: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_1RJrPDgJDFp-keMKgtgYQvWdiQPHy1ziPw&sn",
     odds: [47, 53],
     votes: 11,
+
+    marketId: 11,
   },
   {
     name: "Nevada",
     flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Flag_of_Nevada.svg/640px-Flag_of_Nevada.svg.png",
     odds: [46, 54],
     votes: 6,
+    marketId: 20,
   },
   {
     name: "Pennsylvania",
     flag: "https://cdn.britannica.com/29/3429-050-0A641390/Pennsylvania-state-flag-William-Penn-blue-coat-1777.jpg",
     odds: [56, 44],
     votes: 19,
+    marketId: 12,
   },
   {
     name: "Wisconsin",
     flag: "https://www.eekwi.org/sites/default/files/2019-12/wiflag.png",
     odds: [56, 44],
     votes: 10,
+    marketId: 13,
   },
   {
     name: "Michigan",
     flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Michigan.svg/640px-Flag_of_Michigan.svg.png",
     odds: [64, 36],
     votes: 15,
+    marketId: 14,
   },
 ];

@@ -9,8 +9,12 @@ import {
   EightballStorageV1ABI,
 } from "../contracts/EightballStorage";
 import { OutcomeTokenABI } from "../contracts/OutcomeToken";
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain";
+import {
+  BASE_SEPOLIA_STORAGE_ADDRESS,
+  ROOT_OPERATOR_ADDRESS,
+} from "@/constants/onchain";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+import { rpcClient } from "../rpcClient";
 interface CashoutParams {
   preferYes: boolean;
   option: string;
@@ -18,47 +22,50 @@ interface CashoutParams {
   userId: string;
   client: SmartAccountClient;
   address: Address;
+  ownedTokens: number;
 }
 
 async function cashoutPrediction(props: CashoutParams) {
-  console.log("Props", props.marketId);
+  console.log("Props", props.ownedTokens, props.preferYes);
   if (!props.marketId) {
     throw new Error("All fields must be provided");
   }
   try {
-    // Convert the _Amount to USDC's correct unit (typically 6 decimals)
-
     const account = props.address;
     const currentPairId = BigInt(props?.marketId);
 
-    const marketPair = await props.client.readContract({
-      address: EightBallStorageAddress,
+    const marketPair = await rpcClient.readContract({
+      address: BASE_SEPOLIA_STORAGE_ADDRESS,
       abi: EightballStorageV1ABI,
       args: [currentPairId],
       functionName: "getMarketPair",
     });
 
-    const tokenAddy = props.preferYes
+    const tokenAddy = !props.preferYes
       ? marketPair.yesToken
       : marketPair.noToken;
 
-    const ownedTokens = await props.client.readContract({
-      address: tokenAddy,
+    const outcomeToken = await getContract({
       abi: OutcomeTokenABI,
-      args: [account],
-      functionName: "balanceOf",
+      address: tokenAddy,
+      client: { public: rpcClient, wallet: props?.client },
     });
+
+    const hash1 = await outcomeToken.write.approve([
+      BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      BigInt(1000000 * props.ownedTokens),
+    ]);
 
     const contract = getContract({
       abi: EightballV1ABI,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-      client: { public: props.client, wallet: props.client },
+      client: { public: rpcClient, wallet: props.client },
     });
 
-    const preferYesNum = props.preferYes ? 1 : 0;
+    const preferYesNum = !props.preferYes ? 1 : 0;
 
     const hash = await contract.write.cashOut([
-      ownedTokens,
+      BigInt(props.ownedTokens),
       preferYesNum,
       BigInt(props.marketId),
       ROOT_OPERATOR_ADDRESS,
@@ -70,7 +77,7 @@ async function cashoutPrediction(props: CashoutParams) {
     console.log("Cashed out");
   } catch (error) {
     console.error("Error during cashout", error);
-    throw error; // Rethrow the error after logging it
+    throw error;
   }
 }
 

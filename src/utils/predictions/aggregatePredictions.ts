@@ -37,9 +37,10 @@ export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
 
   orders.forEach((item: any) => {
     const marketIdFromOrder = parseInt(item.market.marketId, 10); // Ensure it's an integer
-    console.log("marketId", marketIdFromOrder);
     const market = Markets.find((m: any) => m.id === marketIdFromOrder);
-    if (market) {
+
+    if (market && item.tokensOwned !== 0) {
+      // Check that amount is not zero
       const updatedItem = {
         ...item,
         image: market.image,
@@ -48,12 +49,15 @@ export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
       const key = `${item.market.marketId}-${item.option}`;
 
       if (aggregated[key]) {
-        aggregated[key].amount += updatedItem.amount;
+        aggregated[key].tokensOwned += updatedItem.tokensOwned;
       } else {
         aggregated[key] = { ...updatedItem };
       }
     }
   });
 
-  return Object.values(aggregated);
+  // Filter out any aggregated items with amount === 0, just in case
+  return Object.values(aggregated).filter(
+    (item: any) => item.tokensOwned !== 0
+  );
 };

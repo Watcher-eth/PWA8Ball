@@ -19,9 +19,11 @@ import { useGetOriginalLpPrice } from "@/graphql/queries/liquidity/useGetOrigina
 export function DesktopLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
-  const { lpPositions } = useGetUserLp(user?.walletaddress);
+  const { data: lpPositions } = useGetUserLp(user?.walletAddress);
 
-  const { lpPositionsData } = useGetLpPositionsByUser(user?.walletaddress);
+  const { data: lpPositionsData } = useGetLpPositionsByUser(
+    user?.walletAddress
+  );
 
   const { lpTrades: originalLpValues } = useGetOriginalLpPrice(
     user?.walletaddress
@@ -78,6 +80,7 @@ export function DesktopLiquidityPage() {
                   image={item.image}
                   title={item.market?.title}
                   id={item.marketId}
+                  amountLp={item?.amountLp}
                 />
               ))}
             </div>

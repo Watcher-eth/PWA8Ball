@@ -5,7 +5,7 @@ import { X, Clock, AlignLeft, ArrowDown, ArrowLeftRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
 
-interface RemoveLPOverviewProps {
+interface CashoutOverviewProps {
   setIsOpen: () => void;
   onClose: () => void;
   changeStep: (step: number) => void;
@@ -16,13 +16,13 @@ interface RemoveLPOverviewProps {
   multiplier: string;
   totalPot: number;
   isDesktop?: boolean;
+  id: number;
 }
 
-export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
+export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
   const width = window.innerWidth;
   const { cashOutPrediction, loading, success } = useCashOutPrediction();
 
-  console.log("option", props.option, props.options?.name);
   return (
     <div className="flex flex-col items-center w-full bg-[#0c0c0c] md:bg-[#080808] py-1 mt-5 -mb-9 md:mb-0 rounded-lg min-h-[585px] md:min-h-full">
       <motion.div className="flex flex-col items-center w-full bg-[#0c0c0c]  md:bg-[#080808] px-3 md:px-3  rounded-lg">
@@ -124,7 +124,14 @@ export const CashoutOverview: React.FC<RemoveLPOverviewProps> = (props) => {
         </motion.button>
 
         <motion.button
-          onClick={cashOutPrediction}
+          onClick={() =>
+            cashOutPrediction({
+              points: props?.amount,
+              option: props?.option,
+              marketId: props?.id,
+              options: props?.options,
+            })
+          }
           className="mt-3 py-2  px-6 rounded-full w-[48%] bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
         >
           {loading ? (

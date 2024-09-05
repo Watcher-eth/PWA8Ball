@@ -108,7 +108,7 @@ function SwingStateComponent({
   state: any;
 }) {
   return (
-    <div className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
+    <Link href={getMarketPath(state?.marketId)} className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
       <div
         className="absolute z-0 h-full bg-gradient-to-r top-0 from-[#0050FF]/[10%]  rounded-l-lg to-[#0050FF]/[0%]  left-0"
         style={{ width: `${sectionData.odds[0]}%` }}
@@ -160,7 +160,7 @@ function SwingStateComponent({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -251,6 +251,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
             odds={sectionData.odds[0]}
             change={1}
             side={1}
+
           />
           <div className="flex flex-col items-center -space-y-1 z-1"></div>
           <CandidateSection
@@ -279,6 +280,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
               key={state.name}
               sectionData={sectionData}
               state={state}
+
             />
           ))}
         </div>

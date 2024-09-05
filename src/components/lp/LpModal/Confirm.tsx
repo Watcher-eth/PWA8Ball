@@ -25,6 +25,7 @@ export function RemoveLPConfirmationScreen(props: {
   points: number;
   id: number;
   isDesktop?: boolean;
+  amountLp: number;
 }) {
   const { onClose } = props;
   const {
@@ -126,7 +127,7 @@ export function RemoveLPConfirmationScreen(props: {
               Now
             </span>
             <span className="text-[16.5px] text-[lightgray] font-normal">
-              {(props.points / 10 ** 5).toFixed(0)} $Cred
+              {props.points.toFixed(0)} $Cred
             </span>
           </div>
           <div className="flex flex-row items-center justify-between">
@@ -134,7 +135,7 @@ export function RemoveLPConfirmationScreen(props: {
               After Resolution
             </span>
             <span className="text-[20px] text-white font-medium">
-              {((props.points / 10 ** 5) * 3).toFixed(0)} $Cred
+              {(props.points * 3).toFixed(0)} $Cred
             </span>
           </div>
         </div>

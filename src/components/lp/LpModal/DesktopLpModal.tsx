@@ -11,13 +11,16 @@ export function DesktopLpModal({
   title,
   image,
   amount,
+  amountLp,
 }: {
   children: React.ReactNode;
   id: string;
   image: string;
   title: string;
   amount: string;
+  amountLp: string;
 }) {
+  console.log("amount", amount);
   const [step, setStep] = useState<number>(1);
   return (
     <DesktopCardModal
@@ -33,7 +36,7 @@ export function DesktopLpModal({
             setStep={setStep}
             isDesktop={true}
             onClose={() => {}}
-            totalPot={amount / 10 ** 6}
+            totalPot={amount}
           />
         ) : (
           <RemoveLPConfirmationScreen
@@ -44,6 +47,7 @@ export function DesktopLpModal({
             id={id}
             onClose={() => {}}
             isDesktop={true}
+            amountLp={amountLp}
           />
         )
       }

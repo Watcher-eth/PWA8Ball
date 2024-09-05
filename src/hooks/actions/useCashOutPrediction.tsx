@@ -33,7 +33,7 @@ export function useCashOutPrediction() {
     options: string[];
   }) {
     setLoading(true);
-
+    console.log("params", points);
     try {
       if (!address) {
         throw new Error("Address is required");
@@ -50,6 +50,7 @@ export function useCashOutPrediction() {
         preferYes: Number(option) === 1 ? false : true,
         option: options[Number(option) - 1],
         isBuy: true,
+        ownedTokens: points,
       });
 
       setTimeout(() => {
