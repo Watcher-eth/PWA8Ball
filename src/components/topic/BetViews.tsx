@@ -65,15 +65,15 @@ export const BetBigView = ({
         </p>
         {option1.image ? (
           <PollingComponentImage
-            yesValue={option1}
-            noValue={option2}
+            yesValue={option1.odds}
+            noValue={option2.odds}
             option1={option1.name}
             option2={option2.name}
           />
         ) : (
           <PollingComponent
-            yesValue={option1.amount}
-            noValue={option2.amount}
+            yesValue={option1.odds}
+            noValue={option2.odds}
             option1={option1.name}
             option2={option2.name}
           />

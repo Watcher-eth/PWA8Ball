@@ -39,17 +39,23 @@ function DesktopTopic({
   id,
   type,
   members,
+  markets,
+  allTopicMarkets,
 }) {
   const router = useRouter();
   const scrollRef = useRef(null);
-  console.log("id", id);
+
   const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { marketsForTopic } = useGetAllMarketsForTopic(Number(id));
-  // const { data: comments, error, isLoading } = useGetCommentsForTopic(id);
   const { user } = useUserStore();
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
-    marketsForTopic,
+    allTopicMarkets,
+    HARD_MARKETS,
+    HARD_TOPICS
+  );
+
+  const enhancedTrendingMarkets = enhanceMarketsWithImageAndPolyId(
+    markets,
     HARD_MARKETS,
     HARD_TOPICS
   );
@@ -58,18 +64,9 @@ function DesktopTopic({
     []
   );
 
-  // const allComments = _.uniqBy(
-  //   [...optimisticComments, ...(comments || [])],
-  //   (comment) => comment.id
-  // );
-
-  // function addOptimisticComment(comment: BetComment) {
-  //   setOptimisticComments([comment, ...optimisticComments]);
-  // }
-
   const handleComment = () => {};
   const setReply = () => {};
-  console.log("markets2", enhancedMarkets);
+
   const renderDesktopTopicItems = (items, size, count) => {
     const placeholders = Array.from({ length: count - items.length });
     return (
@@ -158,11 +155,11 @@ function DesktopTopic({
           <div className="h-[0.08rem] w-full  bg-[#212121] mt-3.5  mb-8" />
 
           <div className="flex flex-col ">
-            <div className="mt-10 -mb-6 ml-1.5 flex flex-row ">
+            <div className="mt-10 -mb-0 ml-1.5 flex flex-row ">
               <DesktopHomeNews
                 topic={true}
                 amount={3}
-                markets={enhancedMarkets}
+                markets={enhancedTrendingMarkets}
               />
             </div>
             <div className=" pb-[3rem]  flex flex-row">

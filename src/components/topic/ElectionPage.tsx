@@ -166,12 +166,18 @@ function SwingStateComponent({
 
 export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59");
 
-export function ElectionPage() {
+export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
   const [section, setSection] = useState("Presidency");
-  const { marketsForTopic } = useGetAllMarketsForTopic(1);
+
   // @ts-ignore
   const markets = enhanceMarketsWithImageAndPolyId(
-    marketsForTopic,
+    allTopicMarkets,
+    HARD_MARKETS,
+    HARD_TOPICS
+  );
+
+  const enhancedeTrendingMarkets = enhanceMarketsWithImageAndPolyId(
+    trendingMarkets,
     HARD_MARKETS,
     HARD_TOPICS
   );
@@ -290,7 +296,7 @@ export function ElectionPage() {
           </div>
           <Button text="See all" IconComponent={ChevronDown} />
         </div>
-        {markets?.slice(0, 5).map((item) => (
+        {enhancedeTrendingMarkets?.slice(0, 5).map((item) => (
           <Link
             href={getMarketPath(String(item.id))}
             key={item.id}
@@ -315,7 +321,7 @@ export function ElectionPage() {
                 {item?.outcomeOddsA / 100}%{" "}
                 {item?.outcomeA?.length < 4
                   ? item?.outcomeA
-                  : item?.outcomeA?.slice(0,3)}
+                  : item?.outcomeA?.slice(0, 3)}
               </div>
             </div>
           </Link>

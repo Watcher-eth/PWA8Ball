@@ -17,6 +17,9 @@ import { ShareTopicModal } from "@/components/share/topic/ShareTopicModal";
 import { BetBigView, BetSmallView } from "./BetViews";
 import { AvatarGroup } from "./AvatarGroup";
 import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 
 const ICON_BUTTON_CLASSNAME = `
   bg-[rgba(21,21,21,0.45)] backdrop-blur-2xl
@@ -33,13 +36,18 @@ export function Topic({
   id,
   type,
   members,
+  allTopicMarkets,
+  trendingMarkets,
 }) {
   const router = useRouter();
   const scrollRef = useRef(null);
 
   const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { data: markets } = useGetMarketsForTopic(id);
-
+  const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
+    trendingMarkets,
+    HARD_MARKETS,
+    HARD_TOPICS
+  );
   return (
     <div className="flex overflow-x-hidden overflow-y-scroll flex-col no-scrollbar w-full bg-[#070707]  relative">
       <a
@@ -104,7 +112,7 @@ export function Topic({
             Trending Bets
           </span>
         </div>
-        {markets?.slice(0, 4)?.map((market, idx) => {
+        {enhancedMarkets?.slice(0, 4)?.map((market, idx) => {
           const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView;
           return (
             <BetViewComponent
@@ -114,8 +122,8 @@ export function Topic({
               question={market.question}
               image={market.image}
               topic={name}
-              option1={market.options[0]}
-              option2={market.options[1]}
+              option1={{name: market?.outcomeA, odds: market?.outcomeOddsA}}
+              option2={{name: market?.outcomeB, odds: market?.outcomeOddsB}}
             />
           );
         })}

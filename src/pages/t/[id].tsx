@@ -3,6 +3,9 @@ import { supabase } from "@/supabase/supabaseClient";
 import { Topic } from "@/components/topic";
 import { MobiTop } from "@/components/layouts/MobiTop";
 import DesktopTopic from "@/components/topic/DesktopTopic";
+import { GRAPH_ENDPOINT_URL } from "@/providers/GraphQlProvider";
+import { Market } from "@/__generated__/graphql";
+import { getAllMarketsForTopicId } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
 
 export async function getServerSideProps(context) {
   const { id } = context.params as { id: string };
@@ -20,22 +23,36 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/${id}?limit=15&hours=24`;
+
+  const resMarkets = await fetch(endpoint);
+  const markets = await resMarkets.json();
+  const allTopicMarkets = await getAllMarketsForTopicId("1");
+
   return {
     props: {
       topicData,
+      markets,
+      allTopicMarkets,
     },
   };
 }
 
-export default function TopicPage({ topicData }: { topicData: any }) {
-
+export default function TopicPage({
+  topicData,
+  markets,
+  allTopicMarkets,
+}: {
+  topicData: any;
+  markets: Market[];
+  allTopicMarkets: Market[];
+}) {
   if (topicData) {
     const { id, name, description, image, title, icon, topic, type, members } =
       topicData;
 
     return (
       <div>
-        
         <MobiTop
           mobile={
             <Topic
@@ -47,6 +64,8 @@ export default function TopicPage({ topicData }: { topicData: any }) {
               topic={topic}
               type={type}
               members={parseInt(members, 10)}
+              markets={markets}
+              allTopicMarkets={allTopicMarkets}
             />
           }
           desktop={
@@ -59,6 +78,8 @@ export default function TopicPage({ topicData }: { topicData: any }) {
               topic={topic}
               type={type}
               members={parseInt(members, 10)}
+              markets={markets}
+              allTopicMarkets={allTopicMarkets}
             />
           }
         />
