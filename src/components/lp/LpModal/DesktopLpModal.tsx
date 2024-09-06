@@ -29,6 +29,7 @@ export function DesktopLpModal({
   return (
     <DesktopCardModal
       open={open}
+      
       onOpenChange={setOpen}
       cardClassName="rounded-[1.5rem]"
       dialogContentClassName="w-full rounded-[1.5rem] xl:w-[30vw] p-2 "

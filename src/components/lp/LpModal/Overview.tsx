@@ -25,16 +25,15 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
       } w-full`}
     >
       <div className="flex flex-row items-center justify-between w-full">
-        <div className="flex flex-row items-center">
-          <img
-            className="h-[35px] w-[35px] rounded-[18px] object-cover mr-1.5"
-            src={props?.image}
-            alt="Profile"
-          />
-          <span className="ml-2 font-semibold text-[20px] text-white">
-            {props?.title}
-          </span>
-        </div>
+        <img
+          className="h-[35px] w-[35px] rounded-[18px] object-cover mr-1.5"
+          src={props?.image}
+          alt="Profile"
+        />
+        <span className="ml-2 font-semibold text-[20px] text-white">
+          Withdraw your Boost
+        </span>
+
         <DialogClose asChild>
           <motion.button
             onClick={props.onClose}
