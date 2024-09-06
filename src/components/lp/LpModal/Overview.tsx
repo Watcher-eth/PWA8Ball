@@ -21,7 +21,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
       className={`flex flex-col items-center ${
         props?.isDesktop
           ? "bg-[#080808] p-3 mt-2 rounded-[10px]"
-          : "bg-[#121212] p-5 mt-[5px] rounded-[30px]"
+          : "bg-[#101010] p-5 mt-[5px] -mb-2 rounded-t-[30px]"
       } w-full`}
     >
       <div className="flex flex-row items-center justify-between w-full">

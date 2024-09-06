@@ -16,6 +16,7 @@ import { NumericKeypad } from "@/components/NumericKeypad";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import { OnrampStep } from "./OnrampStep";
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
 
 export function PredictModal({
   text,
@@ -45,8 +46,10 @@ export function PredictModal({
   const setVotingState = useVotingStore((state) => state.setState);
   const amount = useVotingStore((state) => state.amount);
   const { user } = useUserStore();
-  const userBalanceUnformatted = useUserUsdcBalance();
-  const userBalance = Number(userBalanceUnformatted) / 10 ** 6;
+  const userBalanceUnformatted = useUsdcBalance({
+    address: user?.walletAddress,
+  });
+  const userBalance = userBalanceUnformatted;
   const baseFontSize = "5.3rem";
   const lengthAdjustmentThreshold = 3;
   const fontSizeAdjustmentFactor = 0.95;
@@ -133,12 +136,12 @@ export function PredictModal({
           <motion.div
             layout
             transition={{ duration: 0.2 }}
-            className="bg-[#080808] rounded-2xl w-screen relative"
+            className="bg-[#090909] rounded-2xl w-screen relative"
           >
             <AnimatePresence>
               {step === 1 && (
-                <div className="flex flex-col p-8 w-full pt-4 bg-[#080808] pb-8 z-15">
-                  <div className="flex flex-row items-center bg-gray-[#080808] w-full justify-center relative">
+                <div className="flex flex-col p-8 w-full pt-4 bg-[#090909] pb-8 z-15">
+                  <div className="flex flex-row items-center bg-[#090909] w-full justify-center relative">
                     <img
                       className="size-8 rounded-full object-cover"
                       src={image}

@@ -88,7 +88,7 @@ export function DesktopLoadingPrediction({
   const controls = useLoadingAnimationControls();
 
   return (
-    <div className="flex flex-col items-center rounded-lg   justify-center w-full h-full overflow-hidden">
+    <div className="flex flex-col items-center rounded-lg bg-[#090909]   justify-center w-full h-full overflow-hidden">
       {/* <div className=""> */}
       <motion.img
         src={image}
@@ -96,12 +96,12 @@ export function DesktopLoadingPrediction({
       
         className="rounded-md w-full h-[80%]  overflow-hidden absolute  object-cover  "
       />
-      <motion.div className=" w-full h-[80%]absolute backdrop-blur-xl " />
+      <motion.div className=" w-full h-[100%] absolute backdrop-blur-xl " />
       <motion.div
-        className="absolute  w-full h-[80%] "
+        className="absolute  w-full h-[100%] "
         style={{
           background:
-            "linear-gradient(to bottom, transparent, rgba(8, 8, 8, 0.8), #080808)",
+            "linear-gradient(to bottom, transparent, rgba(9, 9, 9, 0.8), #090909)",
         }}
       />
       <motion.div

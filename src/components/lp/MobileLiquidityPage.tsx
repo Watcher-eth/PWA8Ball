@@ -7,19 +7,22 @@ import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
+import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp";
+import { HARD_MARKETS } from "@/constants/markets";
 export function MobileLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
-  const {
-    data: positions,
-    isLoading,
-    refetch,
-  } = useGetLPForUser(user?.walletAddress);
+  const { data: lpPositions, refetch } = useGetUserLp(user?.walletAddress);
 
-  const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
+  const filteredPositions =
+    enhancePositionsWithImages(
+      lpPositions?.filter((item) => item.amountUsdc > 0),
+      HARD_MARKETS
+    ) ?? [];
 
   return (
-    <div className="pt-4 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
+    <div className="pt-4 flex flex-col  min-h-screen bg-[#101010] w-full px-5">
       <div className="flex flex-row items-center justify-between my-[18px]">
         <motion.button
           onClick={() => router.back()}
@@ -33,16 +36,19 @@ export function MobileLiquidityPage() {
         <div className="w-5" />
       </div>
       {filteredPositions?.length > 0 ? (
-        <div className="pb-5">
+        <div className="pb-5 w-full">
           {filteredPositions.map((item, index: number) => (
-            <LiquidityPosition
-              refetch={refetch}
-              key={index}
-              amount={item.amount / 10 ** 6}
-              image={item.image}
-              title={item.title}
-              id={item.marketId}
-            />
+            <div className="w-full mx-5 ">
+              <LiquidityPosition
+                refetch={refetch}
+                key={index}
+                amount={Number(item.amountUsdc) / 10 ** 6}
+                image={item.image}
+                title={item.market?.title}
+                id={item.marketId}
+                amountLp={item?.amountLp}
+              />
+            </div>
           ))}
         </div>
       ) : (

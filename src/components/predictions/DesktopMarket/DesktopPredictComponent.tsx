@@ -310,7 +310,7 @@ function DesktopConfirmPrediction({
           >
             Back
           </motion.button>
-          {loading || success ? (
+          {loading || success || error ? (
             <DesktopShareBetModal
               setStep={setStep}
               image={image}

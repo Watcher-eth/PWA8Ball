@@ -27,6 +27,7 @@ export function RemoveLiquidityModal({
 }) {
   const [goal, setGoal] = useState(1);
   const [step, setStep] = useState(1);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -35,7 +36,7 @@ export function RemoveLiquidityModal({
   }, [isOpen]);
 
   return (
-    <Drawer>
+    <Drawer onOpenChange={setOpen}>
       <DrawerTrigger>
         <motion.div className="mt-4 hover:scale-110 active:scale-93 transition-all">
           {children}
@@ -45,7 +46,7 @@ export function RemoveLiquidityModal({
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-[#121212] rounded-3xl  mb-2 w-full relative"
+          className="bg-[#101010] rounded-3xl  mb-2 w-full relative"
         >
           <AnimatePresence>
             {step === 1 && (
@@ -55,6 +56,7 @@ export function RemoveLiquidityModal({
                 amount={amount}
                 multiplier={multiplier}
                 setStep={setStep}
+                totalPot={amount}
               />
             )}
             {step === 2 && (
@@ -66,7 +68,7 @@ export function RemoveLiquidityModal({
                 setStep={setStep}
                 id={id}
                 refetch={refetch}
-                onClose={onClose}
+                onClose={() => setOpen(false)}
               />
             )}
           </AnimatePresence>

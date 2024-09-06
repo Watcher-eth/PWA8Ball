@@ -105,12 +105,12 @@ export function RemoveLPConfirmationScreen(props: {
       className={`flex flex-col items-center ${
         props?.isDesktop
           ? "bg-[#080808] p-4 mt-3 rounded-[15px]"
-          : "bg-[#131313] p-5 mt-[5px] rounded-[30px]"
+          : "bg-[#101010] p-5 mt-[5px] rounded-t-[30px] -mb-2"
       } w-full`}
     >
       <motion.div
         className={`flex flex-col ${
-          props?.isDesktop ? "bg-[#080808]" : "bg-[#131313]"
+          props?.isDesktop ? "bg-[#080808]" : "bg-[#101010] "
         } rounded-[20px] w-full`}
       >
         <div className="flex flex-row items-center justify-between w-full">
