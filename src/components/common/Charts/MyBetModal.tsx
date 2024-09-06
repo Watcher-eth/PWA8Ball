@@ -57,6 +57,7 @@ export const MobileMyBetModal = (props: {
   openCashout: () => void;
   handleReceipt: () => void;
   setStep: (num: number) => void;
+  
 }) => {
   const [timeframe, setTimeframe] = useState("1M");
 
@@ -318,6 +319,7 @@ export function DesktopMyBetModal({
   resolved,
   outcome,
   onClose,
+  refetch,
 }: {
   children: React.ReactNode;
   title: string;
@@ -339,6 +341,7 @@ export function DesktopMyBetModal({
   user: User;
   resolved?: boolean;
   outcome?: number;
+  refetch: () => void;
 }) {
   const [step, setStep] = useState(1);
   return (
@@ -387,6 +390,7 @@ export function DesktopMyBetModal({
             onClose={() => {}}
             totalPot={Number(ownedAmount)}
             amount={Number(ownedAmount)}
+            refetch={refetch}
             isDesktop={true}
           />
         ) : step === 3 ? (

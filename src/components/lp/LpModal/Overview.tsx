@@ -80,7 +80,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
         <DialogClose asChild>
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="flex flex-row items-center justify-center w-1/2 p-[0.75rem] bg-[#1D1D1D] rounded-full mt-3"
+            className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#1D1D1D] rounded-full mt-3"
           >
             <WalletCards color="#D9D9D9" strokeWidth={3} height={20} />
             <span className="ml-1.5 text-[20px] font-extrabold text-[#D9D9D9]">
@@ -91,10 +91,10 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
         <motion.button
           onClick={() => props.setStep(2)}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-row items-center justify-center w-1/2 p-[0.7rem] bg-[#D9D9D9] rounded-full mt-3 ml-4"
+          className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#D9D9D9] rounded-full mt-3 ml-4"
         >
           <ArrowDown color="black" strokeWidth={3} height={23} />
-          <span className="ml-0.5 text-[20px] font-extrabold text-[#1D1D1D]">
+          <span className="ml-0.5 text-[20px] font-[600] text-[#1D1D1D]">
             Withdraw
           </span>
         </motion.button>

@@ -22,6 +22,7 @@ export function RemoveLiquidityModal({
   amount,
   multiplier,
   id,
+  refetch,
   children,
 }) {
   const [goal, setGoal] = useState(1);
@@ -64,6 +65,7 @@ export function RemoveLiquidityModal({
                 multiplier={multiplier}
                 setStep={setStep}
                 id={id}
+                refetch={refetch}
                 onClose={onClose}
               />
             )}

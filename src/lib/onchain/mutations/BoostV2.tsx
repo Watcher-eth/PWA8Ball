@@ -35,13 +35,6 @@ async function boostV2(props: BoostMarket) {
       BigInt(props.marketId),
     ]);
     // console.log("hash", hash);
-
-    //Update DB
-    await addLiquidityBoost({
-      user_id: props.userId,
-      market_id: props.marketId,
-      amount_added: props.amount,
-    });
   } catch (error) {
     console.error("Error during market boost", error);
     throw error; // Rethrow the error after logging it

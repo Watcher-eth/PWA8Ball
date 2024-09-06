@@ -7,6 +7,7 @@ import { type Address, getContract } from "viem";
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain";
 import { useUserPrediction } from "@/supabase/mutations/onchainActions/useUserPrediction";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+import { rpcClient } from "../rpcClient";
 
 interface PredictParams {
   amount: number;
@@ -30,7 +31,7 @@ async function predict(props: PredictParams) {
     const contract = getContract({
       abi: EightballV1ABI,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-      client: { public: props.client, wallet: props.client },
+      client: { public: rpcClient, wallet: props.client },
     });
 
     //TODO: Custom slippage
@@ -52,12 +53,12 @@ async function predict(props: PredictParams) {
 
     console.log("Prediction hash", hash);
 
-    const { prediction, updatedUser } = await managePrediction(
-      props.address,
-      props.marketId,
-      props.amount,
-      props.option
-    );
+    // const { prediction, updatedUser } = await managePrediction(
+    //   props.address,
+    //   props.marketId,
+    //   props.amount,
+    //   props.option
+    // );
   } catch (error) {
     console.error("Error during prediction", error);
     throw error;

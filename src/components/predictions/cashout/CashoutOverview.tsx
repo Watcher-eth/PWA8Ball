@@ -4,6 +4,7 @@ import React from "react";
 import { X, Clock, AlignLeft, ArrowDown, ArrowLeftRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 
 interface CashoutOverviewProps {
   setIsOpen: () => void;
@@ -17,11 +18,12 @@ interface CashoutOverviewProps {
   totalPot: number;
   isDesktop?: boolean;
   id: number;
+  refetch: () => void;
 }
 
 export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
   const width = window.innerWidth;
-  const { cashOutPrediction, loading, success } = useCashOutPrediction();
+  const { cashOutPrediction, loading, success, error } = useCashOutPrediction();
 
   return (
     <div className="flex flex-col items-center w-full bg-[#0c0c0c] md:bg-[#080808] py-1 mt-5 -mb-9 md:mb-0 rounded-lg min-h-[585px] md:min-h-full">
@@ -98,54 +100,63 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
           <p className="text-md text-white font-medium mb-4 self-start">
             {props.question}
           </p>
-          <p className="text-sm text-[#525252] mt-3 font-medium text-center px-3">
+          <p className="text-sm text-[#525252] mt-8 font-medium text-center px-3">
             Review the above carefully before confirming. Cashing out is not
             reversible.
           </p>
         </div>
       </motion.div>
 
-      <div
-        style={{ marginTop: loading || success ? "3.8rem" : 0 }}
-        className="flex w-full items-center gap-2 mb-4 px-3 md:px-0 justify-between"
-      >
+      <div className="flex w-full items-center gap-2 mb-1 px-3 md:px-0 pt-3.5 justify-between">
         <motion.button
           onClick={() => {
             props?.changeStep(1);
           }}
           className={`
-      mt-3 py-2 px-6 rounded-full w-[48%] bg-[#151515] text-lg text-[#D9D9D9] font-bold
+     h-12 px-5 rounded-full w-[48%] bg-[#121212] text-[1.35rem]  text-[#D9D9D9] font-bold
     `}
-          animate={{
-            opacity: success ? 0 : 1,
-          }}
         >
           Back
         </motion.button>
-
-        <motion.button
-          onClick={() =>
-            cashOutPrediction({
-              points: props?.amount,
-              option: props?.option,
-              marketId: props?.id,
-              options: props?.options,
-            })
-          }
-          className="mt-3 py-2  px-6 rounded-full w-[48%] bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
-        >
-          {loading ? (
-            <div className="flex items-center gap-2">
-              <span className="loader"></span>
-              <span>Cashing out</span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-1.5">
-              <ArrowDown color="#1D1D1D" strokeWidth={3.5} size={"1.25rem"} />
-              <div>Cashout</div>
-            </div>
-          )}
-        </motion.button>
+        {loading || success || error ? (
+          <TxStatusButton
+            minWidth={"min-w-[48%]"}
+            height="h-12"
+            isPending={loading}
+            isSuccess={success}
+            isError={error}
+            pendingText="Cashing out"
+            successText="Success"
+            errorText="Cashout Failed"
+          />
+        ) : (
+          <motion.button
+            onClick={() => {
+              cashOutPrediction({
+                points: props?.amount,
+                option: props?.option,
+                marketId: props?.id,
+                options: props?.options,
+              });
+              setTimeout(() => {
+                props?.refetch();
+              }, 11000);
+            }}
+            className="h-12  px-6 rounded-full w-[48%] bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
+          >
+            {loading ? (
+              <div className="flex items-center gap-2">
+                <span className="loader"></span>
+                <span>Cashing out</span>
+              </div>
+            ) : (
+              <div className="flex items-center text-[1.35rem] gap-1.5">
+                <ArrowDown color="#1D1D1D" strokeWidth={3.5} size={"1.35rem"} />
+                <div>Cashout</div>
+              </div>
+            )}
+          </motion.button>
+        )}
       </div>
     </div>
   );

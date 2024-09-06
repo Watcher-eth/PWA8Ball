@@ -72,6 +72,7 @@ export function DesktopUserActivity({
               user={item?.user}
               resolved={item?.market?.resolved}
               outcome={item?.market?.outcome}
+              refetch={refetchOrders}
             >
               <motion.div
                 whileHover={{ scale: 1.01 }}

@@ -18,6 +18,9 @@ export function ConfirmButton({
       width: "100%",
       transition: { duration: 0.5 },
     });
+    setTimeout(() => {
+      onComplete(), 4500;
+    });
   }
 
   return (

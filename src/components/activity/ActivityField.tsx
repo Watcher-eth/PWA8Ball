@@ -23,6 +23,7 @@ export function ActivityField({
   resolved,
   outcome,
   onOpenBottomSheet,
+  refetch,
 }: {
   index: number;
   pfp: string;
@@ -39,6 +40,8 @@ export function ActivityField({
   initialProb: number;
   resolved?: boolean;
   outcome?: number;
+  refetch: () => void;
+
   onOpenBottomSheet: () => void;
 }) {
   const MotionDivContent = () => (
@@ -110,6 +113,7 @@ export function ActivityField({
         name={name}
         userId={userId}
         isExternal={true}
+        refetch={refetch}
         initialProb={initialProb}
         resolved={resolved}
         outcome={outcome}
@@ -138,6 +142,7 @@ export function ActivityFieldMobile({
   resolved,
   outcome,
   onOpenBottomSheet,
+  refetch,
 }: {
   index: number;
   pfp: string;
@@ -155,12 +160,14 @@ export function ActivityFieldMobile({
   resolved?: boolean;
   outcome?: number;
   onOpenBottomSheet: () => void;
+  refetch: () => void;
 }) {
   return (
     <PredictionPositionModal
       key={`predicted-${id}-${option}`}
       title={title}
       image={image}
+      refetch={refetch}
       price={amount}
       ownedAmount={amount}
       betId={id}

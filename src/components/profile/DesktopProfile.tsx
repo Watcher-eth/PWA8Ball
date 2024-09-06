@@ -45,7 +45,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [editedName, setEditedName] = useState("");
   const [editedPfp, setEditedPfp] = useState(userC.pfp);
   const { upsertUser } = useUpsertUser();
-  const { orders: ordersData } = useGetPositionsByWallet(userId);
+  const { orders: ordersData, refetch } = useGetPositionsByWallet(userId);
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -304,6 +304,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                         betId={item.marketId}
                         topic={item.marketId}
                         icon={item.icon}
+                        refetch={refetch}
                         question={item.market?.question}
                         option={item.option}
                         optionNumber={item.option}

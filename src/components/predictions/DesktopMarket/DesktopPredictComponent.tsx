@@ -20,6 +20,7 @@ import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutCo
 import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
 import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
 import { Card } from "@/components/ui/tailwind/Card";
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -29,9 +30,11 @@ export function DesktopPredictComponent(props: {
   options: string[];
   topic: string;
   initialProb: number;
+  refetch: () => void;
   userOwns?: { highest_amount: number; highest_option: number };
 }) {
-  const { question, title, image, id, options, topic, userOwns } = props;
+  const { question, title, image, id, options, topic, userOwns, refetch } =
+    props;
   const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
@@ -44,9 +47,7 @@ export function DesktopPredictComponent(props: {
       >
         <AnimatePresence>
           {step === 0 && (
-            <div className="text-xl font-semibold">
-              Predict on {title}
-            </div>
+            <div className="text-xl font-semibold">Predict on {title}</div>
           )}
           {step === 0 && (
             <div className="flex flex-col w-full pt-4  gap-4">
@@ -151,6 +152,7 @@ export function DesktopPredictComponent(props: {
               changeStep={setStep}
               odds={"20"}
               totalPot={1200}
+              refetch={refetch}
               amount={1200}
               isDesktop={true}
             />
@@ -204,10 +206,14 @@ function DesktopConfirmPrediction({
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
 
-  const { executePrediction, loading, success } = useExecutePrediction();
-
+  const { executePrediction, loading, success, error } = useExecutePrediction();
+  console.log("loading", loading, success);
   return (
-    <div className="flex flex-col items-center w-full py-4 pt-0 rounded-lg ">
+    <div
+      className={`flex flex-col items-center w-full ${
+        success || loading ? "py-0 px-0" : "  py-4"
+      } overflow-hidden pt-0 rounded-lg `}
+    >
       {loading || success ? (
         <DesktopLoadingPrediction
           image={image}
@@ -281,7 +287,7 @@ function DesktopConfirmPrediction({
             <p className="text-[0.95rem] text-white/80 font-medium py-1 mb-3 self-start">
               {question}
             </p>
-            <p className="text-[0.75rem] text-[#424242] mt-1 font-medium text-center px-3">
+            <p className="text-[0.75rem] text-[#424242] mt-5 font-medium text-center px-3">
               Review the above carefully before confirming. Once made, your
               prediction is irreversible.
             </p>
@@ -290,12 +296,21 @@ function DesktopConfirmPrediction({
       )}
       <div
         className={`
-          flex items-center gap-2 px-7 mb-2 w-full
-          ${(loading || success) && "mt-[3.8rem]"}
+          flex items-center gap-2 px-7  w-full
+          ${(loading || success) && "mt-[3.8rem] mb-4"}
         `}
       >
-        {success ? (
-          <div className="z-10 w-full">
+        <div className="flex w-full pt-3 space-x-3">
+          <motion.button
+            onClick={() => setStep(0)}
+            className={`
+         py-2 px-6  h-12 w-[50%] rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
+          flex-1
+        `}
+          >
+            Back
+          </motion.button>
+          {loading || success ? (
             <DesktopShareBetModal
               setStep={setStep}
               image={image}
@@ -305,30 +320,18 @@ function DesktopConfirmPrediction({
               id={id}
               odds={odds}
             >
-              <motion.button
-                className={`
-                  mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
-                  font-bold flex items-center justify-center gap-1 self-center
-                  hover:scale-101 active:scale-98 transition-all w-full
-                `}
-              >
-                <div className="flex items-center justify-around gap-2">
-                  <SharePredictButton success={success} />
-                </div>
-              </motion.button>
+              <TxStatusButton
+                minWidth={"min-w-[11rem]"}
+                height="h-12"
+                isPending={loading}
+                isSuccess={success}
+                isError={error}
+                pendingText="Processing"
+                successText="Success"
+                errorText="Prediction Failed"
+              />
             </DesktopShareBetModal>
-          </div>
-        ) : (
-          <div className="flex w-full">
-            <motion.button
-              onClick={() => setStep(0)}
-              className={`
-          mt-3 py-2 px-6 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
-          flex-1
-        `}
-            >
-              Back
-            </motion.button>
+          ) : (
             <motion.button
               onClick={() => {
                 executePrediction({
@@ -339,7 +342,7 @@ function DesktopConfirmPrediction({
                 });
               }}
               className={`
-          ml-4 mt-3 py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
+          ml-4  py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
           font-bold flex items-center justify-center gap-1 self-center
           hover:scale-101 active:scale-98 transition-all flex-1
         `}
@@ -355,8 +358,8 @@ function DesktopConfirmPrediction({
                 )}
               </div>
             </motion.button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

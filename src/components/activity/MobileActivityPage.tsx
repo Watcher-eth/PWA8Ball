@@ -164,6 +164,7 @@ min-h-screen
                           {predictions.map((item, idx) => {
                             return (
                               <ActivityFieldMobile
+                                refetch={refetch}
                                 isDesktop={isDesktop}
                                 key={idx}
                                 index={idx}

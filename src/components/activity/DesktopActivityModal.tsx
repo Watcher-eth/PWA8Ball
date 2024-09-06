@@ -92,6 +92,7 @@ function DesktopFriendActivity(props: { user: User }) {
                     const option = parseOptionJSON(item.option);
                     return (
                       <ActivityField
+                        refetch={refetch}
                         isDesktop={true}
                         key={idx}
                         index={idx}

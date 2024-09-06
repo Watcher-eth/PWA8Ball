@@ -17,6 +17,8 @@ import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
 import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
 import { HARD_MARKETS } from "@/constants/markets";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_TOPICS } from "@/constants/topics";
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const { user } = useUserStore();
@@ -25,12 +27,12 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
 
   const {
     orders: ordersData,
-    isLoading: isOrdersLoading,
+    loading: isOrdersLoading,
     refetch: refetchOrders,
   } = useGetPositionsByWallet(walletAddress);
   const {
     markets: createdMarketsData,
-    isLoading: isCreatedMarketsLoading,
+    loading: isCreatedMarketsLoading,
     refetch: refetchCreated,
   } = useGetCreatedMarketsByUser(walletAddress);
 
@@ -53,6 +55,12 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   const aggregatedOrdersData = aggregatePredictedItemsWithImage(
     ordersData || [],
     HARD_MARKETS
+  );
+
+  const enhancedCreatedMarket = enhanceMarketsWithImageAndPolyId(
+    createdMarketsData,
+    HARD_MARKETS,
+    HARD_TOPICS
   );
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),

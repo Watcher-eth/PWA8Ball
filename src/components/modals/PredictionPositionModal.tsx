@@ -30,6 +30,7 @@ export function PredictionPositionModal({
   optionNumber,
   isExternal,
   initialProb,
+  refetch,
   onClose,
   openCashout,
   handleReceipt,
@@ -52,6 +53,8 @@ export function PredictionPositionModal({
   initialProb?: number;
   onClose: () => void;
   openCashout: () => void;
+  refetch: () => void;
+
   handleReceipt: () => void;
 }) {
   const [snap, setSnap] = useState<number | string | null>(
@@ -118,6 +121,7 @@ export function PredictionPositionModal({
 
               {step === 2 && (
                 <CashoutOverview
+                  refetch={refetch}
                   option={option}
                   options={options}
                   image={image}

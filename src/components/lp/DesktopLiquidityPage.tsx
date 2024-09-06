@@ -19,7 +19,7 @@ import { useGetOriginalLpPrice } from "@/graphql/queries/liquidity/useGetOrigina
 export function DesktopLiquidityPage() {
   const router = useRouter();
   const { user } = useUserStore();
-  const { data: lpPositions } = useGetUserLp(user?.walletAddress);
+  const { data: lpPositions, refetch } = useGetUserLp(user?.walletAddress);
 
   const { data: lpPositionsData } = useGetLpPositionsByUser(
     user?.walletAddress
@@ -75,6 +75,7 @@ export function DesktopLiquidityPage() {
             <div className="pb-5 grid-cols-3 row-span-3 grid grid-flow-col gap-4">
               {filteredPositions.map((item, index: number) => (
                 <DesktopLiquidityPosition
+                  refetch={refetch}
                   key={index}
                   amount={item.amountUsdc / 10 ** 6}
                   image={item.image}

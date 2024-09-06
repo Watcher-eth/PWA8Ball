@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { Overview } from "@/components/lp/LpModal/Overview";
 import { RemoveLPConfirmationScreen } from "@/components/lp/LpModal/Confirm";
+import { DialogTrigger } from "@/components/ui/dialog";
 
 export function DesktopLpModal({
   children,
@@ -12,6 +13,7 @@ export function DesktopLpModal({
   image,
   amount,
   amountLp,
+  refetch,
 }: {
   children: React.ReactNode;
   id: string;
@@ -19,11 +21,15 @@ export function DesktopLpModal({
   title: string;
   amount: string;
   amountLp: string;
+  refetch?: () => void;
 }) {
   console.log("amount", amount);
   const [step, setStep] = useState<number>(1);
+  const [open, setOpen] = useState(false);
   return (
     <DesktopCardModal
+      open={open}
+      onOpenChange={setOpen}
       cardClassName="rounded-[1.5rem]"
       dialogContentClassName="w-full rounded-[1.5rem] xl:w-[30vw] p-2 "
       cardContentClassName=" min-h-[50vh] rounded-[1.5rem] p-2 bg-[#080808]"
@@ -48,6 +54,8 @@ export function DesktopLpModal({
             onClose={() => {}}
             isDesktop={true}
             amountLp={amountLp}
+            refetch={refetch}
+            onClose={() => setOpen(false)}
           />
         )
       }

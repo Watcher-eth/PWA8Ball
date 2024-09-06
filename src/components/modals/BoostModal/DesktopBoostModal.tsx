@@ -4,7 +4,9 @@ import { Input } from "@/components/ui/Input";
 import React, { useState } from "react";
 import { ConfirmButton } from "./ConfirmButton";
 import { DesktopCardModal } from "../DesktopCardModal";
-
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion, AnimatePresence } from "framer-motion";
 export function DesktopBoostContent(props: {
   image: string;
   id: string;
@@ -74,17 +76,39 @@ export function DesktopBoostModal({
   image: string;
   id: string;
 }) {
+  const [open, setOpen] = useState(false);
   return (
-    <DesktopCardModal
-      cardClassName="w-full"
-      dialogContentClassName="w-[30vw] min-w-[400px]"
-      cardContentClassName="w-[30vw] min-w-[400px]"
-      dialogClassName="w-full"
-      content={
-        <DesktopBoostContent image={image} id={id} onComplete={() => {}} />
-      }
-    >
-      {children}
-    </DesktopCardModal>
+    <Dialog open={open} onOpenChange={setOpen} className={`!rounded-[1.5rem] `}>
+      <DialogTrigger asChild>
+        <div onClick={() => setOpen(true)}>{children}</div>
+      </DialogTrigger>
+      <DialogContent
+        className={`
+          p-0 bg-transparent  border-0
+          rounded-2xl xl:max-w-[29vw] backdrop-blur-lg 
+        `}
+      >
+        <motion.div layout transition={{ duration: 0.3 }}>
+          <AnimatePresence>
+            <Card
+              className={`
+            shadow-none !p-0 w-full
+            rounded-2xl  !bg-[#080808]/85 px-0 xl:max-w-[29vw] min-h-[50vh] 
+          `}
+            >
+              <CardContent className={`p-6 rounded-2xl `}>
+                <DesktopBoostContent
+                  image={image}
+                  id={id}
+                  onComplete={() => {
+                    setOpen(false);
+                  }}
+                />
+              </CardContent>
+            </Card>
+          </AnimatePresence>
+        </motion.div>
+      </DialogContent>
+    </Dialog>
   );
 }

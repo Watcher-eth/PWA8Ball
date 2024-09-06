@@ -15,6 +15,7 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { toast } from "sonner";
 import { DialogClose } from "@/components/ui/dialog";
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 
 export function RemoveLPConfirmationScreen(props: {
   setStep: (num: number) => void;
@@ -27,7 +28,7 @@ export function RemoveLPConfirmationScreen(props: {
   isDesktop?: boolean;
   amountLp: number;
 }) {
-  const { onClose } = props;
+  const { onClose, refetch } = props;
   const {
     smartAccountReady,
     smartAccountClient,
@@ -40,18 +41,34 @@ export function RemoveLPConfirmationScreen(props: {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { mutate: removeLP, isSuccess } = useRemoveLp();
+  const { mutate: removeLP, isPending, isSuccess, error } = useRemoveLp();
 
   const showToast = () => {
-    toast.success("Boost withdrawal successful!", {
-      icon: <CheckCircle />,
-      style: { backgroundColor: "#5ACE5A", color: "white" },
-    });
+    toast(
+      <div className="w-full rounded-full bg-[#101010] text-base font-[500] px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
+          <Check strokeWidth={4.5} className="text-green-400 h-[0.95rem]" />
+        </div>
+        Withdrawl Succesfull
+      </div>,
+      {
+        unstyled: true,
+
+        classNames: {
+          title: "text-red-400 text-2xl",
+          description: "text-red-400",
+          actionButton: "bg-zinc-400",
+          cancelButton: "bg-orange-400",
+          closeButton: "bg-lime-400",
+        },
+      }
+    );
   };
 
   async function userRemoveLP() {
     if (smartAccountReady) {
       try {
+        showToast();
         setLoading(true);
         if (userCon?.walletType === "smartwallet")
           removeLP({
@@ -71,10 +88,10 @@ export function RemoveLPConfirmationScreen(props: {
 
         setTimeout(() => setLoading(false), 500);
 
-        setSuccess(true);
-        showToast();
-
-        setTimeout(() => {}, 7000);
+        setTimeout(() => {
+          onClose();
+          refetch();
+        }, 11000);
       } catch (error) {
         console.error("Failed to withdraw boost:", error);
         alert("Failed to withdraw boost!");
@@ -140,7 +157,7 @@ export function RemoveLPConfirmationScreen(props: {
           </div>
         </div>
       </motion.div>
-      <div className="flex flex-row items-center gap-1.5  mt-8 w-full">
+      <div className="flex flex-row  items-center gap-3.5  mt-10 w-full">
         <DialogClose asChild>
           <motion.button
             onClick={() =>
@@ -149,60 +166,44 @@ export function RemoveLPConfirmationScreen(props: {
               }, 200)
             }
             whileTap={{ scale: 0.95 }}
-            className="mt-3 p-[0.75rem] rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none"
+            className={` px-6 h-12 rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none`}
           >
             <span className="text-[20px] text-[#D9D9D9] font-extrabold">
               Hold
             </span>
           </motion.button>
         </DialogClose>
-        <motion.button
-          onClick={() => {
-            success ? () => {} : userRemoveLP();
-          }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-3 flex flex-row ml-4 p-[0.7rem] rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
-        >
-          {loading ? (
+        {loading || success || isPending || isSuccess || error ? (
+          <TxStatusButton
+            isPending={isPending}
+            isSuccess={isSuccess}
+            height="h-12"
+            isError={error}
+            pendingText="Withdrawing"
+            successText="Success"
+            errorText="Withdrawl Failed"
+          />
+        ) : (
+          <motion.button
+            onClick={() => {
+              isSuccess ? () => {} : userRemoveLP();
+            }}
+            whileTap={{ scale: 0.95 }}
+            className=" flex flex-row ml-4 px-6 h-12 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-row items-center justify-center"
-            >
-              <span className="loader" />
-              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
-                Withdrawing
-              </span>
-            </motion.div>
-          ) : success ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-row items-center justify-center"
-            >
-              <div className="p-1 rounded-[19px] mr-1 bg-[#5ACE5A]">
-                <Check strokeWidth={5} color="white" size={15} />
-              </div>
-              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
-                Success
-              </span>
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-row items-center justify-center"
+              className="flex flex-row items-center w-1/2 justify-center"
             >
               <ArrowDown color="black" strokeWidth={3} height={23} />
               <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
                 Withdraw
               </span>
             </motion.div>
-          )}
-        </motion.button>
+          </motion.button>
+        )}
       </div>
     </div>
   );

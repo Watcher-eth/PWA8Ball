@@ -18,7 +18,7 @@ export function useCashOutPrediction() {
   const { approveToken } = useEightBallApproval();
 
   const { user: userCon } = useUserStore();
-  const { mutate: cashOut } = useCashout();
+  const { mutate: cashOut, isPending, isSuccess, error } = useCashout();
   const { client, address } = useClientAddress();
 
   async function cashOutPrediction({
@@ -88,5 +88,5 @@ export function useCashOutPrediction() {
     }
   }
 
-  return { cashOutPrediction, loading, success };
+  return { cashOutPrediction, loading: isPending, success: isSuccess, error };
 }

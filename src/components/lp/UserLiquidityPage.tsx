@@ -41,6 +41,7 @@ export function UserLiquidityPage() {
         <div className="pb-5">
           {filteredPositions.map((item, index: number) => (
             <LiquidityPosition
+              refetch={refetch}
               key={index}
               amount={item.amount / 10 ** 6}
               image={item.image}

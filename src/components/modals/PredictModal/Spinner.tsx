@@ -56,49 +56,51 @@ export function Spinner({
 
   return (
     <div className="relative flex justify-center items-center">
-      <motion.div
-        className="absolute flex justify-center items-center"
-        animate={controls}
-        initial={{ rotate: 0 }}
-        style={{ width: SIZE * 0.7, height: SIZE * 0.7 }}
-      >
-        <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
-          <circle
-            cx={SIZE / 2}
-            cy={SIZE / 2}
-            r={(SIZE - STROKE_WIDTH) / 2}
-            stroke={BACKGROUND_COLOR}
-            strokeWidth={STROKE_WIDTH}
-            fill="none"
-          />
-          <path
-            d={`
+      {!success && (
+        <motion.div
+          className="absolute flex justify-center items-center"
+          animate={controls}
+          initial={{ rotate: 0 }}
+          style={{ width: SIZE * 0.7, height: SIZE * 0.7 }}
+        >
+          <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
+            <circle
+              cx={SIZE / 2}
+              cy={SIZE / 2}
+              r={(SIZE - STROKE_WIDTH) / 2}
+              stroke={BACKGROUND_COLOR}
+              strokeWidth={STROKE_WIDTH}
+              fill="none"
+            />
+            <path
+              d={`
               M ${STROKE_WIDTH / 2}, ${SIZE / 2}
               a ${(SIZE - STROKE_WIDTH) / 2} ${
-              (SIZE - STROKE_WIDTH) / 2
-            } 0 1,0 ${SIZE - STROKE_WIDTH},0
+                (SIZE - STROKE_WIDTH) / 2
+              } 0 1,0 ${SIZE - STROKE_WIDTH},0
             `}
-            stroke={WHITE_COLOR}
-            strokeWidth={STROKE_WIDTH}
-            fill="none"
-            strokeLinecap="round"
-          />
-          <path
-            d={`
+              stroke={WHITE_COLOR}
+              strokeWidth={STROKE_WIDTH}
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d={`
               M ${STROKE_WIDTH / 2}, ${SIZE / 2}
               a ${(SIZE - STROKE_WIDTH) / 2} ${
-              (SIZE - STROKE_WIDTH) / 2
-            } 0 1,0 ${SIZE - STROKE_WIDTH},0
+                (SIZE - STROKE_WIDTH) / 2
+              } 0 1,0 ${SIZE - STROKE_WIDTH},0
             `}
-            stroke="none"
-            strokeWidth={STROKE_WIDTH + 2}
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="miter"
-            opacity={0.9}
-          />
-        </svg>
-      </motion.div>
+              stroke="none"
+              strokeWidth={STROKE_WIDTH + 2}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="miter"
+              opacity={0.9}
+            />
+          </svg>
+        </motion.div>
+      )}
       {success && (
         <motion.div
           className="absolute flex justify-center items-center"
@@ -110,10 +112,11 @@ export function Spinner({
             style={{
               width: SIZE * 0.85,
               height: SIZE * 0.85,
-              backgroundColor: SUCCESS_COLOR,
+              borderColor: SUCCESS_COLOR,
+              borderWidth: 2.5,
             }}
           >
-            <Check size={SIZE * 0.5} strokeWidth={5} color={WHITE_COLOR} />
+            <Check size={SIZE * 0.5} strokeWidth={4} color={SUCCESS_COLOR} />
           </div>
         </motion.div>
       )}
