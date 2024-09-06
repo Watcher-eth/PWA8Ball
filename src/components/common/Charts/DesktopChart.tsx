@@ -59,7 +59,7 @@ export function DesktopChart(props: {
 
   return (
     <div>
-      <div className="flex flex-row items-center space-x-3  mt-4">
+      <div className="flex flex-row items-center space-x-3 ">
         <div
           onClick={() => {
             props.onClose();

@@ -3,7 +3,7 @@
 import { DEFAULT_USER_ID } from "@/constants/testData";
 
 import { MobiTop } from "@/components/layouts/MobiTop";
-import { DesktopMarketPage } from "@/components/predictions/DesktopMarketPage";
+import { DesktopMarketPage } from "@/components/predictions/DesktopMarket";
 import {
   MobileMarketPage,
   WrappedMobileMarketPage,

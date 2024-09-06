@@ -4,7 +4,7 @@ import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembers
 import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { FeedCard } from "./FeedCard";
 import Link from "next/link";
-import { getTopicPath } from "@/utils/urls";
+import { ELECTIONS_PATH, getTopicPath } from "@/utils/urls";
 import { skeletonVariants } from "../ui/Skeleton";
 
 export function DesktopTrendingTopics({
@@ -38,7 +38,7 @@ export function DesktopTrendingTopics({
       <div className="flex flex-col pt-6 h-full">
         <Link
           href={{
-            pathname: topicId === "1" ? "/Elections" : getTopicPath(topicId),
+            pathname: topicId === "1" ? ELECTIONS_PATH : getTopicPath(topicId),
             query: {
               id: topicId,
               name: title,
@@ -66,7 +66,7 @@ export function DesktopTrendingTopics({
             <Link
               href={{
                 pathname:
-                  topicId === "1" ? "/Elections" : getTopicPath(topicId),
+                  topicId === "1" ? ELECTIONS_PATH : getTopicPath(topicId),
                 query: {
                   id: topicId,
                   name: title,

@@ -14,6 +14,8 @@ export const LEADERBOARD_PATH = "/leaderboard"
 
 export const SETTINGS_PATH = "/settings"
 
+export const ELECTIONS_PATH = "/elections" // "/Elections"
+
 export function getTopicPath(topicId: string) {
   return `/t/${topicId}` as const;
 }

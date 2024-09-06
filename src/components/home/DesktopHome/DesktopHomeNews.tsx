@@ -16,7 +16,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
           {amount === 4 && (
             <img src={"../images/OrbLogo.png"} className="h-11 w-11" />
           )}
-          <div className="">
+          <div>
             {amount === 4 ? "Breaking News" : "New Predictions"}
           </div>
         </div>

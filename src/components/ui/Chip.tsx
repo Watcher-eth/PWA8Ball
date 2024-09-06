@@ -8,7 +8,7 @@ export function Chip({
   return (
     <div
       className={`
-        bg-slate-400/10
+        bg-slate-400/5
         rounded-full ring-1 ring-white/10 px-3 py-1 backdrop-blur-xl ${className}
         items-center
       `}

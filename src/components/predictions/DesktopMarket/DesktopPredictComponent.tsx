@@ -16,9 +16,10 @@ import { DesktopChart } from "@/components/common/Charts/DesktopChart";
 import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
 import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal";
 
-import { CashoutConfirmScreen } from "./cashout/CashoutConfirmScreen";
-import { CashoutWarningScreen } from "./cashout/CashoutWarningScreen";
-import { CashoutOverview } from "./cashout/CashoutOverview";
+import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
+import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
+import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
+import { Card } from "@/components/ui/tailwind/Card";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -35,35 +36,28 @@ export function DesktopPredictComponent(props: {
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
   return (
-    <div
-      className={`
-        border  rounded-[1.5rem] border-white/10 text-white h-auto overflow-hidden
-      `}
-    >
+    <Card className="rounded-lg">
       <motion.div
         layout
         transition={{ duration: 0.2 }}
         className="relative bg-transparent"
       >
         <AnimatePresence>
-          {(step === 0 || step === 4) && (
-            <div>
-              <CardContent>
-                <DesktopChart userOwns={userOwns} {...props} />
-              </CardContent>
+          {step === 0 && (
+            <div className="text-xl font-semibold">
+              Predict on {title}
             </div>
           )}
-
           {step === 0 && (
-            <div className="flex flex-col w-full  -mt-6 py-4 md:px-6 px-6 gap-4">
+            <div className="flex flex-col w-full pt-4  gap-4">
               <Input
                 onChange={(e) => setAmount(Number(e.target.value))}
                 type="numeric"
                 placeholder="$0.00"
                 className={`
                     w-full font-semibold  rounded-md py-6 text-md border-none
-                    bg-slate-400/10 hover:bg-slate-400/20
-                    focus:!ring-white/30 focus:!ring-offset-0 focus:!ring-1
+                    bg-slate-400/5 hover:bg-slate-400/10
+                    focus:!ring-white/20 focus:!ring-offset-0 focus:!ring-1
                   `}
               />
               <div className="flex items-center justify-between z-2 gap-3 mt-0">
@@ -184,7 +178,7 @@ export function DesktopPredictComponent(props: {
           )}
         </AnimatePresence>
       </motion.div>
-    </div>
+    </Card>
   );
 }
 
@@ -296,9 +290,9 @@ function DesktopConfirmPrediction({
       )}
       <div
         className={`
-    flex items-center gap-2 px-7 mb-2 w-full
-    ${(loading || success) && "mt-[3.8rem]"}
-  `}
+          flex items-center gap-2 px-7 mb-2 w-full
+          ${(loading || success) && "mt-[3.8rem]"}
+        `}
       >
         {success ? (
           <div className="z-10 w-full">

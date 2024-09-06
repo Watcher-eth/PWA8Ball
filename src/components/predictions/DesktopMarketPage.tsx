@@ -18,7 +18,7 @@ import { CommentSection } from "@/components/predictions/CommentSection";
 import { BetDetails } from "@/components/predictions/BetDetails";
 import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 
-import { DesktopPredictComponent } from "./DesktopPredictComponent";
+import { DesktopPredictComponent } from "./DesktopMarket/DesktopPredictComponent";
 
 import { AlignLeft } from "lucide-react";
 import { DesktopBettersModal } from "./Betters/DesktopBettersModal";

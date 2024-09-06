@@ -12,6 +12,7 @@ import { MarketCard } from "./MarketCard";
 import { DesktopFooter } from "./DesktopFooter";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { ELECTIONS_PATH } from "@/utils/urls";
 
 export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
@@ -43,7 +44,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2 hover:scale-[100.5%] active:scale-99">
             Latest News
           </div>
-          <Link href={"/Elections"} className="flex items-center gap-1">
+          <Link href={ELECTIONS_PATH} className="flex items-center gap-1">
             <div className="text-[1.1rem] text-[gray] font-[Aeonik] space-x-2">
               See all latest news
             </div>
@@ -55,7 +56,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           feedDataArr={enrichedFeedData?.slice(4, 6)}
         />
         <Link
-          href={"/Elections"}
+          href={ELECTIONS_PATH}
           className="flex items-center justify-center gap-1 hover:scale-[100.5%] active:scale-99"
         >
           <div className="text-[1.2rem] text-[gray] font-[Aeonik] space-x-2">
