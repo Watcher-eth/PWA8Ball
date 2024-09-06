@@ -211,10 +211,10 @@ export function ActivityFieldMobile({
             className="h-[27px] w-[27px] object-cover rounded-[15px] absolute bottom-[-7px] left-[34px] border-[3px] border-[#080808]"
           />
           <div className="flex flex-col justify-start items-start -space-y-0.5  ">
-            <h3 className="text-[18px]  text-white ml-3 font-semibold">
+            <h3 className="text-[18px]  text-white ml-3 font-[AeonikBold]">
               {name}
             </h3>
-            <p className="text-[15.5px] text-[lightgray] font-normal overflow-hidden line-clamp-1 -ml-0.5 ">
+            <p className="text-[15.5px] text-[lightgray] font-[Aenik] overflow-hidden line-clamp-1 -ml-0.5 ">
               {question}
             </p>
           </div>
@@ -223,7 +223,7 @@ export function ActivityFieldMobile({
           <p
             className={`text-[14px] px-2 py-0 rounded-md ${
               option?.index === 0 ? "bg-[#FF0050]" : "bg-[#0067E1]"
-            } text-white font-semibold`}
+            } text-white font-[Aeonik]`}
           >
             {option?.name.length < 8
               ? option?.name

@@ -1,11 +1,4 @@
-import {
-  BatteryCharging,
-  CalendarClock,
-  Receipt,
-  X,
-} from "lucide-react";
-
-
+import { BatteryCharging, CalendarClock, Receipt, X } from "lucide-react";
 
 export function BoostExplainer({
   setOpen,
@@ -90,7 +83,7 @@ export function BoostExplainer({
             </h3>
             <p
               className={`
-                text-[15px] text-[lightgray] font-normal
+                text-[15px] text-[lightgray] font-[Aeonik]
                 self-start mb-2
               `}
             >
@@ -113,7 +106,7 @@ export function BoostExplainer({
             </h3>
             <p
               className={`
-                text-[15px] text-[lightgray] font-normal
+                text-[15px] text-[lightgray] font-[Aeonik]
                 self-start mb-2 pr-[1px]
               `}
             >

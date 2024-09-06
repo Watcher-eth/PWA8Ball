@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: "Aeonik"; /* Specify your preferred font name */
-  src: url("../../public/fonts/AeonikTRIAL-Regular.woff2") format("woff2");
+  src: url("../../public/fonts/AeonikMedium.woff2") format("woff2");
   /* Adjust the path to your font file as needed */
   font-weight: bold;
   font-style: normal;

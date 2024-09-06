@@ -140,7 +140,7 @@ export function RemoveLPConfirmationScreen(props: {
         </div>
         <div className="flex flex-col p-3.5 rounded-[15px] mt-4 bg-[#1C1C1C]">
           <div className="flex flex-row items-center mb-2.5 justify-between">
-            <span className="text-[16.5px] text-[lightgray] font-normal">
+            <span className="text-[16.5px] text-[lightgray] font-[Aeonik]">
               Now
             </span>
             <span className="text-[16.5px] text-[lightgray] font-normal">
@@ -148,10 +148,10 @@ export function RemoveLPConfirmationScreen(props: {
             </span>
           </div>
           <div className="flex flex-row items-center justify-between">
-            <span className="text-[20px] text-white font-medium">
+            <span className="text-[20px] text-white font-[Aeonik]">
               After Resolution
             </span>
-            <span className="text-[20px] text-white font-medium">
+            <span className="text-[20px] text-white font-[Aeonik]">
               {(props.points * 3).toFixed(0)} $Cred
             </span>
           </div>
@@ -168,7 +168,7 @@ export function RemoveLPConfirmationScreen(props: {
             whileTap={{ scale: 0.95 }}
             className={` px-6 h-12 rounded-full bg-[#1C1C1C] w-1/2 flex items-center justify-center border-none`}
           >
-            <span className="text-[20px] text-[#D9D9D9] font-extrabold">
+            <span className="text-[20px] text-[#D9D9D9] font-semibold">
               Hold
             </span>
           </motion.button>
@@ -198,7 +198,7 @@ export function RemoveLPConfirmationScreen(props: {
               className="flex flex-row items-center w-1/2 justify-center"
             >
               <ArrowDown color="black" strokeWidth={3} height={23} />
-              <span className="text-[20px] text-[#1D1D1D] font-extrabold ml-0.5">
+              <span className="text-[20px] text-[#1D1D1D] font-semibold ml-0.5">
                 Withdraw
               </span>
             </motion.div>

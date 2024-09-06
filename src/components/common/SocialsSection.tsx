@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { Twitter } from "lucide-react";
 
-
 export function SocialsSection({ twitter, farcaster }) {
   let username;
   let icon;
@@ -19,7 +18,7 @@ function SocialDisplayBlock({ username, icon }) {
   return (
     <div className="flex items-center font-medium">
       {icon}
-      <p className="text-gray-200 text-md ml-1 font-medium">@{username}</p>
+      <p className="text-gray-200 text-md ml-1 font-[Aeonik]">@{username}</p>
     </div>
   );
 }

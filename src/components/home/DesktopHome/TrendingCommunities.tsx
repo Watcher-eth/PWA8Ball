@@ -11,7 +11,7 @@ export function TrendingCommunities() {
 
   return (
     <div className=" flex flex-col w-full">
-      <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
+      <div className="text-[1.8rem] text-white font-[600] mb-7 space-x-2">
         Popular Communities
       </div>
       <div className="flex flex-row space-x-7">
@@ -59,11 +59,11 @@ function TrendingCommunityItem({
           className="inset-0 object-cover w-20 h-20 rounded-lg"
         />
 
-        <h2 className="text-4xl font-bold mb-6 mt-4">{title}</h2>
+        <h2 className="text-5xl font-[Aeonik-Bold] mb-6 mt-4">{title}</h2>
 
         <div className="flex justify-center space-x-3 px-3 lg:px-0 lg:mt-12">
           <div className="text-center flex flex-col items-center -space-y-0">
-            <p className="text-lg font-semibold">Members</p>
+            <p className="text-lg font-[Aeonik-Bold]">Members</p>
             <div className="flex items-center justify-center space-x-2 mt-2">
               <p className="text-2xl font-bold">33</p>
               <div className="flex -space-x-1">
@@ -87,7 +87,7 @@ function TrendingCommunityItem({
           </div>
           <div className="h-full py-1 w-px bg-white/20" />
           <div className="text-center flex flex-col items-center -space-y-0">
-            <p className="text-lg font-semibold">Live Predictions</p>
+            <p className="text-lg font-[Aeonik-Bold]">Live Predictions</p>
             <div className="flex items-center mt-2 space-x-2 justify-cemterr">
               <p className="text-2xl font-bold ">8</p>
               <div className="relative flex items-center  ">
@@ -110,7 +110,7 @@ function TrendingCommunityItem({
           </div>
           <div className="h-full py-1 w-px bg-white/20" />
           <div className="text-center flex flex-col items-center -space-y-0">
-            <p className="text-lg font-semibold">Total Stake</p>
+            <p className="text-lg font-[Aeonik-Bold]">Total Stake</p>
             <p className="text-2xl font-bold mt-2">$278,345.00</p>
           </div>
         </div>

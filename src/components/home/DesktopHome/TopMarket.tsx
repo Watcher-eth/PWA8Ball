@@ -48,7 +48,7 @@ export function TopMarket() {
         <div className="text-white text-3xl mt-6 font-semibold">
           {enhancedMarket?.title}
         </div>
-        <div className="text-[lightgray] mt-2 text-lg font-normal">
+        <div className="text-[lightgray] mt-2 text-lg font-[Aeonik]">
           {enhancedMarket?.question}
         </div>
         <div className="flex pt-2 space-x-2">
@@ -72,14 +72,14 @@ export function TopMarket() {
           </Chip>
         </div>
 
-        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-medium"></div>
+        <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[Aeonik]"></div>
       </div>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
         <div className="text-[gray] text-md font-normal">
           {enhancedMarket?.title}
         </div>
         <div className="flex flex-row justify-between items-center">
-          <div className="text-3xl font-medium my-1 text-white">
+          <div className="text-3xl font-[Aeonik] my-1 text-white">
             {enhancedMarket?.outcomeOddsA / 100}%{" "}
             {enhancedMarket?.outcomeA !== "Yes"
               ? enhancedMarket?.outcomeA

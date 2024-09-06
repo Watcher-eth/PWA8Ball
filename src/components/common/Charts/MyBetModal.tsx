@@ -145,10 +145,10 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       <div className="flex flex-row items-center justify-between pb-1">
-        <span className="text-base text-white/70 font-medium">
+        <span className="text-base text-white/70 font-[Aeonik]">
           {props.title}
         </span>
-        <span className="text-base text-white/80 font-medium">
+        <span className="text-base text-white/80 font-[Aeonik]">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
@@ -251,7 +251,7 @@ export const MobileMyBetModal = (props: {
           ) : (
             <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
           )}
-          <span className="text-[20px] text-[#D9D9D9] font-bold">
+          <span className="text-[20px] text-[#D9D9D9] font-[Aeonik-Bold]">
             {props?.resolved
               ? "Redeem"
               : props.isExternal
@@ -266,7 +266,7 @@ export const MobileMyBetModal = (props: {
           className="mt-2.5  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
           <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
-          <span className="text-[20px] text-[#1D1D1D] font-bold ml-[3px]">
+          <span className="text-[20px] text-[#1D1D1D] font-[Aeonik-Bold] ml-[3px]">
             Details
           </span>
         </motion.div>

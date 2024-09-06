@@ -21,16 +21,15 @@ export function DesktopFooter() {
                 Glimpse
               </div>
             </div>
-            <div className="text-[lightgray] font-normal mt-3 text-base">
+            <div className="text-[lightgray] font-[Aeonik] mt-3 text-base">
               {/*Destiny is no matter of chance. It is a matter of choice.*/}
             </div>
-            <div className="text-[lightgray] font-normal text-base">
+            <div className="text-[lightgray] font-[Aeonik] text-base">
               {/* It is not a thing to be waited for, it is a thing to be achieved. */}
-              There is no fate but what you make
+              The future is not a destination. It's a journey.
             </div>
-            <div className="text-[gray] font-normal mt-1 text-[0.85rem]">
-              {/* -William Jennings Bryan{" "} */}
-              - Sarah Conner
+            <div className="text-[gray] font-[Aeonik] mt-1 text-[0.85rem]">
+              {/* -William Jennings Bryan{" "} */}- Wise guy
             </div>
           </div>
           <div className="flex flex-row w-1/2 space-x-12 justify-end mt-1">
@@ -92,7 +91,7 @@ function FooterLink({
   return (
     <Link
       href={href ?? ""}
-      className={`text-[lightgray] font-normal  text-base ${className}`}
+      className={`text-[lightgray] hover:scale-102 active:scale-98 font-[Aeonik]  text-base ${className}`}
     >
       {label}
       {children}

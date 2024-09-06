@@ -16,7 +16,7 @@ export function FeaturedMarketsSection({ markets, topic }) {
   return (
     <div className="flex flex-col w-full">
       {!topic && (
-        <div className="text-[1.8rem] text-white font-[Aeonik-Bold] mb-7 space-x-2">
+        <div className="text-[1.8rem] text-white font-[600] mb-7 space-x-2">
           Trending Today
         </div>
       )}

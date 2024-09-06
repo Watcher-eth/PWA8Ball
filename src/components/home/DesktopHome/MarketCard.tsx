@@ -63,7 +63,7 @@ export function MarketCard({
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3 w-full">
           <div className="flex items-center w-full justify-between">
-            <div className="text-white text-[1.6rem] font-semibold">
+            <div className="text-white text-[1.6rem] font-[Aeonik-Bold]">
               {item?.title}
             </div>
             <div
@@ -75,7 +75,7 @@ export function MarketCard({
               {item?.outcomeA === "Yes" ? "Chance" : item?.outcomeA}
             </div>
           </div>
-          <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-normal">
+          <div className="text-[lightgray] max-w-[100%] text-[1.1rem] font-[Aeonik]">
             {item?.question}
           </div>
         </div>
