@@ -39,7 +39,7 @@ export function ConfirmPrediction(props: {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full bg-[#090909] py-4 pt-0 mt-5 rounded-lg min-h-[685px]">
+    <div className="flex flex-col items-center w-full bg-[#090909] py-4 pt-0 mt-5 rounded-lg min-h-[485px]">
       <motion.div className="flex flex-col items-center w-full bg-[#090909] px-6  rounded-lg">
         <div className="flex flex-col w-full my-2 mt-0">
           <img
