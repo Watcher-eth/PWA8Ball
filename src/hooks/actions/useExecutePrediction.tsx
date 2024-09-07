@@ -18,7 +18,7 @@ export function useExecutePrediction() {
   const referralId = useReferralStore((state) => state.referralId);
   const router = useRouter();
   const { user: userCon } = useUserStore();
-  const { mutate: predictV2, error, isPending, isSuccess } = usePredictV2();
+  const { mutate: predictV2, isError, isPending, isSuccess } = usePredictV2();
   const { client, address, walletType } = useClientAddress();
   const { approveToken, allowance } = useEightBallApproval();
 
@@ -44,8 +44,11 @@ export function useExecutePrediction() {
       if (!address) {
         throw new Error("Address is required");
       }
-      const biAmount = BigInt(Number(amount.toFixed(4)) * 1000000)
-      if (walletType === "smartwallet") && (!allowance || allowance < biAmount)) {
+      const biAmount = BigInt(Number(amount.toFixed(4)) * 1000000);
+      if (
+        (walletType === "smartwallet" && !allowance) ||
+        allowance < biAmount
+      ) {
         approveToken();
       }
       //TODO: Referall pass in once redeploy
@@ -86,12 +89,17 @@ export function useExecutePrediction() {
         9000
       );
       //   }
-    } catch (error) {
-      console.error("Failed to make prediction:", error);
+    } catch (isError) {
+      console.error("Failed to make prediction:", isError);
       toast.error("Failed to make prediction!");
       setLoading(false);
     }
   }
 
-  return { executePrediction, loading: isPending, success: isSuccess, error };
+  return {
+    executePrediction,
+    loading: isPending,
+    success: isSuccess,
+    error: isError,
+  };
 }
