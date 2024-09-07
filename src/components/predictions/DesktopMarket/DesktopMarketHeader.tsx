@@ -17,7 +17,7 @@ import { CommentSection } from "@/components/predictions/CommentSection";
 import { BetDetails } from "@/components/predictions/BetDetails";
 import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 
-import { DesktopPredictComponent } from "./DesktopPredictComponent";
+import { DesktopPredictComponent } from "../DesktopPredictComponent";
 
 import { AlignLeft, Users } from "lucide-react";
 
@@ -90,21 +90,6 @@ export function DesktopMarketHeader({
               </Chip>
             </div>
           </div>
-          {/* <BetDetails
-            endDate={"12th September, 2024"}
-            icon={topic_image}
-            multiplier={2}
-            topicId={topic_id}
-            members={members}
-            handleBoost={() => {}}
-            joined={false}
-            question={topic_description}
-            image={image}
-            topic={topic_title}
-            id={id}
-            isDesktop={true}
-          />
-          <RulesCollapsible /> */}
         </div>
       </Col>
     </Grid>

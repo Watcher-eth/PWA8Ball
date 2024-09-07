@@ -45,11 +45,6 @@ export function BetDetails({
         title="End Date"
         subtitle={`${fullDay} ${fullMonth}, ${year}`}
       />
-      <DetailRow
-        icon={<Gift color="white" strokeWidth={2.5} size={34} />}
-        title="Rewards"
-        subtitle={`${multiplier.toFixed(1)}x $Cred Bonus`}
-      />
       <BoostDetail
         id={id}
         image={image}

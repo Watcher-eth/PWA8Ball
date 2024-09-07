@@ -38,7 +38,7 @@ export function DesktopChart(props: {
   //   timeframe
   // );
 
-  const { data: prices2 } = useGetPricesForMarket(props?.id);
+  const { data: prices2 } = useGetPricesForMarket(props?.id, timeframe);
 
   const userOutcome = props?.optionNumber;
   const { currentPrices, percentageDifference } = processPrices(

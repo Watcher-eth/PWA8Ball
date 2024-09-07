@@ -93,7 +93,7 @@ export function DesktopLoadingPrediction({
       <motion.img
         src={image}
         alt="Prediction"
-      
+
         className="rounded-md w-full h-[80%]  overflow-hidden absolute  object-cover  "
       />
       <motion.div className=" w-full h-[100%] absolute backdrop-blur-xl " />
@@ -149,13 +149,14 @@ export function DesktopLoadingPrediction({
 function useLoadingAnimationControls() {
   const controls = useAnimation();
   async function sequence() {
-    await controls.start({
+
+    await controls?.start({
       height: 100,
       width: 100,
       transition: { type: "spring", damping: 20, stiffness: 100 },
     });
-    await controls.start({ opacity: 1, transition: { delay: 0.3 } });
-    await controls.start({ opacity: 1, transition: { delay: 0.6 } });
+    await controls?.start({ opacity: 1, transition: { delay: 0.3 } });
+    await controls?.start({ opacity: 1, transition: { delay: 0.6 } });
   }
 
   useEffect(() => {

@@ -9,16 +9,9 @@ import {
   Stars,
   User2,
 } from "lucide-react";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
 import { useRouter } from "next/router";
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { chartConfig } from "./DesktopChart";
+
 import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
 import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
 import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
@@ -57,7 +50,7 @@ export const MobileMyBetModal = (props: {
   openCashout: () => void;
   handleReceipt: () => void;
   setStep: (num: number) => void;
-  
+
 }) => {
   const [timeframe, setTimeframe] = useState("1M");
 

@@ -2,41 +2,41 @@
 
 import { useMutation } from "@tanstack/react-query";
 
-import { EightballV1ABI } from "../contracts/Eightball";
+import { EightballV1ABI } from "@/lib/onchain/contracts/Eightball";
 import { rpcClient } from "@/lib/onchain/rpcClient";
 import { WalletClient, getContract, Address } from "viem";
 import { SmartAccountClient } from "permissionless";
-import { addLiquidityBoost } from "@/supabase/mutations/addLiquidityBoost";
-import { supabase } from "@/supabase/supabaseClient";
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
 
-interface BoostMarket {
-  amount: number;
-  userId: string;
+
+async function boostV2({
+  amount,
+  marketId,
+  client,
+}: {
+  amount: bigint;
   marketId: number;
   client: SmartAccountClient;
-  address: Address;
-}
-
-async function boostV2(props: BoostMarket) {
-  if (!props.amount || !props.marketId) {
+}) {
+  if (!amount || !marketId) {
     throw new Error("All fields must be provided");
   }
   try {
     const contract = getContract({
       abi: EightballV1ABI,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-      client: { public: props.client, wallet: props.client },
+      client: { public: rpcClient, wallet: client },
     });
-
     // Boost the market
     const hash = await contract.write.addLiquidity([
-      BigInt(props.amount),
-      BigInt(props.marketId),
+      BigInt(amount),
+      BigInt(marketId),
     ]);
+    return hash
     // console.log("hash", hash);
   } catch (error) {
     console.error("Error during market boost", error);
+    console.log("Error", error);
     throw error; // Rethrow the error after logging it
   }
 }

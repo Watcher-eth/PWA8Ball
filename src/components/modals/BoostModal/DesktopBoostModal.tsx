@@ -85,15 +85,15 @@ export function DesktopBoostModal({
       <DialogContent
         className={`
           p-0 bg-transparent  border-0
-          rounded-2xl xl:max-w-[29vw] backdrop-blur-lg 
+          rounded-2xl xl:max-w-[29vw] backdrop-blur-lg
         `}
       >
         <motion.div layout transition={{ duration: 0.3 }}>
           <AnimatePresence>
             <Card
               className={`
-            shadow-none !p-0 w-full
-            rounded-2xl  !bg-[#080808]/85 px-0 xl:max-w-[29vw] min-h-[50vh] 
+            shadow-none !p-0 w-full border-white/10
+            rounded-2xl  !bg-[#080808]/85 px-0 xl:max-w-[29vw] min-h-[50vh]
           `}
             >
               <CardContent className={`p-6 rounded-2xl `}>

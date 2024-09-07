@@ -13,19 +13,18 @@ export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const { user: userCon } = useUserStore();
   const { mutate: boostV2 } = useBoostMarket2();
   const { client, address } = useClientAddress();
-  const { approveToken } = useEightBallApproval();
+  const { approveToken, allowance } = useEightBallApproval();
   const userBalance = useUserUsdcBalance();
 
   async function executeBoost({ id, amount }: { id: number; amount: number }) {
     setLoading(true);
 
     try {
-      const userBalanceNum = Number(userBalance) / 1000000;
-      const hasBalance = userBalanceNum > amount;
-      console.log("Compare", userBalanceNum, amount);
+      const biAmount = BigInt(Number(amount) * 1000000);
+      const hasBalance = userBalance && (userBalance > biAmount);
+      console.log("Compare", userBalance, biAmount);
       if (!hasBalance) {
         throw new Error("Insufficient balance to boost the market.");
       }
@@ -34,14 +33,16 @@ export function useExecuteBoost() {
         throw new Error("Address is required");
       }
 
-      approveToken();
+      console.log("got here");
+      if (!allowance || allowance < biAmount) {
+        await approveToken();
+      }
 
-      boostV2({
-        userId: userCon?.external_auth_provider_user_id!,
+
+      await boostV2({
         marketId: id,
-        amount: amount * 1000000,
+        amount: biAmount,
         client,
-        address,
       });
 
       toast(

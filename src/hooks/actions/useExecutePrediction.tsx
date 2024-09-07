@@ -20,7 +20,7 @@ export function useExecutePrediction() {
   const { user: userCon } = useUserStore();
   const { mutate: predictV2, error, isPending, isSuccess } = usePredictV2();
   const { client, address } = useClientAddress();
-  const { approveToken } = useEightBallApproval();
+  const { approveToken, allowance } = useEightBallApproval();
 
   async function executePrediction({
     amount,
@@ -44,19 +44,18 @@ export function useExecutePrediction() {
       if (!address) {
         throw new Error("Address is required");
       }
-
-      approveToken();
+      const biAmount = BigInt(Number(amount.toFixed(4)) * 1000000)
+      if ( !allowance || (allowance < biAmount)) {
+        approveToken();
+      }
       //TODO: Referall pass in once redeploy
       const res = predictV2({
         client,
-        address,
-        userId: userCon?.externalAuthProviderUserId!,
         marketId,
-        amount: Number(amount.toFixed(4)) * 1000000,
+        amount: biAmount,
         preferYes: Number(option) === 1 ? false : true,
-        option: options[Number(option) - 1],
-        isBuy: true,
       });
+      console.log({ res });
       router?.prefetch(getProfilePath(userCon?.walletAddress!));
       setLoading(false);
 
