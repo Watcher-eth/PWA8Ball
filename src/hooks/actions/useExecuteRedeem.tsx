@@ -12,7 +12,7 @@ export function useExecuteRedeem() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const { mutate: redeem } = useRedeem();
+  const { mutate: redeem, isPending, isSuccess, isError } = useRedeem();
   const { client, address } = useClientAddress();
   const { approveToken } = useEightBallApproval();
   const userBalance = useUserUsdcBalance();
@@ -82,5 +82,10 @@ export function useExecuteRedeem() {
     }
   }
 
-  return { executeRedeem, loading, success };
+  return {
+    executeRedeem,
+    loading: isPending,
+    success: isSuccess,
+    error: isError,
+  };
 }

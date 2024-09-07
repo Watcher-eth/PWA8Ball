@@ -18,7 +18,7 @@ export function useCashOutPrediction() {
   const { approveToken } = useEightBallApproval();
 
   const { user: userCon } = useUserStore();
-  const { mutate: cashOut, isPending, isSuccess, error } = useCashout();
+  const { mutate: cashOut, isPending, isSuccess, isError } = useCashout();
   const { client, address, walletType } = useClientAddress();
 
   async function cashOutPrediction({
@@ -33,7 +33,6 @@ export function useCashOutPrediction() {
     options: string[];
   }) {
     setLoading(true);
-    console.log("params", points);
     try {
       if (!address) {
         throw new Error("Address is required");
@@ -81,12 +80,17 @@ export function useCashOutPrediction() {
           pathname: getProfilePath(userCon?.walletAddress),
         });
       }, 6500);
-    } catch (error) {
-      console.error("Failed to cash out:", error);
+    } catch (isError) {
+      console.error("Failed to cash out:", isError);
       toast.error("Failed to cash out!");
       setLoading(false);
     }
   }
 
-  return { cashOutPrediction, loading: isPending, success: isSuccess, error };
+  return {
+    cashOutPrediction,
+    loading: isPending,
+    success: isSuccess,
+    error: isError,
+  };
 }

@@ -13,7 +13,7 @@ export function useExecuteBoost() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const { mutate: boostV2 } = useBoostMarket2();
+  const { mutate: boostV2, isError, isSuccess, isPending } = useBoostMarket2();
   const { client, address } = useClientAddress();
   const { approveToken, allowance } = useEightBallApproval();
   const userBalance = useUserUsdcBalance();
@@ -23,7 +23,7 @@ export function useExecuteBoost() {
 
     try {
       const biAmount = BigInt(Number(amount) * 1000000);
-      const hasBalance = userBalance && (userBalance > biAmount);
+      const hasBalance = userBalance && userBalance > biAmount;
       console.log("Compare", userBalance, biAmount);
       if (!hasBalance) {
         throw new Error("Insufficient balance to boost the market.");
@@ -38,7 +38,6 @@ export function useExecuteBoost() {
         await approveToken();
       }
 
-
       await boostV2({
         marketId: id,
         amount: biAmount,
@@ -48,7 +47,7 @@ export function useExecuteBoost() {
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
-          <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
+            <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
           </div>
           Boosted successfully!
         </div>,
@@ -68,12 +67,17 @@ export function useExecuteBoost() {
         setSuccess(true);
         router.push({ pathname: `/lp` });
       }, 8500);
-    } catch (error) {
-      console.error("Failed to boost market:", error);
+    } catch (isError) {
+      console.error("Failed to boost market:", isError);
       toast.error("Failed to boost market!");
       setLoading(false);
     }
   }
 
-  return { executeBoost, loading, success };
+  return {
+    executeBoost,
+    loading: isPending,
+    success: isSuccess,
+    error: isError,
+  };
 }
