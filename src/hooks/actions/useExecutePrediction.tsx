@@ -19,7 +19,7 @@ export function useExecutePrediction() {
   const router = useRouter();
   const { user: userCon } = useUserStore();
   const { mutate: predictV2, error, isPending, isSuccess } = usePredictV2();
-  const { client, address } = useClientAddress();
+  const { client, address, walletType } = useClientAddress();
   const { approveToken, allowance } = useEightBallApproval();
 
   async function executePrediction({
@@ -45,7 +45,7 @@ export function useExecutePrediction() {
         throw new Error("Address is required");
       }
       const biAmount = BigInt(Number(amount.toFixed(4)) * 1000000)
-      if ( !allowance || (allowance < biAmount)) {
+      if (walletType === "smartwallet") && (!allowance || allowance < biAmount)) {
         approveToken();
       }
       //TODO: Referall pass in once redeploy

@@ -7,6 +7,7 @@ import type { WalletClient, Address } from "viem";
 type ClientAndAddress = {
   client: WalletClient;
   address: Address;
+  walletType?: "smartwallet" | "eoa"
 };
 
 export function useClientAddress() {
@@ -33,6 +34,7 @@ export function useClientAddress() {
   return {
     client,
     address,
+    walletType: userCon?.walletType,
   } as ClientAndAddress;
 
 }

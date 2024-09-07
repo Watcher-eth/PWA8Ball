@@ -19,7 +19,7 @@ export function useCashOutPrediction() {
 
   const { user: userCon } = useUserStore();
   const { mutate: cashOut, isPending, isSuccess, error } = useCashout();
-  const { client, address } = useClientAddress();
+  const { client, address, walletType } = useClientAddress();
 
   async function cashOutPrediction({
     points,
