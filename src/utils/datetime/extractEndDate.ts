@@ -1,7 +1,6 @@
-
 export function parseAndFormatDate(dateString: string) {
   // Step 1: Remove the commas and split by spaces
-  const parts = dateString.replace(",", "").split(" ");
+  const parts = dateString?.replace(",", "").split(" ");
 
   // Assuming the format is always "day month, year"
   let day = parts[0];
@@ -29,3 +28,22 @@ export const formatDateWithMilliseconds = (date: Date) => {
 
   return `${year}-${month}-${day} ${hour}:${minute}:${second}.${milliseconds}000`; // Appending '000' to simulate microseconds
 };
+
+export function formatUnixTimestamp(unixTimestamp: number) {
+  // Convert to milliseconds by multiplying by 1000
+  const date = new Date(unixTimestamp * 1000);
+
+  // Format the date options
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long", // Full month name (e.g., "April")
+    day: "numeric", // Day of the month
+    hour: "numeric", // Hour (12-hour format)
+    minute: "numeric", // Minutes
+    second: "numeric", // Seconds
+    hour12: true, // Use 12-hour format
+  };
+
+  // Format the date using toLocaleDateString
+  return date.toLocaleString("en-US", options);
+}

@@ -31,6 +31,9 @@ import { HARD_TOPICS } from "@/constants/topics";
 import { useCheckReferral } from "@/hooks/useCheckReferral";
 import { DesktopMarketHeader } from "./DesktopMarketHeader";
 import { DesktopChartCard } from "./DesktopChartCard";
+import { MarketMetadata } from "../BetDetails/MarketMetadata";
+import { shortenAddress } from "@/utils/address/shortenAddress";
+import { StatusBlock } from "../BetDetails/MarketStatus";
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore();
@@ -62,8 +65,8 @@ export function DesktopMarketPage({ users, market, id }) {
                 backdrop-blur-lg absolute bottom-0
               `}
             />
-            <InverseBleedOverlay>
-              <div className="flex absolute top-8">
+            {/* <InverseBleedOverlay>
+              <div className="flex absolute top-14">
                 <img
                   className={` mt-10
                   size-28 md:size-32 lg:size-36 xl:size-40
@@ -80,13 +83,13 @@ export function DesktopMarketPage({ users, market, id }) {
                   />
                 </div>
               </div>
-            </InverseBleedOverlay>
+            </InverseBleedOverlay> */}
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
       <div className="w-full h-full overflow-y-auto flex flex-col">
         <div>
-          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-2">
+          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-7">
             <Col xs={4} lg={5}>
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
               <div className="py-4">
@@ -100,7 +103,7 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
             <Col xs={4} lg={3}>
-              <div className="xl:px-4 pb-1">
+              <div className="xl:px-4 border-none  pb-1">
                 <DesktopPredictComponent
                   id={id}
                   question={enhancedMarket?.question}
@@ -121,9 +124,15 @@ export function DesktopMarketPage({ users, market, id }) {
                   topic={enhancedMarket?.topic_title}
                 />
               </div>
+
               <div className="flex flex-col py-4">
+                <MarketMetadata
+                  creator={shortenAddress(market?.userAddress)}
+                  usdcStake={market?.usdcStake}
+                  length={users?.length}
+                  users={userImages}
+                />
                 <BetDetails
-                  endDate={"12th September, 2024"}
                   icon={enhancedMarket?.topic_image}
                   multiplier={2}
                   topicId={enhancedMarket?.topic_id}
@@ -136,9 +145,18 @@ export function DesktopMarketPage({ users, market, id }) {
                   id={id}
                   isDesktop={true}
                 />
-                <RulesCollapsible />
+                <StatusBlock
+                  creator={market?.userAddress}
+                  endDate={"12th September, 2024"}
+                  createdAt={market?.createdAt}
+                  resolved={market?.resolved}
+                  outcome={market?.outcome}
+                  resolvedAt={market?.resolvedAt}
+                  proposedOutcome={market?.proposedOutcome}
+                  proposedAt={market?.proposedAt}
+                />
               </div>
-              <div className="mx-4 mt-2 rounded-lg">
+              <div className="mx-4 -mt-2 rounded-lg">
                 <RelatedMarkets
                   isDesktop={true}
                   topicId={enhancedMarket?.topic_id}

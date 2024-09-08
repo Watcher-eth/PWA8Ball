@@ -22,35 +22,14 @@ export function BetDetails({
   isDesktop,
 }) {
   const { user } = useUserStore();
-  const { day, month, year, fullMonth, fullDay } = parseAndFormatDate(endDate);
   const {
     data: positions,
     isLoading,
     refetch,
   } = useGetLPForUser(user?.walletaddress);
 
-
-
   return (
-    <div className="flex flex-col w-full p-4 pb-2 mb-2 space-y-2">
-      <DetailRow
-        icon={
-          <>
-            <span className="text-xs font-bold text-[#FF0050]">{month}</span>
-            <span className="text-3xl font-bold mt-[-3] text-white">
-              {day}
-            </span>
-          </>
-        }
-        title="End Date"
-        subtitle={`${fullDay} ${fullMonth}, ${year}`}
-      />
-      <BoostDetail
-        id={id}
-        image={image}
-        isDesktop={isDesktop}
-        handleBoost={handleBoost}
-      />
+    <div className="flex flex-col w-full p-4 px-3.5 pb-2 mb-2 space-y-2">
       <TopicInfoDetail
         topicId={topicId}
         topic={topic}
@@ -59,8 +38,12 @@ export function BetDetails({
         members={members}
         joined={joined}
       />
+      <BoostDetail
+        id={id}
+        image={image}
+        isDesktop={isDesktop}
+        handleBoost={handleBoost}
+      />
     </div>
   );
-};
-
-
+}

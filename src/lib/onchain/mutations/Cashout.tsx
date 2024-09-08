@@ -63,7 +63,7 @@ async function cashoutPrediction(props: CashoutParams) {
     });
 
     const preferYesNum = !props.preferYes ? 1 : 0;
-
+    console.log("ownedTokens", props?.ownedTokens);
     const hash = await contract.write.cashOut([
       BigInt(props.ownedTokens),
       preferYesNum,

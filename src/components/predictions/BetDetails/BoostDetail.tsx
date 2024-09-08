@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Rocket } from "lucide-react";
+import { Plus, Rocket } from "lucide-react";
 import { MobileBoostModal } from "@/components/modals/BoostModal/MobileBoostModal";
 import { DesktopBoostModal } from "@/components/modals/BoostModal/DesktopBoostModal";
 import { BoostExplainerModal } from "@/components/modals/BoostExplainerModal";
@@ -23,25 +23,17 @@ export function BoostDetail({
       <BoostModalComponent image={image} id={id}>
         <div
           className={`
-            flex flex-row w-full items-center justify-between flex-grow
-            p-2 border border-white/10 hover:border-white/20
+            flex flex-row w-full rounded-md mt-3 items-center justify-between flex-grow
+            p-1 border border-white/10 hover:border-white/20
              rounded-[12px]
              active:scale-98 transition-all
             cursor-pointer
         `}
           onClick={isDesktop ? () => {} : handleBoost}
         >
-          <div className="flex flex-row space-x-4 items-center pl-2">
-            <Rocket size={30} color="white" />
-            <div className="flex flex-col ml-[-28px] space-y-[-0.1rem] items-start">
-              <span className="text-lg font-bold text-white">
-                Boost this market
-              </span>
-              <span className="text-sm text-white">Earn fees & $Cred</span>
-            </div>
-          </div>
-          <div className="flex items-center justify-center px-4 py-2 border border-[#212121] rounded-full">
-            <span className="text-md font-bold text-white">Boost</span>
+          <div className="flex items-center justify-center px-4 w-full py-2 gap-2  rounded-full">
+            <Plus strokeWidth={4} size={20} color="white" />
+            <span className="text-lg font-bold text-white">Boost</span>
           </div>
         </div>
       </BoostModalComponent>

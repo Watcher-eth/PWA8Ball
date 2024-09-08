@@ -128,7 +128,7 @@ export function DesktopChart(props: {
         </div>
       </div>
 
-      <div className="h-[25vh] min-h-[280px] pb-2 pt-2">
+      <div className="h-[40vh] min-h-[280px] pb-2 pt-2">
         <GenericAreaChart
           domain={[
             minMax.min - (minMax.max - minMax.min) / 4,

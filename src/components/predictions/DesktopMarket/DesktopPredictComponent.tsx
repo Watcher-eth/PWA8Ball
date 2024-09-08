@@ -39,16 +39,20 @@ export function DesktopPredictComponent(props: {
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
   return (
-    <Card className="rounded-lg">
+    <div
+      className={`rounded-lg ${
+        step === 0 || 4 ? " p-4 pt-1" : "border-[0.1rem] border-[#141414]"
+      } border-[0.1rem] border-[#141414]`}
+    >
       <motion.div
         layout
         transition={{ duration: 0.2 }}
-        className="relative bg-transparent"
+        className="relative bg-transparent  "
       >
         <AnimatePresence>
-          {step === 0 && (
-            <div className="text-xl font-semibold">Predict on {title}</div>
-          )}
+          {step === 0 || step === 4 ? (
+            <div className="flex text-[1.5rem] font-[500] flex-row items-center gap-3"></div>
+          ) : null}
           {step === 0 && (
             <div className="flex flex-col w-full pt-4  gap-4">
               <Input
@@ -58,7 +62,7 @@ export function DesktopPredictComponent(props: {
                 className={`
                     w-full font-semibold  rounded-md py-6 text-md border-none
                     bg-slate-400/5 hover:bg-slate-400/10
-                    focus:!ring-white/20 focus:!ring-offset-0 focus:!ring-1
+                    focus:!ring-white/20 focus:!ring-offset-0  focus:!ring-1
                   `}
               />
               <div className="flex items-center justify-between z-2 gap-3 mt-0">
@@ -180,7 +184,7 @@ export function DesktopPredictComponent(props: {
           )}
         </AnimatePresence>
       </motion.div>
-    </Card>
+    </div>
   );
 }
 
@@ -224,7 +228,7 @@ function DesktopConfirmPrediction({
           setStep={setStep}
         />
       ) : (
-        <div className="flex flex-col items-center w-full px-6  rounded-lg">
+        <div className="flex flex-col items-center w-full px-4  rounded-lg">
           <div className="flex flex-col w-full my-2 mt-7">
             <img
               src={image}
@@ -304,7 +308,7 @@ function DesktopConfirmPrediction({
           <motion.button
             onClick={() => setStep(0)}
             className={`
-         py-2 px-6  h-12 w-[50%] rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
+         py-2 px-6  h-12 w-[50%] rounded-full bg-[#181818] text-lg text-[#D9D9D9] font-bold
           flex-1
         `}
           >
