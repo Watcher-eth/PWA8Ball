@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { AlignLeft, ArrowLeftRight, Receipt } from "lucide-react";
+import { AlignLeft, ArrowLeftRight, Receipt, ReceiptText } from "lucide-react";
 
 import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 import { useVotingStore } from "@/lib/stores/VotingStore";
@@ -33,16 +33,27 @@ export function DesktopPredictComponent(props: {
   refetch: () => void;
   userOwns?: { highest_amount: number; highest_option: number };
 }) {
-  const { question, title, image, id, options, topic, userOwns, refetch } =
-    props;
+  const {
+    question,
+    title,
+    image,
+    id,
+    options,
+    topic,
+    userOwns,
+    initialProb,
+    refetch,
+  } = props;
   const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
   const [amount, setAmount] = useState(0);
   const setStake = useVotingStore((state) => state.setState);
   return (
     <div
       className={`rounded-lg ${
-        step === 0 || 4 ? " p-4 pt-1" : "border-[0.1rem] border-[#141414]"
-      } border-[0.1rem] border-[#141414]`}
+        step === 0 || step === 4
+          ? " "
+          : " p-4 pt-1 border-[0.1rem] border-[#141414]"
+      } `}
     >
       <motion.div
         layout
@@ -51,7 +62,23 @@ export function DesktopPredictComponent(props: {
       >
         <AnimatePresence>
           {step === 0 || step === 4 ? (
-            <div className="flex text-[1.5rem] font-[500] flex-row items-center gap-3"></div>
+            <div className="flex justify-between text-[1.5rem] font-[500] flex-row items-center gap-3">
+              <div>{step === 0 ? `Predict ${title}` : "Your Positions"}</div>{" "}
+              <div
+                onClick={() => {
+                  if (step === 0) {
+                    setStep(4);
+                  } else if (step === 4) {
+                    setStep(0);
+                  } else {
+                    setStep(4);
+                  }
+                }}
+                className="h-[2rem] hover:scale-101 active:scale-98 w-[2rem] border-[0.1rem] border-[#181818] bg-[#131313] rounded-full flex flex-row items-center justify-center"
+              >
+                <ArrowLeftRight size={15} strokeWidth={3.5} />
+              </div>
+            </div>
           ) : null}
           {step === 0 && (
             <div className="flex flex-col w-full pt-4  gap-4">
@@ -60,9 +87,9 @@ export function DesktopPredictComponent(props: {
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full font-semibold  rounded-md py-6 text-md border-none
-                    bg-slate-400/5 hover:bg-slate-400/10
-                    focus:!ring-white/20 focus:!ring-offset-0  focus:!ring-1
+                    w-full font-semibold placeholder:text-[#282828]  rounded-md py-6 text-md 
+                    bg-[#090909] border-[0.1rem] border-[#202020] hover:bg-[#101010]
+                    focus:!ring-white/40 focus:!ring-offset-0  focus:!ring-1
                   `}
               />
               <div className="flex items-center justify-between z-2 gap-3 mt-0">
@@ -99,9 +126,37 @@ export function DesktopPredictComponent(props: {
           {step === 4 && (
             <div
               className={`
+          flex flex-row items-center
+         rounded-[10px] cursor-pointer
+          transition-all mt-3.5 mb-0.5
+        `}
+            >
+              <img
+                className="h-[54px] w-[54px]  rounded-[6px] object-cover"
+                src={image}
+                alt={title}
+              />
+              <div className="flex flex-col ml-[9px] w-full -space-y-0.5">
+                <div className="flex items-center justify-between w-full">
+                  <span className="line-clamp-1 font-[500] text-[16px] text-[lightgray]/80 max-w-[73vw] mb-[1px] overflow-hidden">
+                    You predicted '{options[1].name}'
+                  </span>
+                  <span className="line-clamp-1 font-[400] text-[14px] text-[#999999] max-w-[73vw] mb-[1px] overflow-hidden">
+                    3hrs ago
+                  </span>
+                </div>
+                <span className="text-lg font-[600] text-white">
+                  {options[1].value / 100}% Chance
+                </span>
+              </div>
+            </div>
+          )}
+          {step === 4 && (
+            <div
+              className={`
                 flex flex-row items-center justify-around
                 self-center w-full
-                mt-2 mb-9 px-6
+                mt-1 -mb-2
                 space-x-4
               `}
             >
@@ -110,10 +165,10 @@ export function DesktopPredictComponent(props: {
                   setStep(5);
                 }}
                 className={`
-                  mt-3 rounded-md p-2.5 overflow-hidden
-                  bg-[#1D1D1D] w-1/2
+                  mt-3 rounded-md p-2 overflow-hidden
+              w-1/2 hover:scale-[101%]  active:scale-99
                   flex flex-row items-center justify-center
-                  gap-1
+                  gap-1  bg-[#121212] text-lg  text-[#D9D9D9]
                 `}
               >
                 <ArrowLeftRight height={20} color={"#D9D9D9"} strokeWidth={3} />
@@ -129,13 +184,13 @@ export function DesktopPredictComponent(props: {
                   setStep(7);
                 }}
                 className={`
-                  mt-3 rounded-md p-2.5 overflow-hidden
-                  bg-[#D9D9D9]  w-1/2
+                  mt-3 rounded-md p-2 overflow-hidden hover:scale-[100.8%]  active:scale-99
+                  bg-[#D9D9D9] text-lg text-[#1D1D1D]  w-1/2
                   flex flex-row items-center justify-center
                   gap-1
                 `}
               >
-                <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
+                <ReceiptText height={20} color={"#1D1D1D"} strokeWidth={3} />
                 <span
                   style={{
                     fontSize: 20,
@@ -144,7 +199,7 @@ export function DesktopPredictComponent(props: {
                     marginLeft: "3px",
                   }}
                 >
-                  Details
+                  Your Prediction
                 </span>
               </motion.div>
             </div>
