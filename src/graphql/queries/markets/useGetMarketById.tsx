@@ -10,6 +10,7 @@ const GET_ONCHAIN_MARKET = tgql(/* GraphQL */ `
       createdAt
       initialProb
       liquidityTotal
+      liquidityBalanceUsdc
       outcomeA
       outcomeB
       outcomeOddsA

@@ -47,7 +47,6 @@ export function DesktopMarketPage({ users, market, id }) {
     HARD_TOPICS
   );
 
-  console.log(enhancedMarket);
   return (
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
@@ -61,8 +60,8 @@ export function DesktopMarketPage({ users, market, id }) {
             <div
               className={`
                 h-60 w-full
-                bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent
-                backdrop-blur-lg absolute bottom-0
+                bg-gradient-to-t from-[#080808] via-[#080808]/70 via-[#080808]/30 to-[#080808]/10
+                backdrop-blur-xl absolute bottom-0
               `}
             />
             {/* <InverseBleedOverlay>
@@ -87,12 +86,16 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full overflow-y-auto flex flex-col">
+      <div className="w-full h-full overflow-y-auto z-[30] flex flex-col">
         <div>
-          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-7">
+          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-3">
             <Col xs={4} lg={5}>
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
+
               <div className="py-4">
+                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-[500]">
+                  {enhancedMarket?.question}
+                </div>
                 <CommentSection
                   topic_id={enhancedMarket?.topic_id}
                   users={users}
@@ -129,6 +132,7 @@ export function DesktopMarketPage({ users, market, id }) {
                 <MarketMetadata
                   creator={shortenAddress(market?.userAddress)}
                   usdcStake={market?.usdcStake}
+                  liquidityStake={enhancedMarket?.liquidityBalanceUsdc}
                   length={users?.length}
                   users={userImages}
                 />

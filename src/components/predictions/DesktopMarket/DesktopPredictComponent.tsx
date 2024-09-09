@@ -57,12 +57,12 @@ export function DesktopPredictComponent(props: {
     >
       <motion.div
         layout
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 1, damping: 10, type: "spring" }}
         className="relative bg-transparent  "
       >
         <AnimatePresence>
           {step === 0 || step === 4 ? (
-            <div className="flex justify-between text-[1.5rem] font-[500] flex-row items-center gap-3">
+            <div className="flex justify-between text-[1.5rem] text-white font-[500] flex-row items-center gap-3">
               <div>{step === 0 ? `Predict ${title}` : "Your Positions"}</div>{" "}
               <div
                 onClick={() => {
@@ -87,8 +87,8 @@ export function DesktopPredictComponent(props: {
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full font-semibold placeholder:text-[#282828]  rounded-md py-6 text-md 
-                    bg-[#090909] border-[0.1rem] border-[#202020] hover:bg-[#101010]
+                    w-full font-semibold placeholder:text-[lightgray]  rounded-md py-6 text-md 
+                    bg-[#090909] border-[0.1rem] border-[#212121] hover:bg-[#101010]
                     focus:!ring-white/40 focus:!ring-offset-0  focus:!ring-1
                   `}
               />
@@ -128,7 +128,7 @@ export function DesktopPredictComponent(props: {
               className={`
           flex flex-row items-center
          rounded-[10px] cursor-pointer
-          transition-all mt-3.5 mb-0.5
+          transition-all mt-4 mb-0.5
         `}
             >
               <img
@@ -156,7 +156,7 @@ export function DesktopPredictComponent(props: {
               className={`
                 flex flex-row items-center justify-around
                 self-center w-full
-                mt-1 -mb-2
+                mt-1.5 -mb-2
                 space-x-4
               `}
             >

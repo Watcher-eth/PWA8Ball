@@ -29,7 +29,9 @@ export function DesktopChart(props: {
   options: string[];
   topic: string;
   initialProb: number;
+  option: number;
   userOwns?: { highest_amount: number; highest_option: number };
+  isMarketPage?: boolean;
 }) {
   const [timeframe, setTimeframe] = useState("1M");
 
@@ -40,11 +42,11 @@ export function DesktopChart(props: {
 
   const { data: prices2 } = useGetPricesForMarket(props?.id, timeframe);
 
-  const userOutcome = props?.optionNumber;
+  const userOutcome = props?.option;
   const { currentPrices, percentageDifference } = processPrices(
     prices2,
     userOutcome,
-    props?.initialProb,
+    props?.initialProb / 100,
     timeframe
   );
 
@@ -78,57 +80,109 @@ export function DesktopChart(props: {
           }}
         >
           <img
-            className="w-10 h-10 rounded-full object-cover"
+            className={`${
+              props?.isMarketPage
+                ? " w-[5rem] h-[4.6rem] rounded-md"
+                : " w-10 h-10 rounded-full"
+            }  object-cover`}
             src={props.image}
             alt="Market image"
           />
         </div>
-        <div className="flex flex-col w-full  -space-y-1">
+        <div className="flex flex-col w-full  -space-y-0.5">
           <div className="flex flex-row items-center justify-between mt-1">
-            <span className="text-white text-lg font-semibold">
-              {prices2
-                ? props?.userOwns?.highest_option === 1
-                  ? currentPrices[currentPrices.length - 1].value.toFixed(2)
-                  : currentPrices.length > 0
-                  ? currentPrices[currentPrices.length - 1].value.toFixed(2)
-                  : (100 - props.price).toFixed(2)
-                : (props.price / 10000).toFixed(2)}
-              %{" "}
-              {
-                props.options[props?.userOwns?.highest_option === 0 ? 1 : 0]
-                  ?.name
-              }
-            </span>
-            <span
-              className={`
-            text-white text-lg font-semibold
-            ${props.optionNumber === 0 ? "text-red-500" : "text-blue-500"}
+            {props?.isMarketPage ? (
+              <span className="text-white text-[1.9rem] font-[600]">
+                {props?.title}
+              </span>
+            ) : (
+              <span className="text-white text-lg font-semibold">
+                {prices2
+                  ? props?.userOwns?.highest_option === 1
+                    ? currentPrices[currentPrices.length - 1].value.toFixed(2)
+                    : currentPrices.length > 0
+                    ? currentPrices[currentPrices.length - 1].value.toFixed(2)
+                    : (100 - props.price).toFixed(2)
+                  : (props.price / 10000).toFixed(2)}
+                %{" "}
+                {
+                  props.options[props?.userOwns?.highest_option === 0 ? 1 : 0]
+                    ?.name
+                }
+              </span>
+            )}
+            {props?.isMarketPage ? (
+              <span
+                className={`
+            text-white text-3xl font-semibold
+            ${props.optionNumber === 0 ? "text-[#FF0050]" : "text-blue-500"}
           `}
-            >
-              {percentageDifference && percentageDifference >= 0
-                ? `+${percentageDifference}`
-                : `${percentageDifference}`}
-              %
-            </span>
+              >
+                {currentPrices[currentPrices.length - 1].value.toFixed(2)}%{" "}
+                {props?.options[0].name}
+              </span>
+            ) : (
+              <span
+                className={`
+            text-white text-lg font-semibold
+            ${props.optionNumber === 0 ? "text-[#FF0050]" : "text-blue-500"}
+          `}
+              >
+                {percentageDifference && percentageDifference >= 0
+                  ? `+${percentageDifference}`
+                  : `${percentageDifference}`}
+                %
+              </span>
+            )}
           </div>
           <div className="flex flex-row items-center justify-between pb-1">
-            <span className="text-base text-white/80 font-semibold">
-              {props.title}
-            </span>
-            <span className="text-base text-white/80 font-semibold">
-              {timeframe === "1D"
-                ? "Today"
-                : timeframe === "1W"
-                ? "This Week"
-                : timeframe === "1H"
-                ? "This Hour"
-                : "This Month"}
-            </span>
+            {props?.isMarketPage ? (
+              <span className="text-base text-white/80 font-[500]">
+                {props?.question}
+              </span>
+            ) : (
+              <span className="text-base text-white/80 font-semibold">
+                {props.title}
+              </span>
+            )}
+            {props?.isMarketPage ? (
+              <span
+                className={`
+   text-base  font-semibold
+                ${
+                  percentageDifference === 0
+                    ? "text-[#909090]"
+                    : percentageDifference < 0
+                    ? "text-[#FF0050]"
+                    : "text-blue-500"
+                }
+              `}
+              >
+                {percentageDifference && percentageDifference >= 0
+                  ? `+${percentageDifference}`
+                  : `${percentageDifference}`}
+                %
+              </span>
+            ) : (
+              <span className="text-base text-white/80 font-semibold">
+                {timeframe === "1D"
+                  ? "Today"
+                  : timeframe === "1W"
+                  ? "This Week"
+                  : timeframe === "1H"
+                  ? "This Hour"
+                  : "This Month"}
+              </span>
+            )}
           </div>
         </div>
       </div>
 
-      <div className="h-[40vh] min-h-[280px] pb-2 pt-2">
+      <div
+        className={`${
+          props?.isMarketPage ? "h-[48vh]  my-5" : "h-[40vh]"
+        }  min-h-[280px] pb-2 pt-2"`}
+      >
         <GenericAreaChart
           domain={[
             minMax.min - (minMax.max - minMax.min) / 4,

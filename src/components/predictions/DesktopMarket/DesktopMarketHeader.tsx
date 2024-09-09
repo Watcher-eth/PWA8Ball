@@ -7,27 +7,8 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Grid } from "@/components/ui/tailwind/Grid";
 import { Col } from "@/components/ui/tailwind/Col";
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
-import {
-  InverseBleedOverlay,
-  InverseVerticalBleedOverlay,
-  StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay";
-import { CommentSection } from "@/components/predictions/CommentSection";
-import { BetDetails } from "@/components/predictions/BetDetails";
-import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
-
-import { DesktopPredictComponent } from "../DesktopPredictComponent";
 
 import { AlignLeft, Users } from "lucide-react";
-
-import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
-import { DesktopBettersModal } from "../Betters/DesktopBettersModal";
-import { RulesCollapsible } from "../BetDetails/RulesCollapsible";
-import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { useCheckReferral } from "@/hooks/useCheckReferral";
 import { Chip } from "@/components/ui/Chip";
 import { commifyBigIntToString } from "@/utils/bigint/format";
 

@@ -29,7 +29,7 @@ export function BetDetails({
   } = useGetLPForUser(user?.walletaddress);
 
   return (
-    <div className="flex flex-col w-full p-4 px-3.5 pb-2 mb-2 space-y-2">
+    <div className="flex flex-col w-full p-4 px-3.5 pb-0 mb-2 space-y-2">
       <TopicInfoDetail
         topicId={topicId}
         topic={topic}

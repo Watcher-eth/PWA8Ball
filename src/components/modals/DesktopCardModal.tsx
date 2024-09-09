@@ -32,7 +32,6 @@ export function DesktopCardModal({
   dialogClassName?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-
 }) {
   return (
     <Dialog
@@ -49,7 +48,10 @@ export function DesktopCardModal({
           rounded-2xl ${dialogContentClassName}
         `}
       >
-        <motion.div layout transition={{ duration: 0.3 }}>
+        <motion.div
+          layout
+          transition={{ duration: 0.5, damping: 20, type: "spring" }}
+        >
           <AnimatePresence>
             <Card
               className={`

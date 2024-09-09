@@ -4,6 +4,7 @@ import { AvatarGroup } from "@/components/topic/AvatarGroup";
 
 interface MarketMetadataProps {
   usdcStake: number;
+  liquidityStake: number;
   creator: string;
   users: string[];
   length: number;
@@ -11,11 +12,15 @@ interface MarketMetadataProps {
 }
 
 export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
+  console.log("params3", props);
   return (
     <div className="flex flex-col w-full gap-1.5 px-4">
       <MetadataItem
         name="Total Value"
-        value={`$${(props?.usdcStake / 10 ** 6).toFixed(2)}`}
+        value={`$${(
+          props?.usdcStake / 10 ** 6 +
+          props?.liquidityStake / 10 ** 6
+        ).toFixed(2)}`}
         icon={Landmark}
       />
       <MetadataItem name="Rewards" value={`3x 🔭`} icon={Gift} />
