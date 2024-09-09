@@ -26,7 +26,7 @@ export function TopMarket() {
     prices2,
     userOutcome,
     enhancedMarket?.initialProb,
-    "1M"
+    "1W"
   );
 
   const minMax = getMinMaxValues(currentPrices);
@@ -85,11 +85,11 @@ export function TopMarket() {
               ? enhancedMarket?.outcomeA
               : "Chance"}
           </div>
-          <div className="text-3xl text-white/20 font-[Aeonik-Bold]">
+          <div className="text-3xl text-white/5 font-[Aeonik-Bold]">
             Glimpse
           </div>
         </div>
-        <div className="w-full h-[9rem] my-3 rounded-md ">
+        <div className="w-[101%] h-[9rem] my-3.5 -ml-2  rounded-md ">
           <GenericLineChart
             domain={
               minMax.max && [
@@ -125,10 +125,10 @@ export function TopMarket() {
 
 function TopMarketOutcomeBtn({
   outcome,
-  outcomeOdds = 0
+  outcomeOdds = 0,
 }: {
-  outcome?: string
-  outcomeOdds?: number // | bigint
+  outcome?: string;
+  outcomeOdds?: number; // | bigint
 }) {
   return (
     <div
@@ -141,5 +141,5 @@ function TopMarketOutcomeBtn({
         {outcomeOdds / 100}%
       </p>
     </div>
-  )
+  );
 }
