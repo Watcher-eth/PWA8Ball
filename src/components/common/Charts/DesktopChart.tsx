@@ -11,7 +11,7 @@ import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
 import { Chip } from "@/components/ui/Chip";
-import { ShareIcon, Users } from "lucide-react";
+import { MessageCircle, PlusCircle, ShareIcon, Users } from "lucide-react";
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -204,16 +204,28 @@ export function DesktopChart(props: {
               </div>
             </Chip>
           </div>
-
-          <div className="hover:scale-101 active:scale-99">
-            <Chip className="flex-shrink flex  space-x-1 text-[lightgray] pt-1 text-sm">
-              <div className="inline-block  text-sm text-white/60">Share</div>
-              <ShareIcon
-                size={13}
+          <div className="flex items-center gap-3.5">
+            <div className="hover:scale-102 active:scale-98">
+              <MessageCircle
+                size={20}
                 className="text-white/60"
                 strokeWidth={2.5}
               />
-            </Chip>
+            </div>
+            <div className="hover:scale-102 active:scale-98">
+              <ShareIcon
+                size={20}
+                className="text-white/60"
+                strokeWidth={2.5}
+              />
+            </div>
+            <div className="hover:scale-102 active:scale-98">
+              <PlusCircle
+                size={20}
+                className="text-white/60"
+                strokeWidth={2.5}
+              />
+            </div>
           </div>
         </div>
       )}

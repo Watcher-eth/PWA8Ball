@@ -64,7 +64,7 @@ export function Comment({
         </button>
         <LikeDislikeSection />
       </div>
-      <div className="w-full self-center h-0 border-b border-[#303030] mt-3 z-1" />
+      <div className="w-full self-center h-0 border-b border-[#212121] mt-3 z-1" />
     </motion.div>
   );
 }
