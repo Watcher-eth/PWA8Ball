@@ -10,6 +10,8 @@ import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
 import { timeframes } from "./MyBetModal";
 import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
 import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
+import { Chip } from "@/components/ui/Chip";
+import { ShareIcon, Users } from "lucide-react";
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -34,7 +36,7 @@ export function DesktopChart(props: {
   isMarketPage?: boolean;
 }) {
   const [timeframe, setTimeframe] = useState("1M");
-
+  console.log("props", props);
   // const { data: prices, error: priceError } = useGetPricesForMarket(
   //   props?.id,
   //   timeframe
@@ -178,6 +180,43 @@ export function DesktopChart(props: {
         </div>
       </div>
 
+      {props?.isMarketPage && (
+        <div className="flex pt-4 space-x-2 -mb-4 items-center justify-between">
+          <div className="flex space-x-2">
+            <Chip className="flex-shrink space-x-2 pt-0.5">
+              <Users
+                size="16"
+                strokeWidth={2.7}
+                color="gray"
+                className="inline -mt-0.5"
+              />
+              <div className="inline-block text-[lightgray] text-sm">
+                354+ Predictors
+              </div>
+            </Chip>
+            <Chip className="flex-shrink space-x-1 text-[lightgray] pt-1 text-sm">
+              $
+              <span className="font-semibold text-[lightgray]">
+                {(props?.usdcStake / 10 ** 6).toFixed(2)}
+              </span>
+              <div className="inline-block  text-sm text-white/60">
+                at Stake
+              </div>
+            </Chip>
+          </div>
+
+          <div className="hover:scale-101 active:scale-99">
+            <Chip className="flex-shrink flex  space-x-1 text-[lightgray] pt-1 text-sm">
+              <div className="inline-block  text-sm text-white/60">Share</div>
+              <ShareIcon
+                size={13}
+                className="text-white/60"
+                strokeWidth={2.5}
+              />
+            </Chip>
+          </div>
+        </div>
+      )}
       <div
         className={`${
           props?.isMarketPage ? "h-[48vh]  my-5" : "h-[40vh]"

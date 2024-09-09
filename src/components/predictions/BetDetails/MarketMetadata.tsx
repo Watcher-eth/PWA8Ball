@@ -16,11 +16,8 @@ export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
   return (
     <div className="flex flex-col w-full gap-1.5 px-4">
       <MetadataItem
-        name="Total Value"
-        value={`$${(
-          props?.usdcStake / 10 ** 6 +
-          props?.liquidityStake / 10 ** 6
-        ).toFixed(2)}`}
+        name="Total Liquidity"
+        value={`$${(props?.liquidityStake / 10 ** 6).toFixed(2)}`}
         icon={Landmark}
       />
       <MetadataItem name="Rewards" value={`3x 🔭`} icon={Gift} />

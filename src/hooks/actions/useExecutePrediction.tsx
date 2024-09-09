@@ -70,7 +70,7 @@ export function useExecutePrediction() {
             <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
               <Check strokeWidth={4.5} className="text-white h-[0.9rem]" />
             </div>
-            Prediction successfull
+            Prediction successful
           </div>,
           {
             unstyled: true,

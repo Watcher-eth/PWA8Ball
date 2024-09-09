@@ -51,16 +51,16 @@ export function DesktopMarketPage({ users, market, id }) {
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
-          <div className="w-full h-60 relative">
+          <div className="w-full h-40 relative">
             <img
-              className="w-full transform rotate-180 object-cover h-60 relative"
+              className="w-full transform rotate-180 object-cover h-40 relative"
               alt="CoverImage"
               src={enhancedMarket?.image}
             />
             <div
               className={`
-                h-60 w-full
-                bg-gradient-to-t from-[#080808] via-[#080808]/70 via-[#080808]/30 to-[#080808]/10
+                h-40 w-full
+                bg-gradient-to-t from-[#080808]  via-[#080808]/30 to-[#080808]/10
                 backdrop-blur-xl absolute bottom-0
               `}
             />
@@ -88,7 +88,7 @@ export function DesktopMarketPage({ users, market, id }) {
       </StandardBleedOverlay>
       <div className="w-full h-full overflow-y-auto z-[30] flex flex-col">
         <div>
-          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-3">
+          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-2">
             <Col xs={4} lg={5}>
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
 
