@@ -231,8 +231,10 @@ export function DesktopChart(props: {
       )}
       <div
         className={`${
-          props?.isMarketPage ? "h-[48vh]  my-5" : "h-[40vh]"
-        }  min-h-[280px] pb-2 pt-2"`}
+          props?.isMarketPage
+            ? "h-[48vh]  mt-7 -pb-0 pt-2"
+            : "h-[40vh] pb-2 pt-2"
+        }  min-h-[280px] "`}
       >
         <GenericAreaChart
           domain={[

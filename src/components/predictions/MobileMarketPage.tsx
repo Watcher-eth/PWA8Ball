@@ -32,6 +32,8 @@ import {
 } from "../onboarding/Invites/InviteBlur";
 import { INVITES_ACTIVE } from "@/constants";
 import { useCheckReferral } from "@/hooks/useCheckReferral";
+import { MarketMetadata } from "./BetDetails/MarketMetadata";
+import { shortenAddress } from "@/utils/address/shortenAddress";
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
@@ -145,7 +147,7 @@ function MobileMarketContent({
         {title}
       </div>
 
-      <div className="flex justify-between mt-4 items-center w-[88vw] mx-5">
+      <div className="flex justify-between mt-4 items-center w-[90vw] mx-5">
         <div className="flex flex-col">
           <div
             className={`
@@ -244,7 +246,14 @@ function MobileMarketContent({
           </div>
         </PredictModal>
       </div>
-      <div className="z-2">
+      <div className="z-2 mt-2.5 px-1">
+        <MarketMetadata
+          creator={shortenAddress(market?.userAddress)}
+          usdcStake={market?.usdcStake}
+          liquidityStake={market?.liquidityBalanceUsdc}
+          length={users?.length}
+          users={userImages}
+        />
         <BetDetails
           endDate={"12th September, 2024"}
           icon={icon}
@@ -262,7 +271,6 @@ function MobileMarketContent({
       </div>
       <div className="z-2">
         <CommentSection
-
           topic_id={topicId}
           users={users}
           totalComments={market?.total_comments}

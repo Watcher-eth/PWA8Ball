@@ -89,7 +89,9 @@ export function ActivityField({
             : option?.name.substring(0, 3)}
         </p>
         <p className="text-[16px] text-white font-[600]">
-          ${((amount * option?.value) / 10 ** 10).toFixed(2)}
+          {(amount * option?.value) / 10 ** 10 > 0
+            ? `$${((amount * option?.value) / 10 ** 10).toFixed(2)}`
+            : "Sold"}
         </p>
       </div>
     </motion.div>
@@ -230,7 +232,10 @@ export function ActivityFieldMobile({
               : option?.name.substring(0, 3)}
           </p>
           <p className="text-[16px] text-white font-[600]">
-            ${((amount * option?.value) / 10 ** 10).toFixed(2)}
+            $
+            {(amount * option?.value) / 100 > 0
+              ? ((amount * option?.value) / 100).toFixed(2)
+              : "Sold"}
           </p>
         </div>
       </motion.div>
