@@ -49,7 +49,7 @@ export function DesktopPredictComponent(props: {
   const setStake = useVotingStore((state) => state.setState);
   return (
     <div
-      className={`rounded-lg ${
+      className={`rounded-lg overflow-hidden ${
         step === 0 || step === 4
           ? " "
           : " p-4 pt-1 border-[0.1rem] border-[#141414]"
@@ -87,7 +87,7 @@ export function DesktopPredictComponent(props: {
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full font-semibold placeholder:text-[lightgray]  rounded-md py-6 text-md 
+                    w-full font-semibold placeholder:text-[lightgray]  rounded-md py-6 text-md
                     bg-[#090909] border-[0.1rem] border-[#212121] hover:bg-[#101010]
                     focus:!ring-white/40 focus:!ring-offset-0  focus:!ring-1
                   `}

@@ -5,11 +5,10 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import type { AppProps } from "next/app";
 import { WagmiProvider } from "wagmi";
-import { base, baseSepolia, mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { init, AirstackProvider } from "@airstack/airstack-react";
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { PrivyProvider } from "@privy-io/react-auth";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth";
 // import * as amplitude from "@amplitude/analytics-browser";
 import "../utils/patch";
 import { SonnerToaster } from "@/components/ui/SonnerToaster";
@@ -21,11 +20,11 @@ import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
 import { CustomHead } from "@/components/layouts/CustomHead";
 import { RootLayout } from "@/components/layouts/RootLayout";
-import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
 
+import { wagmiConfig } from "@/wagmiConfig";
 export const queryClient = new QueryClient();
 
-const PRIVY_CONFIG = {
+const PRIVY_CONFIG: PrivyClientConfig = {
   loginMethods: ["email", "wallet", "google", "farcaster", "apple", "twitter"],
   appearance: {
     theme: "dark",
@@ -38,12 +37,13 @@ const PRIVY_CONFIG = {
   },
 };
 
-export const wagmiConfig = getDefaultConfig({
-  appName: "8Ball",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-  chains: [baseSepolia, base, mainnet],
-  ssr: true, // If your dApp uses server side rendering (SSR)
-});
+// export const wagmiConfig = getDefaultConfig({
+//   appName: "8Ball",
+//   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+//   chains: [baseSepolia, base, mainnet],
+//   connectors: [injected()],
+//   ssr: true, // If your dApp uses server side rendering (SSR)
+// });
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)

@@ -16,6 +16,7 @@ import { useSmartAccount } from "@/lib/onchain/SmartAccount";
 import { toast } from "sonner";
 import { DialogClose } from "@/components/ui/dialog";
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import { useClientAddress } from "@/hooks/wallet/useClientAddress";
 
 export function RemoveLPConfirmationScreen(props: {
   setStep: (num: number) => void;
@@ -29,13 +30,7 @@ export function RemoveLPConfirmationScreen(props: {
   amountLp: number;
 }) {
   const { onClose, refetch } = props;
-  const {
-    smartAccountReady,
-    smartAccountClient,
-    smartAccountAddress,
-    eoaClient,
-    eoa,
-  } = useSmartAccount();
+  const { client, address } = useClientAddress()
   const { user: userCon } = useUserStore();
 
   const [loading, setLoading] = useState(false);
@@ -66,26 +61,16 @@ export function RemoveLPConfirmationScreen(props: {
   };
 
   async function userRemoveLP() {
-    if (smartAccountReady) {
+
       try {
         showToast();
         setLoading(true);
-        if (userCon?.walletType === "smartwallet")
-          removeLP({
-            userId: userCon?.externalAuthProviderUserId!,
-            marketId: props.id,
-            client: smartAccountClient,
-            address: smartAccountAddress!,
-          });
-
-        if (userCon?.walletType === "eoa")
-          removeLP({
-            userId: userCon?.externalAuthProviderUserId!,
-            marketId: props.id,
-            client: eoaClient,
-            address: eoa?.address!,
-          });
-
+        removeLP({
+          userId: userCon?.externalAuthProviderUserId!,
+          marketId: props.id,
+          client: client,
+          address: address,
+        });
         setTimeout(() => setLoading(false), 500);
 
         setTimeout(() => {
@@ -96,8 +81,7 @@ export function RemoveLPConfirmationScreen(props: {
         console.error("Failed to withdraw boost:", error);
         alert("Failed to withdraw boost!");
       }
-    } else {
-    }
+
   }
 
   return (

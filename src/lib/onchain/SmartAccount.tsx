@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState, useEffect, useContext } from "react";
 import {
   type Address,
@@ -23,11 +21,11 @@ import {
 } from "permissionless/clients/pimlico";
 import { USDC_ABI } from "./contracts/Usdc";
 import { rpcClient } from "@/lib/onchain/rpcClient";
-import { ConnectedWallet, useWallets } from "@privy-io/react-auth";
-import { useAccount } from "wagmi";
+import { ConnectedWallet, useConnectWallet, usePrivy, useWallets } from "@privy-io/react-auth";
+import { useAccount, useWalletClient } from "wagmi";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { getWalletClient } from "@wagmi/core";
-import { wagmiConfig } from "@/pages/_app";
+import { wagmiConfig } from "@/wagmiConfig";
 import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
   BASE_SEPOLIA_USDC_ADDRESS,
@@ -39,27 +37,18 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789";
 
 /** Interface returned by custom `useSmartAccount` hook */
-interface SmartAccountInterface {
-  /** Privy embedded wallet, used as a signer for the smart account */
-  eoa?: ConnectedWallet;
+const SmartAccountContext = React.createContext<{
   /** Smart account client to send signature/transaction requests to the smart account */
   smartAccountClient?: SmartAccountClient;
-  /** EOA client for regular EOAs */
-  eoaClient?: any;
   /** Smart account address */
   smartAccountAddress?: Address;
   /** Boolean to indicate whether the smart account state has initialized */
   smartAccountReady: boolean;
-  eoaAddress?: Address;
-}
-
-const SmartAccountContext = React.createContext<SmartAccountInterface>({
-  eoa: undefined,
+}>({
   smartAccountClient: undefined,
-  eoaClient: undefined,
   smartAccountAddress: undefined,
   smartAccountReady: false,
-  eoaAddress: undefined,
+
 });
 
 export const SmartAccountProvider = ({
@@ -67,6 +56,8 @@ export const SmartAccountProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  // const { connectWallet } = useConnectWallet();
+  // const { connectWallet } = usePrivy();
   const { wallets } = useWallets();
   const { address: eoaAddress, isConnected } = useAccount();
   const { user } = useUserStore();
@@ -74,22 +65,21 @@ export const SmartAccountProvider = ({
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   );
+  console.log(wallets[0])
 
   // States to store the smart account and its status
   const [eoa, setEoa] = useState<ConnectedWallet | undefined>();
   const [smartAccountClient, setSmartAccountClient] = useState<
     SmartAccountClient | undefined
   >();
-  const [eoaClient, setEoaClient] = useState<any | undefined>();
   const [smartAccountAddress, setSmartAccountAddress] = useState<Address>();
   const [smartAccountReady, setSmartAccountReady] = useState(false);
 
-  async function createSmartWallet(eoa: ConnectedWallet) {
+  async function createSmartWallet() {
     // Creates a smart account given a Privy `ConnectedWallet` object representing
     // the  user's EOA.
-    const eip1193provider = await embeddedWallet.getEthereumProvider();
+    const eip1193provider = await embeddedWallet?.getEthereumProvider();
 
-    setEoa(eoa);
     // Get an EIP1193 provider and viem WalletClient for the EOA
     const privyClient = createWalletClient({
       account: embeddedWallet?.address,
@@ -178,35 +168,25 @@ export const SmartAccountProvider = ({
     setSmartAccountReady(true);
   }
 
-  async function createEOAWallet() {
-    const walletClient = await getWalletClient(wagmiConfig, {
-      account: eoaAddress,
-      chain: baseSepolia,
-    });
-
-
-    setEoaClient(walletClient);
-    setEoa(eoaAddress);
-    setSmartAccountAddress(eoaAddress);
-    setSmartAccountReady(true);
-  }
 
   useEffect(() => {
     if (walletType === "smartwallet" && embeddedWallet) {
+      console.log('smartWalletCondition')
       createSmartWallet(embeddedWallet);
-    } else if (walletType === "eoa" && isConnected && eoaAddress) {
-      try {
-        createEOAWallet();
-      } catch (error) {
-        console.error(error);
-      }
     }
+    // else if (walletType === "eoa" && isConnected && eoaAddress) {
+    //   console.log("eoaCondition");
+    //   try {
+    //     createEOAWallet();
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
   }, [
     walletType,
     smartAccountAddress,
     embeddedWallet?.address,
     embeddedWallet,
-    eoaAddress,
     isConnected,
   ]);
 
@@ -215,10 +195,7 @@ export const SmartAccountProvider = ({
       value={{
         smartAccountReady,
         smartAccountClient,
-        smartAccountAddress: smartAccountAddress,
-        eoaClient,
-        eoaAddress,
-        eoa,
+        smartAccountAddress,
       }}
     >
       {children}
