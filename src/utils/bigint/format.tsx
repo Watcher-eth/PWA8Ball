@@ -11,56 +11,56 @@ export function formatBigIntToString(
   decimalPlaces?: number
 ) {
   if (typeof bi !== "bigint" && !bi) {
-    return;
+    return
   }
   try {
     // Check if input is zero
     if (bi === 0n) {
-      return "0.0";
+      return "0.0"
     }
 
     // Check if the input is negative
-    const isNegative = bi < 0n;
+    const isNegative = bi < 0n
     if (isNegative) {
       // Convert to positive for the calculation
-      bi = -bi;
+      bi = -bi
     }
     // Convert to string and add padding zeros if necessary
-    let str = bi.toString().padStart(nativePrecision, "0");
+    let str = bi.toString().padStart(nativePrecision, "0")
 
     // Insert decimal point
-    const idx = str.length - nativePrecision;
-    str = `${str.slice(0, idx)}.${str.slice(idx)}`;
+    const idx = str.length - nativePrecision
+    str = `${str.slice(0, idx)}.${str.slice(idx)}`
 
     // Handle values below zero by adding a '0' before the decimal point
     if (str.startsWith(".")) {
-      str = "0" + str;
+      str = "0" + str
     }
 
     // Trim to desired number of decimal places
     if (decimalPlaces !== undefined) {
-      const decimalIdx = str.indexOf(".");
-      str = str.slice(0, decimalIdx + decimalPlaces + 1);
+      const decimalIdx = str.indexOf(".")
+      str = str.slice(0, decimalIdx + decimalPlaces + 1)
     }
 
     // Add the negative sign back if necessary
     if (isNegative) {
-      str = "-" + str;
+      str = "-" + str
     }
 
-    return str;
+    return str
   } catch (error) {
-    console.log(`error`, error);
+    console.log(`error`, error)
     // txErrorHandler(error)
   }
 }
 
 export function powBigInt(base: bigint, exponent: bigint | number) {
-  let result = 1n;
+  let result = 1n
   for (let i = 0; i < exponent; i++) {
-    result *= base;
+    result *= base
   }
-  return result;
+  return result
 }
 
 /**
@@ -82,19 +82,19 @@ export const formatBigIntToPercentString = (
     const conversionFactor = powBigInt(
       10n,
       BigInt(nativePrecison - 2 + decimalPlaces)
-    );
+    )
 
     // Convert the bigint to a floating-point number, preserving the requested number of decimal places
-    const percentConvert = convert ? 100 : 1;
-    const num = (Number(bn) * percentConvert) / Number(conversionFactor);
+    const percentConvert = convert ? 100 : 1
+    const num = (Number(bn) * percentConvert) / Number(conversionFactor)
 
     // Format the number as a percentage string
-    return `${num.toFixed(decimalPlaces)}%`;
+    return `${num.toFixed(decimalPlaces)}%`
   } catch (error) {
-    console.log(`error`, error);
+    console.log(`error`, error)
     // txErrorHandler(error)
   }
-};
+}
 
 // Some environments have issues with RegEx that contain back-tracking, so we cannot
 // use them.
@@ -104,7 +104,7 @@ export const formatBigIntToPercentString = (
  * @returns {string} The formatted string with commas.
  */
 export function commify(value?: string | number) {
-  const comps = String(value).split(".");
+  const comps = String(value).split(".")
 
   if (
     comps.length > 2 ||
@@ -113,47 +113,47 @@ export function commify(value?: string | number) {
     value === "." ||
     value === "-."
   ) {
-    console.log("invalid value", "value", value);
+    console.log("invalid value", "value", value)
   }
 
   // Make sure we have at least one whole digit (0 if none)
-  let whole = comps[0];
+  let whole = comps[0]
 
-  let negative = "";
+  let negative = ""
   if (whole.substring(0, 1) === "-") {
-    negative = "-";
-    whole = whole.substring(1);
+    negative = "-"
+    whole = whole.substring(1)
   }
 
   // Make sure we have at least 1 whole digit with no leading zeros
   while (whole.substring(0, 1) === "0") {
-    whole = whole.substring(1);
+    whole = whole.substring(1)
   }
   if (whole === "") {
-    whole = "0";
+    whole = "0"
   }
 
-  let suffix = "";
+  let suffix = ""
   if (comps.length === 2) {
-    suffix = "." + (comps[1] || "0");
+    suffix = "." + (comps[1] || "0")
   }
   while (suffix.length > 2 && suffix[suffix.length - 1] === "0") {
-    suffix = suffix.substring(0, suffix.length - 1);
+    suffix = suffix.substring(0, suffix.length - 1)
   }
 
-  const formatted = [];
+  const formatted = []
   while (whole.length) {
     if (whole.length <= 3) {
-      formatted.unshift(whole);
-      break;
+      formatted.unshift(whole)
+      break
     } else {
-      const index = whole.length - 3;
-      formatted.unshift(whole.substring(index));
-      whole = whole.substring(0, index);
+      const index = whole.length - 3
+      formatted.unshift(whole.substring(index))
+      whole = whole.substring(0, index)
     }
   }
 
-  return negative + formatted.join(",") + suffix;
+  return negative + formatted.join(",") + suffix
 }
 
 /**
@@ -168,8 +168,8 @@ export const commifyBigIntToString = (
   precision: number,
   decimals = 2
 ) => {
-  return commify(formatBigIntToString(bi, precision, decimals));
-};
+  return commify(formatBigIntToString(bi, precision, decimals))
+}
 
 /**
  * Formats a BigInt to a string with commas and specified decimal places, or returns "0" if the input is falsy.
@@ -178,5 +178,5 @@ export const commifyBigIntToString = (
  * @returns {string} The formatted string with commas or "0" if input is falsy.
  */
 export function commifyBigIntWithDefault(bi: bigint, decimals: number) {
-  return bi ? commifyBigIntToString(bi, 18, decimals) : "0";
+  return bi ? commifyBigIntToString(bi, 18, decimals) : "0"
 }

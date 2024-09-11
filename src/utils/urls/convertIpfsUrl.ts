@@ -1,8 +1,6 @@
-// @ts-nocheck
-
-export function convertIpfsUrl(url) {
+export function convertIpfsUrl(url: string) {
   if (url.startsWith("ipfs://")) {
-    return `https://ipfs.infura.io/ipfs/${url.substring(7)}`;
+    return `https://ipfs.infura.io/ipfs/${url.substring(7)}`
   }
-  return url;
+  return url
 }

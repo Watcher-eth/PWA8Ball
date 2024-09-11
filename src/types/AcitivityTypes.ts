@@ -1,4 +1,4 @@
 export type ActivityChartType = {
-  image: string;
-  amount: number;
-};
+  image: string
+  amount: number
+}

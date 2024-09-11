@@ -8,7 +8,7 @@ export const REGEX = {
   santiizeHandle: /[^\d .A-Za-z]/g,
 
   gm: /\bgm\b/i,
-};
+}
 
 /**
  * Returns an array of URLs found in the specified text.
@@ -18,7 +18,7 @@ export const REGEX = {
  */
 export default function getURLs(text: string): string[] {
   if (!text) {
-    return [];
+    return []
   }
-  return text.match(REGEX.url) || [];
-};;
+  return text.match(REGEX.url) || []
+}

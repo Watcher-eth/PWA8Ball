@@ -1,18 +1,16 @@
 // @ts-nocheck
-import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
-import { parseOptions } from "@/utils/predictions/parseOption";
-import { stripEmoji } from "@/utils/string/stripEmoji";
+import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets"
+import { parseOptions } from "@/utils/predictions/parseOption"
+import { stripEmoji } from "@/utils/string/stripEmoji"
 
-export function formatMarketArr(
-  {
-    markets,
-    selectedTopic,
-  }: {
-    markets: IMarketWithTopicDetails[]
-    selectedTopic?: string;
-  }
-) {
-  const strippedSelectedTopic = stripEmoji(selectedTopic ?? "");
+export function formatMarketArr({
+  markets,
+  selectedTopic,
+}: {
+  markets: IMarketWithTopicDetails[]
+  selectedTopic?: string
+}) {
+  const strippedSelectedTopic = stripEmoji(selectedTopic ?? "")
   const enrichedFeedData = markets
     ?.map(formatMarket)
     ?.filter((item) =>
@@ -21,10 +19,9 @@ export function formatMarketArr(
           ? true
           : stripEmoji(item?.topic ?? item?.name) === strippedSelectedTopic
         : true
-    );
-  return enrichedFeedData ?? [];
+    )
+  return enrichedFeedData ?? []
 }
-
 
 export function formatMarket(market: IMarketWithTopicDetails) {
   return {
@@ -38,7 +35,7 @@ export function formatMarket(market: IMarketWithTopicDetails) {
     stake: market?.usdcstake,
     topicId: market?.topic_id,
     multiplier:
-    market?.outcomea === market?.outcomeb
+      market?.outcomea === market?.outcomeb
         ? 2
         : market?.outcomea > market?.outcomeb
         ? 1 + (100 - market?.outcomeb) / market?.outcomeb
@@ -55,5 +52,5 @@ export function formatMarket(market: IMarketWithTopicDetails) {
     },
     type: "market",
     topicBio: market?.topic_description,
-  };
+  }
 }

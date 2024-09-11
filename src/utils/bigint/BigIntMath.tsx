@@ -5,11 +5,11 @@
  * @returns The next approximation of the square root
  */
 function newtonIteration(n: bigint, x0: bigint): bigint {
-  const x1 = (n / x0 + x0) >> 1n;
+  const x1 = (n / x0 + x0) >> 1n
   if (x0 === x1 || x0 === x1 - 1n) {
-    return x0;
+    return x0
   }
-  return newtonIteration(n, x1);
+  return newtonIteration(n, x1)
 }
 
 /**
@@ -20,11 +20,11 @@ function newtonIteration(n: bigint, x0: bigint): bigint {
  */
 export function sqrt(value: bigint): bigint {
   if (value < 0n) {
-    throw new Error("Cannot compute square root of a negative number");
+    throw new Error("Cannot compute square root of a negative number")
   }
   if (value < 2n) {
-    return value;
+    return value
   }
 
-  return newtonIteration(value, 1n);
+  return newtonIteration(value, 1n)
 }

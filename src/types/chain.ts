@@ -3,23 +3,23 @@
 // import { getAddress } from '@ethersproject/address'
 
 export type Chain = {
-  id: number;
-  chainSymbol: string;
-  name: string;
-  altName?: string;
-  codeName: string;
-  chainImg: any;
-  layer: number;
-  rpcUrls: { primary: string; fallback: string };
-  explorerUrl: string;
-  explorerName: string;
-  explorerImg: any;
-  blockTime: number;
-  nativeCurrency: { name: string; symbol: string; decimals: number };
-  priorityRank: number;
-  color?: string;
-  unsupported?: boolean;
-};
+  id: number
+  chainSymbol: string
+  name: string
+  altName?: string
+  codeName: string
+  chainImg: any
+  layer: number
+  rpcUrls: { primary: string; fallback: string }
+  explorerUrl: string
+  explorerName: string
+  explorerImg: any
+  blockTime: number
+  nativeCurrency: { name: string; symbol: string; decimals: number }
+  priorityRank: number
+  color?: string
+  unsupported?: boolean
+}
 
 export enum WalletId {
   MetaMask = "metaMask",
@@ -28,6 +28,6 @@ export enum WalletId {
 }
 
 export interface IconProps {
-  walletId?: string;
-  className?: string;
+  walletId?: string
+  className?: string
 }

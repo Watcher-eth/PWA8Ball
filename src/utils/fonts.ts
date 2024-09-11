@@ -4,9 +4,8 @@
 // Note, would use woff2 here as well but vercel is fucking retarded & doesnt support it
 export const aeonikFontDataPromise = fetch(
   new URL("../../public/fonts/AeonikTRIAL-Bold.otf", import.meta.url)
-).then((res) => res.arrayBuffer());
-
+).then((res) => res.arrayBuffer())
 
 export const benzinFontDataPromise = fetch(
   new URL("../../public/fonts/Benzin-ExtraBold.ttf", import.meta.url)
-).then((res) => res.arrayBuffer());
+).then((res) => res.arrayBuffer())

@@ -1,4 +1,3 @@
-
 export async function uploadImage(imageFile: File) {
   const reader = new FileReader()
 
@@ -7,15 +6,15 @@ export async function uploadImage(imageFile: File) {
       const base64data = reader.result as string
 
       try {
-        const response = await fetch('/api/pinImage', {
-          method: 'POST',
+        const response = await fetch("/api/pinImage", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            imageBuffer: base64data.split(',')[1], // Remove the base64 prefix
-            fileName: imageFile.name
-          })
+            imageBuffer: base64data.split(",")[1], // Remove the base64 prefix
+            fileName: imageFile.name,
+          }),
         })
 
         const data = await response.json()

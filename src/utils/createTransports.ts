@@ -4,7 +4,7 @@ import { fallback, http } from "@wagmi/core"
 // import { Chain } from "@/types/chain"
 import { CHAINS_BY_ID } from "@/constants/chains"
 
-type Transports = Record<Chain["id"], Transport>;
+type Transports = Record<Chain["id"], Transport>
 
 export function createTransports(chains: Chain[]): Transports {
   return chains.reduce<Transports>((acc, chain) => {
@@ -13,9 +13,9 @@ export function createTransports(chains: Chain[]): Transports {
     console.log(chain)
     acc[chain.id] = fallback([
       http(chain.rpcUrls.default?.http[0] ?? chain.rpcUrls.primary),
-        // http(apeChain.rpcUrls.primary),
+      // http(apeChain.rpcUrls.primary),
       //   http(apeChain.rpcUrls.fallback),
     ])
-    return acc;
-  }, {});
-};
+    return acc
+  }, {})
+}
