@@ -3,13 +3,13 @@ import {
   InMemoryCache,
   ApolloProvider,
   gql,
-} from "@apollo/client";
-import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
+} from "@apollo/client"
+import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev"
 // import { relayStylePagination } from "@apollo/client/utilities"
 
-export const GRAPH_ENDPOINT_DEV_URL = "https://glimpse-dev.up.railway.app";
+export const GRAPH_ENDPOINT_DEV_URL = "https://glimpse-dev.up.railway.app"
 
-export const GRAPH_ENDPOINT_URL = "https://glimpse-main.up.railway.app";
+export const GRAPH_ENDPOINT_URL = "https://glimpse-main.up.railway.app"
 export const APOLLO_CLIENT = new ApolloClient({
   uri: GRAPH_ENDPOINT_DEV_URL,
   cache: new InMemoryCache({
@@ -21,14 +21,14 @@ export const APOLLO_CLIENT = new ApolloClient({
     //   },
     // },
   }),
-});
+})
 
 if (process.env.NODE_ENV != "production") {
   // Adds messages only in a dev environment
-  loadDevMessages();
-  loadErrorMessages();
+  loadDevMessages()
+  loadErrorMessages()
 }
 
 export function GraphQlProvider({ children }: { children: React.ReactNode }) {
-  return <ApolloProvider client={APOLLO_CLIENT}>{children}</ApolloProvider>;
+  return <ApolloProvider client={APOLLO_CLIENT}>{children}</ApolloProvider>
 }
