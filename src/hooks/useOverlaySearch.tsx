@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { useKeyPress } from "@/hooks/useKeyPress";
-import { useCloseOutsideRef } from "@/hooks/useCloseOutsideRef";
+import { useCallback, useEffect, useState } from "react"
+import { useKeyPress } from "@/hooks/useKeyPress"
+import { useCloseOutsideRef } from "@/hooks/useCloseOutsideRef"
 
 /**
  * Custom hook for managing overlay search functionality.
@@ -23,42 +23,42 @@ export function useOverlaySearch(
   masterListLength: number | Function,
   closeOverlayDispatchFunc: Function
 ) {
-  const [currentIdx, setCurrentIdx] = useState(-1);
-  const [searchStr, setSearchStr] = useState("");
+  const [currentIdx, setCurrentIdx] = useState(-1)
+  const [searchStr, setSearchStr] = useState("")
 
-  const arrowUp = useKeyPress("ArrowUp");
-  const arrowDown = useKeyPress("ArrowDown");
+  const arrowUp = useKeyPress("ArrowUp")
+  const arrowDown = useKeyPress("ArrowDown")
 
   const onClose = useCallback(() => {
-    setCurrentIdx(-1);
-    setSearchStr("");
-    closeOverlayDispatchFunc();
-  }, [closeOverlayDispatchFunc]);
+    setCurrentIdx(-1)
+    setSearchStr("")
+    closeOverlayDispatchFunc()
+  }, [closeOverlayDispatchFunc])
 
-  const overlayRef = useCloseOutsideRef(onClose);
+  const overlayRef = useCloseOutsideRef(onClose)
 
   function arrowDownFunc() {
-    const nextIdx = currentIdx + 1;
+    const nextIdx = currentIdx + 1
     // @ts-ignore
-    if (arrowDown && nextIdx < (masterListLength?.() ?? masterListLength) ) {
-      setCurrentIdx(nextIdx);
+    if (arrowDown && nextIdx < (masterListLength?.() ?? masterListLength)) {
+      setCurrentIdx(nextIdx)
     }
   }
 
   function arrowUpFunc() {
-    const nextIdx = currentIdx - 1;
+    const nextIdx = currentIdx - 1
     if (arrowUp && -1 < nextIdx) {
-      setCurrentIdx(nextIdx);
+      setCurrentIdx(nextIdx)
     }
   }
 
   async function onSearch(str: string) {
-    setSearchStr(str);
-    setCurrentIdx(-1);
+    setSearchStr(str)
+    setCurrentIdx(-1)
   }
 
-  useEffect(arrowDownFunc, [arrowDown]);
-  useEffect(arrowUpFunc, [arrowUp]);
+  useEffect(arrowDownFunc, [arrowDown])
+  useEffect(arrowUpFunc, [arrowUp])
 
   return {
     overlayRef,
@@ -66,5 +66,5 @@ export function useOverlaySearch(
     currentIdx,
     searchStr,
     onClose,
-  };
+  }
 }

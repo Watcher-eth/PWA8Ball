@@ -1,21 +1,21 @@
 // @ts-nocheck
-import { getEightBallContract } from "../contracts/Eightball";
-import { useUpdateMarketOutcome } from "@/supabase/mutations/useUpdateMarketOutcome";
+import { getEightBallContract } from "../contracts/Eightball"
+import { useUpdateMarketOutcome } from "@/supabase/mutations/useUpdateMarketOutcome"
 
 export const getOutcomeOptions = (marketId: number) => {
-  const updateMarketOutcome = useUpdateMarketOutcome();
+  const updateMarketOutcome = useUpdateMarketOutcome()
 
   return {
     queryKey: ["getOutcome", marketId],
     queryFn: async () => {
       if (marketId === undefined) {
-        return { isResolved: false, outcome: null };
+        return { isResolved: false, outcome: null }
       }
 
-      const contract = await getEightBallContract();
+      const contract = await getEightBallContract()
       const { isResolved, outcome } = await contract.read.getMarketPair(
         marketId
-      );
+      )
 
       // After getting the outcome from the contract, update the database
       if (isResolved) {
@@ -30,14 +30,14 @@ export const getOutcomeOptions = (marketId: number) => {
               // Optionally refetch or invalidate other queries that depend on this data
             },
           }
-        );
+        )
       }
 
-      return { isResolved, outcome };
+      return { isResolved, outcome }
     },
     enabled: marketId !== undefined, // Ensures the query runs only if marketId is provided
-  };
-};
+  }
+}
 
 // To use this hook
 /*

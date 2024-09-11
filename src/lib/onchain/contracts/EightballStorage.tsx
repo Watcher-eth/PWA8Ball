@@ -262,4 +262,4 @@ export const EightballStorageV1ABI = [
     stateMutability: "view",
     type: "function",
   },
-] as const;
+] as const

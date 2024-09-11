@@ -1,4 +1,3 @@
-// @ts-nocheck
 
 import {
   WalletClient,
@@ -6,10 +5,10 @@ import {
   custom,
   getContract,
   http,
-} from "viem";
-import { baseGoerli } from "viem/chains";
-import { rpcClient } from "@/lib/onchain/rpcClient";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+} from "viem"
+import { baseGoerli } from "viem/chains"
+import { rpcClient } from "@/lib/onchain/rpcClient"
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 
 export const EightballV1ABI = [
   {
@@ -495,7 +494,7 @@ export const EightballV1ABI = [
   { type: "error", name: "NotResolver", inputs: [] },
   { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
   { type: "error", name: "TransferFailed", inputs: [] },
-] as const;
+] as const
 
 export async function getEightBallContract(walletClient: WalletClient) {
   // Use walletClient for write operations and rpcClient for read operations
@@ -503,7 +502,7 @@ export async function getEightBallContract(walletClient: WalletClient) {
     abi: EightballV1ABI,
     address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
     client: { public: rpcClient, wallet: walletClient },
-  });
+  })
 
-  return contract;
+  return contract
 }

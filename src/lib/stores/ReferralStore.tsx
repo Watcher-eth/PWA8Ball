@@ -1,9 +1,10 @@
-import {create} from "zustand";
-import { persist } from "zustand/middleware";
+// @ts-nocheck
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
 interface ReferralState {
-  referralId: string | null;
-  setReferralId: (id: string) => void;
+  referralId: string | null
+  setReferralId: (id: string) => void
 }
 
 export const useReferralStore = create<ReferralState>(
@@ -13,7 +14,7 @@ export const useReferralStore = create<ReferralState>(
       setReferralId: (id: string) => set({ referralId: id }),
     }),
     {
-      name: "referral-storage", 
+      name: "referral-storage",
     }
   )
-);
+)

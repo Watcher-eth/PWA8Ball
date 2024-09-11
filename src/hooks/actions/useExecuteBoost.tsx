@@ -1,48 +1,48 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { toast } from "sonner";
-import { Check, CheckCircle } from "lucide-react";
+import { useState } from "react"
+import { useRouter } from "next/router"
+import { toast } from "sonner"
+import { Check, CheckCircle } from "lucide-react"
 
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2";
-import { useClientAddress } from "@/hooks/wallet/useClientAddress";
-import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useBoostMarket2 } from "@/lib/onchain/mutations/BoostV2"
+import { useClientAddress } from "@/hooks/wallet/useClientAddress"
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
 
 export function useExecuteBoost() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const router = useRouter();
-  const { mutate: boostV2, isError, isSuccess, isPending } = useBoostMarket2();
-  const { client, address } = useClientAddress();
-  const { approveToken, allowance } = useEightBallApproval();
-  const userBalance = useUserUsdcBalance();
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const router = useRouter()
+  const { mutate: boostV2, isError, isSuccess, isPending } = useBoostMarket2()
+  const { client, address } = useClientAddress()
+  const { approveToken, allowance } = useEightBallApproval()
+  const userBalance = useUserUsdcBalance()
 
   async function executeBoost({ id, amount }: { id: number; amount: number }) {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const biAmount = BigInt(Number(amount) * 1000000);
-      const hasBalance = userBalance && userBalance > biAmount;
-      console.log("Compare", userBalance, biAmount);
+      const biAmount = BigInt(Number(amount) * 1000000)
+      const hasBalance = userBalance && userBalance > biAmount
+      console.log("Compare", userBalance, biAmount)
       if (!hasBalance) {
-        throw new Error("Insufficient balance to boost the market.");
+        throw new Error("Insufficient balance to boost the market.")
       }
 
       if (!address) {
-        throw new Error("Address is required");
+        throw new Error("Address is required")
       }
 
-      console.log("got here");
+      console.log("got here")
       if (!allowance || allowance < biAmount) {
-        await approveToken();
+        await approveToken()
       }
 
       await boostV2({
         marketId: id,
         amount: biAmount,
         client,
-      });
+      })
 
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
@@ -61,16 +61,16 @@ export function useExecuteBoost() {
             closeButton: "bg-lime-400",
           },
         }
-      );
+      )
       setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
-        router.push({ pathname: `/lp` });
-      }, 8500);
+        setLoading(false)
+        setSuccess(true)
+        router.push({ pathname: `/lp` })
+      }, 8500)
     } catch (isError) {
-      console.error("Failed to boost market:", isError);
-      toast.error("Failed to boost market!");
-      setLoading(false);
+      console.error("Failed to boost market:", isError)
+      toast.error("Failed to boost market!")
+      setLoading(false)
     }
   }
 
@@ -79,5 +79,5 @@ export function useExecuteBoost() {
     loading: isPending,
     success: isSuccess,
     error: isError,
-  };
+  }
 }

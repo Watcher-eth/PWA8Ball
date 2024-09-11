@@ -1,40 +1,35 @@
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { useSmartAccount } from "@/lib/onchain/SmartAccount"
+import { useUserStore } from "@/lib/stores/UserStore"
 
-import type { WalletClient, Address } from "viem";
-import { useAccount, useWalletClient } from "wagmi";
-
+import type { WalletClient, Address } from "viem"
+import { useAccount, useWalletClient } from "wagmi"
 
 type ClientAndAddress = {
-  client: WalletClient;
-  address: Address;
+  client: WalletClient
+  address: Address
   walletType?: "smartwallet" | "eoa"
-};
+}
 
 export function useClientAddress() {
-  const {
-    smartAccountClient,
-    smartAccountAddress,
-  } = useSmartAccount();
-  const { user: userCon } = useUserStore();
-  const { address: eoaAddress }  = useAccount()
+  const { smartAccountClient, smartAccountAddress } = useSmartAccount()
+  const { user: userCon } = useUserStore()
+  const { address: eoaAddress } = useAccount()
   const { data: eoaWalletClient } = useWalletClient()
   console.log(userCon)
-  let client;
-  let address;
+  let client
+  let address
   if (userCon?.walletType === "smartwallet") {
-    client = smartAccountClient;
-    address = smartAccountAddress;
+    client = smartAccountClient
+    address = smartAccountAddress
   } else if (userCon?.walletType === "eoa") {
-    client = eoaWalletClient;//eoaClient;
+    client = eoaWalletClient //eoaClient;
     address = eoaAddress //eoaAddress;
   }
 
-  console.log({client, address})
+  console.log({ client, address })
   return {
     client,
     address,
     walletType: userCon?.walletType,
-  } as ClientAndAddress;
-
+  } as ClientAndAddress
 }

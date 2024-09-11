@@ -1,28 +1,30 @@
 // @ts-nocheck
-import { useMutation } from "@tanstack/react-query";
-import { EightballV1ABI } from "../contracts/Eightball";
-import { rpcClient } from "@/lib/onchain/rpcClient";
-import { WalletClient, getContract } from "viem";
-import { SmartAccountClient } from "permissionless";
+import { useMutation } from "@tanstack/react-query"
+import { EightballV1ABI } from "../contracts/Eightball"
+import { rpcClient } from "@/lib/onchain/rpcClient"
+import { WalletClient, getContract } from "viem"
+import { SmartAccountClient } from "permissionless"
 import {
   EightBallStorageAddress,
   EightballStorageV1ABI,
-} from "../contracts/EightballStorage";
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain";
-import { createMarket } from "@/supabase/mutations/createMarket";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+} from "../contracts/EightballStorage"
+import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain"
+import { createMarket } from "@/supabase/mutations/createMarket"
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
+
+
 
 async function initialize(props: {
-  amount: number;
-  title: string;
-  description: string;
-  options: string[];
-  topicId: string;
-  image: string;
-  client: SmartAccountClient;
-  address: Address;
-  created_by: string;
-  initialProb: number;
+  amount: number
+  title: string
+  description: string
+  options: string[]
+  topicId: string
+  image: string
+  client: SmartAccountClient
+  address: Address
+  created_by: string
+  initialProb: number
 }) {
   if (
     !props.amount ||
@@ -32,18 +34,18 @@ async function initialize(props: {
     !props.topicId ||
     !props.image
   ) {
-    throw new Error("All fields must be provided");
+    throw new Error("All fields must be provided")
   }
   try {
-    const account = props.address;
+    const account = props.address
 
-    const initialProb = props?.initialProb ? props?.initialProb : 50;
+    const initialProb = props?.initialProb ? props?.initialProb : 50
 
     const contract = getContract({
       abi: EightballV1ABI,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
-    });
+    })
     // Initialize the market
     const hash = await contract.write.initializeMarket([
       ROOT_OPERATOR_ADDRESS,
@@ -57,9 +59,9 @@ async function initialize(props: {
         title: props.title,
         question: props.description,
       },
-    ]);
+    ])
 
-    console.log("hash", hash);
+    console.log("hash", hash)
 
     setTimeout(async () => {
       const marketData = {
@@ -70,13 +72,13 @@ async function initialize(props: {
         topicid: props.topicId,
         participants: 0,
         created_by: props.created_by,
-      };
+      }
 
-      const send = await createMarket(marketData, props.client);
-    }, 2000);
+      const send = await createMarket(marketData, props.client)
+    }, 2000)
   } catch (error) {
-    console.error("Error during market initialization", error);
-    throw error; // Rethrow the error after logging it
+    console.error("Error during market initialization", error)
+    throw error // Rethrow the error after logging it
   }
 }
 
@@ -85,8 +87,8 @@ export const useInitializeMarketV2 = () => {
     mutationFn: initialize,
     onSuccess: (variables, data) => {},
     onError: (error) => {
-      console.error("Error initializing market", error);
+      console.error("Error initializing market", error)
       // Handle errors appropriately in the UI
     },
-  });
-};
+  })
+}

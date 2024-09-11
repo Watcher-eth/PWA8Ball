@@ -1,19 +1,19 @@
-import { useUserStore } from "@/lib/stores/UserStore";
-import { usePrivy } from "@privy-io/react-auth";
-import { DoorOpen } from "lucide-react";
-import { toast } from "sonner";
-import { useDisconnect } from "wagmi";
+import { useUserStore } from "@/lib/stores/UserStore"
+import { usePrivy } from "@privy-io/react-auth"
+import { DoorOpen } from "lucide-react"
+import { toast } from "sonner"
+import { useDisconnect } from "wagmi"
 
 export function useDisconnectUser() {
-  const { user, setUser } = useUserStore();
-  const { disconnect } = useDisconnect();
-  const { logout } = usePrivy();
+  const { user, setUser } = useUserStore()
+  const { disconnect } = useDisconnect()
+  const { logout } = usePrivy()
 
   const disconnectUser = () => {
     if (user?.walletType === "eoa") {
       try {
-        disconnect();
-        setUser(null);
+        disconnect()
+        setUser(null)
         toast(
           <div className="w-full rounded-full bg-[#101010] font-semibold text-base px-3 pr-4 text-white flex flex-row items-center p-2">
             <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
@@ -31,16 +31,16 @@ export function useDisconnectUser() {
               closeButton: "bg-lime-400",
             },
           }
-        );
+        )
       } catch (e) {
         toast.warning(
           "Error logging out! Please reload the page and try again."
-        );
+        )
       }
     } else if (user?.walletType === "smartwallet") {
       try {
-        logout();
-        setUser(null);
+        logout()
+        setUser(null)
         toast(
           <div className="w-full rounded-full bg-[#101010] font-semibold text-base px-3 pr-4 text-white flex flex-row items-center p-2">
             <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
@@ -58,14 +58,14 @@ export function useDisconnectUser() {
               closeButton: "bg-lime-400",
             },
           }
-        );
+        )
       } catch (e) {
         toast.warning(
           "Error logging out! Please reload the page and try again."
-        );
+        )
       }
     }
-  };
+  }
 
-  return { disconnectUser };
+  return { disconnectUser }
 }

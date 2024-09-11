@@ -1,18 +1,18 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { IUser } from "@/supabase/types";
-import { replaceBigInts } from "@/utils/replaceBigInts";
-import { User } from "@/__generated__/graphql";
+// @ts-nocheck
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
+import { replaceBigInts } from "@/utils/replaceBigInts"
+import { User } from "@/__generated__/graphql"
 
 interface ExtendedUser extends User {
-  walletType?: "smartwallet" | "eoa";
-  invited?: boolean;
+  walletType?: "smartwallet" | "eoa"
+  invited?: boolean
 }
 
 interface UserState {
-  user: ExtendedUser | null;
-  setUser: (user: ExtendedUser | null) => void;
-  setWalletType: (walletType: "smartwallet" | "eoa") => void;
+  user: ExtendedUser | null
+  setUser: (user: ExtendedUser | null) => void
+  setWalletType: (walletType: "smartwallet" | "eoa") => void
 }
 
 export const useUserStore = create<UserState>(
@@ -21,7 +21,7 @@ export const useUserStore = create<UserState>(
       user: null,
       setUser: (user) => {
         // @dev Should only be true in development
-        const isDevelopment = process.env.NODE_ENV === "development";
+        const isDevelopment = process.env.NODE_ENV === "development"
         set({
           user: user
             ? {
@@ -29,7 +29,7 @@ export const useUserStore = create<UserState>(
                 invited: isDevelopment ? true : user.invited ?? false,
               }
             : null,
-        });
+        })
       },
       setWalletType: (walletType) =>
         set((state) => ({
@@ -41,4 +41,4 @@ export const useUserStore = create<UserState>(
       // getStorage: () => localStorage,
     }
   )
-);
+)

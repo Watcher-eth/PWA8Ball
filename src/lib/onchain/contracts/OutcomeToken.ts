@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 
 // import { createPublicClient, custom, getContract, http } from "viem";
 // import { baseGoerli } from "viem/chains";
@@ -240,7 +240,7 @@ export const OutcomeTokenABI = [
     name: "OwnableUnauthorizedAccount",
     inputs: [{ name: "account", type: "address", internalType: "address" }],
   },
-] as const;
+] as const
 
 // export async function getOutcomeTokenContract() {
 //   const walletClient = await getWalletClient();

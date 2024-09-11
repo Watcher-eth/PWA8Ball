@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { BetUploadState, BetVotingState } from "@/types/BetTypes";
-import { create } from "zustand";
+import { BetVotingState } from "@/types/BetTypes"
+import { create } from "zustand"
 
 export const useVotingStore = create<BetVotingState>((set) => ({
   question: "",
@@ -12,5 +12,4 @@ export const useVotingStore = create<BetVotingState>((set) => ({
   setState: (newState) => set((state) => ({ ...state, ...newState })),
   reset: () =>
     set(() => ({ question: "", title: "", betId: "", amount: 0, option: 0 })),
-}));
-
+}))

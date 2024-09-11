@@ -1,38 +1,39 @@
 // @ts-nocheck
 
-import { useMutation } from "@tanstack/react-query";
-import { EightballV1ABI } from "../contracts/Eightball";
-import { WalletClient, getContract, Address } from "viem";
+import { useMutation } from "@tanstack/react-query"
+import { WalletClient, getContract, Address } from "viem"
+import { EightballV1ABI } from "../contracts/Eightball"
 
-import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints";
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain";
+
+import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints"
+import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 
 async function redeemPrediction(props: {
-  marketId: number;
-  outcomeTokenAddress: Address;
-  userId: string;
-  client: WalletClient;
-  address: Address;
+  marketId: number
+  outcomeTokenAddress: Address
+  userId: string
+  client: WalletClient
+  address: Address
 }) {
-  const { updateLiquidityPoints } = useUpdateLiquidityPoints();
+  const { updateLiquidityPoints } = useUpdateLiquidityPoints()
   if (!props.userId || !props.marketId) {
-    throw new Error("All fields must be provided");
+    throw new Error("All fields must be provided")
   }
   try {
     const contract = getContract({
       abi: EightballV1ABI,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
-    });
+    })
 
     // Redeem position
-    const hash = await contract.write.redeem([BigInt(props.marketId)]);
-    console.log("Redeemed", hash);
+    const hash = await contract.write.redeem([BigInt(props.marketId)])
+    console.log("Redeemed", hash)
 
-    await updateLiquidityPoints(props.address, 50);
+    await updateLiquidityPoints(props.address, 50)
   } catch (error) {
-    console.error("Error during cashout", error);
-    throw error;
+    console.error("Error during cashout", error)
+    throw error
   }
 }
 
@@ -40,10 +41,10 @@ export const useRedeem = () => {
   return useMutation({
     mutationFn: redeemPrediction,
     onSuccess: () => {
-      console.log("Redeemed successfully");
+      console.log("Redeemed successfully")
     },
     onError: (error) => {
-      console.error("Error redeeming", error);
+      console.error("Error redeeming", error)
     },
-  });
-};
+  })
+}

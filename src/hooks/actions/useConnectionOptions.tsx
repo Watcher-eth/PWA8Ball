@@ -1,8 +1,7 @@
 // @ts-nocheck
-import { useAccount } from "wagmi";
-import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit";
-import { isSupportedAndTargetChain } from "@/constants/supportedChains";
-
+import { useAccount } from "wagmi"
+import { useChainModal, useConnectModal } from "@rainbow-me/rainbowkit"
+import { isSupportedAndTargetChain } from "@/constants/supportedChains"
 
 /**
  * A custom hook for managing connection options and chain-related actions.
@@ -13,11 +12,11 @@ import { isSupportedAndTargetChain } from "@/constants/supportedChains";
 export function useConnectionOptions({
   targetChainId,
 }: {
-  targetChainId?: number;
+  targetChainId?: number
 }) {
-  const { address, chainId } = useAccount();
-  const { openConnectModal } = useConnectModal();
-  const { openChainModal } = useChainModal();
+  const { address, chainId } = useAccount()
+  const { openConnectModal } = useConnectModal()
+  const { openChainModal } = useChainModal()
 
   /**
    * Wraps an action function with connection and chain checks.
@@ -28,19 +27,19 @@ export function useConnectionOptions({
     {
       if (address) {
         if (isSupportedAndTargetChain({ chainId, targetChainId })) {
-          func();
+          func()
         } else {
-          openChainModal();
+          openChainModal()
         }
       } else {
-        openConnectModal();
+        openConnectModal()
       }
     }
-  };
+  }
 
   return {
     onActionWrapper,
     isConnected: !!address,
     isCorrectChain: isSupportedAndTargetChain({ chainId, targetChainId }),
-  };
+  }
 }

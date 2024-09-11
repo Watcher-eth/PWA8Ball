@@ -1,13 +1,13 @@
-import { erc20Abi, type Address } from "viem";
-import { useAccount, useReadContract, useWriteContract } from "wagmi";
+import { erc20Abi, type Address } from "viem"
+import { useAccount, useReadContract, useWriteContract } from "wagmi"
 
-import { MAX_UINT_256 } from "@/constants/misc";
+import { MAX_UINT_256 } from "@/constants/misc"
 
-import { txErrorHandlerWrapper } from "@/utils/txErrorHandler";
+import { txErrorHandlerWrapper } from "@/utils/txErrorHandler"
 
 export function useTokenContractApproval({
   tokenAddress,
-  contractAddress
+  contractAddress,
 }: {
   tokenAddress: Address
   contractAddress: Address
@@ -15,10 +15,10 @@ export function useTokenContractApproval({
   const contractInfo = {
     address: tokenAddress,
     abi: erc20Abi,
-  };
+  }
 
-  const { address, chainId } = useAccount();
-  const targetContract = useWriteContract();
+  const { address, chainId } = useAccount()
+  const targetContract = useWriteContract()
 
   const { data: allowance } = useReadContract({
     ...contractInfo,
@@ -27,19 +27,19 @@ export function useTokenContractApproval({
     query: {
       refetchInterval: 5 * 1_000,
     },
-  });
+  })
 
   function approveToken() {
     targetContract.writeContractAsync({
       ...contractInfo,
       functionName: "approve",
       args: [contractAddress, BigInt(MAX_UINT_256)],
-    });
+    })
   }
 
   return {
     approveToken: txErrorHandlerWrapper(approveToken),
     allowance,
     ...targetContract,
-  };
+  }
 }

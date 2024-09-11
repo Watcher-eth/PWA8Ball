@@ -1,4 +1,3 @@
-// @ts-nocheck
 export const USDC_ABI = [
   {
     type: "function",
@@ -95,4 +94,4 @@ export const USDC_ABI = [
     ],
     anonymous: false,
   },
-] as const;
+] as const

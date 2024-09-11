@@ -1,25 +1,25 @@
 // @ts-nocheck
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useCashout } from "@/lib/onchain/mutations/Cashout";
-import { useClientAddress } from "@/hooks/wallet/useClientAddress";
-import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval";
+import { useState } from "react"
+import { useRouter } from "next/router"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useCashout } from "@/lib/onchain/mutations/Cashout"
+import { useClientAddress } from "@/hooks/wallet/useClientAddress"
+import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 
-import { toast } from "sonner";
+import { toast } from "sonner"
 
-import { Check, CheckCircle } from "lucide-react";
-import { getProfilePath } from "@/utils/urls";
+import { Check, CheckCircle } from "lucide-react"
+import { getProfilePath } from "@/utils/urls"
 
 export function useCashOutPrediction() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const { approveToken } = useEightBallApproval();
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const { approveToken } = useEightBallApproval()
 
-  const { user: userCon } = useUserStore();
-  const { mutate: cashOut, isPending, isSuccess, isError } = useCashout();
-  const { client, address, walletType } = useClientAddress();
+  const { user: userCon } = useUserStore()
+  const { mutate: cashOut, isPending, isSuccess, isError } = useCashout()
+  const { client, address, walletType } = useClientAddress()
 
   async function cashOutPrediction({
     points,
@@ -27,18 +27,18 @@ export function useCashOutPrediction() {
     marketId,
     options,
   }: {
-    points: number;
-    option: number;
-    marketId: number;
-    options: string[];
+    points: number
+    option: number
+    marketId: number
+    options: string[]
   }) {
-    setLoading(true);
+    setLoading(true)
     try {
       if (!address) {
-        throw new Error("Address is required");
+        throw new Error("Address is required")
       }
 
-      approveToken();
+      approveToken()
 
       cashOut({
         client,
@@ -50,11 +50,11 @@ export function useCashOutPrediction() {
         option: options[Number(option) - 1],
         isBuy: true,
         ownedTokens: points,
-      });
+      })
 
       setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
+        setLoading(false)
+        setSuccess(true)
         toast(
           <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
             <div className="p-0.5 py-1.5 rounded-full bg-[#4CAF50] mr-2 flex justify-center items-center">
@@ -72,18 +72,18 @@ export function useCashOutPrediction() {
               closeButton: "bg-lime-400",
             },
           }
-        );
-      }, 3500);
+        )
+      }, 3500)
       setTimeout(() => {
         router.push({
           // @ts-ignore
           pathname: getProfilePath(userCon?.walletAddress),
-        });
-      }, 6500);
+        })
+      }, 6500)
     } catch (isError) {
-      console.error("Failed to cash out:", isError);
-      toast.error("Failed to cash out!");
-      setLoading(false);
+      console.error("Failed to cash out:", isError)
+      toast.error("Failed to cash out!")
+      setLoading(false)
     }
   }
 
@@ -92,5 +92,5 @@ export function useCashOutPrediction() {
     loading: isPending,
     success: isSuccess,
     error: isError,
-  };
+  }
 }
