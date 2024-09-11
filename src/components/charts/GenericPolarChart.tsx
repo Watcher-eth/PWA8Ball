@@ -1,15 +1,15 @@
-import _ from "lodash";
+import _ from "lodash"
 import {
   RadialBarChart,
   PolarGrid,
   PolarRadiusAxis,
   RadialBar,
   Label,
-} from "recharts";
+} from "recharts"
 
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
-import { generateChartConfig } from "./generateChartConfig";
+import { generateChartConfig } from "./generateChartConfig"
 
 export function GenericPolarChart({
   chartData,
@@ -17,22 +17,19 @@ export function GenericPolarChart({
   radiusKey = "percentage",
   customConfig,
 }: {
-  chartData: any[];
-  angleKey?: string;
-  radiusKey?: string;
-  customConfig?: Partial<ChartConfig>;
+  chartData: any[]
+  angleKey?: string
+  radiusKey?: string
+  customConfig?: Partial<ChartConfig>
 }) {
   const chartConfig = generateChartConfig({
     data: chartData,
     xAxisKey: angleKey,
     customConfig,
-  });
+  })
 
   return (
-    <ChartContainer
-      className="mx-auto aspect-square"
-      config={chartConfig}
-    >
+    <ChartContainer className="mx-auto aspect-square" config={chartConfig}>
       <RadialBarChart
         data={chartData}
         startAngle={0}
@@ -61,7 +58,7 @@ export function GenericPolarChart({
                 const totalPercentage = chartData.reduce(
                   (sum, entry) => sum + entry[radiusKey],
                   0
-                );
+                )
                 return (
                   <text
                     x={viewBox.cx}
@@ -84,12 +81,12 @@ export function GenericPolarChart({
                       Accuracy
                     </tspan>
                   </text>
-                );
+                )
               }
             }}
           />
         </PolarRadiusAxis>
       </RadialBarChart>
     </ChartContainer>
-  );
+  )
 }

@@ -3,9 +3,9 @@ export function TimeframeSelector({
   timeframe,
   setTimeframe,
 }: {
-  timeframes: string[];
-  timeframe: string;
-  setTimeframe: (timeframe: string) => void;
+  timeframes: string[]
+  timeframe: string
+  setTimeframe: (timeframe: string) => void
 }) {
   return (
     <div
@@ -36,5 +36,5 @@ export function TimeframeSelector({
         </div>
       ))}
     </div>
-  );
+  )
 }

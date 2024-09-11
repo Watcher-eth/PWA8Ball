@@ -1,14 +1,14 @@
-import { IUser } from "@/supabase/types";
-import { useMyEns } from "@/hooks/wallet/useMyEns";
-import { UserCircle } from "lucide-react";
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+import { IUser } from "@/supabase/types"
+import { useMyEns } from "@/hooks/wallet/useMyEns"
+import { UserCircle } from "lucide-react"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function ConnectButton({ user }: { user: IUser }) {
-  const { displayName } = useMyEns();
+  const { displayName } = useMyEns()
   const buttonText =
     displayName && !displayName.startsWith("0x")
       ? displayName
-      : user?.name || (displayName ? displayName : "Connect");
+      : user?.name || (displayName ? displayName : "Connect")
   return (
     <div
       className={`
@@ -30,5 +30,5 @@ export function ConnectButton({ user }: { user: IUser }) {
         <UserCircle className="size-6 rounded-full ml-2 -mr-1 inline" />
       )}
     </div>
-  );
+  )
 }

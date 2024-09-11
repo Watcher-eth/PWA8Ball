@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button"
 
 export function OutcomeButton({
   text,
@@ -8,14 +8,14 @@ export function OutcomeButton({
   isDesktop,
   onClick,
 }: {
-  text: string;
-  multiplier: number;
-  option: number;
-  className?: string;
-  isDesktop?: boolean;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  text: string
+  multiplier: number
+  option: number
+  className?: string
+  isDesktop?: boolean
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }) {
-  const outcomeOptionClassName = getClassNameFromOption(option);
+  const outcomeOptionClassName = getClassNameFromOption(option)
   return (
     <Button
       onClick={onClick}
@@ -45,7 +45,7 @@ export function OutcomeButton({
         {multiplier}%
       </div>
     </Button>
-  );
+  )
 }
 
 function getClassNameFromOption(option: string | number) {
@@ -54,16 +54,16 @@ function getClassNameFromOption(option: string | number) {
       bg-red-500/5 hover:!bg-red-500/10
       border border-red-500/20
       active:border-red-500/30 active:bg-red-500/15
-      ` as const;
+      ` as const
     //"bg-[#141414] hover:!bg-[#151515]  border-[0.12rem] border-[#212121] active:bg-[#181818]" as const; // red
   } else if (option == 1) {
     return `
       bg-blue-500/5 hover:!bg-blue-500/10
       border border-blue-500/20
       active:border-blue-500/30 active:bg-blue-500/15
-      ` as const;
+      ` as const
     //"bg-[#141414] hover:!bg-[#151515] border-[0.12rem] border-[#212121] active:bg-[#181818]" as const;
   } else {
-    return "";
+    return ""
   }
 }

@@ -15,7 +15,7 @@ const GET_USER_POSITION_COUNT = tgql(/* GraphQL */ `
   }
 `)
 
-export function useGetUserPositionsCount(userAddress: string) {
+export function useGetUserPositionsCount(userAddress?: string) {
   const { data, loading, error } = useApolloQuery(GET_USER_POSITION_COUNT, {
     variables: {
       userAddress: getChecksummedAddress(userAddress),

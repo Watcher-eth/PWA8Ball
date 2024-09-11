@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 import {
   MobileMyBetModal,
   DesktopMyBetModal,
-} from "../common/Charts/MyBetModal";
-import { PredictionPositionModal } from "../modals/PredictionPositionModal";
+} from "../common/Charts/MyBetModal"
+import { PredictionPositionModal } from "../modals/PredictionPositionModal"
 
 export function ActivityField({
   index,
@@ -25,24 +25,24 @@ export function ActivityField({
   onOpenBottomSheet,
   refetch,
 }: {
-  index: number;
-  pfp: string;
-  name: string;
-  amount: number;
-  title: string;
-  image: string;
-  question: string;
-  userId: string;
-  isDesktop?: boolean;
-  options: string[];
-  option: { name: string; value: number; index: number };
-  id: string;
-  initialProb: number;
-  resolved?: boolean;
-  outcome?: number;
-  refetch: () => void;
+  index: number
+  pfp: string
+  name: string
+  amount: number
+  title: string
+  image: string
+  question: string
+  userId: string
+  isDesktop?: boolean
+  options: string[]
+  option: { name: string; value: number; index: number }
+  id: string
+  initialProb: number
+  resolved?: boolean
+  outcome?: number
+  refetch: () => void
 
-  onOpenBottomSheet: () => void;
+  onOpenBottomSheet: () => void
 }) {
   const MotionDivContent = () => (
     <motion.div
@@ -95,9 +95,9 @@ export function ActivityField({
         </p>
       </div>
     </motion.div>
-  );
+  )
 
-  const MyBetModalComponent = isDesktop ? DesktopMyBetModal : MobileMyBetModal;
+  const MyBetModalComponent = isDesktop ? DesktopMyBetModal : MobileMyBetModal
   return (
     <div>
       <MyBetModalComponent
@@ -124,7 +124,7 @@ export function ActivityField({
         <MotionDivContent />
       </MyBetModalComponent>
     </div>
-  );
+  )
 }
 
 export function ActivityFieldMobile({
@@ -146,23 +146,23 @@ export function ActivityFieldMobile({
   onOpenBottomSheet,
   refetch,
 }: {
-  index: number;
-  pfp: string;
-  name: string;
-  amount: number;
-  title: string;
-  image: string;
-  question: string;
-  userId: string;
-  isDesktop?: boolean;
-  options: string[];
-  option: string;
-  id: string;
-  initialProb: number;
-  resolved?: boolean;
-  outcome?: number;
-  onOpenBottomSheet: () => void;
-  refetch: () => void;
+  index: number
+  pfp: string
+  name: string
+  amount: number
+  title: string
+  image: string
+  question: string
+  userId: string
+  isDesktop?: boolean
+  options: string[]
+  option: string
+  id: string
+  initialProb: number
+  resolved?: boolean
+  outcome?: number
+  onOpenBottomSheet: () => void
+  refetch: () => void
 }) {
   return (
     <PredictionPositionModal
@@ -240,5 +240,5 @@ export function ActivityFieldMobile({
         </div>
       </motion.div>
     </PredictionPositionModal>
-  );
+  )
 }

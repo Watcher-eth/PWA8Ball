@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { AltSkeleton } from "@/components/ui/Skeleton";
+import { motion } from "framer-motion"
+import { AltSkeleton } from "@/components/ui/Skeleton"
 
 export function FollowPredictionSkeleton({ index }: { index: number }) {
   return (
@@ -25,5 +25,5 @@ export function FollowPredictionSkeleton({ index }: { index: number }) {
         <AltSkeleton className="h-8 w-[15vw] !bg-[#212121] !rounded-full" />
       </AltSkeleton>
     </motion.div>
-  );
+  )
 }

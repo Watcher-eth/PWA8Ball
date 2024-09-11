@@ -1,23 +1,22 @@
 // @ts-nocheck
 import _ from "lodash"
-import { Line, LineChart, XAxis } from "recharts";
+import { Line, LineChart, XAxis } from "recharts"
 
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/ui/chart"
 
-import { generateChartConfig } from "./generateChartConfig";
-
+import { generateChartConfig } from "./generateChartConfig"
 
 export function GenericLineChart({
   chartData,
   xAxisKey = "month",
   xAxisTickFormatter = (value) => value,
   customConfig,
-  domain
+  domain,
 }: {
   chartData: any[]
   xAxisKey?: string
@@ -29,7 +28,7 @@ export function GenericLineChart({
     data: chartData,
     xAxisKey,
     customConfig,
-  });
+  })
 
   return (
     <ChartContainer className="h-full w-full" config={chartConfig}>
@@ -61,5 +60,5 @@ export function GenericLineChart({
         ))}
       </LineChart>
     </ChartContainer>
-  );
+  )
 }

@@ -4,10 +4,10 @@ export function NavIconButton({
   className = "",
   iconClassName = "",
 }: {
-  icon?: React.ReactNode;
-  IconComponent?: any;
-  className?: string;
-  iconClassName?: string;
+  icon?: React.ReactNode
+  IconComponent?: any
+  className?: string
+  iconClassName?: string
 }) {
   return (
     <div
@@ -23,5 +23,5 @@ export function NavIconButton({
         />
       )}
     </div>
-  );
+  )
 }

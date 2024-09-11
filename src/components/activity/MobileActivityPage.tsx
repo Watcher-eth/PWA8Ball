@@ -1,37 +1,35 @@
 // @ts-nocheck
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Bell, Users, Globe } from "lucide-react";
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Bell, Users, Globe } from "lucide-react"
 
-import { useGetFollowingPredictions } from "@/supabase/queries/friends/useGetFollowingPredictions";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
-import { parseOptionJSON } from "@/utils/predictions/parseOption";
+import { useUserStore } from "@/lib/stores/UserStore"
+import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate"
 
-import { InviteFriendsPlaceholder } from "@/components/common/placeholders/InviteFriendsPlaceholder";
-import { NotificationsModal } from "@/components/notifications/NotificationsModal";
-import { AltSkeleton } from "@/components/ui/Skeleton";
+import { InviteFriendsPlaceholder } from "@/components/common/placeholders/InviteFriendsPlaceholder"
+import { NotificationsModal } from "@/components/notifications/NotificationsModal"
+import { AltSkeleton } from "@/components/ui/Skeleton"
 
-import { FollowPredictionSkeleton } from "@/components/activity/FollowPredictionSkeleton";
+import { FollowPredictionSkeleton } from "@/components/activity/FollowPredictionSkeleton"
 import {
   ActivityField,
   ActivityFieldMobile,
-} from "@/components/activity/ActivityField";
-import { Leaderboard } from "@/components/activity/Leaderboard";
-import { YourStats } from "@/components/activity/YourStats";
-import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders";
-import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions";
-import { HARD_MARKETS } from "@/constants/markets";
+} from "@/components/activity/ActivityField"
+import { Leaderboard } from "@/components/activity/Leaderboard"
+import { YourStats } from "@/components/activity/YourStats"
+import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders"
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
+import { HARD_MARKETS } from "@/constants/markets"
 
 export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
-  const [page, setPage] = useState<boolean>(false);
-  const { user } = useUserStore();
+  const [page, setPage] = useState<boolean>(false)
+  const { user } = useUserStore()
   const {
     data: predictions,
     error,
     loading: isLoading,
     refetch,
-  } = useGetFriendsPositions(user?.walletAddress);
+  } = useGetFriendsPositions(user?.walletAddress)
 
   if (isLoading) {
     return (
@@ -85,14 +83,14 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
           <ActivitySkeleton />;
         </div>
       </div>
-    );
+    )
   }
 
   const aggregatedPredictions = predictions
     ? aggregatePredictedItemsWithImage(predictions, HARD_MARKETS)
-    : [];
+    : []
 
-  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions);
+  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions)
   return (
     <div
       className={`
@@ -191,10 +189,10 @@ min-h-screen
                                 initialProb={item.market.initialProb}
                                 onOpenBottomSheet={() => {}}
                               />
-                            );
+                            )
                           })}
                         </div>
-                      );
+                      )
                     }
                   )}
                   <div className="h-[110px]" />
@@ -207,7 +205,7 @@ min-h-screen
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function ActivitySkeleton() {
@@ -223,5 +221,5 @@ function ActivitySkeleton() {
         <AltSkeleton className="h-4.5  !bg-[#212121]" />
       </div>
     </div>
-  );
+  )
 }

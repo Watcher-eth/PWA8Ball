@@ -1,4 +1,3 @@
-
 export function ContrastButton({
   label,
   className = "",
@@ -6,11 +5,11 @@ export function ContrastButton({
   IconComponent,
   icon,
 }: {
-  label: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-  IconComponent?: React.FC;
-  icon?: React.ReactNode;
+  label: React.ReactNode
+  className?: string
+  onClick?: () => void
+  IconComponent?: React.FC
+  icon?: React.ReactNode
 }) {
   return (
     <div
@@ -30,5 +29,5 @@ export function ContrastButton({
       )}
       {label}
     </div>
-  );
+  )
 }

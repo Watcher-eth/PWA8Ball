@@ -1,9 +1,9 @@
-import { useGetUserPositionsCount } from "@/graphql/queries/positions/useGetUserPositionsCount";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { useGetUserPositionsCount } from "@/graphql/queries/positions/useGetUserPositionsCount"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export function YourStats() {
-  const { user } = useUserStore();
-  const { data } = useGetUserPositionsCount(user?.walletAddress);
+  const { user } = useUserStore()
+  const { data } = useGetUserPositionsCount(user?.walletAddress)
   return (
     <div className="flex flex-row items-center justify-between p-3 px-8 rounded-lg border border-[#212121] my-3">
       <StatSection
@@ -14,7 +14,7 @@ export function YourStats() {
       <StatSection label="Total" value={data?.count ? data?.count : 0} />
       <StatSection label="Accuracy" value="0%" />
     </div>
-  );
+  )
 }
 
 function StatSection({
@@ -22,9 +22,9 @@ function StatSection({
   value,
   divider = true,
 }: {
-  label: string;
-  value?: string | number;
-  divider?: boolean;
+  label: string
+  value?: string | number
+  divider?: boolean
 }) {
   return (
     <>
@@ -38,5 +38,5 @@ function StatSection({
         )}
       </div>
     </>
-  );
+  )
 }

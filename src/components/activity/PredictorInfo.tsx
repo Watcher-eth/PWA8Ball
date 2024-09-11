@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { getProfilePath } from "@/utils/urls";
-import { ProfileToolTip } from "../profile/ProfileToolTip";
+import Link from "next/link"
+import { getProfilePath } from "@/utils/urls"
+import { ProfileToolTip } from "../profile/ProfileToolTip"
 
 export function PredictorInfo({
   user_id,
@@ -10,13 +10,13 @@ export function PredictorInfo({
   index,
   address,
 }: {
-  user_id: string;
-  name: string;
-  pfp: string;
-  total_amount: number;
-  index: number;
-  totalAmountUsdc: number;
-  address: string;
+  user_id: string
+  name: string
+  pfp: string
+  total_amount: number
+  index: number
+  totalAmountUsdc: number
+  address: string
 }) {
   return (
     <Link href={getProfilePath(address)}>
@@ -48,5 +48,5 @@ export function PredictorInfo({
         </p>
       </div>
     </Link>
-  );
+  )
 }

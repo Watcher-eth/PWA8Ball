@@ -1,14 +1,14 @@
-import _ from "lodash";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import _ from "lodash"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/ui/chart"
 
-import { generateChartConfig } from "./generateChartConfig";
+import { generateChartConfig } from "./generateChartConfig"
 
 export function GenericAreaChart({
   chartData,
@@ -17,17 +17,17 @@ export function GenericAreaChart({
   xAxisTickFormatter = (value) => value,
   customConfig,
 }: {
-  domain: number[];
-  chartData: any[];
-  xAxisKey?: string;
-  xAxisTickFormatter?: (value: string) => string;
-  customConfig?: Partial<ChartConfig>;
+  domain: number[]
+  chartData: any[]
+  xAxisKey?: string
+  xAxisTickFormatter?: (value: string) => string
+  customConfig?: Partial<ChartConfig>
 }) {
   const chartConfig = generateChartConfig({
     data: chartData,
     xAxisKey,
     customConfig,
-  });
+  })
 
   return (
     <ChartContainer className="h-full w-full" config={chartConfig}>
@@ -86,5 +86,5 @@ export function GenericAreaChart({
         ))}
       </AreaChart>
     </ChartContainer>
-  );
+  )
 }

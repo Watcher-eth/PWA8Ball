@@ -1,17 +1,16 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors";
+import { motion } from "framer-motion"
 
-import { AltSkeleton, Skeleton } from "@/components/ui/Skeleton";
-import { PredictorInfo } from "./PredictorInfo";
-import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard";
-import LeaderBoardTop3 from "./Leaderboard/LeaderboardTop3";
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+import { AltSkeleton, Skeleton } from "@/components/ui/Skeleton"
+import { PredictorInfo } from "./PredictorInfo"
+import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
+import LeaderBoardTop3 from "./Leaderboard/LeaderboardTop3"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function Leaderboard(props: { isDesktop: boolean }) {
-  const { data, isLoading } = useGetGlobalLeaderboard();
+  const { data, isLoading } = useGetGlobalLeaderboard()
   if (isLoading) {
-    return <LoadingLeaderboardSkeleton />;
+    return <LoadingLeaderboardSkeleton />
   }
 
   if (data) {
@@ -21,9 +20,9 @@ export function Leaderboard(props: { isDesktop: boolean }) {
         predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
       score: predictor.totalAmountUsdc / 1000000,
       walletAddress: predictor?.walletAddress,
-    }));
+    }))
 
-    const remainingPredictors = data?.slice(3);
+    const remainingPredictors = data?.slice(3)
 
     return (
       <motion.div
@@ -58,7 +57,7 @@ export function Leaderboard(props: { isDesktop: boolean }) {
             ))}
         </div>
       </motion.div>
-    );
+    )
   }
 }
 
@@ -77,5 +76,5 @@ export function LoadingLeaderboardSkeleton() {
       </div>
       <Skeleton className="h-5 w-14 " />
     </motion.div>
-  ));
+  ))
 }

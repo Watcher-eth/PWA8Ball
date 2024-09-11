@@ -3,18 +3,18 @@ import {
   DialogClose,
   DialogContent,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard";
-import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors";
-import LeaderBoardTop3 from "./LeaderboardTop3";
-import { PredictorInfo } from "../PredictorInfo";
-import { LoadingLeaderboardSkeleton } from "../Leaderboard";
-import UserRank from "./UserRank";
-import { Trophy, X } from "lucide-react";
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+} from "@/components/ui/dialog"
+import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
+import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors"
+import LeaderBoardTop3 from "./LeaderboardTop3"
+import { PredictorInfo } from "../PredictorInfo"
+import { LoadingLeaderboardSkeleton } from "../Leaderboard"
+import UserRank from "./UserRank"
+import { Trophy, X } from "lucide-react"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 function DesktopLeaderboardModal({ children }) {
-  const { data } = useGetGlobalLeaderboard();
+  const { data } = useGetGlobalLeaderboard()
 
   if (data) {
     const top3Users = data?.slice(0, 3).map((predictor) => ({
@@ -23,9 +23,9 @@ function DesktopLeaderboardModal({ children }) {
         predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
       score: predictor.totalAmountUsdc / 1000000,
       walletAddress: predictor?.walletAddress,
-    }));
+    }))
 
-    const remainingPredictors = data?.slice(3);
+    const remainingPredictors = data?.slice(3)
 
     return (
       <Dialog className={`!rounded-[1.5rem]`}>
@@ -83,8 +83,8 @@ function DesktopLeaderboardModal({ children }) {
           <UserRank />
         </DialogContent>
       </Dialog>
-    );
+    )
   }
 }
 
-export default DesktopLeaderboardModal;
+export default DesktopLeaderboardModal
