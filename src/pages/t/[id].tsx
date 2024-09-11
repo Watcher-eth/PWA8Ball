@@ -1,33 +1,33 @@
 // @ts-nocheck
-import { supabase } from "@/supabase/supabaseClient";
-import { Topic } from "@/components/topic";
-import { MobiTop } from "@/components/layouts/MobiTop";
-import DesktopTopic from "@/components/topic/DesktopTopic";
-import { GRAPH_ENDPOINT_URL } from "@/providers/GraphQlProvider";
-import { Market } from "@/__generated__/graphql";
-import { getAllMarketsForTopicId } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
+import { supabase } from "@/supabase/supabaseClient"
+import { Topic } from "@/components/topic"
+import { MobiTop } from "@/components/layouts/MobiTop"
+import DesktopTopic from "@/components/topic/DesktopTopic"
+import { GRAPH_ENDPOINT_URL } from "@/providers/GraphQlProvider"
+import { Market } from "@/__generated__/graphql"
+import { getAllMarketsForTopicId } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
 
 export async function getServerSideProps(context) {
-  const { id } = context.params as { id: string };
+  const { id } = context.params as { id: string }
 
   const { data: topicData, error } = await supabase
     .from("topics")
     .select("*")
     .eq("id", id)
-    .single();
+    .single()
 
   if (error) {
-    console.error(error);
+    console.error(error)
     return {
       notFound: true,
-    };
+    }
   }
 
-  const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/${id}?limit=15&hours=24`;
+  const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/${id}?limit=15&hours=24`
 
-  const resMarkets = await fetch(endpoint);
-  const markets = await resMarkets.json();
-  const allTopicMarkets = await getAllMarketsForTopicId("1");
+  const resMarkets = await fetch(endpoint)
+  const markets = await resMarkets.json()
+  const allTopicMarkets = await getAllMarketsForTopicId("1")
 
   return {
     props: {
@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
       markets,
       allTopicMarkets,
     },
-  };
+  }
 }
 
 export default function TopicPage({
@@ -43,13 +43,13 @@ export default function TopicPage({
   markets,
   allTopicMarkets,
 }: {
-  topicData: any;
-  markets: Market[];
-  allTopicMarkets: Market[];
+  topicData: any
+  markets: Market[]
+  allTopicMarkets: Market[]
 }) {
   if (topicData) {
     const { id, name, description, image, title, icon, topic, type, members } =
-      topicData;
+      topicData
 
     return (
       <div>
@@ -84,8 +84,8 @@ export default function TopicPage({
           }
         />
       </div>
-    );
+    )
   } else {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 }

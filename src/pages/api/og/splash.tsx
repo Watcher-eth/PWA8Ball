@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from "@vercel/og"
 
-import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets";
-import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
-import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts";
+import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets"
+import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
+import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts"
 
-export const runtime = "edge";
+export const runtime = "edge"
 
 export default async function GET(request: Request) {
   try {
@@ -14,16 +14,16 @@ export default async function GET(request: Request) {
     const [aeonikFontData, benzinFontData] = await Promise.all([
       aeonikFontDataPromise,
       benzinFontDataPromise,
-    ]);
+    ])
 
-    const markets = await fetchTrendingMarkets();
+    const markets = await fetchTrendingMarkets()
     const imgProps = {
       style: {
         width: "50px",
         height: "50px",
         borderRadius: "50%",
       },
-    };
+    }
     return new ImageResponse(
       (
         <div
@@ -140,7 +140,7 @@ export default async function GET(request: Request) {
               <img
                 src={
                   markets[0]?.image ??
-                    "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/71d4d17edcd49703a5ea446cc0e588e6.jpg"
+                  "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/71d4d17edcd49703a5ea446cc0e588e6.jpg"
                 }
                 alt="Image 1"
                 width="130px"
@@ -272,20 +272,19 @@ export default async function GET(request: Request) {
           { name: "Benzin", data: benzinFontData, style: "normal" },
         ],
       }
-    );
+    )
   } catch (e) {
-    return new Response("Failed to generate Market OG Image", { status: 500 });
+    return new Response("Failed to generate Market OG Image", { status: 500 })
   }
 }
 
-
 async function fetchTrendingMarkets(): Promise<IMarketWithTopicDetails[]> {
-  const { data, error } = await SUPABASE_CLIENT.rpc("get_trending_markets");
+  const { data, error } = await SUPABASE_CLIENT.rpc("get_trending_markets")
 
   if (error) {
-    console.error("Fetch Trending Markets Error:", error.message);
-    throw new Error(error.message);
+    console.error("Fetch Trending Markets Error:", error.message)
+    throw new Error(error.message)
   }
 
-  return data;
-};
+  return data
+}

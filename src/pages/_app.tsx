@@ -1,28 +1,28 @@
 // @ts-nocheck
-import "@/styles/fonts.css";
-import "@/styles/globals.css";
-import "@rainbow-me/rainbowkit/styles.css";
+import "@/styles/fonts.css"
+import "@/styles/globals.css"
+import "@rainbow-me/rainbowkit/styles.css"
 
-import type { AppProps } from "next/app";
-import { WagmiProvider } from "wagmi";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { init, AirstackProvider } from "@airstack/airstack-react";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth";
+import type { AppProps } from "next/app"
+import { WagmiProvider } from "wagmi"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { init, AirstackProvider } from "@airstack/airstack-react"
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
+import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 // import * as amplitude from "@amplitude/analytics-browser";
-import "../utils/patch";
-import { SonnerToaster } from "@/components/ui/SonnerToaster";
+import "../utils/patch"
+import { SonnerToaster } from "@/components/ui/SonnerToaster"
 
-import { AuthChecker } from "@/providers/AuthProvider";
-import { GraphQlProvider } from "@/providers/GraphQlProvider";
+import { AuthChecker } from "@/providers/AuthProvider"
+import { GraphQlProvider } from "@/providers/GraphQlProvider"
 
-import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
+import { useServiceWorker } from "@/hooks/useServiceWorker" // Import the hook
 
-import { CustomHead } from "@/components/layouts/CustomHead";
-import { RootLayout } from "@/components/layouts/RootLayout";
+import { CustomHead } from "@/components/layouts/CustomHead"
+import { RootLayout } from "@/components/layouts/RootLayout"
 
-import { wagmiConfig } from "@/wagmiConfig";
-export const queryClient = new QueryClient();
+import { wagmiConfig } from "@/wagmiConfig"
+export const queryClient = new QueryClient()
 
 const PRIVY_CONFIG: PrivyClientConfig = {
   loginMethods: ["email", "wallet", "google", "farcaster", "apple", "twitter"],
@@ -35,7 +35,7 @@ const PRIVY_CONFIG: PrivyClientConfig = {
     createOnLogin: "users-without-wallets",
     noPromptOnSignature: true,
   },
-};
+}
 
 // export const wagmiConfig = getDefaultConfig({
 //   appName: "8Ball",
@@ -52,7 +52,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // amplitude.init("3b52857bdc943ed9b3ec5ac60e5dbba1", {
   //   autocapture: { elementInteractions: true },
   // });
-  useServiceWorker(); // Use the custom hook
+  useServiceWorker() // Use the custom hook
 
   return (
     <>
@@ -85,5 +85,5 @@ export default function App({ Component, pageProps, router }: AppProps) {
       </WagmiProvider>
       {/**Need to check if this is valid*/}
     </>
-  );
+  )
 }

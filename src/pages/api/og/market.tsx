@@ -1,17 +1,17 @@
-import { ImageResponse } from "@vercel/og";
-import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
-import { aeonikFontDataPromise } from "@/utils/fonts";
+import { ImageResponse } from "@vercel/og"
+import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
+import { aeonikFontDataPromise } from "@/utils/fonts"
 
-export const runtime = "edge";
+export const runtime = "edge"
 
 export default async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = Number(searchParams.get("id")?.slice(0, 100));
-    const fontData = await aeonikFontDataPromise;
+    const { searchParams } = new URL(request.url)
+    const id = Number(searchParams.get("id")?.slice(0, 100))
+    const fontData = await aeonikFontDataPromise
 
-    const market = await fetchMarketAndPricesById(id);
-    const prices = market.prices;
+    const market = await fetchMarketAndPricesById(id)
+    const prices = market.prices
 
     return new ImageResponse(
       (
@@ -82,9 +82,9 @@ export default async function GET(request: Request) {
         height: 630,
         fonts: [{ name: "AeonikBold", data: fontData, style: "normal" }],
       }
-    );
+    )
   } catch (e) {
-    return new Response("Failed to generate Market OG Image", { status: 500 });
+    return new Response("Failed to generate Market OG Image", { status: 500 })
   }
 }
 
@@ -92,11 +92,11 @@ async function fetchMarketAndPricesById(marketId: number): Promise<any | null> {
   const { data, error } = await SUPABASE_CLIENT.rpc("get_market_with_details", {
     market_id: marketId,
     user_external_auth_id: "did:privy:clwsvnoij0de59b0ly1k7rvad",
-  });
+  })
 
-  let startTime = new Date();
-  startTime.setMonth(startTime.getMonth() - 1);
-  const startTimestamp = Math.floor(startTime.getTime() / 1000); // convert milliseconds to seconds
+  let startTime = new Date()
+  startTime.setMonth(startTime.getMonth() - 1)
+  const startTimestamp = Math.floor(startTime.getTime() / 1000) // convert milliseconds to seconds
 
   const { data: PriceData, error: PriceError } = await SUPABASE_CLIENT.from(
     "Price"
@@ -104,12 +104,12 @@ async function fetchMarketAndPricesById(marketId: number): Promise<any | null> {
     .select("*")
     .eq("marketId", marketId)
     .gte("timestamp", startTimestamp)
-    .order("timestamp", { ascending: true });
+    .order("timestamp", { ascending: true })
 
   if (error) {
-    console.error("Fetch User By External Auth ID Error:", error.message);
-    throw new Error(error.message);
+    console.error("Fetch User By External Auth ID Error:", error.message)
+    throw new Error(error.message)
   }
-  const marketAndPrice = { market: data, prices: PriceData };
-  return marketAndPrice;
+  const marketAndPrice = { market: data, prices: PriceData }
+  return marketAndPrice
 }

@@ -1,8 +1,7 @@
-import { MobileSearchPage } from "@/components/search/MobileSearchPage";
-import React from "react";
+import { MobileSearchPage } from "@/components/search/MobileSearchPage"
 
 function Search() {
-  return <MobileSearchPage />;
+  return <MobileSearchPage />
 }
 
-export default Search;
+export default Search

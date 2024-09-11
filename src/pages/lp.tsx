@@ -1,6 +1,6 @@
-import { MobiTop } from "@/components/layouts/MobiTop";
-import { DesktopLiquidityPage } from "@/components/lp/DesktopLiquidityPage";
-import { MobileLiquidityPage } from "@/components/lp/MobileLiquidityPage";
+import { MobiTop } from "@/components/layouts/MobiTop"
+import { DesktopLiquidityPage } from "@/components/lp/DesktopLiquidityPage"
+import { MobileLiquidityPage } from "@/components/lp/MobileLiquidityPage"
 
 export default function Lp() {
   return (
@@ -8,5 +8,5 @@ export default function Lp() {
       mobile={<MobileLiquidityPage />}
       desktop={<DesktopLiquidityPage />}
     />
-  );
+  )
 }

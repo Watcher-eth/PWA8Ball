@@ -1,11 +1,11 @@
 //@ts-nocheck
-import { MobileActivityPage } from "@/components/activity/MobileActivityPage";
-import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage";
-import { MobiTop } from "@/components/layouts/MobiTop";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { MobileActivityPage } from "@/components/activity/MobileActivityPage"
+import { DesktopProfilePage } from "@/components/profile/DesktopProfilePage"
+import { MobiTop } from "@/components/layouts/MobiTop"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export default function Activity() {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
   return (
     <MobiTop
       mobile={<MobileActivityPage />}
@@ -17,5 +17,5 @@ export default function Activity() {
         <MobileActivityPage />
       }
     />
-  );
+  )
 }

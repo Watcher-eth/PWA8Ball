@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import { NextApiRequest, NextApiResponse } from "next"
+import axios from "axios"
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const { walletAddress } = req.body;
+      const { walletAddress } = req.body
 
       const response = await axios.post(
         "https://api.stripe.com/v1/crypto/onramp_sessions",
@@ -21,14 +21,14 @@ export default async function handler(
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
-      );
+      )
 
-      res.status(200).json(response.data);
+      res.status(200).json(response.data)
     } catch (error) {
-      res.status(500).json({ error: (error as Error).message });
+      res.status(500).json({ error: (error as Error).message })
     }
   } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.setHeader("Allow", ["POST"])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 }

@@ -1,8 +1,6 @@
-import { PrivacyPolicy } from "@/components/settings/Legal/Privacy";
-import React from "react";
+import { PrivacyPolicy } from "@/components/settings/Legal/Privacy"
 
-function privacy() {
-  return <PrivacyPolicy />;
+
+export default function privacy() {
+  return <PrivacyPolicy />
 }
-
-export default privacy;

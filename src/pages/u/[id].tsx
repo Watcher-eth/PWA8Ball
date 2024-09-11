@@ -1,22 +1,20 @@
 // @ts-nocheck
 
-import { GetServerSideProps } from "next";
-import { fetchUserByExternalAuthId } from "@/supabase/queries/user/useGetUserByExternalAuthId";
-import { fetchTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers";
+import { GetServerSideProps } from "next"
 
-import { MobiTop } from "@/components/layouts/MobiTop";
-import { MobileProfilePage } from "@/components/profile/MobileProfilePage";
-import { DesktopProfilePage2 } from "@/components/profile/DesktopProfile";
-import { getUserById } from "@/graphql/queries/users/useUserById";
+import { MobiTop } from "@/components/layouts/MobiTop"
+import { MobileProfilePage } from "@/components/profile/MobileProfilePage"
+import { DesktopProfilePage2 } from "@/components/profile/DesktopProfile"
+import { getUserById } from "@/graphql/queries/users/useUserById"
 
 export default function ProfilePage({
   userId,
   totalFollowers,
   userC,
 }: {
-  userId: string;
-  totalFollowers: number;
-  userC: User;
+  userId: string
+  totalFollowers: number
+  userC: User
 }) {
   return (
     <MobiTop
@@ -35,17 +33,17 @@ export default function ProfilePage({
         />
       }
     />
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
+  const { id } = context.params as { id: string }
   // const [totalFollowers, userC] = await Promise.all([
   //   getUserById(id),
   //   fetchUserByExternalAuthId(id),
   // ]);
-  const totalFollowers = 0; // this should be temp
-  const userC = await getUserById(id);
+  const totalFollowers = 0 // this should be temp
+  const userC = await getUserById(id)
 
   return {
     props: {
@@ -53,5 +51,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       totalFollowers,
       userC,
     },
-  };
-};
+  }
+}

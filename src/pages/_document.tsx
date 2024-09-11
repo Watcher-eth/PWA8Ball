@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import { APP_DESCRIPTION, APP_NAME } from "@/constants";
+import { Html, Head, Main, NextScript } from "next/document"
+import { APP_DESCRIPTION, APP_NAME } from "@/constants"
 
 export default function Document() {
   return (
@@ -33,5 +33,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }

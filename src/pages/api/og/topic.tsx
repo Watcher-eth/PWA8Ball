@@ -1,24 +1,24 @@
 // @ts-nocheck
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from "@vercel/og"
 
-import { ITopic, IUser } from "@/supabase/types";
+import { ITopic, IUser } from "@/supabase/types"
 
-import { SUPABASE_CLIENT } from "@/supabase/supabaseClient";
-import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts";
+import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
+import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts"
 
-export const runtime = "edge";
+export const runtime = "edge"
 
 export default async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id")?.slice(0, 100) || "5";
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get("id")?.slice(0, 100) || "5"
     const [aeonikFontData, benzinFontData] = await Promise.all([
       aeonikFontDataPromise,
       benzinFontDataPromise,
-    ]);
+    ])
 
-    const topic = getTopics(id);
-    const members = await fetchMembersForTopic(id);
+    const topic = getTopics(id)
+    const members = await fetchMembersForTopic(id)
 
     const memberImgProps = {
       width: "40px",
@@ -28,7 +28,7 @@ export default async function GET(request: Request) {
         height: "40px",
         borderRadius: "50%",
       },
-    };
+    }
 
     return new ImageResponse(
       (
@@ -207,9 +207,9 @@ export default async function GET(request: Request) {
           { name: "Benzin", data: benzinFontData, style: "normal" },
         ],
       }
-    );
+    )
   } catch (e) {
-    return new Response("Failed to generate Market OG Image", { status: 500 });
+    return new Response("Failed to generate Market OG Image", { status: 500 })
   }
 }
 
@@ -226,20 +226,20 @@ async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
       `
     )
     .eq("topic_id", topicId)
-    .limit(5); // Limit the number of users to 5
+    .limit(5) // Limit the number of users to 5
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message)
 
   // Flatten the structure to directly get user details
-  return data.map((entry) => entry.users).flat();
+  return data.map((entry) => entry.users).flat()
 }
 
 async function getTopics(searchString: string): Promise<ITopic> {
   const { data, error } = await SUPABASE_CLIENT.from("topics")
     .select("*")
-    .eq("id", 2);
+    .eq("id", 2)
 
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message)
 
-  return data;
+  return data
 }

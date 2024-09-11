@@ -50,136 +50,136 @@ export async function trackMakePrediction(
 }
 
 // User boosts a market
-export const trackBoostMarket = async (
+export async function trackBoostMarket(
   marketId: MarketId,
   boostAmount: number,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Boost Market", { marketId, boostAmount, device })
 }
 
 // User joins a topic
-export const trackJoinTopic = async (
+export async function trackJoinTopic(
   topicId: TopicId,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Join Topic", { topicId, device })
 }
 
 // User clicks on a category
-export const trackClickCategory = async (
+export async function trackClickCategory(
   categoryId: CategoryId,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Click Category", { categoryId, device })
 }
 
 // User clicks on a topic
-export const trackClickTopic = async (
+export async function trackClickTopic(
   topicId: TopicId,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Click Topic", { topicId, device })
 }
 
 // User follows another user
-export const trackFollowUser = async (
+export async function trackFollowUser(
   followedUserId: UserId,
   followerId: UserId,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Follow User", { followedUserId, followerId, device })
 }
 
 // Onboarding steps
-export const trackOnboardingStep = async (
+export async function trackOnboardingStep(
   marketId: MarketId,
   amount: number,
   option: string,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("User onramp", { marketId, amount, option, device })
 }
 
 // User onramp steps
-export const trackOnramp = async (
+export async function trackOnramp(
   step: Step,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Onboarding Step", { step, device })
 }
 
 // User connects socials
-export const trackConnectSocials = async (
+export async function trackConnectSocials(
   socialPlatform: SocialPlatform,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Connect Socials", { socialPlatform, device })
 }
 
 // Steps for making a prediction
-export const trackPredictionStep = async (
+export async function trackPredictionStep(
   marketId: MarketId,
   step: Step,
   data: Record<string, unknown>,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Prediction Step", { marketId, step, data, device })
 }
 
 // User goes on site (once a day or multiple times)
-export const trackSiteVisit = async (device: string): Promise<void> => {
+export async function trackSiteVisit(device: string): Promise<void> {
   await logEventAsync("Site Visit", { timestamp: new Date(), device })
 }
 
 // User login
-export const trackUserLogin = async (
+export async function trackUserLogin(
   userId: UserId,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("User Login", { userId, device })
 }
 
 // User search
-export const trackSearch = async (
+export async function trackSearch(
   searchTerm: string,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Search", { searchTerm, device })
 }
 
 // Error events
-export const trackErrorEvent = async (
+export async function trackErrorEvent(
   errorType: ErrorType,
   context: Context,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Error Event", { errorType, context, device })
 }
 
 // Item share
-export const trackItemShare = async (
+export async function trackItemShare(
   itemType: ItemType,
   itemId: string,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Item Share", { itemType, itemId, device })
 }
 
 // Add comment
-export const trackAddComment = async (
+export async function trackAddComment (
   marketId: string,
   userId: string,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Add Comment", { marketId, userId, device })
 }
 
 // Abandoned action
-export const trackAbandonedAction = async (
+export async function trackAbandonedAction(
   actionType: string,
   itemId: string,
   device: string
-): Promise<void> => {
+): Promise<void> {
   await logEventAsync("Abandoned Action", { actionType, itemId, device })
 }

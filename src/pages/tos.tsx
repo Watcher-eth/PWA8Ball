@@ -1,8 +1,7 @@
-import { TermsOfServicePage } from "@/components/settings/Legal/tos";
-import React from "react";
+import { TermsOfServicePage } from "@/components/settings/Legal/tos"
 
-function tos() {
-  return <TermsOfServicePage />;
+
+
+export default function tos() {
+  return <TermsOfServicePage />
 }
-
-export default tos;
