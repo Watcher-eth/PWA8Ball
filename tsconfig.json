@@ -23,6 +23,9 @@
       }
     ]
   },
+  "format": {
+    "semicolons": false,
+  },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/graphql/scripts/InsertUser.js", "src/graphql/scripts/UpdateUser.js"],
   "exclude": ["node_modules"]
 }
