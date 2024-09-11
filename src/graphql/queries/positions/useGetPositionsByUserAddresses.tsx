@@ -1,10 +1,10 @@
 //@ts-nocheck
 
-import { gql } from "@/__generated__";
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { useQuery as useApolloQuery } from "@apollo/client";
+import { tgql } from "@/__generated__"
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
+import { useQuery as useApolloQuery } from "@apollo/client"
 
-export const GET_POSITION_BY_USER_ADDRESSES = gql(/* GraphQL */ `
+export const GET_POSITION_BY_USER_ADDRESSES = tgql(/* GraphQL */ `
   query FriendsOrders($userAddress_in: [String]!) {
     positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
       items {
@@ -31,7 +31,7 @@ export const GET_POSITION_BY_USER_ADDRESSES = gql(/* GraphQL */ `
       }
     }
   }
-`);
+`)
 
 export function useGetPositionsByUserAddresses(userAddresses: string[]) {
   const { data, loading, error } = useApolloQuery(
@@ -44,11 +44,11 @@ export function useGetPositionsByUserAddresses(userAddresses: string[]) {
             : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"],
       },
     }
-  );
+  )
 
   return {
     orders: data?.positions?.items ?? [],
     loading,
     error,
-  };
+  }
 }

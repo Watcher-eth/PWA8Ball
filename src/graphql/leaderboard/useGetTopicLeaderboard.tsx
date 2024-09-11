@@ -1,6 +1,6 @@
-import { useApiEndpoint } from "../useApiEndpoint";
+import { useApiEndpoint } from "../useApiEndpoint"
 
 export function useGetTopicLeaderboard(topicId: string) {
-  const { data } = useApiEndpoint(`/leaderboard/topic/${topicId}`);
-  return data;
+  const { data } = useApiEndpoint(`/leaderboard/topic/${topicId}`)
+  return data
 }

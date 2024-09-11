@@ -1,5 +1,5 @@
-import { useQuery as useApolloQuery } from "@apollo/client";
-import { tgql } from "@/__generated__";
+import { useQuery as useApolloQuery } from "@apollo/client"
+import { tgql } from "@/__generated__"
 
 const SEARCH_USERS = tgql(/* GraphQL */ `
   query searchUsers($name_contains: String!) {
@@ -12,12 +12,12 @@ const SEARCH_USERS = tgql(/* GraphQL */ `
       }
     }
   }
-`);
+`)
 
 export function useSearchUsers(searchString: string) {
   const { data, loading, error, refetch } = useApolloQuery(SEARCH_USERS, {
     variables: { name_contains: String(searchString) },
-  });
+  })
 
   //TODO: Get Topic
 
@@ -26,5 +26,5 @@ export function useSearchUsers(searchString: string) {
     loading,
     error,
     refetch,
-  };
+  }
 }

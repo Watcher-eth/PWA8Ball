@@ -1,8 +1,8 @@
-import { gql, useQuery as useApolloQuery } from "@apollo/client";
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
-import { tgql } from "@/__generated__";
+import { useQuery as useApolloQuery } from "@apollo/client"
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
+import { tgql } from "@/__generated__"
 
-export const GET_POSITIONS_BY_WALLET = gql`
+export const GET_POSITIONS_BY_WALLET = tgql(/* GraphQL */ `
   query getPositionsByWallet($userAddress: String!) {
     positions(where: { userAddress: $userAddress }, limit: 15) {
       items {
@@ -31,7 +31,7 @@ export const GET_POSITIONS_BY_WALLET = gql`
       }
     }
   }
-`;
+`)
 
 export function useGetPositionsByWallet(userAddress: string) {
   const { data, loading, error, refetch } = useApolloQuery(
@@ -41,11 +41,11 @@ export function useGetPositionsByWallet(userAddress: string) {
         userAddress: getChecksummedAddress(userAddress),
       },
     }
-  );
+  )
   return {
     orders: data?.positions?.items,
     loading,
     error,
     refetch,
-  };
+  }
 }

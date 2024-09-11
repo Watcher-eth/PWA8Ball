@@ -1,6 +1,6 @@
-import { useQuery as useApolloQuery } from "@apollo/client";
-import { tgql } from "@/__generated__";
-import { APOLLO_CLIENT } from "@/providers/GraphQlProvider";
+import { useQuery as useApolloQuery } from "@apollo/client"
+import { tgql } from "@/__generated__"
+import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 
 const GET_ONCHAIN_MARKET = tgql(/* GraphQL */ `
   query getMarketById($id: BigInt!) {
@@ -25,20 +25,20 @@ const GET_ONCHAIN_MARKET = tgql(/* GraphQL */ `
       userAddress
     }
   }
-`);
+`)
 
 export async function getMarketById(id: string) {
   const { data } = await APOLLO_CLIENT.query({
     query: GET_ONCHAIN_MARKET,
     variables: { id: String(id) },
-  });
-  return data?.market;
+  })
+  return data?.market
 }
 
 export function useGetMarketById(id: string) {
   const { data, loading, error, refetch } = useApolloQuery(GET_ONCHAIN_MARKET, {
     variables: { id: String(id) },
-  });
+  })
 
   //TODO: Get Topic
 
@@ -47,5 +47,5 @@ export function useGetMarketById(id: string) {
     loading,
     error,
     refetch,
-  };
+  }
 }
