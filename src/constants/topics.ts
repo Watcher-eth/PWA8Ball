@@ -153,4 +153,4 @@ export const HARD_TOPICS = [
     image: "https://roastbrief.us/wp-content/uploads/2023/10/influencers.webp",
     members: "0",
   },
-];
+]

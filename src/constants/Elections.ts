@@ -26,7 +26,7 @@ export const SECTION_DATA_MAP = {
     odds: [36, 64],
     marketId: 6,
   },
-} as const;
+} as const
 
 export const SwingStates = [
   {
@@ -72,4 +72,4 @@ export const SwingStates = [
     votes: 15,
     marketId: 14,
   },
-];
+]

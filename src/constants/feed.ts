@@ -1,4 +1,4 @@
-import { CardType } from "@/types/FeedTypes";
+import { CardType } from "@/types/FeedTypes"
 
 export const TEST_FEED_DATA: CardType[] = [
   {
@@ -52,5 +52,4 @@ export const TEST_FEED_DATA: CardType[] = [
     optionA: { multiplier: 3.4, name: "No", odds: 0.66 },
     optionB: { multiplier: 1.15, name: "Yes", odds: 0.34 },
   },
-] as const;
-
+] as const

@@ -1,8 +1,8 @@
-import { ActivityChartType } from "@/types/AcitivityTypes";
+import { ActivityChartType } from "@/types/AcitivityTypes"
 
-export const DEFAULT_USER_ID = "did:privy:clutganzs01rz2oqk4vvlwtih";
+export const DEFAULT_USER_ID = "did:privy:clutganzs01rz2oqk4vvlwtih"
 export const DEFAULT_PFP_PLACEHOLDER =
-  "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6";
+  "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQalRrZ3DhpviKTK_4Mn_uCvClxYNP5QntBI2GluPXMX77Ps3A6"
 
 export const TEST_BET_MODAL_DATA = {
   question: "Will Oppenheimer win best picture at the 2024 Academy Awards",
@@ -13,7 +13,7 @@ export const TEST_BET_MODAL_DATA = {
   options: ["No", "Yes"],
   image:
     "https://imgs.search.brave.com/t1L4NG0G9uVXWT5F44Tp6reSnaW1mSMVd9thDo1mwyE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dGVsZWdyYXBoLmNv/LnVrL2NvbnRlbnQv/ZGFtL2ZpbG1zLzIw/MjQvMDEvMTgvVEVM/RU1NR0xQSUNUMDAw/MzQzMjcwMDY1XzE3/MDU1OTY4MDkzMDMw/X3RyYW5zX052QlF6/UU5qdjRCcUE3TjJD/eG5KV25ZSTN0Q2JW/Qmd1OVQwYWVzdXN2/TjFURTdhMGRkZF9l/c0kuanBlZz9pbXdp/ZHRoPTQ4MA",
-};
+}
 
 export const TEST_ACTIVITY_DATA = [
   {
@@ -46,7 +46,7 @@ export const TEST_ACTIVITY_DATA = [
     image:
       "https://phantom-marca.unidadeditorial.es/931e11306070eef2226fbf72e6452563/resize/828/f/jpg/assets/multimedia/imagenes/2023/12/04/17017052216381.jpg",
   },
-];
+]
 
 export const TEST_FINISHED_ACTIVITY_DATA = [
   {
@@ -67,7 +67,7 @@ export const TEST_FINISHED_ACTIVITY_DATA = [
     image:
       "https://www.allkpop.com/upload/2024/03/content/130003/1710302625-dj-pumpkin-01.jpg",
   },
-];
+]
 
 export const TEST_FIND_FRIENDS_DATA = [
   {
@@ -90,7 +90,7 @@ export const TEST_FIND_FRIENDS_DATA = [
     handle: "@0xSmallbrain.eth",
     pfp: "https://res.cloudinary.com/merkle-manufactory/image/fetch/c_fill,f_jpg,w_168/https%3A%2F%2Fi.imgur.com%2FVj7CdUX.jpg",
   },
-];
+]
 
 export const TEST_ACTIVITY_CHART_DATA: ActivityChartType[] = [
   {
@@ -108,7 +108,7 @@ export const TEST_ACTIVITY_CHART_DATA: ActivityChartType[] = [
     image:
       "https://www.brides.com/thmb/AKCV9mWFEAgFRgRN9HnbePceqLk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1179298993-016de42ca11d4a25b911999cb8a7db1f.jpg",
   },
-];
+]
 
 export const TEST_TOPICS = [
   "🔥 Trending",
@@ -134,7 +134,7 @@ export const TEST_TOPICS = [
   "🪖 Ukraine",
   "📹 Twitch",
   "🎤 KPop",
-];
+]
 
 export const TEST_COMMENTS_DATA = [
   {
@@ -170,7 +170,7 @@ export const TEST_COMMENTS_DATA = [
       "I think the score was one of the best parts of the movie. I think it has a good shot at winning best soundtrack!",
     date: "2023-03-15T09:10:00Z",
   },
-];
+]
 
 export const TEST_VOTERS = [
   {
@@ -201,4 +201,4 @@ export const TEST_VOTERS = [
     option: "Yes",
     pfp: "https://pbs.twimg.com/profile_images/1518670972559130624/-G9gNsOp_400x400.png",
   },
-];
+]
