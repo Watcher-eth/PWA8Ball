@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 import { Wallet } from "lucide-react";
 import { useConnectWallet, useLogin } from "@privy-io/react-auth";
 
-import { useCreateUser } from "@/supabase/mutations/useCreateUser";
-import { NewUser } from "@/lib/supabase/types";
-
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
