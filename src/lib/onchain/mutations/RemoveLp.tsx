@@ -6,15 +6,13 @@ import { EightballV1ABI } from "../contracts/Eightball"
 import { type Address, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 import { V2_PAIR_ABI } from "../contracts/V2Pair"
-import {
-  EightBallStorageAddress,
-  EightballStorageV1ABI,
-} from "../contracts/EightballStorage"
+import { EightballStorageV1ABI } from "../contracts/EightballStorage"
 import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
   BASE_SEPOLIA_STORAGE_ADDRESS,
 } from "@/constants/onchain"
 import { rpcClient } from "../rpcClient"
+import { EightBallAbi, EightBallStorageAbi, EightBallStorageAddress, PairV1Abi } from "../generated"
 
 async function removeLp(props: {
   userId: string
@@ -31,21 +29,21 @@ async function removeLp(props: {
     const currentPairId = BigInt(props.marketId)
 
     const marketPair = await rpcClient.readContract({
-      address: BASE_SEPOLIA_STORAGE_ADDRESS,
-      abi: EightballStorageV1ABI,
+      address: EightBallStorageAddress,
+      abi: EightBallStorageAbi,
       args: [currentPairId],
       functionName: "getMarketPair",
     })
 
     const liquidityTokens = await rpcClient.readContract({
       address: marketPair.liquidityPool,
-      abi: V2_PAIR_ABI,
+      abi: PairV1Abi,
       args: [account],
       functionName: "balanceOf",
     })
 
     const contract = getContract({
-      abi: EightballV1ABI,
+      abi: EightBallAbi,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     })

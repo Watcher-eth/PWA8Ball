@@ -11,6 +11,7 @@ import {
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain"
 import { createMarket } from "@/supabase/mutations/createMarket"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
+import { EightBallAbi } from "../generated"
 
 
 
@@ -42,7 +43,7 @@ async function initialize(props: {
     const initialProb = props?.initialProb ? props?.initialProb : 50
 
     const contract = getContract({
-      abi: EightballV1ABI,
+      abi: EightBallAbi,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: props.client, wallet: props.client },
     })

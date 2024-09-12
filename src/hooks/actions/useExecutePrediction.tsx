@@ -20,6 +20,7 @@ import { getProfilePath } from "@/utils/urls"
 
 import { ZERO_ADDRESS } from "@/constants/misc"
 import { baseSepolia } from "viem/chains"
+import { EightBallAbi } from "@/lib/onchain/generated"
 
 
 
@@ -79,7 +80,7 @@ export function useExecutePrediction() {
       const preferYes = Number(option) === 1 ? false : true
       const preferYesNum = preferYes ? 1 : 0
       const contract = getContract({
-        abi: EightballV1ABI,
+        abi: EightBallAbi,
         address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
         client: { public: rpcClient, wallet: client },
       })

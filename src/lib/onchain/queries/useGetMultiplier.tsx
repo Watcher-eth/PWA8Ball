@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { EightballV1ABI } from "../contracts/Eightball"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
+import { EightBallAbi } from "../generated"
 
 export const useGetMultiplier = (marketId: number, tokenAddress: string) => {
   return useQuery<number | null>({
@@ -15,7 +16,7 @@ export const useGetMultiplier = (marketId: number, tokenAddress: string) => {
       try {
         const multiplier = await rpcClient.readContract({
           address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-          abi: EightballV1ABI,
+          abi: EightBallAbi,
           args: [BigInt(marketId), tokenAddress],
           functionName: "getMultiplier",
         })

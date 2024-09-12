@@ -12,6 +12,7 @@ import { EightballV1ABI } from "@/lib/onchain/contracts/Eightball"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { txErrorHandlerWrapper } from "@/utils/txErrorHandler"
+import { EightBallAbi } from "@/lib/onchain/generated"
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false)
@@ -44,7 +45,7 @@ export function useExecuteBoost() {
     }
 
     const contract = getContract({
-      abi: EightballV1ABI,
+      abi: EightBallAbi,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: rpcClient, wallet: client },
     })
