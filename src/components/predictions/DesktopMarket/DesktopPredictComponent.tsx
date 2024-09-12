@@ -49,10 +49,10 @@ export function DesktopPredictComponent(props: {
   const setStake = useVotingStore((state) => state.setState);
   return (
     <div
-      className={`rounded-lg overflow-hidden ${
+      className={`  ${
         step === 0 || step === 4
-          ? " "
-          : " p-4 pt-1 border-[0.1rem] border-[#141414]"
+          ? ""
+          : "p-4 rounded-lg  pt-1 border-[0.1rem] border-[#141414] overflow-hidden"
       } `}
     >
       <motion.div
@@ -62,16 +62,16 @@ export function DesktopPredictComponent(props: {
       >
         <AnimatePresence>
           {step === 0 || step === 4 ? (
-            <div className="flex justify-between text-[1.5rem] text-white font-[500] flex-row items-center gap-3">
+            <div className="flex justify-between text-[1.5rem] text-white font-medium flex-row items-center gap-3">
               <div>{step === 0 ? `Predict ${title}` : "Your Positions"}</div>{" "}
               <div
                 onClick={() => {
                   if (step === 0) {
-                    setStep(4);
+                    setStep(4)
                   } else if (step === 4) {
-                    setStep(0);
+                    setStep(0)
                   } else {
-                    setStep(4);
+                    setStep(4)
                   }
                 }}
                 className="h-[2rem] hover:scale-101 active:scale-98 w-[2rem] border-[0.1rem] border-[#181818] bg-[#131313] rounded-full flex flex-row items-center justify-center"
@@ -81,9 +81,11 @@ export function DesktopPredictComponent(props: {
             </div>
           ) : null}
           {step === 0 && (
-            <div className="flex flex-col w-full pt-4  gap-4">
+            <div className="flex flex-col w-full pt-4 gap-4">
               <Input
-                onChange={(e) => setAmount(Number(e.target.value))}
+                onChange={(e) =>
+                  setAmount(Number(cleanNumberInput(e.target.value)))
+                }
                 type="numeric"
                 placeholder="$0.00"
                 className={`
@@ -92,15 +94,15 @@ export function DesktopPredictComponent(props: {
                     focus:!ring-white/40 focus:!ring-offset-0  focus:!ring-1
                   `}
               />
-              <div className="flex items-center justify-between z-2 gap-3 mt-0">
+              <div className="flex items-center justify-around z-2 gap-3 mt-0 max-w-full">
                 <OutcomeButton
                   isDesktop={true}
                   text={options[1].name}
                   multiplier={options[1].value / 100}
                   option={0}
                   onClick={() => {
-                    setStake({ amount, option: 1 });
-                    setStep(2);
+                    setStake({ amount, option: 1 })
+                    setStep(2)
                   }}
                 />
                 <OutcomeButton
@@ -109,8 +111,8 @@ export function DesktopPredictComponent(props: {
                   multiplier={options[0].value / 100}
                   option={1}
                   onClick={() => {
-                    setStake({ amount, option: 2 });
-                    setStep(2);
+                    setStake({ amount, option: 2 })
+                    setStep(2)
                   }}
                 />
               </div>
@@ -138,7 +140,7 @@ export function DesktopPredictComponent(props: {
               />
               <div className="flex flex-col ml-[9px] w-full -space-y-0.5">
                 <div className="flex items-center justify-between w-full">
-                  <span className="line-clamp-1 font-[500] text-[16px] text-[lightgray]/80 max-w-[73vw] mb-[1px] overflow-hidden">
+                  <span className="line-clamp-1 font-medium text-[16px] text-[lightgray]/80 max-w-[73vw] mb-[1px] overflow-hidden">
                     You predicted '{options[1].name}'
                   </span>
                   <span className="line-clamp-1 font-[400] text-[14px] text-[#999999] max-w-[73vw] mb-[1px] overflow-hidden">
@@ -162,7 +164,7 @@ export function DesktopPredictComponent(props: {
             >
               <motion.div
                 onClick={() => {
-                  setStep(5);
+                  setStep(5)
                 }}
                 className={`
                   mt-3 rounded-md p-2 overflow-hidden
@@ -181,7 +183,7 @@ export function DesktopPredictComponent(props: {
               </motion.div>
               <motion.div
                 onClick={() => {
-                  setStep(7);
+                  setStep(7)
                 }}
                 className={`
                   mt-3 rounded-md p-2 overflow-hidden hover:scale-[100.8%]  active:scale-99
@@ -240,7 +242,7 @@ export function DesktopPredictComponent(props: {
         </AnimatePresence>
       </motion.div>
     </div>
-  );
+  )
 }
 
 function DesktopConfirmPrediction({

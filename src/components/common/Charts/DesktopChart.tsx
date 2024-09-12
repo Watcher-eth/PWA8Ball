@@ -139,7 +139,7 @@ export function DesktopChart(props: {
           </div>
           <div className="flex flex-row items-center justify-between pb-1">
             {props?.isMarketPage ? (
-              <span className="text-base text-white/80 font-[500]">
+              <span className="text-base text-white/80 font-medium">
                 {props?.question}
               </span>
             ) : (

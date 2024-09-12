@@ -40,7 +40,7 @@ export function RemoveLPConfirmationScreen(props: {
 
   const showToast = () => {
     toast(
-      <div className="w-full rounded-full bg-[#101010] text-base font-[500] px-3 pr-4 text-white flex flex-row items-center p-2">
+      <div className="w-full rounded-full bg-[#101010] text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
         <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
           <Check strokeWidth={4.5} className="text-green-400 h-[0.95rem]" />
         </div>

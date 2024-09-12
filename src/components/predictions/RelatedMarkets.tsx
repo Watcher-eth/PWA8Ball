@@ -79,7 +79,7 @@ function RelatedMarketQuestion({
           alt={title}
         />
         <div className="flex flex-col ml-[9px] -space-y-0.5">
-          <span className="line-clamp-1 font-[500] text-[16px] text-[lightgray] max-w-[73vw] mb-[1px] overflow-hidden">
+          <span className="line-clamp-1 font-medium text-[16px] text-[lightgray] max-w-[73vw] mb-[1px] overflow-hidden">
             {question}
           </span>
           <span className="text-lg font-[600] text-white">

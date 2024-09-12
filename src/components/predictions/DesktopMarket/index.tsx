@@ -93,7 +93,7 @@ export function DesktopMarketPage({ users, market, id }) {
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
 
               <div className="py-4">
-                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-[500]">
+                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-medium">
                   {enhancedMarket?.question}
                 </div>
                 <CommentSection

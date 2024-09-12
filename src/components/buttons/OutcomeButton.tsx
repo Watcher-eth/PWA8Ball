@@ -30,8 +30,8 @@ export function OutcomeButton({
       <div
         className={
           text?.length < 6
-            ? "text-[22px] sm:text-[18px] lg:text-[22px]"
-            : "text-[18px] sm:text-[16px] lg:text-[22px]"
+            ? "text-[22px] sm:text-[18px] xl:text-[22px]"
+            : "text-[18px] sm:text-[16px] xl:text-[22px]"
         }
       >
         {text}{" "}

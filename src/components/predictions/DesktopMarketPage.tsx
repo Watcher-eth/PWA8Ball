@@ -154,7 +154,7 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
             <Col xs={4} lg={3}>
-              <div className="pt-3 xl:px-4 pb-1 rounded-[1.5rem] ">
+              <div className="pt-3 xl:px-4 pb-1 ">
                 <DesktopPredictComponent
                   id={id}
                   question={enhancedMarket?.question}
