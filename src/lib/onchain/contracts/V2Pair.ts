@@ -1,5 +1,6 @@
 import { pairV1Abi } from "../../../../generated"
+import { PairFactoryV1Address, PairV1Abi } from "../generated"
 
-export const V2_PAIR_ADDRESS = "0xAcD90268578f4D8B8fF8ff309b8840f6F19926D5" // Replace with your contract's address
+export const V2_PAIR_ADDRESS = PairFactoryV1Address // Replace with your contract's address
 
-export const V2_PAIR_ABI = pairV1Abi
+export const V2_PAIR_ABI = PairV1Abi

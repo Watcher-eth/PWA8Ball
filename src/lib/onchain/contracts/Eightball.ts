@@ -9,14 +9,14 @@ import {
 import { baseGoerli } from "viem/chains"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { eightBallAbi } from "../../../../generated"
+import { EightBallAbi } from "../generated"
 
-export const EightballV1ABI = eightBallAbi
+export const EightballV1ABI = EightBallAbi
 
 export async function getEightBallContract(walletClient: WalletClient) {
   // Use walletClient for write operations and rpcClient for read operations
   const contract = getContract({
-    abi: EightballV1ABI,
+    abi: EightBallAbi,
     address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
     client: { public: rpcClient, wallet: walletClient },
   })
