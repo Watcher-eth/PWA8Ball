@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { SmartAccountClient } from "permissionless"
-import { getContract } from "viem"
+import { Address, getContract } from "viem"
 import { useRouter } from "next/router"
 import { toast } from "sonner"
 import { Check } from "lucide-react"
@@ -22,11 +22,13 @@ async function predict({
   preferYes,
   marketId,
   client,
+  referrer,
 }: {
   amount: bigint
   preferYes: boolean
   marketId: number
   client: SmartAccountClient
+  referrer?: Address
 }) {
   if (!amount || !marketId) {
     throw new Error("All fields must be provided")
@@ -40,16 +42,28 @@ async function predict({
       client: { public: rpcClient, wallet: client },
     })
 
-    const contractArgs = [
-      BigInt(amount),
-      preferYesNum,
-      BigInt(marketId),
-      ROOT_OPERATOR_ADDRESS,
-      990,
-    ]
-    console.log("Args", contractArgs)
+    // const contractArgs = [
+    //   BigInt(amount),
+    //   preferYesNum,
+    //   BigInt(marketId),
+    //   ROOT_OPERATOR_ADDRESS,
+    //   990,
+    // ]
 
-    const hash = await contract.write.predict(contractArgs)
+    const predictionParams = {
+      desiredAmount: BigInt(amount),
+      preferYes: preferYesNum,
+      marketId: BigInt(marketId),
+      operator: ROOT_OPERATOR_ADDRESS,
+      slippage: 990,
+      referrer: referrer
+        ? referrer
+        : "0x0000000000000000000000000000000000000000",
+    }
+
+    console.log("Args", predictionParams)
+
+    const hash = await contract.write.predict(predictionParams)
 
     console.log("Prediction hash", hash)
     return hash
@@ -79,6 +93,7 @@ export function useExecutePrediction() {
     option: number
     marketId: number
     options: any[]
+    referrer?: Address
   }) {
     setLoading(true)
     setError(null)
@@ -110,6 +125,7 @@ export function useExecutePrediction() {
         marketId,
         amount: biAmount,
         preferYes: Number(option) === 1 ? false : true,
+        referrer,
       })
 
       router?.prefetch(getProfilePath(userCon?.walletAddress!))
