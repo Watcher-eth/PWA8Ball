@@ -6,6 +6,7 @@ import {
   custom,
   getContract,
   http,
+  WalletClient,
 } from "viem"
 import { baseSepolia } from "viem/chains"
 import {
@@ -23,6 +24,7 @@ import { USDC_ABI } from "./contracts/Usdc"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import {
   ConnectedWallet,
+  EIP1193Provider,
   useConnectWallet,
   usePrivy,
   useWallets,
@@ -40,16 +42,16 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-
-/** Interface returned by custom `useSmartAccount` hook */
-const SmartAccountContext = React.createContext<{
-  /** Smart account client to send signature/transaction requests to the smart account */
-  smartAccountClient?: SmartAccountClient<never>
-  /** Smart account address */
-  smartAccountAddress?: Address
-  /** Boolean to indicate whether the smart account state has initialized */
-  smartAccountReady: boolean
-}>({
+  /** Interface returned by custom `useSmartAccount` hook */
+  // <{
+  //   /** Smart account client to send signature/transaction requests to the smart account */
+  //   smartAccountClient?: SmartAccountClient<never>
+  //   /** Smart account address */
+  //   smartAccountAddress?: Address
+  //   /** Boolean to indicate whether the smart account state has initialized */
+  //   smartAccountReady: boolean
+  // }>
+const SmartAccountContext = React.createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
   smartAccountReady: false,
@@ -82,9 +84,9 @@ export function SmartAccountProvider({
 
     // Get an EIP1193 provider and viem WalletClient for the EOA
     const privyClient = createWalletClient({
-      account: embeddedWallet?.address,
+      account: embeddedWallet?.address as Address,
       chain: baseSepolia,
-      transport: custom(eip1193provider),
+      transport: custom(eip1193provider as EIP1193Provider),
     })
 
     const customSigner = walletClientToSmartAccountSigner(privyClient)
@@ -117,7 +119,7 @@ export function SmartAccountProvider({
     })
     console.log("Step 2", pimlicoPaymaster)
 
-    const smartAccountClient = createSmartAccountClient({
+    const smartAccountClient: WalletClient = createSmartAccountClient({
       account: simpleSmartAccount,
       bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
       middleware: {
@@ -169,7 +171,7 @@ export function SmartAccountProvider({
 
   useEffect(() => {
     if (walletType === "smartwallet" && embeddedWallet) {
-      createSmartWallet(embeddedWallet)
+      createSmartWallet()
     }
   }, [
     walletType,

@@ -19,6 +19,7 @@ import { getProfilePath } from "@/utils/urls"
 
 
 import { ZERO_ADDRESS } from "@/constants/misc"
+import { baseSepolia } from "viem/chains"
 
 
 
