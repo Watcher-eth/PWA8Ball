@@ -21,6 +21,7 @@ import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWa
 import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
 import { Card } from "@/components/ui/tailwind/Card";
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import { cleanNumberInput } from "@/utils/string/cleanNumberInput"
 
 export function DesktopPredictComponent(props: {
   question: string;
