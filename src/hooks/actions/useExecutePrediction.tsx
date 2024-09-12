@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { SmartAccountClient } from "permissionless"
-import { Address, getContract } from "viem"
+import { Address, getContract, WalletClient } from "viem"
 import { useRouter } from "next/router"
 import { toast } from "sonner"
 import { Check } from "lucide-react"
@@ -17,6 +17,11 @@ import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useReferralStore } from "@/lib/stores/ReferralStore"
 import { getProfilePath } from "@/utils/urls"
 
+
+import { ZERO_ADDRESS } from "@/constants/misc"
+
+
+
 async function predict({
   amount,
   preferYes,
@@ -27,8 +32,8 @@ async function predict({
   amount: bigint
   preferYes: boolean
   marketId: number
-  client: SmartAccountClient
-  referrer?: Address
+  client: WalletClient //SmartAccountClient<any> |
+  referrer: Address
 }) {
   if (!amount || !marketId) {
     throw new Error("All fields must be provided")
@@ -52,18 +57,27 @@ async function predict({
 
     const predictionParams = {
       desiredAmount: BigInt(amount),
-      preferYes: preferYesNum,
-      marketId: BigInt(marketId),
-      operator: ROOT_OPERATOR_ADDRESS,
-      slippage: 990,
-      referrer: referrer
-        ? referrer
-        : "0x0000000000000000000000000000000000000000",
+      preferYes:     preferYesNum,
+      marketId:      BigInt(marketId),
+      operator:      ROOT_OPERATOR_ADDRESS,
+      slippage:      990,
+      referrer:      referrer,
     }
+    const predictionParamsArr = [
+      BigInt(amount),
+      preferYesNum,
+      BigInt(marketId),
+      ROOT_OPERATOR_ADDRESS,
+      990,
+      referrer,
+    ]
 
-    console.log("Args", predictionParams)
+    // console.log("predictionParams", predictionParams)
+    console.log("predictionParamsArr", predictionParamsArr)
+    console.log("referrer", referrer)
+    // console.log("Args", predictionParams)
 
-    const hash = await contract.write.predict(predictionParams)
+    const hash = await contract.write.predict([predictionParams])
 
     console.log("Prediction hash", hash)
     return hash
@@ -88,6 +102,7 @@ export function useExecutePrediction() {
     option,
     marketId,
     options,
+    referrer = ZERO_ADDRESS,
   }: {
     amount: number
     option: number
@@ -149,11 +164,6 @@ export function useExecutePrediction() {
           },
         }
       )
-
-      // setTimeout(
-      //   () => router.push(getProfilePath(userCon?.walletAddress!)),
-      //   9000
-      // );
     } catch (err) {
       console.error("Failed to make prediction:", err)
       toast.error("Failed to make prediction!")

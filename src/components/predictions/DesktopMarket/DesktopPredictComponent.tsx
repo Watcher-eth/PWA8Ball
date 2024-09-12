@@ -46,7 +46,10 @@ export function DesktopPredictComponent(props: {
     refetch,
   } = props;
   const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
-  const [amount, setAmount] = useState(0);
+  // const [amount, setAmount] = useState(0);
+  const [amountStr, setAmountStr] = useState()
+  const amount = Number(amountStr?.length > 0 ? amountStr : 0)
+  // const amountStr = amount.toString()
   const setStake = useVotingStore((state) => state.setState);
   return (
     <div
@@ -84,8 +87,9 @@ export function DesktopPredictComponent(props: {
           {step === 0 && (
             <div className="flex flex-col w-full pt-4 gap-4">
               <Input
+                value={amountStr}
                 onChange={(e) =>
-                  setAmount(Number(cleanNumberInput(e.target.value)))
+                  setAmountStr(cleanNumberInput(e.target.value))
                 }
                 type="numeric"
                 placeholder="$0.00"
