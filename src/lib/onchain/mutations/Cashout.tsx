@@ -15,6 +15,7 @@ import {
 } from "@/constants/onchain"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { rpcClient } from "../rpcClient"
+import { EightBallStorageAbi } from "../generated"
 
 
 async function cashoutPrediction(props: {
@@ -36,7 +37,7 @@ async function cashoutPrediction(props: {
 
     const marketPair = await rpcClient.readContract({
       address: BASE_SEPOLIA_STORAGE_ADDRESS,
-      abi: EightballStorageV1ABI,
+      abi: EightBallStorageAbi,
       args: [currentPairId],
       functionName: "getMarketPair",
     })
