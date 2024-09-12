@@ -22,71 +22,6 @@ import { ZERO_ADDRESS } from "@/constants/misc"
 
 
 
-async function predict({
-  amount,
-  preferYes,
-  marketId,
-  client,
-  referrer,
-}: {
-  amount: bigint
-  preferYes: boolean
-  marketId: number
-  client: WalletClient //SmartAccountClient<any> |
-  referrer: Address
-}) {
-  if (!amount || !marketId) {
-    throw new Error("All fields must be provided")
-  }
-
-  try {
-    const preferYesNum = preferYes ? 1 : 0
-    const contract = getContract({
-      abi: EightballV1ABI,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-      client: { public: rpcClient, wallet: client },
-    })
-
-    // const contractArgs = [
-    //   BigInt(amount),
-    //   preferYesNum,
-    //   BigInt(marketId),
-    //   ROOT_OPERATOR_ADDRESS,
-    //   990,
-    // ]
-
-    const predictionParams = {
-      desiredAmount: BigInt(amount),
-      preferYes:     preferYesNum,
-      marketId:      BigInt(marketId),
-      operator:      ROOT_OPERATOR_ADDRESS,
-      slippage:      990,
-      referrer:      referrer,
-    }
-    const predictionParamsArr = [
-      BigInt(amount),
-      preferYesNum,
-      BigInt(marketId),
-      ROOT_OPERATOR_ADDRESS,
-      990,
-      referrer,
-    ]
-
-    // console.log("predictionParams", predictionParams)
-    console.log("predictionParamsArr", predictionParamsArr)
-    console.log("referrer", referrer)
-    // console.log("Args", predictionParams)
-
-    const hash = await contract.write.predict([predictionParams])
-
-    console.log("Prediction hash", hash)
-    return hash
-  } catch (error) {
-    console.error("Error during prediction", error)
-    throw error
-  }
-}
-
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -96,6 +31,7 @@ export function useExecutePrediction() {
   const { user: userCon } = useUserStore()
   const { client, address, walletType } = useClientAddress()
   const { approveToken, allowance } = useEightBallApproval()
+
 
   async function executePrediction({
     amount,
@@ -118,12 +54,15 @@ export function useExecutePrediction() {
       if (!address) {
         throw new Error("Address is required")
       }
+      if (!amount || !marketId) {
+        throw new Error("All fields must be provided")
+      }
 
       const biAmount = BigInt(Number(amount.toFixed(4)) * 1000000)
       console.log({ allowance, biAmount })
       if (
         (walletType === "smartwallet" && !allowance) ||
-        !(allowance >= biAmount)
+         (!allowance) || !(allowance >= biAmount)
       ) {
         console.log("Approving token")
         await approveToken()
@@ -135,16 +74,41 @@ export function useExecutePrediction() {
         amount: biAmount,
         preferYes: Number(option) === 1 ? false : true,
       })
-      await predict({
-        client,
-        marketId,
-        amount: biAmount,
-        preferYes: Number(option) === 1 ? false : true,
-        referrer,
+
+      const preferYes = Number(option) === 1 ? false : true
+      const preferYesNum = preferYes ? 1 : 0
+      const contract = getContract({
+        abi: EightballV1ABI,
+        address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+        client: { public: rpcClient, wallet: client },
       })
 
+
+      const predictionParams = {
+        desiredAmount: biAmount,
+        preferYes: preferYesNum,
+        marketId: BigInt(marketId),
+        operator: ROOT_OPERATOR_ADDRESS,
+        slippage: 990,
+        referrer: referrer,
+      }
+      // const predictionParamsArr = [
+      //   biAmount,
+      //   preferYesNum,
+      //   BigInt(marketId),
+      //   ROOT_OPERATOR_ADDRESS,
+      //   990,
+      //   referrer,
+      // ]
+
+      // console.log("predictionParams", predictionParams)
+      // console.log("predictionParamsArr", predictionParamsArr)
+      console.log("referrer", referrer)
+      // console.log("Args", predictionParams)
+      const hash = await contract.write.predict([predictionParams], {})
+
+
       router?.prefetch(getProfilePath(userCon?.walletAddress!))
-      setLoading(false)
       setSuccess(true)
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
@@ -168,9 +132,8 @@ export function useExecutePrediction() {
       console.error("Failed to make prediction:", err)
       toast.error("Failed to make prediction!")
       setError(err instanceof Error ? err : new Error("Unknown error occurred"))
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return {

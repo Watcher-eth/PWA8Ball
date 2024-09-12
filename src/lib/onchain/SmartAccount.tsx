@@ -44,7 +44,7 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
 /** Interface returned by custom `useSmartAccount` hook */
 const SmartAccountContext = React.createContext<{
   /** Smart account client to send signature/transaction requests to the smart account */
-  smartAccountClient?: SmartAccountClient
+  smartAccountClient?: SmartAccountClient<never>
   /** Smart account address */
   smartAccountAddress?: Address
   /** Boolean to indicate whether the smart account state has initialized */
@@ -71,9 +71,7 @@ export function SmartAccountProvider({
   )
 
   // States to store the smart account and its status
-  const [smartAccountClient, setSmartAccountClient] = useState<
-    SmartAccountClient | undefined
-  >()
+  const [smartAccountClient, setSmartAccountClient] = useState()
   const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
