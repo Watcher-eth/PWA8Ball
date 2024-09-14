@@ -11,9 +11,7 @@ import {
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain"
 import { createMarket } from "@/supabase/mutations/createMarket"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { EightBallAbi } from "../generated"
-
-
+import { EightBallAbi } from "../../generated"
 
 async function initialize(props: {
   amount: number

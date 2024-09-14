@@ -15,8 +15,7 @@ import {
 } from "@/constants/onchain"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { rpcClient } from "../rpcClient"
-import { EightBallStorageAbi } from "../generated"
-
+import { EightBallStorageAbi } from "../../generated"
 
 async function cashoutPrediction(props: {
   preferYes: boolean

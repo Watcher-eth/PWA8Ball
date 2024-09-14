@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { EightballV1ABI } from "../contracts/Eightball"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { EightBallAbi } from "../generated"
+import { EightBallAbi } from "../../generated"
 
 export const useGetMultiplier = (marketId: number, tokenAddress: string) => {
   return useQuery<number | null>({

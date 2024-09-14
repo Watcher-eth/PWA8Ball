@@ -1,4 +1,3 @@
-
 import {
   WalletClient,
   createPublicClient,
@@ -9,7 +8,7 @@ import {
 import { baseGoerli } from "viem/chains"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { EightBallAbi } from "../generated"
+import { EightBallAbi } from "../../generated"
 
 export const EightballV1ABI = EightBallAbi
 

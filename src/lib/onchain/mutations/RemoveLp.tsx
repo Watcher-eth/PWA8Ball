@@ -12,7 +12,12 @@ import {
   BASE_SEPOLIA_STORAGE_ADDRESS,
 } from "@/constants/onchain"
 import { rpcClient } from "../rpcClient"
-import { EightBallAbi, EightBallStorageAbi, EightBallStorageAddress, PairV1Abi } from "../generated"
+import {
+  EightBallAbi,
+  EightBallStorageAbi,
+  EightBallStorageAddress,
+  PairV1Abi,
+} from "../../generated"
 
 async function removeLp(props: {
   userId: string
