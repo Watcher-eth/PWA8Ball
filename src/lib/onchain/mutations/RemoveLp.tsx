@@ -1,7 +1,4 @@
-// @ts-nocheck
-
-import { useMutation } from "@tanstack/react-query"
-
+import { useState } from "react"
 import { type Address, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 
@@ -15,39 +12,49 @@ import {
   EightBallStorageAbi,
   EightBallStorageAddress,
   PairV1Abi,
+  useReadEightBallStorageGetMarketPair,
+  useReadPairV1BalanceOf,
 } from "@/lib/onchain/generated"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 
 
-export const useRemoveLp = () => {
+export function useRemoveLp({ marketId } :{marketId: number | bigint}) {
+  const chainId = DEFAULT_CHAIN_ID
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const currentPairId = BigInt(marketId)
+  const {data: marketPair } = useReadEightBallStorageGetMarketPair({
+    chainId,
+    args: [currentPairId],
+  })
+
+  // const { data: liquidityTokens } = useReadPairV1BalanceOf({
+  //   chainId,
+  //   address: marketPair?.liquidityPool,
+  //   args: [account],
+  // })
+
+
   async function removeLp({
     userId,
-    marketId,
     client,
     address,
   }: {
     userId: string
-    marketId: number
     client: SmartAccountClient
     address: Address
   }) {
-    if (!marketId) {
-      throw new Error("All fields must be provided")
+    if (!marketPair) {
+      throw new Error("Market pair not found")
     }
+
     setLoading(true)
     try {
 
       const account = address
       const currentPairId = BigInt(marketId)
 
-      const marketPair = await rpcClient.readContract({
-        address: EightBallStorageAddress,
-        abi: EightBallStorageAbi,
-        args: [currentPairId],
-        functionName: "getMarketPair",
-      })
 
       const liquidityTokens = await rpcClient.readContract({
         address: marketPair.liquidityPool,

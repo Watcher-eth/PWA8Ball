@@ -1,21 +1,18 @@
 // @ts-nocheck
 
 import { useMutation } from "@tanstack/react-query"
-import { EightballV1ABI } from "../contracts/Eightball"
 import { type Address, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
-import {
-  EightBallStorageAddress,
-  EightballStorageV1ABI,
-} from "../contracts/EightballStorage"
-import { OutcomeTokenABI } from "../contracts/OutcomeToken"
+
+
+import { OutcomeTokenAbi } from "@/lib/onchain/generated"
 import {
   BASE_SEPOLIA_STORAGE_ADDRESS,
   ROOT_OPERATOR_ADDRESS,
 } from "@/constants/onchain"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { rpcClient } from "../rpcClient"
-import { EightBallStorageAbi } from "../../generated"
+import { rpcClient } from "@/lib/onchain/rpcClient"
+import { EightBallAbi, EightBallStorageAbi } from "@/lib/onchain/generated"
 
 async function cashoutPrediction(props: {
   preferYes: boolean
@@ -46,7 +43,7 @@ async function cashoutPrediction(props: {
       : marketPair.noToken
 
     const outcomeToken = await getContract({
-      abi: OutcomeTokenABI,
+      abi: OutcomeTokenAbi,
       address: tokenAddy,
       client: { public: rpcClient, wallet: props?.client },
     })
@@ -57,7 +54,7 @@ async function cashoutPrediction(props: {
     ])
 
     const contract = getContract({
-      abi: EightballV1ABI,
+      abi: EightBallAbi,
       address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
       client: { public: rpcClient, wallet: props.client },
     })

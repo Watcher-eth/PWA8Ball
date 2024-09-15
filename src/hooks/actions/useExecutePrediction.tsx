@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import { toast } from "sonner"
 import { Check } from "lucide-react"
 
-import { EightballV1ABI } from "@/lib/onchain/contracts/Eightball"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import {
   ROOT_OPERATOR_ADDRESS,

@@ -36,7 +36,7 @@ export function RemoveLPConfirmationScreen(props: {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { mutate: removeLP, loading, success } = useRemoveLp();
+  const { removeLp } = useRemoveLp({ marketId: props.id });
 
 
   const showToast = () => {
@@ -66,12 +66,13 @@ export function RemoveLPConfirmationScreen(props: {
       try {
         showToast();
         setLoading(true);
-        removeLP({
+        await removeLP({
           userId: userCon?.externalAuthProviderUserId!,
           marketId: props.id,
           client: client,
           address: address,
         });
+        setSuccess(true)
         setTimeout(() => setLoading(false), 500);
 
         setTimeout(() => {
@@ -158,7 +159,7 @@ export function RemoveLPConfirmationScreen(props: {
             </span>
           </motion.button>
         </DialogClose>
-        {loading || success || loading || success || error ? (
+        {loading || success || loading || error ? (
           <TxStatusButton
             isPending={loading}
             isSuccess={isSuccess}

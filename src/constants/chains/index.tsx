@@ -1,4 +1,4 @@
-import { base } from "viem/chains"
+import { base, baseSepolia } from "viem/chains"
 
 import type { Chain } from "@/types/chain"
 
@@ -6,7 +6,7 @@ import * as all from "./master"
 
 export * from "./supportedChains"
 
-export const DEFAULT_CHAIN_ID = base.id
+export const DEFAULT_CHAIN_ID = baseSepolia.id
 
 export type ChainsByChainID = {
   [cID: number]: Chain
