@@ -58,7 +58,7 @@ function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
     >
       <button
         onClick={onTopicPress}
-        className={`px-4 py-2 text-base font-[Aeonik-Bold] rounded-full mr-4
+        className={`px-4 py-2 text-base font-[Aeonik] rounded-full mr-4
         border-[0.5px] border-transparent active:scale-95 hover:scale-102 transition-all
         ${
           selectedTopic === item
