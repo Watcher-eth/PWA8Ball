@@ -36,7 +36,8 @@ export function RemoveLPConfirmationScreen(props: {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { mutate: removeLP, isPending, isSuccess, error } = useRemoveLp();
+  const { mutate: removeLP, loading, success } = useRemoveLp();
+
 
   const showToast = () => {
     toast(
@@ -157,9 +158,9 @@ export function RemoveLPConfirmationScreen(props: {
             </span>
           </motion.button>
         </DialogClose>
-        {loading || success || isPending || isSuccess || error ? (
+        {loading || success || loading || success || error ? (
           <TxStatusButton
-            isPending={isPending}
+            isPending={loading}
             isSuccess={isSuccess}
             height="h-12"
             isError={error}

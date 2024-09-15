@@ -1,17 +1,12 @@
 // @ts-nocheck
 import { useMutation } from "@tanstack/react-query"
-import { EightballV1ABI } from "../contracts/Eightball"
-import { rpcClient } from "@/lib/onchain/rpcClient"
 import { WalletClient, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
-import {
-  EightBallStorageAddress,
-  EightballStorageV1ABI,
-} from "../contracts/EightballStorage"
+
 import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain"
 import { createMarket } from "@/supabase/mutations/createMarket"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { EightBallAbi } from "../../generated"
+import { EightBallAbi } from "@/lib/onchain/generated"
 
 async function initialize(props: {
   amount: number
