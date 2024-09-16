@@ -88,7 +88,7 @@ export function ConfirmPrediction(props: {
           </div>
           <div className="flex items-center justify-between my-2 w-full">
             <span className="text-lg  text-[#424242] font-semibold">
-              Market fees
+              Fees
             </span>
             <span className="text-lg text-white font-bold">
               ${(amount * 0.025).toPrecision(2)}

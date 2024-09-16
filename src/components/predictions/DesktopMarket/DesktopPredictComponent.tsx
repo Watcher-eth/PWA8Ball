@@ -328,7 +328,7 @@ function DesktopConfirmPrediction({
               contentStr={amount.toPrecision(3)}
             />
             <PredictInfoRow
-              label="Market Fees"
+              label="Fees"
               contentStr={(amount * 0.025).toPrecision(2)}
             />
             <PredictInfoRow
