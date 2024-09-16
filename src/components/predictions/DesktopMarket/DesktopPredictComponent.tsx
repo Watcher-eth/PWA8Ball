@@ -1,38 +1,39 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { AlignLeft, ArrowLeftRight, Receipt, ReceiptText } from "lucide-react";
+import React, { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { AlignLeft, ArrowLeftRight, Receipt, ReceiptText } from "lucide-react"
 
-import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
-import { useVotingStore } from "@/lib/stores/VotingStore";
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction"
+import { useVotingStore } from "@/lib/stores/VotingStore"
 
-import { CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/Input";
-import { OutcomeButton } from "@/components/buttons/OutcomeButton";
-import { SharePredictButton } from "@/components/buttons/SharePredictButton";
+import { CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/Input"
+import { OutcomeButton } from "@/components/buttons/OutcomeButton"
+import { SharePredictButton } from "@/components/buttons/SharePredictButton"
 
-import { DesktopChart } from "@/components/common/Charts/DesktopChart";
-import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction";
-import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal";
+import { DesktopChart } from "@/components/common/Charts/DesktopChart"
+import { DesktopLoadingPrediction } from "@/components/modals/PredictModal/LoadingPrediction"
+import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal"
 
-import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
-import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
-import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
-import { Card } from "@/components/ui/tailwind/Card";
-import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen"
+import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen"
+import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview"
+import { Card } from "@/components/ui/tailwind/Card"
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
 import { cleanNumberInput } from "@/utils/string/cleanNumberInput"
+import { useReferralStore } from "@/lib/stores/ReferralStore"
 
 export function DesktopPredictComponent(props: {
-  question: string;
-  title: string;
-  image: string;
-  id: string;
-  options: string[];
-  topic: string;
-  initialProb: number;
-  refetch: () => void;
-  userOwns?: { highest_amount: number; highest_option: number };
+  question: string
+  title: string
+  image: string
+  id: string
+  options: string[]
+  topic: string
+  initialProb: number
+  refetch: () => void
+  userOwns?: { highest_amount: number; highest_option: number }
 }) {
   const {
     question,
@@ -44,13 +45,13 @@ export function DesktopPredictComponent(props: {
     userOwns,
     initialProb,
     refetch,
-  } = props;
-  const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0);
+  } = props
+  const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0)
   // const [amount, setAmount] = useState(0);
   const [amountStr, setAmountStr] = useState()
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
   // const amountStr = amount.toString()
-  const setStake = useVotingStore((state) => state.setState);
+  const setStake = useVotingStore((state) => state.setState)
   return (
     <div
       className={`  ${
@@ -88,13 +89,11 @@ export function DesktopPredictComponent(props: {
             <div className="flex flex-col w-full pt-4 gap-4">
               <Input
                 value={amountStr}
-                onChange={(e) =>
-                  setAmountStr(cleanNumberInput(e.target.value))
-                }
+                onChange={(e) => setAmountStr(cleanNumberInput(e.target.value))}
                 type="numeric"
                 placeholder="$0.00"
                 className={`
-                    w-full font-semibold placeholder:text-[lightgray]  rounded-md py-6 text-md
+                    w-full font-semibold placeholder:text-[lightgray] text-white  rounded-md py-6 text-md
                     bg-[#090909] border-[0.1rem] border-[#212121] hover:bg-[#101010]
                     focus:!ring-white/40 focus:!ring-offset-0  focus:!ring-1
                   `}
@@ -260,20 +259,21 @@ function DesktopConfirmPrediction({
   id,
   odds,
 }: {
-  setStep: (step: number) => void;
-  image: string;
+  setStep: (step: number) => void
+  image: string
   // option: string;
-  options: string[];
-  question: string;
-  title: string;
-  id: string;
-  odds: number;
+  options: string[]
+  question: string
+  title: string
+  id: string
+  odds: number
 }) {
-  const amount = useVotingStore((state) => state.amount);
-  const option = useVotingStore((state) => state.option);
+  const amount = useVotingStore((state) => state.amount)
+  const option = useVotingStore((state) => state.option)
+  const refId = useReferralStore((state) => state.referralId)
 
-  const { executePrediction, loading, success, error } = useExecutePrediction();
-  console.log("loading", loading, success);
+  const { executePrediction, loading, success, error } = useExecutePrediction()
+  console.log("loading", loading, success)
   return (
     <div
       className={`flex flex-col items-center w-full ${
@@ -405,7 +405,8 @@ function DesktopConfirmPrediction({
                   option,
                   marketId: id,
                   options,
-                });
+                  referrer: refId,
+                })
               }}
               className={`
           ml-4  py-2 px-6 z-10 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D]
@@ -428,7 +429,7 @@ function DesktopConfirmPrediction({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function PredictInfoRow({
@@ -436,9 +437,9 @@ function PredictInfoRow({
   contentStr,
   content,
 }: {
-  label: string;
-  contentStr?: string;
-  content?: React.ReactNode;
+  label: string
+  contentStr?: string
+  content?: React.ReactNode
 }) {
   return (
     <div className="flex items-center justify-between my-2 w-full">
@@ -447,5 +448,5 @@ function PredictInfoRow({
         <span className="text-lg text-white font-bold">${contentStr}</span>
       )}
     </div>
-  );
+  )
 }

@@ -7,10 +7,10 @@ export function useCheckReferral() {
   const setReferralId = useReferralStore((state) => state.setReferralId)
 
   useEffect(() => {
-    const ref = router.query.ref // For Next.js
+    const ref = router.query.ref // Extract referral ID from query params
 
     if (ref) {
-      setReferralId(ref)
+      setReferralId(ref) // Store the referral ID
     }
   }, [router.query.ref, setReferralId])
 }

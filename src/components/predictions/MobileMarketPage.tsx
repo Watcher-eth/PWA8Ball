@@ -1,49 +1,49 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowLeft, Share } from "lucide-react";
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { ArrowLeft, Share } from "lucide-react"
 
-import { HOME_PATH } from "@/utils/urls";
-import { fillUserImages } from "@/utils/fillUserImages";
+import { HOME_PATH } from "@/utils/urls"
+import { fillUserImages } from "@/utils/fillUserImages"
 
-import { useModalStore } from "@/lib/stores/ModalStore";
+import { useModalStore } from "@/lib/stores/ModalStore"
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { DrawerClose } from "@/components/ui/drawer";
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { DrawerClose } from "@/components/ui/drawer"
 
-import { PredictModal } from "@/components/modals/PredictModal";
-import { MobileShareBetModal } from "@/components/share/bet/MobileShareBetModal";
+import { PredictModal } from "@/components/modals/PredictModal"
+import { MobileShareBetModal } from "@/components/share/bet/MobileShareBetModal"
 
-import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer";
-import { OutcomeButton } from "@/components/buttons/OutcomeButton";
+import { MobileDrawerContainer } from "@/components/ui/MobileDrawerContainer"
+import { OutcomeButton } from "@/components/buttons/OutcomeButton"
 
-import { MobileBettersModal } from "@/components/predictions/Betters/MobileBettersModal";
-import { CommentSection } from "@/components/predictions/CommentSection";
-import { BetDetails } from "@/components/predictions/BetDetails";
-import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
-import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { formatMarket } from "@/utils/markets/formatMarketArr";
+import { MobileBettersModal } from "@/components/predictions/Betters/MobileBettersModal"
+import { CommentSection } from "@/components/predictions/CommentSection"
+import { BetDetails } from "@/components/predictions/BetDetails"
+import { RelatedMarkets } from "@/components/predictions/RelatedMarkets"
+import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { formatMarket } from "@/utils/markets/formatMarketArr"
 import {
   BlurOverlayWrapper,
   withBlurOverlay,
-} from "../onboarding/Invites/InviteBlur";
-import { INVITES_ACTIVE } from "@/constants";
-import { useCheckReferral } from "@/hooks/useCheckReferral";
-import { MarketMetadata } from "./BetDetails/MarketMetadata";
-import { shortenAddress } from "@/utils/address/shortenAddress";
+} from "../onboarding/Invites/InviteBlur"
+import { INVITES_ACTIVE } from "@/constants"
+import { useCheckReferral } from "@/hooks/useCheckReferral"
+import { MarketMetadata } from "./BetDetails/MarketMetadata"
+import { shortenAddress } from "@/utils/address/shortenAddress"
 
 export function MobileMarketPage({ market, users, id }) {
-  const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const userImages = fillUserImages(users, 3);
-  useCheckReferral();
+  const openLoginModal = useModalStore((state) => state.openLoginModal)
+  const userImages = fillUserImages(users, 3)
+  useCheckReferral()
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <MobileDrawerContainer>
@@ -60,7 +60,7 @@ export function MobileMarketPage({ market, users, id }) {
         />
       </MobileDrawerContainer>
     </BlurOverlayWrapper>
-  );
+  )
 }
 
 function MobileMarketContent({
@@ -163,7 +163,7 @@ function MobileMarketContent({
               font-[Aeonik-Bold] z-2
             `}
           >
-            <div> ${((stake ?? 0) / 100000).toFixed(2)}</div>
+            <div> ${((market?.usdcStake ?? 0) / 100000).toFixed(2)}</div>
           </div>
         </div>
         <MobileBettersModal
@@ -246,7 +246,7 @@ function MobileMarketContent({
           </div>
         </PredictModal>
       </div>
-      <div className="z-2 mt-2.5 px-1">
+      <div className="z-2 mt-3.5 px-1.5">
         <MarketMetadata
           creator={shortenAddress(market?.userAddress)}
           usdcStake={market?.usdcStake}
@@ -281,5 +281,5 @@ function MobileMarketContent({
         <RelatedMarkets topicId={topicId} id={id} />
       </div>
     </motion.div>
-  );
+  )
 }

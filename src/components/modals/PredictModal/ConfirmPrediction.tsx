@@ -1,29 +1,31 @@
 // @ts-nocheck
 
-import { motion } from "framer-motion";
-import { AlignLeft } from "lucide-react";
-import { useVotingStore } from "@/lib/stores/VotingStore";
-import { SharePredictButton } from "@/components/buttons/SharePredictButton";
+import { motion } from "framer-motion"
+import { AlignLeft } from "lucide-react"
+import { useVotingStore } from "@/lib/stores/VotingStore"
+import { SharePredictButton } from "@/components/buttons/SharePredictButton"
 
-import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction"
 
-import { MobileLoadingPrediction } from "./LoadingPrediction";
-import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import { MobileLoadingPrediction } from "./LoadingPrediction"
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
+import { useReferralStore } from "@/lib/stores/ReferralStore"
 
 export function ConfirmPrediction(props: {
-  setStep: (step: number) => void;
-  image: string;
-  option: string;
-  options: string[];
-  question: string;
-  title: string;
-  id: string;
-  odds: number;
+  setStep: (step: number) => void
+  image: string
+  option: string
+  options: string[]
+  question: string
+  title: string
+  id: string
+  odds: number
 }) {
-  const { executePrediction, loading, success, error } = useExecutePrediction();
+  const { executePrediction, loading, success, error } = useExecutePrediction()
 
-  const amount = useVotingStore((state) => state.amount);
-  const option = useVotingStore((state) => state.option);
+  const amount = useVotingStore((state) => state.amount)
+  const option = useVotingStore((state) => state.option)
+  const refId = useReferralStore((state) => state.referralId)
 
   const shareLink = async () => {
     try {
@@ -35,9 +37,9 @@ export function ConfirmPrediction(props: {
       //   url: "https://tryglimpse.xyz",
       // });
     } catch (error) {
-      console.error("Error during sharing", error);
+      console.error("Error during sharing", error)
     }
-  };
+  }
   return (
     <div className="flex flex-col items-center w-full bg-[#090909] py-4 pt-0 mt-5 rounded-lg min-h-[485px]">
       <motion.div className="flex flex-col items-center w-full bg-[#090909] px-6  rounded-lg">
@@ -124,7 +126,7 @@ export function ConfirmPrediction(props: {
       >
         <motion.button
           onClick={() => {
-            props.setStep(1);
+            props.setStep(1)
           }}
           className={`
             py-2 px-6 w-1/2 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
@@ -154,7 +156,8 @@ export function ConfirmPrediction(props: {
                     option: props.option,
                     marketId: props?.id,
                     options: props?.options,
-                  });
+                    referrer: refId,
+                  })
             }}
             className="py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
             initial={{ width: "40vw" }}
@@ -178,5 +181,5 @@ export function ConfirmPrediction(props: {
         )}
       </div>
     </div>
-  );
+  )
 }

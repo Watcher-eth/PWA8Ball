@@ -1,27 +1,27 @@
 // @ts-nocheck
 
-import { Input } from "@/components/ui/Input";
-import React, { useState } from "react";
-import { ConfirmButton } from "./ConfirmButton";
-import { DesktopCardModal } from "../DesktopCardModal";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion, AnimatePresence } from "framer-motion";
+import { Input } from "@/components/ui/Input"
+import React, { useState } from "react"
+import { ConfirmButton } from "./ConfirmButton"
+import { DesktopCardModal } from "../DesktopCardModal"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion, AnimatePresence } from "framer-motion"
 export function DesktopBoostContent(props: {
-  image: string;
-  id: string;
-  onComplete: () => void;
+  image: string
+  id: string
+  onComplete: () => void
 }) {
-  const [amount, setAmount] = useState<number>();
+  const [amount, setAmount] = useState<number>()
   return (
     <div className="flex flex-col p-2 ">
       <img className="h-14 w-14 object-cover rounded-full" src={props?.image} />
       <div className="text-white text-[1.5rem] font-semibold mt-4 ">
-        Boost and earn rewards
+        Boost and earn fees
       </div>
       <div className="text-[lightgray] text-[0.95rem] font-medium mb-3  ">
-        Boost this market to earn extra cred and trading fees. The more popular
-        a prediction gets the more fees you receive.
+        Boost this market to improve it's accuracy and earn fees. The more
+        popular a prediction gets the more fees you receive.
       </div>
       <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-5" />
       <BoostInfoRow label="Minimum Boost" content="$10.00" />
@@ -46,7 +46,7 @@ export function DesktopBoostContent(props: {
         amount={amount}
       />
     </div>
-  );
+  )
 }
 
 export function BoostInfoRow({
@@ -54,9 +54,9 @@ export function BoostInfoRow({
   content,
   children,
 }: {
-  label: string;
-  content?: React.ReactNode;
-  children?: React.ReactNode;
+  label: string
+  content?: React.ReactNode
+  children?: React.ReactNode
 }) {
   return (
     <div className="flex flex-row items-center justify-between my-3">
@@ -65,18 +65,18 @@ export function BoostInfoRow({
       <div className="text-white font-medium text-[1.1rem]">{content}</div>
       {children}
     </div>
-  );
+  )
 }
 export function DesktopBoostModal({
   children,
   image,
   id,
 }: {
-  children: React.ReactNode;
-  image: string;
-  id: string;
+  children: React.ReactNode
+  image: string
+  id: string
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   return (
     <Dialog open={open} onOpenChange={setOpen} className={`!rounded-[1.5rem] `}>
       <DialogTrigger asChild>
@@ -101,7 +101,7 @@ export function DesktopBoostModal({
                   image={image}
                   id={id}
                   onComplete={() => {
-                    setOpen(false);
+                    setOpen(false)
                   }}
                 />
               </CardContent>
@@ -110,5 +110,5 @@ export function DesktopBoostModal({
         </motion.div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
