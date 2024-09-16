@@ -1,11 +1,10 @@
 // @ts-nocheck
-import { formatMarketArr } from "@/utils/markets/formatMarketArr";
-import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
-import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
-import { FeedCard } from "./FeedCard";
-import Link from "next/link";
-import { ELECTIONS_PATH, getTopicPath } from "@/utils/urls";
-import { skeletonVariants } from "../ui/Skeleton";
+import { formatMarketArr } from "@/utils/markets/formatMarketArr"
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic"
+import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic"
+import { FeedCard } from "./FeedCard"
+import Link from "next/link"
+import { ELECTIONS_PATH, getTopicPath } from "@/utils/urls"
 
 export function DesktopTrendingTopics({
   title,
@@ -16,16 +15,16 @@ export function DesktopTrendingTopics({
   imageUrl,
   topicId,
 }: {
-  title: string;
-  subtitle: string;
-  amount: string;
-  participants: string[];
-  date: string;
-  imageUrl: string;
-  topicId: string;
+  title: string
+  subtitle: string
+  amount: string
+  participants: string[]
+  date: string
+  imageUrl: string
+  topicId: string
 }) {
-  const { data: membersProfiles } = useGetMembersForTopic(topicId);
-  const { data: markets } = useGetMarketsForTopic(topicId);
+  const { data: membersProfiles } = useGetMembersForTopic(topicId)
+  const { data: markets } = useGetMarketsForTopic(topicId)
 
   return (
     <div className="relative mx-8 rounded-lg flex align-center shadow-inner justify-between h-[56vh] py-8 flex-row items-center   overflow-hidden">
@@ -113,10 +112,10 @@ export function DesktopTrendingTopics({
       <div className="relative w-[70vw] ">
         <div className="overflow-x-auto overflow-y-visible flex gap-4 p-2 pr-7">
           {formatMarketArr({ markets })?.map((market, index) => {
-            return <FeedCard key={index} {...market} />;
+            return <FeedCard key={index} {...market} />
           })}
         </div>
       </div>
     </div>
-  );
+  )
 }

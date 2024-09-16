@@ -9,7 +9,6 @@ import { ChevronLeft, Share, Star } from "lucide-react";
 
 import { LEADERBOARD_PATH } from "@/utils/urls";
 
-import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
 
 import { ShareTopicModal } from "@/components/share/topic/ShareTopicModal";

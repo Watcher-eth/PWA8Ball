@@ -1,38 +1,37 @@
-import _ from "lodash";
-import { useState, useCallback } from "react";
-import { AnimatePresence } from "framer-motion";
-import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
-import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
-import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
-import { useOverlaySearch } from "@/hooks/useOverlaySearch";
-import { Input } from "../ui/Input";
-import { FriendItem, MarketItem, TopicItem } from "./SearchOverview/SearchItem";
-import { Spinner } from "../modals/PredictModal/Spinner";
-import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
-import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers";
+import _ from "lodash"
+import { useState, useCallback } from "react"
+import { AnimatePresence } from "framer-motion"
+import { useOverlaySearch } from "@/hooks/useOverlaySearch"
+import { Input } from "../ui/Input"
+import { FriendItem, MarketItem, TopicItem } from "./SearchOverview/SearchItem"
+import { Spinner } from "../modals/PredictModal/Spinner"
+import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
+import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets"
+import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers"
+
+
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
-];
+]
 
 export function MobileSearchPage() {
-  const [debouncedText, setDebouncedText] = useState("");
-  const { markets: allMarkets, loading: loadingMarkets } = useGetAllMarkets();
+  const [debouncedText, setDebouncedText] = useState("")
+  const { markets: allMarkets, loading: loadingMarkets } = useGetAllMarkets()
 
   const trendingMarkets = enhanceMarketsWithImageAndPolyId(
     allMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
-  const { users: users, loading: loadingUsers } = useSearchUsers(debouncedText);
+  )
+  const { users: users, loading: loadingUsers } = useSearchUsers(debouncedText)
   const { markets: searchMarkets, loading: loadingQuestion } =
-    useSearchMarkets(debouncedText);
+    useSearchMarkets(debouncedText)
 
-  const isLoading = loadingUsers || loadingMarkets || loadingQuestion;
+  const isLoading = loadingUsers || loadingMarkets || loadingQuestion
 
   const displayedSearchMarkets =
     enhanceMarketsWithImageAndPolyId(searchMarkets, HARD_MARKETS, HARD_TOPICS)
@@ -40,66 +39,66 @@ export function MobileSearchPage() {
       .map((obj, idx) => ({
         ...obj,
         idx,
-      })) ?? [];
+      })) ?? []
 
   const displayedUsers =
     users?.slice(0, 5).map((obj, idx) => ({
       ...obj,
       idx: displayedSearchMarkets?.length + idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedTrendingMarkets =
     trendingMarkets?.slice(0, 4).map((obj, idx) => ({
       ...obj,
       idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedFriends =
     friends?.slice(0, 5).map((obj, idx) => ({
       ...obj,
       idx: displayedTrendingMarkets?.length + idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedTrendingTopics =
     trendingMarkets?.slice(0, 3).map((obj, idx) => ({
       ...obj,
       idx: displayedFriends?.length + displayedTrendingMarkets?.length + idx,
-    })) ?? [];
+    })) ?? []
 
   const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
     useOverlaySearch(
       () => getMasterList().length,
       () => {}
-    );
+    )
 
   function handleSearch(e) {
-    onSearch(e.target.value);
-    debouncedSearch(e.target.value);
+    onSearch(e.target.value)
+    debouncedSearch(e.target.value)
   }
 
   function getMasterList() {
-    let arr;
+    let arr
     if (searchStr) {
-      arr = [...displayedSearchMarkets, ...displayedUsers];
+      arr = [...displayedSearchMarkets, ...displayedUsers]
     } else {
       arr = [
         ...displayedTrendingMarkets,
         ...displayedFriends,
         ...displayedTrendingTopics,
-      ];
+      ]
     }
-    return arr;
+    return arr
   }
-  const masterList = getMasterList();
+  const masterList = getMasterList()
 
   const debouncedSearch = useCallback(
     _.debounce((text) => {
-      setDebouncedText(text);
+      setDebouncedText(text)
     }, 300),
     []
-  );
+  )
 
-  console.log("markets", searchMarkets);
+  console.log("markets", searchMarkets)
   return (
     <div className="flex flex-col gap-6 p-6 py-10 bg-[#080808] min-h-screen sm:p-8">
       <h2 className="text-3xl font-[600] text-white -mb-3">Search</h2>
@@ -238,7 +237,7 @@ export function MobileSearchPage() {
         </div>
       </AnimatePresence>
     </div>
-  );
+  )
 }
 
 function Section({ title, children }) {
@@ -247,7 +246,7 @@ function Section({ title, children }) {
       <h3 className="text-[lightgray] text-sm mb-1">{title}</h3>
       <div className="-ml-1 w-full flex flex-col -my-1 -gap-2">{children}</div>
     </div>
-  );
+  )
 }
 
 function SearchIcon(props: any) {
@@ -267,5 +266,5 @@ function SearchIcon(props: any) {
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />
     </svg>
-  );
+  )
 }

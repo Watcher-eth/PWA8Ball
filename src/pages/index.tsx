@@ -10,7 +10,6 @@ export async function getServerSideProps({ req, res }) {
     "Cache-Control",
     "public, s-maxage=20, stale-while-revalidate=59"
   ) // s-maxage=20 means 20 seconds considered fresh
-  // const trendingMarkets = await fetchTrendingMarkets();
   const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/0?limit=15`
 
   const resMarkets = await fetch(endpoint)

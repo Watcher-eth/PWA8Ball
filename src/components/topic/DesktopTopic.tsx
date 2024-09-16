@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
-import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { StandardPageWrapper } from "../layouts/StandardPageWrapper";

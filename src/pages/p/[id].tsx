@@ -37,10 +37,8 @@ export async function getServerSideProps(context) {
   const { id } = context.params as { id: string }
 
   const [market, users] = await Promise.all([
-    // fetchMarketById(id, DEFAULT_USER_ID),
     getMarketById(id),
     getUsersByMarketId(id),
-    // fetchUsersByMarketId(id),
   ])
 
   return {

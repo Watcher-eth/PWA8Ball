@@ -1,40 +1,37 @@
 // @ts-nocheck
-import _ from "lodash";
-import { useState, useCallback } from "react";
-import { AnimatePresence } from "framer-motion";
-import { useGetTrendingMarkets } from "@/supabase/queries/useGetTrendingMarkets";
-import { useGetUsersByName } from "@/supabase/queries/useGetUsersByName";
-import { useGetMarketsByQuestion } from "@/supabase/queries/search/useGetMarketsByQuestion";
-import { useOverlaySearch } from "@/hooks/useOverlaySearch";
-import { MarketItem, TopicItem, FriendItem } from "./SearchItem";
-import { SearchInputSection } from "./SearchInputSection";
-import { Spinner } from "@/components/modals/PredictModal/Spinner";
-import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers";
+import _ from "lodash"
+import { useState, useCallback } from "react"
+import { AnimatePresence } from "framer-motion"
+import { useOverlaySearch } from "@/hooks/useOverlaySearch"
+import { MarketItem, TopicItem, FriendItem } from "./SearchItem"
+import { SearchInputSection } from "./SearchInputSection"
+import { Spinner } from "@/components/modals/PredictModal/Spinner"
+import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
+import { useSearchMarkets } from "@/graphql/queries/search/useSearchMarkets"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers"
 
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
-];
+]
 
 export function SearchOverview() {
-  const [debouncedText, setDebouncedText] = useState("");
-  const { markets: allMarkets, loading: loadingMarkets } = useGetAllMarkets();
+  const [debouncedText, setDebouncedText] = useState("")
+  const { markets: allMarkets, loading: loadingMarkets } = useGetAllMarkets()
 
   const trendingMarkets = enhanceMarketsWithImageAndPolyId(
     allMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
-  const { users, loading: loadingUsers } = useSearchUsers(debouncedText);
+  )
+  const { users, loading: loadingUsers } = useSearchUsers(debouncedText)
   const { markets: searchMarkets, loading: loadingQuestion } =
-    useSearchMarkets(debouncedText);
+    useSearchMarkets(debouncedText)
 
-  const isLoading = loadingUsers || loadingMarkets || loadingQuestion;
+  const isLoading = loadingUsers || loadingMarkets || loadingQuestion
 
   const displayedSearchMarkets =
     enhanceMarketsWithImageAndPolyId(searchMarkets, HARD_MARKETS, HARD_TOPICS)
@@ -42,67 +39,67 @@ export function SearchOverview() {
       .map((obj, idx) => ({
         ...obj,
         idx,
-      })) ?? [];
+      })) ?? []
 
   const displayedUsers =
     users?.slice(0, 5).map((obj, idx) => ({
       ...obj,
       idx: displayedSearchMarkets?.length + idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedTrendingMarkets =
     trendingMarkets?.slice(0, 4).map((obj, idx) => ({
       ...obj,
       idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedFriends =
     friends?.slice(0, 5).map((obj, idx) => ({
       ...obj,
       idx: displayedTrendingMarkets?.length + idx,
-    })) ?? [];
+    })) ?? []
 
   const displayedTrendingTopics =
     trendingMarkets?.slice(0, 3).map((obj, idx) => ({
       ...obj,
       idx: displayedFriends?.length + displayedTrendingMarkets?.length + idx,
-    })) ?? []; //trendingMarkets?.slice(4, 7);
+    })) ?? [] //trendingMarkets?.slice(4, 7);
 
   const { overlayRef, onSearch, currentIdx, searchStr, onClose } =
     useOverlaySearch(
       () => getMasterList().length,
       () => {}
-    );
+    )
 
   function handleSearch(e) {
-    onSearch(e.target.value);
-    debouncedSearch(e.target.value);
+    onSearch(e.target.value)
+    debouncedSearch(e.target.value)
   }
 
   // this part is black magic fuckery that needs to be properly rewritten
   function getMasterList() {
-    let arr;
+    let arr
     if (searchStr) {
-      arr = [...displayedSearchMarkets, ...displayedUsers];
+      arr = [...displayedSearchMarkets, ...displayedUsers]
     } else {
       arr = [
         ...displayedTrendingMarkets,
         ...displayedFriends,
         ...displayedTrendingTopics,
-      ];
+      ]
     }
-    return arr;
+    return arr
   }
-  const masterList = getMasterList();
+  const masterList = getMasterList()
 
   const debouncedSearch = useCallback(
     _.debounce((text) => {
-      setDebouncedText(text);
+      setDebouncedText(text)
     }, 300),
     []
-  );
+  )
 
-  console.log("uiser", users);
+  console.log("uiser", users)
   return (
     <div className="rounded-2xl p-2 w-full transition-all duration-300">
       <SearchInputSection value={searchStr} onChange={handleSearch} />
@@ -221,7 +218,7 @@ export function SearchOverview() {
         </div>
       </AnimatePresence>
     </div>
-  );
+  )
 }
 
 function Section({ title, children }) {
@@ -230,5 +227,5 @@ function Section({ title, children }) {
       <h3 className="text-gray-400 text-sm mb-2">{title}</h3>
       <div className="-ml-1 w-full">{children}</div>
     </div>
-  );
+  )
 }

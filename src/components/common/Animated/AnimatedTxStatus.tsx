@@ -1,16 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo } from "react";
 
-interface ButtonProps {
-  isPending: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  pendingText: string;
-  successText: string;
-  errorText: string;
-  minWidth?: string;
-  height?: string;
-}
 
 export function TxStatusButton({
   isPending,
@@ -21,20 +11,31 @@ export function TxStatusButton({
   errorText,
   minWidth,
   height,
-}: ButtonProps) {
+}: {
+  isPending: boolean
+  isSuccess: boolean
+  isError: boolean
+  pendingText: string
+  successText: string
+  errorText: string
+  minWidth?: string
+  height?: string
+}) {
+  // let state
+  // let currentText
   const state = useMemo<"success" | "error" | "pending">(() => {
-    if (isPending) return "pending";
-    if (isSuccess) return "success";
-    if (isError) return "error";
-    return "pending";
-  }, [isPending, isSuccess, isError]);
+    if (isPending) return "pending"
+    if (isSuccess) return "success"
+    if (isError) return "error"
+    return "pending"
+  }, [isPending, isSuccess, isError])
 
   const currentText = useMemo(() => {
-    if (isPending) return pendingText;
-    if (isSuccess) return successText;
-    if (isError) return errorText;
-    return pendingText;
-  }, [isPending, isSuccess, isError, pendingText, successText, errorText]);
+    if (isPending) return pendingText
+    if (isSuccess) return successText
+    if (isError) return errorText
+    return pendingText
+  }, [isPending, isSuccess, isError, pendingText, successText, errorText])
 
   return (
     <motion.button
@@ -105,15 +106,15 @@ export function TxStatusButton({
         </motion.span>
       </AnimatePresence>
     </motion.button>
-  );
+  )
 }
 
-function LoaderIcon(props: { className: string }) {
+function LoaderIcon({ className }: { className: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
+      className={className}
       fill="currentColor"
     >
       <path
@@ -133,13 +134,13 @@ function LoaderIcon(props: { className: string }) {
   );
 }
 
-function SolidWarningIcon(props: { className: string }) {
+function SolidWarningIcon({ className }: { className: string }) {
   return (
     <motion.svg
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
+      className={className}
       style={{ scale: 1.15 }}
       animate={{ x: [0, -4, 4, -4, 0] }}
       transition={{ duration: 0.15, delay: 0.5 }}
@@ -154,13 +155,13 @@ function SolidWarningIcon(props: { className: string }) {
   );
 }
 
-function SolidCheckIcon(props: { className: string }) {
+function SolidCheckIcon({className}: { className: string }) {
   return (
     <svg
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={props.className}
+      className={className}
     >
       <g clipPath="url(#clip0_114_308)">
         <path
