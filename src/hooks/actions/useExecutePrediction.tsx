@@ -16,12 +16,9 @@ import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useReferralStore } from "@/lib/stores/ReferralStore"
 import { getProfilePath } from "@/utils/urls"
 
-
 import { ZERO_ADDRESS } from "@/constants/misc"
 import { baseSepolia } from "viem/chains"
 import { EightBallAbi } from "@/lib/onchain/generated"
-
-
 
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false)
@@ -32,7 +29,6 @@ export function useExecutePrediction() {
   const { user: userCon } = useUserStore()
   const { client, address, walletType } = useClientAddress()
   const { approveToken, allowance } = useEightBallApproval()
-
 
   async function executePrediction({
     amount,
@@ -63,7 +59,8 @@ export function useExecutePrediction() {
       console.log({ allowance, biAmount })
       if (
         (walletType === "smartwallet" && !allowance) ||
-         (!allowance) || !(allowance >= biAmount)
+        !allowance ||
+        !(allowance >= biAmount)
       ) {
         console.log("Approving token")
         await approveToken()
@@ -84,6 +81,13 @@ export function useExecutePrediction() {
         client: { public: rpcClient, wallet: client },
       })
 
+      console.log("Predict params", {
+        preferYes: preferYesNum,
+        marketId: BigInt(marketId),
+        operator: ROOT_OPERATOR_ADDRESS,
+        slippage: 990,
+        referrer: referrer,
+      })
 
       const predictionParams = {
         desiredAmount: biAmount,
@@ -107,7 +111,7 @@ export function useExecutePrediction() {
       console.log("referrer", referrer)
       // console.log("Args", predictionParams)
       const hash = await contract.write.predict([predictionParams], {})
-
+      console.log("hash", hash)
 
       router?.prefetch(getProfilePath(userCon?.walletAddress!))
       setSuccess(true)
