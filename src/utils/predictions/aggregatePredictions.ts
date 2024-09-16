@@ -36,7 +36,7 @@ export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
   const aggregated: { [key: string]: any } = {}
 
   orders.forEach((item: any) => {
-    const marketIdFromOrder = parseInt(item.market.marketId, 10) // Ensure it's an integer
+    const marketIdFromOrder = parseInt(item?.marketId, 10) // Ensure it's an integer
     const market = Markets.find((m: any) => m.id === marketIdFromOrder)
 
     if (market && item.tokensOwned !== 0) {
@@ -46,7 +46,7 @@ export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
         image: market.image,
       }
 
-      const key = `${item.market.marketId}-${item.option}`
+      const key = `${item.marketId}-${item.option}`
 
       if (aggregated[key]) {
         aggregated[key].tokensOwned += updatedItem.tokensOwned

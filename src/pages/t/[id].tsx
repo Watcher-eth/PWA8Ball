@@ -23,11 +23,11 @@ export async function getServerSideProps(context) {
     }
   }
 
-  const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/${id}?limit=15&hours=24`
+  const endpoint = `${GRAPH_ENDPOINT_URL}/markets/trending/${id}?limit=15`
 
   const resMarkets = await fetch(endpoint)
   const markets = await resMarkets.json()
-  const allTopicMarkets = await getAllMarketsForTopicId("1")
+  const allTopicMarkets = await getAllMarketsForTopicId(id)
 
   return {
     props: {

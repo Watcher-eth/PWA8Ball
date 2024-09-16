@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { formatMarketArr } from "@/utils/markets/formatMarketArr"
 import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic"
-import { useGetMarketsForTopic } from "@/supabase/queries/useGetMarketsForTopic"
 import { FeedCard } from "./FeedCard"
 import Link from "next/link"
 import { ELECTIONS_PATH, getTopicPath } from "@/utils/urls"
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
 
 export function DesktopTrendingTopics({
   title,
@@ -24,7 +24,7 @@ export function DesktopTrendingTopics({
   topicId: string
 }) {
   const { data: membersProfiles } = useGetMembersForTopic(topicId)
-  const { data: markets } = useGetMarketsForTopic(topicId)
+  const { data: markets } = useGetAllMarketsForTopic(topicId)
 
   return (
     <div className="relative mx-8 rounded-lg flex align-center shadow-inner justify-between h-[56vh] py-8 flex-row items-center   overflow-hidden">

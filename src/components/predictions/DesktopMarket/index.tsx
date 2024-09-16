@@ -35,11 +35,12 @@ import { MarketMetadata } from "../BetDetails/MarketMetadata"
 import { shortenAddress } from "@/utils/address/shortenAddress"
 import { StatusBlock } from "../BetDetails/MarketStatus"
 import { useUserById } from "@/graphql/queries/users/useUserById"
+import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
 
 export function DesktopMarketPage({ users, market, id }) {
   const { user } = useUserStore()
   const openLoginModal = useModalStore((state) => state.openLoginModal)
-  const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id)
   useCheckReferral()
   const userImages = fillUserImages(users, 3)
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
@@ -49,7 +50,15 @@ export function DesktopMarketPage({ users, market, id }) {
   )
 
   const { user: creator, loading } = useUserById(market?.userAddress)
-  console.log("user", creator, "option", userOwns)
+  const { data: userOwns } = useGetUserPositionsForMarket(
+    user?.walletAddress,
+    id
+  )
+  const aggregatedPositions = aggregatePredictedItemsWithImage(
+    userOwns ?? [],
+    HARD_MARKETS
+  )
+  console.log("option", userOwns)
   return (
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>

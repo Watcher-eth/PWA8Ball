@@ -1,30 +1,30 @@
 // @ts-nocheck
 
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { useRef } from "react"
+import { motion } from "framer-motion"
+import { useRouter } from "next/router"
+import Link from "next/link"
 // Adjust import path as necessary
-import { ChevronLeft, Share, Star } from "lucide-react";
+import { ChevronLeft, Share, Star } from "lucide-react"
 
-import { LEADERBOARD_PATH } from "@/utils/urls";
+import { LEADERBOARD_PATH } from "@/utils/urls"
 
-import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic"
 
-import { ShareTopicModal } from "@/components/share/topic/ShareTopicModal";
+import { ShareTopicModal } from "@/components/share/topic/ShareTopicModal"
 
-import { BetBigView, BetSmallView } from "./BetViews";
-import { AvatarGroup } from "./AvatarGroup";
-import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
+import { BetBigView, BetSmallView } from "./BetViews"
+import { AvatarGroup } from "./AvatarGroup"
+import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
 
 const ICON_BUTTON_CLASSNAME = `
   bg-[rgba(21,21,21,0.45)] backdrop-blur-2xl
   rounded-full flex justify-center items-center
   absolute top-12 z-10
-  `;
+  `
 
 export function Topic({
   name,
@@ -38,15 +38,15 @@ export function Topic({
   allTopicMarkets,
   trendingMarkets,
 }) {
-  const router = useRouter();
-  const scrollRef = useRef(null);
+  const router = useRouter()
+  const scrollRef = useRef(null)
 
-  const { data: membersProfiles } = useGetMembersForTopic(id);
+  const { data: membersProfiles } = useGetMembersForTopic(id)
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     trendingMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
   return (
     <div className="flex overflow-x-hidden overflow-y-scroll flex-col no-scrollbar w-full bg-[#070707]  relative">
       <a
@@ -67,7 +67,7 @@ export function Topic({
         question={description}
         topic={id}
         members={membersProfiles}
-        markets={markets?.length}
+        markets={allTopicMarkets?.length}
       >
         <div className={`${ICON_BUTTON_CLASSNAME} p-2 right-3.5 `}>
           <Share size={17} strokeWidth={3.3} color="white" />
@@ -112,7 +112,7 @@ export function Topic({
           </span>
         </div>
         {enhancedMarkets?.slice(0, 4)?.map((market, idx) => {
-          const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView;
+          const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView
           return (
             <BetViewComponent
               key={idx}
@@ -121,12 +121,12 @@ export function Topic({
               question={market.question}
               image={market.image}
               topic={name}
-              option1={{name: market?.outcomeA, odds: market?.outcomeOddsA}}
-              option2={{name: market?.outcomeB, odds: market?.outcomeOddsB}}
+              option1={{ name: market?.outcomeA, odds: market?.outcomeOddsA }}
+              option2={{ name: market?.outcomeB, odds: market?.outcomeOddsB }}
             />
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }

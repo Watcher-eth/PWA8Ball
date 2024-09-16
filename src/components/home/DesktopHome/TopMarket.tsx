@@ -1,46 +1,51 @@
-import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById";
-import { Users } from "lucide-react";
-import { formatDate } from "@/utils/datetime/formatDate";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
-import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
+import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById"
+import { Users } from "lucide-react"
+import { formatDate } from "@/utils/datetime/formatDate"
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket"
+import { getMinMaxValues, processPrices } from "@/utils/chartUtils"
 
-import { GenericLineChart } from "@/components/charts/GenericLineChart";
-import { Chip } from "@/components/ui/Chip";
-import { formatChartDateStr } from "@/utils/datetime/parseChartDate";
+import { GenericLineChart } from "@/components/charts/GenericLineChart"
+import { Chip } from "@/components/ui/Chip"
+import { formatChartDateStr } from "@/utils/datetime/parseChartDate"
+import Link from "next/link"
+import { getMarketPath } from "@/utils/urls"
 
 export function TopMarket() {
-  const { market } = useGetMarketById("1");
+  const { market } = useGetMarketById("1")
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
 
-  const { data: prices2 } = useGetPricesForMarket("1", "1M");
+  const { data: prices2 } = useGetPricesForMarket("1", "1M")
 
-  const userOutcome = 0;
+  const userOutcome = 0
   const { currentPrices, percentageDifference } = processPrices(
     prices2,
     userOutcome,
     enhancedMarket?.initialProb,
     "1W"
-  );
+  )
 
-  const minMax = getMinMaxValues(currentPrices);
+  const minMax = getMinMaxValues(currentPrices)
 
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
     [`${enhancedMarket?.outcomeA}`]: 100 - price.value,
     [`${enhancedMarket?.outcomeB}`]: price.value,
-  }));
+  }))
 
   return (
     <div className="w-full flex flex-row pl-1 mt-2 -mb-5  border-b-[0.1rem] border-[#181818] pb-12">
-      <div className="flex flex-col w-[30%] pr-5 z-1 pt-2">
+      <Link
+        href={getMarketPath(enhancedMarket?.marketId)}
+        className="flex flex-col w-[30%] pr-5 z-1 pt-2"
+      >
         <img
           className="size-24 object-cover -mb-2 rounded-md"
           src={enhancedMarket?.image}
@@ -73,12 +78,15 @@ export function TopMarket() {
         </div>
 
         <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[Aeonik]"></div>
-      </div>
+      </Link>
       <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
         <div className="text-[gray] text-md font-normal">
           {enhancedMarket?.title}
         </div>
-        <div className="flex flex-row justify-between items-center">
+        <Link
+          href={getMarketPath(enhancedMarket?.marketId)}
+          className="flex flex-row justify-between items-center"
+        >
           <div className="text-3xl font-[Aeonik] my-1 text-white">
             {enhancedMarket?.outcomeOddsA / 100}%{" "}
             {enhancedMarket?.outcomeA !== "Yes"
@@ -88,8 +96,11 @@ export function TopMarket() {
           <div className="text-3xl text-white/5 font-[Aeonik-Bold]">
             Glimpse
           </div>
-        </div>
-        <div className="w-[101%] h-[9rem] my-3.5 -ml-2  rounded-md ">
+        </Link>
+        <Link
+          href={getMarketPath(enhancedMarket?.marketId)}
+          className="w-[101%] h-[9rem] my-3.5 -ml-2  rounded-md "
+        >
           <GenericLineChart
             domain={
               minMax.max && [
@@ -101,18 +112,20 @@ export function TopMarket() {
             xAxisKey="month"
             xAxisTickFormatter={(value, ...args) => {
               // console.log({ value, args });
-              return formatChartDateStr(value); //.slice(0, 3);
+              return formatChartDateStr(value) //.slice(0, 3);
             }}
           />
-        </div>
+        </Link>
         <div className="flex flex-row justify-between -mb-3 items-center">
           <div></div>
           <div className="flex flex-row  space-x-3  items-center ">
             <TopMarketOutcomeBtn
+              id={enhancedMarket?.marketId}
               outcome={enhancedMarket?.outcomeA}
               outcomeOdds={enhancedMarket?.outcomeOddsA}
             />
             <TopMarketOutcomeBtn
+              id={enhancedMarket?.marketId}
               outcome={enhancedMarket?.outcomeB}
               outcomeOdds={enhancedMarket?.outcomeOddsB}
             />
@@ -120,18 +133,21 @@ export function TopMarket() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function TopMarketOutcomeBtn({
   outcome,
   outcomeOdds = 0,
+  id,
 }: {
-  outcome?: string;
-  outcomeOdds?: number; // | bigint
+  outcome?: string
+  outcomeOdds?: number // | bigint
+  id: string
 }) {
   return (
-    <div
+    <Link
+      href={getMarketPath(id)}
       className={`
         px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]
       `}
@@ -140,6 +156,6 @@ function TopMarketOutcomeBtn({
       <p className="text-[0.75rem] text-[lightgray] ml-1">
         {outcomeOdds / 100}%
       </p>
-    </div>
-  );
+    </Link>
+  )
 }

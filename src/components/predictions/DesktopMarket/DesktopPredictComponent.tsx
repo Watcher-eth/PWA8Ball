@@ -46,7 +46,7 @@ export function DesktopPredictComponent(props: {
     initialProb,
     refetch,
   } = props
-  const [step, setStep] = useState<number>(userOwns?.highest_amount ? 4 : 0)
+  const [step, setStep] = useState<number>(userOwns[0] ? 4 : 0)
   // const [amount, setAmount] = useState(0);
   const [amountStr, setAmountStr] = useState()
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
@@ -66,7 +66,7 @@ export function DesktopPredictComponent(props: {
         className="relative bg-transparent  "
       >
         <AnimatePresence>
-          {step === 0 || step === 4 ? (
+          {(userOwns[0] && step === 0) || (userOwns[0] && step === 4) ? (
             <div className="flex justify-between text-[1.5rem] text-white font-medium flex-row items-center gap-3">
               <div>{step === 0 ? `Predict ${title}` : "Your Positions"}</div>{" "}
               <div
@@ -215,10 +215,14 @@ export function DesktopPredictComponent(props: {
             <CashoutOverview
               {...props}
               changeStep={setStep}
-              odds={"20"}
-              totalPot={1200}
+              odds={
+                userOwns[0]?.option === 0
+                  ? options[0].value / 100
+                  : options[1].value / 100
+              }
+              totalPot={userOwns[0]?.tokensOwned}
               refetch={refetch}
-              amount={1200}
+              amount={userOwns[0]?.tokensOwned}
               isDesktop={true}
             />
           )}
@@ -226,10 +230,14 @@ export function DesktopPredictComponent(props: {
             <CashoutWarningScreen
               {...props}
               changeStep={setStep}
-              odds={"20"}
-              totalPot={1200}
-              amount={1200}
-              points={1200}
+              odds={
+                userOwns[0]?.option === 0
+                  ? options[0].value / 100
+                  : options[1].value / 100
+              }
+              totalPot={userOwns[0]?.tokensOwned}
+              amount={userOwns[0]?.tokensOwned}
+              points={userOwns[0]?.tokensOwned}
               isDesktop={true}
             />
           )}
@@ -237,9 +245,13 @@ export function DesktopPredictComponent(props: {
             <CashoutConfirmScreen
               {...props}
               changeStep={setStep}
-              odds={"20"}
-              totalPot={1200}
-              points={1200}
+              odds={
+                userOwns[0]?.option === 0
+                  ? options[0].value / 100
+                  : options[1].value / 100
+              }
+              totalPot={userOwns[0]?.tokensOwned}
+              points={userOwns[0]?.tokensOwned}
               isDesktop={true}
             />
           )}
