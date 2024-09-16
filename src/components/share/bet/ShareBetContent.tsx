@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { AnimatePresence } from "framer-motion";
-import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard";
-import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
+import { AnimatePresence } from "framer-motion"
+import { Copy, Gift, Share as ShareIcon } from "lucide-react"
+import { copyToClipboard } from "@/utils/copyToClipboard"
+import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen"
 
 interface Option {
-  name: string;
-  value: number;
+  name: string
+  value: number
 }
 
 export function ShareBetContent({
@@ -18,13 +18,13 @@ export function ShareBetContent({
   options,
   isDesktop,
 }: {
-  id: string;
-  title: string;
-  image: string;
-  topic: string;
-  question: string;
-  options: Option[];
-  isDesktop?: boolean;
+  id: string
+  title: string
+  image: string
+  topic: string
+  question: string
+  options: Option[]
+  isDesktop?: boolean
 }) {
   const shareLink = async () => {
     try {
@@ -32,16 +32,16 @@ export function ShareBetContent({
         title: `${title} on Glimpse`,
         text: "This prediction on Glimpse is wild! Check it out",
         url: `https://pwa-8-ball.vercel.app/p/${id}`,
-      });
+      })
     } catch (error) {
-      console.error("Error during sharing", error);
+      console.error("Error during sharing", error)
     }
-  };
+  }
   return (
     <div
       className={`
         w-full flex flex-col p-5
-        rounded-t-[20px] bg-[#080808]
+        rounded-t-[20px] bg-[transparent]
         ${isDesktop ? "h-[65vh]  pt-5" : "h-[110%] pt-7"}
       `}
     >
@@ -94,18 +94,18 @@ export function ShareBetContent({
           <div className="flex flex-row justify-center mt-4 mb-1 gap-2.5">
             <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#FF0050] gap-1">
               <span className="text-xl text-white font-medium">
-                {options[0]?.name}
+                {options[1]?.name}
               </span>
               <span className="text-sm font-medium text-[white]/[0.8]">
-                /{options[0]?.odds / 100}%
+                /{options[1]?.value / 100}%
               </span>
             </button>
             <button className="w-1/2 p-3 flex flex-row items-baseline justify-center rounded-[11px] bg-[#0050FF] gap-1">
               <span className="text-xl text-white font-medium">
-                {options[1].name}
+                {options[0].name}
               </span>
               <span className="text-sm font-medium text-[white]/[0.8]">
-                /{options[1].odds / 100}%
+                /{options[0].value / 100}%
               </span>
             </button>
           </div>
@@ -136,5 +136,5 @@ export function ShareBetContent({
         </span>
       </div>
     </div>
-  );
+  )
 }

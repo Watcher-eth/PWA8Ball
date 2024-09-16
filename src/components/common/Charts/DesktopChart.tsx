@@ -1,17 +1,18 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { motion } from "framer-motion"
+import { useState } from "react"
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
-import { ChartConfig } from "@/components/ui/chart";
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket";
+import { ChartConfig } from "@/components/ui/chart"
+import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket"
 
-import { getMinMaxValues, processPrices } from "@/utils/chartUtils";
-import { timeframes } from "./MyBetModal";
-import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
-import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
-import { Chip } from "@/components/ui/Chip";
-import { MessageCircle, PlusCircle, ShareIcon, Users } from "lucide-react";
+import { getMinMaxValues, processPrices } from "@/utils/chartUtils"
+import { timeframes } from "./MyBetModal"
+import { GenericAreaChart } from "@/components/charts/GenericAreaChart"
+import { TimeframeSelector } from "@/components/charts/TimeframeSelector"
+import { Chip } from "@/components/ui/Chip"
+import { MessageCircle, PlusCircle, ShareIcon, Users } from "lucide-react"
+import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal"
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -21,52 +22,53 @@ export const chartConfig = {
     label: "Mobile",
     color: "hsl(var(--chart-2))",
   },
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 export function DesktopChart(props: {
-  question: string;
-  id: string;
-  title: string;
-  image: string;
-  options: string[];
-  topic: string;
-  initialProb: number;
-  option: number;
-  userOwns?: { highest_amount: number; highest_option: number };
-  isMarketPage?: boolean;
+  question: string
+  id: string
+  title: string
+  image: string
+  options: string[]
+  topic: string
+  initialProb: number
+  option: number
+  userOwns?: { highest_amount: number; highest_option: number }
+  isMarketPage?: boolean
+  odds?: number[]
 }) {
-  const [timeframe, setTimeframe] = useState("1M");
-  console.log("props", props);
+  const [timeframe, setTimeframe] = useState("1M")
+  console.log("props", props)
   // const { data: prices, error: priceError } = useGetPricesForMarket(
   //   props?.id,
   //   timeframe
   // );
 
-  const { data: prices2 } = useGetPricesForMarket(props?.id, timeframe);
+  const { data: prices2 } = useGetPricesForMarket(props?.id, timeframe)
 
-  const userOutcome = props?.option;
+  const userOutcome = props?.option
   const { currentPrices, percentageDifference } = processPrices(
     prices2,
     userOutcome,
     props?.initialProb / 100,
     timeframe
-  );
+  )
 
-  const minMax = getMinMaxValues(currentPrices);
+  const minMax = getMinMaxValues(currentPrices)
 
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
     [`${props.options[0].name}`]: 100 - price.value,
     [`${props.options[1].name}`]: price.value,
-  }));
+  }))
 
   return (
     <div>
       <div className="flex flex-row items-center space-x-3 ">
         <div
           onClick={() => {
-            props.onClose();
+            props.onClose()
             router.push({
               pathname: "[id]",
               query: {
@@ -78,7 +80,7 @@ export function DesktopChart(props: {
                 topic: props.topic,
                 option: props.option,
               },
-            });
+            })
           }}
         >
           <img
@@ -213,11 +215,22 @@ export function DesktopChart(props: {
               />
             </div>
             <div className="hover:scale-102 active:scale-98">
-              <ShareIcon
-                size={20}
-                className="text-white/60"
-                strokeWidth={2.5}
-              />
+              <DesktopShareBetModal
+                setStep={() => {}}
+                image={props?.image}
+                options={props.options}
+                question={props.question}
+                title={props.title}
+                id={props.id}
+                topic={props?.topic_title}
+                odds={[props.outcomeOddsA, props?.outcomeOddsB]}
+              >
+                <ShareIcon
+                  size={20}
+                  className="text-white/60"
+                  strokeWidth={2.5}
+                />
+              </DesktopShareBetModal>
             </div>
             <div className="hover:scale-102 active:scale-98">
               <PlusCircle
@@ -277,5 +290,5 @@ export function DesktopChart(props: {
         </div>
       )}
     </div>
-  );
+  )
 }

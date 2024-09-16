@@ -1,52 +1,55 @@
 // @ts-nocheck
 
-import { fillUserImages } from "@/utils/fillUserImages";
+import { fillUserImages } from "@/utils/fillUserImages"
 
-import { useModalStore } from "@/lib/stores/ModalStore";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { useModalStore } from "@/lib/stores/ModalStore"
+import { useUserStore } from "@/lib/stores/UserStore"
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Grid } from "@/components/ui/tailwind/Grid";
-import { Col } from "@/components/ui/tailwind/Col";
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { Grid } from "@/components/ui/tailwind/Grid"
+import { Col } from "@/components/ui/tailwind/Col"
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper"
 import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay";
-import { CommentSection } from "@/components/predictions/CommentSection";
-import { BetDetails } from "@/components/predictions/BetDetails";
-import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
+} from "@/components/layouts/StandardBleedOverlay"
+import { CommentSection } from "@/components/predictions/CommentSection"
+import { BetDetails } from "@/components/predictions/BetDetails"
+import { RelatedMarkets } from "@/components/predictions/RelatedMarkets"
 
-import { DesktopPredictComponent } from "./DesktopPredictComponent";
+import { DesktopPredictComponent } from "./DesktopPredictComponent"
 
-import { AlignLeft } from "lucide-react";
+import { AlignLeft } from "lucide-react"
 
-import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption";
-import { DesktopBettersModal } from "../Betters/DesktopBettersModal";
-import { RulesCollapsible } from "../BetDetails/RulesCollapsible";
-import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
-import { useCheckReferral } from "@/hooks/useCheckReferral";
-import { DesktopMarketHeader } from "./DesktopMarketHeader";
-import { DesktopChartCard } from "./DesktopChartCard";
-import { MarketMetadata } from "../BetDetails/MarketMetadata";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import { StatusBlock } from "../BetDetails/MarketStatus";
+import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption"
+import { DesktopBettersModal } from "../Betters/DesktopBettersModal"
+import { RulesCollapsible } from "../BetDetails/RulesCollapsible"
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
+import { useCheckReferral } from "@/hooks/useCheckReferral"
+import { DesktopMarketHeader } from "./DesktopMarketHeader"
+import { DesktopChartCard } from "./DesktopChartCard"
+import { MarketMetadata } from "../BetDetails/MarketMetadata"
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import { StatusBlock } from "../BetDetails/MarketStatus"
+import { useUserById } from "@/graphql/queries/users/useUserById"
 
 export function DesktopMarketPage({ users, market, id }) {
-  const { user } = useUserStore();
-  const openLoginModal = useModalStore((state) => state.openLoginModal);
-  const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id);
-  useCheckReferral();
-  const userImages = fillUserImages(users, 3);
+  const { user } = useUserStore()
+  const openLoginModal = useModalStore((state) => state.openLoginModal)
+  const { data: userOwns } = useGetHighestOrderOption(user?.walletaddress, id)
+  useCheckReferral()
+  const userImages = fillUserImages(users, 3)
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
 
+  const { user: creator, loading } = useUserById(market?.userAddress)
+  console.log("user", creator, "option", userOwns)
   return (
     <StandardPageWrapper className="h-full flex flex-col">
       <StandardBleedOverlay>
@@ -130,7 +133,9 @@ export function DesktopMarketPage({ users, market, id }) {
 
               <div className="flex flex-col py-4">
                 <MarketMetadata
-                  creator={shortenAddress(market?.userAddress)}
+                  creatorAddress={shortenAddress(market?.userAddress)}
+                  creatorLoading={loading}
+                  creator={creator}
                   usdcStake={market?.usdcStake}
                   liquidityStake={enhancedMarket?.liquidityBalanceUsdc}
                   length={users?.length}
@@ -176,5 +181,5 @@ export function DesktopMarketPage({ users, market, id }) {
         </div>
       </div>
     </StandardPageWrapper>
-  );
+  )
 }

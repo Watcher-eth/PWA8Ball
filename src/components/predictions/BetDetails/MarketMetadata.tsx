@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   Gift,
   Landmark,
@@ -7,20 +7,24 @@ import {
   TriangleAlert,
   Sticker,
   Check,
-} from "lucide-react";
-import { AvatarGroup } from "@/components/topic/AvatarGroup";
+} from "lucide-react"
+import { AvatarGroup } from "@/components/topic/AvatarGroup"
+import { Market, User } from "@/__generated__/graphql"
+import { Address } from "viem"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 interface MarketMetadataProps {
-  usdcStake: number;
-  liquidityStake: number;
-  creator: string;
-  users: string[];
-  length: number;
-  handleOpenVotersSheet: () => void;
+  usdcStake: number
+  liquidityStake: number
+  creator: User
+  users: string[]
+  length: number
+  creatorAddress: Address
+  creatorLoading: boolean
+  handleOpenVotersSheet: () => void
 }
 
 export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
-  console.log("params3", props);
   return (
     <div className="flex flex-col w-full gap-1.5 px-4">
       <MetadataItem
@@ -29,7 +33,13 @@ export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
         icon={Landmark}
       />
       <MetadataItem name="Rewards" value={`3x 🔭`} icon={Gift} />
-      <MetadataItem name="Created by" value={props.creator} icon={Plus} />
+      <CreatorItem
+        name="Created by"
+        value={props.creatorAddress}
+        loading={props?.creatorLoading}
+        user={props?.creator}
+        icon={Plus}
+      />
       <div className="flex flex-row w-full items-center justify-between my-1.5">
         <div className="flex flex-row gap-2 items-center">
           <Users className="text-[gray]" strokeWidth={2.8} size={16} />
@@ -45,13 +55,13 @@ export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 interface MetadataItemProps {
-  name: string;
-  value: string;
-  icon: React.ElementType;
+  name: string
+  value: string
+  icon: React.ElementType
 }
 
 const MetadataItem: React.FC<MetadataItemProps> = ({
@@ -59,7 +69,7 @@ const MetadataItem: React.FC<MetadataItemProps> = ({
   value,
   icon: Icon,
 }) => {
-  console.log("item", name, value);
+  console.log("item", name, value)
   return (
     <div className="flex flex-row w-full items-center justify-between my-1.5">
       <div className="flex flex-row gap-2 items-center">
@@ -98,5 +108,40 @@ const MetadataItem: React.FC<MetadataItemProps> = ({
         </span>
       </div>
     </div>
-  );
-};
+  )
+}
+
+interface CreatorItemProps {
+  name: string
+  value: string
+  loading: boolean
+  user: User
+  icon: React.ElementType
+}
+
+const CreatorItem: React.FC<CreatorItemProps> = ({
+  name,
+  value,
+  user,
+  loading,
+  icon: Icon,
+}) => {
+  console.log("item", name, value)
+  return (
+    <div className="flex flex-row w-full items-center justify-between my-1.5">
+      <div className="flex flex-row gap-2 items-center">
+        <Icon className="text-[gray]" strokeWidth={2.8} size={16} />
+        <span className="text-[gray] text-lg font-medium">{name}</span>
+      </div>
+      <div className="flex flex-row gap-2 items-center">
+        <span className="text-white text-lg font-semibold">
+          {loading ? value : user?.name}
+        </span>
+        <img
+          src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
+          className="h-5 w-5 rounded-full"
+        />
+      </div>
+    </div>
+  )
+}
