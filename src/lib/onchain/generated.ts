@@ -2138,6 +2138,8 @@ export const FeeManagerV2Abi = [
  */
 export const FeeManagerV2Address = {
   84532: "0x7De89017DeBc9BAEfcF306024bEe27F09DBd7f7c",
+  8453: "0x52b3803cb1793ed62B8F1E2338c099C74679995F",
+
 } as const
 
 /**
@@ -5644,6 +5646,7 @@ export const PairFactoryV1Abi = [
  */
 export const PairFactoryV1Address = {
   84532: "0x05Bf120b70290b926d966ECA260D0A4D2dd8F8C5",
+  8453: "0x0E49F5F62F7F938fd863e470F485B5e13f95Ace3",
 } as const
 
 /**
@@ -6339,6 +6342,7 @@ export const RouterV1Abi = [
  */
 export const RouterV1Address = {
   84532: "0x01F2943A4be12ddeEF206d7f44608800Ed421CC5",
+  8453: "0x0a40c9AA95D1bf885fCB273897000B4D67A0cac4",
 } as const
 
 /**
