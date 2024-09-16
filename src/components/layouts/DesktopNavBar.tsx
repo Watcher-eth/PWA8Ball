@@ -1,22 +1,25 @@
 // @ts-nocheck
-import Link from "next/link";
-import { ActivityIcon, Bell, Search, Trophy } from "lucide-react";
-import { HOME_PATH } from "@/utils/urls";
-import { useUserStore } from "@/lib/stores/UserStore";
+import Link from "next/link"
+import { ActivityIcon, Bell, Search, Trophy } from "lucide-react"
+import { HOME_PATH } from "@/utils/urls"
+import { useUserStore } from "@/lib/stores/UserStore"
 
-import { ConnectButton } from "@/components/buttons/ConnectButton";
-import { NavIconButton } from "@/components/buttons/NavIconButton";
+import { ConnectButton } from "@/components/buttons/ConnectButton"
+import { NavIconButton } from "@/components/buttons/NavIconButton"
 
-import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal";
-import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
-import { DesktopProfilePopover } from "@/components/layouts/DesktopProfilePopover";
-import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
-import { DesktopActivityModal } from "../activity/DesktopActivityModal";
-import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal";
+import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal"
+import { DesktopSearchModal } from "@/components/search/DesktopSearchModal"
+import { DesktopProfilePopover } from "@/components/layouts/DesktopProfilePopover"
+import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal"
+import { DesktopActivityModal } from "../activity/DesktopActivityModal"
+import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal"
+import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
 
 export function DesktopNavBar() {
-  const { user } = useUserStore();
-  const userId = user?.external_auth_provider_user_id;
+  const { user } = useUserStore()
+  const userId = user?.external_auth_provider_user_id
+  const { data } = useGetGlobalLeaderboard()
+
   return (
     <div className="w-full absolute z-50 top-0">
       <div
@@ -49,7 +52,7 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Search} />
             </DesktopSearchModal>
 
-            <DesktopLeaderboardModal>
+            <DesktopLeaderboardModal data={data}>
               <NavIconButton IconComponent={Trophy} />
             </DesktopLeaderboardModal>
             <DesktopActivityModal>
@@ -73,5 +76,5 @@ export function DesktopNavBar() {
         </div>
       </div>
     </div>
-  );
+  )
 }

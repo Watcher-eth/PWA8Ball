@@ -1,33 +1,35 @@
 // @ts-nocheck
-import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
-import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic"
+import { useRouter } from "next/router"
+import React, { useRef, useState } from "react"
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay";
-import { Medal, Trophy, UserPlus } from "lucide-react";
-import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { BetComment } from "@/types/PostTypes";
-import _ from "lodash";
-import Link from "next/link";
-import { Comment } from "../predictions/CommentSection/Comment";
-import JoinTopicButton from "./JoinTopicButton";
-import { motion } from "framer-motion";
-import { skeletonVariants } from "../ui/Skeleton";
-import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
+} from "../layouts/StandardBleedOverlay"
+import { Medal, Trophy, UserPlus } from "lucide-react"
+import { useGetCommentsForTopic } from "@/supabase/queries/comments/useGetCommentsForTopic"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { BetComment } from "@/types/PostTypes"
+import _ from "lodash"
+import Link from "next/link"
+import { Comment } from "../predictions/CommentSection/Comment"
+import JoinTopicButton from "./JoinTopicButton"
+import { motion } from "framer-motion"
+import { skeletonVariants } from "../ui/Skeleton"
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
 import {
   BlurOverlay,
   BlurOverlayWrapper,
-} from "../onboarding/Invites/InviteBlur";
-import { INVITES_ACTIVE } from "@/constants";
-import { DesktopHomeNews } from "../home/DesktopHome/DesktopHomeNews";
-import { FeaturedMarketsSection } from "../home/DesktopHome/FeaturedMarketsSection";
+} from "../onboarding/Invites/InviteBlur"
+import { INVITES_ACTIVE } from "@/constants"
+import { DesktopHomeNews } from "../home/DesktopHome/DesktopHomeNews"
+import { FeaturedMarketsSection } from "../home/DesktopHome/FeaturedMarketsSection"
+import { useGetTopicLeaderboard } from "@/graphql/leaderboard/useGetTopicLeaderboard"
+import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal"
 
 function DesktopTopic({
   name,
@@ -41,33 +43,33 @@ function DesktopTopic({
   markets,
   allTopicMarkets,
 }) {
-  const router = useRouter();
-  const scrollRef = useRef(null);
+  const router = useRouter()
+  const scrollRef = useRef(null)
 
-  const { data: membersProfiles } = useGetMembersForTopic(id);
-  const { user } = useUserStore();
+  const { data: membersProfiles } = useGetMembersForTopic(id)
+  const { user } = useUserStore()
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     allTopicMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
 
   const enhancedTrendingMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
 
-  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
-    []
-  );
+  const { data: LeaderBoardData } = useGetTopicLeaderboard()
 
-  const handleComment = () => {};
-  const setReply = () => {};
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
+
+  const handleComment = () => {}
+  const setReply = () => {}
 
   const renderDesktopTopicItems = (items, size, count) => {
-    const placeholders = Array.from({ length: count - items.length });
+    const placeholders = Array.from({ length: count - items.length })
     return (
       <>
         {items.map((item, index) => (
@@ -93,8 +95,8 @@ function DesktopTopic({
           />
         ))}
       </>
-    );
-  };
+    )
+  }
 
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
@@ -128,9 +130,16 @@ function DesktopTopic({
                   userId={user?.walletaddress}
                   showToast={() => {}}
                 />
-                <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-bold rounded-full text-base text-white">
-                  <Trophy color="white" strokeWidth={2.5} size={"1.2rem"} />
-                </div>
+                <DesktopLeaderboardModal data={LeaderBoardData}>
+                  <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-bold rounded-full text-base text-white">
+                    <Trophy
+                      color="white"
+                      strokeWidth={2.5}
+                      className="size-6"
+                      size={"1.2rem"}
+                    />
+                  </div>
+                </DesktopLeaderboardModal>
               </div>
               <div className="flex items-center mt-1 space-x-2 -mb-1 ml-[-0.2rem]">
                 <div className="flex mt-1 -space-x-2">
@@ -173,24 +182,24 @@ function DesktopTopic({
         </div>
       </StandardPageWrapper>
     </BlurOverlayWrapper>
-  );
+  )
 }
 
-export default DesktopTopic;
+export default DesktopTopic
 
 interface Outcome {
-  name: string;
-  value: number;
+  name: string
+  value: number
 }
 
 interface DesktopItemProps {
-  image: string;
-  title: string;
-  question: string;
-  outcomes: Outcome[];
-  created_at: string;
-  size: "large" | "medium" | "small";
-  id: string;
+  image: string
+  title: string
+  question: string
+  outcomes: Outcome[]
+  created_at: string
+  size: "large" | "medium" | "small"
+  id: string
 }
 
 export function DesktopTopicItem(props: DesktopItemProps) {
@@ -219,9 +228,9 @@ export function DesktopTopicItem(props: DesktopItemProps) {
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.25rem]",
     },
-  };
+  }
 
-  const selectedSize = sizeClasses[props.size];
+  const selectedSize = sizeClasses[props.size]
   return (
     <Link
       href={`/p/${props.id}`}
@@ -255,17 +264,17 @@ export function DesktopTopicItem(props: DesktopItemProps) {
         />
       </div>
     </Link>
-  );
+  )
 }
 
 type GradientBarProps = {
-  percentage: number;
-  labels: [string, string];
-};
+  percentage: number
+  labels: [string, string]
+}
 
 const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
   // Ensure the percentage is between 1 and 100
-  const validPercentage = Math.min(Math.max(percentage, 1), 100);
+  const validPercentage = Math.min(Math.max(percentage, 1), 100)
 
   return (
     <div className="relative m-2 mx-4 bg-[#151515] h-10 rounded-md flex items-center text-white">
@@ -295,12 +304,12 @@ const GradientBar: React.FC<GradientBarProps> = ({ percentage, labels }) => {
       <div className="absolute font-medium left-2.5 ml-2">{labels[0]}</div>
       <div className="absolute font-medium right-2.5 mr-2">{labels[1]}</div>
     </div>
-  );
-};
+  )
+}
 
 export function DesktopTopicItemSkeleton(props: {
-  size: "large" | "medium" | "small";
-  index: number;
+  size: "large" | "medium" | "small"
+  index: number
 }) {
   const sizeClasses = {
     large: {
@@ -327,9 +336,9 @@ export function DesktopTopicItemSkeleton(props: {
       date: "text-[0.85rem]",
       lineHeight: "leading-[1.25rem]",
     },
-  };
+  }
 
-  const selectedSize = sizeClasses[props.size];
+  const selectedSize = sizeClasses[props.size]
 
   return (
     <motion.div
@@ -382,5 +391,5 @@ export function DesktopTopicItemSkeleton(props: {
         </div>
       </div>
     </motion.div>
-  );
+  )
 }

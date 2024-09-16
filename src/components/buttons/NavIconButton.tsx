@@ -18,7 +18,7 @@ export function NavIconButton({
     >
       {icon ?? (
         <IconComponent
-          className={`size-6 ${iconClassName}`}
+          className={`c ${iconClassName}`}
           strokeWidth={2.9}
         />
       )}

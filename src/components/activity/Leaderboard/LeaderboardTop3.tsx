@@ -1,22 +1,22 @@
-import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
-import { getProfilePath } from "@/utils/urls";
-import Link from "next/link";
-import React from "react";
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
+import { getProfilePath } from "@/utils/urls"
+import Link from "next/link"
+import React from "react"
 
 interface LeaderBoardTopUser {
-  name: string;
-  image: string;
-  score: number;
-  walletAddress: string;
+  name: string
+  image: string
+  score: number
+  walletAddress: string
 }
 
 interface LeaderboardTopProps {
-  users: LeaderBoardTopUser[];
+  users: LeaderBoardTopUser[]
 }
 
 const UserCard: React.FC<{
-  user: LeaderBoardTopUser;
-  showMarginTop?: boolean;
+  user: LeaderBoardTopUser
+  showMarginTop?: boolean
 }> = ({ user, showMarginTop }) => (
   <div
     className={`flex flex-col items-center ${showMarginTop ? "mt-2.5" : ""}`}
@@ -53,14 +53,26 @@ const UserCard: React.FC<{
       <div className="h-3 w-20 bg-gray-300 animate-pulse"></div>
     )}
   </div>
-);
+)
 
 const LeaderBoardTop3: React.FC<LeaderboardTopProps> = ({ users }) => (
-  <div className="flex justify-between mt-5 mb-5 w-11/12 mx-auto">
-    <UserCard user={users[1]} showMarginTop />
-    <UserCard user={users[0]} />
-    <UserCard user={users[2]} showMarginTop />
+  <div className="flex justify-between mt-6 mb-5 w-11/12 mx-auto">
+    {users?.length > 1 ? (
+      <UserCard user={users[1]} showMarginTop />
+    ) : (
+      <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
+    )}
+    {users?.length > 0 ? (
+      <UserCard user={users[0]} showMarginTop />
+    ) : (
+      <div className="h-20 w-20 rounded-full bg-[#212121]  animate-pulse"></div>
+    )}{" "}
+    {users?.length > 2 ? (
+      <UserCard user={users[2]} showMarginTop />
+    ) : (
+      <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
+    )}
   </div>
-);
+)
 
-export default LeaderBoardTop3;
+export default LeaderBoardTop3
