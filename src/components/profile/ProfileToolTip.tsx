@@ -11,12 +11,12 @@ import { shortenAddress } from "@/utils/address/shortenAddress";
 import { User } from "@/__generated__/graphql";
 
 export function ProfileToolTip(props: {
-  user: User;
+  user: Partial<IUser>;
   children: React.ReactNode;
 }) {
   const { children } = props;
 
-  
+
   return (
     <TooltipProvider>
       <Tooltip>

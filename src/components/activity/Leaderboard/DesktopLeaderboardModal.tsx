@@ -4,15 +4,15 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import LeaderBoardTop3 from "./LeaderboardTop3"
+import { LeaderBoardTop3 } from "./LeaderboardTop3"
 import { PredictorInfo } from "../PredictorInfo"
 import { LoadingLeaderboardSkeleton } from "../Leaderboard"
 import UserRank from "./UserRank"
 import { Trophy, X } from "lucide-react"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
-function DesktopLeaderboardModal({ children, data, title }) {
-  const top3Users = data?.slice(0, 3).map((predictor) => ({
+function DesktopLeaderboardModal({ children, data, title }: { children: React.ReactNode, data: any[], title: string }) {
+  const top3Users = data?.slice(0, 3).map((predictor: any) => ({
     name: predictor.name?.length > 0 ? predictor?.name : "Anon",
     image: predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
     score: predictor.totalAmountUsdc / 1000000,
@@ -22,17 +22,18 @@ function DesktopLeaderboardModal({ children, data, title }) {
   const remainingPredictors = data?.slice(3)
 
   return (
+    // @ts-ignore
     <Dialog className={`!rounded-[1.5rem]`}>
       <DialogTrigger asChild>
         <div>{children}</div>
       </DialogTrigger>
       <DialogContent
         className={`
-        p-0 bg-transparent  border-0
+        p-0
         rounded-3xl
         bg-[#090909]/85
         backdrop-blur-xl
-        border-[0.08rem] border-[#212121]
+        border border-[#212121]
         h-[80%]
 
       `}

@@ -10,9 +10,6 @@ interface LeaderBoardTopUser {
   walletAddress: string
 }
 
-interface LeaderboardTopProps {
-  users: LeaderBoardTopUser[]
-}
 
 const UserCard: React.FC<{
   user: LeaderBoardTopUser
@@ -26,6 +23,7 @@ const UserCard: React.FC<{
         user={{
           pfp: user?.image,
           name: user?.name,
+          // @ts-ignore
           walletAddress: user?.walletAddress,
         }}
       >
@@ -55,9 +53,12 @@ const UserCard: React.FC<{
   </div>
 )
 
-const LeaderBoardTop3: React.FC<LeaderboardTopProps> = ({ users }) => (
-  <div className="flex justify-between mt-6 mb-5 w-11/12 mx-auto">
-    {users?.length > 1 ? (
+export function LeaderBoardTop3({ users }: {
+  users: LeaderBoardTopUser[]
+}) {
+  return (
+    <div className="flex justify-between mt-6 mb-5 w-11/12 mx-auto">
+      {users?.length > 1 ? (
       <UserCard user={users[1]} showMarginTop />
     ) : (
       <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
@@ -72,7 +73,8 @@ const LeaderBoardTop3: React.FC<LeaderboardTopProps> = ({ users }) => (
     ) : (
       <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
     )}
-  </div>
-)
+    </div>
+  )
+}
 
-export default LeaderBoardTop3
+

@@ -1,13 +1,13 @@
 // @ts-nocheck
 import { motion } from "framer-motion"
 
-import { AltSkeleton, Skeleton } from "@/components/ui/Skeleton"
+import {  Skeleton } from "@/components/ui/Skeleton"
 import { PredictorInfo } from "./PredictorInfo"
 import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
-import LeaderBoardTop3 from "./Leaderboard/LeaderboardTop3"
+import { LeaderBoardTop3 } from "./Leaderboard/LeaderboardTop3"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
-export function Leaderboard(props: { isDesktop: boolean }) {
+export function Leaderboard({ isDesktop }: { isDesktop: boolean }) {
   const { data, isLoading } = useGetGlobalLeaderboard()
   if (isLoading) {
     return <LoadingLeaderboardSkeleton />
@@ -31,7 +31,7 @@ export function Leaderboard(props: { isDesktop: boolean }) {
         exit={{ opacity: 0 }}
         className="flex h-screen flex-col mt-2"
       >
-        {props.isDesktop && (
+        {isDesktop && (
           <div className="text-[1.8rem] text-white font-semibold">
             Global Leaderboard
           </div>
