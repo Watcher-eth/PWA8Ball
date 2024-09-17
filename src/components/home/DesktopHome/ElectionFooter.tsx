@@ -5,7 +5,7 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "@/components/layouts/StandardBleedOverlay";
-import Countdown from "@/components/common/CountDown";
+import { Countdown } from "@/components/common/CountDown";
 import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
 
 import { MarketCard } from "./MarketCard";

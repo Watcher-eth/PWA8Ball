@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useState } from "react";
-import Countdown from "../common/CountDown";
+import { Countdown } from "../common/CountDown";
 import {
   ChevronDown,
   ChevronUp,
