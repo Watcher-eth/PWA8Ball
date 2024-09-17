@@ -235,7 +235,7 @@ export function SettingsPage() {
             <div className="h-[0.1rem] w-full bg-[#222222] mb-5 mt-1.5" />
             <div className="flex flex-row items-center justify-between">
               <button
-                onClick={() => copyToClipboard(user?.walletaddress)}
+                onClick={() => copyToClipboard(user?.walletAddress)}
                 className="px-2 space-x-5 hover:scale-101 actice:scale:98 flex-row font-semibold text-white text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
               >
                 <Wallet
@@ -244,7 +244,7 @@ export function SettingsPage() {
                   height={17}
                   strokeWidth={2.5}
                 />
-                {user?.walletaddress && shortenAddress(user?.walletaddress)}
+                {user?.walletAddress && shortenAddress(user?.walletAddress)}
               </button>
               <button
 

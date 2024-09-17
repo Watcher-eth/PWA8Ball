@@ -5,7 +5,7 @@ import { getProfilePath } from "@/utils/urls";
 
 export function BettersOverviewItem({
   name,
-  walletaddress,
+  walletAddress,
   amount,
   option,
   pfp,
@@ -13,7 +13,7 @@ export function BettersOverviewItem({
   onClose,
 }: {
   name: string;
-  walletaddress: string;
+  walletAddress: string;
   amount: number;
   option: { name: string };
   pfp: string;
@@ -21,7 +21,7 @@ export function BettersOverviewItem({
   onClose: () => void;
 }) {
   return (
-    <Link href={getProfilePath(walletaddress)}>
+    <Link href={getProfilePath(walletAddress)}>
       <div
         onClick={() => {
           onClose();
@@ -67,7 +67,7 @@ export function BettersOverviewItem({
                 color: "lightgray",
               }}
             >
-              {shortenAddress(walletaddress)}
+              {shortenAddress(walletAddress)}
             </p>
           </div>
         </div>

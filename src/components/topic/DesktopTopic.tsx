@@ -127,7 +127,7 @@ function DesktopTopic({
               <div className="flex flex-row space-x-2 items-center">
                 <JoinTopicButton
                   topicId={id}
-                  userId={user?.walletaddress}
+                  userId={user?.walletAddress}
                   showToast={() => {}}
                 />
                 <DesktopLeaderboardModal title={name} data={LeaderBoardData}>

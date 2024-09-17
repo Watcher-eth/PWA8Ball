@@ -5,7 +5,7 @@ export interface IUser {
   external_auth_provider_user_id: string;
   liquiditypoints?: number;
   rewardpoints?: number;
-  walletaddress?: Address; // Walet address should be, you know, and address
+  walletAddress?: Address; // Walet address should be, you know, and address
   socials?: any; // Consider making this more specific if possible
   friends?: any; // Same here
   web_push_subscription?: any; // And here

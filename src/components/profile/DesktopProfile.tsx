@@ -189,7 +189,7 @@ export function DesktopProfilePage2({ userId, userC }) {
           </div>
           <div className="flex flex-row space-x-3 mt-3 items-center">
             <div
-              onClick={() => copyToClipboard(userC?.walletaddress)}
+              onClick={() => copyToClipboard(userC?.walletAddress)}
               className="py-2 hover:scale-101 active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-[Aeonik]"
             >
               <div>

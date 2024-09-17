@@ -85,12 +85,12 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
           Your Address
         </div>
         <div className="text-white flex items-center space-x-[0.35rem] w-full  text-[1.25rem] font-bold  mx-[1.65rem]">
-          <div>{shortenAddress(user?.walletaddress, false)} </div>
+          <div>{shortenAddress(user?.walletAddress, false)} </div>
           <motion.div
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => {
-              copyToClipboard(user?.walletaddress);
+              copyToClipboard(user?.walletAddress);
             }}
           >
             <Copy className="mt-[0.1rem]" size={18} strokeWidth={3} />
@@ -124,7 +124,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
         <StepButton
           onClick={() => {
-            copyToClipboard(user?.walletaddress);
+            copyToClipboard(user?.walletAddress);
           }}
         >
           <Copy size={17} className="mt-[0.05rem]" strokeWidth={3} />
@@ -146,7 +146,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
     defaultFlow: "ONRAMP",
     // fiatCurrency: "USD",
     // fiatValue: 10.0,
-    userAddress: user?.walletaddress,
+    userAddress: user?.walletAddress,
     // defaultAsset: "USDC",
     finalUrl: "https://pwa-8-ball.vercel.app/settings",
   }).show();

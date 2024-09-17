@@ -26,7 +26,7 @@ export function BetDetails({
     data: positions,
     isLoading,
     refetch,
-  } = useGetUserLp(user?.walletaddress);
+  } = useGetUserLp(user?.walletAddress);
 
   return (
     <div className="flex flex-col w-full p-4 px-3.5 pb-0 mb-2 space-y-2">

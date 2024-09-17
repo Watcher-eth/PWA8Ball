@@ -26,7 +26,7 @@ export function DesktopLiquidityPage() {
   );
 
   const { lpTrades: originalLpValues } = useGetOriginalLpPrice(
-    user?.walletaddress
+    user?.walletAddress
   );
 
   const filteredPositions =

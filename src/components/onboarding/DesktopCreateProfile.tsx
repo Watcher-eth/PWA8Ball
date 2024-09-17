@@ -49,21 +49,21 @@ function DesktopCreateProfile() {
     if (user?.walletType === "eoa") {
       setUser({
         ...user,
-        id: user?.walletaddress,
+        id: user?.walletAddress,
         name: username,
         pfp: pfpUrl,
-        walletaddress: user?.walletaddress,
+        walletAddress: user?.walletAddress,
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
       });
-    } else if (user?.walletaddress) {
+    } else if (user?.walletAddress) {
       setUser({
         ...user,
-        id: user?.walletaddress,
+        id: user?.walletAddress,
         name: username,
         pfp: pfpUrl,
-        walletaddress: user?.walletaddress,
+        walletAddress: user?.walletAddress,
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
