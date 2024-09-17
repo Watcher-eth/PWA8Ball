@@ -10,6 +10,7 @@ import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction"
 import { MobileLoadingPrediction } from "./LoadingPrediction"
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
 import { useReferralStore } from "@/lib/stores/ReferralStore"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export function ConfirmPrediction(props: {
   setStep: (step: number) => void
@@ -22,20 +23,20 @@ export function ConfirmPrediction(props: {
   odds: number
 }) {
   const { executePrediction, loading, success, error } = useExecutePrediction()
-
+  const { user } = useUserStore()
   const amount = useVotingStore((state) => state.amount)
   const option = useVotingStore((state) => state.option)
   const refId = useReferralStore((state) => state.referralId)
 
   const shareLink = async () => {
     try {
-      // await navigator.share({
-      //   title: `${userCon.name} just predicted ${options[Option - 1]}`,
-      //   text: `I just predicted ${
-      //     options[Option - 1]
-      //   } for ${question}. What do you think?`,
-      //   url: "https://tryglimpse.xyz",
-      // });
+      await navigator.share({
+        title: `${userCon.name} just predicted ${options[Option - 1]}`,
+        text: `I just predicted ${
+          options[Option - 1]
+        } for ${question}. What do you think?`,
+        url: `https://tryglimpse.xyz?ref=${user?.walletAddress}`,
+      })
     } catch (error) {
       console.error("Error during sharing", error)
     }
@@ -87,9 +88,7 @@ export function ConfirmPrediction(props: {
             </span>
           </div>
           <div className="flex items-center justify-between my-2 w-full">
-            <span className="text-lg  text-[#424242] font-semibold">
-              Fees
-            </span>
+            <span className="text-lg  text-[#424242] font-semibold">Fees</span>
             <span className="text-lg text-white font-bold">
               ${(amount * 0.025).toPrecision(2)}
             </span>

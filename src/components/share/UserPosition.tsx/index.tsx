@@ -27,7 +27,7 @@ export function Receipt(props: {
         await navigator.share({
           title: `${props.title} on Glimpse`,
           text: "This prediction on Glimpse is wild! Check it out",
-          url: `https://pwa-8-ball.vercel.app/p/${props.id}`,
+          url: `https://pwa-8-ball.vercel.app/p/${props.id}?ref=${user?.walletAddress}`,
         });
         console.log("Data was shared successfully");
       } catch (err) {

@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion"
 import { Copy, Gift, Share as ShareIcon } from "lucide-react"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 interface Option {
   name: string
@@ -26,12 +27,13 @@ export function ShareBetContent({
   options: Option[]
   isDesktop?: boolean
 }) {
+  const { user } = useUserStore()
   const shareLink = async () => {
     try {
       await navigator.share({
         title: `${title} on Glimpse`,
         text: "This prediction on Glimpse is wild! Check it out",
-        url: `https://pwa-8-ball.vercel.app/p/${id}`,
+        url: `https://pwa-8-ball.vercel.app/p/${id}?ref=${user?.walletAddress}`,
       })
     } catch (error) {
       console.error("Error during sharing", error)
@@ -114,7 +116,7 @@ export function ShareBetContent({
       <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
         <button
           className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1"
-          onClick={() => copyToClipboard("share bet")}
+          onClick={() => copyToClipboard(`https://pwa-8-ball.vercel.app/p/${id}?ref=${user?.walletAddress}`)}
         >
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
           <span className="text-xl text-[#D9D9D9] font-extrabold">Copy</span>
