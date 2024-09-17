@@ -5,7 +5,6 @@ import { useUserStore } from "@/lib/stores/UserStore";
 import { LiquidityPosition } from "./LiquidityPosition";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
 import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp";

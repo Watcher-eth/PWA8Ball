@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
 import { ChartConfig } from "@/components/ui/chart"
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket"
 
 import { getMinMaxValues, processPrices } from "@/utils/chartUtils"
 import { timeframes } from "./MyBetModal"
@@ -13,6 +12,7 @@ import { TimeframeSelector } from "@/components/charts/TimeframeSelector"
 import { Chip } from "@/components/ui/Chip"
 import { MessageCircle, PlusCircle, ShareIcon, Users } from "lucide-react"
 import { DesktopShareBetModal } from "@/components/share/bet/DesktopShareBetModal"
+import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices"
 export const chartConfig = {
   desktop: {
     label: "Desktop",
@@ -39,12 +39,8 @@ export function DesktopChart(props: {
 }) {
   const [timeframe, setTimeframe] = useState("1M")
   console.log("props", props)
-  // const { data: prices, error: priceError } = useGetPricesForMarket(
-  //   props?.id,
-  //   timeframe
-  // );
 
-  const { data: prices2 } = useGetPricesForMarket(props?.id, timeframe)
+  const { data: prices2 } = useGetMarketPrices(props?.id)
 
   const userOutcome = props?.option
   const { currentPrices, percentageDifference } = processPrices(
@@ -59,10 +55,11 @@ export function DesktopChart(props: {
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
     month: price.date.toLocaleString(), // Format the date as needed
-    [`${props.options[0].name}`]: 100 - price.value,
-    [`${props.options[1].name}`]: price.value,
+    [`${props.options[0].name}`]: price.value,
+    [`${props.options[1].name}`]: 100 - price.value,
   }))
 
+  console.log("iuserOwne", props?.userOwns[0])
   return (
     <div>
       <div className="flex flex-row items-center space-x-3 ">
@@ -102,17 +99,14 @@ export function DesktopChart(props: {
             ) : (
               <span className="text-white text-lg font-semibold">
                 {prices2
-                  ? props?.userOwns?.highest_option === 1
+                  ? props?.userOwns[0]?.option === 1
                     ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                     : currentPrices.length > 0
                     ? currentPrices[currentPrices.length - 1].value.toFixed(2)
                     : (100 - props.price).toFixed(2)
                   : (props.price / 10000).toFixed(2)}
                 %{" "}
-                {
-                  props.options[props?.userOwns?.highest_option === 0 ? 1 : 0]
-                    ?.name
-                }
+                {props.options[props?.userOwns[0]?.option === 0 ? 1 : 0]?.name}
               </span>
             )}
             {props?.isMarketPage ? (
@@ -123,7 +117,9 @@ export function DesktopChart(props: {
           `}
               >
                 {currentPrices[currentPrices.length - 1].value.toFixed(2)}%{" "}
-                {props?.options[0].name}
+                {props?.options[0].name === "Yes"
+                  ? "Chance"
+                  : props?.options[0].name}
               </span>
             ) : (
               <span
@@ -265,14 +261,11 @@ export function DesktopChart(props: {
         setTimeframe={setTimeframe}
       />
       {props?.userOwns && (
-        <div className="flex flex-row items-center justify-between -mb-6">
+        <div className="flex flex-row items-center justify-between mb-3 mt-2">
           <div className="flex flex-col items-start">
             <span className="text-xs text-white/70">You voted</span>
             <span className="text-white text-lg font-semibold">
-              {
-                props.options[props?.userOwns?.highest_option === 1 ? 0 : 1]
-                  ?.name
-              }
+              {props.options[props?.userOwns[0]?.option === 1 ? 0 : 1]?.name}
             </span>
           </div>
           <div className="flex flex-col items-end">
@@ -281,8 +274,8 @@ export function DesktopChart(props: {
               <span className="text-white text-lg font-semibold">
                 $
                 {(
-                  props?.userOwns?.highest_amount *
-                  (currentPrices[currentPrices.length - 1]?.value / 1000000)
+                  props?.userOwns[0]?.tokensOwned *
+                  (currentPrices[currentPrices.length - 1]?.value / 10000000)
                 ).toFixed(2)}
               </span>
             )}

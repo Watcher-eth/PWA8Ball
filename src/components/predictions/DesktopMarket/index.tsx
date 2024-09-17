@@ -22,9 +22,8 @@ import { DesktopPredictComponent } from "./DesktopPredictComponent"
 
 import { AlignLeft } from "lucide-react"
 
-import { useGetHighestOrderOption } from "@/supabase/queries/markets/useGetHighestOrderOption"
 import { DesktopBettersModal } from "../Betters/DesktopBettersModal"
-import { RulesCollapsible } from "../BetDetails/RulesCollapsible"
+
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
 import { HARD_MARKETS } from "@/constants/markets"
 import { HARD_TOPICS } from "@/constants/topics"
@@ -72,7 +71,7 @@ export function DesktopMarketPage({ users, market, id }) {
             <div
               className={`
                 h-40 w-full
-                bg-gradient-to-t from-[#080808]  via-[#080808]/30 to-[#080808]/10
+                bg-gradient-to-t from-[#080808] to-[#080808]/5
                 backdrop-blur-xl absolute bottom-0
               `}
             />
@@ -98,9 +97,9 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full overflow-y-auto z-[30] flex flex-col">
+      <div className="w-full h-full mt-4 overflow-y-auto z-[30] flex flex-col">
         <div>
-          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-2">
+          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-4">
             <Col xs={4} lg={5}>
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
 

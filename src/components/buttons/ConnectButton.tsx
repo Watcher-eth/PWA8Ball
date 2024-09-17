@@ -1,9 +1,9 @@
-import { IUser } from "@/supabase/types"
 import { useMyEns } from "@/hooks/wallet/useMyEns"
 import { UserCircle } from "lucide-react"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
+import { User } from "@/__generated__/graphql"
 
-export function ConnectButton({ user }: { user: IUser }) {
+export function ConnectButton({ user }: { user: User }) {
   const { displayName } = useMyEns()
   const buttonText =
     displayName && !displayName.startsWith("0x")

@@ -130,7 +130,7 @@ function DesktopTopic({
                   userId={user?.walletaddress}
                   showToast={() => {}}
                 />
-                <DesktopLeaderboardModal data={LeaderBoardData}>
+                <DesktopLeaderboardModal title={name} data={LeaderBoardData}>
                   <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-bold rounded-full text-base text-white">
                     <Trophy
                       color="white"

@@ -1,11 +1,11 @@
 // @ts-nocheck
 import { Gift } from "lucide-react";
-import { useGetLPForUser } from "@/supabase/queries/user/useGetLPForUser";
 import { useUserStore } from "@/lib/stores/UserStore.tsx";
 import { parseAndFormatDate } from "@/utils/datetime/extractEndDate";
 import { BoostDetail } from "./BoostDetail";
 import { TopicInfoDetail } from "./TopicInfoDetail";
 import { DetailRow } from "./DetailRow";
+import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp"
 
 export function BetDetails({
   endDate,
@@ -26,7 +26,7 @@ export function BetDetails({
     data: positions,
     isLoading,
     refetch,
-  } = useGetLPForUser(user?.walletaddress);
+  } = useGetUserLp(user?.walletaddress);
 
   return (
     <div className="flex flex-col w-full p-4 px-3.5 pb-0 mb-2 space-y-2">

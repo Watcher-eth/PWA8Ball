@@ -4,8 +4,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
-import { useGetTopPredictors } from "@/supabase/queries/leaderboard/useGetTopPredictors"
 import LeaderBoardTop3 from "./LeaderboardTop3"
 import { PredictorInfo } from "../PredictorInfo"
 import { LoadingLeaderboardSkeleton } from "../Leaderboard"
@@ -13,7 +11,7 @@ import UserRank from "./UserRank"
 import { Trophy, X } from "lucide-react"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
-function DesktopLeaderboardModal({ children, data }) {
+function DesktopLeaderboardModal({ children, data, title }) {
   const top3Users = data?.slice(0, 3).map((predictor) => ({
     name: predictor.name?.length > 0 ? predictor?.name : "Anon",
     image: predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
@@ -43,7 +41,7 @@ function DesktopLeaderboardModal({ children, data }) {
           <div className="flex items-center space-x-3 mb-2 justify-between">
             <div className="flex flex-col">
               <div className="text-white text-2xl font-semibold">
-                Global Leaderboard
+                {title} Leaderboard
               </div>
               <div className="text-[lightgray] text-md font-normal">
                 All users last 24 hours

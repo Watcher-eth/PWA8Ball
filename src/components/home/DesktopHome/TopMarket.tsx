@@ -3,8 +3,6 @@ import { HARD_MARKETS } from "@/constants/markets"
 import { HARD_TOPICS } from "@/constants/topics"
 import { useGetMarketById } from "@/graphql/queries/markets/useGetMarketById"
 import { Users } from "lucide-react"
-import { formatDate } from "@/utils/datetime/formatDate"
-import { useGetPricesForMarket } from "@/supabase/queries/charts/useGetPricesForMarket"
 import { getMinMaxValues, processPrices } from "@/utils/chartUtils"
 
 import { GenericLineChart } from "@/components/charts/GenericLineChart"
@@ -12,6 +10,7 @@ import { Chip } from "@/components/ui/Chip"
 import { formatChartDateStr } from "@/utils/datetime/parseChartDate"
 import Link from "next/link"
 import { getMarketPath } from "@/utils/urls"
+import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices"
 
 export function TopMarket() {
   const { market } = useGetMarketById("1")
@@ -21,7 +20,7 @@ export function TopMarket() {
     HARD_TOPICS
   )
 
-  const { data: prices2 } = useGetPricesForMarket("1", "1M")
+  const { data: prices2 } = useGetMarketPrices("1")
 
   const userOutcome = 0
   const { currentPrices, percentageDifference } = processPrices(
