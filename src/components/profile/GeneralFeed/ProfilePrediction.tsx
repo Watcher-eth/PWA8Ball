@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { motion } from "framer-motion"
+import { Skeleton } from "@/components/ui/Skeleton"
 
 export function ProfilePrediction({
   image,
@@ -11,12 +11,12 @@ export function ProfilePrediction({
   index,
   rightContent,
 }: {
-  image: string;
-  question: string;
-  amount: number;
-  title: string;
-  index: number;
-  rightContent?: React.ReactNode;
+  image: string
+  question: string
+  amount: number
+  title: string
+  index: number
+  rightContent?: React.ReactNode
 }) {
   return (
     <motion.div
@@ -47,5 +47,5 @@ export function ProfilePrediction({
       </div>
       {rightContent}
     </motion.div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { DrawerClose } from "@/components/ui/drawer";
+import { DrawerClose } from "@/components/ui/drawer"
 
-import { KeypadActionButton } from "./KeypadActionButton";
-import { KeypadButton } from "./KeypadButton";
-import { KeypadAmountButton } from "./KeypadAmountButton";
+import { KeypadActionButton } from "./KeypadActionButton"
+import { KeypadButton } from "./KeypadButton"
+import { KeypadAmountButton } from "./KeypadAmountButton"
 
 export function NumericKeypad({
   sliderValue,
@@ -12,12 +12,12 @@ export function NumericKeypad({
   handleDelete,
   handleContinue,
 }: {
-  sliderValue: string;
-  setSliderValue: (value: string) => void;
-  userBalance: number;
-  handleButtonPress: (value: string) => void;
-  handleDelete: () => void;
-  handleContinue: () => void;
+  sliderValue: string
+  setSliderValue: (value: string) => void
+  userBalance: number
+  handleButtonPress: (value: string) => void
+  handleDelete: () => void
+  handleContinue: () => void
 }) {
   return (
     <>
@@ -69,5 +69,5 @@ export function NumericKeypad({
         )}
       </div>
     </>
-  );
+  )
 }

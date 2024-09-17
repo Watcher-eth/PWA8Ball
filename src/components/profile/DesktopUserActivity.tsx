@@ -1,39 +1,39 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { motion } from "framer-motion"
+import { useEffect } from "react"
 
-import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
-import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions";
-import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
-import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton";
-import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
+import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser"
+import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions"
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
+import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton"
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet"
 
 export function DesktopUserActivity({
   walletAddress,
   userId,
   onParentRefresh,
 }: {
-  walletAddress: string;
-  userId: string;
-  onParentRefresh?: boolean;
+  walletAddress: string
+  userId: string
+  onParentRefresh?: boolean
 }) {
   const {
     data: ordersData,
     isLoading: isOrdersLoading,
     refetch: refetchOrders,
-  } = useGetPositionsByWallet(walletAddress);
+  } = useGetPositionsByWallet(walletAddress)
   const {
     data: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetMarketsCreatedByUser(userId);
+  } = useGetMarketsCreatedByUser(userId)
 
   useEffect(() => {
     if (onParentRefresh) {
-      refetchOrders();
-      refetchCreated();
+      refetchOrders()
+      refetchCreated()
     }
-  }, [onParentRefresh, refetchOrders, refetchCreated]);
+  }, [onParentRefresh, refetchOrders, refetchCreated])
 
   if (isOrdersLoading || isCreatedMarketsLoading) {
     return (
@@ -41,15 +41,15 @@ export function DesktopUserActivity({
         <UserPredictionSkeleton index={0} />
         <UserPredictionSkeleton index={1} />
       </div>
-    );
+    )
   }
 
-  const aggregatedOrdersData = aggregatePredictedItems(ordersData || []);
+  const aggregatedOrdersData = aggregatePredictedItems(ordersData || [])
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
     ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
       []),
-  ];
+  ]
   return (
     <div className="h-screen w-full max-w-[29%] p-4 pt-3">
       <h1 className="text-white text-2xl font-semibold ">Your Activity</h1>
@@ -109,11 +109,11 @@ export function DesktopUserActivity({
         ) : (
           <div className="max-w-full">
             {[1, 2, 3].map((item, index) => {
-              return <UserPredictionSkeleton index={index} />;
+              return <UserPredictionSkeleton index={index} />
             })}
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }

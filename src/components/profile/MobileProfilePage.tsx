@@ -1,30 +1,30 @@
 // @ts-nocheck
 
-import Link from "next/link";
-import { PieChart, CircleEllipsis } from "lucide-react";
-import { GeneralFeed } from "@/components/profile/GeneralFeed";
-import { FollowButton } from "@/components/profile/FollowButton";
+import Link from "next/link"
+import { PieChart, CircleEllipsis } from "lucide-react"
+import { GeneralFeed } from "@/components/profile/GeneralFeed"
+import { FollowButton } from "@/components/profile/FollowButton"
 
-import { SocialsSection } from "@/components/common/SocialsSection";
-import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
-import { BlurOverlayWrapper } from "../onboarding/Invites/InviteBlur";
-import { INVITES_ACTIVE } from "@/constants";
-import { DesktopProfilePopover } from "../layouts/DesktopProfilePopover";
-import { MobileProfilePopover } from "../layouts/MobileProfilePopover";
+import { SocialsSection } from "@/components/common/SocialsSection"
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance"
+import { BlurOverlayWrapper } from "../onboarding/Invites/InviteBlur"
+import { INVITES_ACTIVE } from "@/constants"
+import { MobileProfilePopover } from "../layouts/MobileProfilePopover"
+import { User } from "@/__generated__/graphql"
 
 export function MobileProfilePage({
   userId,
   totalFollowers,
   userC,
 }: {
-  userId: string;
-  totalFollowers: number;
-  userC: User;
+  userId: string
+  totalFollowers: number
+  userC: User
 }) {
   const balance = useUsdcBalance({
     address: userC?.walletAddress,
-  });
-  console.log("userC", userC);
+  })
+  console.log("userC", userC)
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
@@ -88,15 +88,15 @@ export function MobileProfilePage({
         {/* {isModalOpen && <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />} */}
       </div>
     </BlurOverlayWrapper>
-  );
+  )
 }
 
 function AbsoluteBlurIcon({
   IconComponent,
   className = "",
 }: {
-  IconComponent: React.FC;
-  className?: string;
+  IconComponent: React.FC
+  className?: string
 }) {
   return (
     <div
@@ -107,5 +107,5 @@ function AbsoluteBlurIcon({
     >
       <IconComponent size={19} color="white" strokeWidth={3} />
     </div>
-  );
+  )
 }

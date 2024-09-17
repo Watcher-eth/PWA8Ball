@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { getMarketPath } from "@/utils/urls";
+import { Plus } from "lucide-react"
+import Link from "next/link"
+import { getMarketPath } from "@/utils/urls"
 
-import { ProfilePrediction } from "./ProfilePrediction";
+import { ProfilePrediction } from "./ProfilePrediction"
 
 export function UserPrediction({
   index,
@@ -34,7 +34,7 @@ export function UserPrediction({
         </div>
       }
     />
-  );
+  )
 }
 
 export function CreatedPrediction({
@@ -62,5 +62,5 @@ export function CreatedPrediction({
         }
       />
     </Link>
-  );
+  )
 }

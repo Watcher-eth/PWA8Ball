@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import { AltSkeleton } from "@/components/ui/Skeleton";
+import { motion } from "framer-motion"
+import { AltSkeleton } from "@/components/ui/Skeleton"
 
 export function UserPredictionSkeleton({ index }) {
   return (
@@ -20,5 +20,5 @@ export function UserPredictionSkeleton({ index }) {
       </div>
       <AltSkeleton className="w-[18%] h-[35px]" />
     </motion.div>
-  );
+  )
 }

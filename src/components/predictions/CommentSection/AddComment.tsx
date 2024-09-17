@@ -90,7 +90,7 @@ export function AddComment({
           ref={inputRef}
           placeholder="Add a comment..."
           rows={1}
-          className={`pb-1 bg-[transparent] placeholder-[lightgray] w-7/10 border-[#303030] text-[lightgray] bg-transparent focus:outline-none transition-all duration-300 resize-none
+          className={`pb-1 bg-transparent placeholder-[lightgray] w-7/10 border-[#303030] text-[lightgray] focus:outline-none transition-all duration-300 resize-none
           border-b-[0.8px] focus:border-b-1 focus:border-b-[lightgray] outline-none overflow-hidden
           `}
           onInput={handleInput}

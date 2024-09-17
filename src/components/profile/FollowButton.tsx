@@ -1,31 +1,31 @@
 // @ts-nocheck
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import { PenBox, UserMinus, UserPlus } from "lucide-react";
-import { useFollowUser } from "@/supabase/mutations/follow/useFollowUser";
-import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useCheckIfFollowing } from "@/supabase/queries/user/useCheckIfFollowing";
-import { toast } from "sonner";
+import { PenBox, UserMinus, UserPlus } from "lucide-react"
+import { useFollowUser } from "@/supabase/mutations/follow/useFollowUser"
+import { useUnfollowUser } from "@/supabase/mutations/follow/useUnfollowUser"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useCheckIfFollowing } from "@/supabase/queries/user/useCheckIfFollowing"
+import { toast } from "sonner"
 
-export function FollowButton({ profileId }: { profileId: string }) {
-  const { user } = useUserStore();
-  const followerId = user?.walletAddress;
-  const followingId = profileId;
-  const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId);
-  const [edit, setEdit] = useState<boolean>();
-  const [isFollowing, setFollowing] = useState(false);
-  const [temporaryUnfollow, setTemporaryUnfollow] = useState(false);
+export function FollowButton({ profileId }: { profileId?: string }) {
+  const { user } = useUserStore()
+  const followerId = user?.walletAddress
+  const followingId = profileId
+  const { data: isFollowing2 } = useCheckIfFollowing(followerId!, followingId)
+  const [edit, setEdit] = useState<boolean>()
+  const [isFollowing, setFollowing] = useState(false)
+  const [temporaryUnfollow, setTemporaryUnfollow] = useState(false)
 
-  const { mutate: followUser } = useFollowUser();
-  const { mutate: unfollowUser } = useUnfollowUser();
-  console.log("follow ids", followerId, profileId);
+  const { mutate: followUser } = useFollowUser()
+  const { mutate: unfollowUser } = useUnfollowUser()
+  console.log("follow ids", followerId, profileId)
   useEffect(() => {
     if (isFollowing2) {
-      setFollowing(true);
+      setFollowing(true)
     }
-  }, [isFollowing2]);
+  }, [isFollowing2])
 
   const toastUp = (text: string) => {
     toast(
@@ -49,25 +49,25 @@ export function FollowButton({ profileId }: { profileId: string }) {
           closeButton: "bg-lime-400",
         },
       }
-    );
-  };
+    )
+  }
 
   const handleFollow = () => {
-    followUser({ followerId, followingId });
-    setFollowing(true);
-    toastUp("Followed");
-  };
+    followUser({ followerId, followingId })
+    setFollowing(true)
+    toastUp("Followed")
+  }
 
   const handleUnfollow = () => {
-    unfollowUser({ followerId, followingId });
-    setFollowing(false);
-    setTemporaryUnfollow(true);
-    toastUp("Unfollowed");
-  };
+    unfollowUser({ followerId, followingId })
+    setFollowing(false)
+    setTemporaryUnfollow(true)
+    toastUp("Unfollowed")
+  }
 
-  const isUser = user?.walletAddress === profileId;
+  const isUser = user?.walletAddress === profileId
 
-  console.log("params follow", user?.walletAddress, profileId);
+  console.log("params follow", user?.walletAddress, profileId)
   if ((!isUser && !isFollowing && !isFollowing2) || temporaryUnfollow) {
     return (
       <DisplayFollowButton
@@ -75,7 +75,7 @@ export function FollowButton({ profileId }: { profileId: string }) {
         IconComponent={UserPlus}
         label="Follow"
       />
-    );
+    )
   }
 
   if ((!isUser && isFollowing) || (isFollowing2 && !temporaryUnfollow)) {
@@ -85,7 +85,7 @@ export function FollowButton({ profileId }: { profileId: string }) {
         label="Following"
         isDark={false}
       />
-    );
+    )
   }
 
   if (isUser) {
@@ -95,10 +95,10 @@ export function FollowButton({ profileId }: { profileId: string }) {
         IconComponent={PenBox}
         label="Edit"
       />
-    );
+    )
   }
 
-  return null;
+  return null
 }
 
 function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
@@ -128,5 +128,5 @@ function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
         {label}
       </div>
     </button>
-  );
+  )
 }

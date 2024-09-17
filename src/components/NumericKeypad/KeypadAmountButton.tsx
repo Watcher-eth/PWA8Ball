@@ -2,8 +2,8 @@ export function KeypadAmountButton({
   children,
   onClick,
 }: {
-  children: React.ReactNode;
-  onClick: () => void;
+  children: React.ReactNode
+  onClick: () => void
 }) {
   return (
     <button
@@ -16,5 +16,5 @@ export function KeypadAmountButton({
     >
       {children}
     </button>
-  );
+  )
 }

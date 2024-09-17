@@ -2,8 +2,8 @@ export function KeypadActionButton({
   label,
   onClick,
 }: {
-  label: string;
-  onClick?: () => void;
+  label: string
+  onClick?: () => void
 }) {
   return (
     <button
@@ -15,5 +15,5 @@ export function KeypadActionButton({
     >
       {label}
     </button>
-  );
+  )
 }

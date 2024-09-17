@@ -1,60 +1,60 @@
 // @ts-nocheck
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"
+import Link from "next/link"
 
-import { Copy, Wallet } from "lucide-react";
+import { Copy, Wallet } from "lucide-react"
 
-import { useUserStore } from "@/lib/stores/UserStore";
-import { SocialsSection } from "@/components/common/SocialsSection";
+import { useUserStore } from "@/lib/stores/UserStore"
+import { SocialsSection } from "@/components/common/SocialsSection"
 
-import { ContrastButton } from "@/components/buttons/ContrastButton";
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
+import { ContrastButton } from "@/components/buttons/ContrastButton"
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
 import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import { FollowButton } from "./FollowButton";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+} from "../layouts/StandardBleedOverlay"
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import { FollowButton } from "./FollowButton"
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
+import { copyToClipboard } from "@/utils/copyToClipboard"
 import {
   BlurOverlay,
   BlurOverlayWrapper,
   withBlurOverlay,
-} from "../onboarding/Invites/InviteBlur";
-import AnimatedBackground from "../common/Animated/AnimatedSelector";
-import { INVITES_ACTIVE } from "@/constants";
-import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
+} from "../onboarding/Invites/InviteBlur"
+import AnimatedBackground from "../common/Animated/AnimatedSelector"
+import { INVITES_ACTIVE } from "@/constants"
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet"
 import {
   aggregatePredictedItems,
   aggregatePredictedItemsWithImage,
-} from "@/utils/predictions/aggregatePredictions";
-import { HARD_MARKETS } from "@/constants/markets";
-import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
-import { PredictionPositionModal } from "../modals/PredictionPositionModal";
-import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
+} from "@/utils/predictions/aggregatePredictions"
+import { HARD_MARKETS } from "@/constants/markets"
+import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser"
+import { PredictionPositionModal } from "../modals/PredictionPositionModal"
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
 
 export function DesktopProfilePage2({ userId, userC }) {
-  const { user, setUser } = useUserStore();
-  const balance = useUserUsdcBalance();
-  const [filter, setFilter] = useState("All");
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState("");
-  const [editedPfp, setEditedPfp] = useState(userC.pfp);
-  const { upsertUser } = useUpsertUser();
-  const { orders: ordersData, refetch } = useGetPositionsByWallet(userId);
+  const { user, setUser } = useUserStore()
+  const balance = useUserUsdcBalance()
+  const [filter, setFilter] = useState("All")
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedName, setEditedName] = useState("")
+  const [editedPfp, setEditedPfp] = useState(userC.pfp)
+  const { upsertUser } = useUpsertUser()
+  const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetCreatedMarketsByUser(userId);
+  } = useGetCreatedMarketsByUser(userId)
   const aggregatedOrdersData = aggregatePredictedItemsWithImage(
     ordersData ?? [],
     HARD_MARKETS
-  );
+  )
   const mergedData =
     filter === "All"
       ? [
@@ -74,33 +74,33 @@ export function DesktopProfilePage2({ userId, userC }) {
             type: "created",
           })),
         ]
-      : [];
+      : []
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onloadend = () => {
-        setEditedPfp(reader.result);
-      };
-      reader.readAsDataURL(file);
+        setEditedPfp(reader.result)
+      }
+      reader.readAsDataURL(file)
     }
-  };
+  }
 
   async function handleConfirm() {
     setUser({
       ...user,
       name: editedName?.length > 2 ? editedName : user?.name,
       pfp: editedPfp ?? user?.pfp,
-    });
+    })
 
     await upsertUser({
       id: user?.walletAddress,
       name: editedName?.length > 2 ? editedName : user?.name,
       pfp: editedPfp ?? user?.pfp,
-    });
+    })
 
-    setIsEditing(false);
+    setIsEditing(false)
   }
 
   return (
@@ -285,7 +285,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                         pfp={userC?.pfp}
                         {...item}
                       />
-                    );
+                    )
                   if (Number(item.tokensOwned) !== 0) {
                     return (
                       <DesktopMyBetModal
@@ -326,7 +326,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                           {...item}
                         />
                       </DesktopMyBetModal>
-                    );
+                    )
                   }
                 })}
             </div>
@@ -343,7 +343,7 @@ export function DesktopProfilePage2({ userId, userC }) {
         </div>
       </StandardPageWrapper>
     </BlurOverlayWrapper>
-  );
+  )
 }
 
 function ProfilePositionCard(
@@ -419,5 +419,5 @@ function ProfilePositionCard(
         </div>
       </div>
     </div>
-  );
+  )
 }

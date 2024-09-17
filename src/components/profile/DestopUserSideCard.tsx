@@ -1,14 +1,14 @@
 // @ts-nocheck
-import React from "react";
+import React from "react"
 
-import { Share, Share2 } from "lucide-react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { motion } from "framer-motion";
+import { Share, Share2 } from "lucide-react"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { motion } from "framer-motion"
 export const DesktopUserSideProfile: React.FC = () => {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -50,13 +50,13 @@ export const DesktopUserSideProfile: React.FC = () => {
         Share your score
       </motion.button>
     </div>
-  );
-};
+  )
+}
 
 function InfoParaStack({
   label,
   content,
-  className=""
+  className = "",
 }: {
   label: string
   content: string
@@ -65,9 +65,7 @@ function InfoParaStack({
   return (
     <div className={className}>
       <p className="font-semibold">{label}</p>
-      <p className="text-[1.45rem] font-semibold text-[lightgray]">
-        {content}
-      </p>
+      <p className="text-[1.45rem] font-semibold text-[lightgray]">{content}</p>
     </div>
-  );
+  )
 }

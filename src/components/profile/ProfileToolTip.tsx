@@ -1,21 +1,20 @@
-import React from "react";
+import React from "react"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { FollowButton } from "./FollowButton";
-import { IUser } from "@/supabase/types";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import { User } from "@/__generated__/graphql";
+} from "@/components/ui/tooltip"
+import { FollowButton } from "./FollowButton"
+import { IUser } from "@/supabase/types"
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import { User } from "@/__generated__/graphql"
 
 export function ProfileToolTip(props: {
-  user: Partial<IUser>;
-  children: React.ReactNode;
+  user: Partial<IUser>
+  children: React.ReactNode
 }) {
-  const { children } = props;
-
+  const { children } = props
 
   return (
     <TooltipProvider>
@@ -66,5 +65,5 @@ export function ProfileToolTip(props: {
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  );
+  )
 }

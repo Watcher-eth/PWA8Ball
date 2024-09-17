@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
-import { Heart, UserPlus, MessageSquareText, Bell } from "lucide-react";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
+import { Heart, UserPlus, MessageSquareText, Bell } from "lucide-react"
 
 export function NotificationCard({
   type,
@@ -11,11 +11,11 @@ export function NotificationCard({
   comment,
   index,
 }) {
-  let icon;
+  let icon
   switch (type) {
     case "follow":
-      icon = <UserPlus strokeWidth={3} size={16} color="white" />;
-      break;
+      icon = <UserPlus strokeWidth={3} size={16} color="white" />
+      break
     case "reply":
       icon = (
         <MessageSquareText
@@ -24,13 +24,13 @@ export function NotificationCard({
           color="#191919"
           fill="#191919"
         />
-      );
-      break;
+      )
+      break
     case "like":
-      icon = <Heart strokeWidth={4} size={16} color="white" fill="white" />;
-      break;
+      icon = <Heart strokeWidth={4} size={16} color="white" fill="white" />
+      break
     default:
-      icon = <Bell strokeWidth={4} size={16} color="white" fill="white" />;
+      icon = <Bell strokeWidth={4} size={16} color="white" fill="white" />
   }
 
   return (
@@ -95,5 +95,5 @@ export function NotificationCard({
         {image && <img src={image} alt="Notification" />}
       </div>
     </div>
-  );
+  )
 }

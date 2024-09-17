@@ -1,26 +1,26 @@
 // @ts-nocheck
 
-import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
+import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser"
 
-import { NotificationsPlaceholder } from "../common/placeholders/NewPlaceholders";
-import { DesktopCardModal } from "../modals/DesktopCardModal";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { NotificationsPlaceholder } from "../common/placeholders/NewPlaceholders"
+import { DesktopCardModal } from "../modals/DesktopCardModal"
+import { useUserStore } from "@/lib/stores/UserStore"
 
-import { NotificationCard } from "./NotificationCard";
+import { NotificationCard } from "./NotificationCard"
 
 export function DesktopNotificationModal({
   children,
   userId,
 }: {
-  children: React.ReactNode;
-  userId: string;
+  children: React.ReactNode
+  userId: string
 }) {
   const {
     data: notifications,
     isLoading,
     error,
-  } = useGetNotificationsForUser(userId);
-  const { user } = useUserStore();
+  } = useGetNotificationsForUser(userId)
+  const { user } = useUserStore()
   return (
     <DesktopCardModal
       title="Notifications"
@@ -51,5 +51,5 @@ export function DesktopNotificationModal({
     >
       {children}
     </DesktopCardModal>
-  );
+  )
 }

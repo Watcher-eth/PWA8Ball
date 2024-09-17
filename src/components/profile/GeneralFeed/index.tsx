@@ -1,47 +1,46 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser";
+import React, { useEffect } from "react"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 import {
   aggregatePredictedItems,
   aggregatePredictedItemsWithImage,
-} from "@/utils/predictions/aggregatePredictions";
+} from "@/utils/predictions/aggregatePredictions"
 
-import { NewPlaceholder } from "../../common/placeholders/NewPlaceholders";
-import { PredictionPositionModal } from "../../modals/PredictionPositionModal";
+import { NewPlaceholder } from "../../common/placeholders/NewPlaceholders"
+import { PredictionPositionModal } from "../../modals/PredictionPositionModal"
 
-import { UserPrediction, CreatedPrediction } from "./UserPrediction";
-import { UserPredictionSkeleton } from "./UserPredictionSkeleton";
-import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
-import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
-import { HARD_MARKETS } from "@/constants/markets";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_TOPICS } from "@/constants/topics";
+import { UserPrediction, CreatedPrediction } from "./UserPrediction"
+import { UserPredictionSkeleton } from "./UserPredictionSkeleton"
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet"
+import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser"
+import { HARD_MARKETS } from "@/constants/markets"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_TOPICS } from "@/constants/topics"
 
 export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
-  const { user } = useUserStore();
-  const walletAddress = walletAddy || user?.walletAddress;
-  const userId = id || user?.externalAuthProviderUserId;
+  const { user } = useUserStore()
+  const walletAddress = walletAddy || user?.walletAddress
+  const userId = id || user?.externalAuthProviderUserId
 
   const {
     orders: ordersData,
     loading: isOrdersLoading,
     refetch: refetchOrders,
-  } = useGetPositionsByWallet(walletAddress);
+  } = useGetPositionsByWallet(walletAddress)
   const {
     markets: createdMarketsData,
     loading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetCreatedMarketsByUser(walletAddress);
+  } = useGetCreatedMarketsByUser(walletAddress)
 
   useEffect(() => {
     if (onParentRefresh) {
-      refetchOrders();
-      refetchCreated();
+      refetchOrders()
+      refetchCreated()
     }
-  }, [onParentRefresh, refetchOrders, refetchCreated]);
+  }, [onParentRefresh, refetchOrders, refetchCreated])
 
   if (isOrdersLoading || isCreatedMarketsLoading) {
     return (
@@ -49,26 +48,26 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
         <UserPredictionSkeleton index={0} />
         <UserPredictionSkeleton index={1} />
       </div>
-    );
+    )
   }
 
   const aggregatedOrdersData = aggregatePredictedItemsWithImage(
     ordersData || [],
     HARD_MARKETS
-  );
+  )
 
   const enhancedCreatedMarket = enhanceMarketsWithImageAndPolyId(
     createdMarketsData,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
     ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
       []),
-  ];
+  ]
 
-  console.log("aggrea", mergedData);
+  console.log("aggrea", mergedData)
   return (
     <div className="flex flex-col items-center -gap-2.5 -mt-3">
       {mergedData.length < 1 ? (
@@ -134,5 +133,5 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
         )
       )}
     </div>
-  );
+  )
 }

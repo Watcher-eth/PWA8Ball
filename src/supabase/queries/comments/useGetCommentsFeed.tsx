@@ -12,7 +12,7 @@ interface ICommentWithMarket extends IComment {
   market_image: string;
 }
 
-const fetchCommentsForTopic = async (): Promise<IComment[]> => {
+const fetchCommentsForTopic = async () => {
   const { data, error } = await supabase
     .from("comments")
     .select(
@@ -36,8 +36,10 @@ const fetchCommentsWithDetails = async (): Promise<ICommentWithMarket[]> => {
 
   const commentsWithDetails = await Promise.all(
     comments.map(async (comment) => {
-      const user = await getUserById(comment.created_by);
-      const market = await getMarketById(String(comment?.market_id));
+      const [user, market] = await Promise.all([
+        getUserById(comment.created_by),
+        getMarketById(String(comment?.market_id))
+      ])
 
       const enhancedMarket = enhanceMarketsWithImageAndPolyId(
         market,
