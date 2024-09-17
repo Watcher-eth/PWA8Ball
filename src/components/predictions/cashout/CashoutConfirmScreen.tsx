@@ -1,44 +1,44 @@
 // @ts-nocheck
 
-import React, { useState } from "react";
-import { ArrowDown, X, Share as ShareIcon } from "lucide-react";
-import { motion } from "framer-motion";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { formatAmountWithCommas } from "@/utils/markets/formatAmountWithCommas";
-import { User } from "@/__generated__/graphql";
+import React, { useState } from "react"
+import { ArrowDown, X, Share as ShareIcon } from "lucide-react"
+import { motion } from "framer-motion"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { formatAmountWithCommas } from "@/utils/markets/formatAmountWithCommas"
+import { User } from "@/__generated__/graphql"
 
 export function CashoutConfirmScreen(props: {
-  changeStep: () => void;
-  onClose: () => void;
-  title: string;
-  multiplier: number;
-  points: number;
-  image: string;
-  option: number;
-  options: [];
-  id: number;
-  isDesktop?: boolean;
-  user?: User;
+  changeStep: () => void
+  onClose: () => void
+  title: string
+  multiplier: number
+  points: number
+  image: string
+  option: number
+  options: []
+  id: number
+  isDesktop?: boolean
+  user?: User
 }) {
-  const { onClose } = props;
-  const { userC } = useUserStore();
-  const { user } = props;
+  const { onClose } = props
+  const { userC } = useUserStore()
+  const { user } = props
   const shareLink = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: `${props.title} on Glimpse`,
           text: "This prediction on Glimpse is wild! Check it out",
-          url: `https://pwa-8-ball.vercel.app/p/${props.id}`,
-        });
-        console.log("Data was shared successfully");
+          url: `https://pwa-8-ball.vercel.app/p/${props.id}?ref=${userC?.walletAddress}`,
+        })
+        console.log("Data was shared successfully")
       } catch (err) {
-        console.error("Share failed:", err);
+        console.error("Share failed:", err)
       }
     } else {
-      console.log("Web Share not supported on this browser");
+      console.log("Web Share not supported on this browser")
     }
-  };
+  }
 
   return (
     <div
@@ -134,5 +134,5 @@ export function CashoutConfirmScreen(props: {
         </div>
       </div>
     </div>
-  );
+  )
 }

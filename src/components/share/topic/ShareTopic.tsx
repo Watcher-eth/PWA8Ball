@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { Copy, Gift, Share as ShareIcon } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+import { Copy, Gift, Share as ShareIcon } from "lucide-react"
+import { copyToClipboard } from "@/utils/copyToClipboard"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export const ShareTopic = ({
   id,
@@ -10,26 +11,26 @@ export const ShareTopic = ({
   members,
   markets,
 }: {
-  id: string;
-  title: string;
-  image: string;
-  topic: string;
-  question: string;
-  members: number;
-  markets: number;
+  id: string
+  title: string
+  image: string
+  topic: string
+  question: string
+  members: number
+  markets: number
 }) => {
+  const { user } = useUserStore()
   const shareLink = async () => {
-
     try {
       await navigator.share({
         message: `Join ${title} on Glimpse to get all the latest predictions and odds.`,
-        url: `https://pwa-8-ball.vercel.app/t/${id}`,
+        url: `https://pwa-8-ball.vercel.app/t/${id}?ref=${user?.walletAddress}`,
         title: title,
-      });
+      })
     } catch (error) {
-      console.error("Error during sharing", error);
+      console.error("Error during sharing", error)
     }
-  };
+  }
 
   return (
     <div className={CLASSNAMES.modal}>
@@ -86,7 +87,11 @@ export const ShareTopic = ({
       <div className={CLASSNAMES.actionGroup}>
         <button
           className={CLASSNAMES.copyButton}
-          onClick={() => copyToClipboard("share copy")}
+          onClick={() =>
+            copyToClipboard(
+              `https://pwa-8-ball.vercel.app/t/${id}?ref=${user?.walletAddress}`
+            )
+          }
         >
           <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
           <span className={CLASSNAMES.actionText}>Copy</span>
@@ -103,8 +108,8 @@ export const ShareTopic = ({
         </span>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const CLASSNAMES = {
   modal:
@@ -136,7 +141,7 @@ const CLASSNAMES = {
   shareText: "text-xl text-[#1D1D1D] font-extrabold ml-0.75",
   earnings: "flex mt-4.25 flex-row items-center gap-1 self-center",
   earningsText: "text-sm text-gray-300",
-};
+}
 
 const styles = {
   modal: {
@@ -309,4 +314,4 @@ const styles = {
     fontSize: 13.5,
     color: "lightgrey",
   },
-};
+}
