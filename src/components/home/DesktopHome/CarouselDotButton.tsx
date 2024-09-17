@@ -1,42 +1,42 @@
-import { useCarousel } from "@/components/ui/carousel";
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useCarousel } from "@/components/ui/carousel"
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
-function PaginationDots() {
-  const { api, orientation } = useCarousel();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [scrollSnaps, setScrollSnaps] = React.useState([]);
-  const maxVisibleDots = 7;
+export function PaginationDots() {
+  const { api, orientation } = useCarousel()
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState([])
+  const maxVisibleDots = 7
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (api) {
-      setScrollSnaps(api.scrollSnapList());
+      setScrollSnaps(api.scrollSnapList())
       const updateSelectedIndex = () =>
-        setSelectedIndex(api.selectedScrollSnap());
-      api.on("select", updateSelectedIndex);
-      updateSelectedIndex(); // Initial setup
+        setSelectedIndex(api.selectedScrollSnap())
+      api.on("select", updateSelectedIndex)
+      updateSelectedIndex() // Initial setup
     }
-  }, [api]);
+  }, [api])
 
-  const scrollTo = (index) => {
-    api.scrollTo(index);
-  };
+  function scrollTo(index: number) {
+    api.scrollTo(index)
+  }
 
   const getVisibleDots = () => {
-    const totalDots = scrollSnaps.length;
-    const halfMaxDots = Math.floor(maxVisibleDots / 2);
+    const totalDots = scrollSnaps.length
+    const halfMaxDots = Math.floor(maxVisibleDots / 2)
 
-    let start = Math.max(selectedIndex - halfMaxDots, 0);
-    let end = Math.min(start + maxVisibleDots - 1, totalDots - 1);
+    let start = Math.max(selectedIndex - halfMaxDots, 0)
+    let end = Math.min(start + maxVisibleDots - 1, totalDots - 1)
 
     if (end - start < maxVisibleDots - 1) {
-      start = Math.max(end - maxVisibleDots + 1, 0);
+      start = Math.max(end - maxVisibleDots + 1, 0)
     }
 
-    return scrollSnaps.slice(start, end + 1).map((_, index) => start + index);
-  };
+    return scrollSnaps.slice(start, end + 1).map((_, index) => start + index)
+  }
 
-  const visibleDots = getVisibleDots();
+  const visibleDots = getVisibleDots()
 
   return (
     <div
@@ -68,7 +68,7 @@ function PaginationDots() {
         ))}
       </AnimatePresence>
     </div>
-  );
+  )
 }
 
-export default PaginationDots;
+

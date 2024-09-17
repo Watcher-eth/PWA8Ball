@@ -1,17 +1,17 @@
-import { formatMarketArr } from "@/utils/markets/formatMarketArr";
+import { formatMarketArr } from "@/utils/markets/formatMarketArr"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { MarketCard } from "./MarketCard";
-import PaginationDots from "./CarouselDotButton";
+} from "@/components/ui/carousel"
+import { MarketCard } from "./MarketCard"
+import { PaginationDots } from "./CarouselDotButton"
 
 export function FeaturedMarketsSection({ markets, topic }) {
   const enrichedFeedData = formatMarketArr({
     markets,
     selectedTopic: "🔥 Trending",
-  });
+  })
 
   return (
     <div className="flex flex-col w-full">
@@ -29,13 +29,13 @@ export function FeaturedMarketsSection({ markets, topic }) {
                 <CarouselItem key={index} className="basis-1/2 w-1/2">
                   <MarketCard item={item} isTwoCards={true} loading={true} />
                 </CarouselItem>
-              );
+              )
             }
-            return null; // Return null for items that shouldn't be displayed
+            return null // Return null for items that shouldn't be displayed
           })}
         </CarouselContent>
         <PaginationDots />
       </Carousel>
     </div>
-  );
+  )
 }

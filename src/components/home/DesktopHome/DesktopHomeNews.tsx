@@ -6,7 +6,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { MarketCard } from "./MarketCard";
-import PaginationDots from "./CarouselDotButton";
+import { PaginationDots } from "./CarouselDotButton";
 
 export function DesktopHomeNews({ markets, amount, topic }) {
   return (
