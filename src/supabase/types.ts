@@ -50,3 +50,16 @@ export type NewMarket = Omit<IMarket, "outcome">; // Assuming 'id' is auto-gener
 
 export type NewUser = Omit<IUser, "created_at" | "updated_at">;
 export type NewTopic = Omit<ITopic, "id">;
+
+
+export interface IMarketWithTopicDetails extends IMarket {
+  // Extend your IMarket interface with additional properties that your function returns
+  usdcStake: number
+  liquidityUSDC: number
+  outcomeA: number
+  outcomeB: number
+  topic_id: string // Assuming these are returned by your SQL function
+  topic_title: string
+  topic_description: string
+  topic_image: string
+}

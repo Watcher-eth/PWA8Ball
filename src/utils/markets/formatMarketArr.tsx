@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets"
+import { IMarketWithTopicDetails } from "@/supabase/types"
 import { parseOptions } from "@/utils/predictions/parseOption"
 import { stripEmoji } from "@/utils/string/stripEmoji"
 

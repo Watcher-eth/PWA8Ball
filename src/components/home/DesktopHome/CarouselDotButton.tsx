@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 export function PaginationDots() {
   const { api, orientation } = useCarousel()
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [scrollSnaps, setScrollSnaps] = useState([])
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+
   const maxVisibleDots = 7
 
   useEffect(() => {
@@ -18,9 +19,7 @@ export function PaginationDots() {
     }
   }, [api])
 
-  function scrollTo(index: number) {
-    api.scrollTo(index)
-  }
+
 
   const getVisibleDots = () => {
     const totalDots = scrollSnaps.length
@@ -53,7 +52,9 @@ export function PaginationDots() {
             className={`h-2 w-2 rounded-full transition-colors duration-300 ${
               selectedIndex === index ? "bg-white" : "bg-[gray]"
             }`}
-            onClick={() => scrollTo(index)}
+            onClick={() => {
+              api?.scrollTo(index)
+            }}
             aria-label={`Go to slide ${index + 1}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}

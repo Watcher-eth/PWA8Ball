@@ -2,7 +2,7 @@
 
 import { ImageResponse } from "@vercel/og"
 
-import { IMarketWithTopicDetails } from "@/supabase/queries/useGetTrendingMarkets"
+import { IMarketWithTopicDetails } from "@/supabase/types"
 import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
 import { aeonikFontDataPromise, benzinFontDataPromise } from "@/utils/fonts"
 
