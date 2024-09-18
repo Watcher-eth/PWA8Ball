@@ -17,7 +17,7 @@ export default async function GET(request: Request) {
       benzinFontDataPromise,
     ])
 
-    const topic = getTopics(id)
+    const topic = await getTopics(id)
 
     return new ImageResponse(
       (
