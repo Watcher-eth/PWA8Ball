@@ -14,11 +14,11 @@ export default async function GET(request: Request) {
     const fontData = await aeonikFontDataPromise
 
     const market = await getMarketById(id!)
-    const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
-      market!,
-      HARD_MARKETS,
-      HARD_TOPICS
-    )
+    // const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
+    //   market!,
+    //   HARD_MARKETS,
+    //   HARD_TOPICS
+    // )
     // const prices = market.prices
 
     return new ImageResponse(
