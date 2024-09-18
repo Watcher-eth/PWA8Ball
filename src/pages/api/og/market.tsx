@@ -27,9 +27,8 @@ export default async function GET(request: Request) {
           style={{
             position: "relative",
             width: "100%",
-            padding: "16px",
+            padding: "54px",
             backgroundColor: "#070707",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
@@ -38,51 +37,63 @@ export default async function GET(request: Request) {
             height: "100%",
           }}
         >
-          <div
+          <img
             style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "100%",
-              marginBottom: 5,
+              position: "absolute",
+              width: 1200,
+              height: 630,
+              objectFit: "cover",
             }}
-          >
-            <div
-              style={{
-                padding: "2px 5px",
-                borderRadius: 10,
-                border: "2px solid white",
-                fontSize: 17,
-                color: "white",
-              }}
-            >
-              {enhancedMarket?.topic_title}
-            </div>
-            <div
-              style={{
-                fontSize: 23,
-                color: "white",
-                fontWeight: "700",
-              }}
-            >
-              {market?.outcomeOddsA / 100}%
-            </div>
-          </div>
+            src={enhancedMarket?.image}
+          />
           <div
             style={{
-              fontSize: 23,
+              position: "absolute",
+              width: 1200,
+              height: 630,
+              background:
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 10%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
+            }}
+          />
+
+          <div
+            style={{
+              fontSize: "5.5rem",
               color: "white",
-              fontWeight: "700",
-              marginBottom: 10,
+              fontFamily: "AeonikBold",
+              marginTop: 30,
             }}
           >
             {market?.question}
           </div>
-          {/* <div
-            dangerouslySetInnerHTML={{ __html: chartSVG }}
-            style={{ width: "1200px", height: "630px" }}
-          /> */}
+          <div
+            style={{
+              fontSize: "2.5rem",
+              color: "white",
+              fontFamily: "AeonikBold",
+              position: "absolute",
+              top: 40,
+              alignSelf: "center",
+            }}
+          >
+            GLIMPSE
+          </div>
+          <div
+            style={{
+              fontSize: "2.5rem",
+              color: "white",
+              fontFamily: "AeonikBold",
+              position: "absolute",
+              padding: "5px 15px",
+              borderRadius: 40,
+              backgroundColor: "rgba(21, 21, 21, 0.4",
+              backdropFilter: "blur(12px)",
+              bottom: 40,
+              alignSelf: "center",
+            }}
+          >
+            {market?.outcomeOddsA}% Chance
+          </div>
         </div>
       ),
       {
