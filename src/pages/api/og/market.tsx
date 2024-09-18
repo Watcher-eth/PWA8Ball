@@ -55,7 +55,7 @@ export default async function GET(request: Request) {
               width: 1200,
               height: 630,
               background:
-                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 10%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 20%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
             }}
           />
           <div
@@ -90,10 +90,11 @@ export default async function GET(request: Request) {
               color: "white",
               fontFamily: "AeonikBold",
               position: "absolute",
-              padding: "5px 15px",
+              padding: "10px 25px",
               borderRadius: 40,
-              backgroundColor: "rgba(21, 21, 21, 0.4)",
-              backdropFilter: "blur(12px)",
+              backgroundColor: "rgba(21, 21, 21, 0.8)",
+              backdropFilter: "blur(10px)",
+              border: "0.5px solid #282828",
               bottom: 40,
               alignSelf: "center",
               display: "flex", // Set display flex
