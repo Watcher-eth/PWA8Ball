@@ -14,14 +14,14 @@ export default async function GET(request: Request) {
     const fontData = await aeonikFontDataPromise
 
     const market = await getMarketById(id!)
-    // const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
-    //   market!,
-    //   HARD_MARKETS,
-    //   HARD_TOPICS
-    // )
-    // const prices = market.prices
-    console.log("Market data: ", market) // Log market data
-
+    const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
+      market!,
+      HARD_MARKETS,
+      HARD_TOPICS
+    )
+    console.log("Market data: ", market); // Log market data
+    console.log("Enhanced Market data: ", enhancedMarket); // Log enhanced market data
+    
     return new ImageResponse(
       (
         <div
@@ -31,13 +31,14 @@ export default async function GET(request: Request) {
             padding: "54px",
             backgroundColor: "#070707",
             overflow: "hidden",
-            display: "flex",
+            display: "flex", // Ensure "display: flex" is set
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             height: "100%",
           }}
         >
+          {/* Optional: Uncomment the img tag below if needed */}
           {/* <img
             style={{
               position: "absolute",
@@ -47,6 +48,7 @@ export default async function GET(request: Request) {
             }}
             src={enhancedMarket?.image}
           /> */}
+
           <div
             style={{
               position: "absolute",
@@ -56,17 +58,17 @@ export default async function GET(request: Request) {
                 "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 10%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
             }}
           />
-
           <div
             style={{
               fontSize: "5.5rem",
               color: "white",
               fontFamily: "AeonikBold",
               marginTop: 30,
+              display: "flex", // Set display flex
             }}
           >
-            {/* {market?.question} */}
-            Will Martin Shkreli get sent back to Jail this year?
+            {/* Render the market question or fallback text */}
+            {market?.question || "Market Question"}
           </div>
           <div
             style={{
@@ -76,6 +78,7 @@ export default async function GET(request: Request) {
               position: "absolute",
               top: 40,
               alignSelf: "center",
+              display: "flex", // Set display flex
             }}
           >
             GLIMPSE
@@ -92,9 +95,12 @@ export default async function GET(request: Request) {
               backdropFilter: "blur(12px)",
               bottom: 40,
               alignSelf: "center",
+              display: "flex", // Set display flex
             }}
           >
-            {market?.outcomeOddsA}% Chance
+            {market?.outcomeOddsA != null
+              ? `${market.outcomeOddsA}% Chance`
+              : "No Data"}
           </div>
         </div>
       ),
