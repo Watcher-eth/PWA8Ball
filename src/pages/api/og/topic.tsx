@@ -36,7 +36,12 @@ export default async function GET(request: Request) {
           }}
         >
           <img
-            style={{ position: "absolute", width: 1200, height: 630, objectFit: "cover" }}
+            style={{
+              position: "absolute",
+              width: 1200,
+              height: 630,
+              objectFit: "cover",
+            }}
             src={topic?.image}
           />
           <div
@@ -45,7 +50,7 @@ export default async function GET(request: Request) {
               width: 1200,
               height: 630,
               background:
-                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 10%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
             }}
           />
 
@@ -54,7 +59,7 @@ export default async function GET(request: Request) {
               fontSize: "7.5rem",
               color: "white",
               fontFamily: "AeonikBold",
-              marginTop: 20,
+              marginTop: 30,
             }}
           >
             {topic?.title}
