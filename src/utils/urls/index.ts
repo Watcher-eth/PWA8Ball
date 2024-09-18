@@ -25,7 +25,7 @@ export function getMarketPath(id: string) {
 }
 
 export function getMarketPreviewUrl(id: string) {
-  return `${BASE_URL}/api/marketPreview?id=${id}` as const
+  return `${PWA_URL}/api/marketPreview?id=${id}` as const
 }
 
 export function getProfileUrl(userId: string) {
@@ -33,7 +33,7 @@ export function getProfileUrl(userId: string) {
 }
 
 export function getMarketUrl(id: string) {
-  return `${BASE_URL}${getMarketPath(id)}` as const
+  return `${PWA_URL}${getMarketPath(id)}` as const
 }
 
 export function getTopicUrl(topicId: string) {
@@ -51,6 +51,10 @@ export function getApiOgRouteUrl(userId: string) {
 export function getApiOgTopicUrl(topicId: string) {
   return `${PWA_URL}${OG_API_PATH}/topic?id=${topicId}` as const
 }
+export function getApiOgMarketUrl(topicId: string) {
+  return `${PWA_URL}${OG_API_PATH}/market?id=${topicId}` as const
+}
+
 
 // export function getApiOgSplashUrl() {
 //   return `${PWA_URL}${OG_API_PATH}/splash`

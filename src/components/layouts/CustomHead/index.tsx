@@ -7,6 +7,7 @@ import {
   getMarketUrl,
   getTopicUrl,
   getProfileUrl,
+  getApiOgMarketUrl,
 } from "@/utils/urls"
 import { NextSeo } from "next-seo"
 
@@ -120,17 +121,19 @@ function ElectionSeo({
   )
 }
 
-function MarketSeo({ id }) {
+function MarketSeo({ id, question, title }) {
+  const ogUrl = getApiOgMarketUrl(id)
+
   return (
     <NextSeo
       openGraph={{
         type: "website",
-        //     title: market.title,
-        //   description: market.question,
+        title: title,
+        description: question,
         url: getMarketUrl(id),
         images: [
           {
-            url: getMarketPreviewUrl(id), // Use the API endpoint to generate the image
+            url: getApiOgMarketUrl(id), // Use the API endpoint to generate the image
             width: 1200,
             height: 630,
           },
@@ -139,9 +142,9 @@ function MarketSeo({ id }) {
       twitter={{
         ...DEFAULT_TWITTER_INFO,
         card: "summary_large_image",
-        //   title: market.title,
-        //   description: market.question,
-        images: [getMarketPreviewUrl(id)],
+        title: title,
+        description: question,
+        images: [getApiOgMarketUrl(id)],
       }}
     />
   )
