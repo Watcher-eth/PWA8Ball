@@ -30,109 +30,57 @@ export default async function GET(request: Request) {
             overflow: "hidden",
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
+            alignItems: "center",
+            justifyContent: "center",
             height: "100%",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              zIndex: 1,
-            }}
-          >
-            <div
-              style={{
-                fontSize: "4.8rem",
-                fontWeight: "bold",
-                color: "white",
-                marginBottom: "10px",
-                marginTop: "15px",
-              }}
-            >
-              {topic?.title ?? "US Elections"}
-            </div>
-            <div
-              style={{
-                fontSize: "3.2rem",
-                color: "#b3b3b3",
-                marginBottom: "25px",
-                maxWidth: "70%",
-              }}
-            >
-              {topic?.description ?? "Everything about the 2024 US Elections"}
-            </div>
-          </div>
+          <img
+            style={{ position: "absolute", width: "100%", height: "100%" }}
+            src={topic?.image}
+          />
           <div
             style={{
               position: "absolute",
-              top: "54px",
-              right: "54px",
-              width: "300px",
-              height: "300px",
-              borderRadius: "20px",
-              overflow: "hidden",
-              display: "flex",
+              width: "100%",
+              height: "100%",
+              background:
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
+            }}
+            src={topic?.image}
+          />
+          <div
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "30%",
+              backdropFilter: "blur(10px)",
+              background:
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
+            }}
+            src={topic?.image}
+          />
+          <div
+            style={{
+              fontSize: "2rem",
+              color: "white",
+              fontFamily: "AeonikBold",
             }}
           >
-            <img
-              src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/05/gta-6-rockstar-car-overlooking-the-city.jpeg"
-              alt="US Elections"
-              width="300px"
-              height="300px"
-              style={{
-                objectFit: "cover",
-
-                width: "300px",
-                height: "300px",
-                borderRadius: "20px",
-              }}
-            />
+            {topic?.title}
           </div>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "100%",
-              marginTop: "auto",
+              fontSize: "1rem",
+              color: "white",
+              fontFamily: "AeonikBold",
+              position: "absolute",
+              bottom: 10,
+              alignSelf: "center",
+              opacity: 0.7,
             }}
           >
-            <div
-              style={{
-                fontSize: "4rem",
-                fontWeight: "bold",
-                color: "white",
-                marginBottom: "-10px",
-                paddingRight: "4rem",
-                maxWidth: "50%",
-                display: "flex",
-                lineHeight: "5.2rem",
-                fontFamily: "AeonikBold",
-              }}
-            >
-              Glimpse
-            </div>
-            <button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                padding: "22px 80px",
-                backgroundColor: "#181818",
-                border: "none",
-                borderRadius: "60px",
-                fontSize: "2.8rem",
-                fontWeight: "bold",
-                cursor: "pointer",
-                border: "1.5px solid #212121",
-                color: "white",
-              }}
-            >
-              Join
-            </button>
+            {topic?.title}
           </div>
         </div>
       ),
