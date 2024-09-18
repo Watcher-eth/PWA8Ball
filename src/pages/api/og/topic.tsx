@@ -39,7 +39,7 @@ export default async function GET(request: Request) {
             style={{ position: "absolute", width: "100%", height: "100%" }}
             src={topic?.image}
           />
-          <div
+          {/* <div
             style={{
               position: "absolute",
               width: "100%",
@@ -47,7 +47,6 @@ export default async function GET(request: Request) {
               background:
                 "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
             }}
-            src={topic?.image}
           />
           <div
             style={{
@@ -58,8 +57,7 @@ export default async function GET(request: Request) {
               background:
                 "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
             }}
-            src={topic?.image}
-          />
+          /> */}
           <div
             style={{
               fontSize: "2rem",
