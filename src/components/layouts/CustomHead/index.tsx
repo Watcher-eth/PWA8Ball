@@ -7,40 +7,40 @@ import {
   getMarketUrl,
   getTopicUrl,
   getProfileUrl,
-} from "@/utils/urls";
-import { NextSeo } from "next-seo";
+} from "@/utils/urls"
+import { NextSeo } from "next-seo"
 
 export function CustomHead({ topicData, userId, router, ...rest }) {
-  let headSeo;
+  let headSeo
   if (topicData && topicData?.id !== 1) {
-    headSeo = <TopicSeo {...topicData} />;
+    headSeo = <TopicSeo {...topicData} />
   } else if (topicData && topicData?.id === 1) {
-    headSeo = <ElectionSeo {...topicData} />;
+    headSeo = <ElectionSeo {...topicData} />
   } else if (userId) {
-    headSeo = <ProfileSeo userId={userId} />;
+    headSeo = <ProfileSeo userId={userId} />
   } else if (router?.query?.id) {
     // NOTE: This if statement needs to be more specific given its rn
     //       likely to catch too much
-    headSeo = <MarketSeo id={router?.query?.id} />;
+    headSeo = <MarketSeo id={router?.query?.id} />
   } else {
-    headSeo = <SplashSeo />;
+    headSeo = <SplashSeo />
   }
 
-  return <>{headSeo}</>;
+  return <>{headSeo}</>
 }
 
 function SplashSeo() {
   return (
     <NextSeo
       title="Glimpse"
-      description="Glimpse prediction market"
+      description="Discover Tomorrow, Today"
       openGraph={{
-        title: "TryGlimpse",
-        description: "Try Glimpse",
+        title: "Glimpse",
+        description: "Discover Tomorrow, Today",
         type: "website",
         images: [
           {
-            url: "../../../../public/images/HomeMeta.png",
+            url: "/../../../../public/images/HomeMeta.png",
             width: 1200,
             height: 843,
             alt: "Topic Cover Image",
@@ -49,7 +49,7 @@ function SplashSeo() {
       }}
       twitter={DEFAULT_TWITTER_INFO}
     />
-  );
+  )
 }
 
 function TopicSeo({
@@ -63,7 +63,7 @@ function TopicSeo({
   type,
   members,
 }) {
-  const ogUrl = getApiOgTopicUrl(id);
+  const ogUrl = getApiOgTopicUrl(id)
   return (
     <NextSeo
       openGraph={{
@@ -82,7 +82,7 @@ function TopicSeo({
       }}
       twitter={DEFAULT_TWITTER_INFO}
     />
-  );
+  )
 }
 
 function ElectionSeo({
@@ -114,7 +114,7 @@ function ElectionSeo({
       }}
       twitter={DEFAULT_TWITTER_INFO}
     />
-  );
+  )
 }
 
 function MarketSeo({ id }) {
@@ -141,11 +141,11 @@ function MarketSeo({ id }) {
         images: [getMarketPreviewUrl(id)],
       }}
     />
-  );
+  )
 }
 
 function ProfileSeo({ userId }) {
-  const ogUrl = getApiOgRouteUrl(userId);
+  const ogUrl = getApiOgRouteUrl(userId)
 
   return (
     <NextSeo
@@ -163,11 +163,11 @@ function ProfileSeo({ userId }) {
       }}
       twitter={DEFAULT_TWITTER_INFO}
     />
-  );
+  )
 }
 
 const DEFAULT_TWITTER_INFO = {
   handle: "@tryglimpse",
   site: "@site",
   cardType: "summary_large_image",
-};
+}
