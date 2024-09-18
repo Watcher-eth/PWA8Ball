@@ -60,13 +60,12 @@ export default async function GET(request: Request) {
           /> */}
           <div
             style={{
-              fontSize: "8rem",
+              fontSize: "7.5rem",
               color: "white",
               fontFamily: "AeonikBold",
             }}
           >
-            {/* {topic?.title} */}
-            GTA 6
+            {topic?.title}
           </div>
           <div
             style={{
@@ -74,7 +73,7 @@ export default async function GET(request: Request) {
               color: "white",
               fontFamily: "AeonikBold",
               position: "absolute",
-              bottom: 30,
+              bottom: 40,
               alignSelf: "center",
             }}
           >
@@ -99,7 +98,7 @@ export default async function GET(request: Request) {
 async function getTopics(searchString: string): Promise<ITopic> {
   const { data, error } = await SUPABASE_CLIENT.from("topics")
     .select("*")
-    .eq("id", 2)
+    .eq("id", searchString)
 
   if (error) throw new Error(error.message)
 
