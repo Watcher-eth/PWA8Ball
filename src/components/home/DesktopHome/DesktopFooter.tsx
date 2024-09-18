@@ -1,16 +1,11 @@
-import Link from "next/link";
-import { SocialOnboardButton } from "@/components/onboarding/DesktopOnboardingModal";
-import {
-  AppleIcon,
-  GoogleIcon,
-  XIcon,
-} from "@/components/onboarding/AuthIcons";
-import { Instagram, Send } from "lucide-react";
+import Link from "next/link"
+import { AppleIcon, GoogleIcon, XIcon } from "@/components/onboarding/AuthIcons"
+import { Instagram, Send } from "lucide-react"
 
 export function DesktopFooter() {
   return (
     <div className="relative w-full mt-10  -mb-32">
-      <div className="h-px w-full bg-[#212121] px-5" />
+      <div className="h-px w-full bg-[#212121]/30 px-5" />
       {/* Footer Content */}
       <div className="relative z-10 flex flex-col w-full  py-10 px-14 space-y-8">
         <div className="flex flex-row w-full justify-between ">
@@ -52,29 +47,53 @@ export function DesktopFooter() {
             </FooterColumn>
           </div>
         </div>
-        <div className="flex flex-row space-x-3">
-          <SocialOnboardButton IconComponent={Instagram} onClick={() => {}} />
-          <SocialOnboardButton IconComponent={XIcon} onClick={() => {}} />
-          <SocialOnboardButton IconComponent={Send} onClick={() => {}} />
+        <div className="flex flex-row space-x-8">
+          <SocialLinkButton IconComponent={Instagram} onClick={() => {}} />
+          <SocialLinkButton IconComponent={XIcon} onClick={() => {}} />
+          <SocialLinkButton IconComponent={Send} onClick={() => {}} />
         </div>
       </div>
     </div>
-  );
+  )
+}
+
+export function SocialLinkButton({
+  IconComponent,
+  onClick,
+  label,
+}: {
+  IconComponent: React.ReactNode
+  onClick: () => void
+  label?: string
+}) {
+  return (
+    <div
+      className={`
+        hover:scale-105 active:scale-98 transition-all
+
+        justify-center items-center
+        flex rounded-[0.4rem] text-white cursor-pointer
+      `}
+      onClick={onClick}
+    >
+      <IconComponent className="w-7 h-7 sm:w-10" />
+    </div>
+  )
 }
 
 function FooterColumn({
   title,
   children,
 }: {
-  title: string;
-  children: React.ReactNode;
+  title: string
+  children: React.ReactNode
 }) {
   return (
     <div className="flex flex-col space-y-2.5">
       <div className="text-white font-semibold text-[1.05rem]">{title}</div>
       {children}
     </div>
-  );
+  )
 }
 
 function FooterLink({
@@ -83,10 +102,10 @@ function FooterLink({
   children,
   className = "",
 }: {
-  href?: string;
-  label?: string;
-  children?: React.ReactNode;
-  className?: string;
+  href?: string
+  label?: string
+  children?: React.ReactNode
+  className?: string
 }) {
   return (
     <Link
@@ -96,5 +115,5 @@ function FooterLink({
       {label}
       {children}
     </Link>
-  );
+  )
 }

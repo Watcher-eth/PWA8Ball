@@ -1,20 +1,18 @@
 import { ImageResponse } from "@vercel/og"
 
 import { IUser } from "@/supabase/types"
-import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
 import { aeonikFontDataPromise } from "@/utils/fonts"
 import { getLevel } from "@/constants/CredLevels"
+import { getUserById } from "@/graphql/queries/users/useUserById"
 
 export const runtime = "edge"
 
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const id =
-      searchParams.get("id")?.slice(0, 100) ||
-      "did:privy:clutganzs01rz2oqk4vvlw1ih"
+    const id = searchParams.get("id")?.slice(0, 100)
     const fontData = await aeonikFontDataPromise
-    const user = await fetchUserByExternalAuthId(id)
+    const user = await getUserById(id!)
 
     const level = getLevel(user?.liquidityPoints!)
     return new ImageResponse(
@@ -74,7 +72,7 @@ export default async function GET(request: Request) {
             }}
           >
             <img
-              src={user?.pfp}
+              src={user?.pfp!}
               alt="Profile"
               style={{
                 width: "250px",
@@ -125,20 +123,4 @@ export default async function GET(request: Request) {
   } catch (e) {
     return new Response("Failed to generate Market OG Image", { status: 500 })
   }
-}
-
-async function fetchUserByExternalAuthId(
-  externalAuthId: string
-): Promise<IUser | null> {
-  const { data, error } = await SUPABASE_CLIENT.from("users")
-    .select("*")
-    .eq("external_auth_provider_user_id", externalAuthId)
-    .single() // Using .single() because we expect at most one record
-
-  if (error) {
-    console.error("Fetch User By External Auth ID Error:", error.message)
-    throw new Error(error.message)
-  }
-
-  return data
 }

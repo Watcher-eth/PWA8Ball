@@ -1,17 +1,25 @@
 import { ImageResponse } from "@vercel/og"
-import { SUPABASE_CLIENT } from "@/supabase/supabaseClient"
 import { aeonikFontDataPromise } from "@/utils/fonts"
+import { getMarketById } from "@/graphql/queries/markets/useGetMarketById"
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
 
 export const runtime = "edge"
 
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const id = Number(searchParams.get("id")?.slice(0, 100))
+    const id = searchParams.get("id")?.slice(0, 100)
     const fontData = await aeonikFontDataPromise
 
-    const market = await fetchMarketAndPricesById(id)
-    const prices = market.prices
+    const market = await getMarketById(id!)
+    const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
+      market!,
+      HARD_MARKETS,
+      HARD_TOPICS
+    )
+    // const prices = market.prices
 
     return new ImageResponse(
       (
@@ -49,7 +57,7 @@ export default async function GET(request: Request) {
                 color: "white",
               }}
             >
-              {market.market.topic}
+              {enhancedMarket?.topic_title}
             </div>
             <div
               style={{
@@ -58,7 +66,7 @@ export default async function GET(request: Request) {
                 fontWeight: "700",
               }}
             >
-              {market.market.optionA.odds / 100}%
+              {market?.outcomeOddsA / 100}%
             </div>
           </div>
           <div
@@ -69,7 +77,7 @@ export default async function GET(request: Request) {
               marginBottom: 10,
             }}
           >
-            {market.market.question}
+            {market?.question}
           </div>
           {/* <div
             dangerouslySetInnerHTML={{ __html: chartSVG }}
@@ -86,30 +94,4 @@ export default async function GET(request: Request) {
   } catch (e) {
     return new Response("Failed to generate Market OG Image", { status: 500 })
   }
-}
-
-async function fetchMarketAndPricesById(marketId: number): Promise<any | null> {
-  const { data, error } = await SUPABASE_CLIENT.rpc("get_market_with_details", {
-    market_id: marketId,
-    user_external_auth_id: "did:privy:clwsvnoij0de59b0ly1k7rvad",
-  })
-
-  let startTime = new Date()
-  startTime.setMonth(startTime.getMonth() - 1)
-  const startTimestamp = Math.floor(startTime.getTime() / 1000) // convert milliseconds to seconds
-
-  const { data: PriceData, error: PriceError } = await SUPABASE_CLIENT.from(
-    "Price"
-  )
-    .select("*")
-    .eq("marketId", marketId)
-    .gte("timestamp", startTimestamp)
-    .order("timestamp", { ascending: true })
-
-  if (error) {
-    console.error("Fetch User By External Auth ID Error:", error.message)
-    throw new Error(error.message)
-  }
-  const marketAndPrice = { market: data, prices: PriceData }
-  return marketAndPrice
 }

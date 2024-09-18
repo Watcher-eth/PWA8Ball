@@ -60,7 +60,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           className="flex items-center justify-center gap-1 hover:scale-[100.5%] active:scale-99"
         >
           <div className="text-[1.1rem] text-[#909090] font-[400] space-x-2">
-            See all {enrichedFeedData?.length}+ live Election forecasts
+            See all 20+ live Election forecasts
           </div>
           <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
         </Link>

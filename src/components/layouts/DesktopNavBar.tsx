@@ -14,6 +14,7 @@ import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardin
 import { DesktopActivityModal } from "../activity/DesktopActivityModal"
 import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal"
 import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
+import { DesktopReferralModal } from "../share/Referrals/DesktopReferralModal"
 
 export function DesktopNavBar() {
   const { user } = useUserStore()
@@ -55,9 +56,9 @@ export function DesktopNavBar() {
             <DesktopLeaderboardModal title="Global" data={data}>
               <NavIconButton IconComponent={Trophy} />
             </DesktopLeaderboardModal>
-            <DesktopActivityModal>
+            <DesktopReferralModal>
               <NavIconButton IconComponent={ActivityIcon} />
-            </DesktopActivityModal>
+            </DesktopReferralModal>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
