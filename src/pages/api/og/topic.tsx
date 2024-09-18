@@ -54,6 +54,7 @@ export default async function GET(request: Request) {
               fontSize: "7.5rem",
               color: "white",
               fontFamily: "AeonikBold",
+              marginTop: 10,
             }}
           >
             {topic?.title}
