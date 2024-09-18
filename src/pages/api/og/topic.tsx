@@ -18,17 +18,6 @@ export default async function GET(request: Request) {
     ])
 
     const topic = getTopics(id)
-    const members = await fetchMembersForTopic(id)
-
-    const memberImgProps = {
-      width: "40px",
-      height: "40px",
-      style: {
-        width: "40px",
-        height: "40px",
-        borderRadius: "50%",
-      },
-    }
 
     return new ImageResponse(
       (
@@ -73,58 +62,6 @@ export default async function GET(request: Request) {
               }}
             >
               {topic?.description ?? "Everything about the 2024 US Elections"}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "-8px",
-                }}
-              >
-                <img
-                  {...memberImgProps}
-                  src={
-                    members[0]?.pfp ??
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjh2HDZ5kbbi4gS6Ki1m2vmkTwta2nJ4uKQA&s"
-                  }
-                  alt="Avatar 1"
-                />
-                <img
-                  {...memberImgProps}
-                  src={
-                    members[1]?.pfp ??
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGQMZpF4lfChZnNqMYSziZuMjJphYbQO7IZw&s"
-                  }
-                  alt="Avatar 2"
-                />
-                <img
-                  {...memberImgProps}
-                  src={
-                    members[2]?.pfp ??
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53_Ks7duOWtHFySS4pTDjlZ36bwfqHY-53w&s"
-                  }
-                  alt="Avatar 3"
-                />
-              </div>
-              <span
-                style={{
-                  fontSize: "1.8rem",
-                  fontWeight: "medium",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px",
-                  marginLeft: "8px",
-                }}
-              >
-                {members.length}+ Members
-              </span>
             </div>
           </div>
           <div
@@ -172,7 +109,7 @@ export default async function GET(request: Request) {
                 maxWidth: "50%",
                 display: "flex",
                 lineHeight: "5.2rem",
-                fontFamily: "Benzin",
+                fontFamily: "AeonikBold",
               }}
             >
               Glimpse
@@ -209,29 +146,8 @@ export default async function GET(request: Request) {
       }
     )
   } catch (e) {
-    return new Response("Failed to generate Market OG Image", { status: 500 })
+    return new Response("Failed to generate Topic OG Image", { status: 500 })
   }
-}
-
-async function fetchMembersForTopic(topicId: string): Promise<IUser[]> {
-  const { data, error } = await SUPABASE_CLIENT.from("user_topics")
-    .select(
-      `
-        users (
-          internal_id,
-          external_auth_provider_user_id,
-          name,
-          pfp
-        )
-      `
-    )
-    .eq("topic_id", topicId)
-    .limit(5) // Limit the number of users to 5
-
-  if (error) throw new Error(error.message)
-
-  // Flatten the structure to directly get user details
-  return data.map((entry) => entry.users).flat()
 }
 
 async function getTopics(searchString: string): Promise<ITopic> {
