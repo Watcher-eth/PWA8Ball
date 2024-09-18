@@ -20,6 +20,7 @@ export default async function GET(request: Request) {
     //   HARD_TOPICS
     // )
     // const prices = market.prices
+    console.log("Market data: ", market) // Log market data
 
     return new ImageResponse(
       (
