@@ -53,9 +53,9 @@ export default async function GET(request: Request) {
             style={{
               position: "absolute",
               width: 1200,
-              height: 630,
+              height: 670,
               background:
-                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 20%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 80%, rgba(0,0,0,0.1) 90%)",
             }}
           />
           <div
