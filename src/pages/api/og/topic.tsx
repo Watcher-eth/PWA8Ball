@@ -65,7 +65,8 @@ export default async function GET(request: Request) {
               fontFamily: "AeonikBold",
             }}
           >
-            {topic?.title}
+            {/* {topic?.title} */}
+            GTA 6
           </div>
           <div
             style={{
@@ -77,7 +78,7 @@ export default async function GET(request: Request) {
               alignSelf: "center",
             }}
           >
-            {topic?.title}
+            GLIMPSE
           </div>
         </div>
       ),
