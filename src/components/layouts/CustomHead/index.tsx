@@ -22,7 +22,7 @@ export function CustomHead({ topicData, userId, router, ...rest }) {
   } else if (router?.query?.id) {
     // NOTE: This if statement needs to be more specific given its rn
     //       likely to catch too much
-    headSeo = <MarketSeo id={router?.query?.id} />
+    headSeo = <MarketSeo id={router?.query?.id}  />
   } else {
     headSeo = <SplashSeo />
   }
@@ -109,7 +109,7 @@ function ElectionSeo({
         url: getTopicUrl(id),
         images: [
           {
-            url: "../../../../public/images/ElectionsMeta.png",
+            url: "https://pwa-8-ball.vercel.app/images/ElectionsMeta.png",
             width: 1200,
             height: 630,
             alt: "Topic Cover Image",

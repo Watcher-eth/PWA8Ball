@@ -37,7 +37,7 @@ export default async function GET(request: Request) {
             height: "100%",
           }}
         >
-          <img
+          {/* <img
             style={{
               position: "absolute",
               width: 1200,
@@ -45,7 +45,7 @@ export default async function GET(request: Request) {
               objectFit: "cover",
             }}
             src={enhancedMarket?.image}
-          />
+          /> */}
           <div
             style={{
               position: "absolute",
@@ -64,7 +64,8 @@ export default async function GET(request: Request) {
               marginTop: 30,
             }}
           >
-            {market?.question}
+            {/* {market?.question} */}
+            Will Martin Shkreli get sent back to Jail this year?
           </div>
           <div
             style={{
