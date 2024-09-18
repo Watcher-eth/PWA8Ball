@@ -60,7 +60,7 @@ export default async function GET(request: Request) {
           /> */}
           <div
             style={{
-              fontSize: "2rem",
+              fontSize: "8rem",
               color: "white",
               fontFamily: "AeonikBold",
             }}
@@ -70,11 +70,11 @@ export default async function GET(request: Request) {
           </div>
           <div
             style={{
-              fontSize: "1rem",
+              fontSize: "2.5rem",
               color: "white",
               fontFamily: "AeonikBold",
               position: "absolute",
-              bottom: 10,
+              bottom: 30,
               alignSelf: "center",
             }}
           >
