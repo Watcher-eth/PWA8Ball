@@ -19,9 +19,9 @@ export default async function GET(request: Request) {
       HARD_MARKETS,
       HARD_TOPICS
     )
-    console.log("Market data: ", market); // Log market data
-    console.log("Enhanced Market data: ", enhancedMarket); // Log enhanced market data
-    
+    console.log("Market data: ", market) // Log market data
+    console.log("Enhanced Market data: ", enhancedMarket) // Log enhanced market data
+
     return new ImageResponse(
       (
         <div
@@ -39,7 +39,7 @@ export default async function GET(request: Request) {
           }}
         >
           {/* Optional: Uncomment the img tag below if needed */}
-          {/* <img
+          <img
             style={{
               position: "absolute",
               width: 1200,
@@ -47,7 +47,7 @@ export default async function GET(request: Request) {
               objectFit: "cover",
             }}
             src={enhancedMarket?.image}
-          /> */}
+          />
 
           <div
             style={{
@@ -60,11 +60,12 @@ export default async function GET(request: Request) {
           />
           <div
             style={{
-              fontSize: "5.5rem",
+              fontSize: "5rem",
               color: "white",
               fontFamily: "AeonikBold",
               marginTop: 30,
               display: "flex", // Set display flex
+              textAlign: "center",
             }}
           >
             {/* Render the market question or fallback text */}
@@ -91,7 +92,7 @@ export default async function GET(request: Request) {
               position: "absolute",
               padding: "5px 15px",
               borderRadius: 40,
-              backgroundColor: "rgba(21, 21, 21, 0.4",
+              backgroundColor: "rgba(21, 21, 21, 0.4)",
               backdropFilter: "blur(12px)",
               bottom: 40,
               alignSelf: "center",
@@ -99,7 +100,7 @@ export default async function GET(request: Request) {
             }}
           >
             {market?.outcomeOddsA != null
-              ? `${market.outcomeOddsA}% Chance`
+              ? `${Number(market.outcomeOddsA) / 100}% Chance`
               : "No Data"}
           </div>
         </div>
