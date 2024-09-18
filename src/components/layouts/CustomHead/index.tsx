@@ -40,14 +40,17 @@ function SplashSeo() {
         type: "website",
         images: [
           {
-            url: "/../../../../public/images/HomeMeta.png",
+            url: "https://pwa-8-ball.vercel.app/images/HomeMeta.png", // Absolute path to the image
             width: 1200,
             height: 843,
             alt: "Topic Cover Image",
           },
         ],
       }}
-      twitter={DEFAULT_TWITTER_INFO}
+      twitter={{
+        ...DEFAULT_TWITTER_INFO,
+        images: ["https://pwa-8-ball.vercel.app/images/HomeMeta.png"], // Same absolute path for Twitter card image
+      }}
     />
   )
 }
