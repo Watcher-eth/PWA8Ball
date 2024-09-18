@@ -35,10 +35,10 @@ export default async function GET(request: Request) {
             height: "100%",
           }}
         >
-          <img
+          {/* <img
             style={{ position: "absolute", width: 1200, height: 630 }}
             src={topic?.image}
-          />
+          /> */}
           {/* <div
             style={{
               position: "absolute",
@@ -77,7 +77,7 @@ export default async function GET(request: Request) {
               alignSelf: "center",
             }}
           >
-            {topic?.question}
+            {topic?.title}
           </div>
         </div>
       ),
