@@ -11,7 +11,7 @@ export const runtime = "edge"
 export default async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const id = searchParams.get("id")?.slice(0, 100) || "5"
+    const id = searchParams.get("id")?.slice(0, 100)
     const [aeonikFontData, benzinFontData] = await Promise.all([
       aeonikFontDataPromise,
       benzinFontDataPromise,
@@ -95,12 +95,13 @@ export default async function GET(request: Request) {
   }
 }
 
-async function getTopics(searchString: string): Promise<ITopic> {
+async function getTopics(searchString: string): Promise<ITopic | null> {
   const { data, error } = await SUPABASE_CLIENT.from("topics")
     .select("*")
     .eq("id", searchString)
+    .single() // This ensures only one object is returned, instead of an array
 
   if (error) throw new Error(error.message)
 
-  return data
+  return data // Data should be a single topic or null
 }
