@@ -36,7 +36,7 @@ export default async function GET(request: Request) {
           }}
         >
           <img
-            style={{ position: "absolute", width: 1200, height: 630 }}
+            style={{ position: "absolute", width: 1200, height: 630, objectFit: "cover" }}
             src={topic?.image}
           />
           <div
@@ -54,7 +54,7 @@ export default async function GET(request: Request) {
               fontSize: "7.5rem",
               color: "white",
               fontFamily: "AeonikBold",
-              marginTop: 10,
+              marginTop: 20,
             }}
           >
             {topic?.title}
