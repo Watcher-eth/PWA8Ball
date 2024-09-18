@@ -1325,7 +1325,7 @@ export const EightBallAddress = {
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x1f4852d20a71d21984d2e34e6ca946c2071da4af)
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x93becc08844c4aa0f6d3a3f447a3b14e95e46c26)
  */
-export const eightBallConfig = {
+export const EightBallConfig = {
   address: EightBallAddress,
   abi: EightBallAbi,
 } as const
@@ -1556,7 +1556,7 @@ export const EightBallAdminAddress = {
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
  */
-export const eightBallAdminConfig = {
+export const EightBallAdminConfig = {
   address: EightBallAdminAddress,
   abi: EightBallAdminAbi,
 } as const
@@ -1858,7 +1858,7 @@ export const EightBallStorageAddress = {
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x490136044bec32ff4282ceaeb7d50b21465b4d7e)
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xde8bccbb3c197de83ee2ee9a4d94d87714c4fcb2)
  */
-export const eightBallStorageConfig = {
+export const EightBallStorageConfig = {
   address: EightBallStorageAddress,
   abi: EightBallStorageAbi,
 } as const
@@ -5301,7 +5301,7 @@ export const PairFactoryV1Address = {
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x5942adc43279f1cf68159ea60411c28a47cb00eb)
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x5405eeac7eba0d1d2cbee13ca426b5b62bac8c43)
  */
-export const pairFactoryV1Config = {
+export const PairFactoryV1Config = {
   address: PairFactoryV1Address,
   abi: PairFactoryV1Abi,
 } as const
@@ -6000,7 +6000,7 @@ export const RouterV1Address = {
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x47dd5456b1062875fd8eff33a4b407dedddb2796)
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xafc877cfe7ce9dd15b6e165f0a44785ea66a4dfa)
  */
-export const routerV1Config = {
+export const RouterV1Config = {
   address: RouterV1Address,
   abi: RouterV1Abi,
 } as const
