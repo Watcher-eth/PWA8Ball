@@ -42,22 +42,13 @@ export default async function GET(request: Request) {
           <div
             style={{
               position: "absolute",
-              width: "100%",
-              height: "100%",
+              width: 1200,
+              height: 630,
               background:
-                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
+                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 90%, rgba(0,0,0,0) 92%)",
             }}
           />
-          <div
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "30%",
-              backdropFilter: "blur(10px)",
-              background:
-                "linear-gradient(0deg, rgba(0,0,0,0.8604035364145658) 0%, rgba(0,0,0,0.4458377100840336) 32%, rgba(0,0,0,0.26936712184873945) 57%, rgba(0,0,0,0.1685267857142857) 98%, rgba(0,0,0,0) 100%)",
-            }}
-          />
+
           <div
             style={{
               fontSize: "7.5rem",
