@@ -6047,7 +6047,7 @@ export const ScriptAbi = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const TopicRegistryAbi = [
   {
@@ -6095,11 +6095,12 @@ export const TopicRegistryAbi = [
         internalType: 'struct TopicRegistry.Topic',
         type: 'tuple',
         components: [
+          { name: 'id', internalType: 'uint256', type: 'uint256' },
           { name: 'title', internalType: 'string', type: 'string' },
           { name: 'description', internalType: 'string', type: 'string' },
           { name: 'image', internalType: 'string', type: 'string' },
-          { name: 'creator', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
+          { name: 'creator', internalType: 'address', type: 'address' },
         ],
       },
     ],
@@ -6179,14 +6180,14 @@ export const TopicRegistryAbi = [
 ] as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const TopicRegistryAddress = {
-  84532: '0x949901cb4592012D38E116b4D60f320Bef779bB9',
+  84532: '0xEEb4958d6a139BaB4d133a0fA6450381B323D291',
 } as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const TopicRegistryConfig = {
   address: TopicRegistryAddress,
@@ -6198,7 +6199,7 @@ export const TopicRegistryConfig = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const UserRegistryAbi = [
   {
@@ -6227,20 +6228,17 @@ export const UserRegistryAbi = [
         type: 'tuple',
         components: [
           { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'id', internalType: 'address', type: 'address' },
           {
             name: 'externalAuthProviderUserId',
             internalType: 'string',
             type: 'string',
           },
-          { name: 'id', internalType: 'string', type: 'string' },
-          { name: 'liquidityPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'name', internalType: 'string', type: 'string' },
           { name: 'pfp', internalType: 'string', type: 'string' },
-          { name: 'rewardPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'socials', internalType: 'string', type: 'string' },
           { name: 'theme', internalType: 'string', type: 'string' },
-          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
-          { name: 'walletAddress', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
         ],
       },
@@ -6262,20 +6260,17 @@ export const UserRegistryAbi = [
         type: 'tuple',
         components: [
           { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'id', internalType: 'address', type: 'address' },
           {
             name: 'externalAuthProviderUserId',
             internalType: 'string',
             type: 'string',
           },
-          { name: 'id', internalType: 'string', type: 'string' },
-          { name: 'liquidityPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'name', internalType: 'string', type: 'string' },
           { name: 'pfp', internalType: 'string', type: 'string' },
-          { name: 'rewardPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'socials', internalType: 'string', type: 'string' },
           { name: 'theme', internalType: 'string', type: 'string' },
-          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
-          { name: 'walletAddress', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
         ],
       },
@@ -6292,20 +6287,17 @@ export const UserRegistryAbi = [
         type: 'tuple',
         components: [
           { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'id', internalType: 'address', type: 'address' },
           {
             name: 'externalAuthProviderUserId',
             internalType: 'string',
             type: 'string',
           },
-          { name: 'id', internalType: 'string', type: 'string' },
-          { name: 'liquidityPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'name', internalType: 'string', type: 'string' },
           { name: 'pfp', internalType: 'string', type: 'string' },
-          { name: 'rewardPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'socials', internalType: 'string', type: 'string' },
           { name: 'theme', internalType: 'string', type: 'string' },
-          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
-          { name: 'walletAddress', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
         ],
       },
@@ -6330,20 +6322,17 @@ export const UserRegistryAbi = [
         type: 'tuple',
         components: [
           { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'id', internalType: 'address', type: 'address' },
           {
             name: 'externalAuthProviderUserId',
             internalType: 'string',
             type: 'string',
           },
-          { name: 'id', internalType: 'string', type: 'string' },
-          { name: 'liquidityPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'name', internalType: 'string', type: 'string' },
           { name: 'pfp', internalType: 'string', type: 'string' },
-          { name: 'rewardPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'socials', internalType: 'string', type: 'string' },
           { name: 'theme', internalType: 'string', type: 'string' },
-          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
-          { name: 'walletAddress', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
         ],
         indexed: false,
@@ -6367,20 +6356,17 @@ export const UserRegistryAbi = [
         type: 'tuple',
         components: [
           { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'id', internalType: 'address', type: 'address' },
           {
             name: 'externalAuthProviderUserId',
             internalType: 'string',
             type: 'string',
           },
-          { name: 'id', internalType: 'string', type: 'string' },
-          { name: 'liquidityPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'name', internalType: 'string', type: 'string' },
           { name: 'pfp', internalType: 'string', type: 'string' },
-          { name: 'rewardPoints', internalType: 'uint256', type: 'uint256' },
           { name: 'socials', internalType: 'string', type: 'string' },
           { name: 'theme', internalType: 'string', type: 'string' },
-          { name: 'updatedAt', internalType: 'uint256', type: 'uint256' },
-          { name: 'walletAddress', internalType: 'address', type: 'address' },
           { name: 'metadata', internalType: 'string', type: 'string' },
         ],
         indexed: false,
@@ -6394,14 +6380,14 @@ export const UserRegistryAbi = [
 ] as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const UserRegistryAddress = {
-  84532: '0xbD75D1650364f9030a77FfDb2b67042745035702',
+  84532: '0x60a96694220d67CD930b5919e57af2b1b098C9f1',
 } as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const UserRegistryConfig = {
   address: UserRegistryAddress,
@@ -12953,7 +12939,7 @@ export const useReadScriptIsScript = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useReadTopicRegistry = /*#__PURE__*/ createUseReadContract({
   abi: TopicRegistryAbi,
@@ -12963,7 +12949,7 @@ export const useReadTopicRegistry = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"adminContract"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useReadTopicRegistryAdminContract =
   /*#__PURE__*/ createUseReadContract({
@@ -12975,7 +12961,7 @@ export const useReadTopicRegistryAdminContract =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"currentTopicId"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useReadTopicRegistryCurrentTopicId =
   /*#__PURE__*/ createUseReadContract({
@@ -12987,7 +12973,7 @@ export const useReadTopicRegistryCurrentTopicId =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"getTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useReadTopicRegistryGetTopic = /*#__PURE__*/ createUseReadContract(
   {
@@ -13000,7 +12986,7 @@ export const useReadTopicRegistryGetTopic = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWriteTopicRegistry = /*#__PURE__*/ createUseWriteContract({
   abi: TopicRegistryAbi,
@@ -13010,7 +12996,7 @@ export const useWriteTopicRegistry = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"createTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWriteTopicRegistryCreateTopic =
   /*#__PURE__*/ createUseWriteContract({
@@ -13022,7 +13008,7 @@ export const useWriteTopicRegistryCreateTopic =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"updateTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWriteTopicRegistryUpdateTopic =
   /*#__PURE__*/ createUseWriteContract({
@@ -13034,7 +13020,7 @@ export const useWriteTopicRegistryUpdateTopic =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useSimulateTopicRegistry = /*#__PURE__*/ createUseSimulateContract(
   { abi: TopicRegistryAbi, address: TopicRegistryAddress },
@@ -13043,7 +13029,7 @@ export const useSimulateTopicRegistry = /*#__PURE__*/ createUseSimulateContract(
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"createTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useSimulateTopicRegistryCreateTopic =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13055,7 +13041,7 @@ export const useSimulateTopicRegistryCreateTopic =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"updateTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useSimulateTopicRegistryUpdateTopic =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13067,7 +13053,7 @@ export const useSimulateTopicRegistryUpdateTopic =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWatchTopicRegistryEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13078,7 +13064,7 @@ export const useWatchTopicRegistryEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__ and `eventName` set to `"TopicCreated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWatchTopicRegistryTopicCreatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13090,7 +13076,7 @@ export const useWatchTopicRegistryTopicCreatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__ and `eventName` set to `"TopicUpdated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x949901cb4592012d38e116b4d60f320bef779bb9)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
  */
 export const useWatchTopicRegistryTopicUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13102,7 +13088,7 @@ export const useWatchTopicRegistryTopicUpdatedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link UserRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useReadUserRegistry = /*#__PURE__*/ createUseReadContract({
   abi: UserRegistryAbi,
@@ -13112,7 +13098,7 @@ export const useReadUserRegistry = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"adminContract"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useReadUserRegistryAdminContract =
   /*#__PURE__*/ createUseReadContract({
@@ -13124,7 +13110,7 @@ export const useReadUserRegistryAdminContract =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"getUser"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useReadUserRegistryGetUser = /*#__PURE__*/ createUseReadContract({
   abi: UserRegistryAbi,
@@ -13135,7 +13121,7 @@ export const useReadUserRegistryGetUser = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link UserRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWriteUserRegistry = /*#__PURE__*/ createUseWriteContract({
   abi: UserRegistryAbi,
@@ -13145,7 +13131,7 @@ export const useWriteUserRegistry = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"createUser"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWriteUserRegistryCreateUser =
   /*#__PURE__*/ createUseWriteContract({
@@ -13157,7 +13143,7 @@ export const useWriteUserRegistryCreateUser =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"updateUser"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWriteUserRegistryUpdateUser =
   /*#__PURE__*/ createUseWriteContract({
@@ -13169,7 +13155,7 @@ export const useWriteUserRegistryUpdateUser =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link UserRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useSimulateUserRegistry = /*#__PURE__*/ createUseSimulateContract({
   abi: UserRegistryAbi,
@@ -13179,7 +13165,7 @@ export const useSimulateUserRegistry = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"createUser"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useSimulateUserRegistryCreateUser =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13191,7 +13177,7 @@ export const useSimulateUserRegistryCreateUser =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link UserRegistryAbi}__ and `functionName` set to `"updateUser"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useSimulateUserRegistryUpdateUser =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13203,7 +13189,7 @@ export const useSimulateUserRegistryUpdateUser =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link UserRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWatchUserRegistryEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13214,7 +13200,7 @@ export const useWatchUserRegistryEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link UserRegistryAbi}__ and `eventName` set to `"UserCreated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWatchUserRegistryUserCreatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13226,7 +13212,7 @@ export const useWatchUserRegistryUserCreatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link UserRegistryAbi}__ and `eventName` set to `"UserUpdated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xbd75d1650364f9030a77ffdb2b67042745035702)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x60a96694220d67cd930b5919e57af2b1b098c9f1)
  */
 export const useWatchUserRegistryUserUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
