@@ -56,7 +56,7 @@ export function MobileHomePage({ markets }: { markets: Market[] }) {
           setSelectedTopic={setSelectedTopic}
           selectedTopic={selectedTopic}
         />
-        <div className="px-5 flex flex-col w-full items-center no-scrollbar mt-2 space-y-6">
+        <div className="px-5 flex flex-col w-full items-center no-scrollbar mt-3 space-y-6">
           {
             enrichedFeedData?.map((bet, index) => {
               return (

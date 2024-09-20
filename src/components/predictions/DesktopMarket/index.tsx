@@ -33,7 +33,7 @@ import { DesktopChartCard } from "./DesktopChartCard"
 import { MarketMetadata } from "../BetDetails/MarketMetadata"
 import { shortenAddress } from "@/utils/address/shortenAddress"
 import { StatusBlock } from "../BetDetails/MarketStatus"
-import { useUserById } from "@/graphql/queries/users/useUserById"
+import { useGetUserById } from "@/graphql/queries/users/useUserById"
 import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
 import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
 
@@ -48,7 +48,7 @@ export function DesktopMarketPage({ users, market, id }) {
     HARD_TOPICS
   )
 
-  const { user: creator, loading } = useUserById(market?.userAddress)
+  const { user: creator, loading } = useGetUserById(market?.userAddress)
   const { data: userOwns } = useGetUserPositionsForMarket(
     user?.walletAddress,
     id

@@ -92,7 +92,7 @@ export function TopMarket() {
               ? enhancedMarket?.outcomeA
               : "Chance"}
           </div>
-          <div className="text-3xl text-white/5 font-[Aeonik-Bold]">
+          <div className="text-3xl text-white/10 font-[Aeonik-Bold]">
             Glimpse
           </div>
         </Link>
@@ -148,7 +148,7 @@ function TopMarketOutcomeBtn({
     <Link
       href={getMarketPath(id)}
       className={`
-        px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.08rem] border-[#202020] shadow-sm shadow-[#212121]
+        px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.06rem] border-[#202020] shadow-sm shadow-[#212121]
       `}
     >
       {outcome}

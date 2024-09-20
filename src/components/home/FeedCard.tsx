@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { getMarketPath } from "@/utils/urls";
-import Link from "next/link";
+import { getMarketPath } from "@/utils/urls"
+import Link from "next/link"
 
 export function FeedCard({
   image,
@@ -26,7 +26,7 @@ export function FeedCard({
         />
       </Link>
     </div>
-  );
+  )
 }
 
 function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
@@ -50,10 +50,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
           absolute bottom-0 z-2 
         `}
       />
-      <div
-        style={{ fontFamily: "Aeonik-Bold" }}
-        className="absolute top-4 z-3 right-3 text-[0.95rem] bg-[#181818]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-xl"
-      >
+      <div className="absolute top-4 z-3 right-3 text-[0.95rem] bg-[#181818]/10 text-white font-[600] p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.1rem] border-[#303030]/5">
         {odds.toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div
@@ -87,5 +84,5 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
