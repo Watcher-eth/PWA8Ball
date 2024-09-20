@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
 
   const resMarkets = await fetch(endpoint)
   const markets = await resMarkets.json()
-  const allTopicMarkets = await getAllMarketsForTopicId(id)
+  const allTopicMarkets = await getAllMarketsForTopicId(Number(id))
 
   return {
     props: {

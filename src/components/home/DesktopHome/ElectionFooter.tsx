@@ -1,26 +1,26 @@
-import { formatMarketArr } from "@/utils/markets/formatMarketArr";
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { formatMarketArr } from "@/utils/markets/formatMarketArr"
+import { motion } from "framer-motion"
+import { Skeleton } from "@/components/ui/Skeleton"
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay";
-import { Countdown } from "@/components/common/CountDown";
-import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
+} from "@/components/layouts/StandardBleedOverlay"
+import { Countdown } from "@/components/common/CountDown"
+import { ELECTION_END_DATE } from "@/components/topic/ElectionPage"
 
-import { MarketCard } from "./MarketCard";
-import { DesktopFooter } from "./DesktopFooter";
-import { ChevronDown } from "lucide-react";
-import Link from "next/link";
-import { ELECTIONS_PATH } from "@/utils/urls";
+import { MarketCard } from "./MarketCard"
+import { DesktopFooter } from "./DesktopFooter"
+import { ChevronDown } from "lucide-react"
+import Link from "next/link"
+import { ELECTIONS_PATH } from "@/utils/urls"
 
 export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
     // @ts-ignore
     markets,
     selectedTopic: "🇺🇸 2024 US Elections",
-  });
-
+  })
+  console.log("markets356", markets)
   return (
     <div className="px-4 mt-[6.5rem] flex flex-col w-full">
       <div className="flex flex-col w-full px-14">
@@ -72,15 +72,15 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
         </StandardBleedOverlay>
       </div>
     </div>
-  );
+  )
 }
 
 function MarketCardSection<T>({
   feedDataArr,
   length,
 }: {
-  feedDataArr?: T[];
-  length: number;
+  feedDataArr?: T[]
+  length: number
 }) {
   return (
     <motion.div
@@ -100,5 +100,5 @@ function MarketCardSection<T>({
           </div>
         ))}
     </motion.div>
-  );
+  )
 }
