@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react"
+import { motion } from "framer-motion"
 import {
   AlignLeft,
   ArrowLeftRight,
@@ -8,65 +8,64 @@ import {
   Receipt,
   Stars,
   User2,
-} from "lucide-react";
-import { useRouter } from "next/router";
-import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
+} from "lucide-react"
+import { useRouter } from "next/router"
+import { DesktopCardModal } from "@/components/modals/DesktopCardModal"
 
-import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview";
-import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen";
-import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen";
-import { processPrices } from "@/utils/chartUtils";
-import { TimeframeSelector } from "@/components/charts/TimeframeSelector";
-import { GenericAreaChart } from "@/components/charts/GenericAreaChart";
-import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
-import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices";
-import { getMarketPath } from "@/utils/urls";
-import { User } from "@/__generated__/graphql";
-import { RedeemModal } from "@/components/predictions/Redeem/RedeemModal";
+import { CashoutOverview } from "@/components/predictions/cashout/CashoutOverview"
+import { CashoutWarningScreen } from "@/components/predictions/cashout/CashoutWarningScreen"
+import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen"
+import { processPrices } from "@/utils/chartUtils"
+import { TimeframeSelector } from "@/components/charts/TimeframeSelector"
+import { GenericAreaChart } from "@/components/charts/GenericAreaChart"
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
+import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices"
+import { getMarketPath } from "@/utils/urls"
+import { User } from "@/__generated__/graphql"
+import { RedeemModal } from "@/components/predictions/Redeem/RedeemModal"
 
-export const timeframes = ["1H", "1D", "1W", "1M"];
+export const timeframes = ["1H", "1D", "1W", "1M"]
 
 export const MobileMyBetModal = (props: {
-  title: string;
-  image: string;
-  price: number;
-  ownedAmount: number;
-  options: { name: string }[];
-  percentage: number;
-  betId: string;
-  topic: string;
-  icon: string;
-  question: string;
-  name?: string;
-  userId?: string;
-  option?: number;
-  optionNumber?: number;
-  isExternal?: boolean;
-  isDesktop?: boolean;
-  initialProb?: number;
-  resolved?: boolean;
-  outcome?: number;
-  onClose: () => void;
-  openCashout: () => void;
-  handleReceipt: () => void;
-  setStep: (num: number) => void;
-
+  title: string
+  image: string
+  price: number
+  ownedAmount: number
+  options: { name: string }[]
+  percentage: number
+  betId: string
+  topic: string
+  icon: string
+  question: string
+  name?: string
+  userId?: string
+  option?: number
+  optionNumber?: number
+  isExternal?: boolean
+  isDesktop?: boolean
+  initialProb?: number
+  resolved?: boolean
+  outcome?: number
+  onClose: () => void
+  openCashout: () => void
+  handleReceipt: () => void
+  setStep: (num: number) => void
 }) => {
-  const [timeframe, setTimeframe] = useState("1M");
+  const [timeframe, setTimeframe] = useState("1M")
 
   const { data: prices, error: priceError } = useGetMarketPrices(
     props.betId,
     timeframe
-  );
+  )
 
-  const router = useRouter();
-  const userOutcome = props?.optionNumber;
+  const router = useRouter()
+  const userOutcome = props?.optionNumber
   const { currentPrices, percentageDifference } = processPrices(
     prices,
     userOutcome,
     props?.initialProb,
     timeframe
-  );
+  )
 
   // Format data for AreaChart
   const chartData = currentPrices?.map((price) => ({
@@ -75,14 +74,14 @@ export const MobileMyBetModal = (props: {
     [`${props.options[1]}`]: price.value,
     // desktop: price.value,
     // mobile: 100 - price.value,
-  }));
+  }))
 
   const percentageDif =
     ((currentPrices[currentPrices.length - 1].value - currentPrices[0].value) /
       currentPrices[0].value) *
-    100;
+    100
 
-  console.log("resolved", props?.resolved);
+  console.log("resolved", props?.resolved)
   return (
     <div
       className={`flex flex-col ${
@@ -94,7 +93,7 @@ export const MobileMyBetModal = (props: {
       <div className="flex flex-row items-center justify-between my-[5px]">
         <motion.div
           onClick={() => {
-            props.onClose();
+            props.onClose()
             router.push({
               pathname: "[id]",
               query: {
@@ -106,26 +105,26 @@ export const MobileMyBetModal = (props: {
                 topic: props.topic,
                 option: props.option,
               },
-            });
+            })
           }}
           className="relative"
         >
           <img
             src={props.image}
-            className="h-[40px] w-[40px] rounded-full object-cover"
+            className="h-[50px] w-[50px] rounded-full object-cover"
             alt="Market image"
           />
         </motion.div>
       </div>
       <div className="flex flex-row items-center justify-between mt-[3px]">
-        <span className="text-[19px] text-white font-bold">
+        <span className="text-[21px] text-white font-[700]">
           {currentPrices[currentPrices.length - 1].value.toFixed(2)}%{" "}
           {props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             ? props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             : props.options?.name}
         </span>
         <span
-          className={`text-[20px] font-bold ${
+          className={`text-[22px] font-[700] ${
             percentageDifference < 0
               ? "text-[#FF0050]"
               : percentageDifference === 0
@@ -137,8 +136,8 @@ export const MobileMyBetModal = (props: {
           {percentageDifference}%
         </span>
       </div>
-      <div className="flex flex-row items-center justify-between pb-1">
-        <span className="text-base text-white/70 font-[Aeonik]">
+      <div className="flex flex-row items-center justify-between -mt-1 pb-1">
+        <span className="text-base text-white/80 font-[Aeonik]">
           {props.title}
         </span>
         <span className="text-base text-white/80 font-[Aeonik]">
@@ -152,7 +151,7 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       {prices ? (
-        <div className="h-[23vh] my-4">
+        <div className={`${props?.isDesktop ? "h-[23vh]" : "h-[40vh]"} my-4`}>
           <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       ) : (
@@ -230,11 +229,11 @@ export const MobileMyBetModal = (props: {
         <motion.div
           onClick={() => {
             if (props.isExternal) {
-              router.push({ pathname: getMarketPath(props.betId) });
+              router.push({ pathname: getMarketPath(props.betId) })
             } else if (props?.resolved) {
-              props.setStep(5);
+              props.setStep(5)
             } else {
-              props.setStep(2);
+              props.setStep(2)
             }
           }}
           className="mt-2.5 hover:scale-[100.5%] active:scale-99 rounded-[25px] p-[10px] bg-[#151515] flex items-center justify-center flex-row gap-[3px] w-1/2"
@@ -254,7 +253,7 @@ export const MobileMyBetModal = (props: {
         </motion.div>
         <motion.div
           onClick={() => {
-            props.setStep(4);
+            props.setStep(4)
           }}
           className="mt-2.5  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
@@ -275,7 +274,7 @@ export const MobileMyBetModal = (props: {
         {props.question}
       </span>
       <div className="h-[1px] w-full bg-[rgba(100,100,100,0.3)] my-[14px] mt-[12px]" />
-      <div className="flex flex-row items-center self-center gap-[5px]">
+      <div className="flex flex-row items-center self-center gap-[5px] -mb-6">
         <Clock
           color="#989898"
           size={15}
@@ -287,8 +286,8 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export function DesktopMyBetModal({
   children,
@@ -314,33 +313,33 @@ export function DesktopMyBetModal({
   onClose,
   refetch,
 }: {
-  children: React.ReactNode;
-  title: string;
-  image: string;
-  price: number;
-  ownedAmount: number;
-  options: string[];
-  percentage: number;
-  betId: string;
-  topic: string;
-  icon: string;
-  question: string;
-  name?: string;
-  userId?: string;
-  option?: number;
-  optionNumber?: number;
-  initialProb?: number;
-  isExternal?: boolean;
-  user: User;
-  resolved?: boolean;
-  outcome?: number;
-  refetch: () => void;
+  children: React.ReactNode
+  title: string
+  image: string
+  price: number
+  ownedAmount: number
+  options: string[]
+  percentage: number
+  betId: string
+  topic: string
+  icon: string
+  question: string
+  name?: string
+  userId?: string
+  option?: number
+  optionNumber?: number
+  initialProb?: number
+  isExternal?: boolean
+  user: User
+  resolved?: boolean
+  outcome?: number
+  refetch: () => void
 }) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1)
   return (
     <DesktopCardModal
       onOpenChange={() => {
-        setStep(1);
+        setStep(1)
       }}
       cardClassName="w-full rounded-[1.5rem]"
       dialogContentClassName=" w-[40vw] lg:w-[30vw] xl:w-[25vw] bg-[#080808] rounded-[1.5rem] min-w-[450px]"
@@ -429,5 +428,5 @@ export function DesktopMyBetModal({
     >
       {children}
     </DesktopCardModal>
-  );
+  )
 }

@@ -69,7 +69,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
 
   console.log("aggrea", mergedData)
   return (
-    <div className="flex flex-col items-center -gap-2.5 -mt-3">
+    <div className="flex flex-col items-center -gap-2.5 z-[10] -mt-3">
       {mergedData.length < 1 ? (
         <NewPlaceholder isUser={userId === user?.externalAuthProviderUserId} />
       ) : (

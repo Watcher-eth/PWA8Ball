@@ -12,9 +12,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser";
-import { useUserStore } from "@/lib/stores/UserStore";
+} from "@/components/ui/dropdown-menu"
+import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser"
+import { useUserStore } from "@/lib/stores/UserStore"
 import {
   DoorOpen,
   Settings,
@@ -23,37 +23,38 @@ import {
   ArrowDownToLine,
   Key,
   Copy,
-} from "lucide-react";
+} from "lucide-react"
 
-import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
-import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
-import { Dialog } from "@/components/ui/dialog";
-import { DropdownItem } from "@/components/ui/DropdownItem";
-import { useMyEns } from "@/hooks/wallet/useMyEns";
-import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal"
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
+import { Dialog, DialogOverlay } from "@/components/ui/dialog"
+import { DropdownItem } from "@/components/ui/DropdownItem"
+import { useMyEns } from "@/hooks/wallet/useMyEns"
+import { getProfilePath, SETTINGS_PATH } from "@/utils/urls"
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
+import { copyToClipboard } from "@/utils/copyToClipboard"
 
 export function MobileProfilePopover({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const { user } = useUserStore();
-  const { disconnectUser } = useDisconnectUser();
-  const { displayName } = useMyEns();
-  const userBalance = useUserUsdcBalance();
+  const { user } = useUserStore()
+  const { disconnectUser } = useDisconnectUser()
+  const { displayName } = useMyEns()
+  const userBalance = useUserUsdcBalance()
 
   const displayUsername =
-    !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
+    !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name
 
   return (
     <Dialog>
       <DropdownMenu>
+
         <DropdownMenuTrigger asChild>
           <div>{children}</div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-[#303030]/20 -mr-[8rem] mt-4 rounded-md backdrop-blur-xl border w-56 border-white/10">
+        <DropdownMenuContent className="bg-[#303030]/20 -mr-[8rem] mt-4 rounded-lg backdrop-blur-xl border w-56 border-white/10">
           <DropdownMenuLabel className="flex  flex-row items-center">
             {user?.pfp ? (
               <img className="size-6 rounded-full mr-2" src={user?.pfp} />
@@ -146,5 +147,5 @@ export function MobileProfilePopover({
         </DropdownMenuContent>
       </DropdownMenu>
     </Dialog>
-  );
+  )
 }
