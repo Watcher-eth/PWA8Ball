@@ -1476,6 +1476,71 @@ export const EightBallAdminAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
+      {
+        name: 'admin',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'AdminRenounced',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'newBaseOperator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'BaseOperatorChanged',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'market',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'MarketGranted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'operator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'OperatorGranted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'operator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'OperatorRevoked',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
       { name: 'role', internalType: 'bytes32', type: 'bytes32', indexed: true },
       {
         name: 'previousAdminRole',
@@ -1749,6 +1814,19 @@ export const EightBallStorageAbi = [
     anonymous: false,
     inputs: [
       {
+        name: 'timestamp',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'EightBallStorageCreated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
         name: 'account',
         internalType: 'address',
         type: 'address',
@@ -1867,6 +1945,10 @@ export const EightBallStorageConfig = {
 // FeeManagerV2
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
+ */
 export const FeeManagerV2Abi = [
   {
     type: 'constructor',
@@ -2147,6 +2229,24 @@ export const FeeManagerV2Abi = [
   { type: 'error', inputs: [], name: 'NotWhitelistedOperator' },
   { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
 ] as const
+
+/**
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
+ */
+export const FeeManagerV2Address = {
+  8453: '0xC0cab73B347F8a9E98090b4A7fCb4E21aD94e07F',
+  84532: '0x3501C77f9356728b1f20cd621eF69325BA35fb7A',
+} as const
+
+/**
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
+ */
+export const FeeManagerV2Config = {
+  address: FeeManagerV2Address,
+  abi: FeeManagerV2Abi,
+} as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // HashPairV1
@@ -4794,6 +4894,12 @@ export const IPairFactoryV1Abi = [
         type: 'address',
         indexed: false,
       },
+      {
+        name: 'initialProb',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
       { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
     ],
     name: 'PairCreated',
@@ -5280,6 +5386,12 @@ export const PairFactoryV1Abi = [
         name: 'pair',
         internalType: 'address',
         type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'initialProb',
+        internalType: 'uint256',
+        type: 'uint256',
         indexed: false,
       },
       { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
@@ -8190,6 +8302,71 @@ export const useWatchEightBallAdminEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"AdminRenounced"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
+ */
+export const useWatchEightBallAdminAdminRenouncedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallAdminAbi,
+    address: EightBallAdminAddress,
+    eventName: 'AdminRenounced',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"BaseOperatorChanged"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
+ */
+export const useWatchEightBallAdminBaseOperatorChangedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallAdminAbi,
+    address: EightBallAdminAddress,
+    eventName: 'BaseOperatorChanged',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"MarketGranted"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
+ */
+export const useWatchEightBallAdminMarketGrantedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallAdminAbi,
+    address: EightBallAdminAddress,
+    eventName: 'MarketGranted',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"OperatorGranted"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
+ */
+export const useWatchEightBallAdminOperatorGrantedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallAdminAbi,
+    address: EightBallAdminAddress,
+    eventName: 'OperatorGranted',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"OperatorRevoked"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x2ba053e368450f9d676f7bbd0d9798e6565613c9)
+ */
+export const useWatchEightBallAdminOperatorRevokedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallAdminAbi,
+    address: EightBallAdminAddress,
+    eventName: 'OperatorRevoked',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallAdminAbi}__ and `eventName` set to `"RoleAdminChanged"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0xf85dacaaca7621b3d8855fa92e4b7623ddcff878)
@@ -8522,6 +8699,19 @@ export const useWatchEightBallStorageEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallStorageAbi}__ and `eventName` set to `"EightBallStorageCreated"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x490136044bec32ff4282ceaeb7d50b21465b4d7e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xde8bccbb3c197de83ee2ee9a4d94d87714c4fcb2)
+ */
+export const useWatchEightBallStorageEightBallStorageCreatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: EightBallStorageAbi,
+    address: EightBallStorageAddress,
+    eventName: 'EightBallStorageCreated',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link EightBallStorageAbi}__ and `eventName` set to `"Paused"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x490136044bec32ff4282ceaeb7d50b21465b4d7e)
@@ -8588,341 +8778,499 @@ export const useWatchEightBallStorageUnpausedEvent =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2 = /*#__PURE__*/ createUseReadContract({
   abi: FeeManagerV2Abi,
+  address: FeeManagerV2Address,
 })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"REFERRAL_FEE_BPS"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2ReferralFeeBps =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'REFERRAL_FEE_BPS',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"accruedBaseFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2AccruedBaseFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'accruedBaseFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"accruedCreatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2AccruedCreatorFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'accruedCreatorFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"accruedOperatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2AccruedOperatorFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'accruedOperatorFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"accruedReferralFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2AccruedReferralFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'accruedReferralFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"adminContract"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2AdminContract =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'adminContract',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"baseFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2BaseFee = /*#__PURE__*/ createUseReadContract({
   abi: FeeManagerV2Abi,
+  address: FeeManagerV2Address,
   functionName: 'baseFee',
 })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"baseOperator"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2BaseOperator =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'baseOperator',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"creatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2CreatorFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'creatorFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"getFeeForCreator"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2GetFeeForCreator =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'getFeeForCreator',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"getFeeForOperator"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2GetFeeForOperator =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'getFeeForOperator',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"getTotalFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2GetTotalFee =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'getTotalFee',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"operatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2OperatorFees =
   /*#__PURE__*/ createUseReadContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'operatorFees',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"usdc"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useReadFeeManagerV2Usdc = /*#__PURE__*/ createUseReadContract({
   abi: FeeManagerV2Abi,
+  address: FeeManagerV2Address,
   functionName: 'usdc',
 })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2 = /*#__PURE__*/ createUseWriteContract({
   abi: FeeManagerV2Abi,
+  address: FeeManagerV2Address,
 })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimBaseFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2ClaimBaseFees =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimBaseFees',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimCreatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2ClaimCreatorFees =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimCreatorFees',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimOperatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2ClaimOperatorFees =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimOperatorFees',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimReferralFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2ClaimReferralFees =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimReferralFees',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"collectFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2CollectFees =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'collectFees',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setBaseFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2SetBaseFee =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setBaseFee',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setCreatorFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2SetCreatorFee =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setCreatorFee',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setOperatorFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWriteFeeManagerV2SetOperatorFee =
   /*#__PURE__*/ createUseWriteContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setOperatorFee',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2 = /*#__PURE__*/ createUseSimulateContract({
   abi: FeeManagerV2Abi,
+  address: FeeManagerV2Address,
 })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimBaseFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2ClaimBaseFees =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimBaseFees',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimCreatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2ClaimCreatorFees =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimCreatorFees',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimOperatorFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2ClaimOperatorFees =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimOperatorFees',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"claimReferralFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2ClaimReferralFees =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'claimReferralFees',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"collectFees"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2CollectFees =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'collectFees',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setBaseFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2SetBaseFee =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setBaseFee',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setCreatorFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2SetCreatorFee =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setCreatorFee',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `functionName` set to `"setOperatorFee"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useSimulateFeeManagerV2SetOperatorFee =
   /*#__PURE__*/ createUseSimulateContract({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     functionName: 'setOperatorFee',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2Event =
-  /*#__PURE__*/ createUseWatchContractEvent({ abi: FeeManagerV2Abi })
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `eventName` set to `"BaseFeesClaimed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2BaseFeesClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     eventName: 'BaseFeesClaimed',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `eventName` set to `"CreatorFeesClaimed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2CreatorFeesClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     eventName: 'CreatorFeesClaimed',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `eventName` set to `"FeesCollected"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2FeesCollectedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     eventName: 'FeesCollected',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `eventName` set to `"OperatorFeesClaimed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2OperatorFeesClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     eventName: 'OperatorFeesClaimed',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link FeeManagerV2Abi}__ and `eventName` set to `"ReferralFeesClaimed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0xc0cab73b347f8a9e98090b4a7fcb4e21ad94e07f)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x3501c77f9356728b1f20cd621ef69325ba35fb7a)
  */
 export const useWatchFeeManagerV2ReferralFeesClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: FeeManagerV2Abi,
+    address: FeeManagerV2Address,
     eventName: 'ReferralFeesClaimed',
   })
 
