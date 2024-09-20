@@ -60,7 +60,12 @@ export default async function GET(request: Request) {
           />
           <div
             style={{
-              fontSize: "5rem",
+              fontSize:
+                market?.question?.length < 50
+                  ? "5rem"
+                  : market?.question?.length < 70
+                  ? "4.5rem"
+                  : "4rem",
               color: "white",
               fontFamily: "AeonikBold",
               marginTop: 30,
