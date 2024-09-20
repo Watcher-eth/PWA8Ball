@@ -29,8 +29,9 @@ const documents = {
     "\n  query userPositionsByMarket($marketId: BigInt, $userAddress: String) {\n    positions(where: { marketId: $marketId, userAddress: $userAddress }) {\n      items {\n        createdAt\n        marketId\n        option\n        tokensOwned\n      }\n    }\n  }\n": types.UserPositionsByMarketDocument,
     "\n  query SearchMarkets($question_contains: String!) {\n    markets(where: { question_contains: $question_contains }, limit: 10) {\n      items {\n        id\n        title\n        question\n        outcomeOddsA\n        outcomeA\n        marketId\n        topicId\n      }\n    }\n  }\n": types.SearchMarketsDocument,
     "\n  query searchUsers($name_contains: String!) {\n    users(where: { name_contains: $name_contains }) {\n      items {\n        name\n        pfp\n        id\n        walletAddress\n      }\n    }\n  }\n": types.SearchUsersDocument,
-    "\n  query getMarketsForTopic($id: Int) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n": types.GetMarketsForTopicDocument,
-    "\n  query getUserById($id: String = \"\") {\n    user(id: $id) {\n      name\n      pfp\n      id\n      socials\n      theme\n      walletAddress\n      updatedAt\n      liquidityPoints\n      rewardPoints\n    }\n  }\n": types.GetUserByIdDocument,
+    "\n  query getMarketsForTopic($id: BigInt) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n": types.GetMarketsForTopicDocument,
+    "\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n": types.GetTopicByIdDocument,
+    "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n": types.GetUserByIdDocument,
 };
 
 /**
@@ -114,11 +115,15 @@ export function tgql(source: "\n  query searchUsers($name_contains: String!) {\n
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function tgql(source: "\n  query getMarketsForTopic($id: Int) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMarketsForTopic($id: Int) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n"];
+export function tgql(source: "\n  query getMarketsForTopic($id: BigInt) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMarketsForTopic($id: BigInt) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n"];
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function tgql(source: "\n  query getUserById($id: String = \"\") {\n    user(id: $id) {\n      name\n      pfp\n      id\n      socials\n      theme\n      walletAddress\n      updatedAt\n      liquidityPoints\n      rewardPoints\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: String = \"\") {\n    user(id: $id) {\n      name\n      pfp\n      id\n      socials\n      theme\n      walletAddress\n      updatedAt\n      liquidityPoints\n      rewardPoints\n    }\n  }\n"];
+export function tgql(source: "\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n"): (typeof documents)["\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n"];
+/**
+ * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function tgql(source: "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n"];
 
 export function tgql(source: string) {
   return (documents as any)[source] ?? {};

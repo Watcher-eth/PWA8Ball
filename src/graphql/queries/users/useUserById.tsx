@@ -1,20 +1,17 @@
 import { gql, useQuery as useApolloQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 import { User } from "@/__generated__/graphql"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-export const GET_USER_BY_ID = tgql(/* GraphQL */ `
-  query getUserById($id: String = "") {
+
+const GET_USER_BY_ID = tgql(/* GraphQL */ `
+  query getUserById($id: String!) {
     user(id: $id) {
+      externalAuthProviderUserId
+      createdAt
       name
       pfp
-      id
-      socials
-      theme
       walletAddress
-      updatedAt
-      liquidityPoints
-      rewardPoints
     }
   }
 `)
@@ -27,11 +24,10 @@ export async function getUserById(userId: string) {
   return data?.user as User
 }
 
-export function useUserById(id: string) {
+export function useGetUserById(id: string) {
   const { data, loading, error, refetch } = useApolloQuery(GET_USER_BY_ID, {
-    variables: { id: String(id) },
+    variables: { id: getChecksummedAddress(id) },
   })
-
   return {
     user: data?.user,
     loading,
