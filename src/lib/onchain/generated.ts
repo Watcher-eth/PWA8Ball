@@ -6159,7 +6159,7 @@ export const ScriptAbi = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const TopicRegistryAbi = [
   {
@@ -6292,14 +6292,14 @@ export const TopicRegistryAbi = [
 ] as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const TopicRegistryAddress = {
-  84532: '0xEEb4958d6a139BaB4d133a0fA6450381B323D291',
+  84532: '0xC7b1A1e4f828D8A3805e789503557eB49DF00E55',
 } as const
 
 /**
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const TopicRegistryConfig = {
   address: TopicRegistryAddress,
@@ -13287,7 +13287,7 @@ export const useReadScriptIsScript = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useReadTopicRegistry = /*#__PURE__*/ createUseReadContract({
   abi: TopicRegistryAbi,
@@ -13297,7 +13297,7 @@ export const useReadTopicRegistry = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"adminContract"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useReadTopicRegistryAdminContract =
   /*#__PURE__*/ createUseReadContract({
@@ -13309,7 +13309,7 @@ export const useReadTopicRegistryAdminContract =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"currentTopicId"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useReadTopicRegistryCurrentTopicId =
   /*#__PURE__*/ createUseReadContract({
@@ -13321,7 +13321,7 @@ export const useReadTopicRegistryCurrentTopicId =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"getTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useReadTopicRegistryGetTopic = /*#__PURE__*/ createUseReadContract(
   {
@@ -13334,7 +13334,7 @@ export const useReadTopicRegistryGetTopic = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWriteTopicRegistry = /*#__PURE__*/ createUseWriteContract({
   abi: TopicRegistryAbi,
@@ -13344,7 +13344,7 @@ export const useWriteTopicRegistry = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"createTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWriteTopicRegistryCreateTopic =
   /*#__PURE__*/ createUseWriteContract({
@@ -13356,7 +13356,7 @@ export const useWriteTopicRegistryCreateTopic =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"updateTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWriteTopicRegistryUpdateTopic =
   /*#__PURE__*/ createUseWriteContract({
@@ -13368,7 +13368,7 @@ export const useWriteTopicRegistryUpdateTopic =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useSimulateTopicRegistry = /*#__PURE__*/ createUseSimulateContract(
   { abi: TopicRegistryAbi, address: TopicRegistryAddress },
@@ -13377,7 +13377,7 @@ export const useSimulateTopicRegistry = /*#__PURE__*/ createUseSimulateContract(
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"createTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useSimulateTopicRegistryCreateTopic =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13389,7 +13389,7 @@ export const useSimulateTopicRegistryCreateTopic =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link TopicRegistryAbi}__ and `functionName` set to `"updateTopic"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useSimulateTopicRegistryUpdateTopic =
   /*#__PURE__*/ createUseSimulateContract({
@@ -13401,7 +13401,7 @@ export const useSimulateTopicRegistryUpdateTopic =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWatchTopicRegistryEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13412,7 +13412,7 @@ export const useWatchTopicRegistryEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__ and `eventName` set to `"TopicCreated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWatchTopicRegistryTopicCreatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -13424,7 +13424,7 @@ export const useWatchTopicRegistryTopicCreatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link TopicRegistryAbi}__ and `eventName` set to `"TopicUpdated"`
  *
- * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xeeb4958d6a139bab4d133a0fa6450381b323d291)
+ * [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xc7b1a1e4f828d8a3805e789503557eb49df00e55)
  */
 export const useWatchTopicRegistryTopicUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
