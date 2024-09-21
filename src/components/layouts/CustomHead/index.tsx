@@ -22,7 +22,7 @@ export function CustomHead({ topicData, userId, router, ...rest }) {
   } else if (router?.query?.id) {
     // NOTE: This if statement needs to be more specific given its rn
     //       likely to catch too much
-    headSeo = <MarketSeo id={router?.query?.id}  />
+    headSeo = <MarketSeo id={router?.query?.id} />
   } else {
     headSeo = <SplashSeo />
   }
@@ -71,7 +71,7 @@ function TopicSeo({
   return (
     <NextSeo
       openGraph={{
-        title: title,
+        title: `${title} Forecasts`,
         description: description,
         type: "website",
         url: getTopicUrl(id),
@@ -128,8 +128,8 @@ function MarketSeo({ id, question, title }) {
     <NextSeo
       openGraph={{
         type: "website",
-        title: title,
-        description: question,
+        title: "Glimpse",
+        description: "Discover Tommorow, Today",
         url: getMarketUrl(id),
         images: [
           {
@@ -158,6 +158,8 @@ function ProfileSeo({ userId }) {
       openGraph={{
         type: "website",
         url: getProfileUrl(userId),
+        title: "Glimpse",
+        description: "Discover Tommorow, Today",
         images: [
           {
             url: ogUrl,
