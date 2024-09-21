@@ -8,41 +8,41 @@ import {
   Save,
   UserPlus,
   Wallet,
-} from "lucide-react";
-import { useState, useEffect } from "react";
-import { Switch } from "@/components/ui/switch";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import Link from "next/link";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+} from "lucide-react"
+import { useState, useEffect } from "react"
+import { Switch } from "@/components/ui/switch"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal"
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import Link from "next/link"
+import { copyToClipboard } from "@/utils/copyToClipboard"
 
-import UserInviteModal from "../onboarding/Invites/UserInviteModal";
+import UserInviteModal from "../onboarding/Invites/UserInviteModal"
+import { useCreateUser } from "@/hooks/actions/UserRegistry/useCreateUser"
 
 export function SettingsPage() {
   const initialSettings = {
     pushNotifications: false,
     personalizedRecommendations: false,
     publicProfile: false,
-  };
-  const { user } = useUserStore();
-  const userBalance = useUserUsdcBalance();
-  const [settings, setSettings] = useState(initialSettings);
-  const [showSaveButton, setShowSaveButton] = useState(false);
-
+  }
+  const { user } = useUserStore()
+  const userBalance = useUserUsdcBalance()
+  const [settings, setSettings] = useState(initialSettings)
+  const [showSaveButton, setShowSaveButton] = useState(false)
+  const { handleCreateUser } = useCreateUser()
   useEffect(() => {
-    const hasChanges = _.isEqual(settings, initialSettings);
-    setShowSaveButton(hasChanges);
-  }, [settings]);
+    const hasChanges = _.isEqual(settings, initialSettings)
+    setShowSaveButton(hasChanges)
+  }, [settings])
 
   const handleSwitchChange = (key: keyof typeof settings, value: boolean) => {
     setSettings((prevSettings) => ({
       ...prevSettings,
       [key]: value,
-    }));
-  };
-
+    }))
+  }
 
   return (
     <div className="container pt-6 md:pt-0 p-0 w-full h-full z-[10]">
@@ -152,7 +152,7 @@ export function SettingsPage() {
             <button
               onClick={() => {
                 // Handle save action here
-                setShowSaveButton(false); // Hide the save button after saving
+                setShowSaveButton(false) // Hide the save button after saving
               }}
               className=" bg-[#151515] text-white justify-center font-semibold flex flex-row items-center px-4 py-2.5 rounded-md"
             >
@@ -247,7 +247,23 @@ export function SettingsPage() {
                 {user?.walletAddress && shortenAddress(user?.walletAddress)}
               </button>
               <button
-
+                onClick={() =>
+                  handleCreateUser({
+                    walletAddress: "0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591",
+                    externalAuthProviderUserId:
+                      "did:privy:clutganzs01rz2oqk4vvlw1ih",
+                    id: "0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591",
+                    pfp: "https://pbs.twimg.com/profile_images/1749354610261979136/44nFYEPi_400x400.jpg",
+                    name: "Watcher",
+                    socials: JSON.stringify({
+                      twitter: {
+                        pfp: "https://pbs.twimg.com/profile_images/1749354610261979136/44nFYEPi_400x400.jpg",
+                        name: "Watcher",
+                        username: "Watcher2nd",
+                      },
+                    }),
+                  })
+                }
                 className="px-2 space-x-5 flex-row font-semibold text-white md:text-md flex items-center justify-center py-1 rounded-md bg-[#262626]"
               >
                 <Download
@@ -263,5 +279,5 @@ export function SettingsPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

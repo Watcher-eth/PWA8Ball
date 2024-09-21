@@ -1,18 +1,18 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { X, WalletCards, ArrowDown } from "lucide-react";
-import { DialogClose } from "@/components/ui/dialog";
+import React from "react"
+import { motion } from "framer-motion"
+import { X, WalletCards, ArrowDown } from "lucide-react"
+import { DialogClose } from "@/components/ui/dialog"
 
 interface RemoveLPOverviewProps {
-  setStep: (num: number) => void;
-  onClose: () => void;
-  changeStep: (step: number) => void;
-  image: string;
-  title: string;
-  amount: string;
-  multiplier: string;
-  totalPot: number;
-  isDesktop?: boolean;
+  setStep: (num: number) => void
+  onClose: () => void
+  changeStep: (step: number) => void
+  image: string
+  title: string
+  amount: string
+  multiplier: string
+  totalPot: number
+  isDesktop?: boolean
 }
 
 export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
@@ -81,7 +81,6 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
             whileTap={{ scale: 0.95 }}
             className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#1D1D1D] rounded-full mt-3"
           >
-            <WalletCards color="#D9D9D9" strokeWidth={3} height={20} />
             <span className="ml-1.5 text-[20px] font-extrabold text-[#D9D9D9]">
               Cancel
             </span>
@@ -99,5 +98,5 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
         </motion.button>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -45,7 +45,8 @@ export const useCreateUser = () => {
     }
 
     try {
-      await createUser({ args: [walletAddress, userData] })
+      const res = await createUser({ args: [walletAddress, userData] })
+      console.log("res", res)
     } catch (err) {
       console.error("Error creating user:", err)
     }
