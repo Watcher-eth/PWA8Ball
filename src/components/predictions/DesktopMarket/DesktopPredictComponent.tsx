@@ -341,7 +341,9 @@ function DesktopConfirmPrediction({
             />
             <PredictInfoRow
               label="Fees"
-              contentStr={(amount * 0.025).toPrecision(2)}
+              contentStr={
+                refId?.length > 3 ? (amount * 0.025).toPrecision(2) : 0.0
+              }
             />
             <PredictInfoRow
               label="Potential Payout"
