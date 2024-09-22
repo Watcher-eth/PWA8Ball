@@ -300,11 +300,22 @@ export type Market = {
   resolved?: Maybe<Scalars['Boolean']['output']>;
   resolvedAt?: Maybe<Scalars['BigInt']['output']>;
   title: Scalars['String']['output'];
-  topic: Topic;
-  topicId: Scalars['BigInt']['output'];
+  topic?: Maybe<Topic>;
+  topicId?: Maybe<Scalars['BigInt']['output']>;
+  trades?: Maybe<TradePage>;
   updatedAt?: Maybe<Scalars['BigInt']['output']>;
   usdcStake: Scalars['BigInt']['output'];
   userAddress: Scalars['String']['output'];
+};
+
+
+export type MarketTradesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Scalars['String']['input']>;
+  orderDirection?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<TradeFilter>;
 };
 
 export type MarketFilter = {
@@ -687,6 +698,8 @@ export type Query = {
   positions: PositionPage;
   price?: Maybe<Price>;
   prices: PricePage;
+  referral?: Maybe<Referral>;
+  referrals: ReferralPage;
   topic?: Maybe<Topic>;
   topics: TopicPage;
   trade?: Maybe<Trade>;
@@ -786,6 +799,21 @@ export type QueryPricesArgs = {
 };
 
 
+export type QueryReferralArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryReferralsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Scalars['String']['input']>;
+  orderDirection?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<ReferralFilter>;
+};
+
+
 export type QueryTopicArgs = {
   id: Scalars['BigInt']['input'];
 };
@@ -830,14 +858,114 @@ export type QueryUsersArgs = {
   where?: InputMaybe<UserFilter>;
 };
 
+export type Referral = {
+  __typename?: 'Referral';
+  feeAmount: Scalars['BigInt']['output'];
+  id: Scalars['String']['output'];
+  market: Market;
+  marketId: Scalars['BigInt']['output'];
+  referrerAddress: Scalars['String']['output'];
+  timestamp: Scalars['BigInt']['output'];
+  trade: Trade;
+  txHash: Scalars['String']['output'];
+  user: User;
+  userAddress: Scalars['String']['output'];
+};
+
+export type ReferralFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ReferralFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ReferralFilter>>>;
+  feeAmount?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  feeAmount_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_not?: InputMaybe<Scalars['BigInt']['input']>;
+  feeAmount_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  id_contains?: InputMaybe<Scalars['String']['input']>;
+  id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not?: InputMaybe<Scalars['String']['input']>;
+  id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  marketId?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  marketId_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not?: InputMaybe<Scalars['BigInt']['input']>;
+  marketId_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  referrerAddress?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  referrerAddress_not?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  referrerAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  referrerAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']['input']>;
+  timestamp_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  txHash?: InputMaybe<Scalars['String']['input']>;
+  txHash_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_contains?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  txHash_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  txHash_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress?: InputMaybe<Scalars['String']['input']>;
+  userAddress_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_contains?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  userAddress_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  userAddress_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReferralPage = {
+  __typename?: 'ReferralPage';
+  items: Array<Referral>;
+  pageInfo: PageInfo;
+};
+
 export type Topic = {
   __typename?: 'Topic';
   createdAt: Scalars['BigInt']['output'];
   creatorAddress: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['BigInt']['output'];
+  markets?: Maybe<MarketPage>;
   title: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['BigInt']['output']>;
+};
+
+
+export type TopicMarketsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Scalars['String']['input']>;
+  orderDirection?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<MarketFilter>;
 };
 
 export type TopicFilter = {
@@ -915,6 +1043,7 @@ export type Trade = {
   netAmount: Scalars['BigInt']['output'];
   option: Scalars['Int']['output'];
   price: Scalars['BigInt']['output'];
+  referrer?: Maybe<Scalars['String']['output']>;
   timestamp: Scalars['BigInt']['output'];
   tradeType: Scalars['String']['output'];
   txHash: Scalars['String']['output'];
@@ -983,6 +1112,16 @@ export type TradeFilter = {
   price_lte?: InputMaybe<Scalars['BigInt']['input']>;
   price_not?: InputMaybe<Scalars['BigInt']['input']>;
   price_not_in?: InputMaybe<Array<InputMaybe<Scalars['BigInt']['input']>>>;
+  referrer?: InputMaybe<Scalars['String']['input']>;
+  referrer_contains?: InputMaybe<Scalars['String']['input']>;
+  referrer_ends_with?: InputMaybe<Scalars['String']['input']>;
+  referrer_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  referrer_not?: InputMaybe<Scalars['String']['input']>;
+  referrer_not_contains?: InputMaybe<Scalars['String']['input']>;
+  referrer_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  referrer_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  referrer_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  referrer_starts_with?: InputMaybe<Scalars['String']['input']>;
   timestamp?: InputMaybe<Scalars['BigInt']['input']>;
   timestamp_gt?: InputMaybe<Scalars['BigInt']['input']>;
   timestamp_gte?: InputMaybe<Scalars['BigInt']['input']>;
@@ -1171,21 +1310,21 @@ export type GetUserLpQuery = { __typename?: 'Query', lpPositions: { __typename?:
 export type AllMarketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllMarketsQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', marketId: any, outcomeB: string, outcomeA: string, outcomeOddsB: any, outcomeOddsA: any, question: string, title: string, topicId: any, usdcStake: any }> } };
+export type AllMarketsQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', marketId: any, outcomeB: string, outcomeA: string, outcomeOddsB: any, outcomeOddsA: any, question: string, title: string, topicId?: any | null, usdcStake: any }> } };
 
 export type CreatedMarketsByUserAddressQueryVariables = Exact<{
   userAddress: Scalars['String']['input'];
 }>;
 
 
-export type CreatedMarketsByUserAddressQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', createdAt: any, id: any, initialProb: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, proposedOutcome?: string | null, resolved?: boolean | null, title: string, topicId: any }> } };
+export type CreatedMarketsByUserAddressQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', createdAt: any, id: any, initialProb: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, proposedOutcome?: string | null, resolved?: boolean | null, title: string, topicId?: any | null }> } };
 
 export type GetMarketByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
 }>;
 
 
-export type GetMarketByIdQuery = { __typename?: 'Query', market?: { __typename?: 'Market', id: any, marketId: any, createdAt: any, initialProb: any, liquidityTotal?: any | null, liquidityBalanceUsdc: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, outcome?: string | null, proposedAt?: any | null, question: string, proposedOutcome?: string | null, title: string, usdcStake: any, topicId: any, userAddress: string } | null };
+export type GetMarketByIdQuery = { __typename?: 'Query', market?: { __typename?: 'Market', id: any, marketId: any, createdAt: any, initialProb: any, liquidityTotal?: any | null, liquidityBalanceUsdc: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, outcome?: string | null, proposedAt?: any | null, question: string, proposedOutcome?: string | null, title: string, usdcStake: any, topicId?: any | null, userAddress: string } | null };
 
 export type MarketUsersQueryVariables = Exact<{
   marketId: Scalars['BigInt']['input'];
@@ -1235,7 +1374,7 @@ export type SearchMarketsQueryVariables = Exact<{
 }>;
 
 
-export type SearchMarketsQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', id: any, title: string, question: string, outcomeOddsA: any, outcomeA: string, marketId: any, topicId: any }> } };
+export type SearchMarketsQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', id: any, title: string, question: string, outcomeOddsA: any, outcomeA: string, marketId: any, topicId?: any | null }> } };
 
 export type SearchUsersQueryVariables = Exact<{
   name_contains: Scalars['String']['input'];
@@ -1249,7 +1388,7 @@ export type GetMarketsForTopicQueryVariables = Exact<{
 }>;
 
 
-export type GetMarketsForTopicQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', outcome?: string | null, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, title: string, question: string, topicId: any }> } };
+export type GetMarketsForTopicQuery = { __typename?: 'Query', markets: { __typename?: 'MarketPage', items: Array<{ __typename?: 'Market', outcome?: string | null, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, title: string, question: string, topicId?: any | null }> } };
 
 export type GetTopicByIdQueryVariables = Exact<{
   id: Scalars['BigInt']['input'];
@@ -1257,6 +1396,13 @@ export type GetTopicByIdQueryVariables = Exact<{
 
 
 export type GetTopicByIdQuery = { __typename?: 'Query', topic?: { __typename?: 'Topic', creatorAddress: string, description?: string | null, title: string, id: any } | null };
+
+export type GetUserReferralsQueryVariables = Exact<{
+  referrerAddress: Scalars['String']['input'];
+}>;
+
+
+export type GetUserReferralsQuery = { __typename?: 'Query', referrals: { __typename?: 'ReferralPage', items: Array<{ __typename?: 'Referral', feeAmount: any, id: string, marketId: any, referrerAddress: string, timestamp: any, market: { __typename?: 'Market', question: string, title: string } }> } };
 
 export type GetUserByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -1284,4 +1430,5 @@ export const SearchMarketsDocument = {"kind":"Document","definitions":[{"kind":"
 export const SearchUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name_contains"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name_contains"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name_contains"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"walletAddress"}}]}}]}}]}}]} as unknown as DocumentNode<SearchUsersQuery, SearchUsersQueryVariables>;
 export const GetMarketsForTopicDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketsForTopic"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"topicId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"topicId"}}]}}]}}]}}]} as unknown as DocumentNode<GetMarketsForTopicQuery, GetMarketsForTopicQueryVariables>;
 export const GetTopicByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTopicById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topic"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creatorAddress"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetTopicByIdQuery, GetTopicByIdQueryVariables>;
+export const GetUserReferralsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserReferrals"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"referrerAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"referrals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"referrerAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"referrerAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feeAmount"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"referrerAddress"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserReferralsQuery, GetUserReferralsQueryVariables>;
 export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}},{"kind":"Field","name":{"kind":"Name","value":"walletAddress"}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;

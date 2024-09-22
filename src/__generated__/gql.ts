@@ -31,6 +31,7 @@ const documents = {
     "\n  query searchUsers($name_contains: String!) {\n    users(where: { name_contains: $name_contains }) {\n      items {\n        name\n        pfp\n        id\n        walletAddress\n      }\n    }\n  }\n": types.SearchUsersDocument,
     "\n  query getMarketsForTopic($id: BigInt) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n": types.GetMarketsForTopicDocument,
     "\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n": types.GetTopicByIdDocument,
+    "\n  query getUserReferrals($referrerAddress: String!) {\n    referrals(where: { referrerAddress: $referrerAddress }) {\n      items {\n        feeAmount\n        id\n        marketId\n        referrerAddress\n        timestamp\n        market {\n          question\n          title\n        }\n      }\n    }\n  }\n": types.GetUserReferralsDocument,
     "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n": types.GetUserByIdDocument,
 };
 
@@ -120,6 +121,10 @@ export function tgql(source: "\n  query getMarketsForTopic($id: BigInt) {\n    m
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function tgql(source: "\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n"): (typeof documents)["\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n"];
+/**
+ * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function tgql(source: "\n  query getUserReferrals($referrerAddress: String!) {\n    referrals(where: { referrerAddress: $referrerAddress }) {\n      items {\n        feeAmount\n        id\n        marketId\n        referrerAddress\n        timestamp\n        market {\n          question\n          title\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getUserReferrals($referrerAddress: String!) {\n    referrals(where: { referrerAddress: $referrerAddress }) {\n      items {\n        feeAmount\n        id\n        marketId\n        referrerAddress\n        timestamp\n        market {\n          question\n          title\n        }\n      }\n    }\n  }\n"];
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

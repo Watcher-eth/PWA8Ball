@@ -4,7 +4,7 @@ import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 import { gql, useQuery as useApolloQuery } from "@apollo/client"
 
 const GET_ALL_MARKETS = gql`
-  query getMarketsForTopic($id: Int) {
+  query getMarketsForTopic($id: BigInt) {
     markets(where: { topicId: $id }) {
       items {
         outcome

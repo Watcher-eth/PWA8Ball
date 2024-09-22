@@ -1,7 +1,19 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { X, WalletCards, ArrowDown } from "lucide-react"
+import {
+  X,
+  WalletCards,
+  ArrowDown,
+  AlertTriangle,
+  InfoIcon,
+} from "lucide-react"
 import { DialogClose } from "@/components/ui/dialog"
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { TooltipContent } from "@radix-ui/react-tooltip"
 
 interface RemoveLPOverviewProps {
   setStep: (num: number) => void
@@ -44,13 +56,41 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           </motion.button>
         </DialogClose>
       </div>
-      <div className="flex flex-col items-center justify-center w-full -space-y-2 p-5 py-7 rounded-[20px] bg-[#181818] mt-5 mb-5">
+      <div className="flex flex-col items-center justify-center w-full -space-y-2 p-5 py-7 rounded-[20px] border-[0.2rem] border-dashed border-[#181818] mt-7 mb-5">
         <span className="font-bold text-[52px] text-white">
-          ${(props?.totalPot * 1.09).toFixed(2)}
+          ${(props?.totalPot).toFixed(2)}
         </span>
         <span className="font-medium text-[15px] text-[lightgray]">
           Your Boost
         </span>
+      </div>
+      <div
+        style={{ backgroundColor: "rgba(255, 63, 63, 0.15)" }}
+        className="flex items-center justify-between rounded-full py-2 px-4  mb-2 w-full"
+      >
+        <AlertTriangle color={"#FF3F3F"} size={20} strokeWidth={3} />
+
+        <span className="text-lg  text-[#FF3F3F] font-semibold">
+          Pre Resolution
+        </span>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <InfoIcon color={"#FF3F3F"} size={20} strokeWidth={3} />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="bg-[#cccccc]/10 flex items-center border-[0.05rem] border-[#cccccc]/20 backdrop-blur-xl text-white px-4  rounded-full p-2">
+                <InfoIcon
+                  color={"white"}
+                  size={18}
+                  className="mr-1.5"
+                  strokeWidth={2.7}
+                />
+                Wait till after resolution to get double $Cred!
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       {[
         {

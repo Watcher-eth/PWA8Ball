@@ -6,7 +6,7 @@ export const ProfileCard = ({ user, userBalance, onClose }) => {
   const [toastVisible, setToastVisible] = useState(false)
 
   return (
-    <div className="flex  items-center bg-[#090909] shadow-md border-[0.1rem] border-[#121212] p-5 mt-6 rounded-lg">
+    <div className="flex  items-center bg-[#090909] shadow-md border-[0.1rem] border-[#121212] p-5 mt-6 mb-4 rounded-lg">
       <div className="flex  justify-between w-full ">
         <div className="flex flex-col justify-between">
           <div className="flex flex-col">

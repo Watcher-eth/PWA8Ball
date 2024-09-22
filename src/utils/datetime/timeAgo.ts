@@ -18,32 +18,32 @@ export function timeAgo(dateString: string) {
   interval = seconds / 2592000
   if (interval > 1) {
     return `${Math.floor(interval)} ${
-      Math.floor(interval) === 1 ? "month" : "months"
+      Math.floor(interval) === 1 ? "mo" : "mos"
     } ago`
   }
 
   interval = seconds / 86400
   if (interval > 1) {
     return `${Math.floor(interval)} ${
-      Math.floor(interval) === 1 ? "day" : "days"
+      Math.floor(interval) === 1 ? "d" : "days"
     } ago`
   }
 
   interval = seconds / 3600
   if (interval > 1) {
     return `${Math.floor(interval)} ${
-      Math.floor(interval) === 1 ? "hour" : "hours"
+      Math.floor(interval) === 1 ? "hr" : "hrs"
     } ago`
   }
 
   interval = seconds / 60
   if (interval > 1) {
     return `${Math.floor(interval)} ${
-      Math.floor(interval) === 1 ? "minute" : "minutes"
+      Math.floor(interval) === 1 ? "min" : "mins"
     } ago`
   }
 
   return `${Math.floor(seconds)} ${
-    Math.floor(seconds) === 1 ? "second" : "seconds"
+    Math.floor(seconds) === 1 ? "sec" : "secs"
   } ago`
 }

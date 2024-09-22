@@ -36,7 +36,7 @@ export function RemoveLPConfirmationScreen(props: {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const { removeLp } = useRemoveLp({ marketId: props.id });
+  const { removeLp, isPending, isSuccess, isError } = useRemoveLp({ marketId: props.id });
 
 
   const showToast = () => {

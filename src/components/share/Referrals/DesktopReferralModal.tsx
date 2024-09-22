@@ -4,12 +4,50 @@ import { useUserStore } from "@/lib/stores/UserStore"
 import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance"
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal"
 import { motion } from "framer-motion"
+import { useGetUserReferrals } from "@/graphql/queries/users/useGetUserReferrals"
+import { formatDate } from "@/utils/datetime/formatDate"
+import { Skeleton } from "@/components/ui/Skeleton"
+import { timeAgo } from "@/utils/datetime/timeAgo"
+import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
 function DesktopReferralModalContent() {
   const { user } = useUserStore()
   const balance = useUsdcBalance({ address: user?.walletAddress })
+  const { referrals, loading } = useGetUserReferrals(
+    "0x9fEFD0Bb2d175B039C8c72C55eEa11BC66452591"
+  )
+  console.log("referrals", referrals)
+
+  const totalFeeAmount = referrals?.reduce((acc, referral) => {
+    return acc + parseFloat(referral.feeAmount)
+  }, 0)
+
+  const formattedMarkets = enhancePositionsWithImages(referrals, HARD_MARKETS)
+
   return (
-    <div className="flex flex-col p-8">
-      <ProfileCard user={user} userBalance={balance} onClose={() => {}} />
+    <div className="flex flex-col w-full p-8">
+      <ProfileCard
+        user={user}
+        userBalance={totalFeeAmount}
+        onClose={() => {}}
+      />
+      {referrals ? (
+        referrals?.map((item, index) => {
+          return (
+            <ReferallItem
+              image={formattedMarkets[index].image}
+              title={item?.market?.title}
+              name="Alice"
+              pfp={"https://rallyrd.com/wp-content/uploads/2022/03/Punk-02.jpg"}
+              amount={item?.feeAmount}
+              date={formatDate(new Date(parseInt(item.timestamp) * 1000))}
+              index={index}
+            />
+          )
+        })
+      ) : (
+        <Skeleton />
+      )}
     </div>
   )
 }
@@ -42,25 +80,25 @@ function ReferallItem(props: {
   index: number
 }) {
   return (
-    <div className="flex flex-row items-center justify-between">
+    <div className="flex flex-row items-center w-full my-3 mx-0.5 justify-between">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.15 }}
-        className={`flex flex-row items-center justify-between`}
+        transition={{ duration: 0.5, delay: props?.index * 0.15 }}
+        className={`flex flex-row items-center w-full justify-between`}
       >
         <div className="flex flex-row items-center relative">
           <img
             src={props.image}
             alt="Prediction"
-            className={`h-[50px] w-[50px] object-cover ${"rounded-[10px]"}`}
+            className={`h-[50px] w-[50px] object-cover ${"rounded-[8px]"}`}
           />
           <img
             src={props.pfp}
             alt="Profile"
-            className="h-[25px] w-[25px] object-cover rounded-[15px] absolute bottom-[-6px] left-[32px] border-[3px] border-[#1B1B1E]"
+            className="h-[25px] w-[25px] object-cover rounded-[15px] absolute bottom-[-6px] left-[32px] border-[2px] border-[#1B1B1E]"
           />
-          <div className="flex flex-col -space-y-0.5 ml-[12.5px] mr-[-36px] max-w-full">
+          <div className="flex flex-col -space-y-0.5 ml-[14.5px] mr-[-30px] max-w-full">
             <h3 className="text-[18px] text-white font-semibold">
               {props.name}
             </h3>
@@ -69,13 +107,15 @@ function ReferallItem(props: {
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-end space-y-1">
+        <div className="flex flex-col items-end -space-y-0">
           <p
-            className={`text-[14px] px-2 py-0 rounded-md text-white font-semibold`}
+            className={`text-[13px]  py-0 rounded-md text-[lightgray] font-[500]`}
           >
             {props.date}
           </p>
-          <p className="text-[16px] text-white font-[600]">{props.amount}</p>
+          <p className="text-[17px] text-white font-[600]">
+            ${(props.amount / 10 ** 6).toFixed(2)}
+          </p>
         </div>
       </motion.div>
     </div>
