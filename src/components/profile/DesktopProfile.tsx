@@ -43,7 +43,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [filter, setFilter] = useState("All")
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
-  const [editedPfp, setEditedPfp] = useState(userC.pfp)
+  const [editedPfp, setEditedPfp] = useState(userC?.pfp)
   const { upsertUser } = useUpsertUser()
   const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
   const {
@@ -174,7 +174,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                   Followers
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
-                  222
+                  {user?.totalFollowers}
                 </div>
               </div>
               <div className="flex flex-col space-y-0">
@@ -182,7 +182,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                   Following
                 </div>
                 <div className="text-[1.8rem] text-white font-[Aeonik-Bold]">
-                  669
+                  {user?.totalFollowing}
                 </div>
               </div>
             </div>

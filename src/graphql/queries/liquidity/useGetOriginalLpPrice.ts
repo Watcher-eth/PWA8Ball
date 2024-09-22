@@ -1,4 +1,3 @@
-
 import { tgql } from "@/__generated__"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 import { useQuery as useApolloQuery } from "@apollo/client"
@@ -18,13 +17,15 @@ const GET_LP_CHART_DATA = tgql(/* GraphQL */ `
 export function useGetOriginalLpPrice(userAddress: string) {
   const { data, loading, error } = useApolloQuery(GET_LP_CHART_DATA, {
     variables: {
-      userAddress: getChecksummedAddress(userAddress),
+      userAddress: userAddress
+        ? getChecksummedAddress(userAddress)
+        : userAddress,
     },
-  });
+  })
 
   return {
     data: data?.lpTrades?.items ?? [],
     loading: loading,
     error: error,
-  };
+  }
 }

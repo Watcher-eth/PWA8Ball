@@ -7,6 +7,8 @@ import { User } from "@/__generated__/graphql"
 interface ExtendedUser extends User {
   walletType?: "smartwallet" | "eoa"
   invited?: boolean
+  totalFollowers?: number
+  totalFollowing?: number
 }
 
 interface UserState {

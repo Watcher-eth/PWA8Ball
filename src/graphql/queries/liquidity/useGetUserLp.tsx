@@ -1,9 +1,9 @@
 //@ts-nocheck
 import { tgql } from "@/__generated__"
-import { useQuery as useApolloQuery, gql } from "@apollo/client";
-import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress";
+import { useQuery as useApolloQuery, gql } from "@apollo/client"
+import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 
-const GET_USER_LP = tgql(/* GraphQL */`
+const GET_USER_LP = tgql(/* GraphQL */ `
   query getUserLp($userAddress: String!) {
     lpPositions(where: { userAddress: $userAddress }) {
       items {
@@ -29,7 +29,10 @@ export function useGetUserLp(userAddress: string) {
     refetch,
   } = useApolloQuery(GET_USER_LP, {
     variables: {
-      userAddress: getChecksummedAddress(userAddress),
+      userAddress:
+        userAddress?.length > 0
+          ? getChecksummedAddress(userAddress)
+          : userAddress,
     },
     skip: !Boolean(userAddress),
   })
@@ -39,5 +42,5 @@ export function useGetUserLp(userAddress: string) {
     loading: lpLoading,
     error: lpError,
     refetch,
-  };
+  }
 }

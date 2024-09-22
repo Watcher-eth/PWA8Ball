@@ -11,6 +11,8 @@ import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
 import { getUserById } from "@/graphql/queries/users/useUserById"
 
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
+import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers"
+import { useGetTotalFollowing } from "@/supabase/queries/user/getTotalFollowing"
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7" // Define a static namespace for generating UUIDs
 const DEFAULT_PFP =
@@ -22,13 +24,15 @@ export function useInitializeUser() {
   const { smartAccountAddress, smartAccountClient } = useSmartAccount()
   const { address: eoaAddress, isConnected } = useAccount()
   const { upsertUser } = useUpsertUser()
+  const { data: followersCount, isLoading: isFollowersLoading } =
+    useGetTotalFollowers(user?.walletAddress)
+  const { data: followingCount, isLoading: isFollowingLoading } =
+    useGetTotalFollowing(user?.walletAddress)
 
   console.log("addyy", smartAccountAddress, smartAccountClient)
 
   async function fetchUser() {
     if (ready && authenticated && privyUser && !eoaAddress) {
-      // Handle Privy smart wallet user
-
       const dbUser = await getUserById(smartAccountAddress)
       console.log("privyUser", privyUser, dbUser, smartAccountAddress)
 
@@ -43,6 +47,8 @@ export function useInitializeUser() {
           ...dbUser,
           pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
           walletType: "smartwallet",
+          totalFollowers: followersCount,
+          totalFollowing: followingCount,
         })
       } else if (smartAccountAddress && user?.walletType !== "eoa") {
         const update = {
@@ -54,13 +60,18 @@ export function useInitializeUser() {
           externalAuthProviderUserId: privyUser?.id,
           updatedAt: BigInt(Math.floor(Date.now() / 1000)),
           createdAt: BigInt(Math.floor(Date.now() / 1000)),
+          totalFollowers: followersCount,
+          totalFollowing: followingCount,
         }
 
         const newUser = await upsertUser(update)
 
         newUser.pfp = DEFAULT_PFP
 
-        setUser({ ...update, walletType: "smartwallet" })
+        setUser({
+          ...update,
+          walletType: "smartwallet",
+        })
       }
     } else if (isConnected && eoaAddress) {
       // Handle EOA user
@@ -73,6 +84,8 @@ export function useInitializeUser() {
           name: dbUser?.name ? dbUser?.name : "Anon",
           pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
           walletType: "eoa",
+          totalFollowers: followersCount,
+          totalFollowing: followingCount,
         })
       } else {
         const update = {
@@ -83,6 +96,8 @@ export function useInitializeUser() {
           externalAuthProviderUserId: eoaUUID,
           updatedAt: BigInt(Math.floor(Date.now() / 1000)),
           createdAt: BigInt(Math.floor(Date.now() / 1000)),
+          totalFollowers: followersCount,
+          totalFollowing: followingCount,
         }
         console.log("updaze eoa", update)
         const newUser = await upsertUser(update)
@@ -106,5 +121,6 @@ export function useInitializeUser() {
     smartAccountAddress,
     isConnected,
     eoaAddress,
+    followersCount,
   ])
 }

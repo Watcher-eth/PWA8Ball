@@ -24,7 +24,6 @@ export function MobileProfilePage({
   const balance = useUsdcBalance({
     address: userC?.walletAddress,
   })
-  console.log("userC", userC)
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">

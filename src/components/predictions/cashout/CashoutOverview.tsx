@@ -1,29 +1,43 @@
 // @ts-nocheck
 
-import React from "react";
-import { X, Clock, AlignLeft, ArrowDown, ArrowLeftRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
-import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import React from "react"
+import {
+  X,
+  Clock,
+  AlignLeft,
+  ArrowDown,
+  ArrowLeftRight,
+  AlertTriangle,
+  InfoIcon,
+} from "lucide-react"
+import { motion } from "framer-motion"
+import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction"
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { TooltipContent } from "@radix-ui/react-tooltip"
 
 interface CashoutOverviewProps {
-  setIsOpen: () => void;
-  onClose: () => void;
-  changeStep: (step: number) => void;
-  image: string;
-  question: string;
-  title: string;
-  amount: string;
-  multiplier: string;
-  totalPot: number;
-  isDesktop?: boolean;
-  id: number;
-  refetch: () => void;
+  setIsOpen: () => void
+  onClose: () => void
+  changeStep: (step: number) => void
+  image: string
+  question: string
+  title: string
+  amount: string
+  multiplier: string
+  totalPot: number
+  isDesktop?: boolean
+  id: number
+  refetch: () => void
 }
 
 export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
-  const width = window.innerWidth;
-  const { cashOutPrediction, loading, success, error } = useCashOutPrediction();
+  const width = window.innerWidth
+  const { cashOutPrediction, loading, success, error } = useCashOutPrediction()
 
   return (
     <div className="flex flex-col items-center w-full bg-[#0c0c0c] md:bg-[#080808] py-1 mt-5 -mb-9 md:mb-0 rounded-lg min-h-[585px] md:min-h-full">
@@ -78,12 +92,15 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
               ${((props?.totalPot / 10 ** 6) * 0.025).toPrecision(2)}
             </span>
           </div>
-          <div className="flex items-center justify-between my-2 mb-2 w-full">
-            <span className="text-lg  text-[#626262] font-semibold">
-              Potential Payout
-            </span>
-            <span className="text-lg text-white font-bold">
-              $
+
+          <div
+            style={{ backgroundColor: "rgba(255, 63, 63, 0.15)" }}
+            className="flex items-center justify-between rounded-full py-2 px-4  my-2 mb-2 w-full"
+          >
+            <AlertTriangle color={"#FF3F3F"} size={20} strokeWidth={3} />
+
+            <span className="text-lg  text-[#FF3F3F] font-semibold">
+              Potential Payout $
               {props.option === 2
                 ? ((100 / props.odds) * (props?.totalPot / 10 ** 6)).toFixed(2)
                 : (
@@ -91,8 +108,27 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
                     (props?.totalPot / 10 ** 6)
                   ).toFixed(2)}
             </span>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <InfoIcon color={"#FF3F3F"} size={20} strokeWidth={3} />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="bg-[#cccccc]/10 flex items-center border-[0.05rem] border-[#cccccc]/20 backdrop-blur-xl text-white px-4  rounded-full p-2">
+                    <InfoIcon
+                      color={"white"}
+                      size={18}
+                      className="mr-1.5"
+                      strokeWidth={2.7}
+                    />
+                    Wait till after resolution to get the full payout!
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
-          <div className="w-full  bg-[#424242] h-px my-3"></div>
+
+          <div className="w-full  bg-[#282828] h-px my-3"></div>
           <div className="flex items-center self-start mb-0 gap-1">
             <AlignLeft className="text-[#626262]" strokeWidth={3.3} size={16} />
             <span className="text-lg text-[#626262] font-bold">Question</span>
@@ -110,7 +146,7 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
       <div className="flex w-full items-center gap-2 mb-1 px-3 md:px-0 pt-3.5 justify-between">
         <motion.button
           onClick={() => {
-            props?.changeStep(1);
+            props?.changeStep(1)
           }}
           className={`
      h-12 px-5 rounded-full w-[48%] bg-[#121212] text-[1.35rem]  text-[#D9D9D9] font-bold
@@ -137,10 +173,10 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
                 option: props?.option,
                 marketId: props?.id,
                 options: props?.options,
-              });
+              })
               setTimeout(() => {
-                props?.refetch();
-              }, 11000);
+                props?.refetch()
+              }, 11000)
             }}
             className="h-12  px-6 rounded-full w-[48%] bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
           >
@@ -159,5 +195,5 @@ export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
