@@ -221,6 +221,29 @@ export function SmartAccountProvider({
       sponsorUserOperation: pimlicoClient.sponsorUserOperation,
     })
     connect({ connector })
+    const allowance = await publicClient.readContract({
+      address: BASE_SEPOLIA_USDC_ADDRESS,
+      abi: USDC_ABI,
+      args: [privyClient.account.address, BASE_SEPOLIA_EIGHTBALL_ADDRESS],
+      functionName: "allowance",
+    })
+    if (allowance < 1n) {
+      console.log("allowance", allowance)
+      try {
+        const contract = getContract({
+          abi: USDC_ABI,
+          address: BASE_SEPOLIA_USDC_ADDRESS,
+          client: { public: rpcClient, wallet: privyClient },
+        })
+        const hash = await contract.write.approve([
+          BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+          10000000000n,
+        ])
+      } catch (error) {
+        console.error("Failed to send transaction:", error)
+        throw error
+      }
+    }
     setSmartAccountReady(true)
   }
 
