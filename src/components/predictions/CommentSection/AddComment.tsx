@@ -92,10 +92,10 @@ export function AddComment({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             ref={inputRef}
-            placeholder="Add a comment..."
+            placeholder="Join the discussion..."
             rows={1}
-            className={`p-[0.45rem] rounded-full px-3.5 border-[#353535]  pb-3 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
-          text-xl border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
+            className={`p-[0.5rem] -mt-0.5 rounded-full px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
+          text-[1.1rem] border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
           `}
             onInput={handleInput}
           />

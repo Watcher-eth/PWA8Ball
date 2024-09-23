@@ -20,7 +20,9 @@ export function DesktopNavBar() {
   const { user } = useUserStore()
   const userId = user?.external_auth_provider_user_id
   const { data } = useGetGlobalLeaderboard()
-
+  const isNotEOA =
+    user?.walletType !== "smartwallet" ||
+    (!user?.name?.startsWith("0x") && user?.walletType === "smartwallet")
   return (
     <div className="w-full absolute z-50 top-0">
       <div
@@ -65,7 +67,7 @@ export function DesktopNavBar() {
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>
             <div className="flex items-center space-x-2 ">
-              {user?.name && !user?.name?.startsWith("0x") && user ? (
+              {user?.name && isNotEOA && user ? (
                 <DesktopProfilePopover>
                   <ConnectButton user={user} />
                 </DesktopProfilePopover>
