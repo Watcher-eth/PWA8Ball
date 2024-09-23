@@ -77,7 +77,7 @@ export function AddComment({
   }
 
   return (
-    <div className="flex flex-row -mb-5 w-full  mt-4">
+    <div className="flex flex-row -mb-3 w-full  mt-4">
       <img
         className="h-10 min-w-10  rounded-[50%] overflow-hidden object-cover mr-2.5"
         src={user?.pfp}

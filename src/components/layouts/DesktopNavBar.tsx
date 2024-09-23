@@ -41,11 +41,13 @@ export function DesktopNavBar() {
                   <img
                     src="/images/OrbLogo.png" // Replace with your image path
                     alt="Left Icon"
-                    className="size-10 rounded-full ml-1"
+                    className="size-10 hover:scale-101  active:scale-99  rounded-full ml-1"
                   />
                 }
               />
-              <div className="pl-2 font-[Aeonik-Bold] text-2xl">Glimpse</div>
+              <div className="pl-2 font-[Aeonik-Bold] hover:scale-101 hover:text-white/80 active:scale-99  active:text-white/60 text-2xl">
+                Glimpse
+              </div>
             </div>
           </Link>
           <div className="flex items-center space-x-8">
