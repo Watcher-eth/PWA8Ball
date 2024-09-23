@@ -1,21 +1,21 @@
 // @ts-nocheck
-import _ from "lodash";
-import { useState } from "react";
-import { useUserStore } from "@/lib/stores/UserStore";
+import _ from "lodash"
+import { useState } from "react"
+import { useUserStore } from "@/lib/stores/UserStore"
 
-import { BetComment } from "@/types/PostTypes";
-import { IUserWithBet } from "@/supabase/types";
+import { BetComment } from "@/types/PostTypes"
+import { IUserWithBet } from "@/supabase/types"
 
-import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders";
-import { AddComment } from "./AddComment";
-import { Comment } from "./Comment";
-import { useGetAllCommentsForMarket } from "@/supabase/queries/comments/getCommentsForMarket";
+import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders"
+import { AddComment } from "./AddComment"
+import { Comment } from "./Comment"
+import { useGetAllCommentsForMarket } from "@/supabase/queries/comments/getCommentsForMarket"
 
 export function findUserByExternalAuthId(externalAuthId: string, users) {
   if (users)
     return users?.find(
       (user) => user.external_auth_provider_user_id === externalAuthId
-    );
+    )
 }
 
 export function CommentSection({
@@ -25,36 +25,34 @@ export function CommentSection({
   isDesktop,
   topic_id,
 }: {
-  marketId: string;
-  totalComments: number;
-  users: IUserWithBet[];
-  isDesktop?: boolean;
-  topic_id: string;
+  marketId: string
+  totalComments: number
+  users: IUserWithBet[]
+  isDesktop?: boolean
+  topic_id: string
 }) {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
 
-  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
-    []
-  );
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
 
   const {
     data: comments,
     error,
     isLoading,
     refetch, // Method to refetch the data
-  } = useGetAllCommentsForMarket(Number(marketId), user?.walletAddress);
+  } = useGetAllCommentsForMarket(Number(marketId), user?.walletAddress)
 
   const allComments = _.uniqBy(
     [...optimisticComments, ...(comments || [])],
     (comment) => comment.id
-  );
+  )
 
   function addOptimisticComment(comment: BetComment) {
-    setOptimisticComments([comment, ...optimisticComments]);
+    setOptimisticComments([comment, ...optimisticComments])
   }
 
-  const handleComment = () => {};
-  const setReply = () => {};
+  const handleComment = () => {}
+  const setReply = () => {}
 
   return (
     <div
@@ -76,20 +74,18 @@ export function CommentSection({
       <div className="-mt-7 -mb-1.5">
         {allComments.length > 0 ? (
           allComments.map((item) => {
-            const commentUser = findUserByExternalAuthId(
-              item.created_by,
-              users
-            );
+            const commentUser = findUserByExternalAuthId(item.created_by, users)
 
             return (
               <Comment
                 key={item.id}
                 {...item}
                 setReply={setReply}
+                isDesktop={isDesktop}
                 handleComment={handleComment}
                 user2={commentUser}
               />
-            );
+            )
           })
         ) : (
           <NewPlaceholderComment
@@ -100,5 +96,5 @@ export function CommentSection({
         )}
       </div>
     </div>
-  );
+  )
 }

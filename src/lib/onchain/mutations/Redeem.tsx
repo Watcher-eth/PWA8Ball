@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query"
 import { WalletClient, getContract, Address } from "viem"
 import { EightBallAbi } from "@/lib/onchain/generated"
 
-
 import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 
@@ -27,7 +26,7 @@ async function redeemPrediction(props: {
     })
 
     // Redeem position
-    const hash = await contract.write.redeem([BigInt(props.marketId)])
+    const hash = await contract.write.redeem([BigInt(props.marketId)], {})
     console.log("Redeemed", hash)
 
     await updateLiquidityPoints(props.address, 50)

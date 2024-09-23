@@ -1,13 +1,13 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 
-import type { BetComment } from "@/types/PostTypes";
-import type { User } from "@/types/UserTypes";
+import type { BetComment } from "@/types/PostTypes"
+import type { User } from "@/types/UserTypes"
 
-import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment";
+import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment"
 
-import { CommentHeader } from "./CommentHeader";
-import { LikeDislikeSection } from "./LikeDislikeSection";
+import { CommentHeader } from "./CommentHeader"
+import { LikeDislikeSection } from "./LikeDislikeSection"
 
 export function Comment({
   id,
@@ -17,26 +17,28 @@ export function Comment({
   content,
   name,
   date,
+  isDesktop,
   setReply,
   handleComment,
 }: BetComment & {
-  created_at: string;
-  setReply: (name: string) => void;
-  handleComment: () => void;
-  user2: User;
+  created_at: string
+  setReply: (name: string) => void
+  handleComment: () => void
+  user2: User
+  isDesktop?: boolean
 }) {
-  const { mutate: deleteComment } = useDeleteComment();
+  const { mutate: deleteComment } = useDeleteComment()
 
   const handleDelete = () => {
     deleteComment(id, {
       onSuccess: (data) => {
-        console.log("Deletion successful, deleted data:", data);
+        console.log("Deletion successful, deleted data:", data)
       },
       onError: (error) => {
-        console.error("Failed to delete comment:", error);
+        console.error("Failed to delete comment:", error)
       },
-    });
-  };
+    })
+  }
 
   return (
     <motion.div
@@ -51,8 +53,8 @@ export function Comment({
       <div className="flex flex-row items-center justify-between mb-1.5 ">
         <button
           onClick={() => {
-            setReply(user?.name ?? name);
-            handleComment();
+            setReply(user?.name ?? name)
+            handleComment()
           }}
           className={`
             text-sm text-white/60 hover:text-white/80   rounded-full
@@ -64,7 +66,9 @@ export function Comment({
         </button>
         <LikeDislikeSection />
       </div>
-      <div className="w-full self-center h-0 border-b border-[#212121] mt-3 z-1" />
+      {!isDesktop && (
+        <div className="w-full self-center h-0 border-b border-[#212121] mt-3 z-1" />
+      )}
     </motion.div>
-  );
+  )
 }

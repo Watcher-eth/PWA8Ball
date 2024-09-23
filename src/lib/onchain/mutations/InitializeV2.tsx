@@ -41,19 +41,22 @@ async function initialize(props: {
       client: { public: props.client, wallet: props.client },
     })
     // Initialize the market
-    const hash = await contract.write.initializeMarket([
-      ROOT_OPERATOR_ADDRESS,
-      ROOT_OPERATOR_ADDRESS,
-      account,
-      BigInt(initialProb),
-      {
-        topicId: Number(props.topicId),
-        outcomeA: props.options[0],
-        outcomeB: props.options[1],
-        title: props.title,
-        question: props.description,
-      },
-    ])
+    const hash = await contract.write.initializeMarket(
+      [
+        ROOT_OPERATOR_ADDRESS,
+        ROOT_OPERATOR_ADDRESS,
+        account,
+        BigInt(initialProb),
+        {
+          topicId: Number(props.topicId),
+          outcomeA: props.options[0],
+          outcomeB: props.options[1],
+          title: props.title,
+          question: props.description,
+        },
+      ],
+      {}
+    )
 
     console.log("hash", hash)
 

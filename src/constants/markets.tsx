@@ -3,7 +3,7 @@ export const HARD_MARKETS = [
     id: 0, // Senate Majority
     title: "Senate Majority",
     image:
-      "https://cdn.vox-cdn.com/thumbor/80iTbWEanqefLhLeyea1gNrtuFI=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/12776915/SenateBattlefield.jpg",
+      "https://cdnuploads.aa.com.tr/uploads/Contents/2022/11/10/thumbs_b_c_48c7eccd6f9f321b538bad7aaba3d7d3.jpg?v=204109",
     options: [
       {
         name: "Democrats",
@@ -43,7 +43,7 @@ export const HARD_MARKETS = [
     id: 2, // Presidential Election
     title: "Presidential Election",
     image:
-      "https://www.ft.com/__origami/service/image/v2/images/raw/ftcms%3Aab45d07d-be95-4e35-9537-ab2d0d4e16a3?source=next-article&fit=scale-down&quality=highest&width=1440&dpr=1",
+      "https://www.telegraph.co.uk/content/dam/en-us/politics/2024/07/27/TELEMMGLPICT000387052325_17220935346920_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.jpeg?imwidth=680",
     options: [
       {
         name: "Kamela",

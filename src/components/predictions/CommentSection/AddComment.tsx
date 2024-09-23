@@ -1,50 +1,50 @@
 // @ts-nocheck
-import { useState, useRef } from "react";
-import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
-import type { User } from "@/types/UserTypes";
-import { useCreateComment } from "@/supabase/mutations/useCreateComment";
+import { useState, useRef } from "react"
+import { toast } from "sonner"
+import { CheckCircle } from "lucide-react"
+import type { User } from "@/types/UserTypes"
+import { useCreateComment } from "@/supabase/mutations/useCreateComment"
 
-import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate";
-import { useUserStore } from "@/lib/stores/UserStore";
+import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export function AddComment({
   id,
   topic_id,
   addOptimisticComment,
 }: {
-  id: number;
-  topic_id: string;
-  addOptimisticComment: () => void;
+  id: number
+  topic_id: string
+  addOptimisticComment: () => void
 }) {
-  const [lineCount, setLineCount] = useState(1);
-  const [content, setContent] = useState<string>();
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { mutate: addComment } = useCreateComment();
+  const [lineCount, setLineCount] = useState(1)
+  const [content, setContent] = useState<string>()
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const { mutate: addComment } = useCreateComment()
 
-  const { user } = useUserStore();
+  const { user } = useUserStore()
   const handleCancel = () => {
     if (inputRef.current) {
-      inputRef.current.blur();
+      inputRef.current.blur()
     }
-  };
+  }
 
-  console.log("params", id, topic_id);
+  console.log("params", id, topic_id)
   const handleInput = () => {
     if (inputRef.current) {
-      const lines = inputRef.current.value.split("\n").length;
-      setLineCount(lines);
+      const lines = inputRef.current.value.split("\n").length
+      setLineCount(lines)
       // Adjust the height of the textarea to fit the content
-      inputRef.current.style.height = "auto";
-      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+      inputRef.current.style.height = "auto"
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
     }
-  };
+  }
 
   async function addUserComment() {
-    const date = new Date();
+    const date = new Date()
     if (content?.length < 1) {
-      toast.error("Comment cannot be empty!", {});
-      return;
+      toast.error("Comment cannot be empty!", {})
+      return
     }
     addOptimisticComment({
       user2: { name: user.name, pfp: user.pfp },
@@ -55,7 +55,7 @@ export function AddComment({
       date: formatDateWithMilliseconds(date),
       extraComments: [],
       id: id,
-    });
+    })
 
     const result = await addComment({
       market_id: id,
@@ -63,7 +63,7 @@ export function AddComment({
       created_by: user?.walletAddress,
       topic_id: topic_id,
       parent_id: null,
-    });
+    })
 
     toast.success("Commented successfully!", {
       icon: <CheckCircle height={"15px"} />,
@@ -73,29 +73,34 @@ export function AddComment({
         color: "white",
         border: "0px",
       },
-    });
+    })
   }
 
   return (
-    <div className="flex flex-row w-full mb-4 mt-3">
+    <div className="flex flex-row -mb-5 w-full  mt-4">
       <img
-        className="h-12 min-w-12  rounded-[50%] overflow-hidden object-cover mr-2.5"
+        className="h-10 min-w-10  rounded-[50%] overflow-hidden object-cover mr-2.5"
         src={user?.pfp}
         alt="User Profile"
       />
       <div className="flex flex-col w-full relative group">
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          ref={inputRef}
-          placeholder="Add a comment..."
-          rows={1}
-          className={`pb-1 bg-transparent placeholder-[lightgray] w-7/10 border-[#303030] text-[lightgray] focus:outline-none transition-all duration-300 resize-none
-          border-b-[0.8px] focus:border-b-1 focus:border-b-[lightgray] outline-none overflow-hidden
+        <div
+          className=" h-11  rounded-full bg-transparent placeholder-[lightgray] w-7/10  text-[lightgray] focus:outline-none transition-all duration-300 
+           text-xl  outline-none "
+        >
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            ref={inputRef}
+            placeholder="Add a comment..."
+            rows={1}
+            className={`p-[0.45rem] rounded-full px-3.5 border-[#353535]  pb-3 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
+          text-xl border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
           `}
-          onInput={handleInput}
-        />
-        <span
+            onInput={handleInput}
+          />
+        </div>
+        {/* <span
           className={`absolute left-0 w-7/10 h-[2px] transition-all duration-300
             group-focus-within:bg-[#505050] group-focus-within:scale-x-100
             bg-transparent scale-x-0 transform origin-center
@@ -104,7 +109,7 @@ export function AddComment({
             transformOrigin: "center",
             top: `${26 + (lineCount - 1) * 24}px`,
           }}
-        ></span>
+        ></span> */}
 
         <div // hidden group-focus-within:flex
           className={`
@@ -132,7 +137,7 @@ export function AddComment({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function CommentActionButton({ onClick, label, className = "" }) {
@@ -149,5 +154,5 @@ function CommentActionButton({ onClick, label, className = "" }) {
     >
       {label}
     </div>
-  );
+  )
 }

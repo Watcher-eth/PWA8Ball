@@ -1,7 +1,8 @@
 // @ts-nocheck
-import { motion, useAnimation } from "framer-motion";
-import { Check, Loader } from "lucide-react";
-import { useExecuteBoost } from "@/hooks/actions/useExecuteBoost";
+import { motion, useAnimation } from "framer-motion"
+import { Check, Loader } from "lucide-react"
+import { useExecuteBoost } from "@/hooks/actions/useExecuteBoost"
+import { useEffect } from "react"
 
 export function ConfirmButton({
   onComplete,
@@ -9,20 +10,23 @@ export function ConfirmButton({
   id,
   amount,
 }) {
-  const controls = useAnimation();
-  const { executeBoost, loading, success } = useExecuteBoost();
+  const controls = useAnimation()
+  const { executeBoost, loading, success } = useExecuteBoost()
 
   function handleClick() {
-    executeBoost({ id, amount });
+    executeBoost({ id, amount })
     controls.start({
       width: "100%",
       transition: { duration: 0.5 },
-    });
-    setTimeout(() => {
-      onComplete(), 4500;
-    });
+    })
   }
 
+  useEffect(() => {
+    if (success)
+      setTimeout(() => {
+        onComplete()
+      }, 4500)
+  }, [success])
   return (
     <motion.button
       className="relative w-full rounded-full h-[3.2rem] bg-[#151515] border border-[#212121] shadow-md overflow-hidden flex items-center justify-center p-px cursor-pointer"
@@ -46,5 +50,5 @@ export function ConfirmButton({
         )}
       </span>
     </motion.button>
-  );
+  )
 }

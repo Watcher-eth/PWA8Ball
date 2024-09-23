@@ -9,8 +9,6 @@ import {
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import {
   EightBallAbi,
-  EightBallStorageAbi,
-  EightBallStorageAddress,
   PairV1Abi,
   useReadEightBallStorageGetMarketPair,
   useReadPairV1BalanceOf,
@@ -66,10 +64,10 @@ export function useRemoveLp({ marketId }: { marketId: number | bigint }) {
         client: { public: client, wallet: client },
       })
 
-      const hash = await contract.write.removeLiquidity([
-        liquidityTokens,
-        currentPairId,
-      ])
+      const hash = await contract.write.removeLiquidity(
+        [liquidityTokens, currentPairId],
+        {}
+      )
       console.log("hash", hash)
       setSuccess(true)
     } catch (error) {

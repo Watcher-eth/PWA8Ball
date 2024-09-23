@@ -1,26 +1,32 @@
+import {
+  EightBallAddress,
+  EightBallAdminAddress,
+  EightBallStorageAddress,
+  FeeManagerV2Address,
+  PairFactoryV1Address,
+  RouterV1Address,
+} from "@/lib/onchain/generated"
 import type { Address } from "viem"
 //Testnet (Base Sepolia)
 export const BASE_SEPOLIA_USDC_ADDRESS =
   "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as const
-export const BASE_SEPOLIA_EIGHTBALL_ADDRESS =
-  "0x45A5caF2c687C9fd7aC7335325cC257d438FeF82" as const
-export const BASE_SEPOLIA_ROUTER_ADDRESS =
-  "0x01F2943A4be12ddeEF206d7f44608800Ed421CC5" as const
-export const BASE_SEPOLIA_STORAGE_ADDRESS =
-  "0xB39615345CF623801F8dF47e7Eb4E5d6e91E860B" as const
+export const BASE_SEPOLIA_EIGHTBALL_ADDRESS = EightBallAddress[84532]
+export const BASE_SEPOLIA_ROUTER_ADDRESS = RouterV1Address[84532]
+export const BASE_SEPOLIA_STORAGE_ADDRESS = EightBallStorageAddress[84532]
 export const BASE_SEPOLIA_CREATOR_RESOLUTION_ADDRESS = ""
-export const BASE_SEPOLIA_PAIR_FACTORY =
-  "0x05Bf120b70290b926d966ECA260D0A4D2dd8F8C5" as const
-export const BASE_SEPOLIA_FEE_MANAGER =
-  "0x7De89017DeBc9BAEfcF306024bEe27F09DBd7f7c" as const
-export const BASE_SEPOLIA_ADMIN_CONTRACT =
-  "0x3854FC72f744f6c2d3A470D6B7B0F91C2E538AD8" as const
+export const BASE_SEPOLIA_PAIR_FACTORY = PairFactoryV1Address[84532]
+export const BASE_SEPOLIA_FEE_MANAGER = FeeManagerV2Address[84532]
+export const BASE_SEPOLIA_ADMIN_CONTRACT = EightBallAdminAddress[84532]
 
 //Mainnet (Base)
-export const BASE_USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as const
-export const BASE_EIGHTBALL_ADDRESS = "0x0E49F5F62F7F938fd863e470F485B5e13f95Ace3" as const
-export const BASE_ROUTER_ADDRESS = "0x0a40c9AA95D1bf885fCB273897000B4D67A0cac4" as const
-export const BASE_STORAGE_ADDRESS = "0x745082aB9200A49E604c2761A43fACE99F6C9b50" as const
+export const BASE_USDC_ADDRESS =
+  "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as const
+export const BASE_EIGHTBALL_ADDRESS =
+  "0x0E49F5F62F7F938fd863e470F485B5e13f95Ace3" as const
+export const BASE_ROUTER_ADDRESS =
+  "0x0a40c9AA95D1bf885fCB273897000B4D67A0cac4" as const
+export const BASE_STORAGE_ADDRESS =
+  "0x745082aB9200A49E604c2761A43fACE99F6C9b50" as const
 export const BASE_PAIR_FACTORY =
   "0x0E49F5F62F7F938fd863e470F485B5e13f95Ace3" as const
 export const BASE_FEE_MANAGER =
@@ -30,7 +36,8 @@ export const BASE_ADMIN_CONTRACT =
 
 //Operations
 //Recipient (Protocol Fee)
-export const BASE_FEE_ADDRESS = "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853" as const
+export const BASE_FEE_ADDRESS =
+  "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853" as const
 
 //Operator (Client / Frontend provider)
 export const BASE_OPERATOR_ADDRESS =
@@ -39,4 +46,3 @@ export const BASE_OPERATOR_ADDRESS =
 //Operator (Admin / Frontend provider)
 export const ROOT_OPERATOR_ADDRESS =
   "0xF1068eCe146Be3E4aC1d90f739C5a42A8bFc5853" as const
-

@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query"
 import { type Address, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 
-
 import { OutcomeTokenAbi } from "@/lib/onchain/generated"
 import {
   BASE_SEPOLIA_STORAGE_ADDRESS,
@@ -61,12 +60,15 @@ async function cashoutPrediction(props: {
 
     const preferYesNum = !props.preferYes ? 1 : 0
     console.log("ownedTokens", props?.ownedTokens)
-    const hash = await contract.write.cashOut([
-      BigInt(props.ownedTokens),
-      preferYesNum,
-      BigInt(props.marketId),
-      ROOT_OPERATOR_ADDRESS,
-    ])
+    const hash = await contract.write.cashOut(
+      [
+        BigInt(props.ownedTokens),
+        preferYesNum,
+        BigInt(props.marketId),
+        ROOT_OPERATOR_ADDRESS,
+      ],
+      {}
+    )
 
     //TODO: Update to cashed out
     console.log("hash", hash)

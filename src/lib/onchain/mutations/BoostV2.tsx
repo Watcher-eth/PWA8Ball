@@ -7,8 +7,6 @@ import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import { EightBallAbi } from "@/lib/onchain/generated"
 
-
-
 async function boostV2({
   amount,
   marketId,
@@ -28,10 +26,10 @@ async function boostV2({
       client: { public: rpcClient, wallet: client },
     })
     // Boost the market
-    const hash = await contract.write.addLiquidity([
-      BigInt(amount),
-      BigInt(marketId),
-    ])
+    const hash = await contract.write.addLiquidity(
+      [BigInt(amount), BigInt(marketId)],
+      {}
+    )
     return hash
     // console.log("hash", hash);
   } catch (error) {

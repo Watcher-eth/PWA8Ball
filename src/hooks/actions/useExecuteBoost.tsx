@@ -4,7 +4,6 @@ import { toast } from "sonner"
 import { Check } from "lucide-react"
 import { getContract } from "viem"
 
-
 import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
@@ -49,10 +48,13 @@ export function useExecuteBoost() {
       client: { public: rpcClient, wallet: client },
     })
 
-    const hash = await contract.write.addLiquidity([
-      biAmount, // amount
-      marketId, // marketId
-    ])
+    const hash = await contract.write.addLiquidity(
+      [
+        biAmount, // amount
+        marketId, // marketId
+      ],
+      {}
+    )
 
     toast(
       <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
