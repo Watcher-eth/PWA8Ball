@@ -29,9 +29,7 @@ export function useExecuteRedeem() {
     setLoading(true)
 
     try {
-      if (!address) {
-        throw new Error("Address is required")
-      }
+ 
 
       const userBalanceNum = Number(userBalance) / 1000000
       const desired = Number(amount)

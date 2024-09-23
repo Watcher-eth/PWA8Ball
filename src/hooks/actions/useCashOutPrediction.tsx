@@ -34,9 +34,7 @@ export function useCashOutPrediction() {
   }) {
     setLoading(true)
     try {
-      if (!address) {
-        throw new Error("Address is required")
-      }
+   
 
       approveToken()
 

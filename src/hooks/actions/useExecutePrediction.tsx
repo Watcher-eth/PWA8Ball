@@ -30,6 +30,7 @@ export function useExecutePrediction() {
   const { client, address, walletType } = useClientAddress()
   const { approveToken, allowance } = useEightBallApproval()
 
+  console.log("client", client, address)
   async function executePrediction({
     amount,
     option,
@@ -48,9 +49,6 @@ export function useExecutePrediction() {
     console.log({ amount, option, marketId, options })
 
     try {
-      if (!address) {
-        throw new Error("Address is required")
-      }
       if (!amount || !marketId) {
         throw new Error("All fields must be provided")
       }

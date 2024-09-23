@@ -321,12 +321,15 @@ function DesktopConfirmPrediction({
               label="Your Prediction"
               content={
                 <div
+                style={{backgroundColor:  option === 1
+                  ? "rgb(255, 63, 63, 0.1) "
+                  : " "}}
                   className={`
-                    flex items-center px-2 py-1 rounded-lg
+                    flex items-center px-3 py-0.5 rounded-lg
                     text-[0.95rem] font-semibold
                     ${
                       option === 1
-                        ? "bg-[#75171D] text-[#E23B3B]"
+                        ? " text-[#E23B3B]"
                         : "bg-[#013145] text-[#0596FF]"
                     }
                   `}
@@ -384,7 +387,7 @@ function DesktopConfirmPrediction({
           <motion.button
             onClick={() => setStep(0)}
             className={`
-         py-2 px-6  h-12 w-[50%] rounded-full bg-[#181818] text-lg text-[#D9D9D9] font-bold
+         py-2 px-6  h-12 w-[50%] rounded-full bg-[#131313] text-lg text-[#D9D9D9] font-bold
           flex-1
         `}
           >

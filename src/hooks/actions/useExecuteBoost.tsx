@@ -30,10 +30,7 @@ export function useExecuteBoost() {
       throw new Error("Insufficient balance to boost the market.")
     }
 
-    if (!address) {
-      throw new Error("Address is required")
-    }
-
+ 
     if (!allowance || allowance < biAmount) {
       await approveToken()
     }

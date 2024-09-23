@@ -64,8 +64,8 @@ export function ConfirmPrediction(props: {
             </span>
             <div
               style={{ borderRadius: 10 }}
-              className={`flex items-center px-2 py-1 rounded-lg ${
-                props.option === 0 ? "bg-[#75171D]" : "bg-[#013145]"
+              className={`flex items-center px-3 py-1 rounded-lg ${
+                props.option === 0 ? "rgb(255, 63, 63, 0.1)" : "bg-[#013145]"
               }`}
             >
               <span
