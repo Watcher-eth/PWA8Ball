@@ -92,7 +92,7 @@ export function SmartAccountProvider({
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-  const client = useWalletClient()
+  const client = useClient() // useWalletClient()
   const { address } = useAccount()
   const smartAccountClient = client
   const smartAccountAddress = address
