@@ -289,8 +289,8 @@ export function InviteScreen() {
 
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
-            <CheckCircle strokeWidth={3} className="text-white h-[0.95rem]" />
+          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
+            <CheckCircle strokeWidth={3} className="text-[#34C759] h-[0.95rem]" />
           </div>
           Successfully used invite!
         </div>,
@@ -309,8 +309,8 @@ export function InviteScreen() {
     } else {
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
-            <Ban strokeWidth={3} className="text-[#FF0050] h-[0.95rem]" />
+          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
+            <Ban strokeWidth={3} className="text-[#FF3F3F] h-[0.95rem]" />
           </div>
           Invalid code!{" "}
         </div>,

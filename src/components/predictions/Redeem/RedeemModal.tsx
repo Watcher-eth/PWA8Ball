@@ -26,10 +26,10 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
   const showToast = () => {
     setToastVisible(true);
     toast.success("Redeemed successfully!", {
-      icon: <DollarSign color="#5ACE5A" size={20} />,
+      icon: <DollarSign color="#34C759" size={20} />,
       style: {
         borderRadius: "30px",
-        background: "rgba(8,8,8,0.8)",
+        background: "rgba(52, 199, 89, 0.15)",
         color: "#fff",
         borderColor: "#121212",
         fontWeight: 700,

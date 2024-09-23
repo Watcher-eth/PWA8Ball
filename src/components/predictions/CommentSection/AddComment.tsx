@@ -66,9 +66,9 @@ export function AddComment({
     })
 
     toast.success("Commented successfully!", {
-      icon: <CheckCircle height={"15px"} />,
+      icon: <CheckCircle color="#34C759" height={"15px"} />,
       style: {
-        backgroundColor: "rgba(21, 21, 21, 0.75)",
+        backgroundColor: "rgba(52, 199, 89, 0.15)",
         backdropFilter: "blur(20px)",
         color: "white",
         border: "0px",

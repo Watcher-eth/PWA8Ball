@@ -1,34 +1,34 @@
-import React, { useRef, useState } from "react";
-import { Ban, ImagePlus } from "lucide-react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { toast } from "sonner";
+import React, { useRef, useState } from "react"
+import { Ban, ImagePlus } from "lucide-react"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { toast } from "sonner"
 
 function DesktopCreateProfile() {
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null)
 
-  const [username, setUsername] = useState("");
-  const [pfpUrl, setPfpUrl] = useState("");
-  const { user, setUser } = useUserStore();
+  const [username, setUsername] = useState("")
+  const [pfpUrl, setPfpUrl] = useState("")
+  const { user, setUser } = useUserStore()
   const handleImageUploadClick = () => {
-    fileInputRef.current.click();
-  };
+    fileInputRef.current.click()
+  }
 
   const handleImageChange = (event: { target: { files: any[] } }) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0]
     if (file) {
-      const fileUrl = URL.createObjectURL(file); // Create a temporary URL for the file
+      const fileUrl = URL.createObjectURL(file) // Create a temporary URL for the file
 
-      setPfpUrl(fileUrl);
+      setPfpUrl(fileUrl)
       // TODO: Add ipfs upload
     }
-  };
+  }
 
   async function uploadProfileData() {
     if (!username) {
       toast(
         <div className="w-full rounded-full bg-[#101010] font-semibold text-base px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[#FF0050] mr-2 flex justify-center items-center">
-            <Ban strokeWidth={3} className="text-white h-[1rem]" />
+          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
+            <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />
           </div>
           Please add a username
         </div>,
@@ -42,8 +42,8 @@ function DesktopCreateProfile() {
             closeButton: "bg-lime-400",
           },
         }
-      );
-      return;
+      )
+      return
     }
 
     if (user?.walletType === "eoa") {
@@ -56,7 +56,7 @@ function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      });
+      })
     } else if (user?.walletAddress) {
       setUser({
         ...user,
@@ -67,7 +67,7 @@ function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      });
+      })
     } else {
       setUser({
         ...user,
@@ -76,7 +76,7 @@ function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      });
+      })
     }
   }
 
@@ -131,7 +131,9 @@ function DesktopCreateProfile() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <div className="text-lg text-[#262626] font-semibold">0xrf724sda3</div>
+            <div className="text-lg text-[#262626] font-semibold">
+              0xrf724sda3
+            </div>
           </div>
         </div>
 
@@ -143,8 +145,8 @@ function DesktopCreateProfile() {
         </div>
         <div
           onClick={() => {
-            user.name = "Anon";
-            setUser(user);
+            user.name = "Anon"
+            setUser(user)
           }}
           className="text-md mt-2.5 text-[#707070] underline font-medium"
         >
@@ -159,7 +161,7 @@ function DesktopCreateProfile() {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default DesktopCreateProfile;
+export default DesktopCreateProfile

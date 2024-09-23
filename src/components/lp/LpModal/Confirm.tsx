@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react"
+import { motion } from "framer-motion"
 import {
   AlertTriangle,
   X,
@@ -9,41 +9,42 @@ import {
   Check,
   CheckCircle,
   Clock,
-} from "lucide-react";
-import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useSmartAccount } from "@/lib/onchain/SmartAccount";
-import { toast } from "sonner";
-import { DialogClose } from "@/components/ui/dialog";
-import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
-import { useClientAddress } from "@/hooks/wallet/useClientAddress";
+} from "lucide-react"
+import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useSmartAccount } from "@/lib/onchain/SmartAccount"
+import { toast } from "sonner"
+import { DialogClose } from "@/components/ui/dialog"
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
+import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 
 export function RemoveLPConfirmationScreen(props: {
-  setStep: (num: number) => void;
-  onClose: () => void;
-  refetch: () => void;
-  title: string;
-  multiplier: number;
-  points: number;
-  id: number;
-  isDesktop?: boolean;
-  amountLp: number;
+  setStep: (num: number) => void
+  onClose: () => void
+  refetch: () => void
+  title: string
+  multiplier: number
+  points: number
+  id: number
+  isDesktop?: boolean
+  amountLp: number
 }) {
-  const { onClose, refetch } = props;
+  const { onClose, refetch } = props
   const { client, address } = useClientAddress()
-  const { user: userCon } = useUserStore();
+  const { user: userCon } = useUserStore()
 
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const { removeLp, isPending, isSuccess, isError } = useRemoveLp({ marketId: props.id });
-
+  const { removeLp, isPending, isSuccess, isError } = useRemoveLp({
+    marketId: props.id,
+  })
 
   const showToast = () => {
     toast(
       <div className="w-full rounded-full bg-[#101010] text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-        <div className="p-0.5 py-1.5 rounded-full bg-[#212121] mr-2 flex justify-center items-center">
-          <Check strokeWidth={4.5} className="text-green-400 h-[0.95rem]" />
+        <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
+          <Check strokeWidth={4.5} className="text-[#34C759] h-[0.95rem]" />
         </div>
         Withdrawl Succesfull
       </div>,
@@ -58,32 +59,30 @@ export function RemoveLPConfirmationScreen(props: {
           closeButton: "bg-lime-400",
         },
       }
-    );
-  };
+    )
+  }
 
   async function userRemoveLP() {
+    try {
+      showToast()
+      setLoading(true)
+      await removeLP({
+        userId: userCon?.externalAuthProviderUserId!,
+        marketId: props.id,
+        client: client,
+        address: address,
+      })
+      setSuccess(true)
+      setTimeout(() => setLoading(false), 500)
 
-      try {
-        showToast();
-        setLoading(true);
-        await removeLP({
-          userId: userCon?.externalAuthProviderUserId!,
-          marketId: props.id,
-          client: client,
-          address: address,
-        });
-        setSuccess(true)
-        setTimeout(() => setLoading(false), 500);
-
-        setTimeout(() => {
-          onClose();
-          refetch();
-        }, 11000);
-      } catch (error) {
-        console.error("Failed to withdraw boost:", error);
-        alert("Failed to withdraw boost!");
-      }
-
+      setTimeout(() => {
+        onClose()
+        refetch()
+      }, 11000)
+    } catch (error) {
+      console.error("Failed to withdraw boost:", error)
+      alert("Failed to withdraw boost!")
+    }
   }
 
   return (
@@ -103,7 +102,7 @@ export function RemoveLPConfirmationScreen(props: {
           <AlertTriangle color={"#FF0050"} strokeWidth={3.5} size={33} />
           <motion.button
             onClick={() => {
-              props?.isDesktop ? props?.setStep(1) : onClose();
+              props?.isDesktop ? props?.setStep(1) : onClose()
             }}
             whileTap={{ scale: 0.95 }}
             className="p-2.5 px-1.5 rounded-[17px] bg-[#1C1C1C] border-none"
@@ -148,7 +147,7 @@ export function RemoveLPConfirmationScreen(props: {
           <motion.button
             onClick={() =>
               setTimeout(() => {
-                props?.setStep(1);
+                props?.setStep(1)
               }, 200)
             }
             whileTap={{ scale: 0.95 }}
@@ -172,7 +171,7 @@ export function RemoveLPConfirmationScreen(props: {
         ) : (
           <motion.button
             onClick={() => {
-              isSuccess ? () => {} : userRemoveLP();
+              isSuccess ? () => {} : userRemoveLP()
             }}
             whileTap={{ scale: 0.95 }}
             className=" flex flex-row ml-4 px-6 h-12 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
@@ -192,5 +191,5 @@ export function RemoveLPConfirmationScreen(props: {
         )}
       </div>
     </div>
-  );
+  )
 }
