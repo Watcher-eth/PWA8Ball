@@ -194,6 +194,7 @@ export function SmartAccountProvider({
       chain: baseSepolia, // Replace this with the chain of your app
       transport: http(),
     })
+    const eip1193provider = await embeddedWallet?.getEthereumProvider()
     // const walletClient = await getWalletClient(config)
     const privyClient = createWalletClient({
       account: embeddedWallet?.address as Address,
@@ -221,6 +222,7 @@ export function SmartAccountProvider({
       sponsorUserOperation: pimlicoClient.sponsorUserOperation,
     })
     connect({ connector })
+    /** Lets see if prev autoapproval works */
     const allowance = await publicClient.readContract({
       address: BASE_SEPOLIA_USDC_ADDRESS,
       abi: USDC_ABI,
