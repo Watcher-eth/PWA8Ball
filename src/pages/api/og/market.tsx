@@ -106,7 +106,9 @@ export default async function GET(request: Request) {
             }}
           >
             {market?.outcomeOddsA != null
-              ? `${Number(market.outcomeOddsA) / 100}% Chance`
+              ? `${Number(market.outcomeOddsA) / 100}% ${
+                  market.outcomeA === "Yes" ? "Chance" : market.outcomeA
+                }`
               : "No Data"}
           </div>
         </div>

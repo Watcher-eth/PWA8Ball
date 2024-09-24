@@ -13,7 +13,9 @@ import { NextSeo } from "next-seo"
 
 export function CustomHead({ topicData, userId, router, ...rest }) {
   let headSeo
-  if (topicData && topicData?.id !== 1) {
+  if (router?.asPath === "/elections") {
+    headSeo = <ElectionSeo />
+  } else if (topicData && topicData?.id !== 1) {
     headSeo = <TopicSeo {...topicData} />
   } else if (topicData && topicData?.id === 1) {
     headSeo = <ElectionSeo {...topicData} />
@@ -103,8 +105,8 @@ function ElectionSeo({
   return (
     <NextSeo
       openGraph={{
-        title: title,
-        description: description,
+        title: "2024 US Election Predictions",
+        description: "Get the latest forecasts about the 2025 US Election",
         type: "website",
         url: getTopicUrl(id),
         images: [
