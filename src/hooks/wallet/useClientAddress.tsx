@@ -26,6 +26,7 @@ export function useClientAddress() {
     address = eoaAddress //eoaAddress;
   }
 
+  console.log("SmartAcc", smartAccountClient, smartAccountAddress)
   console.log({ client, address })
   return {
     client,

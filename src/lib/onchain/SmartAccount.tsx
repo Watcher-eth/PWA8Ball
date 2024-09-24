@@ -56,15 +56,15 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-  /** Interface returned by custom `useSmartAccount` hook */
-  // <{
-  //   /** Smart account client to send signature/transaction requests to the smart account */
-  //   smartAccountClient?: SmartAccountClient<never>
-  //   /** Smart account address */
-  //   smartAccountAddress?: Address
-  //   /** Boolean to indicate whether the smart account state has initialized */
-  //   smartAccountReady: boolean
-  // }>
+/** Interface returned by custom `useSmartAccount` hook */
+// <{
+//   /** Smart account client to send signature/transaction requests to the smart account */
+//   smartAccountClient?: SmartAccountClient<never>
+//   /** Smart account address */
+//   smartAccountAddress?: Address
+//   /** Boolean to indicate whether the smart account state has initialized */
+//   smartAccountReady: boolean
+// }>
 const SmartAccountContext = React.createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
@@ -96,7 +96,7 @@ export function SmartAccountProvider({
   const { address } = useAccount()
   const smartAccountClient = client
   const smartAccountAddress = address
-
+  console.log("Privy client", wallets, embeddedWallet, client)
 
   // async function createSmartWallet() {
   //   // Creates a smart account given a Privy `ConnectedWallet` object representing
@@ -189,7 +189,7 @@ export function SmartAccountProvider({
   //   setSmartAccountAddress(account)
   //   setSmartAccountReady(true)
   // }
-  async function connectSmartAccount(){
+  async function connectSmartAccount() {
     const publicClient = createPublicClient({
       chain: baseSepolia, // Replace this with the chain of your app
       transport: http(),
@@ -249,7 +249,6 @@ export function SmartAccountProvider({
     setSmartAccountReady(true)
   }
 
-
   useEffect(() => {
     if (walletType === "smartwallet" && embeddedWallet) {
       // createSmartWallet()
@@ -262,7 +261,6 @@ export function SmartAccountProvider({
     embeddedWallet,
     isConnected,
   ])
-
 
   return (
     <SmartAccountContext.Provider

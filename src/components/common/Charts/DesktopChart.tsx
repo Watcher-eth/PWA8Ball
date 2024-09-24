@@ -153,7 +153,7 @@ export function DesktopChart(props: {
                   percentageDifference === 0
                     ? "text-[#909090]"
                     : percentageDifference < 0
-                    ? "text-[#FF0050]"
+                    ? "text-[#FF3F3F]"
                     : "text-blue-500"
                 }
               `}

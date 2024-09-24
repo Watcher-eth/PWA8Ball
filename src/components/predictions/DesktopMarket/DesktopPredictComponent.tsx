@@ -62,7 +62,7 @@ export function DesktopPredictComponent(props: {
     >
       <motion.div
         layout
-        transition={{ duration: 1, damping: 10, type: "spring" }}
+        transition={{ duration: "0.6", type: "spring" }}
         className="relative bg-transparent  "
       >
         <AnimatePresence>
@@ -162,7 +162,7 @@ export function DesktopPredictComponent(props: {
               className={`
                 flex flex-row items-center justify-around
                 self-center w-full
-                mt-1.5 -mb-2
+                mt-1.5 -mb-1
                 space-x-4
               `}
             >
@@ -321,9 +321,10 @@ function DesktopConfirmPrediction({
               label="Your Prediction"
               content={
                 <div
-                style={{backgroundColor:  option === 1
-                  ? "rgb(255, 63, 63, 0.1) "
-                  : " "}}
+                  style={{
+                    backgroundColor:
+                      option === 1 ? "rgb(255, 63, 63, 0.1) " : " ",
+                  }}
                   className={`
                     flex items-center px-3 py-0.5 rounded-lg
                     text-[0.95rem] font-semibold

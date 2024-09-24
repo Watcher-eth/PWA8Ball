@@ -44,7 +44,7 @@ export function CashoutConfirmScreen(props: {
     <div
       className={`flex flex-col items-center ${
         props.isDesktop ? "bg-transparent" : "bg-[#101010]"
-      } mt-0 ${props.isDesktop ? "p-1.5" : "p-5"}  ${
+      } mt-0 ${props.isDesktop ? "p-3.5" : "p-5"}  ${
         props.isDesktop ? "rounded-[20px]" : "rounded-[30px]"
       }`}
     >
@@ -53,17 +53,22 @@ export function CashoutConfirmScreen(props: {
           props.isDesktop ? "bg-transparent" : "bg-[#101010]"
         } rounded-[20px]`}
       >
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="flex flex-row items-center mt-1.5 justify-between w-full">
           <div className="w-[37px]"></div>
           <div className="flex flex-row items-center p-[5px] rounded-[15px] bg-[#212121]">
             <div className="p-[5px] rounded-[10px] bg-gradient-to-r from-[#dcedc1]/50 to-[#a8e6cf]/70">
               <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
             </div>
             <span className="text-[17px] text-white mx-[6px] font-semibold">
-              {props.options?.name}
+              {props.options[0].name}
             </span>
           </div>
-          <div className="px-6" />
+          <div
+            onClick={() => props?.changeStep(0)}
+            className="hover:scale-104 active:scale-98 hover:color-white"
+          >
+            <X color="lightgray" />
+          </div>
         </div>
         <div className="flex flex-row items-center justify-center">
           <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-[#a8e6cf] via-white via-[#dcedc1] via-white via-[#dcedc1] to-[#a8e6cf] my-[10px]">
