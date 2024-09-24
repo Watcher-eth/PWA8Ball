@@ -53,7 +53,7 @@ export function MobileShareBetModal({
             layout
             transition={{ duration: 0.2 }}
             className={`
-              bg-white rounded-3xl rounded-t-[20px]
+              bg-[#080808] rounded-3xl rounded-t-[20px]
               h-[90vh] mb-5 w-screen relative
             border-0
             `}

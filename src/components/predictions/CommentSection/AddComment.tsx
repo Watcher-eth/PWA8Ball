@@ -85,7 +85,7 @@ export function AddComment({
       />
       <div className="flex flex-col w-full relative group">
         <div
-          className=" h-11  rounded-full bg-transparent placeholder-[lightgray] w-7/10  text-[lightgray] focus:outline-none transition-all duration-300 
+          className=" h-11  rounded-full bg-transparent placeholder-[lightgray] w-full  text-[lightgray] focus:outline-none transition-all duration-300 
            text-xl  outline-none "
         >
           <textarea
