@@ -1,28 +1,18 @@
-// @ts-nocheck
-
-import {
-  ActivityIcon,
-  Home,
-  Medal,
-  PlusSquare,
-  Search,
-  UserCircle,
-} from "lucide-react";
-import Link from "next/link";
-
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useAuthModalStore } from "@/lib/stores/ModalStore";
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useModalStore } from "@/lib/stores/ModalStore" // Use only one modal store
 import {
   ACTIVITY_PATH,
   HOME_PATH,
   SEARCH_PATH,
   getProfilePath,
-} from "@/utils/urls";
+} from "@/utils/urls"
+import { ActivityIcon, Home, Search, UserCircle } from "lucide-react"
+import Link from "next/link"
 
 export function MobileNavBar() {
-  const { user } = useUserStore();
-  const { isLoginModalOpen, openLoginModal, closeLoginModal } =
-    useAuthModalStore();
+  const { user } = useUserStore()
+  const { openLoginModal, isLoginModalOpen } = useModalStore()
+
   return (
     <div className="flex flex-col items-center -mb-6 justify-center w-full ">
       <div
@@ -61,7 +51,7 @@ export function MobileNavBar() {
       </div>
       <div className="flex flex-col items-center bg-gradient-to-t from-[#151515]/95 via-[#151515]/70  to-[transparent]  justify-center w-full h-14 "></div>
     </div>
-  );
+  )
 }
 
 function MobileNavBtn({
@@ -70,16 +60,16 @@ function MobileNavBtn({
   onClick = () => {},
   href,
 }: {
-  IconComponent?: React.FC;
-  iconSrc?: string;
-  onClick?: () => void;
-  href?: string;
+  IconComponent?: React.FC
+  iconSrc?: string
+  onClick?: () => void
+  href?: string
 }) {
   const content = iconSrc ? (
     <img className="size-7 object-cover rounded-full" src={iconSrc} />
   ) : (
     <IconComponent className="size-6 text-white" />
-  );
+  )
 
   return (
     <div className="active:scale-94 transition-all">
@@ -89,5 +79,5 @@ function MobileNavBtn({
         <div onClick={onClick}>{content}</div>
       )}
     </div>
-  );
+  )
 }

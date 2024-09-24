@@ -12,17 +12,3 @@ export const useModalStore = create<ModalState>((set) => ({
   openLoginModal: () => set({ isLoginModalOpen: true }),
   closeLoginModal: () => set({ isLoginModalOpen: false }),
 }))
-
-// stores/ModalStore.ts
-
-interface AuthModalState {
-  isLoginModalOpen: boolean
-  openLoginModal: () => void
-  closeLoginModal: () => void
-}
-
-export const useAuthModalStore = create<AuthModalState>((set) => ({
-  isLoginModalOpen: false,
-  openLoginModal: () => set({ isLoginModalOpen: true }),
-  closeLoginModal: () => set({ isLoginModalOpen: false }),
-}))

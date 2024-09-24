@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { useEffect, useState } from "react";
-import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react"
+import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer"
+import { AnimatePresence, motion } from "framer-motion"
 import {
   ArrowDown,
   AtSign,
@@ -10,32 +10,33 @@ import {
   ShoppingBag,
   WalletCards,
   X,
-} from "lucide-react";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { OnrampStep } from "../PredictModal/OnrampStep";
-import { SignUp } from "./SignUp";
+} from "lucide-react"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { OnrampStep } from "../PredictModal/OnrampStep"
+import { SignUp } from "./SignUp"
 
 export function LoginModal({ isOpen, onClose }) {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1)
 
   useEffect(() => {
     if (isOpen) {
-      setStep(1); // Reset to the first step whenever the modal is opened
+      setStep(1) // Reset to the first step whenever the modal is opened
     }
-  }, [isOpen]);
-
+    console.log("open", isOpen)
+  }, [isOpen])
+  console.log("isOpen", isOpen)
   return (
     <Drawer open={isOpen}>
-      <DrawerContent className="border-0 rounded-3xl self-center">
+      <DrawerContent className="border-0 bg-[transparent] rounded-3xl self-center">
         <motion.div
           layout
           transition={{ duration: 0.2 }}
-          className="bg-[#131313] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
+          className="bg-[#121212] rounded-3xl ml-[4vw] mb-5 w-[92vw] relative"
         >
           <div className="flex mt-6 w-[86vw] items-center justify-between">
             {step === 1 && (
-              <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
-                Log in to continue
+              <div className="text-white text-[1.5rem] font-[600] mt-3 mx-[1.65rem]">
+                Sign in to Glimpse
               </div>
             )}
             {step === 2 && (
@@ -66,6 +67,7 @@ export function LoginModal({ isOpen, onClose }) {
             )}
             <DrawerClose>
               <motion.div
+                onClick={onClose}
                 whileTap={{ scale: 0.9 }}
                 className="p-2 left-6 rounded-full self-start bg-[#282828]"
               >
@@ -80,5 +82,5 @@ export function LoginModal({ isOpen, onClose }) {
         </motion.div>
       </DrawerContent>
     </Drawer>
-  );
+  )
 }

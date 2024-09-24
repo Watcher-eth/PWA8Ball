@@ -34,6 +34,8 @@ import { INVITES_ACTIVE } from "@/constants"
 import { useCheckReferral } from "@/hooks/useCheckReferral"
 import { MarketMetadata } from "./BetDetails/MarketMetadata"
 import { shortenAddress } from "@/utils/address/shortenAddress"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { LoginModal } from "../modals/LoginModal"
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal)
@@ -54,7 +56,6 @@ export function MobileMarketPage({ market, users, id }) {
           marketId={id}
           market={enhancedMarket}
           userImages={userImages}
-          openLoginModal={openLoginModal}
           handleOpen={() => {}}
           {...formatMarket(enhancedMarket)}
         />
@@ -72,7 +73,6 @@ function MobileMarketContent({
   users,
   market,
   userImages,
-  openLoginModal,
   id,
   stake,
   multiplier,
@@ -84,6 +84,8 @@ function MobileMarketContent({
   topic,
   marketId,
 }) {
+  const { user } = useUserStore()
+  const {openLoginModal, isLoginModalOpen, closeLoginModal} = useModalStore()
   return (
     <motion.div
       onClick={() => setIsDrawerOpen(false)}
@@ -206,46 +208,69 @@ function MobileMarketContent({
         {description}
       </div>
 
-      <div className="flex items-center  justify-between z-2 space-x-4 px-4 ">
-        <PredictModal
-          handleOpen={handleOpen}
-          image={image}
-          multiplier={market?.outcomeOddsB / 100}
-          option={0}
-          text={market?.outcomeB}
-          question={description}
-          odds={market?.outcomeOddsA / 100}
-          marketId={id}
-          options={[market?.outcomeB, market?.outcomeA]}
-        >
-          <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
+      {!user?.walletAddress ? (
+        <div className="flex items-center  w-full justify-between z-2 space-x-4 px-4 ">
+          <div
+            onClick={openLoginModal}
+            className="mt-4 hover:scale-101 w-full  active:scale-95 transition-all"
+          >
             <OutcomeButton
               text={market?.outcomeB}
               multiplier={market?.outcomeOddsB / 100}
               option={0}
             />
           </div>
-        </PredictModal>
-        <PredictModal
-          handleOpen={handleOpen}
-          image={image}
-          multiplier={market?.outcomeOddsA / 100}
-          option={1}
-          text={market?.outcomeA}
-          question={description}
-          odds={market?.outcomeOddsA / 100}
-          marketId={id}
-          options={[market?.outcomeB, market?.outcomeA]}
-        >
-          <div className="mt-4 hover:scale-101 active:scale-95 transition-all ">
+          <div className="mt-4 hover:scale-101 w-full  active:scale-95 transition-all ">
             <OutcomeButton
+              onClick={openLoginModal}
               text={market?.outcomeA}
               multiplier={market?.outcomeOddsA / 100}
               option={1}
             />
           </div>
-        </PredictModal>
-      </div>
+        </div>
+      ) : (
+        <div className="flex items-center  justify-between z-2 space-x-4 px-4 ">
+          <PredictModal
+            handleOpen={handleOpen}
+            image={image}
+            multiplier={market?.outcomeOddsB / 100}
+            option={0}
+            text={market?.outcomeB}
+            question={description}
+            odds={market?.outcomeOddsA / 100}
+            marketId={id}
+            options={[market?.outcomeB, market?.outcomeA]}
+          >
+            <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
+              <OutcomeButton
+                text={market?.outcomeB}
+                multiplier={market?.outcomeOddsB / 100}
+                option={0}
+              />
+            </div>
+          </PredictModal>
+          <PredictModal
+            handleOpen={handleOpen}
+            image={image}
+            multiplier={market?.outcomeOddsA / 100}
+            option={1}
+            text={market?.outcomeA}
+            question={description}
+            odds={market?.outcomeOddsA / 100}
+            marketId={id}
+            options={[market?.outcomeB, market?.outcomeA]}
+          >
+            <div className="mt-4 hover:scale-101 active:scale-95 transition-all ">
+              <OutcomeButton
+                text={market?.outcomeA}
+                multiplier={market?.outcomeOddsA / 100}
+                option={1}
+              />
+            </div>
+          </PredictModal>
+        </div>
+      )}
       <div className="z-2 mt-3.5 px-1.5">
         <MarketMetadata
           creator={shortenAddress(market?.userAddress)}
@@ -280,6 +305,8 @@ function MobileMarketContent({
       <div className="-mt-20">
         <RelatedMarkets topicId={topicId} id={id} />
       </div>
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+
     </motion.div>
   )
 }

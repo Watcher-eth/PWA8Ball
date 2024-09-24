@@ -127,13 +127,13 @@ export function CashoutConfirmScreen(props: {
       <div className="flex flex-row w-full items-center gap-[5px] my-[5px]">
         <div
           onClick={shareLink}
-          className={`mt-[12px] flex flex-row p-[8px] rounded-[24px] overflow-hidden bg-[#D9D9D9]  w-full
+          className={`mt-[12px] flex flex-row p-[8px] hover:scale-[100.5%] active:scale-99 rounded-[24px] overflow-hidden bg-[#181818]  w-full
           items-center justify-center cursor-pointer`}
         >
-          <div className="flex flex-row items-center justify-center">
-            <ShareIcon color="#1D1D1D" strokeWidth={3.3} height={19} />
-            <span className="text-[20px] text-[#1D1D1D] font-[Aeonik-Bold] ml-[3px]">
-              Share
+          <div className="flex flex-row items-center gap-1 justify-center">
+            <ShareIcon color="#D9D9D9" strokeWidth={3.3} height={20} />
+            <span className="text-[20px] text-[#D9D9D9] font-[Aeonik-Bold] ml-[3px]">
+              Share your Prediction
             </span>
           </div>
         </div>
