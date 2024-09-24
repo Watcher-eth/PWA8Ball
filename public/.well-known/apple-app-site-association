@@ -3,20 +3,25 @@
     "apps": [],
     "details": [
       {
-        "appID": "21679397801.com.anonymous.bl1tz",
+        "appID": "PC925LQ278.com.anonymous.bl1tz",
         "paths": [
           "/u/*",
           "/p/*",
           "/t/*",
           "/up/*",
-          "/"
+          "/*"
         ]
       }
     ]
   },
+  "activitycontinuation": {
+    "apps": [
+      "PC925LQ278.com.anonymous.bl1tz"
+    ]
+  },
   "webcredentials": {
     "apps": [
-      "21679397801.com.anonymous.bl1tz"
+      "PC925LQ278.com.anonymous.bl1tz"
     ]
   }
 }
