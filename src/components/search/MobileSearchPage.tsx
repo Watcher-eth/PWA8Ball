@@ -161,7 +161,7 @@ export function MobileSearchPage() {
                 )}
                 {users?.length > 0 && (
                   <Section title="Users">
-                    <div className="flex flex-col -ml-1 -gap-5">
+                    <div className="flex flex-col mt-1 -gap-5">
                       {displayedUsers?.map((user, index) => (
                         <FriendItem
                           key={index}

@@ -75,7 +75,7 @@ export function FriendItem({
       <SearchItem
         title={name}
         subtitle={handle}
-        rightText={time}
+        rightText={"Follow"}
         image={image}
         isImgRounded={true}
         idx={idx}
