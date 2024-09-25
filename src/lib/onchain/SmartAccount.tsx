@@ -94,10 +94,7 @@ export function SmartAccountProvider({
     (wallet) => wallet.walletClientType === "privy"
   )
 
-  if (!embeddedWallet && wallets.length === 0 && userReady && authenticated) {
-    createWallet()
-    console.log("Creating embedded  wallet")
-  }
+
 
   console.log("ready1", ready)
   console.log("wallets1", wallets)
@@ -283,6 +280,10 @@ export function SmartAccountProvider({
   }
 
   useEffect(() => {
+    if (!embeddedWallet && wallets.length === 0 && userReady && authenticated) {
+      createWallet()
+      console.log("Creating embedded  wallet")
+    }
     console.log("walletType", walletType)
     // if (walletType === "smartwallet" && embeddedWallet) {
     // createSmartWallet()
