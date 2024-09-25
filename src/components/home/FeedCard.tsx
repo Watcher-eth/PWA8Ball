@@ -33,9 +33,9 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
   return (
     <div
       className={`
-        flex items-start flex-col rounded-lg w-full md:min-w-[21rem]  max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] justify-end h-[105vw] relative
+        flex items-start flex-col rounded-lg w-full max-h-[27rem] justify-end h-[105vw] relative
          shadow-md hover:scale-101 active:scale-98 transition-all
-        cursor-pointer font-[Aeonik-Bold]
+        cursor-pointer 
       `}
     >
       <img
@@ -45,12 +45,12 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       />
       <div
         className={`
-          h-[50vw] w-full max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem]  max-h-[21.5rem]
-          rounded-b-lg bg-gradient-to-t from-[#171717]/85 to-transparent
+          h-[50vw] w-full   max-h-[21.5rem]
+          rounded-b-lg bg-gradient-to-t from-[#151515]/85 to-transparent
           absolute bottom-0 z-2 
         `}
       />
-      <div className="absolute top-4 z-3 right-3 text-[0.95rem] bg-[#181818]/10 text-white font-[600] p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.1rem] border-[#303030]/5">
+      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-[600] p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.07rem] border-[#090909]/5">
         {odds.toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div
@@ -66,14 +66,14 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       <div
         className={`
           z-2
-          rounded-b-lg w-full max-w-[23.5rem]  md:max-w-[21.5rem] lg:max-w-[21.5rem] items-center p-3 px-3
-          bg-gray-800/20
+          rounded-b-lg w-full items-center p-3 px-3
+          bg-gray-900/10
           backdrop-blur-lg flex
           border-[0.5px] border-white/5
         `}
       >
         <img
-          className="h-[13vw] max-w-[3.4rem] max-h-[3.4rem] object-cover rounded-md w-[13vw] relative"
+          className="h-[12vw] max-w-[3.4rem] max-h-[3.4rem] object-cover rounded-md w-[12vw] relative"
           src={icon}
         />
         <div

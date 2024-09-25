@@ -13,7 +13,7 @@ export function AppBanner() {
     <div className="bg-[#101010]/[05] backdrop-blur-md text-white p-2.5  top-0 w-full z-50 flex justify-between items-center shadow-md">
       <div className="flex items-center">
         <img
-          src="/images/Logo.png"
+          src="/icons/OrbLogo.png"
           alt="App Icon"
           className="w-9 h-9 rounded-md"
         />
