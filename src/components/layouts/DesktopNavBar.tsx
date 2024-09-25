@@ -23,17 +23,17 @@ export function DesktopNavBar() {
   const isNotEOA =
     user?.walletType !== "smartwallet" ||
     (!user?.name?.startsWith("0x") && user?.walletType === "smartwallet")
+
+  console.log({ user, isNotEOA })
   return (
     <div className="w-full absolute z-50 top-0">
       <div
-        className={`
-  text-white z-50 fixed w-full
-        `}
+        className={`text-white z-50 fixed w-full`}
       >
         <div
           className={`
             flex justify-between items-center w-full p-3  px-8
-             backdrop-blur bg-gradient-to-b from-[#080808]/9 to-[transparent] 
+             backdrop-blur bg-gradient-to-b from-[#080808]/9 to-[transparent]
           `}
         >
           <Link href={HOME_PATH}>

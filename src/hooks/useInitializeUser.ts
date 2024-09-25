@@ -24,10 +24,8 @@ export function useInitializeUser() {
   const { smartAccountAddress, smartAccountClient } = useSmartAccount()
   const { address: eoaAddress, isConnected } = useAccount()
   const { upsertUser } = useUpsertUser()
-  const { data: followersCount, isLoading: isFollowersLoading } =
-    useGetTotalFollowers(user?.walletAddress)
-  const { data: followingCount, isLoading: isFollowingLoading } =
-    useGetTotalFollowing(user?.walletAddress)
+  const { data: followersCount } = useGetTotalFollowers(user?.walletAddress)
+  const { data: followingCount } = useGetTotalFollowing(user?.walletAddress)
 
   console.log("addyy", smartAccountAddress, smartAccountClient)
 

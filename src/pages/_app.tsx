@@ -1,10 +1,11 @@
-// @ts-nocheck
+
 import "@/styles/fonts.css"
 import "@/styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
 
 import type { AppProps } from "next/app"
 import { WagmiProvider } from "wagmi"
+// import { WagmiProvider } from "@privy-io/wagmi" // SWAP: wagmi with @privy-io/wagmi
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { init, AirstackProvider } from "@airstack/airstack-react"
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
@@ -61,14 +62,14 @@ export default function App({ Component, pageProps, router }: AppProps) {
         position="top-center"
         className="bg-[#121212] rounded-xl z-100"
       />
-      <WagmiProvider useConfig={wagmiConfig} config={wagmiConfig}>
+      <PrivyProvider
+        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
+        config={PRIVY_CONFIG}
+      >
         <QueryClientProvider client={queryClient}>
-          <AirstackProvider
-            apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}
-          >
-            <PrivyProvider
-              appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
-              config={PRIVY_CONFIG}
+          <WagmiProvider useConfig={wagmiConfig} config={wagmiConfig}>
+            <AirstackProvider
+              apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}
             >
               <RainbowKitProvider coolMode>
                 <GraphQlProvider>
@@ -79,10 +80,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
                   </RootLayout>
                 </GraphQlProvider>
               </RainbowKitProvider>
-            </PrivyProvider>
-          </AirstackProvider>
+            </AirstackProvider>
+          </WagmiProvider>
         </QueryClientProvider>
-      </WagmiProvider>
+      </PrivyProvider>
       {/**Need to check if this is valid*/}
     </>
   )

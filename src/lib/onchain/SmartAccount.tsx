@@ -51,6 +51,8 @@ import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
   BASE_SEPOLIA_USDC_ADDRESS,
 } from "@/constants/onchain"
+import { getWalletClient } from "@wagmi/core"
+import { wagmiConfig } from "@/wagmiConfig"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
@@ -78,26 +80,27 @@ export function SmartAccountProvider({
 }) {
   // const { connectWallet } = useConnectWallet();
   // const { connectWallet } = usePrivy();
+  const config = useConfig()
   const { connectors, connect, status, error } = useConnect()
-  const { wallets } = useWallets()
+  const { ready, wallets } = useWallets()
   const { isConnected } = useAccount()
   const { user } = useUserStore()
   const { walletType } = user || {}
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   )
-
+  console.log("ready", ready)
+  console.log("wallets", wallets)
+  console.log("embeddedWallet", embeddedWallet)
   // States to store the smart account and its status
   // const [smartAccountClient, setSmartAccountClient] = useState()
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-  const client = useClient() // useWalletClient()
+  const client = useWalletClient()
   const { address } = useAccount()
   const smartAccountClient = client
   const smartAccountAddress = address
-
-
   // async function createSmartWallet() {
   //   // Creates a smart account given a Privy `ConnectedWallet` object representing
   //   // the  user's EOA.
@@ -189,24 +192,42 @@ export function SmartAccountProvider({
   //   setSmartAccountAddress(account)
   //   setSmartAccountReady(true)
   // }
-  async function connectSmartAccount(){
+  async function connectSmartAccount() {
+    if (!ready) {
+      return
+    }
+    console.log("connecting smart account")
     const publicClient = createPublicClient({
       chain: baseSepolia, // Replace this with the chain of your app
       transport: http(),
     })
+    console.log("publicClient", publicClient)
     const eip1193provider = await embeddedWallet?.getEthereumProvider()
     // const walletClient = await getWalletClient(config)
+    console.log("eip1193provider", eip1193provider)
     const privyClient = createWalletClient({
       account: embeddedWallet?.address as Address,
       chain: baseSepolia,
-      transport: custom(eip1193provider as EIP1193Provider),
+      transport: http(),
+      // transport: custom(eip1193provider as EIP1193Provider),
     })
+    console.log("privyClient", privyClient)
+
+    // const walletClient = await getWalletClient(wagmiConfig)
+    //   , {
+    //   chainId: baseSepolia.id,
+    //   account: embeddedWallet?.address as Address,
+    // })
+
+    // console.log("walletClient", walletClient)
+    console.log("privyClient", privyClient)
 
     const customSigner = walletClientToSmartAccountSigner(privyClient)
 
-    if (!publicClient) {
-      throw new Error("publicClient not found")
-    }
+    console.log({embeddedWallet, customSigner, privyClient})
+    // if (!publicClient) {
+    //   throw new Error("publicClient not found")
+    // }
 
     const pimlicoClient = createPimlicoPaymasterClient({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
@@ -221,6 +242,7 @@ export function SmartAccountProvider({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
       sponsorUserOperation: pimlicoClient.sponsorUserOperation,
     })
+    console.log({ connector })
     connect({ connector })
     /** Lets see if prev autoapproval works */
     const allowance = await publicClient.readContract({
@@ -251,16 +273,23 @@ export function SmartAccountProvider({
 
 
   useEffect(() => {
-    if (walletType === "smartwallet" && embeddedWallet) {
+    console.log("walletType", walletType)
+    // if (walletType === "smartwallet" && embeddedWallet) {
       // createSmartWallet()
-      connectSmartAccount()
-    }
+      console.log("connecting smart account")
+      connectSmartAccount().then(() => {
+        console.log("connected smart account")
+      }).catch((error) => {
+        console.error("Failed to connect smart account:", error)
+      })
+    // }
   }, [
     walletType,
     smartAccountAddress,
     embeddedWallet?.address,
     embeddedWallet,
     isConnected,
+    // smartAccountClient,
   ])
 
 

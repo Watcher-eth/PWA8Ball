@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { mainnet, base, baseSepolia } from "@wagmi/core/chains"
 
 import { BASE_SEPOLIA, ETH } from "@/constants/chains/master"
