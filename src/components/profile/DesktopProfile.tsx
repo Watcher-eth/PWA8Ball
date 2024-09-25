@@ -36,6 +36,8 @@ import { PredictionPositionModal } from "../modals/PredictionPositionModal"
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 import { useCreateUser } from "@/lib/onchain/mutations/UserRegistry/useCreateUser"
+import { useClient } from "wagmi"
+import { useUpdateUser } from "@/lib/onchain/mutations/UserRegistry/useUpdateUser"
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user, setUser } = useUserStore()
@@ -44,8 +46,9 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
   const [editedPfp, setEditedPfp] = useState(userC?.pfp)
-  const { mutate: createUser } = useCreateUser()
+  const { mutate: updateUser } = useUpdateUser()
   const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
+  const client = useClient()
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
@@ -94,11 +97,23 @@ export function DesktopProfilePage2({ userId, userC }) {
       pfp: editedPfp ?? user?.pfp,
     })
 
-    await upsertUser({
-      id: user?.walletAddress,
-      name: editedName?.length > 2 ? editedName : user?.name,
-      pfp: editedPfp ?? user?.pfp,
-    })
+    updateUser(
+      {
+        walletAddress: user?.walletAddress,
+        externalAuthProviderUserId: user?.externalAuthProviderUserId,
+        name: editedName?.length > 2 ? editedName : user?.name,
+        pfp: editedPfp ?? user?.pfp,
+        client: client, // Pass the smart account client
+      },
+      {
+        onSuccess: () => {
+          console.log("User profile updated successfully")
+        },
+        onError: (error) => {
+          console.error("Error updating user profile", error)
+        },
+      }
+    )
 
     setIsEditing(false)
   }
