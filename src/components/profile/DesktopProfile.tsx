@@ -35,7 +35,7 @@ import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCrea
 import { PredictionPositionModal } from "../modals/PredictionPositionModal"
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
+import { useCreateUser } from "@/lib/onchain/mutations/UserRegistry/useCreateUser"
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user, setUser } = useUserStore()
@@ -44,7 +44,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
   const [editedPfp, setEditedPfp] = useState(userC?.pfp)
-  const { upsertUser } = useUpsertUser()
+  const { mutate: createUser } = useCreateUser()
   const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
   const {
     markets: createdMarketsData,

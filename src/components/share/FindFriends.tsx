@@ -10,7 +10,6 @@ import { Spinner } from "@/components/modals/PredictModal/Spinner";
 
 import { FindFriendsItem } from "./FindFriendsItem";
 import { DialogClose } from "../ui/dialog";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("");

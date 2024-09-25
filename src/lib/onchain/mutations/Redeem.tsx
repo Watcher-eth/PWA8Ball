@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query"
 import { WalletClient, getContract, Address } from "viem"
 import { EightBallAbi } from "@/lib/onchain/generated"
 
-import { useUpdateLiquidityPoints } from "@/supabase/mutations/user/useUpdateUserLiquidityPoints"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 
 async function redeemPrediction(props: {
@@ -14,7 +13,6 @@ async function redeemPrediction(props: {
   client: WalletClient
   address: Address
 }) {
-  const { updateLiquidityPoints } = useUpdateLiquidityPoints()
   if (!props.userId || !props.marketId) {
     throw new Error("All fields must be provided")
   }
@@ -29,7 +27,6 @@ async function redeemPrediction(props: {
     const hash = await contract.write.redeem([BigInt(props.marketId)], {})
     console.log("Redeemed", hash)
 
-    await updateLiquidityPoints(props.address, 50)
   } catch (error) {
     console.error("Error during cashout", error)
     throw error
