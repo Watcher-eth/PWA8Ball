@@ -12,7 +12,6 @@ import { HARD_TOPICS } from "@/constants/topics"
 import { useGetAllMarkets } from "@/graphql/queries/markets/useGetAllMarkets"
 import { useSearchUsers } from "@/graphql/queries/search/useSearchUsers"
 
-
 const friends = [
   { name: "Tony Blair", handle: "@tblair", time: "32m" },
   { name: "Simon", handle: "@xyzsimon", time: "2h" },
@@ -123,13 +122,13 @@ export function MobileSearchPage() {
         >
           {searchStr &&
             (masterList.length === 0 && !isLoading ? (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col mt-5 items-center">
                 <img
                   src="https://media.tenor.com/vpCPcxEuI-cAAAAj/john-tr.gif"
                   className="h-[15vh]"
                 />
-                <div className="text-center mt-4 text-white text-lg font-[Aeonik-Bold]">
-                  This future hasn't been predicted yet
+                <div className="text-center mt-4 text-white text-xl font-[600]">
+                  This future doesn't exist yet
                 </div>
                 <div className="text-center text-[lightgray] text-md font-[Aeonik]">
                   Try searching for something else...
@@ -162,7 +161,7 @@ export function MobileSearchPage() {
                 )}
                 {users?.length > 0 && (
                   <Section title="Users">
-                    <div className="flex flex-col -gap-5">
+                    <div className="flex flex-col -ml-1 -gap-5">
                       {displayedUsers?.map((user, index) => (
                         <FriendItem
                           key={index}
@@ -201,7 +200,7 @@ export function MobileSearchPage() {
                 </div>
               </Section>
               <Section title="Friends">
-                <div className="flex flex-col -gap-5">
+                <div className="flex flex-col  -gap-7">
                   {displayedFriends.map((friend, index) => (
                     <FriendItem
                       key={index}

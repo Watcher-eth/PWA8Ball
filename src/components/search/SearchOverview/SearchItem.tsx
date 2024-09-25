@@ -1,8 +1,9 @@
 // @ts-nocheck
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Users } from "lucide-react";
-import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls";
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { Users } from "lucide-react"
+import { getMarketPath, getProfilePath, getTopicPath } from "@/utils/urls"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function MarketItem({
   id,
@@ -29,7 +30,7 @@ export function MarketItem({
         currentIdx={currentIdx}
       />
     </Link>
-  );
+  )
 }
 
 export function TopicItem({
@@ -56,7 +57,7 @@ export function TopicItem({
         currentIdx={currentIdx}
       />
     </Link>
-  );
+  )
 }
 
 export function FriendItem({
@@ -82,7 +83,7 @@ export function FriendItem({
         walletAddress={walletAddress}
       />
     </Link>
-  );
+  )
 }
 
 export function SearchItem({
@@ -97,16 +98,16 @@ export function SearchItem({
   currentIdx,
   option,
 }: {
-  title: string;
-  subtitle: string;
-  image: string;
-  type: string;
-  isImgRounded: boolean;
-  icon: React.ReactNode;
-  rightText: string;
-  idx: number;
-  currentIdx: number;
-  option?: string;
+  title: string
+  subtitle: string
+  image: string
+  type: string
+  isImgRounded: boolean
+  icon: React.ReactNode
+  rightText: string
+  idx: number
+  currentIdx: number
+  option?: string
 }) {
   return (
     <motion.div
@@ -114,7 +115,7 @@ export function SearchItem({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 0 }}
       className={`
-        flex items-center w-full justify-between p-2 rounded-md
+        flex items-center w-full justify-between p-2 -my-0 rounded-md
          ransition-all duration-150 cursor-pointer
         ring-1 ring-transparent
         hover:!bg-[#151515]/80 hover:!ring-white/10 hover:!scale-101
@@ -127,16 +128,13 @@ export function SearchItem({
       `}
     >
       <div className="flex items-center space-x-3">
-        {image ? (
-          <img
-            src={image}
-            className={`w-9 h-9 object-cover ${
-              isImgRounded ? "rounded-full" : "rounded-[0.2rem]"
-            }`}
-          />
-        ) : (
-          <div className="w-9 h-9 bg-gradient-to-r object-cover from-purple-400 via-pink-500 to-red-500 rounded-full"></div>
-        )}
+        <img
+          src={image ? image : DEFAULT_PFP_PLACEHOLDER}
+          className={`w-10 h-10 -ml-1 object-cover ${
+            isImgRounded ? "rounded-full " : "rounded-[0.35rem]"
+          }`}
+        />
+
         <div>
           <p className="text-white">{title}</p>
           <p className="text-[#909090] line-clamp-1 text-sm">{subtitle}</p>
@@ -151,5 +149,5 @@ export function SearchItem({
         {icon}
       </div>
     </motion.div>
-  );
+  )
 }
