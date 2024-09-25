@@ -280,7 +280,7 @@ export function SmartAccountProvider({
   }
 
   useEffect(() => {
-    if (!embeddedWallet && wallets.length === 0 && userReady && authenticated) {
+    if (!embeddedWallet && userReady && authenticated) {
       createWallet()
       console.log("Creating embedded  wallet")
     }
@@ -302,6 +302,9 @@ export function SmartAccountProvider({
     embeddedWallet?.address,
     embeddedWallet,
     isConnected,
+    embeddedWallet,
+    userReady,
+    authenticated
     // smartAccountClient,
   ])
 
