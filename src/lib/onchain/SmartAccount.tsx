@@ -32,6 +32,7 @@ import {
   ConnectedWallet,
   EIP1193Provider,
   useConnectWallet,
+  useCreateWallet,
   usePrivy,
   useWallets,
 } from "@privy-io/react-auth"
@@ -58,15 +59,15 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-  /** Interface returned by custom `useSmartAccount` hook */
-  // <{
-  //   /** Smart account client to send signature/transaction requests to the smart account */
-  //   smartAccountClient?: SmartAccountClient<never>
-  //   /** Smart account address */
-  //   smartAccountAddress?: Address
-  //   /** Boolean to indicate whether the smart account state has initialized */
-  //   smartAccountReady: boolean
-  // }>
+/** Interface returned by custom `useSmartAccount` hook */
+// <{
+//   /** Smart account client to send signature/transaction requests to the smart account */
+//   smartAccountClient?: SmartAccountClient<never>
+//   /** Smart account address */
+//   smartAccountAddress?: Address
+//   /** Boolean to indicate whether the smart account state has initialized */
+//   smartAccountReady: boolean
+// }>
 const SmartAccountContext = React.createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
@@ -82,16 +83,26 @@ export function SmartAccountProvider({
   // const { connectWallet } = usePrivy();
   const config = useConfig()
   const { connectors, connect, status, error } = useConnect()
+  const { createWallet } = usePrivy()
+
   const { ready, wallets } = useWallets()
   const { isConnected } = useAccount()
   const { user } = useUserStore()
+  const { user: PrivyUser, ready: userReady, authenticated } = usePrivy()
   const { walletType } = user || {}
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   )
-  console.log("ready", ready)
-  console.log("wallets", wallets)
-  console.log("embeddedWallet", embeddedWallet)
+
+  if (!embeddedWallet && wallets.length === 0 && userReady && authenticated) {
+    createWallet()
+    console.log("Creating embedded  wallet")
+  }
+
+  console.log("ready1", ready)
+  console.log("wallets1", wallets)
+  console.log("embeddedWallet1", embeddedWallet)
+  console.log("PrivyUser", PrivyUser)
   // States to store the smart account and its status
   // const [smartAccountClient, setSmartAccountClient] = useState()
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
@@ -224,7 +235,7 @@ export function SmartAccountProvider({
 
     const customSigner = walletClientToSmartAccountSigner(privyClient)
 
-    console.log({embeddedWallet, customSigner, privyClient})
+    console.log({ embeddedWallet, customSigner, privyClient })
     // if (!publicClient) {
     //   throw new Error("publicClient not found")
     // }
@@ -271,15 +282,16 @@ export function SmartAccountProvider({
     setSmartAccountReady(true)
   }
 
-
   useEffect(() => {
     console.log("walletType", walletType)
     // if (walletType === "smartwallet" && embeddedWallet) {
-      // createSmartWallet()
-      console.log("connecting smart account")
-      connectSmartAccount().then(() => {
+    // createSmartWallet()
+    console.log("connecting smart account")
+    connectSmartAccount()
+      .then(() => {
         console.log("connected smart account")
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("Failed to connect smart account:", error)
       })
     // }
@@ -291,7 +303,6 @@ export function SmartAccountProvider({
     isConnected,
     // smartAccountClient,
   ])
-
 
   return (
     <SmartAccountContext.Provider

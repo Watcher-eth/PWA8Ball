@@ -1,4 +1,3 @@
-
 import "@/styles/fonts.css"
 import "@/styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
@@ -32,10 +31,10 @@ const PRIVY_CONFIG: PrivyClientConfig = {
     accentColor: "#0050FF",
     logo: "https://your-logo-url",
   },
-  embeddedWallets: {
-    createOnLogin: "users-without-wallets",
-    noPromptOnSignature: true,
-  },
+  // embeddedWallets: {
+  //   createOnLogin: "users-without-wallets",
+  //   noPromptOnSignature: true,
+  // },
 }
 
 // export const wagmiConfig = getDefaultConfig({
