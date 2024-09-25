@@ -43,7 +43,9 @@ export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
       <div className="flex flex-row w-full items-center justify-between my-1.5">
         <div className="flex flex-row gap-2 items-center">
           <Users className="text-[gray]" strokeWidth={2.8} size={16} />
-          <span className="text-[gray] text-lg font-medium">Predictors</span>
+          <span className="text-[gray] text-[1rem] font-medium">
+            Predictors
+          </span>
         </div>
         <div className="flex flex-row gap-2 items-center">
           <AvatarGroup
@@ -71,10 +73,14 @@ const MetadataItem: React.FC<MetadataItemProps> = ({
 }) => {
   console.log("item", name, value)
   return (
-    <div className="flex flex-row w-full items-center justify-between my-1.5">
+    <div
+      className={`flex flex-row w-full items-center justify-between ${
+        name === "Total Liquidity" ? "my-1.5" : "my-1"
+      }`}
+    >
       <div className="flex flex-row gap-2 items-center">
-        <Icon className="text-[gray]" strokeWidth={2.8} size={16} />
-        <span className="text-[gray] text-lg font-medium">{name}</span>
+        <Icon className="text-[gray]" strokeWidth={2.8} size={15} />
+        <span className="text-[gray] text-[1rem] font-medium">{name}</span>
       </div>
       <div className="flex flex-row gap-2 items-center">
         {name === "Total Liquidity" && Number(value) < 100 ? (
@@ -102,7 +108,7 @@ const MetadataItem: React.FC<MetadataItemProps> = ({
             <div className="text-[#34C759] ">Good</div>
           </div>
         ) : null}
-        <span className="text-white text-lg font-semibold">
+        <span className="text-white text-[1rem] font-semibold">
           {name === "Total Liquidity" && "$"}
           {value}
         </span>
@@ -128,15 +134,13 @@ const CreatorItem: React.FC<CreatorItemProps> = ({
 }) => {
   console.log("item", name, value)
   return (
-    <div className="flex flex-row w-full items-center justify-between my-1.5">
+    <div className="flex flex-row w-full items-center justify-between my-1 ">
       <div className="flex flex-row gap-2 items-center">
-        <Icon className="text-[gray]" strokeWidth={2.8} size={16} />
-        <span className="text-[gray] text-lg font-medium">{name}</span>
+        <Icon className="text-[gray]" strokeWidth={2.8} size={15} />
+        <span className="text-[gray] text-[1rem] font-medium">{name}</span>
       </div>
       <div className="flex flex-row gap-2 items-center">
-        <span className="text-white text-lg font-semibold">
-          {loading ? value : user?.name}
-        </span>
+        <span className="text-white text-[1rem] font-semibold">{value}</span>
         <img
           src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
           className="h-5 w-5 rounded-full"

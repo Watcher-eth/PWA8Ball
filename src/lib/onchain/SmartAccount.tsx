@@ -96,7 +96,7 @@ export function SmartAccountProvider({
   const { address } = useAccount()
   const smartAccountClient = client
   const smartAccountAddress = address
-  console.log("Privy client", wallets, embeddedWallet, client)
+  console.log("Privy client", wallets, embeddedWallet)
 
   // async function createSmartWallet() {
   //   // Creates a smart account given a Privy `ConnectedWallet` object representing

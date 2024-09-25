@@ -36,11 +36,15 @@ import { MarketMetadata } from "./BetDetails/MarketMetadata"
 import { shortenAddress } from "@/utils/address/shortenAddress"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { LoginModal } from "../modals/LoginModal"
+import { useGetUserById } from "@/graphql/queries/users/useUserById"
+import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
+import { StatusBlock } from "./BetDetails/MarketStatus"
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal)
   const userImages = fillUserImages(users, 3)
   useCheckReferral()
+
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     HARD_MARKETS,
@@ -85,7 +89,13 @@ function MobileMarketContent({
   marketId,
 }) {
   const { user } = useUserStore()
-  const {openLoginModal, isLoginModalOpen, closeLoginModal} = useModalStore()
+  const { openLoginModal, isLoginModalOpen, closeLoginModal } = useModalStore()
+  const { user: creator, loading } = useGetUserById(market?.userAddress)
+  const { data: userOwns } = useGetUserPositionsForMarket(
+    user?.walletAddress,
+    id
+  )
+
   return (
     <motion.div
       onClick={() => setIsDrawerOpen(false)}
@@ -98,7 +108,7 @@ function MobileMarketContent({
               <ArrowLeft
                 strokeWidth={3.8}
                 size={33}
-                className="p-2 text-white rounded-full backdrop-blur-lg bg-[rgba(17,17,17,0.15)]"
+                className="p-2 text-white rounded-full border-[0.1rem] border-[#212121] backdrop-blur-md bg-[rgba(50 , 50 , 50 , 0.1)]"
               />
             </Link>
           </DrawerClose>
@@ -113,7 +123,7 @@ function MobileMarketContent({
             <Share
               size={33}
               strokeWidth={3.3}
-              className="p-2 rounded-full text-white backdrop-blur-xl bg-[rgba(17,17,17,0.15)]"
+              className="p-2 rounded-full text-white border-[0.1rem] border-[#212121] backdrop-blur-lg md-[rgba(50 , 50 , 50 , 0.1)]"
             />
           </MobileShareBetModal>
         </div>
@@ -273,7 +283,9 @@ function MobileMarketContent({
       )}
       <div className="z-2 mt-3.5 px-1.5">
         <MarketMetadata
-          creator={shortenAddress(market?.userAddress)}
+          creatorAddress={shortenAddress(market?.userAddress)}
+          creatorLoading={loading}
+          creator={creator}
           usdcStake={market?.usdcStake}
           liquidityStake={market?.liquidityBalanceUsdc}
           length={users?.length}
@@ -293,8 +305,18 @@ function MobileMarketContent({
           topic={topic}
           id={id}
         />
+        <StatusBlock
+          creator={market?.userAddress}
+          endDate={"12th September, 2024"}
+          createdAt={market?.createdAt}
+          resolved={market?.resolved}
+          outcome={market?.outcome}
+          resolvedAt={market?.resolvedAt}
+          proposedOutcome={market?.proposedOutcome}
+          proposedAt={market?.proposedAt}
+        />
       </div>
-      <div className="z-2">
+      <div className="z-2 -mt-5">
         <CommentSection
           topic_id={topicId}
           users={users}
@@ -306,7 +328,6 @@ function MobileMarketContent({
         <RelatedMarkets topicId={topicId} id={id} />
       </div>
       <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
-
     </motion.div>
   )
 }

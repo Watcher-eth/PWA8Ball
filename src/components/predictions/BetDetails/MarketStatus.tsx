@@ -42,7 +42,13 @@ const StatusRow: React.FC<StatusRowProps> = ({
             color="white"
           />
           {!isLast && (
-            <div className="w-[0.1rem] absolute left-4 -bottom-9 h-7 bg-[#212121] mt-4 "></div>
+            <div
+              className={`w-[0.1rem] absolute left-4 ${
+                title === "End Date"
+                  ? "h-[6rem]  -bottom-[6.6rem] "
+                  : "h-7  -bottom-9 "
+              } bg-[#212121] mt-4 `}
+            ></div>
           )}
         </div>
       </div>
@@ -50,7 +56,9 @@ const StatusRow: React.FC<StatusRowProps> = ({
       <div className="flex flex-row justify-between w-full gap-1">
         <div className="flex flex-col -gap-1.5">
           <span className="text-white text-lg font-[600]">{title}</span>
-          <span className="text-[#808080] text-base">{subtitle}</span>
+          <span className="text-[#808080] text-base max-w-[65vw]">
+            {subtitle}
+          </span>
         </div>
 
         {title !== "Created on" && (
