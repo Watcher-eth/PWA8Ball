@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { motion } from "framer-motion"
+import { useRouter } from "next/router"
 
-import { Users } from "lucide-react";
-import Link from "next/link";
+import { Users } from "lucide-react"
+import Link from "next/link"
 
 export const BetBigView = ({
   marketId,
@@ -15,7 +15,7 @@ export const BetBigView = ({
   option1,
   option2,
 }) => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <motion.div
@@ -47,20 +47,18 @@ export const BetBigView = ({
           src={image}
           alt="Market Image"
           style={{ borderRadius: 12 }}
-          className="w-full h-[30vh] rounded-lg object-cover"
+          className="w-full h-[25vh] rounded-lg object-cover"
         />
         <div
-          className="absolute top-[23vh] w-full h-16 bg-gradient-to-t from-[#101010] to-transparent rounded-b-lg"
+          className="absolute top-[20vh] w-full h-16 bg-gradient-to-t from-[#080808] to-transparent rounded-b-lg"
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
-        <div className="absolute top-3 right-3 flex items-center bg-white px-2 pr-1 p-1 rounded-lg z-10">
-          <span className="text-[#212121] font-bold text-12 mr-0">223</span>
-          <Users className="text-[#212121]" strokeWidth={3.5} height={13} />
+        <div className="absolute top-3 right-3 flex items-center bg-[#909090]/10 border-[0.07rem] border-[#999999]/20 backdrop-blur-md px-2 pr-1 p-1 rounded-lg z-10">
+          <span className="text-white font-[600] text-sm mr-0">223</span>
+          <Users className="text-white" strokeWidth={3.2} height={13} />
         </div>
-        <h2 className="text-[1.8rem] text-white font-bold mt-[-3.1rem] ml-2 z-10 font-[Aeonik-Bold]">
-          {title}
-        </h2>
-        <p className="text-base text-white mt-6 ml-1 mb-[-0.1rem] font-medium z-10 leading-[1.2]">
+
+        <p className="text-lg text-white mt-4 mb-[-0.2rem] font-medium z-10 leading-[1.2]">
           {question}
         </p>
         {option1.image ? (
@@ -80,8 +78,8 @@ export const BetBigView = ({
         )}
       </motion.div>
     </motion.div>
-  );
-};
+  )
+}
 
 export const BetSmallView = ({
   marketId,
@@ -92,7 +90,7 @@ export const BetSmallView = ({
   option1,
   option2,
 }) => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <motion.div
@@ -136,44 +134,44 @@ export const BetSmallView = ({
         </div>
       </motion.div>
     </motion.div>
-  );
-};
+  )
+}
 
 export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
-  const total = yesValue + noValue;
-  const yesPercentage = (yesValue / total) * 100;
-  const noPercentage = (noValue / total) * 100;
-
+  const total = yesValue / 100 + noValue / 100
+  const yesPercentage = (yesValue / 100 / total) * 100
+  const noPercentage = (noValue / 100 / total) * 100
+  console.log("Values", yesValue, noValue)
   return (
-    <div className="flex no-scrollbar items-center p-2 px-0.5 my-1  w-full">
+    <div className="flex no-scrollbar items-center p-2 px-0.5 my-1   w-full">
       <motion.div
-        className="flex items-center h-10 justify-center bg-[#FF0050] rounded-l-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-start bg-[#181818] px-4 w-full rounded-l-lg p-2 text-white font-[600]"
         style={{
           width: `${noPercentage}vw`,
           borderTopLeftRadius: 8,
           borderBottomLeftRadius: 8,
-          fontSize: 13,
+          fontSize: 15,
         }}
       >
         {noPercentage.toFixed(0)}% {option1}
       </motion.div>
       <div className="w-[0.35em] bg-white h-12 mx-[0.3rem] rounded-full"></div>
       <motion.div
-        className="flex items-center h-10 justify-center bg-[#0067E1] rounded-r-lg p-2 text-white font-bold"
+        className="flex items-center h-10 justify-end bg-white w-full rounded-r-lg p-2 px-4  text-[#181818] font-[600]"
         style={{
           width: `${yesPercentage}vw`,
           borderTopRightRadius: 8,
           borderBottomRightRadius: 8,
-          fontSize: 13,
+          fontSize: 15,
         }}
       >
         {option2} {yesPercentage.toFixed(0)}%
       </motion.div>
     </div>
-  );
-};
+  )
+}
 
-const MAX_LENGTH = 11;
+const MAX_LENGTH = 11
 
 export const PollingComponentImage = ({
   yesValue,
@@ -181,9 +179,9 @@ export const PollingComponentImage = ({
   option1,
   option2,
 }) => {
-  const total = yesValue.amount + noValue.amount;
-  const yesPercentage = (yesValue.amount / total) * 100;
-  const noPercentage = (noValue.amount / total) * 100;
+  const total = yesValue.amount + noValue.amount
+  const yesPercentage = (yesValue.amount / total) * 100
+  const noPercentage = (noValue.amount / total) * 100
 
   return (
     <div className="flex items-center p-2 my-1">
@@ -233,5 +231,5 @@ export const PollingComponentImage = ({
         </span>
       </motion.div>
     </div>
-  );
-};
+  )
+}

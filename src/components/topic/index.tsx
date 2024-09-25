@@ -21,9 +21,9 @@ import { HARD_MARKETS } from "@/constants/markets"
 import { HARD_TOPICS } from "@/constants/topics"
 
 const ICON_BUTTON_CLASSNAME = `
-  bg-[rgba(21,21,21,0.45)] backdrop-blur-2xl
+  bg-[rgba(50,50,50,0.25)] backdrop-blur-2xl
   rounded-full flex justify-center items-center
-  absolute top-12 z-10
+  absolute top-12 z-10 border-[0.1rem] border-[#606060]/20
   `
 
 export function Topic({
@@ -43,21 +43,27 @@ export function Topic({
 
   const { data: membersProfiles } = useGetMembersForTopic(id)
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
+    allTopicMarkets,
+    HARD_MARKETS,
+    HARD_TOPICS
+  )
+  const enhancedTrendingMarkets = enhanceMarketsWithImageAndPolyId(
     trendingMarkets,
     HARD_MARKETS,
     HARD_TOPICS
   )
+  console.log("markets", trendingMarkets, allTopicMarkets)
   return (
     <div className="flex overflow-x-hidden overflow-y-scroll flex-col no-scrollbar w-full bg-[#070707]  relative">
       <a
         onClick={() => router.back()}
-        className={`${ICON_BUTTON_CLASSNAME} size-8 left-4`}
+        className={`${ICON_BUTTON_CLASSNAME} size-8 top-8 left-4`}
       >
         <ChevronLeft color="white" size={20} strokeWidth={4} />
       </a>
       <Link
         href={LEADERBOARD_PATH}
-        className={`${ICON_BUTTON_CLASSNAME} size-8 right-14`}
+        className={`${ICON_BUTTON_CLASSNAME} size-8 top-8 right-14`}
       >
         <Star color="white" size={20} strokeWidth={3} />
       </Link>
@@ -69,7 +75,7 @@ export function Topic({
         members={membersProfiles}
         markets={allTopicMarkets?.length}
       >
-        <div className={`${ICON_BUTTON_CLASSNAME} p-2 right-3.5 `}>
+        <div className={`${ICON_BUTTON_CLASSNAME} p-2 top-8 right-3.5 `}>
           <Share size={17} strokeWidth={3.3} color="white" />
         </div>
       </ShareTopicModal>
@@ -105,13 +111,14 @@ export function Topic({
               : `Be the first to join /${name}`}
           </span>
         </div>
-        <div className="flex items-center mt-4  mb-1.5 ">
-          <Star color="white" strokeWidth={3} height={20} />
-          <span className="text-white text-xl ml-1 font-['Aeonik-Bold']">
-            Trending Bets
-          </span>
-        </div>
-        {enhancedMarkets?.slice(0, 4)?.map((market, idx) => {
+        {enhancedTrendingMarkets?.length > 0 && (
+          <div className="flex items-center mt-4 -ml-0.5  mb-1.5 ">
+            <span className="text-white text-2xl  font-['Aeonik-Bold']">
+              Trending Today
+            </span>
+          </div>
+        )}
+        {enhancedTrendingMarkets?.slice(0, 4)?.map((market, idx) => {
           const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView
           return (
             <BetViewComponent
@@ -123,6 +130,28 @@ export function Topic({
               topic={name}
               option1={{ name: market?.outcomeA, odds: market?.outcomeOddsA }}
               option2={{ name: market?.outcomeB, odds: market?.outcomeOddsB }}
+            />
+          )
+        })}
+        {enhancedMarkets?.length > 0 && (
+          <div className="flex items-center mt-4 -ml-0.5  mb-1.5 ">
+            <span className="text-white text-2xl  font-['Aeonik-Bold']">
+              Popular Predictions
+            </span>
+          </div>
+        )}
+        {enhancedMarkets?.slice(0, 4)?.map((market, idx) => {
+          const BetViewComponent = idx % 2 == 0 ? BetBigView : BetSmallView
+          return (
+            <BetViewComponent
+              key={idx}
+              marketId={market.id}
+              title={market.title}
+              question={market.question}
+              image={market.image}
+              topic={name}
+              option1={{ name: market?.outcomeB, odds: market?.outcomeOddsB }}
+              option2={{ name: market?.outcomeA, odds: market?.outcomeOddsA }}
             />
           )
         })}
