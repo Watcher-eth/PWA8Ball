@@ -17,11 +17,11 @@ export function MobileNavBar() {
     <div className="flex flex-col items-center -mb-6 justify-center w-full ">
       <div
         className={`
-      bg-[#212121]/20  p-[0.9rem] rounded-full 
-      z-3 self-center border-[0.5px] border-[rgba(90,90,90,0.2)] -mb-8 backdrop-blur-lg
+      bg-[#181818]/20  p-[0.9rem] rounded-full 
+      z-3 self-center border-[0.8px] border-[rgba(80,80,80,0.5)] -mb-8 backdrop-blur-lg
     `}
       >
-        <div className="w-[60vw] max-w-[17rem] flex px-2  justify-between items-center mx-auto">
+        <div className="w-[57vw] max-w-[17rem] flex px-2  justify-between items-center mx-auto">
           <MobileNavBtn IconComponent={Home} href={HOME_PATH} />
           <MobileNavBtn IconComponent={Search} href={SEARCH_PATH} />
 
