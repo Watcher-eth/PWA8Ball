@@ -20,6 +20,7 @@ import {
   biconomySmartAccount,
   kernelSmartAccount,
   simpleSmartAccount,
+  smartAccount as permissionlessSmartAccount,
 } from "@permissionless/wagmi"
 import { signerToSimpleSmartAccount } from "permissionless/accounts"
 import {
@@ -45,6 +46,7 @@ import {
   useSendTransaction,
   useClient,
   useWalletClient,
+  usePublicClient,
 } from "wagmi"
 import { useUserStore } from "@/lib/stores/UserStore"
 
@@ -88,6 +90,7 @@ export function SmartAccountProvider({
   const { ready, wallets } = useWallets()
   const { isConnected, address: accountAddress } = useAccount()
   const { user } = useUserStore()
+  const wagmiPublicClient = usePublicClient()
   const { user: privyUser, ready: userReady, authenticated } = usePrivy()
   const { walletType } = user || {}
   const embeddedWallet = wallets.find(
@@ -105,15 +108,18 @@ export function SmartAccountProvider({
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-  const address = privyUser?.wallet?.address
+  const { address: wagmiAddress } = useAccount()
+
+  const address = wagmiAddress//privyUser?.wallet?.address
   const {data: client} = useWalletClient(
     {
-    // account: address as Address,
+    account: address as Address,
     chainId: baseSepolia.id,
   }
 )
 
-  // const { address } = useAccount()
+
+  console.log("wagmiAddress", wagmiAddress)
   const smartAccountClient = client
   const smartAccountAddress = address
   console.log("smartAccount", {smartAccountClient, smartAccountAddress})
@@ -122,11 +128,16 @@ export function SmartAccountProvider({
     // if (!ready) {
     //   return
     // }
+
     console.log("connecting smart account")
     const publicClient = createPublicClient({
       chain: baseSepolia, // Replace this with the chain of your app
       transport: http(),
     })
+    // const publicClient = wagmiPublicClient
+    if (!publicClient) {
+      console.error(new Error("publicClient not found"))
+    }
     console.log("publicClient", publicClient)
     const eip1193provider = await embeddedWallet?.getEthereumProvider()
     // const walletClient = await getWalletClient(config)
@@ -159,30 +170,68 @@ export function SmartAccountProvider({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
       transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
     })
-
-    const connector = await simpleSmartAccount({
+    const mySimpleSmartAccount = await signerToSimpleSmartAccount(
       publicClient,
-      bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
-      signer: customSigner,
-      factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
+      {
+        entryPoint: ENTRYPOINT_ADDRESS_V07,
+        signer: customSigner,
+        factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
+      }
+    )
+    const pimlicoPaymaster = createPimlicoPaymasterClient({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
-      sponsorUserOperation: pimlicoClient.sponsorUserOperation,
+      transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
     })
+      const pimlicoBundlerClient = createPimlicoBundlerClient({
+        transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
+        entryPoint: ENTRYPOINT_ADDRESS_V07,
+      })
+    const smartAccountClient = createSmartAccountClient({
+      account: mySimpleSmartAccount,
+      bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
+      middleware: {
+        sponsorUserOperation: pimlicoPaymaster.sponsorUserOperation, // optional
+        gasPrice: async () =>
+          (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // if using pimlico bundler
+      },
+
+      chain: baseSepolia, // Replace this with the chain for your app
+    })
+    const connector = permissionlessSmartAccount({
+      smartAccountClient,
+    })
+    // let connector
+    try {
+      // connector = await simpleSmartAccount({
+      //   publicClient,
+      //   bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
+      //   signer: customSigner,
+      //   factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
+      //   entryPoint: ENTRYPOINT_ADDRESS_V07,
+      //   sponsorUserOperation: pimlicoClient.sponsorUserOperation,
+      // })
+    } catch (error) {
+      console.error("simpleSmartAccount:", error)
+      console.log(error)
+    }
     console.log({ connector })
-    connect({
-      connector,
-      chainId: baseSepolia.id
-    }, {
-      onSuccess: (...successArgs) => {
-        console.log("successArgs", successArgs)
+    connect(
+      {
+        connector,
+        chainId: baseSepolia.id,
       },
-      onError: (...errorArgs) => {
-        console.log("errorArgs", errorArgs)
-      },
-      onSettled: (...settleArgs) => {
-        console.log("settleArgs", settleArgs)
-      },
-    })
+      {
+        onSuccess: (...successArgs) => {
+          console.log("successArgs", successArgs)
+        },
+        onError: (...errorArgs) => {
+          console.log("errorArgs", errorArgs)
+        },
+        onSettled: (...settleArgs) => {
+          console.log("settleArgs", settleArgs)
+        },
+      }
+    )
     /** Lets see if prev autoapproval works */
     const allowance = await publicClient.readContract({
       address: BASE_SEPOLIA_USDC_ADDRESS,
@@ -298,7 +347,7 @@ export function SmartAccountProvider({
   //     transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
   //     entryPoint: ENTRYPOINT_ADDRESS_V07,
   //   })
-  //   console.log("Step 2", pimlicoPaymaster)
+  //   console.log("Step 2", pimlix   xcoPaymaster)
 
   //   const smartAccountClient: WalletClient = createSmartAccountClient({
   //     account: mySimpleSmartAccount,
