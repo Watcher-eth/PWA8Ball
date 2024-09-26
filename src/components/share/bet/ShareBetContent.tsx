@@ -4,6 +4,7 @@ import { Copy, Gift, Share as ShareIcon } from "lucide-react"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 import { CashoutConfirmScreen } from "@/components/predictions/cashout/CashoutConfirmScreen"
 import { useUserStore } from "@/lib/stores/UserStore"
+import { DrawerClose } from "@/components/ui/drawer"
 
 interface Option {
   name: string
@@ -114,13 +115,20 @@ export function ShareBetContent({
         </div>
       </AnimatePresence>
       <div className="flex flex-row items-center mt-8 self-center justify-between w-[85%] absolute bottom-4 ">
-        <button
-          className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1"
-          onClick={() => copyToClipboard(`https://pwa-8-ball.vercel.app/p/${id}?ref=${user?.walletAddress}`)}
-        >
-          <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
-          <span className="text-xl text-[#D9D9D9] font-extrabold">Copy</span>
-        </button>
+        <DrawerClose className="mt-3 p-3 rounded-[24px] bg-[#151515] w-[45%] flex flex-row items-center justify-center gap-1">
+          <button
+                      className="flex flex-row items-center justify-center gap-1"
+
+            onClick={() =>
+              copyToClipboard(
+                `https://pwa-8-ball.vercel.app/p/${id}?ref=${user?.walletAddress}`
+              )
+            }
+          >
+            <Copy height={20} color={"#D9D9D9"} strokeWidth={3} />
+            <span className="text-xl text-[#D9D9D9] font-extrabold">Copy</span>
+          </button>
+        </DrawerClose>
         <button
           className="mt-3 p-2.5 rounded-[24px] bg-[#D9D9D9] w-[45%] flex flex-row items-center justify-center transition-transform transform hover:scale-102 active:scale-98"
           onClick={shareLink}
