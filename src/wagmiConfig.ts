@@ -1,7 +1,7 @@
 import type { Chain } from "viem"
 import type { Config } from "wagmi"
-// import { createConfig } from "@wagmi/core"
-import { createConfig } from "@privy-io/wagmi" // SWAP: @wagmi/core with @privy-io/wagmi
+import { createConfig } from "@wagmi/core"
+// import { createConfig } from "@privy-io/wagmi" // SWAP: @wagmi/core with @privy-io/wagmi
 import { connectorsForWallets } from "@rainbow-me/rainbowkit"
 import {
   metaMaskWallet,

@@ -3,8 +3,8 @@ import "@/styles/globals.css"
 import "@rainbow-me/rainbowkit/styles.css"
 
 import type { AppProps } from "next/app"
-// import { WagmiProvider } from "wagmi"
-import { WagmiProvider } from "@privy-io/wagmi" // SWAP: wagmi with @privy-io/wagmi
+import { WagmiProvider } from "wagmi"
+// import { WagmiProvider } from "@privy-io/wagmi" // SWAP: wagmi with @privy-io/wagmi
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { init, AirstackProvider } from "@airstack/airstack-react"
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
