@@ -11,6 +11,8 @@ import { formatChartDateStr } from "@/utils/datetime/parseChartDate"
 import Link from "next/link"
 import { getMarketPath } from "@/utils/urls"
 import { useGetMarketPrices } from "@/graphql/queries/charts/useGetMarketPrices"
+import { Skeleton } from "@/components/ui/Skeleton"
+import MotionNumber from "motion-number"
 
 export function TopMarket() {
   const { market } = useGetMarketById("1")
@@ -45,16 +47,34 @@ export function TopMarket() {
         href={getMarketPath(enhancedMarket?.marketId)}
         className="flex flex-col w-[30%] pr-5 z-1 pt-2"
       >
-        <img
-          className="size-24 object-cover -mb-2 rounded-md"
-          src={enhancedMarket?.image}
-        />
-        <div className="text-white text-3xl mt-6 font-semibold">
-          {enhancedMarket?.title}
-        </div>
-        <div className="text-[lightgray] mt-2 text-lg font-[Aeonik]">
-          {enhancedMarket?.question}
-        </div>
+        {enhancedMarket?.image ? (
+          <img
+            className="size-24 object-cover -mb-2 rounded-md"
+            src={enhancedMarket?.image}
+          />
+        ) : (
+          <Skeleton className={`size-24 object-cover -mb-2 rounded-md`} />
+        )}
+
+        {enhancedMarket?.title ? (
+          <div className="text-white text-3xl mt-6 font-semibold">
+            {enhancedMarket?.title}
+          </div>
+        ) : (
+          <Skeleton
+            className={`h-9 w-[18rem] object-cover mt-6 rounded-full`}
+          />
+        )}
+        {enhancedMarket?.question ? (
+          <div className="text-[lightgray] mt-2 text-lg font-[Aeonik]">
+            {enhancedMarket?.question}
+          </div>
+        ) : (
+          <div className="flex flex-col mt-3 mb-3">
+            <Skeleton className={`h-[1rem] w-[20rem]   rounded-md`} />
+            <Skeleton className={`h-[1rem] mt-2 w-[16rem]  rounded-md`} />
+          </div>
+        )}
         <div className="flex pt-2 space-x-2">
           <Chip className="flex-shrink space-x-2 pt-0.5">
             <Users
@@ -78,18 +98,31 @@ export function TopMarket() {
 
         <div className="text-[gray] mt-8 -mb-3 text-md flex flex-row items-center space-x-2 font-[Aeonik]"></div>
       </Link>
-      <div className="flex flex-col h-full justify-between  w-[70%] z-1 ">
-        <div className="text-[gray] text-md font-normal">
-          {enhancedMarket?.title}
-        </div>
+      <div className="flex flex-col h-full justify-between -mb-1  w-[70%] z-1 ">
+        {enhancedMarket?.title ? (
+          <div className="text-[gray] text-md font-normal">
+            {enhancedMarket?.title}
+          </div>
+        ) : (
+          <Skeleton className={`h-[1rem] w-[15rem]   rounded-md`} />
+        )}
         <Link
           href={getMarketPath(enhancedMarket?.marketId)}
           className="flex flex-row justify-between items-center"
         >
-          <div className="text-3xl font-[Aeonik] my-1 text-white">
-            {enhancedMarket?.outcomeOddsA / 100}%{" "}
-            {enhancedMarket?.outcomeA !== "Yes"
-              ? enhancedMarket?.outcomeA
+          <div className="text-3xl font-[Aeonik] my-0 text-white">
+            <MotionNumber
+              value={
+                enhancedMarket?.outcomeOddsA
+                  ? enhancedMarket?.outcomeOddsA / 100
+                  : (0).toFixed(2)
+              }
+            />
+            %{" "}
+            {enhancedMarket
+              ? enhancedMarket?.outcomeA !== "Yes"
+                ? enhancedMarket?.outcomeA
+                : "Chance"
               : "Chance"}
           </div>
           <div className="text-3xl text-white/10 font-[Aeonik-Bold]">
