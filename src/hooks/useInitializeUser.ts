@@ -27,7 +27,7 @@ export function useInitializeUser() {
   const { data: followersCount } = useGetTotalFollowers(user?.walletAddress)
   const { data: followingCount } = useGetTotalFollowing(user?.walletAddress)
 
-  console.log("addyy", smartAccountAddress, smartAccountClient)
+  // console.log("addyy", smartAccountAddress, smartAccountClient)
 
   async function fetchUser() {
     if (ready && authenticated && privyUser && !eoaAddress) {

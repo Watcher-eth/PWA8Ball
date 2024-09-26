@@ -106,7 +106,7 @@ export function SmartAccountProvider({
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
   const address = privyUser?.wallet?.address
-  const client = useWalletClient({
+  const {data: client} = useWalletClient({
     account: address as Address,
     chainId: baseSepolia.id,
   })
