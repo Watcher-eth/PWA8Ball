@@ -24,7 +24,7 @@ export function ProfilePrediction({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="flex items-center justify-between p-2.5 py-1 rounded-[0.8rem] bg-[#151515]  w-[90vw]"
+      className="flex items-center justify-between p-2 py-1.5  rounded-[0.85rem] bg-[#161616]  w-[90vw]"
     >
       <div className="flex items-center gap-2">
         {image ? (
@@ -36,11 +36,9 @@ export function ProfilePrediction({
         ) : (
           <Skeleton className="w-14 h-14 rounded-lg" />
         )}
-        <div className="flex flex-col items-start -gap-3">
-          <p className="text-white text-md font-medium font-[Aeonik-Bold] ">
-            {title}
-          </p>
-          <p className="text-white/80 text-sm font-[400] text-start max-w-[55vw] line-clamp-2">
+        <div className="flex flex-col items-start space-y-0">
+          <p className="text-white text-[1.05rem] font-[600]">{title}</p>
+          <p style={{lineHeight: 1.2}} className="text-white/80 text-[0.9rem] font-[300] text-start max-w-[55vw] line-clamp-2">
             {question}
           </p>
         </div>

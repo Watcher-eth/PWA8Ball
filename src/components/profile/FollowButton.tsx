@@ -107,19 +107,12 @@ function DisplayFollowButton({ onClick, IconComponent, label, isDark = true }) {
       onClick={onClick}
       className={`
         flex flex-row
-        mt-2 mb-2.5 p-2 !px-3
-        rounded-lg overflow-hidden items-center
+        mt-2 mb-2.5  py-1.5 !px-4 border-[0.08rem] border-[#202020] 
+        rounded-full overflow-hidden items-center
         hover:scale-105 active:scale-95 transition-all
         ${isDark ? "bg-[#181818]" : "bg-white"}
       `}
     >
-      {IconComponent && (
-        <IconComponent
-          color={isDark ? "lightgray" : "#1B1B1E"}
-          strokeWidth={3}
-          height={15}
-        />
-      )}
       <div
         className={`
         text-[14px] font-bold

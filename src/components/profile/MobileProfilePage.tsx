@@ -55,18 +55,20 @@ export function MobileProfilePage({
             className="size-[5rem] -mt-2.5 rounded-full border-4 border-[#202020] "
             alt="Profile"
           />
-          <div className="text-white text-sm absolute top-[3rem] p-1 bg-[#202020] rounded-full font-bold mt-3">
+          <div className="text-white text-[0.75rem] absolute top-[3rem] p-1 px-1.5 bg-[#202020] rounded-full font-bold mt-3">
             0%
           </div>
-          <p className="text-white text-xl font-bold mt-5">{userC?.name}</p>
+          <p className="text-[#ffffff] text-[1.65rem] font-[500] mt-4">
+            {userC?.name}
+          </p>
 
-          <div className="flex flex-col items-center mt-0">
+          <div className="flex flex-col items-center -mt-2.5">
             <SocialsSection {...userC?.socials} />
-            <div className="flex items-center mt-2 font-medium">
-              <p className="text-gray-100 text-sm bg-[#181818] py-2 px-4 rounded-2xl">
+            <div className="flex items-center mt-2 font-[600]">
+              <p className="text-gray-100 text-sm font-[600] border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full">
                 ${(Number(balance) / 10 ** 6).toFixed(2)}
               </p>
-              <p className="text-gray-100 text-sm bg-[#181818] py-2 px-4 rounded-2xl mx-2 font-medium">
+              <p className="text-gray-100 text-sm border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full mx-2 font-[600]">
                 {totalFollowers} Followers
               </p>
               <FollowButton profileId={userC?.walletAddress} />
@@ -74,7 +76,7 @@ export function MobileProfilePage({
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center -mt-[200px]">
+        <div className="w-full flex flex-col items-center -mt-[205px]">
           <GeneralFeed
             walletAddy={userC?.walletAddress}
             id={userId}
@@ -100,7 +102,7 @@ function AbsoluteBlurIcon({
   return (
     <div
       className={`
-        absolute p-2 bg-[rgba(18, 18, 18, 0.9) active:scale-93 backdrop-blur-xl border-[0.05rem] border-[#202020]/20 rounded-[25px]
+        absolute p-1.5 bg-[#151515]/30 active:scale-93 backdrop-blur-xl border-[0.05rem] border-[#202020]/20 rounded-[25px]
         ${className}
       `}
     >
