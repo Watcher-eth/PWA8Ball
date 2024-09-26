@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import Link from "next/link"
-import { PieChart, CircleEllipsis } from "lucide-react"
+import { PieChart, CircleEllipsis, ArrowLeft, ChevronLeft } from "lucide-react"
 import { GeneralFeed } from "@/components/profile/GeneralFeed"
 import { FollowButton } from "@/components/profile/FollowButton"
 
@@ -11,6 +11,7 @@ import { BlurOverlayWrapper } from "../onboarding/Invites/InviteBlur"
 import { INVITES_ACTIVE } from "@/constants"
 import { MobileProfilePopover } from "../layouts/MobileProfilePopover"
 import { User } from "@/__generated__/graphql"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export function MobileProfilePage({
   userId,
@@ -21,9 +22,11 @@ export function MobileProfilePage({
   totalFollowers: number
   userC: User
 }) {
+  const { user } = useUserStore()
   const balance = useUsdcBalance({
     address: userC?.walletAddress,
   })
+
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
@@ -38,12 +41,21 @@ export function MobileProfilePage({
         </div>
 
         <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
-          <Link href="/lp">
-            <AbsoluteBlurIcon
-              IconComponent={PieChart}
-              className="top-4 left-6"
-            />
-          </Link>
+          {userC?.walletAddress === user?.walletAddress ? (
+            <Link href="/lp">
+              <AbsoluteBlurIcon
+                IconComponent={PieChart}
+                className="top-4 left-6"
+              />
+            </Link>
+          ) : (
+            <Link href="/">
+              <AbsoluteBlurIcon
+                IconComponent={ChevronLeft}
+                className="top-4 stroke-width-4 left-6"
+              />
+            </Link>
+          )}
           <MobileProfilePopover>
             <AbsoluteBlurIcon
               IconComponent={CircleEllipsis}
