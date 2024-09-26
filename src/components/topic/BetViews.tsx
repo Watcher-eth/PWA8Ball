@@ -24,11 +24,11 @@ export const BetBigView = ({
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
       style={{ borderRadius: 20 }}
-      className="active:scale-99"
+      className=" my-1.5"
     >
       <motion.div
         style={{ borderRadius: 12 }}
-        className="flex flex-col active:scale-98 w-full mx-auto my-2 relative cursor-pointer"
+        className="flex flex-col  w-full mx-auto my-2 relative cursor-pointer"
         onClick={() =>
           router.push({
             pathname: "/[id]",
@@ -47,7 +47,7 @@ export const BetBigView = ({
           src={image}
           alt="Market Image"
           style={{ borderRadius: 12 }}
-          className="w-full h-[25vh] rounded-lg object-cover"
+          className="w-full h-[25vh] active:scale-99 hover:scale-101 rounded-lg object-cover"
         />
         <div
           className="absolute top-[20vh] w-full h-16 bg-gradient-to-t from-[#080808] to-transparent rounded-b-lg"
@@ -98,7 +98,7 @@ export const BetSmallView = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.5 }}
-      className="active:scale-98"
+      className="active:scale-98 my-1.5"
     >
       <motion.div
         className="flex no-scrollbar active:scale-98 mb-2 mt-[-0.48rem] flex-row p-2 py-2 bg-[#141414] rounded-lg w-[101%] mx-0 ml-[-0.15rem] my-0 items-center"
@@ -121,13 +121,13 @@ export const BetSmallView = ({
           src={image}
           style={{ borderRadius: 10 }}
           alt="Market Image"
-          className="w-24 h-24 rounded-lg object-cover"
+          className="w-20 h-20 rounded-lg object-cover"
         />
-        <div className="flex flex-col ml-2 gap-1">
+        <div className="flex flex-col ml-2 -gap-0.5">
           <span className="text-[lightgray] text-sm">Trending Today</span>
           <p
-            style={{ lineClamp: 2 }}
-            className="text-white line-clamp-2 text-lg font-[600] "
+            style={{ lineClamp: 2, lineHeight: 1.3 }}
+            className="text-white line-clamp-2  text-[1.2rem] font-[600] "
           >
             {question}
           </p>
@@ -143,7 +143,7 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
   const noPercentage = (noValue / 100 / total) * 100
   console.log("Values", yesValue, noValue)
   return (
-    <div className="flex no-scrollbar items-center p-2 px-0.5 my-1   w-full">
+    <div className="flex no-scrollbar items-center p-2 px-0 my-1   w-full">
       <motion.div
         className="flex items-center h-10 justify-start bg-[#181818] px-4 w-full rounded-l-lg p-2 text-white font-[600]"
         style={{
@@ -153,7 +153,8 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
           fontSize: 15,
         }}
       >
-        {noPercentage.toFixed(0)}% {option1}
+        {noPercentage.toFixed(0)}%{" "}
+        {noPercentage < 45 ? String(option1).substring(0, 3) : option1}
       </motion.div>
       <div className="w-[0.35em] bg-white h-12 mx-[0.3rem] rounded-full"></div>
       <motion.div
@@ -165,7 +166,8 @@ export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
           fontSize: 15,
         }}
       >
-        {option2} {yesPercentage.toFixed(0)}%
+        {yesPercentage < 45 ? String(option2).substring(0, 3) : option2}{" "}
+        {yesPercentage.toFixed(0)}%
       </motion.div>
     </div>
   )

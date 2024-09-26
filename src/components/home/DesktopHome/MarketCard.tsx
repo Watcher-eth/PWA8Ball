@@ -1,18 +1,18 @@
-import Link from "next/link";
-import { Stars } from "lucide-react";
-import { getMarketPath } from "@/utils/urls";
-import { Skeleton } from "@/components/ui/Skeleton"; // Assuming you have a Skeleton component
+import Link from "next/link"
+import { Stars } from "lucide-react"
+import { getMarketPath } from "@/utils/urls"
+import { Skeleton } from "@/components/ui/Skeleton" // Assuming you have a Skeleton component
 
 export function MarketCard({
   item,
   isTwoCards,
   loading = false,
 }: {
-  item: any;
-  isTwoCards: boolean;
-  loading?: boolean;
+  item: any
+  isTwoCards: boolean
+  loading?: boolean
 }) {
-  console.log("item", item);
+  console.log("item", item)
   if (!item) {
     return (
       <div className={`flex flex-col my-3 w-full relative`}>
@@ -44,13 +44,13 @@ export function MarketCard({
         {/* Stake Skeleton */}
         <Skeleton className="text-[gray] mt-2 h-[0.9rem] w-[15%]" />
       </div>
-    );
+    )
   }
 
   return (
     <Link
       href={getMarketPath(item?.marketId)}
-      className={`flex flex-col w-full relative hover:scale-[100.4%] active:scale-99`}
+      className={`flex flex-col w-full relative hover:scale-[100.1%] active:scale-[99.5%]`}
     >
       <img
         className={`${
@@ -84,5 +84,5 @@ export function MarketCard({
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
-  );
+  )
 }

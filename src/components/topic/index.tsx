@@ -90,7 +90,7 @@ export function Topic({
       <div className="flex flex-col no-scrollbar p-4 mt-[-1.5rem]">
         <h1
           className={`
-            text-[2.3rem] text-white font-bold z-10 font-['Benzin-Bold']
+            text-[2.3rem] text-white font-bold mb-1 z-10 font-['Aeonik-Bold']
             ${name?.length < 17 ? "text-4xl" : "text-2xl"}
           `}
         >
@@ -99,18 +99,7 @@ export function Topic({
         <p className="text-base text-[lightgray] font-medium z-10">
           {description}
         </p>
-        <div className="flex items-center mt-1 ml-[-0.2rem]">
-          <AvatarGroup images={membersProfiles?.map((item) => item.pfp)} />
-          <span className="text-[lightgray] text-8 ml-1 font-['Aeonik-Bold']">
-            {membersProfiles?.length > 0
-              ? `${membersProfiles[0].name}${
-                  membersProfiles.length > 1
-                    ? `, ${membersProfiles[1].name}`
-                    : ""
-                }${` & ${members - 1} others`}`
-              : `Be the first to join /${name}`}
-          </span>
-        </div>
+
         {enhancedTrendingMarkets?.length > 0 && (
           <div className="flex items-center mt-4 -ml-0.5  mb-1.5 ">
             <span className="text-white text-2xl  font-['Aeonik-Bold']">

@@ -1,6 +1,6 @@
-import { Users } from "lucide-react";
-import Link from "next/link";
-import { getTopicPath } from "@/utils/urls";
+import { Users } from "lucide-react"
+import Link from "next/link"
+import { getTopicPath } from "@/utils/urls"
 
 export function TopicInfoDetail({
   topicId,
@@ -10,17 +10,17 @@ export function TopicInfoDetail({
   members,
   joined,
 }: {
-  topicId: string;
-  topic: string;
-  question: string;
-  icon: string;
-  members: number;
-  joined: boolean;
+  topicId: string
+  topic: string
+  question: string
+  icon: string
+  members: number
+  joined: boolean
 }) {
   return (
     <Link
       href={{
-        pathname: getTopicPath(topicId),
+        pathname: Number(topicId) !== 1 ? getTopicPath(topicId) : `/elections`,
         query: {
           id: topicId,
           name: topic,
@@ -84,5 +84,5 @@ export function TopicInfoDetail({
         </div>
       </div>
     </Link>
-  );
+  )
 }
