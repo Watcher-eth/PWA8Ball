@@ -58,14 +58,14 @@ const WALLET_GROUPS = [
       walletConnectWallet,
       trustWallet,
       safeWallet,
-      privyWallet,
+      // privyWallet,
     ],
   },
 ]
 
 const connectors = connectorsForWallets(WALLET_GROUPS, APP_DETAILS)
 
-const transports = createTransports(SUPPORTED_CHAINS as Chain[])
+const transports = createTransports(SUPPORTED_CHAINS as unknown as Chain[])
 
 export const wagmiConfig = createConfig({
   connectors,

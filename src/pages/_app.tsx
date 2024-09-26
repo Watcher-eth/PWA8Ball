@@ -22,6 +22,7 @@ import { CustomHead } from "@/components/layouts/CustomHead"
 import { RootLayout } from "@/components/layouts/RootLayout"
 
 import { wagmiConfig } from "@/wagmiConfig"
+import { base, baseSepolia, mainnet } from "viem/chains"
 export const queryClient = new QueryClient()
 
 const PRIVY_CONFIG: PrivyClientConfig = {
@@ -31,6 +32,8 @@ const PRIVY_CONFIG: PrivyClientConfig = {
     accentColor: "#0050FF",
     logo: "https://your-logo-url",
   },
+  defaultChain: baseSepolia,
+  supportedChains: [baseSepolia], // , base, mainnet
   // embeddedWallets: {
   //   createOnLogin: "users-without-wallets",
   //   noPromptOnSignature: true,

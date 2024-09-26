@@ -10,21 +10,22 @@ export const SUPPORTED_CHAINS = [
     iconUrl: BASE_SEPOLIA.chainImg.src,
     iconBackground: "transparent",
   },
-  base,
-  {
-    ...mainnet,
-    iconUrl: ETH.chainImg.src,
-    iconBackground: "transparent",
-  },
+  // base,
+  // {
+  //   ...mainnet,
+  //   iconUrl: ETH.chainImg.src,
+  //   iconBackground: "transparent",
+  // },
   // mainnet,
-].map((chain) => {
-  return {
-    ...chain,
-    // configRpc: CHAINS_BY_ID[chain.id]?.rpcUrls.primary,
-    // fallbackRpc: CHAINS_BY_ID[chain.id]?.rpcUrls.fallback,
-    // iconUrl: CHAINS_BY_ID[chain.id]?.chainImg.src,
-  }
-})
+]
+// .map((chain) => {
+//   return {
+//     ...chain,
+//     // configRpc: CHAINS_BY_ID[chain.id]?.rpcUrls.primary,
+//     // fallbackRpc: CHAINS_BY_ID[chain.id]?.rpcUrls.fallback,
+//     // iconUrl: CHAINS_BY_ID[chain.id]?.chainImg.src,
+//   }
+// })
 
 export const SUPPORTED_CHAIN_IDS = SUPPORTED_CHAINS.map((chain) => chain.id)
 

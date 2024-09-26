@@ -111,7 +111,7 @@ export function useInitializeUser() {
   }
 
   useEffect(() => {
-    fetchUser()
+    // fetchUser()
   }, [
     ready,
     authenticated,

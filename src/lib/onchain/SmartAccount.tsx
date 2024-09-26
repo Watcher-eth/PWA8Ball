@@ -88,7 +88,7 @@ export function SmartAccountProvider({
   const { ready, wallets } = useWallets()
   const { isConnected } = useAccount()
   const { user } = useUserStore()
-  const { user: PrivyUser, ready: userReady, authenticated } = usePrivy()
+  const { user: privyUser, ready: userReady, authenticated } = usePrivy()
   const { walletType } = user || {}
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
@@ -99,16 +99,21 @@ export function SmartAccountProvider({
   console.log("ready1", ready)
   console.log("wallets1", wallets)
   console.log("embeddedWallet1", embeddedWallet)
-  console.log("PrivyUser", PrivyUser)
+  console.log("privyUser", privyUser)
   // States to store the smart account and its status
   // const [smartAccountClient, setSmartAccountClient] = useState()
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-  const client = useWalletClient()
-  const { address } = useAccount()
+  const client = useWalletClient({
+    account: privyUser?.wallet?.address as Address,
+    chainId: baseSepolia.id,
+  })
+  const address = embeddedWallet?.address
+  // const { address } = useAccount()
   const smartAccountClient = client
   const smartAccountAddress = address
+  console.log("smartAccount", {smartAccountClient, smartAccountAddress})
   // async function createSmartWallet() {
   //   // Creates a smart account given a Privy `ConnectedWallet` object representing
   //   // the  user's EOA.
@@ -201,9 +206,9 @@ export function SmartAccountProvider({
   //   setSmartAccountReady(true)
   // }
   async function connectSmartAccount() {
-    if (!ready) {
-      return
-    }
+    // if (!ready) {
+    //   return
+    // }
     console.log("connecting smart account")
     const publicClient = createPublicClient({
       chain: baseSepolia, // Replace this with the chain of your app
@@ -251,7 +256,20 @@ export function SmartAccountProvider({
       sponsorUserOperation: pimlicoClient.sponsorUserOperation,
     })
     console.log({ connector })
-    connect({ connector })
+    connect({
+      connector,
+      chainId: baseSepolia.id
+    }, {
+      onSuccess: (...successArgs) => {
+        console.log("successArgs", successArgs)
+      },
+      onError: (...errorArgs) => {
+        console.log("errorArgs", errorArgs)
+      },
+      onSettled: (...settleArgs) => {
+        console.log("settleArgs", settleArgs)
+      },
+    })
     /** Lets see if prev autoapproval works */
     const allowance = await publicClient.readContract({
       address: BASE_SEPOLIA_USDC_ADDRESS,
@@ -271,6 +289,7 @@ export function SmartAccountProvider({
           BASE_SEPOLIA_EIGHTBALL_ADDRESS,
           10000000000n,
         ])
+        console.log("hash", hash)
       } catch (error) {
         console.error("Failed to send transaction:", error)
         throw error
@@ -281,8 +300,14 @@ export function SmartAccountProvider({
 
   useEffect(() => {
     if (!embeddedWallet && userReady && authenticated) {
-      createWallet()
-      console.log("Creating embedded  wallet")
+        createWallet().then((wallet) => {
+          console.log("createdwallet", wallet)
+          console.log("successfully created wallet")
+        }).catch((error) => {
+          console.error("Failed to create wallet:", error)
+        })
+      // createWallet()
+      // console.log("Creating embedded  wallet")
     }
     console.log("walletType", walletType)
     // if (walletType === "smartwallet" && embeddedWallet) {
@@ -299,10 +324,9 @@ export function SmartAccountProvider({
   }, [
     walletType,
     smartAccountAddress,
-    embeddedWallet?.address,
-    embeddedWallet,
+    // embeddedWallet?.address,
+    // embeddedWallet,
     isConnected,
-    embeddedWallet,
     userReady,
     authenticated
     // smartAccountClient,
