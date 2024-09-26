@@ -52,6 +52,7 @@ export function DesktopPredictComponent(props: {
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
   // const amountStr = amount.toString()
   const setStake = useVotingStore((state) => state.setState)
+  console.log("User owsn", userOwns)
   return (
     <div
       className={`  ${
@@ -68,7 +69,7 @@ export function DesktopPredictComponent(props: {
         <AnimatePresence>
           {(userOwns[0] && step === 0) || (userOwns[0] && step === 4) ? (
             <div className="flex justify-between text-[1.5rem] text-white font-medium flex-row items-center gap-3">
-              <div>{step === 0 ? `Predict ${title}` : "Your Positions"}</div>{" "}
+              <div>{step === 0 ? `Predict ${title}` : "Your Predictions"}</div>{" "}
               <div
                 onClick={() => {
                   if (step === 0) {
@@ -86,7 +87,7 @@ export function DesktopPredictComponent(props: {
             </div>
           ) : null}
           {step === 0 && (
-            <div className="flex flex-col w-full pt-4 gap-4">
+            <div className="flex flex-col w-full pt-2 gap-4">
               <Input
                 value={amountStr}
                 onChange={(e) => setAmountStr(cleanNumberInput(e.target.value))}

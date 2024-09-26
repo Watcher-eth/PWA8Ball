@@ -23,7 +23,7 @@ export default function Document() {
           href="/icons/AppIcon512.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/images/OrbLogoTransparent.png" />
+        <link rel="shortcut icon" href="/icons/OrbLogo.png" />
         <script src="https://js.stripe.com/v3/"></script>
         <script src="https://crypto-js.stripe.com/crypto-onramp-outer.js"></script>
       </Head>

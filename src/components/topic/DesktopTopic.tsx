@@ -103,20 +103,20 @@ function DesktopTopic({
       <StandardPageWrapper className="h-full flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
-            <div className="w-full h-60 relative">
+            <div className="w-full h-[18rem] relative">
               <img
-                className="w-full transform object-cover h-60 relative -mt-40"
+                className="w-full transform object-cover h-[18rem] relative -mt-40"
                 alt="CoverImage"
                 src={image}
               />
-              <div className="h-60 w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
+              <div className="h-[18rem] w-full bg-gradient-to-t from-[#080808] via-[#080808]/50 to-transparent absolute bottom-0" />
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="full h-full overflow-y-auto z-20 -mt-2 px-0 flex flex-col">
+        <div className="full h-full overflow-y-auto z-20 mt-4 px-0 flex flex-col">
           <div className="flex flex-row items-center justify-between px-0">
-            <div className="flex flex-col -space-y-3 mt-2">
-              <div className="text-[2.3rem] text-white font-[Benzin-Bold]">
+            <div className="flex flex-col -space-y-2 mt-0">
+              <div className="text-[2.5rem] text-white font-[Aeonik-Bold]">
                 {name}
               </div>
               <div className="text-[1.2rem] text-[white]/[0.9] font-normal">
@@ -131,28 +131,28 @@ function DesktopTopic({
                   showToast={() => {}}
                 />
                 <DesktopLeaderboardModal title={name} data={LeaderBoardData}>
-                  <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-2 bg-[#151515] border-[#212121] font-bold rounded-full text-base text-white">
+                  <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-[0.1rem] bg-[#151515]/50 border-[#212121]/60 font-bold rounded-full text-base text-white">
                     <Trophy
                       color="white"
                       strokeWidth={2.5}
-                      className="size-6"
+                      className="size-5"
                       size={"1.2rem"}
                     />
                   </div>
                 </DesktopLeaderboardModal>
               </div>
-              <div className="flex items-center mt-1 space-x-2 -mb-1 ml-[-0.2rem]">
+              <div className="flex items-center mt-1.5 space-x-2 -mb-1 ml-[-0.2rem]">
                 <div className="flex mt-1 -space-x-2">
                   {membersProfiles?.map((image, index) => (
                     <img
                       key={index}
                       src={image.pfp}
                       alt={`Avatar ${index}`}
-                      className="size-8 hover:scale-103 active:scale-97 rounded-full border-2 border-[#151515]"
+                      className="size-7 hover:scale-103 active:scale-97 rounded-full border-2 border-[#151515]"
                     />
                   ))}
                 </div>{" "}
-                <span className="text-[lightgray] text-[1.15rem] ml-1 font-medium">
+                <span className="text-[lightgray] text-[1rem] ml-1 font-medium">
                   {membersProfiles?.length > 0
                     ? `${`${members} Members`}`
                     : `Be the first to join ${name}`}
@@ -160,15 +160,21 @@ function DesktopTopic({
               </div>
             </div>
           </div>
-          <div className="h-[0.08rem] w-full  bg-[#212121] mt-3.5  mb-8" />
+          <div className="h-[0.05rem] w-full  bg-[#212121] mt-3.5  mb-5" />
 
-          <div className="flex flex-col ">
-            <div className="mt-10 -mb-0 ml-1.5 flex flex-row ">
+          <div className="flex flex-col    ">
+            <div className="mb-6 mt-4 text-3xl font-[600] text-white">
+              Trending Predictions
+            </div>
+            <div className="mt-4 flex flex-row ">
               <DesktopHomeNews
                 topic={true}
                 amount={3}
                 markets={enhancedTrendingMarkets}
               />
+            </div>
+            <div className="mb-6 mt-4 text-3xl font-[600] text-white">
+              Popular Predictions
             </div>
             <div className=" pb-[3rem]  flex flex-row">
               <FeaturedMarketsSection topic={true} markets={enhancedMarkets} />

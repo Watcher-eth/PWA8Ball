@@ -33,10 +33,10 @@ const JoinTopicButton: React.FC<JoinTopicButtonProps> = ({
   return (
     <button
       onClick={handleJoin}
-      className={`p-4 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-1.5 border-2 ${
+      className={`p-4 hover:scale-103 active:scale-97 flex space-x-2 flex-row items-center py-1.5 border-[0.1rem] ${
         optimisticJoin || isMember
-          ? "bg-white border-[#212121]  text-[#212121]"
-          : "bg-[#151515] border-[#212121] text-white"
+          ? "bg-white/60 border-[#212121]/60  text-[#212121]"
+          : "bg-[#151515]/50 border-[#212121]/60 text-white"
       } font-bold rounded-full text-base transition-transform duration-200`}
     >
       <div>{optimisticJoin || isMember ? "Joined" : "Join"}</div>
