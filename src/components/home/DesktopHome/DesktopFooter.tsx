@@ -7,7 +7,7 @@ export function DesktopFooter() {
     <div className="relative w-full mt-10  -mb-32">
       <div className="h-px w-full bg-[#212121]/30 px-5" />
       {/* Footer Content */}
-      <div className="relative z-10 flex flex-col w-full  py-10 px-14 space-y-8">
+      <div className="relative z-10 flex flex-col w-full  py-10 px-5 lg:px-14 space-y-8">
         <div className="flex flex-row w-full justify-between ">
           <div className="flex flex-col w-1/2">
             <div className="flex flex-row items-center space-x-3">

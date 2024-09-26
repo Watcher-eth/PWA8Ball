@@ -22,8 +22,8 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   })
   console.log("markets356", markets)
   return (
-    <div className="px-4 mt-[6.5rem] flex flex-col w-full">
-      <div className="flex flex-col w-full px-14">
+    <div className="px-0 xl:px-4 mt-[6.5rem] flex flex-col w-full">
+      <div className="flex flex-col w-full px-6 lg:px-14">
         <div className="flex items-center justify-between">
           <div className="flex flex-col space-y-0 mb-3">
             <div className="text-[1.9rem] text-white font-[Aeonik-Bold] space-x-2">

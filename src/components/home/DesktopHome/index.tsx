@@ -58,7 +58,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
         </div>
         <HomeDivider />
 
-        <div className="pt-12 pb-[6.5rem] flex flex-row px-5">
+        <div className="pt-12 pb-[6.5rem] flex flex-row px-2.5 lg:px-5">
           <TrendingCommunities />
         </div>
         <HomeDivider />
