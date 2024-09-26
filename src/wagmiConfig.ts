@@ -58,7 +58,7 @@ const WALLET_GROUPS = [
       walletConnectWallet,
       trustWallet,
       safeWallet,
-      // privyWallet,
+      privyWallet,
     ],
   },
 ]
