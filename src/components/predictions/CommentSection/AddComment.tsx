@@ -7,6 +7,7 @@ import { useCreateComment } from "@/supabase/mutations/useCreateComment"
 
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate"
 import { useUserStore } from "@/lib/stores/UserStore"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function AddComment({
   id,
@@ -77,10 +78,10 @@ export function AddComment({
   }
 
   return (
-    <div className="flex flex-row -mb-3 w-full  mt-4">
+    <div className="flex flex-row -mb-9 w-full  mt-4">
       <img
         className="h-10 min-w-10  rounded-[50%] overflow-hidden object-cover mr-2.5"
-        src={user?.pfp}
+        src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
         alt="User Profile"
       />
       <div className="flex flex-col w-full relative group">
@@ -94,8 +95,8 @@ export function AddComment({
             ref={inputRef}
             placeholder="Join the discussion..."
             rows={1}
-            className={`p-[0.5rem] -mt-0.5 rounded-full px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
-          text-[1.1rem] border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
+            className={`p-[0.5rem] -mt-0.5 rounded-md px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
+          text-[1.05rem] border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
           `}
             onInput={handleInput}
           />
@@ -113,9 +114,9 @@ export function AddComment({
 
         <div // hidden group-focus-within:flex
           className={`
-            h-12 group-focus-within:h-12 flex flex-row  items-center space-x-3 justify-end
+            h-12 group-focus-within:h-12 group-focus-within:mb-9 flex flex-row  items-center space-x-3 justify-end
            mt-0 group-focus-within:mt-1  overflow-y-hidden overflow-x-visible transition-all
-            opacity-0 group-focus-within:opacity-100 px-2
+            opacity-0 group-focus-within:opacity-100 px-0
           `}
         >
           <CommentActionButton

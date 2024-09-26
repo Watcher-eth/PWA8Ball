@@ -101,7 +101,7 @@ export function DesktopMarketPage({ users, market, id }) {
         <div>
           <Grid
             gap={4}
-            cols={{ xs: 8, sm: 4, md: 4, lg: 2 }}
+            cols={{ xs: 8, sm: 2, md: 2, lg: 8 }}
             className="px-2 pt-4"
           >
             <Col xs={4} sm={4} md={4} lg={5}>

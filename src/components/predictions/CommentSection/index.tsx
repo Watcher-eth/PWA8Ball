@@ -10,6 +10,7 @@ import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlace
 import { AddComment } from "./AddComment"
 import { Comment } from "./Comment"
 import { useGetAllCommentsForMarket } from "@/supabase/queries/comments/getCommentsForMarket"
+import { ArrowUpDown, ChevronDown } from "lucide-react"
 
 export function findUserByExternalAuthId(externalAuthId: string, users) {
   if (users)
@@ -62,16 +63,27 @@ export function CommentSection({
         ${isDesktop ? "w-full" : "w-full"}
         pb-20`}
     >
-      <p className="text-[21px] font-semibold  text-white mt-1 mb-2">
-        {allComments.length} {allComments.length > 1 ? "comments" : "comment"}
-      </p>
+      <div className="flex flex-row items-center justify-between">
+        <p className="text-[21px] flex items-center font-semibold  text-white mt-1 mb-2">
+          <p>Comments</p>
+          <p className="px-3.5 ml-2  text-[14px] font-[500] -mb-[0.1rem] rounded-full border-[0.1rem] border-[#212121]">
+            {" "}
+            {allComments.length}{" "}
+          </p>
+        </p>
+        <div className="flex flex-row items-center gap-1.5 -mb-0.5">
+          <ArrowUpDown color="gray" strokeWidth={2.5} size={17} />
+          <div className="text-[gray] text-[18px] font-[500]">Most recent</div>
+          <ChevronDown color="gray" strokeWidth={2} size={17} />
+        </div>
+      </div>
       <AddComment
         id={marketId}
         topic_id={topic_id}
         user={user}
         addOptimisticComment={addOptimisticComment}
       />
-      <div className="-mt-7 -mb-1.5">
+      <div className="-mt-2 -mb-1.5">
         {allComments.length > 0 ? (
           allComments.map((item) => {
             const commentUser = findUserByExternalAuthId(item.created_by, users)

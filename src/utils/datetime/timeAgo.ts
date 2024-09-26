@@ -17,8 +17,8 @@ export function timeAgo(dateString: string) {
 
   interval = seconds / 2592000
   if (interval > 1) {
-    return `${Math.floor(interval)} ${
-      Math.floor(interval) === 1 ? "mo" : "mos"
+    return `${Math.floor(interval)}${
+      Math.floor(interval) === 1 ? "mo" : "mo"
     } ago`
   }
 
