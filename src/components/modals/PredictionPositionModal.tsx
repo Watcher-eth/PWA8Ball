@@ -1,17 +1,17 @@
 // @ts-nocheck
-import { useState } from "react";
+import { useState } from "react"
 import {
   Drawer,
   DrawerContent,
   DrawerOverlay,
   DrawerTrigger,
-} from "@/components/ui/drawer.tsx";
-import { AnimatePresence, motion } from "framer-motion";
-import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx";
-import { CashoutOverview } from "../predictions/cashout/CashoutOverview";
-import { CashoutWarningScreen } from "../predictions/cashout/CashoutWarningScreen";
-import { CashoutConfirmScreen } from "../predictions/cashout/CashoutConfirmScreen";
-import { RedeemModal } from "../predictions/Redeem/RedeemModal";
+} from "@/components/ui/drawer.tsx"
+import { AnimatePresence, motion } from "framer-motion"
+import { MobileMyBetModal } from "../common/Charts/MyBetModal.tsx"
+import { CashoutOverview } from "../predictions/cashout/CashoutOverview"
+import { CashoutWarningScreen } from "../predictions/cashout/CashoutWarningScreen"
+import { CashoutConfirmScreen } from "../predictions/cashout/CashoutConfirmScreen"
+import { RedeemModal } from "../predictions/Redeem/RedeemModal"
 
 export function PredictionPositionModal({
   children,
@@ -35,39 +35,39 @@ export function PredictionPositionModal({
   openCashout,
   handleReceipt,
 }: {
-  children: React.ReactNode;
-  title: string;
-  image: string;
-  price: number;
-  ownedAmount: number;
-  options: string[];
-  betId: string;
-  topic: string;
-  icon: string;
-  question: string;
-  name?: string;
-  userId?: string;
-  option?: number;
-  optionNumber?: number;
-  isExternal?: boolean;
-  initialProb?: number;
-  onClose: () => void;
-  openCashout: () => void;
-  refetch: () => void;
+  children: React.ReactNode
+  title: string
+  image: string
+  price: number
+  ownedAmount: number
+  options: string[]
+  betId: string
+  topic: string
+  icon: string
+  question: string
+  name?: string
+  userId?: string
+  option?: number
+  optionNumber?: number
+  isExternal?: boolean
+  initialProb?: number
+  onClose: () => void
+  openCashout: () => void
+  refetch: () => void
 
-  handleReceipt: () => void;
+  handleReceipt: () => void
 }) {
   const [snap, setSnap] = useState<number | string | null>(
     `${window.innerHeight * 0.85}px`
-  );
-  const [step, setStep] = useState(1);
+  )
+  const [step, setStep] = useState(1)
 
   return (
     <div>
       <Drawer
         onClose={() => {
-          setStep(1);
-          setSnap(`${window.innerHeight * 0.85}px`);
+          setStep(1)
+          setSnap(`${window.innerHeight * 0.85}px`)
         }}
         snapPoints={[
           `${window.innerHeight * 0.85}px`,
@@ -79,7 +79,7 @@ export function PredictionPositionModal({
         <DrawerOverlay className="fixed inset-0 bg-black/40" />
 
         <DrawerTrigger>
-          <div className="mt-4 hover:scale-101 active:scale-95 transition-all">
+          <div className="mt-4 hover:scale-101 active:scale-[99.5%] transition-all">
             {children}
           </div>
         </DrawerTrigger>
@@ -175,5 +175,5 @@ export function PredictionPositionModal({
         </DrawerContent>
       </Drawer>
     </div>
-  );
+  )
 }

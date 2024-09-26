@@ -36,7 +36,7 @@ export function MobileProfilePage({
             alt="Profile Header"
             className="w-full h-[250px]  object-cover"
           />
-          <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-transparent via-[#080808]/80 to-[#080808]" />
+          <div className="absolute top-0 left-0 right-0 h-[250px] bg-gradient-to-b from-[#080808]/30 via-[#080808]/80 to-[#080808]" />
           <div className="absolute top-0 left-0 right-0 h-[250px] backdrop-blur-lg bg-opacity-50" />
         </div>
 
