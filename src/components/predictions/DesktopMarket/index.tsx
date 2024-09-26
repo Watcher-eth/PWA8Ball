@@ -59,7 +59,7 @@ export function DesktopMarketPage({ users, market, id }) {
   )
   console.log("option", userOwns)
   return (
-    <StandardPageWrapper className="h-full flex flex-col">
+    <StandardPageWrapper className="h-full w-full flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
           <div className="w-full h-40 relative">
@@ -97,10 +97,14 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full mt-4 overflow-y-auto z-[30] flex flex-col">
+      <div className="w-full h-full mt-4 overflow-y-auto z-[30] mx-4 lg:mx-0 flex flex-col">
         <div>
-          <Grid gap={4} cols={{ xs: 8 }} className="px-2 pt-4">
-            <Col xs={4} lg={5}>
+          <Grid
+            gap={4}
+            cols={{ xs: 8, sm: 4, md: 4, lg: 2 }}
+            className="px-2 pt-4"
+          >
+            <Col xs={4} sm={4} md={4} lg={5}>
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
 
               <div className="py-4">
