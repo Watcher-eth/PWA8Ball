@@ -6,6 +6,7 @@ import {
   ArrowLeftRight,
   Clock,
   Receipt,
+  ReceiptText,
   Stars,
   User2,
 } from "lucide-react"
@@ -85,9 +86,9 @@ export const MobileMyBetModal = (props: {
   return (
     <div
       className={`flex flex-col ${
-        props?.isDesktop ? "bg-transparent" : "bg-[#0c0c0c]"
+        props?.isDesktop ? "bg-transparent" : "bg-[#101010]"
       } self-center pb-[8px] gap-[2px] ${
-        props?.isDesktop ? "p-[6px]" : "p-[22px]"
+        props?.isDesktop ? "p-[6px]" : "p-[15px]"
       } pt-[5px] rounded-t-[30px] w-full`}
     >
       <div className="flex flex-row items-center justify-between my-[5px]">
@@ -111,36 +112,36 @@ export const MobileMyBetModal = (props: {
         >
           <img
             src={props.image}
-            className="h-[50px] w-[50px] rounded-full object-cover"
+            className="h-[45px] w-[45px] rounded-full object-cover"
             alt="Market image"
           />
         </motion.div>
       </div>
       <div className="flex flex-row items-center justify-between mt-[3px]">
-        <span className="text-[21px] text-white font-[700]">
+        <span className="text-[19px] text-white font-[700]">
           {currentPrices[currentPrices.length - 1].value.toFixed(2)}%{" "}
           {props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             ? props.options[props?.optionNumber === 1 ? 0 : 1]?.name
             : props.options?.name}
         </span>
         <span
-          className={`text-[22px] font-[700] ${
+          className={`text-[19px] font-[700] ${
             percentageDifference < 0
               ? "text-[#FF0050]"
               : percentageDifference === 0
               ? "text-[lightgray]"
-              : "text-[#28cd41]"
+              : "text-[#0050FF]"
           }`}
         >
           {percentageDifference > 0 && "+"}
           {percentageDifference}%
         </span>
       </div>
-      <div className="flex flex-row items-center justify-between -mt-1 pb-1">
-        <span className="text-base text-white/80 font-[Aeonik]">
+      <div className="flex flex-row items-center justify-between -mt-1 -pb-2">
+        <span className="text-lg text-white/80 font-[Aeonik]">
           {props.title}
         </span>
-        <span className="text-base text-white/80 font-[Aeonik]">
+        <span className="text-lg text-white/80 font-[Aeonik]">
           {timeframe === "1D"
             ? "Today"
             : timeframe === "1W"
@@ -151,7 +152,7 @@ export const MobileMyBetModal = (props: {
         </span>
       </div>
       {prices ? (
-        <div className={`${props?.isDesktop ? "h-[23vh]" : "h-[40vh]"} my-4`}>
+        <div className={`${props?.isDesktop ? "h-[23vh]" : "h-[40vh]"} my-4 mt-0`}>
           <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       ) : (
@@ -159,14 +160,13 @@ export const MobileMyBetModal = (props: {
           <GenericAreaChart chartData={chartData} xAxisKey="date" />
         </div>
       )}
-      <div className="w-full -mb-4 -mt-1">
+      <div className="w-full -mb-0 -mt-1">
         <TimeframeSelector
           timeframes={timeframes}
           timeframe={timeframe}
           setTimeframe={setTimeframe}
         />
       </div>
-      <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
       {props.ownedAmount === undefined ? (
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col items-start">
@@ -257,7 +257,7 @@ export const MobileMyBetModal = (props: {
           }}
           className="mt-2.5  hover:scale-[100.5%] active:scale-99 flex p-[10px] flex-row rounded-[25px] bg-[#D9D9D9] items-center justify-center w-1/2"
         >
-          <Receipt height={20} color={"#1D1D1D"} strokeWidth={3} />
+          <ReceiptText height={20} color={"#1D1D1D"} strokeWidth={3} />
           <span className="text-[20px] text-[#1D1D1D] font-[Aeonik-Bold] ml-[3px]">
             Details
           </span>
@@ -265,15 +265,15 @@ export const MobileMyBetModal = (props: {
       </div>
       <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
       <div className="flex flex-row items-center gap-[4px]">
-        <AlignLeft color="lightgray" strokeWidth={3} size={17} />
-        <span className="text-[lightgray] font-semibold text-[19px]">
+        <AlignLeft color="lightgray" strokeWidth={3} size={18} />
+        <span className="text-[lightgray] font-[500] text-[18px]">
           About {props.title}
         </span>
       </div>
-      <span className="text-[white] text-[16.5px] leading-[19px] mt-[5px]">
+      <span className="text-[white] text-[18.5px] leading-[23px] mb-1 mt-[3px]">
         {props.question}
       </span>
-      <div className="h-[1px] w-full bg-[rgba(100,100,100,0.3)] my-[14px] mt-[12px]" />
+      <div className="h-[1px] w-full bg-[rgba(100,100,100,0.3)] my-[14px] mt-[16px]" />
       <div className="flex flex-row items-center self-center gap-[5px] -mb-6">
         <Clock
           color="#989898"
