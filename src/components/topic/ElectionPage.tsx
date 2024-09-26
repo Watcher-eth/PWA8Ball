@@ -1,36 +1,36 @@
-import _ from "lodash";
-import { useState } from "react";
-import { Countdown } from "../common/CountDown";
+import _ from "lodash"
+import { useState } from "react"
+import { Countdown } from "../common/CountDown"
 import {
   ChevronDown,
   ChevronUp,
   ShareIcon,
   Split,
   TrendingUp,
-} from "lucide-react";
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
+} from "lucide-react"
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay";
-import { SECTION_DATA_MAP, SwingStates } from "@/constants/Elections";
-import Link from "next/link";
-import { getMarketPath } from "@/utils/urls";
-import { UsMapCard } from "../map/UsMapCard";
-import MotionNumber from "motion-number";
-import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { HARD_MARKETS } from "@/constants/markets";
-import { HARD_TOPICS } from "@/constants/topics";
+} from "../layouts/StandardBleedOverlay"
+import { SECTION_DATA_MAP, SwingStates } from "@/constants/Elections"
+import Link from "next/link"
+import { getMarketPath } from "@/utils/urls"
+import { UsMapCard } from "../map/UsMapCard"
+import MotionNumber from "motion-number"
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { HARD_MARKETS } from "@/constants/markets"
+import { HARD_TOPICS } from "@/constants/topics"
 
 function Button({
   text,
   IconComponent,
   onClick,
 }: {
-  text: string;
-  IconComponent: any;
-  onClick?: any;
+  text: string
+  IconComponent: any
+  onClick?: any
 }) {
   return (
     <div
@@ -40,7 +40,7 @@ function Button({
       <div className="text-lg font-medium text-[#999999] mr-1">{text}</div>
       <IconComponent color="#999999" size={"1rem"} strokeWidth={3.5} />
     </div>
-  );
+  )
 }
 
 function CandidateSection({
@@ -50,32 +50,34 @@ function CandidateSection({
   change,
   side,
 }: {
-  image: string;
-  name: string;
-  odds: number;
-  change: number;
-  side: 1 | 2;
+  image: string
+  name: string
+  odds: number
+  change: number
+  side: 1 | 2
 }) {
   return (
-    <div className="flex flex-row items-center z-1">
+    <div className="flex  flex-row items-center z-1">
       {side === 1 && (
         <div className="flex flex-col hover:scale-101 items-center">
           <img
             src={image}
-            className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+            className="h-[4rem] w-[4rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
           />
-          <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
+          <div className=" text-[1.4rem] md:text-[1.8rem] mt-1 md:mt-3 font-[Aeonik-Bold] text-white">
             {name}
           </div>
         </div>
       )}
       <div
-        className={`flex flex-col -space-y-4 ${side === 1 ? "ml-5" : "mr-5"}`}
+        className={`flex flex-col -space-y-4 ${
+          side === 1 ? "ml-2.5 md:ml-5" : " mr-2.5 md:mr-5"
+        }`}
       >
-        <div className="text-[4rem] lg:text-[4.5rem] font-semibold text-white">
+        <div className="text-[2.2rem] lg:text-[4.5rem] font-semibold text-white">
           <MotionNumber value={odds} />%
         </div>
-        <div className="text-[1.2rem] font-medium flex flex-row items-center text-[#FF0050]">
+        <div className=" text-[1rem] md:text-[1.2rem] pt-1.5 md:mt-0 font-medium flex flex-row items-center text-[#FF0050]">
           <ChevronDown
             color="#FF0050"
             strokeWidth={3}
@@ -89,26 +91,29 @@ function CandidateSection({
         <div className="flex flex-col hover:scale-101 items-center">
           <img
             src={image}
-            className="sm:h-[3rem] sm:w-[3rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+            className="h-[4rem] w-[4rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
           />
-          <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
+          <div className="text-[1.4rem] md:text-[1.8rem] mt-1 md:mt-3 font-[Aeonik-Bold] text-white">
             {name}
           </div>
         </div>
       )}
     </div>
-  );
+  )
 }
 
 function SwingStateComponent({
   sectionData,
   state,
 }: {
-  sectionData: any;
-  state: any;
+  sectionData: any
+  state: any
 }) {
   return (
-    <Link href={getMarketPath(state?.marketId)} className="flex  hover:scale-101 active:scale-98 flex-col sm:w-full w-1/2 p-4 my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]">
+    <Link
+      href={getMarketPath(state?.marketId)}
+      className="flex  hover:scale-101 active:scale-98 flex-col w-full md:mx-0 mx-3  p-4 my-0 md:my-1 rounded-[1.2rem] bg-[#151515] relative border-2 border-[#212121]"
+    >
       <div
         className="absolute z-0 h-full bg-gradient-to-r top-0 from-[#0050FF]/[10%]  rounded-l-lg to-[#0050FF]/[0%]  left-0"
         style={{ width: `${sectionData.odds[0]}%` }}
@@ -161,35 +166,35 @@ function SwingStateComponent({
         </div>
       </div>
     </Link>
-  );
+  )
 }
 
-export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59");
+export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59")
 
 export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
-  const [section, setSection] = useState("Presidency");
+  const [section, setSection] = useState("Presidency")
 
   // @ts-ignore
   const markets = enhanceMarketsWithImageAndPolyId(
     allTopicMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
+  )
 
   const enhancedeTrendingMarkets = enhanceMarketsWithImageAndPolyId(
     trendingMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  );
-  const sectionData = SECTION_DATA_MAP[section];
+  )
+  const sectionData = SECTION_DATA_MAP[section]
 
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col ">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
-          <div className="w-full h-80 relative">
+          <div className="w-full  h-[50vh] md:h-80 relative">
             <img
-              className="w-full transform object-cover h-80 relative -mt-40"
+              className="w-full  h-[50vh] transform object-cover md:h-80 relative -mt-[25vh] md:-mt-40"
               alt="CoverImage"
               src={
                 section === "Presidency"
@@ -199,28 +204,28 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
                   : "https://dornsife.usc.edu/news/wp-content/uploads/sites/7/2023/04/story-3526-768x432.jpg"
               }
             />
-            <div className="h-80 w-full bg-gradient-to-t from-[#080808] backdrop-blur-xl to-transparent absolute bottom-0" />
+            <div className="md:h-80  h-[50vh]  w-full bg-gradient-to-t from-[#080808] backdrop-blur-xl to-transparent absolute bottom-0" />
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
 
-      <div className="w-full bg-[#080808] z-2 flex flex-col md:px-10 lg:px-20 xl:px-40 2xl:px-80 sm:px-3">
+      <div className="w-full bg-[#080808] z-2 flex flex-col px-0 md:px-10 lg:px-20 xl:px-40 2xl:px-80 sm:px-0">
         <img
-          className=" w-[13rem] object-cover -mt-[5rem] mb-3"
+          className=" md:w-[13rem] w-[8rem] object-cover md:self-start self-center -mt-[11rem] md:-mt-[5rem] mb-3"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1280px-Flag_of_the_United_States.png"
         />
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex md:flex-row flex-col items-center md:justify-between">
           <div className="flex flex-col">
-            <div className="text-[1.8rem]  lg:text-[3rem] md:leading-[3rem] text-white font-[Aeonik-Bold]">
-              2024 US Election Forecast
+            <div className="text-[2rem] md:text-start text-center  lg:text-[3rem] md:leading-[3rem] md:mb-0 -mb-5 text-white font-[Aeonik-Bold]">
+              2024 Election Forecast
             </div>
-            <div className="text-[1.3rem] text-[lightgray] md:mt-0 -mt-3 font-medium">
+            <div className="text-[1.3rem] md:text-start text-center text-[lightgray] md:my-0 my-4 font-medium">
               Live forecasts for the 2024 US Elections
             </div>
           </div>
           <Countdown endDate={ELECTION_END_DATE} />
         </div>
-        <div className="flex flex-row items-center justify-between mt-8">
+        <div className="flex flex-row items-center justify-between md:ml-0 ml-4 md:mr-0 mr-1.5 mt-8">
           <div className="flex flex-row space-x-3 items-center">
             {_.keys(SECTION_DATA_MAP).map((key) => (
               <div
@@ -236,7 +241,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
           </div>
           <Button text="Share" IconComponent={ShareIcon} />
         </div>
-        <div className="flex flex-row p-8 bg-[#151515] rounded-lg my-6 justify-between items-center relative">
+        <div className="flex flex-row p-5 md:p-8 bg-[#151515] rounded-lg my-6 md:ml-0 ml-3.5 justify-between items-center relative">
           <div
             className="absolute z-0 h-full bg-gradient-to-r from-[#0050FF]/[10%] rounded-l-lg to-[#0050FF]/[0%]  left-0"
             style={{ width: `${sectionData.odds[0]}%` }}
@@ -251,7 +256,6 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
             odds={sectionData.odds[0]}
             change={1}
             side={1}
-
           />
           <div className="flex flex-col items-center -space-y-1 z-1"></div>
           <CandidateSection
@@ -262,10 +266,10 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
             side={2}
           />
         </div>
-        <div className="h-full w-full my-5 mb-[2rem] rounded-lg">
+        <div className="h-full w-[98%] md:w-full mx-3  md:mx-0 my-2 md:my-5 md:mb-[2rem] rounded-lg">
           <UsMapCard />
         </div>
-        <div className="flex flex-row items-center mt-6 justify-between">
+        <div className="flex md:ml-0 ml-3.5 flex-row items-center mt-3 md:mt-6 justify-between">
           <div className="flex flex-row items-center space-x-2.5">
             <Split color="white" height={"2rem"} strokeWidth={3} />
             <div className="text-white font-semibold text-[1.8rem] my-3">
@@ -274,17 +278,16 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
           </div>
           <Button text="See all" IconComponent={ChevronDown} />
         </div>
-        <div className="grid grid-cols-2 gap-5 mb-8">
+        <div className="grid md:grid-cols-2 w-[95%] md:w-full grid-cols-1 gap-5 mb-8">
           {SwingStates.map((state) => (
             <SwingStateComponent
               key={state.name}
               sectionData={sectionData}
               state={state}
-
             />
           ))}
         </div>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row md:mx-0 mx-3 md:mr-0 mr-2 items-center justify-between">
           <div className="flex flex-row items-center space-x-2">
             <TrendingUp
               color="white"
@@ -292,7 +295,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
               height={"3.8rem"}
               strokeWidth={3}
             />
-            <div className="text-white font-semibold text-[1.8rem] my-3">
+            <div className="text-white font-semibold text-[1.8rem] md:my-3">
               Trending Today
             </div>
           </div>
@@ -302,7 +305,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
           <Link
             href={getMarketPath(String(item.id))}
             key={item.id}
-            className="w-full flex flex-row active:scale-99 items-center justify-between mt-0 border-b-2 border-[#212121] py-4"
+            className="w-full flex flex-row active:scale-99 mx-3  md:mx-0 items-center justify-between mt-0 border-b-[0.1rem] border-[#212121] py-4"
           >
             <div className="flex flex-row items-center">
               <img
@@ -313,13 +316,13 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
                 <div className="text-[1.35rem] text-white font-semibold">
                   {item.title}
                 </div>
-                <div className="text-[1.1rem] text-[lightgray] font-normal">
+                <div className="text-[1.1rem] line-clamp-1 line-height-[0.9rem] md:line-height-[1rem] md:line-clamp-none text-[lightgray] font-normal">
                   {item.question}
                 </div>
               </div>
             </div>
             <div className="flex flex-row items-baseline">
-              <div className="text-[2.1rem] text-white font-semibold">
+              <div className="text-[0.01rem] md:text-[2.1rem] text-white font-semibold">
                 {item?.outcomeOddsA / 100}%{" "}
                 {item?.outcomeA?.length < 4
                   ? item?.outcomeA
@@ -330,5 +333,5 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
         ))}
       </div>
     </StandardPageWrapper>
-  );
+  )
 }
