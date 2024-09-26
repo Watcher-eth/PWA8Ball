@@ -102,13 +102,13 @@ function MobileMarketContent({
       className="bg-[#070707] w-screen overflow-auto flex flex-col"
     >
       <div className="relative h-[100vw]">
-        <div className="flex items-center absolute top-3 justify-between px-6 py-2 w-screen z-2">
+        <div className="flex items-center absolute top-3 justify-between px-4 py-2 w-screen z-2">
           <DrawerClose>
             <Link href={HOME_PATH} prefetch={true}>
               <ArrowLeft
                 strokeWidth={3.8}
                 size={33}
-                className="p-2 text-white rounded-full border-[0.1rem] border-[#212121] backdrop-blur-md bg-[rgba(50 , 50 , 50 , 0.1)]"
+                className="p-2 text-white rounded-full border-[0.05rem] border-[#212121]/20 backdrop-blur-md bg-[#212121]/40"
               />
             </Link>
           </DrawerClose>
@@ -123,7 +123,7 @@ function MobileMarketContent({
             <Share
               size={33}
               strokeWidth={3.3}
-              className="p-2 rounded-full text-white border-[0.1rem] border-[#212121] backdrop-blur-lg md-[rgba(50 , 50 , 50 , 0.1)]"
+              className="p-2 rounded-full text-white border-[0.05rem] border-[#212121]/20 backdrop-blur-md bg-[#212121]/40"
             />
           </MobileShareBetModal>
         </div>
@@ -144,7 +144,7 @@ function MobileMarketContent({
       </div>
       <div
         className={`
-          pr-7 mt-[-3.8rem]  mb-[-0.7rem] pl-5 pb-0 p-3
+          pr-7 mt-[-3rem]  mb-[-0.7rem] pl-5 pb-0 p-3
           text-white text-bold leading-[2.4rem]
           self-start text-start z-2 font-[Benzin-Bold]
           ${
@@ -152,7 +152,7 @@ function MobileMarketContent({
               ? "text-[35px]"
               : title?.length < 21
               ? "text-[31px]"
-              : "text-[26.5px]"
+              : "text-[24.5px]"
           }
         `}
       >
