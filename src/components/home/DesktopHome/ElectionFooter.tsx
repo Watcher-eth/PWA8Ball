@@ -20,7 +20,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
     markets,
     selectedTopic: "🇺🇸 2024 US Elections",
   })
-  console.log("markets356", markets)
+  // console.log("markets356", markets)
   return (
     <div className="px-4 mt-[6.5rem] flex flex-col w-full">
       <div className="flex flex-col w-full px-14">

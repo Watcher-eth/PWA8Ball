@@ -91,7 +91,7 @@ export function DesktopOnboarding() {
             onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
-        <WalletOnboardButton
+        {/* <WalletOnboardButton
           label="MetaMask"
           iconSrc={METAMASK_ICON_SRC}
           onClick={login}
@@ -105,7 +105,7 @@ export function DesktopOnboarding() {
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
           // onClick={login}
-        />
+        /> */}
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy

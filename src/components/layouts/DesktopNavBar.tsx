@@ -24,7 +24,7 @@ export function DesktopNavBar() {
     user?.walletType !== "smartwallet" ||
     (!user?.name?.startsWith("0x") && user?.walletType === "smartwallet")
 
-  console.log({ user, isNotEOA })
+  // console.log({ user, isNotEOA })
   return (
     <div className="w-full absolute z-50 top-0">
       <div
