@@ -139,7 +139,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
           </InverseVerticalBleedOverlay>
         </StandardBleedOverlay>
-        <div className="flex flex-col gap-4 p-0 min-h-screen bg-[#080808] z-20 -mt-6 px-6">
+        <div className="flex flex-col gap-4 p-0 min-h-screen bg-[#080808] z-20 -mt-8 px-6">
           <div className="flex flex-row items-center justify-between">
             <div className="flex flex-col">
               {isEditing ? (
@@ -332,7 +332,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
           ) : (
             <div className="w-full flex flex-col items-center">
-              <div className="text-[2.2rem] mt-[8%] font-[Aeonik-Bold] text-white">
+              <div className="text-[2.2rem] mt-[5%] font-[Aeonik-Bold] text-white">
                 Nothing here yet
               </div>
               <div className="text-[1.1rem] font-medium mt-0.5 text-[lightgray]">

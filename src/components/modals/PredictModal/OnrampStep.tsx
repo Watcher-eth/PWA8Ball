@@ -1,34 +1,34 @@
 // @ts-nocheck
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { Copy } from "lucide-react";
-import { copyToClipboard } from "@/utils/copyToClipboard";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import { RampInstantSDK } from "@ramp-network/ramp-instant-sdk";
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/Button"
+import { ArrowUpDown, Copy } from "lucide-react"
+import { copyToClipboard } from "@/utils/copyToClipboard"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import { RampInstantSDK } from "@ramp-network/ramp-instant-sdk"
 
 const stepVariants = {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -10 },
-};
+}
 
 export function OnrampStep({
   setStep,
   method,
 }: {
-  setStep: (step: number) => void;
-  method: number;
+  setStep: (step: number) => void
+  method: number
 }) {
   return (
-    <div>
+    <div className="max-w-[30vw]">
       {method === 2 && <BuyWithUniswap setStep={setStep} />}
       {method === 3 && <BuyWithFiat setStep={setStep} />}
       {method === 4 && <ReceiveGHO setStep={setStep} />}
     </div>
-  );
+  )
 }
 
 function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
@@ -56,11 +56,11 @@ function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
         <StepButton onClick={() => setStep(3)} isDark={true} label="Continue" />
       </div>
     </motion.div>
-  );
+  )
 }
 
 function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
   return (
     <motion.div
       key="step5"
@@ -69,28 +69,29 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
       animate="animate"
       exit="exit"
       className={`
-        flex flex-col self-center  px-2 py-3
+        flex flex-col self-center    p-2 py-4 pb-2.5
       `}
     >
-      <div className="text-white text-[1.5rem] font-bold mt-3 mx-[1.65rem]">
+      <ArrowUpDown color="white" strokeWidth={3.3} size={45} />
+      <div className="text-white text-[1.7rem] font-bold mt-2 ">
         Receive USDC
       </div>
-      <div className="text-[lightgray] flex   text-base/[1rem]  items-center px-1 text-[0.899rem] mb-4 mt-1 font-bold mx-6">
+      <div className="text-[lightgray] flex leading-5 text-base/[1rem]  items-center text-[1rem] mb-4 mt-1 ">
         Send yourself USDC on Base. Please make sure that you are using the
         correct chain before sending any funds.
       </div>
-      <div className="h-[0.05rem] w-full my-3 bg-[#212121] mx-6 rounded-full" />
-      <div className="flex flex-col w-full ">
-        <div className="text-[lightgray] flex items-center space-x-[0.3rem] mt-3  text-base font-bold  mx-[1.65rem]">
+      <div className="h-[0.05rem] w-full my-3 bg-[#212121] rounded-full" />
+      <div className="flex flex-row items-center my-3 mt-5 justify-between w-full ">
+        <div className="text-[lightgray] flex items-center space-x-[0.3rem]  text-base font-bold ">
           Your Address
         </div>
-        <div className="text-white flex items-center space-x-[0.35rem] w-full  text-[1.25rem] font-bold  mx-[1.65rem]">
+        <div className="text-white flex items-center space-x-[0.35rem]   text-[1.25rem] font-bold ">
           <div>{shortenAddress(user?.walletAddress, false)} </div>
           <motion.div
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => {
-              copyToClipboard(user?.walletAddress);
+              copyToClipboard(user?.walletAddress)
             }}
           >
             <Copy className="mt-[0.1rem]" size={18} strokeWidth={3} />
@@ -98,45 +99,50 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         </div>
       </div>
 
-      <div className="flex mt-3 w-full items-center justify-between">
-        <div className="text-[lightgray] text-base  m-[-0.2rem] font-bold mx-[1.65rem]">
+      <div className="flex my-3 w-full items-center justify-between">
+        <div className="text-[lightgray] text-base  m-[-0.2rem] font-bold ">
           Network
         </div>
-        <div className="text-white flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  mx-[1.65rem]">
+        <div className="text-white flex items-center space-x-[0.5rem]  text-[1.15rem] font-bold  ">
+          <div>Base</div>
           <Avatar className="h-[1.3rem] w-[1.3rem] mt-[0.1rem]  ">
             <AvatarImage
               style={{ objectFit: "cover" }}
               src="https://www.tbstat.com/cdn-cgi/image/format=webp,q=75/wp/uploads/2023/02/coinbase-base1.png"
             />
           </Avatar>
-          <div>Base</div>
         </div>
       </div>
-      <div className="flex mb-7 mt-2  w-full items-center justify-between">
-        <div className="text-[lightgray] text-base m-[-0.2rem] font-bold mx-[1.65rem]">
-          Rec Minimum
+      <div className="flex mb-7 my-3  w-full items-center justify-between">
+        <div className="text-[lightgray] text-base m-[-0.2rem] font-bold ">
+          Recommended Minimum
         </div>
-        <div className="text-[lightgray] flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  mx-[1.65rem]">
-          <div>$15.00</div>
+        <div className="text-[white] flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  ">
+          <div>15.00 USDC</div>
         </div>
       </div>
-      <div className="flex items-center self-center  mt-2 w-full ml-[3rem] my-4 space-x-3 ">
+      <div className="flex items-center self-center  mt-2 w-full   my-0 space-x-4 ">
         <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
         <StepButton
+          isDark={true}
           onClick={() => {
-            copyToClipboard(user?.walletAddress);
+            copyToClipboard(user?.walletAddress)
           }}
         >
-          <Copy size={17} className="mt-[0.05rem]" strokeWidth={3} />
+          <Copy size={17} className="mt-[0.05rem] mr-1.5" strokeWidth={3} />
           <div>Copy</div>
         </StepButton>
       </div>
+      <div className="text-[gray] text-[0.85rem] text-center mt-[0.8rem] px-2 font-[400] ">
+        Please make sure you are on Base Mainnet and sending to the correct
+        address. Lost funds can not be recovered.
+      </div>
     </motion.div>
-  );
+  )
 }
 
 const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
   new RampInstantSDK({
     hostAppName: "Glimpse",
     hostApiKey: "",
@@ -149,7 +155,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
     userAddress: user?.walletAddress,
     // defaultAsset: "USDC",
     finalUrl: "https://pwa-8-ball.vercel.app/settings",
-  }).show();
+  }).show()
 
   return (
     <motion.div
@@ -225,23 +231,23 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
         <StepButton onClick={() => setStep(3)} isDark={true} label="Continue" />
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
 function StepButton({ onClick, children, isDark, label, className = "" }) {
-  let styleClassName;
+  let styleClassName
   if (isDark) {
     styleClassName =
-      "active:bg-[#181818] hover:bg-[#232323] bg-[#212121] text-white";
+      "active:bg-[#131313] hover:bg-[#181818] bg-[#151515] border-[0.07rem] border-[#191919] text-white"
   } else {
     styleClassName =
-      "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[#212121]";
+      "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] border-[0.07rem] border-[#808080] text-[#212121]"
   }
 
   return (
     <div
       className={`
-        flex-grow
+        w-full
         active:scale-98 hover:scale-101 transition-all
       `}
     >
@@ -252,5 +258,5 @@ function StepButton({ onClick, children, isDark, label, className = "" }) {
         {label ?? children}
       </Button>
     </div>
-  );
+  )
 }

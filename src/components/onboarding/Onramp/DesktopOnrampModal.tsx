@@ -31,7 +31,7 @@ function DesktopOnramp() {
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="bg-[#080808] rounded-3xl w-full  "
+      className="bg-[#080808] rounded-3xl w-full max-w-[30vw]  "
     >
       <AnimatePresence>
         {step === 1 && <GetGhoModal setStep={setStep} method={1} />}
