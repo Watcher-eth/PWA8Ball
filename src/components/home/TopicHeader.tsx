@@ -1,13 +1,13 @@
 // @ts-nocheck
-import Marquee from "react-fast-marquee";
-import { motion } from "framer-motion";
-import { TEST_TOPICS } from "@/constants/testData";
+import Marquee from "react-fast-marquee"
+import { motion } from "framer-motion"
+import { TEST_TOPICS } from "@/constants/testData"
 
 export function TopicHeader({ setSelectedTopic, selectedTopic }) {
   return (
     <div
       className={`
-        flex flex-col w-full py-4 bg-[#080808]
+        flex flex-col w-full py-4 bg-[#080808] z-10
       `}
     >
       <Marquee speed={40} gradient={false}>
@@ -37,15 +37,15 @@ export function TopicHeader({ setSelectedTopic, selectedTopic }) {
         </div>
       </Marquee>
     </div>
-  );
+  )
 }
 
 function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
   function onTopicPress() {
     if (selectedTopic === item) {
-      setSelectedTopic("🔥 Trending");
+      setSelectedTopic("🔥 Trending")
     } else {
-      setSelectedTopic(item);
+      setSelectedTopic(item)
     }
   }
 
@@ -73,5 +73,5 @@ function TopicButton({ item, index, selectedTopic, setSelectedTopic }) {
         {item}
       </button>
     </motion.div>
-  );
+  )
 }
