@@ -1,8 +1,11 @@
-
 import { Input } from "@/components/ui/Input"
 import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react"
 import { useLoginWithOAuth, usePrivy } from "@privy-io/react-auth"
-import { WalletButton, ConnectButton, useConnectModal } from "@rainbow-me/rainbowkit"
+import {
+  WalletButton,
+  ConnectButton,
+  useConnectModal,
+} from "@rainbow-me/rainbowkit"
 
 import { DesktopCardModal } from "../modals/DesktopCardModal"
 import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons"
@@ -28,8 +31,10 @@ export function DesktopOnboardingModal({
   children: React.ReactNode
 }) {
   const { user } = useUserStore()
-  const { address } = useAccount()
+  const { user: PrivyUser } = usePrivy()
 
+  const { address } = useAccount()
+  console.log("user", user, PrivyUser)
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
@@ -91,7 +96,7 @@ export function DesktopOnboarding() {
             onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
-        {/* <WalletOnboardButton
+        <WalletOnboardButton
           label="MetaMask"
           iconSrc={METAMASK_ICON_SRC}
           onClick={login}
@@ -105,7 +110,7 @@ export function DesktopOnboarding() {
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
           // onClick={login}
-        /> */}
+        />
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy
@@ -182,9 +187,7 @@ function WalletOnboardButton({
          cursor-pointer
        `}
           >
-            <div
-              className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
-            >
+            <div className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white">
               <img src={iconSrc} className="size-5 mr-2" />
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
             </div>
@@ -247,9 +250,7 @@ export const CustomConnectButton = ({
                      cursor-pointer
                     `}
                   >
-                    <div
-                      className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white"
-                    >
+                    <div className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white">
                       <img src={iconSrc} className="size-5 mr-2" />
                       All Wallets
                     </div>

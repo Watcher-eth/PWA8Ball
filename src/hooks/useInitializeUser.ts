@@ -13,6 +13,7 @@ import { getUserById } from "@/graphql/queries/users/useUserById"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 import { useGetTotalFollowers } from "@/supabase/queries/user/useGetTotalFollowers"
 import { useGetTotalFollowing } from "@/supabase/queries/user/getTotalFollowing"
+import { useCreateUser } from "./actions/UserRegistry/useCreateUser"
 
 const NAMESPACE = "10e62626-6a5d-45ef-96d8-02682a9977a7" // Define a static namespace for generating UUIDs
 const DEFAULT_PFP =
@@ -23,95 +24,71 @@ export function useInitializeUser() {
   const { user, setUser, setWalletType } = useUserStore()
   const { smartAccountAddress, smartAccountClient } = useSmartAccount()
   const { address: eoaAddress, isConnected } = useAccount()
-  const { upsertUser } = useUpsertUser()
+  const { handleCreateUser } = useCreateUser()
   const { data: followersCount } = useGetTotalFollowers(user?.walletAddress)
   const { data: followingCount } = useGetTotalFollowing(user?.walletAddress)
 
-  // console.log("addyy", smartAccountAddress, smartAccountClient)
+  console.log("addyy", user)
 
   async function fetchUser() {
-    if (ready && authenticated && privyUser && !eoaAddress) {
-      const dbUser = await getUserById(smartAccountAddress)
-      console.log("privyUser", privyUser, dbUser, smartAccountAddress)
+    try {
+      let walletType = "eoa"
 
-      if (privyUser) {
-        setUser({
-          walletType: "smartwallet",
-        })
+      if (ready && authenticated && privyUser) {
+        walletType = "smartwallet"
       }
-      if (dbUser) {
-        console.log({ dbUser })
-        setUser({
-          ...dbUser,
-          pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
-          walletType: "smartwallet",
-          totalFollowers: followersCount,
-          totalFollowing: followingCount,
-        })
-      } else if (smartAccountAddress && user?.walletType !== "eoa") {
-        const update = {
-          id: smartAccountAddress,
-          walletAddress: smartAccountAddress,
-          name: user?.name,
-          pfp: user?.pfp,
-          socials: user?.socials,
-          externalAuthProviderUserId: privyUser?.id,
-          updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-          createdAt: BigInt(Math.floor(Date.now() / 1000)),
-          totalFollowers: followersCount,
-          totalFollowing: followingCount,
-        }
 
-        const newUser = await upsertUser(update)
+      const walletAddress =
+        walletType === "smartwallet" ? smartAccountAddress : eoaAddress
 
-        newUser.pfp = DEFAULT_PFP
+      if (!walletAddress) return
+      console.log("before user")
 
-        setUser({
-          ...update,
-          walletType: "smartwallet",
-        })
-      }
-    } else if (isConnected && eoaAddress) {
-      // Handle EOA user
-      const eoaUUID = uuidv5(eoaAddress, NAMESPACE)
-      const dbUser = await getUserById(eoaAddress)
+      const dbUser = await getUserById(walletAddress)
+      console.log("dbUser", dbUser, walletAddress)
 
       if (dbUser) {
         setUser({
           ...dbUser,
-          name: dbUser?.name ? dbUser?.name : "Anon",
-          pfp: dbUser?.pfp ? dbUser?.pfp : DEFAULT_PFP,
-          walletType: "eoa",
+          pfp: dbUser?.pfp || DEFAULT_PFP,
+          walletType,
           totalFollowers: followersCount,
           totalFollowing: followingCount,
         })
       } else {
-        const update = {
-          id: getChecksummedAddress(eoaAddress),
-          walletAddress: getChecksummedAddress(eoaAddress),
-          name: user?.name,
-          pfp: user?.pfp,
-          externalAuthProviderUserId: eoaUUID,
+        const userUUID =
+          walletType === "eoa"
+            ? uuidv5(walletAddress, NAMESPACE)
+            : privyUser?.id
+
+        const newUser = {
+          id: walletAddress,
+          walletAddress,
+          name: user?.name || "Anon",
+          pfp: user?.pfp || DEFAULT_PFP,
+          socials: user?.socials || "{}",
+          externalAuthProviderUserId: userUUID,
           updatedAt: BigInt(Math.floor(Date.now() / 1000)),
           createdAt: BigInt(Math.floor(Date.now() / 1000)),
-          totalFollowers: followersCount,
-          totalFollowing: followingCount,
         }
-        console.log("updaze eoa", update)
-        const newUser = await upsertUser(update)
-        newUser.pfp = newUser?.pfp ?? DEFAULT_PFP
+
+        const tx = await handleCreateUser(newUser)
+        console.log("Created new user:", newUser, tx)
 
         setUser({
-          ...update,
-          walletType: "eoa",
-          name: user?.name,
+          ...newUser,
+          totalFollowers: followersCount,
+          totalFollowing: followingCount,
+          walletType,
         })
       }
+    } catch (error) {
+      console.error("Error fetching or creating user:", error)
     }
   }
 
   useEffect(() => {
-    // fetchUser()
+    fetchUser()
   }, [
     ready,
     authenticated,
