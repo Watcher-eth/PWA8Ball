@@ -42,7 +42,7 @@ export function TopMarket() {
   }))
 
   return (
-    <div className="w-full flex flex-row pl-1 mt-2 -mb-5  border-b-[0.1rem] border-[#181818] pb-12">
+    <div className="w-full flex flex-row pl-1 -mt-2 -mb-5  border-b-[0.1rem] border-[#181818] pb-12">
       <Link
         href={getMarketPath(enhancedMarket?.marketId)}
         className="flex flex-col w-[30%] pr-5 z-1 pt-2"
@@ -57,16 +57,16 @@ export function TopMarket() {
         )}
 
         {enhancedMarket?.title ? (
-          <div className="text-white text-3xl mt-6 font-semibold">
+          <div className="text-white text-2xl lg:text-3xl mt-6 font-semibold">
             {enhancedMarket?.title}
           </div>
         ) : (
           <Skeleton
-            className={`h-9 w-[18rem] object-cover mt-6 rounded-full`}
+            className={`h-9 w-[18rem] object-cover mt-0 lg:mt-6 rounded-full`}
           />
         )}
         {enhancedMarket?.question ? (
-          <div className="text-[lightgray] mt-2 text-lg font-[Aeonik]">
+          <div className="text-[lightgray] lg:mt-2 text-lg font-[Aeonik]">
             {enhancedMarket?.question}
           </div>
         ) : (
@@ -75,7 +75,7 @@ export function TopMarket() {
             <Skeleton className={`h-[1rem] mt-2 w-[16rem]  rounded-md`} />
           </div>
         )}
-        <div className="flex pt-2 space-x-2">
+        <div className="flex flex-col items-start lg:items-center gap-3 lg:gap-2 lg:flex-row pt-2 space-x-2">
           <Chip className="flex-shrink space-x-2 pt-0.5">
             <Users
               size="16"

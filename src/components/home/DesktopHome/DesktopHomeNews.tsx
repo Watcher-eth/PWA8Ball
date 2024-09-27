@@ -1,12 +1,12 @@
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Skeleton } from "@/components/ui/Skeleton"
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { MarketCard } from "./MarketCard";
-import { PaginationDots } from "./CarouselDotButton";
+} from "@/components/ui/carousel"
+import { MarketCard } from "./MarketCard"
+import { PaginationDots } from "./CarouselDotButton"
 
 export function DesktopHomeNews({ markets, amount, topic }) {
   return (
@@ -24,30 +24,30 @@ export function DesktopHomeNews({ markets, amount, topic }) {
           topic === true && "-mt-10"
         }`}
       >
-        <Carousel className="flex flex-col  no-scrollbar mb-10 w-full gap-2   overflow-y-visible">
-          <CarouselContent className="flex flex-row  no-scrollbar  w-full gap-1 py-6  overflow-y-visible">
+        <Carousel className="flex flex-col no-scrollbar mb-10 w-full gap-2 overflow-y-visible">
+          <CarouselContent className="flex flex-row no-scrollbar w-full gap-1 py-6 overflow-y-visible">
             {markets
-              ? markets?.map((item, index) => {
-                  if (
-                    (amount === 4 && index > 4) ||
-                    amount === 3 ||
-                    (amount === 2 && index > 4)
-                  )
-                    return (
-                      <CarouselItem
-                        className={`${
-                          amount === 4 ? "basis-1/4 w-1/4" : "basis-1/3 w-1/3"
-                        }`}
-                      >
-                        <MarketCard
-                          loading={true}
-                          key={index}
-                          item={item}
-                          isTwoCards={false}
-                        />
-                      </CarouselItem>
-                    );
-                })
+              ? markets
+                  .slice(0, amount) // Use .slice() to limit the number of items shown based on the amount
+                  .map((item, index) => (
+                    <CarouselItem
+                      key={index}
+                      className={`${
+                        amount === 4
+                          ? "basis-1/4 w-1/4"
+                          : amount === 3
+                          ? "basis-1/3 w-1/3"
+                          : "basis-1/2 w-1/2"
+                      }`}
+                    >
+                      <MarketCard
+                        loading={true}
+                        key={index}
+                        item={item}
+                        isTwoCards={amount === 2 ?? false}
+                      />
+                    </CarouselItem>
+                  ))
               : [1, 2, 3, 4, 5, 6].map((index) => (
                   <div
                     className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
@@ -61,5 +61,5 @@ export function DesktopHomeNews({ markets, amount, topic }) {
         </Carousel>
       </div>
     </div>
-  );
+  )
 }
