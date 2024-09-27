@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext, useMemo } from "react"
 
 import {
   type Address,
@@ -83,57 +83,54 @@ export function SmartAccountProvider({
 }) {
   // const { connectWallet } = useConnectWallet();
   // const { connectWallet } = usePrivy();
-  const config = useConfig()
+  // const config = useConfig()
   const { connectors, connect, status, error } = useConnect()
-  const { createWallet } = usePrivy()
 
   const { ready, wallets } = useWallets()
-  const { isConnected, address: accountAddress } = useAccount()
-  const { user } = useUserStore()
-  const wagmiPublicClient = usePublicClient()
-  const { user: privyUser, ready: userReady, authenticated } = usePrivy()
-  const { walletType } = user || {}
+  const { isConnected, address, connector: currentConnector } = useAccount()
+  const {data:client} = useWalletClient({
+    account: address as Address,
+    chainId: baseSepolia.id,
+  })
+  // const client = {}
+  // const client = useWalletClient({
+  //   account: address as Address,
+  //   chainId: baseSepolia.id,
+  // })
+  // const { user } = useUserStore()
+  // const wagmiPublicClient = usePublicClient()
+  const {
+    // user: privyUser,
+    ready: userReady,
+    authenticated,
+    createWallet,
+  } = usePrivy()
+  // const { walletType } = user || {}
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   )
+  console.log({ client, address, currentConnector })
 
-
-  console.log("accountAddress", accountAddress)
-  console.log("ready1", ready)
-  console.log("wallets1", wallets)
-  console.log("embeddedWallet1", embeddedWallet)
-  console.log("privyUser", privyUser)
+  // console.log("accountAddress", accountAddress)
+  // console.log("ready1", ready)
+  // console.log("wallets1", wallets)
+  // console.log("embeddedWallet1", embeddedWallet)
+  // console.log("privyUser", privyUser)
   // States to store the smart account and its status
   // const [smartAccountClient, setSmartAccountClient] = useState()
   // const [smartAccountAddress, setSmartAccountAddress] = useState<Address>()
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-  const { address: wagmiAddress } = useAccount()
-
-  const address = wagmiAddress//privyUser?.wallet?.address
-  const {data: client} = useWalletClient(
-    {
-    account: address as Address,
-    chainId: baseSepolia.id,
-  }
-)
-
-
-  console.log("wagmiAddress", wagmiAddress)
-  const smartAccountClient = client
-  const smartAccountAddress = address
-  console.log("smartAccount", {smartAccountClient, smartAccountAddress})
 
   async function connectSmartAccount() {
-    // if (!ready) {
-    //   return
-    // }
-
     console.log("connecting smart account")
     const publicClient = createPublicClient({
       chain: baseSepolia, // Replace this with the chain of your app
       transport: http(),
     })
+    if (!ready) {
+      return
+    }
     // const publicClient = wagmiPublicClient
     if (!publicClient) {
       console.error(new Error("publicClient not found"))
@@ -150,26 +147,8 @@ export function SmartAccountProvider({
     })
     console.log("privyClient", privyClient)
 
-    // const walletClient = await getWalletClient(wagmiConfig)
-    //   , {
-    //   chainId: baseSepolia.id,
-    //   account: embeddedWallet?.address as Address,
-    // })
-
-    // console.log("walletClient", walletClient)
-    console.log("privyClient", privyClient)
-
     const customSigner = walletClientToSmartAccountSigner(privyClient)
 
-    console.log({ embeddedWallet, customSigner, privyClient })
-    // if (!publicClient) {
-    //   throw new Error("publicClient not found")
-    // }
-
-    const pimlicoClient = createPimlicoPaymasterClient({
-      entryPoint: ENTRYPOINT_ADDRESS_V07,
-      transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
-    })
     const mySimpleSmartAccount = await signerToSimpleSmartAccount(
       publicClient,
       {
@@ -182,10 +161,10 @@ export function SmartAccountProvider({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
       transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
     })
-      const pimlicoBundlerClient = createPimlicoBundlerClient({
-        transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
-        entryPoint: ENTRYPOINT_ADDRESS_V07,
-      })
+    const pimlicoBundlerClient = createPimlicoBundlerClient({
+      transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
+      entryPoint: ENTRYPOINT_ADDRESS_V07,
+    })
     const smartAccountClient = createSmartAccountClient({
       account: mySimpleSmartAccount,
       bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
@@ -194,26 +173,12 @@ export function SmartAccountProvider({
         gasPrice: async () =>
           (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // if using pimlico bundler
       },
-
       chain: baseSepolia, // Replace this with the chain for your app
     })
     const connector = permissionlessSmartAccount({
       smartAccountClient,
     })
-    // let connector
-    try {
-      // connector = await simpleSmartAccount({
-      //   publicClient,
-      //   bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
-      //   signer: customSigner,
-      //   factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
-      //   entryPoint: ENTRYPOINT_ADDRESS_V07,
-      //   sponsorUserOperation: pimlicoClient.sponsorUserOperation,
-      // })
-    } catch (error) {
-      console.error("simpleSmartAccount:", error)
-      console.log(error)
-    }
+
     console.log({ connector })
     connect(
       {
@@ -233,73 +198,92 @@ export function SmartAccountProvider({
       }
     )
     /** Lets see if prev autoapproval works */
-    const allowance = await publicClient.readContract({
-      address: BASE_SEPOLIA_USDC_ADDRESS,
-      abi: USDC_ABI,
-      args: [privyClient.account.address, BASE_SEPOLIA_EIGHTBALL_ADDRESS],
-      functionName: "allowance",
-    })
-    if (allowance < 1n) {
-      console.log("allowance", allowance)
-      try {
-        const contract = getContract({
-          abi: USDC_ABI,
-          address: BASE_SEPOLIA_USDC_ADDRESS,
-          client: { public: rpcClient, wallet: privyClient },
-        })
-        const hash = await contract.write.approve([
-          BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-          10000000000n,
-        ])
-        console.log("hash", hash)
-      } catch (error) {
-        console.error("Failed to send transaction:", error)
-        // throw error
-      }
-    }
+    // const allowance = await publicClient.readContract({
+    //   address: BASE_SEPOLIA_USDC_ADDRESS,
+    //   abi: USDC_ABI,
+    //   args: [
+    //     smartAccountClient.account?.address!,
+    //     BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+    //   ],
+    //   functionName: "allowance",
+    // })
+    // if (allowance < 1n) {
+    //   console.log("allowance", allowance)
+    //   try {
+    //     const contract = getContract({
+    //       abi: USDC_ABI,
+    //       address: BASE_SEPOLIA_USDC_ADDRESS,
+    //       client: { public: rpcClient, wallet: smartAccountClient },
+    //     })
+    //     const hash = await contract.write.approve([
+    //       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+    //       10000000000n,
+    //     ])
+    //     console.log("hash", hash)
+    //   } catch (error) {
+    //     console.error("Failed to send transaction:", error)
+    //     // throw error
+    //   }
+    // }
     setSmartAccountReady(true)
   }
 
-  useEffect(() => {
+  async function createAndConnectSmartAccount() {
     if (!embeddedWallet && userReady && authenticated) {
-        createWallet().then((wallet) => {
-          console.log("createdwallet", wallet)
-          console.log("successfully created wallet")
-        }).catch((error) => {
-          console.error("Failed to create wallet:", error)
-        })
-      // createWallet()
-      // console.log("Creating embedded  wallet")
+      try {
+        const wallet = await createWallet()
+        console.log("createdwallet", wallet)
+        console.log("successfully created wallet")
+      } catch (error) {
+        console.error("Failed to create wallet:", error)
+      }
     }
-    console.log("walletType", walletType)
+    try {
+      await connectSmartAccount()
+      console.log("connected smart account")
+    } catch (error) {
+      console.error("Failed to connect smart account:", error)
+    }
+  }
+  useEffect(() => {
+    if (!smartAccountReady) {
+      console.log("connecting smart account")
+      createAndConnectSmartAccount()
+    }
+    // console.log("walletType", walletType)
     // if (walletType === "smartwallet" && embeddedWallet) {
     // createSmartWallet()
-    console.log("connecting smart account")
-    connectSmartAccount()
-      .then(() => {
-        console.log("connected smart account")
-      })
-      .catch((error) => {
-        console.error("Failed to connect smart account:", error)
-      })
+
+
+
     // }
   }, [
-    walletType,
-    smartAccountAddress,
+    // walletType,
+    // smartAccountAddress,
     // embeddedWallet?.address,
     // embeddedWallet,
     isConnected,
     userReady,
-    authenticated
+    authenticated,
+    smartAccountReady,
     // smartAccountClient,
   ])
 
+  // console.log([
+  //   smartAccountAddress,
+  //   // embeddedWallet?.address,
+  //   // embeddedWallet,
+  //   isConnected,
+  //   userReady,
+  //   authenticated,
+  //   // smartAccountClient,
+  // ])
   return (
     <SmartAccountContext.Provider
       value={{
         smartAccountReady,
-        smartAccountClient,
-        smartAccountAddress,
+        smartAccountClient: client,
+        smartAccountAddress: address,
       }}
     >
       {children}
