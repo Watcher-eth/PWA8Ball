@@ -33,7 +33,7 @@ export function DesktopNavBar() {
         <div
           className={`
             flex justify-between items-center w-full p-3  px-8
-             backdrop-blur bg-gradient-to-b from-[#080808]/9 to-[transparent] 
+             backdrop-blur-sm bg-gradient-to-b from-[#080808]/9 to-[transparent] 
           `}
         >
           <Link href={HOME_PATH}>
@@ -60,9 +60,9 @@ export function DesktopNavBar() {
             <DesktopLeaderboardModal title="Global" data={data}>
               <NavIconButton IconComponent={Trophy} />
             </DesktopLeaderboardModal>
-            <DesktopReferralModal>
+            <DesktopActivityModal>
               <NavIconButton IconComponent={ActivityIcon} />
-            </DesktopReferralModal>
+            </DesktopActivityModal>
             <DesktopNotificationModal userId={userId}>
               <NavIconButton IconComponent={Bell} />
             </DesktopNotificationModal>

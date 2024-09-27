@@ -44,7 +44,7 @@ export function DesktopNotificationModal({
               />
             ))
           ) : (
-            <NotificationsPlaceholder />
+            <NotificationsPlaceholder user={user} />
           )}
         </div>
       }

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { motion } from "framer-motion"
 
-import {  Skeleton } from "@/components/ui/Skeleton"
+import { Skeleton } from "@/components/ui/Skeleton"
 import { PredictorInfo } from "./PredictorInfo"
 import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
 import { LeaderBoardTop3 } from "./Leaderboard/LeaderboardTop3"
@@ -62,13 +62,13 @@ export function Leaderboard({ isDesktop }: { isDesktop: boolean }) {
 }
 
 export function LoadingLeaderboardSkeleton() {
-  return [1, 2, 3, 4, 5, 6, 7].map((index) => (
+  return [1, 2, 3, 4].map((index) => (
     <motion.div
       key={index}
       className="flex flex-row items-center justify-between my-3"
     >
       <div className="flex flex-row items-center">
-        <span className="text-white font-bold">{index}</span>
+        <span className="text-white font-bold">{index + 3}</span>
         <div className="mx-3 ml-2.5">
           <Skeleton className="h-7 w-7 !rounded-full " />
         </div>

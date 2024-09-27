@@ -12,6 +12,7 @@ import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsO
 import { HARD_MARKETS } from "@/constants/markets"
 import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
 import { Spinner } from "../modals/PredictModal/Spinner"
+import { ActivityPlaceHolder } from "../common/placeholders/NewPlaceholders"
 
 export function DesktopActivityModal({
   children,
@@ -57,12 +58,16 @@ function DesktopFriendActivity(props: { user: User }) {
 
   const groupedPredictions = groupPredictionsByDate(aggregatedPredictions)
 
-  if (isLoading)
+  if (isLoading && props?.user?.id)
     return (
       <div className="h-[40vh] bg-[transparent] flex justify-center items-center">
         <Spinner loading={isLoading} />
       </div>
     )
+
+  if (!user?.id) {
+    return <ActivityPlaceHolder user={props?.user} />
+  }
 
   return (
     <div className="max-h-[68.5vh] flex flex-col overflow-scroll">

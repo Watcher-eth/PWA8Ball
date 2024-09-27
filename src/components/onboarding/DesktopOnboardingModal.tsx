@@ -1,39 +1,39 @@
 // @ts-nocheck
-import { Input } from "@/components/ui/Input";
-import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react";
-import { useLoginWithOAuth, usePrivy } from "@privy-io/react-auth";
-import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Input } from "@/components/ui/Input"
+import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react"
+import { useLoginWithOAuth, usePrivy } from "@privy-io/react-auth"
+import { WalletButton, useConnectModal } from "@rainbow-me/rainbowkit"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
-import { DesktopCardModal } from "../modals/DesktopCardModal";
-import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons";
-import DesktopCreateProfile from "./DesktopCreateProfile";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useCallback, useState } from "react";
-import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInviteUsed";
-import { debounce } from "lodash";
-import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite";
-import { toast } from "sonner";
-import { useAccount } from "wagmi";
+import { DesktopCardModal } from "../modals/DesktopCardModal"
+import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons"
+import DesktopCreateProfile from "./DesktopCreateProfile"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useCallback, useState } from "react"
+import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInviteUsed"
+import { debounce } from "lodash"
+import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite"
+import { toast } from "sonner"
+import { useAccount } from "wagmi"
 
 const METAMASK_ICON_SRC =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png";
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png"
 const COINBASE_ICON_SRC =
-  "https://seeklogo.com/images/C/coinbase-coin-logo-C86F46D7B8-seeklogo.com.png";
+  "https://seeklogo.com/images/C/coinbase-coin-logo-C86F46D7B8-seeklogo.com.png"
 const WALLETCONNECT_ICON_SRC =
-  "https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon";
+  "https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon"
 
 export function DesktopOnboardingModal({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const { user } = useUserStore();
-  const { account, isConnected, address } = useAccount();
+  const { user } = useUserStore()
+  const { account, isConnected, address } = useAccount()
 
   return (
     <DesktopCardModal
-      dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
+      dialogContentClassName="min-w-[50vw] md:min-w-[50vw] sm:min-w-[50vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
       content={
@@ -50,15 +50,16 @@ export function DesktopOnboardingModal({
     >
       {children}
     </DesktopCardModal>
-  );
+  )
 }
 
 export function DesktopOnboarding() {
-  const { ready, authenticated, login } = usePrivy();
-  const { loginWithOAuth, initOAuth } = useLoginWithOAuth();
+  const { ready, authenticated, login } = usePrivy()
+  const { loginWithOAuth, initOAuth } = useLoginWithOAuth()
+
   return (
     <div className="flex overflow-hidden rounded-lg ">
-      <div className="flex flex-col items-center justify-center sm:w-1/2 w-full p-10 pt-6 text-white">
+      <div className="flex flex-col items-center justify-center lg:w-1/2 w-full p-10 pt-6 text-white">
         <img
           src={"/images/OrbLogo.png"}
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
@@ -73,7 +74,7 @@ export function DesktopOnboarding() {
           placeholder="Email"
           className="mb-4 w-full bg-[#151515] border-2 border-[#181818] placeholder-[lightgray] text-white"
         />
-        <div className="flex justify-between w-full  rounded-[0.5rem]  mb-4">
+        <div className="flex justify-between w-full rounded-[0.5rem] mb-4">
           <SocialOnboardButton
             IconComponent={GoogleIcon}
             onClick={() => initOAuth({ provider: "google" })}
@@ -125,7 +126,8 @@ export function DesktopOnboarding() {
           </a>
         </div>
       </div>
-      <div className="hidden sm:block sm:w-1/2">
+
+      <div className="hidden lg:block lg:w-1/2">
         <img
           src="/images/Futura.JPG"
           alt="Onboarding illustration"
@@ -133,7 +135,7 @@ export function DesktopOnboarding() {
         />
       </div>
     </div>
-  );
+  )
 }
 
 export function SocialOnboardButton({
@@ -141,9 +143,9 @@ export function SocialOnboardButton({
   onClick,
   label,
 }: {
-  IconComponent: React.ReactNode;
-  onClick: () => void;
-  label?: string;
+  IconComponent: React.ReactNode
+  onClick: () => void
+  label?: string
 }) {
   return (
     <div
@@ -157,7 +159,7 @@ export function SocialOnboardButton({
     >
       <IconComponent className="w-5 h-5 sm:w-10" />
     </div>
-  );
+  )
 }
 
 function WalletOnboardButton({
@@ -165,9 +167,9 @@ function WalletOnboardButton({
   iconSrc,
   onClick,
 }: {
-  label: string;
-  iconSrc: string;
-  onClick: () => void;
+  label: string
+  iconSrc: string
+  onClick: () => void
 }) {
   return (
     <WalletButton.Custom wallet={label}>
@@ -191,20 +193,20 @@ function WalletOnboardButton({
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
             </div>
           </button>
-        );
+        )
       }}
     </WalletButton.Custom>
-  );
+  )
 }
 
 export const CustomConnectButton = ({
   label,
   iconSrc,
 }: {
-  label: string;
-  iconSrc: string;
+  label: string
+  iconSrc: string
 }) => {
-  const { openConnectModal } = useConnectModal();
+  const { openConnectModal } = useConnectModal()
 
   return (
     <ConnectButton.Custom>
@@ -218,12 +220,12 @@ export const CustomConnectButton = ({
       }) => {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== "loading";
+        const ready = mounted && authenticationStatus !== "loading"
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus || authenticationStatus === "authenticated");
+          (!authenticationStatus || authenticationStatus === "authenticated")
         return (
           <div
             onClick={openConnectModal}
@@ -257,40 +259,43 @@ export const CustomConnectButton = ({
                       All Wallets
                     </div>
                   </button>
-                );
+                )
               }
             })()}
           </div>
-        );
+        )
       }}
     </ConnectButton.Custom>
-  );
-};
+  )
+}
 
 export function InviteScreen() {
-  const [invite, setInvite] = useState("");
-  const [debouncedInvite, setDebouncedInvite] = useState("");
-  const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite);
-  const { mutate: useInvite } = useUseInvite();
+  const [invite, setInvite] = useState("")
+  const [debouncedInvite, setDebouncedInvite] = useState("")
+  const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite)
+  const { mutate: useInvite } = useUseInvite()
   const debouncedChange = useCallback(
     debounce((nextValue) => setDebouncedInvite(nextValue), 500),
     []
-  );
+  )
 
   const handleInviteChange = (event) => {
-    const nextValue = event.target.value;
-    setInvite(nextValue);
-    debouncedChange(nextValue);
-  };
+    const nextValue = event.target.value
+    setInvite(nextValue)
+    debouncedChange(nextValue)
+  }
 
   async function verifyInvite() {
     if (data === true) {
-      useInvite(debouncedInvite);
+      useInvite(debouncedInvite)
 
       toast(
         <div className="w-full rounded-full bg-[#101010] text-base px-3 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
-            <CheckCircle strokeWidth={3} className="text-[#34C759] h-[0.95rem]" />
+            <CheckCircle
+              strokeWidth={3}
+              className="text-[#34C759] h-[0.95rem]"
+            />
           </div>
           Successfully used invite!
         </div>,
@@ -304,7 +309,7 @@ export function InviteScreen() {
             closeButton: "bg-lime-400",
           },
         }
-      );
+      )
       //TODO: Integrate ponder update user endpoint
     } else {
       toast(
@@ -324,7 +329,7 @@ export function InviteScreen() {
             closeButton: "bg-lime-400",
           },
         }
-      );
+      )
     }
   }
   return (
@@ -406,5 +411,5 @@ export function InviteScreen() {
         />
       </div>
     </div>
-  );
+  )
 }

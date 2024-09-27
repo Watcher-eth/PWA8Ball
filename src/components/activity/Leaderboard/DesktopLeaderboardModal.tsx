@@ -11,7 +11,15 @@ import UserRank from "./UserRank"
 import { Trophy, X } from "lucide-react"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
-function DesktopLeaderboardModal({ children, data, title }: { children: React.ReactNode, data: any[], title: string }) {
+function DesktopLeaderboardModal({
+  children,
+  data,
+  title,
+}: {
+  children: React.ReactNode
+  data: any[]
+  title: string
+}) {
   const top3Users = data?.slice(0, 3).map((predictor: any) => ({
     name: predictor.name?.length > 0 ? predictor?.name : "Anon",
     image: predictor.pfp?.length > 0 ? predictor.pfp : DEFAULT_PFP_PLACEHOLDER,
@@ -59,20 +67,19 @@ function DesktopLeaderboardModal({ children, data, title }: { children: React.Re
               <h2 className="text-white text-[15px] font-bold">Name</h2>
               <h2 className="text-white text-[15px] font-bold">At stake</h2>
             </div>
-            {remainingPredictors?.map((predictor, index) => (
-              <PredictorInfo
-                key={index}
-                totalAmountUsdc={predictor.total_amount}
-                {...predictor}
-                address={predictor?.walletAddress}
-                index={index + 3}
-              />
-            )) ??
-              (!remainingPredictors ? (
-                <LoadingLeaderboardSkeleton />
-              ) : (
-                <p className="text-white">No predictors found</p>
-              ))}
+            {remainingPredictors && remainingPredictors.length > 0 ? (
+              remainingPredictors.map((predictor, index) => (
+                <PredictorInfo
+                  key={index}
+                  totalAmountUsdc={predictor.total_amount}
+                  {...predictor}
+                  address={predictor?.walletAddress}
+                  index={index + 3}
+                />
+              ))
+            ) : (
+              <LoadingLeaderboardSkeleton />
+            )}
           </div>
         </div>
         <UserRank />

@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { HOME_PATH } from "@/utils/urls";
-import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton";
-import { UserPredictionSkeleton as GeneralFeedSkeleton } from "@/components/profile/GeneralFeed/UserPredictionSkeleton";
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { HOME_PATH } from "@/utils/urls"
+import { Skeleton, skeletonVariants } from "@/components/ui/Skeleton"
+import { UserPredictionSkeleton as GeneralFeedSkeleton } from "@/components/profile/GeneralFeed/UserPredictionSkeleton"
 
-import { AltSkeleton } from "@/components/ui/Skeleton";
+import { AltSkeleton } from "@/components/ui/Skeleton"
 
 export function NewPlaceholder({ isUser }) {
   return (
@@ -35,10 +35,10 @@ export function NewPlaceholder({ isUser }) {
         </button>
       </Link>
     </div>
-  );
+  )
 }
 
-export function NotificationsPlaceholder({ isUser }) {
+export function NotificationsPlaceholder({ isUser, user }) {
   return (
     <div className="flex flex-col align-center items-center w-full p-2 mt-2  ">
       {[...Array(3)].map((_, index) => (
@@ -55,11 +55,15 @@ export function NotificationsPlaceholder({ isUser }) {
       </div>
       <Link href={HOME_PATH}>
         <motion.button className="w-[25vw] mt-5 py-3 rounded-full bg-[#090909] border-[0.1rem] border-[#171717] text-white font-bold text-lg transition-all active:scale-95">
-          {isUser ? "Make your first Prediction" : "Come back later"}
+          {user.id
+            ? isUser
+              ? "Make your first Prediction"
+              : "Come back later"
+            : "Sign in first"}
         </motion.button>
       </Link>
     </div>
-  );
+  )
 }
 
 export const UserPredictionSkeleton = ({ index }) => (
@@ -84,7 +88,7 @@ export const UserPredictionSkeleton = ({ index }) => (
       <Skeleton className="h-[25px] rounded-full w-[52%]" />
     </div>
   </motion.div>
-);
+)
 
 export const UserLpSkeleton = ({ index }) => (
   <motion.div
@@ -108,7 +112,7 @@ export const UserLpSkeleton = ({ index }) => (
       <AltSkeleton className="h-[25px] w-[22%]" />
     </div>
   </motion.div>
-);
+)
 
 export const NewPlaceholderLp = ({ isUser }) => {
   return (
@@ -140,8 +144,8 @@ export const NewPlaceholderLp = ({ isUser }) => {
         </motion.button>
       </Link>
     </div>
-  );
-};
+  )
+}
 
 const CommentSkeleton = ({ index }) => (
   <motion.div
@@ -167,7 +171,7 @@ const CommentSkeleton = ({ index }) => (
       <AltSkeleton className="h-[14px] w-[65vw] sm:w-[65%] !bg-[#212121]" />
     </div>
   </motion.div>
-);
+)
 
 export const NewPlaceholderComment = ({ isUser, isPost, onOpen }) => (
   <div className="flex flex-col items-center w-full  mt-3 px-0 mb-32">
@@ -198,7 +202,7 @@ export const NewPlaceholderComment = ({ isUser, isPost, onOpen }) => (
       {isUser ? "Join the discussion" : "Join the discussion"}
     </motion.button>
   </div>
-);
+)
 
 export const NotificationSkeleton = ({ index }) => (
   <motion.div
@@ -237,4 +241,34 @@ export const NotificationSkeleton = ({ index }) => (
       animate="pulse"
     />
   </motion.div>
-);
+)
+
+export function ActivityPlaceHolder({ user }) {
+  return (
+    <div className="flex flex-col items-center w-full px-5  mx-auto">
+      {[...Array(3)].map((_, index) => (
+        <GeneralFeedSkeleton index={index} />
+      ))}
+      <div
+        className="w-full -mt-[105px]  h-[105px]"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.3) 50%,  #101010 100%)",
+        }}
+      />
+      <div className="flex flex-col items-center mt-3">
+        <div className="text-white text-lg font-bold mb-2">
+          There's nothing here, yet
+        </div>
+        <div className="text-gray-400 text-sm text-center px-5">
+          Start by following other predictors to see what they are upto
+        </div>
+      </div>
+      <Link href={HOME_PATH} className="w-[85%]">
+        <button className="w-full mt-5 py-2 border-[0.1rem] border-[#202020] rounded-full bg-[#181818] text-white font-bold text-lg transition-all active:scale-95">
+          {user?.id ? "Find your friends" : "Sign in first"}
+        </button>
+      </Link>
+    </div>
+  )
+}
