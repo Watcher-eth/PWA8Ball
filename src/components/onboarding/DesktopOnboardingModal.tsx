@@ -96,7 +96,7 @@ export function DesktopOnboarding() {
             onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
-        <WalletOnboardButton
+        {/* <WalletOnboardButton
           label="MetaMask"
           iconSrc={METAMASK_ICON_SRC}
           onClick={login}
@@ -110,7 +110,7 @@ export function DesktopOnboarding() {
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
           // onClick={login}
-        />
+        /> */}
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy
@@ -131,9 +131,9 @@ export function DesktopOnboarding() {
       </div>
       <div className="hidden sm:block sm:w-1/2">
         <img
-          src="/images/Futura.JPG"
+          src="https://cdn.midjourney.com/d2bc36af-ea8f-48d5-b649-04536662b45a/0_3.png"
           alt="Onboarding illustration"
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-[70vh]"
         />
       </div>
     </div>
@@ -286,7 +286,7 @@ export function InviteScreen() {
       useInvite(debouncedInvite)
 
       toast(
-        <div className="w-full rounded-full bg-[#101010] text-base px-3 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
             <CheckCircle
               strokeWidth={3}
@@ -309,7 +309,7 @@ export function InviteScreen() {
       //TODO: Integrate ponder update user endpoint
     } else {
       toast(
-        <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
             <Ban strokeWidth={3} className="text-[#FF3F3F] h-[0.95rem]" />
           </div>

@@ -52,8 +52,8 @@ export function useInitializeUser() {
           ...dbUser,
           pfp: dbUser?.pfp || DEFAULT_PFP,
           walletType,
-          totalFollowers: followersCount,
-          totalFollowing: followingCount,
+          totalFollowers: followersCount ?? 0,
+          totalFollowing: followingCount ?? 0,
         })
       } else {
         const userUUID =
@@ -77,8 +77,8 @@ export function useInitializeUser() {
 
         setUser({
           ...newUser,
-          totalFollowers: followersCount,
-          totalFollowing: followingCount,
+          totalFollowers: followersCount ?? 0,
+          totalFollowing: followingCount ?? 0,
           walletType,
         })
       }

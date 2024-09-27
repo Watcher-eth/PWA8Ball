@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Link from "next/link"
 
-import { Copy, Wallet } from "lucide-react"
+import { Copy, Wallet, WalletCards } from "lucide-react"
 
 import { useUserStore } from "@/lib/stores/UserStore"
 import { SocialsSection } from "@/components/common/SocialsSection"
@@ -36,6 +36,7 @@ import { PredictionPositionModal } from "../modals/PredictionPositionModal"
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
+import { DesktopOnrampModal } from "../onboarding/Onramp/DesktopOnrampModal"
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user, setUser } = useUserStore()
@@ -102,7 +103,7 @@ export function DesktopProfilePage2({ userId, userC }) {
 
     setIsEditing(false)
   }
-
+  console.log("userC", userC?.socials)
   return (
     <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
       <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
@@ -154,7 +155,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                   {user?.name}
                 </div>
               )}
-              {userC?.socials !== {} && (
+              {userC?.socials !== undefined && (
                 <div className="text-[1.1rem] -mt-1 font-medium text-[lightgray]">
                   <SocialsSection {...userC?.socials} />
                 </div>
@@ -187,7 +188,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
             </div>
           </div>
-          <div className="flex flex-row space-x-3 mt-3 items-center">
+          <div className="flex flex-row -ml-1 space-x-3 -mt-3.5 items-center">
             <div
               onClick={() => copyToClipboard(userC?.walletAddress)}
               className="py-2 hover:scale-101 active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-[Aeonik]"
@@ -218,15 +219,14 @@ export function DesktopProfilePage2({ userId, userC }) {
             )}
           </div>
           {userC?.name === user?.name && balance < 1 && (
-            <Link
-              href={"/settings"}
-              className="flex flex-row space-x-3 items-center"
-            >
-              <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
-                <Wallet size={16} color="white" strokeWidth={3} />
-                <div>Fund your account</div>
+            <DesktopOnrampModal>
+              <div className="flex flex-row space-x-3 -ml-1 items-center">
+                <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
+                  <Wallet size={16} color="white" strokeWidth={3} />
+                  <div>Fund your account</div>
+                </div>
               </div>
-            </Link>
+            </DesktopOnrampModal>
           )}
           <div className="h-[0.1rem] w-full bg-[#222222] my-3" />
           <div className="flex flex-row">
