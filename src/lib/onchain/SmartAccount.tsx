@@ -33,6 +33,7 @@ import {
 import {
   useAccount,
   useConnect,
+  usePublicClient,
   useWalletClient,
 } from "wagmi"
 
@@ -49,14 +50,7 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
 /* TODO: use the DEFAULT_CHAIN from the wagmi config */
 const TARGET_CHAIN = baseSepolia //as const
 /** Interface returned by custom `useSmartAccount` hook */
-// <{
-//   /** Smart account client to send signature/transaction requests to the smart account */
-//   smartAccountClient?: SmartAccountClient<never>
-//   /** Smart account address */
-//   smartAccountAddress?: Address
-//   /** Boolean to indicate whether the smart account state has initialized */
-//   smartAccountReady: boolean
-// }>
+
 const SmartAccountContext = React.createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
@@ -77,6 +71,7 @@ export function SmartAccountProvider({
     account: address as Address,
     chainId: TARGET_CHAIN.id,
   })
+  // const publicClient = usePublicClient({ chainId: TARGET_CHAIN.id })
 
   const {
     // user: privyUser,
@@ -123,7 +118,7 @@ export function SmartAccountProvider({
 
     const customSigner = walletClientToSmartAccountSigner(privyClient)
 
-    const mySimpleSmartAccount = await signerToSimpleSmartAccount(
+    const simpleSmartAccount = await signerToSimpleSmartAccount(
       publicClient,
       {
         entryPoint: ENTRYPOINT_ADDRESS_V07,
@@ -140,7 +135,7 @@ export function SmartAccountProvider({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
     })
     const smartAccountClient = createSmartAccountClient({
-      account: mySimpleSmartAccount,
+      account: simpleSmartAccount,
       bundlerTransport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
       middleware: {
         sponsorUserOperation: pimlicoPaymaster.sponsorUserOperation, // optional

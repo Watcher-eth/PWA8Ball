@@ -22,8 +22,8 @@ const DEFAULT_PFP =
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy()
   const { user, setUser, setWalletType } = useUserStore()
-  const { smartAccountAddress, smartAccountClient } = useSmartAccount()
-  const { address: eoaAddress, isConnected } = useAccount()
+  // const { smartAccountAddress, smartAccountClient } = useSmartAccount()
+  const { address, isConnected } = useAccount()
   const { handleCreateUser } = useCreateUser()
   const { data: followersCount } = useGetTotalFollowers(user?.walletAddress)
   const { data: followingCount } = useGetTotalFollowing(user?.walletAddress)
@@ -38,8 +38,8 @@ export function useInitializeUser() {
         walletType = "smartwallet"
       }
 
-      const walletAddress =
-        walletType === "smartwallet" ? smartAccountAddress : eoaAddress
+      const walletAddress = address
+        // walletType === "smartwallet" ? smartAccountAddress : eoaAddress
 
       if (!walletAddress) return
       console.log("before user")
@@ -93,9 +93,10 @@ export function useInitializeUser() {
     ready,
     authenticated,
     privyUser,
-    smartAccountAddress,
+    address,
+    // smartAccountAddress,
     isConnected,
-    eoaAddress,
+    // eoaAddress,
     followersCount,
   ])
 }

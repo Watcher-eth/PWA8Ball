@@ -31,10 +31,10 @@ export function DesktopOnboardingModal({
   children: React.ReactNode
 }) {
   const { user } = useUserStore()
-  const { user: PrivyUser } = usePrivy()
+  const { user: privyUser } = usePrivy()
 
   const { address } = useAccount()
-  console.log("user", user, PrivyUser)
+  // console.log("user", user, privyUser)
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
@@ -96,7 +96,8 @@ export function DesktopOnboarding() {
             onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
-        {/* <WalletOnboardButton
+        {/*
+        <WalletOnboardButton
           label="MetaMask"
           iconSrc={METAMASK_ICON_SRC}
           onClick={login}
@@ -106,11 +107,12 @@ export function DesktopOnboarding() {
           iconSrc={COINBASE_ICON_SRC}
           onClick={login}
         />
+        */}
         <CustomConnectButton
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
           // onClick={login}
-        /> */}
+        />
         <div className="flex justify-between w-full mt-4 text-sm text-[lightgray]">
           <a href="#" className="hover:underline">
             Privacy
@@ -174,27 +176,31 @@ function WalletOnboardButton({
   onClick: () => void
 }) {
   return (
-    <WalletButton.Custom wallet={label}>
-      {({ ready, connect }) => {
-        return (
+    // <WalletButton.Custom wallet={label}>
+    //   {({ ready, connect }) => {
+    //     return (
           <button
             type="button"
-            disabled={!ready}
-            onClick={connect}
+            // disabled={!ready}
+            onClick={() => {
+              console.log("clicked connect")
+              // connect()
+              console.log("clicked connect")
+            }}
             className={`
-         w-full mb-4
-          hover:scale-101 active:scale-98 transition-all
-         cursor-pointer
-       `}
+              w-full mb-4
+                hover:scale-101 active:scale-98 transition-all
+              cursor-pointer
+            `}
           >
             <div className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white">
               <img src={iconSrc} className="size-5 mr-2" />
               {label === "coinbase" ? "Coinbase Smart Wallet" : label}
             </div>
           </button>
-        )
-      }}
-    </WalletButton.Custom>
+    //     )
+    //   }}
+    // </WalletButton.Custom>
   )
 }
 
@@ -227,7 +233,7 @@ export const CustomConnectButton = ({
           (!authenticationStatus || authenticationStatus === "authenticated")
         return (
           <div
-            onClick={openConnectModal}
+            // onClick={openConnectModal}
             {...(!ready && {
               "aria-hidden": true,
               style: {
