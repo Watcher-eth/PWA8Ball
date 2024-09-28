@@ -357,14 +357,12 @@ function ProfilePositionCard(
   userName
 ) {
   return (
-    <div className="w-full hover:scale-[100.5%] active:scale-99 h-[50vh] border-[0.065rem] border-[#111111]/30 bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
+    <div className="w-full hover:scale-[100.5%] active:scale-99 h-[50vh] border-[0.095rem] border-[#212121]/50 bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
       <img
-        src={
-          "https://media.istockphoto.com/id/1351691246/photo/dust-scratch-texture-damaged-overlay-grunge-black.jpg?s=612x612&w=0&k=20&c=Ml1ErblrXHtMXCmscfoadLAB0T574CottySDbTJe_wY="
-        }
-        className="w-full h-full z-[1] object-cover  rounded-lg absolute"
+        src={item.image}
+        className="w-full h-3/4 z-[1] object-cover opacity-50  rounded-lg absolute"
       />
-      <div className="w-full bg-gradient-to-b from-[#101010]/50  via-[#101010]/0 to-[#101010]/75  h-full z-[1] object-cover rounded-lg absolute" />
+      <div className="w-full bg-gradient-to-b from-[#101010]/50  via-[#101010]/0 to-[#101010]/75 backdrop-blur-3xl  h-full z-[1] object-cover rounded-lg absolute" />
 
       <div className="flex flex-col z-10 pt-6 px-6">
         <div className="flex flex-row justify-between">
@@ -372,7 +370,7 @@ function ProfilePositionCard(
             src={item.image}
             className="h-20 w-20 object-cover  rounded-lg"
           />
-          <div className="py-2 border-2 border-[white]/10 h-10 px-3 rounded-full bg-[#1B1B1E]/30 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-sm font-semibold">
+          <div className="py-1.5 border-[0.1rem] -mr-2 border-[white]/10 h-10 px-3 rounded-full bg-[#1B1B1E]/20 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-md font-semibold">
             {(
               (Number(item.option) === 1
                 ? item?.market?.outcomeOddsA
@@ -394,7 +392,7 @@ function ProfilePositionCard(
         )}
         <div className="text-base -mt-1 font-medium text-[white]/90">
           {item.type === "created" ? (
-            <div className="py-3 border-2 border-[#212121] w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-sm font-semibold">
+            <div className="py-3 border-[0.1rem] border-[#212121]/80 w-[33%]  h-11 px-3 pl-1.5 rounded-full bg-[#1B1B1E]/40 backdrop-blur-md space-x-2 flex flex-row items-center text-white  text-sm font-semibold">
               <img src={item.pfp} className="h-7 w-7 rounded-full " />{" "}
               <div className="text-[1.02rem] font-medium">{item.userName}</div>
             </div>
@@ -414,7 +412,7 @@ function ProfilePositionCard(
         <div className="text-[1.8rem] mt-3 font-[Aeonik-Bold] text-white">
           {item.type === "created" ? item.title : item?.market?.title}
         </div>
-        <div className="text-base  font-[Aeonik] text-[lightgray]">
+        <div className="text-[1rem]  font-[Aeonik] text-white/70">
           {item.type === "created" ? item.question : item?.market?.question}
         </div>
       </div>
