@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { AppleIcon, GoogleIcon, XIcon } from "@/components/onboarding/AuthIcons"
+import { AppleIcon, GoogleIcon, XIcon } from "@/components/onboarding/DesktopOnboardingModal/AuthIcons"
 import { Instagram, Send } from "lucide-react"
 
 export function DesktopFooter() {

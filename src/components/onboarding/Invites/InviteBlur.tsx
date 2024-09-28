@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { DesktopOnboarding, InviteScreen } from "../DesktopOnboardingModal";
-import DesktopCreateProfile from "../DesktopCreateProfile";
+import { useEffect } from "react"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { InviteScreen } from "./InviteScreen"
+import { DesktopCreateProfile } from "@/components/onboarding/DesktopCreateProfile"
 
 function BlurOverlay() {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
 
   useEffect(() => {
     // Disable scrolling when the overlay is active
-    document.body.classList.add("no-scroll");
+    document.body.classList.add("no-scroll")
 
     // Re-enable scrolling when the overlay is removed
     return () => {
-      document.body.classList.remove("no-scroll");
-    };
-  }, []);
+      document.body.classList.remove("no-scroll")
+    }
+  }, [])
 
   return (
     <div className="fixed w-full inset-0 z-[50] flex items-center justify-center">
@@ -32,7 +32,7 @@ function BlurOverlay() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
 export function BlurOverlayWrapper({ children, shouldShowOverlay }) {
@@ -41,5 +41,5 @@ export function BlurOverlayWrapper({ children, shouldShowOverlay }) {
       {shouldShowOverlay && <BlurOverlay />}
       {children}
     </>
-  );
+  )
 }

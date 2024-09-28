@@ -3,7 +3,7 @@ import { Ban, ImagePlus } from "lucide-react"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { toast } from "sonner"
 
-function DesktopCreateProfile() {
+export function DesktopCreateProfile() {
   const fileInputRef = useRef(null)
 
   const [username, setUsername] = useState("")
@@ -164,4 +164,4 @@ function DesktopCreateProfile() {
   )
 }
 
-export default DesktopCreateProfile
+
