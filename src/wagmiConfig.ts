@@ -58,7 +58,7 @@ const WALLET_GROUPS = [
       walletConnectWallet,
       trustWallet,
       safeWallet,
-      privyWallet,
+      // privyWallet,
     ],
   },
 ]
@@ -73,3 +73,6 @@ export const wagmiConfig = createConfig({
   transports,
   ssr: true,
 })
+
+export const WAGMI_CONNECTORS = connectors
+console.log(WAGMI_CONNECTORS)

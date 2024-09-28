@@ -17,6 +17,8 @@ import { debounce } from "lodash"
 import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite"
 import { toast } from "sonner"
 import { useAccount } from "wagmi"
+import { useConnect } from "wagmi"
+import { WAGMI_CONNECTORS } from "@/wagmiConfig"
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png"
@@ -176,7 +178,7 @@ function WalletOnboardButton({
   iconSrc: string
   onClick: () => void
 }) {
-  const { connectWallet } = usePrivy()
+  const { connectors, connect } = useConnect()
   return (
     // <WalletButton.Custom wallet={label}>
     //   {({ ready, connect }) => {
@@ -186,7 +188,8 @@ function WalletOnboardButton({
             // disabled={!ready}
             onClick={() => {
               console.log("clicked connect")
-              connectWallet()
+              connect({ connector: WAGMI_CONNECTORS[0] })
+              // connectWallet()
               // connect()
               console.log("clicked connect")
             }}
