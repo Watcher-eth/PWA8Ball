@@ -38,11 +38,19 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         cursor-pointer 
       `}
     >
-      <img
-        alt="Card_Preview"
-        src={image}
-        className="w-full h-full absolute  object-cover rounded-lg z-2"
-      />
+      <div className=" absolute w-full h-full">
+        <div className="absolute inset-0 bg-[#212121] animate-pulse rounded-lg z-1"></div>
+        <img
+          alt="Card_Preview"
+          src={image}
+          className="w-full h-full absolute object-cover rounded-lg z-2 transition-opacity duration-500 ease-in-out opacity-0"
+          onLoad={(e) => {
+            const imgElement = e.target as HTMLImageElement
+            imgElement.classList.remove("opacity-0")
+            imgElement.classList.add("opacity-100")
+          }}
+        />
+      </div>
       <div
         className={`
           h-[50vw] w-full   max-h-[21.5rem]
