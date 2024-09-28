@@ -64,7 +64,7 @@ const WALLET_GROUPS = [
 ]
 
 const connectors = connectorsForWallets(WALLET_GROUPS, APP_DETAILS)
-
+console.log(connectors)
 const transports = createTransports(SUPPORTED_CHAINS as unknown as Chain[])
 
 export const wagmiConfig = createConfig({

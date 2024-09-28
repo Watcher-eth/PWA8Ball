@@ -34,7 +34,7 @@ export function DesktopOnboardingModal({
   const { user: privyUser } = usePrivy()
 
   const { address } = useAccount()
-  // console.log("user", user, privyUser)
+  // console.log("user", user, PrivyUser)
   return (
     <DesktopCardModal
       dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
@@ -96,7 +96,7 @@ export function DesktopOnboarding() {
             onClick={() => initOAuth({ provider: "tiktok" })}
           />
         </div>
-        {/*
+
         <WalletOnboardButton
           label="MetaMask"
           iconSrc={METAMASK_ICON_SRC}
@@ -107,7 +107,8 @@ export function DesktopOnboarding() {
           iconSrc={COINBASE_ICON_SRC}
           onClick={login}
         />
-        */}
+
+        {/* <WalletButton wallet="metamask" /> */}
         <CustomConnectButton
           label="WalletConnect"
           iconSrc={WALLETCONNECT_ICON_SRC}
@@ -175,6 +176,7 @@ function WalletOnboardButton({
   iconSrc: string
   onClick: () => void
 }) {
+  const { connectWallet } = usePrivy()
   return (
     // <WalletButton.Custom wallet={label}>
     //   {({ ready, connect }) => {
@@ -184,6 +186,7 @@ function WalletOnboardButton({
             // disabled={!ready}
             onClick={() => {
               console.log("clicked connect")
+              connectWallet()
               // connect()
               console.log("clicked connect")
             }}
@@ -212,7 +215,7 @@ export const CustomConnectButton = ({
   iconSrc: string
 }) => {
   // const { openConnectModal } = useConnectModal()
-  const openConnectModal = () => {}
+  // const openConnectModal = () => {}
   return (
     <ConnectButton.Custom>
       {({
@@ -220,9 +223,20 @@ export const CustomConnectButton = ({
         chain,
         openAccountModal,
         openChainModal,
+        openConnectModal,
         authenticationStatus,
         mounted,
       }) => {
+
+        console.log({
+          account,
+          chain,
+          openAccountModal,
+          openChainModal,
+          openConnectModal,
+          authenticationStatus,
+          mounted,
+        })
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== "loading"
@@ -231,39 +245,32 @@ export const CustomConnectButton = ({
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated")
+
         return (
           <div
-            // onClick={openConnectModal}
-            {...(!ready && {
-              "aria-hidden": true,
-              style: {
-                opacity: 0,
-                pointerEvents: "none",
-                userSelect: "none",
-              },
-            })}
-            className="w-full"
+            // aria-hidden={!ready}
+            className={`
+              w-full
+              ${ready ? "" : "opacity-0 pointer-events-none select-none"}
+            `}
+            onClick={openConnectModal}
           >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button
-                    type="button"
-                    disabled={!ready}
-                    className={`
+            {!connected && (
+              <button
+                type="button"
+                // disabled={!ready}
+                className={`
                      w-full mb-4
                      hover:scale-101 active:scale-98 transition-all
                      cursor-pointer
                     `}
-                  >
-                    <div className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white">
-                      <img src={iconSrc} className="size-5 mr-2" />
-                      All Wallets
-                    </div>
-                  </button>
-                )
-              }
-            })()}
+              >
+                <div className="w-full rounded-md p-2 flex flex-row items-center border-2 border-[#181818] bg-[#151515] text-white">
+                  <img src={iconSrc} className="size-5 mr-2" />
+                  All Wallets
+                </div>
+              </button>
+            )}
           </div>
         )
       }}

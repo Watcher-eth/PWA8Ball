@@ -26,7 +26,15 @@ import { base, baseSepolia, mainnet } from "viem/chains"
 export const queryClient = new QueryClient()
 
 const PRIVY_CONFIG: PrivyClientConfig = {
-  loginMethods: ["email", "wallet", "google", "farcaster", "apple", "twitter"],
+  loginMethods: [
+    "email",
+    "wallet",
+    "google",
+    "farcaster",
+    "apple",
+    "twitter",
+    "wallet",
+  ],
   appearance: {
     theme: "dark",
     accentColor: "#0050FF",
@@ -69,11 +77,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
         config={PRIVY_CONFIG}
       >
         <QueryClientProvider client={queryClient}>
-          <WagmiProvider useConfig={wagmiConfig} config={wagmiConfig}>
-            <AirstackProvider
-              apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}
-            >
-              <RainbowKitProvider coolMode>
+          <WagmiProvider config={wagmiConfig}>
+            <RainbowKitProvider coolMode>
+              <AirstackProvider
+                apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}
+              >
                 <GraphQlProvider>
                   <RootLayout>
                     <AuthChecker>
@@ -81,8 +89,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
                     </AuthChecker>
                   </RootLayout>
                 </GraphQlProvider>
-              </RainbowKitProvider>
-            </AirstackProvider>
+              </AirstackProvider>
+            </RainbowKitProvider>
           </WagmiProvider>
         </QueryClientProvider>
       </PrivyProvider>
