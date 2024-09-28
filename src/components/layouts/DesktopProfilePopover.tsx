@@ -32,16 +32,19 @@ import {
   Copy,
 } from "lucide-react"
 
-import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal"
-import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
 import { Dialog } from "@/components/ui/dialog"
 import { DropdownItem } from "@/components/ui/DropdownItem"
+import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal"
+import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal"
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
+
+
 import { useMyEns } from "@/hooks/wallet/useMyEns"
-import { getProfilePath, SETTINGS_PATH } from "@/utils/urls"
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
-import UserInviteModal from "../onboarding/Invites/UserInviteModal"
+
 import { shortenAddress } from "@/utils/address/shortenAddress"
 import { copyToClipboard } from "@/utils/copyToClipboard"
+import { getProfilePath, SETTINGS_PATH } from "@/utils/urls"
 
 export function DesktopProfilePopover({
   children,
