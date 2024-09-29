@@ -13,9 +13,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser";
-import { useUserStore } from "@/lib/stores/UserStore";
+} from "@/components/ui/dropdown-menu"
+import { useDisconnectUser } from "@/hooks/wallet/useDisconnectUser"
+import { useUserStore } from "@/lib/stores/UserStore"
 import {
   DoorOpen,
   FileText,
@@ -30,31 +30,34 @@ import {
   Key,
   Users,
   Copy,
-} from "lucide-react";
+} from "lucide-react"
 
-import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
-import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
-import { Dialog } from "@/components/ui/dialog";
-import { DropdownItem } from "@/components/ui/DropdownItem";
-import { useMyEns } from "@/hooks/wallet/useMyEns";
-import { getProfilePath, SETTINGS_PATH } from "@/utils/urls";
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
-import UserInviteModal from "../onboarding/Invites/UserInviteModal";
-import { shortenAddress } from "@/utils/address/shortenAddress";
-import { copyToClipboard } from "@/utils/copyToClipboard";
+import { Dialog } from "@/components/ui/dialog"
+import { DropdownItem } from "@/components/ui/DropdownItem"
+import { DesktopOnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal"
+import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal"
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
+
+
+import { useMyEns } from "@/hooks/wallet/useMyEns"
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
+
+import { shortenAddress } from "@/utils/address/shortenAddress"
+import { copyToClipboard } from "@/utils/copyToClipboard"
+import { getProfilePath, SETTINGS_PATH } from "@/utils/urls"
 
 export function DesktopProfilePopover({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const { user } = useUserStore();
-  const { disconnectUser } = useDisconnectUser();
-  const { displayName } = useMyEns();
-  const userBalance = useUserUsdcBalance();
+  const { user } = useUserStore()
+  const { disconnectUser } = useDisconnectUser()
+  const { displayName } = useMyEns()
+  const userBalance = useUserUsdcBalance()
 
   const displayUsername =
-    !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name;
+    !user?.name || user?.name?.slice(0, 2) == "0x" ? displayName : user?.name
 
   return (
     <Dialog>
@@ -186,5 +189,5 @@ export function DesktopProfilePopover({
         </DropdownMenuContent>
       </DropdownMenu>
     </Dialog>
-  );
+  )
 }

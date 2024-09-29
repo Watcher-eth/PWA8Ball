@@ -32,7 +32,7 @@ const documents = {
     "\n  query getMarketsForTopic($id: BigInt) {\n    markets(where: { topicId: $id }) {\n      items {\n        outcome\n        marketId\n        outcomeA\n        outcomeB\n        outcomeOddsA\n        outcomeOddsB\n        title\n        question\n        topicId\n      }\n    }\n  }\n": types.GetMarketsForTopicDocument,
     "\n  query getTopicById($id: BigInt!) {\n    topic(id: $id) {\n      creatorAddress\n      description\n      title\n      id\n    }\n  }\n": types.GetTopicByIdDocument,
     "\n  query getUserReferrals($referrerAddress: String!) {\n    referrals(where: { referrerAddress: $referrerAddress }) {\n      items {\n        feeAmount\n        id\n        marketId\n        referrerAddress\n        timestamp\n        market {\n          question\n          title\n        }\n      }\n    }\n  }\n": types.GetUserReferralsDocument,
-    "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n": types.GetUserByIdDocument,
+    "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      name\n      pfp\n      id\n      externalAuthProviderUserId\n      createdAt\n      isRegistered\n      theme\n      updatedAt\n      walletAddress\n    }\n  }\n": types.GetUserByIdDocument,
 };
 
 /**
@@ -128,7 +128,7 @@ export function tgql(source: "\n  query getUserReferrals($referrerAddress: Strin
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function tgql(source: "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: String!) {\n    user(id: $id) {\n      externalAuthProviderUserId\n      createdAt\n      name\n      pfp\n      walletAddress\n    }\n  }\n"];
+export function tgql(source: "\n  query getUserById($id: String!) {\n    user(id: $id) {\n      name\n      pfp\n      id\n      externalAuthProviderUserId\n      createdAt\n      isRegistered\n      theme\n      updatedAt\n      walletAddress\n    }\n  }\n"): (typeof documents)["\n  query getUserById($id: String!) {\n    user(id: $id) {\n      name\n      pfp\n      id\n      externalAuthProviderUserId\n      createdAt\n      isRegistered\n      theme\n      updatedAt\n      walletAddress\n    }\n  }\n"];
 
 export function tgql(source: string) {
   return (documents as any)[source] ?? {};

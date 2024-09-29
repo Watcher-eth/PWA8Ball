@@ -12,7 +12,6 @@ export function MarketCard({
   isTwoCards: boolean
   loading?: boolean
 }) {
-  console.log("item", item)
   if (!item) {
     return (
       <div className={`flex flex-col my-3 w-full relative`}>

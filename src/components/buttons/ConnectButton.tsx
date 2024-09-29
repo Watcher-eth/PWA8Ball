@@ -3,12 +3,12 @@ import { UserCircle } from "lucide-react"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 import { User } from "@/__generated__/graphql"
 
-export function ConnectButton({ user }: { user: User }) {
+export function ConnectButton({ user }: { user?: User }) {
   const { displayName } = useMyEns()
   const buttonText =
     displayName && !displayName.startsWith("0x")
       ? displayName
-      : user?.name || (displayName ? displayName : "Connect")
+      : user?.name || (displayName ?? "Connect")
   return (
     <div
       className={`
@@ -22,8 +22,8 @@ export function ConnectButton({ user }: { user: User }) {
       {buttonText}
       {user?.pfp ? (
         <img
-          src={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
-          alt={user?.name}
+          src={user?.pfp ?? DEFAULT_PFP_PLACEHOLDER}
+          alt={user?.name ?? ""}
           className="size-6 rounded-full  ml-2 -mr-1 inline"
         />
       ) : (

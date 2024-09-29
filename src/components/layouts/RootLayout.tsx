@@ -1,6 +1,6 @@
-import { isMobile } from "@/utils/isMobile";
-import { SmartAccountProvider } from "@/lib/onchain/SmartAccount";
-import { MobileNavBar } from "@/components/layouts/MobileNavBar";
+import { isMobile } from "@/utils/isMobile"
+import { SmartAccountProvider } from "@/lib/onchain/SmartAccount"
+import { MobileNavBar } from "@/components/layouts/MobileNavBar"
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,5 +15,5 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
         )}
       </div>
     </SmartAccountProvider>
-  );
+  )
 }

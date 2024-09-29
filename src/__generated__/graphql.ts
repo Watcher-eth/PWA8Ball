@@ -1171,8 +1171,9 @@ export type TradePage = {
 export type User = {
   __typename?: 'User';
   createdAt?: Maybe<Scalars['BigInt']['output']>;
-  externalAuthProviderUserId: Scalars['String']['output'];
+  externalAuthProviderUserId?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  isRegistered: Scalars['Boolean']['output'];
   name?: Maybe<Scalars['String']['output']>;
   pfp?: Maybe<Scalars['String']['output']>;
   theme?: Maybe<Scalars['String']['output']>;
@@ -1211,6 +1212,10 @@ export type UserFilter = {
   id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  isRegistered?: InputMaybe<Scalars['Boolean']['input']>;
+  isRegistered_in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
+  isRegistered_not?: InputMaybe<Scalars['Boolean']['input']>;
+  isRegistered_not_in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>;
   name?: InputMaybe<Scalars['String']['input']>;
   name_contains?: InputMaybe<Scalars['String']['input']>;
   name_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -1284,7 +1289,7 @@ export type FriendsOrdersByUserQueryVariables = Exact<{
 }>;
 
 
-export type FriendsOrdersByUserQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, createdAt: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null, walletAddress: string } }> } };
+export type FriendsOrdersByUserQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, createdAt: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId?: string | null, name?: string | null, pfp?: string | null, walletAddress: string } }> } };
 
 export type GetLpPositionsDataQueryVariables = Exact<{
   userAddress: Scalars['String']['input'];
@@ -1331,7 +1336,7 @@ export type MarketUsersQueryVariables = Exact<{
 }>;
 
 
-export type MarketUsersQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', option: number, tokensOwned: any, updatedAt?: any | null, userAddress: string, user: { __typename?: 'User', id: string, name?: string | null, pfp?: string | null, externalAuthProviderUserId: string, walletAddress: string } }> } };
+export type MarketUsersQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', option: number, tokensOwned: any, updatedAt?: any | null, userAddress: string, user: { __typename?: 'User', id: string, name?: string | null, pfp?: string | null, externalAuthProviderUserId?: string | null, walletAddress: string } }> } };
 
 export type OrderByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -1345,14 +1350,14 @@ export type FriendsOrdersQueryVariables = Exact<{
 }>;
 
 
-export type FriendsOrdersQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null } }> } };
+export type FriendsOrdersQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any }, user: { __typename?: 'User', externalAuthProviderUserId?: string | null, name?: string | null, pfp?: string | null } }> } };
 
 export type GetPositionsByWalletQueryVariables = Exact<{
   userAddress: Scalars['String']['input'];
 }>;
 
 
-export type GetPositionsByWalletQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any, outcome?: string | null, resolved?: boolean | null }, user: { __typename?: 'User', externalAuthProviderUserId: string, name?: string | null, pfp?: string | null } }> } };
+export type GetPositionsByWalletQuery = { __typename?: 'Query', positions: { __typename?: 'PositionPage', items: Array<{ __typename?: 'Position', marketId: any, option: number, tokensOwned: any, market: { __typename?: 'Market', id: any, initialProb: any, marketId: any, outcomeA: string, outcomeB: string, outcomeOddsA: any, outcomeOddsB: any, question: string, title: string, usdcStake: any, outcome?: string | null, resolved?: boolean | null }, user: { __typename?: 'User', externalAuthProviderUserId?: string | null, name?: string | null, pfp?: string | null } }> } };
 
 export type UserOrderCountQueryVariables = Exact<{
   userAddress?: InputMaybe<Scalars['String']['input']>;
@@ -1409,7 +1414,7 @@ export type GetUserByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'Query', user?: { __typename?: 'User', externalAuthProviderUserId: string, createdAt?: any | null, name?: string | null, pfp?: string | null, walletAddress: string } | null };
+export type GetUserByIdQuery = { __typename?: 'Query', user?: { __typename?: 'User', name?: string | null, pfp?: string | null, id: string, externalAuthProviderUserId?: string | null, createdAt?: any | null, isRegistered: boolean, theme?: string | null, updatedAt?: any | null, walletAddress: string } | null };
 
 
 export const GetMarketPricesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketPrices"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"marketId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"prices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"marketId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"marketId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}}]}}]}}]}}]} as unknown as DocumentNode<GetMarketPricesQuery, GetMarketPricesQueryVariables>;
@@ -1431,4 +1436,4 @@ export const SearchUsersDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const GetMarketsForTopicDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMarketsForTopic"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"topicId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeB"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsA"}},{"kind":"Field","name":{"kind":"Name","value":"outcomeOddsB"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"topicId"}}]}}]}}]}}]} as unknown as DocumentNode<GetMarketsForTopicQuery, GetMarketsForTopicQueryVariables>;
 export const GetTopicByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTopicById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BigInt"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"topic"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"creatorAddress"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetTopicByIdQuery, GetTopicByIdQueryVariables>;
 export const GetUserReferralsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserReferrals"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"referrerAddress"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"referrals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"referrerAddress"},"value":{"kind":"Variable","name":{"kind":"Name","value":"referrerAddress"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feeAmount"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marketId"}},{"kind":"Field","name":{"kind":"Name","value":"referrerAddress"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"market"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserReferralsQuery, GetUserReferralsQueryVariables>;
-export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}},{"kind":"Field","name":{"kind":"Name","value":"walletAddress"}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"pfp"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"externalAuthProviderUserId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"isRegistered"}},{"kind":"Field","name":{"kind":"Name","value":"theme"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"walletAddress"}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;

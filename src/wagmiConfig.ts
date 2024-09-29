@@ -1,6 +1,7 @@
 import type { Chain } from "viem"
 import type { Config } from "wagmi"
-import { createConfig } from "@wagmi/core"
+// import { createConfig } from "@wagmi/core"
+import { createConfig } from "@privy-io/wagmi" // SWAP: @wagmi/core with @privy-io/wagmi
 import { connectorsForWallets } from "@rainbow-me/rainbowkit"
 import {
   metaMaskWallet,
@@ -14,6 +15,7 @@ import {
   safeWallet,
   injectedWallet,
 } from "@rainbow-me/rainbowkit/wallets"
+import { toPrivyWallet } from "@privy-io/cross-app-connect"
 
 import { createTransports } from "@/utils/createTransports"
 import { SUPPORTED_CHAINS } from "@/constants/chains"
@@ -28,6 +30,14 @@ const APP_DETAILS = {
   appName: "Glimpse",
   projectId: "<insert project id here>",
 } as const
+
+const privyWallet = toPrivyWallet({
+  id: process.env.NEXT_PUBLIC_PRIVY_APP_ID!,
+  name: "PrivyWallet",
+  iconUrl: "https://example.com/image.png",
+})
+
+console.log(privyWallet)
 
 const WALLET_GROUPS = [
   {
@@ -48,13 +58,14 @@ const WALLET_GROUPS = [
       walletConnectWallet,
       trustWallet,
       safeWallet,
+      // privyWallet,
     ],
   },
 ]
 
 const connectors = connectorsForWallets(WALLET_GROUPS, APP_DETAILS)
-
-const transports = createTransports(SUPPORTED_CHAINS as Chain[])
+console.log(connectors)
+const transports = createTransports(SUPPORTED_CHAINS as unknown as Chain[])
 
 export const wagmiConfig = createConfig({
   connectors,
@@ -62,3 +73,6 @@ export const wagmiConfig = createConfig({
   transports,
   ssr: true,
 })
+
+export const WAGMI_CONNECTORS = connectors
+console.log(WAGMI_CONNECTORS)
