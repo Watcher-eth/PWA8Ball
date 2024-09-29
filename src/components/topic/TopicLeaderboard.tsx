@@ -1,17 +1,16 @@
 // @ts-nocheck
-import { useRouter } from "next/router";
-import { ChevronLeft } from "lucide-react";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { useGetLeaderboardForTopic } from "@/supabase/queries/leaderboard/useGetLeaderboardForTopic";
+import { useRouter } from "next/router"
+import { ChevronLeft } from "lucide-react"
+import { Skeleton } from "@/components/ui/Skeleton"
 
-import { PredictorInfo } from "../activity/PredictorInfo";
+import { PredictorInfo } from "../activity/PredictorInfo"
+import { useGetTopicLeaderboard } from "@/graphql/leaderboard/useGetTopicLeaderboard"
 
-const Leaderboard = ({ topicId }) => {
+function Leaderboard({ topicId }) {
   const {
     data: topPredictors,
     error,
-    isLoading,
-  } = useGetLeaderboardForTopic(topicId);
+  } = useGetTopicLeaderboard(topicId)
 
   return (
     <div className="flex flex-col mt-[7px]">
@@ -34,8 +33,8 @@ const Leaderboard = ({ topicId }) => {
         )) ?? <LeaderboardSkeleton />}
       </div>
     </div>
-  );
-};
+  )
+}
 
 function LeaderboardSkeleton() {
   return [1, 2, 3, 4].map((index) => (
@@ -52,11 +51,11 @@ function LeaderboardSkeleton() {
       </div>
       <Skeleton className="h-14 w-25" />
     </div>
-  ));
+  ))
 }
 
 export const TopicLeaderboard = ({ image, name, topicId }) => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <div className="flex flex-col w-full p-[20px] pt-[75px] bg-[#101010] h-screen relative">
@@ -101,5 +100,5 @@ export const TopicLeaderboard = ({ image, name, topicId }) => {
         <Leaderboard topicId={topicId} />
       </div>
     </div>
-  );
-};
+  )
+}

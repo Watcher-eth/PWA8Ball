@@ -1,29 +1,29 @@
 // @ts-nocheck
-import { useRouter } from "next/router";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { LiquidityPosition } from "./LiquidityPosition";
-import { motion } from "framer-motion";
-import { ChevronLeft } from "lucide-react";
-import { useGetLPForUser } from "@/lib/supabase/queries/user/getUsersLP";
-import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
+import { useRouter } from "next/router"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { LiquidityPosition } from "./LiquidityPosition"
+import { motion } from "framer-motion"
+import { ChevronLeft } from "lucide-react"
+import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders"
+import { useGetLpPositionsByUser } from "@/graphql/queries/liquidity/useGetLpPositionsByUser"
 
 export function UserLiquidityPage() {
-  const router = useRouter();
-  const { user } = useUserStore();
+  const router = useRouter()
+  const { user } = useUserStore()
   const {
     data: positions,
-    isLoading,
+    loading,
     refetch,
-  } = useGetLPForUser(user?.walletAddress);
+  } = useGetLpPositionsByUser(user?.walletAddress)
 
-  const filteredPositions = positions?.filter((item) => item.amount > 0) ?? [];
-  console.log("llp", positions);
+  const filteredPositions = positions?.filter((item) => item.amount > 0) ?? []
+  console.log("llp", positions)
   return (
     <div className="pt-16 flex flex-col h-full min-h-screen bg-[#101010] w-full px-5">
       <div className="flex flex-row items-center my-4 justify-between">
         <motion.button
           onClick={() => {
-            router.back();
+            router.back()
           }}
           className={`
             size-[30px] bg-[rgba(100,100,100,0.4)] rounded-full
@@ -56,5 +56,5 @@ export function UserLiquidityPage() {
         </div>
       )}
     </div>
-  );
+  )
 }

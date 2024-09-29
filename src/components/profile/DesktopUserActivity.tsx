@@ -2,7 +2,6 @@
 import { motion } from "framer-motion"
 import { useEffect } from "react"
 
-import { useGetMarketsCreatedByUser } from "@/supabase/queries/useGetMarketsCreatedByUser"
 import { aggregatePredictedItems } from "@/utils/predictions/aggregatePredictions"
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
 import { UserPredictionSkeleton } from "./GeneralFeed/UserPredictionSkeleton"
@@ -22,11 +21,15 @@ export function DesktopUserActivity({
     isLoading: isOrdersLoading,
     refetch: refetchOrders,
   } = useGetPositionsByWallet(walletAddress)
-  const {
-    data: createdMarketsData,
-    isLoading: isCreatedMarketsLoading,
-    refetch: refetchCreated,
-  } = useGetMarketsCreatedByUser(userId)
+
+  const createdMarketsData = []
+  const isCreatedMarketsLoading = false
+  const refetchCreated = () => {}
+  // const {
+  //   data: createdMarketsData,
+  //   isLoading: isCreatedMarketsLoading,
+  //   refetch: refetchCreated,
+  // } = useGetMarketsCreatedByUser(userId)
 
   useEffect(() => {
     if (onParentRefresh) {
