@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/Skeleton";
-import Link from "next/link";
+import { motion } from "framer-motion"
+import { Skeleton } from "@/components/ui/Skeleton"
+import Link from "next/link"
 
-import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsWithMemberCount";
+import { useGetTopicsWithMembers } from "@/supabase/queries/topics/useGetTopicsWithMemberCount"
 
-import { getTopicPath } from "@/utils/urls";
+import { getTopicPath } from "@/utils/urls"
 
 export function TrendingCommunities() {
-  const { data: topics } = useGetTopicsWithMembers(["17", "18"]);
+  const { data: topics } = useGetTopicsWithMembers(["17", "18"])
 
   return (
     <div className=" flex flex-col w-full">
@@ -17,7 +17,7 @@ export function TrendingCommunities() {
       <div className="flex flex-row space-x-7">
         {topics?.map((topic, index) => {
           // @ts-ignore
-          return <TrendingCommunityItem {...topic} key={index} />;
+          return <TrendingCommunityItem {...topic} key={index} />
         }) ??
           [1, 2].map((index) => (
             <div className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}>
@@ -26,7 +26,7 @@ export function TrendingCommunities() {
           ))}
       </div>
     </div>
-  );
+  )
 }
 
 function TrendingCommunityItem({
@@ -35,10 +35,10 @@ function TrendingCommunityItem({
   description,
   image,
 }: {
-  id: string;
-  title: string;
-  description: string;
-  image?: string;
+  id: string
+  title: string
+  description: string
+  image?: string
 }) {
   return (
     <Link
@@ -116,5 +116,5 @@ function TrendingCommunityItem({
         </div>
       </div>
     </Link>
-  );
+  )
 }
