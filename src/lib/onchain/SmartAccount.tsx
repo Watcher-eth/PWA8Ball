@@ -42,7 +42,7 @@ import {
   BASE_SEPOLIA_USDC_ADDRESS,
 } from "@/constants/onchain"
 import { USDC_ABI } from "@/lib/onchain/contracts/Usdc"
-import { DEFAULT_CHAIN_ID } from "@/constants/chains"
+import { DEFAULT_CHAIN } from "@/constants/chains"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
@@ -50,7 +50,7 @@ export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
 
 /* TODO: use the DEFAULT_CHAIN from the wagmi config */
-const TARGET_CHAIN = baseSepolia //as const
+const TARGET_CHAIN = DEFAULT_CHAIN //as const
 /** Interface returned by custom `useSmartAccount` hook */
 
 const SmartAccountContext = React.createContext({
