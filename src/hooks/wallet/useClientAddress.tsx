@@ -11,11 +11,12 @@ type ClientAndAddress = {
 }
 
 export function useClientAddress() {
+
   const { smartAccountClient, smartAccountAddress } = useSmartAccount()
   const { user: userCon } = useUserStore()
   const { address: eoaAddress } = useAccount()
   const { data: eoaWalletClient } = useWalletClient()
-  console.log(userCon)
+  console.log({ eoaAddress, eoaWalletClient })
   let client
   let address
   if (userCon?.walletType === "smartwallet") {

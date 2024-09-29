@@ -12,6 +12,8 @@ export const SETTINGS_PATH = "/settings"
 
 export const ELECTIONS_PATH = "/elections" // "/Elections"
 
+export const LP_PATH = "/lp"
+
 export function getTopicPath(topicId: string) {
   return `/t/${topicId}` as const
 }

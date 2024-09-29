@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { Users } from "lucide-react"
 import Link from "next/link"
 
-export const BetBigView = ({
+export function BetBigView({
   marketId,
   title,
   question,
@@ -14,7 +14,7 @@ export const BetBigView = ({
   topic,
   option1,
   option2,
-}) => {
+}) {
   const router = useRouter()
 
   return (
@@ -81,15 +81,13 @@ export const BetBigView = ({
   )
 }
 
-export const BetSmallView = ({
+export function BetSmallView({
   marketId,
   title,
   question,
   image,
   topic,
-  option1,
-  option2,
-}) => {
+}) {
   const router = useRouter()
 
   return (
@@ -137,7 +135,7 @@ export const BetSmallView = ({
   )
 }
 
-export const PollingComponent = ({ yesValue, noValue, option1, option2 }) => {
+export function PollingComponent({ yesValue, noValue, option1, option2 }) {
   const total = yesValue / 100 + noValue / 100
   const yesPercentage = (yesValue / 100 / total) * 100
   const noPercentage = (noValue / 100 / total) * 100
@@ -178,8 +176,6 @@ const MAX_LENGTH = 11
 export const PollingComponentImage = ({
   yesValue,
   noValue,
-  option1,
-  option2,
 }) => {
   const total = yesValue.amount + noValue.amount
   const yesPercentage = (yesValue.amount / total) * 100

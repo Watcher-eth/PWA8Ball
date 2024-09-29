@@ -16,26 +16,15 @@ import {
   walletClientToSmartAccountSigner,
   ENTRYPOINT_ADDRESS_V07,
 } from "permissionless"
-import {
-  smartAccount as createSmartAccountConnector,
-} from "@permissionless/wagmi"
+import { smartAccount as createSmartAccountConnector } from "@permissionless/wagmi"
 import { signerToSimpleSmartAccount } from "permissionless/accounts"
 import {
   createPimlicoBundlerClient,
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico"
 
-import {
-  EIP1193Provider,
-  usePrivy,
-  useWallets,
-} from "@privy-io/react-auth"
-import {
-  useAccount,
-  useConnect,
-  usePublicClient,
-  useWalletClient,
-} from "wagmi"
+import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth"
+import { useAccount, useConnect, usePublicClient, useWalletClient } from "wagmi"
 
 import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
@@ -49,8 +38,7 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
 export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
 
-/* TODO: use the DEFAULT_CHAIN from the wagmi config */
-const TARGET_CHAIN = DEFAULT_CHAIN //as const
+
 /** Interface returned by custom `useSmartAccount` hook */
 
 const SmartAccountContext = React.createContext({
@@ -58,7 +46,6 @@ const SmartAccountContext = React.createContext({
   smartAccountAddress: undefined,
   smartAccountReady: false,
 })
-
 
 export function SmartAccountProvider({
   children,
@@ -71,9 +58,9 @@ export function SmartAccountProvider({
   const { isConnected, address, connector: currentConnector } = useAccount()
   const { data: client } = useWalletClient({
     account: address as Address,
-    chainId: TARGET_CHAIN.id,
+    chainId: DEFAULT_CHAIN.id,
   })
-  // const publicClient = usePublicClient({ chainId: TARGET_CHAIN.id })
+  // const publicClient = usePublicClient({ chainId: DEFAULT_CHAIN.id })
 
   const {
     // user: privyUser,
@@ -95,11 +82,10 @@ export function SmartAccountProvider({
   // States to store the smart account and its status
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
-
   async function connectSmartAccount() {
     console.log("connecting smart account")
     const publicClient = createPublicClient({
-      chain: TARGET_CHAIN, // Replace this with the chain of your app
+      chain: DEFAULT_CHAIN, // Replace this with the chain of your app
       transport: http(),
     }) as PublicClient
 
@@ -112,7 +98,7 @@ export function SmartAccountProvider({
     console.log("eip1193provider", eip1193provider)
     const privyClient = createWalletClient({
       account: embeddedWallet?.address as Address,
-      chain: TARGET_CHAIN,
+      chain: DEFAULT_CHAIN,
       // transport: http(),
       transport: custom(eip1193provider as EIP1193Provider),
     })
@@ -120,14 +106,11 @@ export function SmartAccountProvider({
 
     const customSigner = walletClientToSmartAccountSigner(privyClient)
 
-    const simpleSmartAccount = await signerToSimpleSmartAccount(
-      publicClient,
-      {
-        entryPoint: ENTRYPOINT_ADDRESS_V07,
-        signer: customSigner,
-        factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
-      }
-    )
+    const simpleSmartAccount = await signerToSimpleSmartAccount(publicClient, {
+      entryPoint: ENTRYPOINT_ADDRESS_V07,
+      signer: customSigner,
+      factoryAddress: SMART_ACCOUNT_FACTORY_ADDRESS,
+    })
     const pimlicoPaymaster = createPimlicoPaymasterClient({
       entryPoint: ENTRYPOINT_ADDRESS_V07,
       transport: http(process.env.NEXT_PUBLIC_PIMLICO_PAYMASTER_URL),
@@ -144,18 +127,18 @@ export function SmartAccountProvider({
         gasPrice: async () =>
           (await pimlicoBundlerClient.getUserOperationGasPrice()).fast, // if using pimlico bundler
       },
-      chain: TARGET_CHAIN, // Replace this with the chain for your app
+      chain: DEFAULT_CHAIN, // Replace this with the chain for your app
     })
     const connector = createSmartAccountConnector({
       // @ts-ignore
-      smartAccountClient
+      smartAccountClient,
     })
 
     console.log({ connector })
     connect(
       {
         connector,
-        chainId: TARGET_CHAIN.id,
+        chainId: DEFAULT_CHAIN.id,
       },
       {
         onSuccess: (...successArgs) => {
@@ -204,8 +187,6 @@ export function SmartAccountProvider({
     // if (walletType === "smartwallet" && embeddedWallet) {
     // createSmartWallet()
 
-
-
     // }
   }, [
     // walletType,
@@ -236,31 +217,30 @@ export const useSmartAccount = () => {
   return useContext(SmartAccountContext)
 }
 
-
-    // const allowance = await publicClient.readContract({
-    //   address: BASE_SEPOLIA_USDC_ADDRESS,
-    //   abi: USDC_ABI,
-    //   args: [
-    //     smartAccountClient.account?.address!,
-    //     BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-    //   ],
-    //   functionName: "allowance",
-    // })
-    // if (allowance < 1n) {
-    //   console.log("allowance", allowance)
-    //   try {
-    //     const contract = getContract({
-    //       abi: USDC_ABI,
-    //       address: BASE_SEPOLIA_USDC_ADDRESS,
-    //       client: { public: rpcClient, wallet: smartAccountClient },
-    //     })
-    //     const hash = await contract.write.approve([
-    //       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-    //       10000000000n,
-    //     ])
-    //     console.log("hash", hash)
-    //   } catch (error) {
-    //     console.error("Failed to send transaction:", error)
-    //     // throw error
-    //   }
-    // }
+// const allowance = await publicClient.readContract({
+//   address: BASE_SEPOLIA_USDC_ADDRESS,
+//   abi: USDC_ABI,
+//   args: [
+//     smartAccountClient.account?.address!,
+//     BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+//   ],
+//   functionName: "allowance",
+// })
+// if (allowance < 1n) {
+//   console.log("allowance", allowance)
+//   try {
+//     const contract = getContract({
+//       abi: USDC_ABI,
+//       address: BASE_SEPOLIA_USDC_ADDRESS,
+//       client: { public: rpcClient, wallet: smartAccountClient },
+//     })
+//     const hash = await contract.write.approve([
+//       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+//       10000000000n,
+//     ])
+//     console.log("hash", hash)
+//   } catch (error) {
+//     console.error("Failed to send transaction:", error)
+//     // throw error
+//   }
+// }

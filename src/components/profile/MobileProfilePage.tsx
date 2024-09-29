@@ -12,6 +12,7 @@ import { INVITES_ACTIVE } from "@/constants"
 import { MobileProfilePopover } from "../layouts/MobileProfilePopover"
 import { User } from "@/__generated__/graphql"
 import { useUserStore } from "@/lib/stores/UserStore"
+import { LP_PATH } from "@/utils/urls"
 
 export function MobileProfilePage({
   userId,
@@ -42,7 +43,7 @@ export function MobileProfilePage({
 
         <div className="w-full flex flex-col items-center pt-1 top-[-13rem] relative">
           {userC?.walletAddress === user?.walletAddress ? (
-            <Link href="/lp">
+            <Link href={LP_PATH}>
               <AbsoluteBlurIcon
                 IconComponent={PieChart}
                 className="top-4 left-6"

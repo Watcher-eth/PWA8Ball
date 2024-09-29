@@ -11,6 +11,7 @@ import { rpcClient } from "@/lib/onchain/rpcClient"
 import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { txErrorHandlerWrapper } from "@/utils/txErrorHandler"
 import { EightBallAbi } from "@/lib/onchain/generated"
+import { LP_PATH } from "@/utils/urls"
 
 export function useExecuteBoost() {
   const [loading, setLoading] = useState(false)
@@ -30,7 +31,7 @@ export function useExecuteBoost() {
       throw new Error("Insufficient balance to boost the market.")
     }
 
- 
+
     if (!allowance || allowance < biAmount) {
       await approveToken()
     }
@@ -73,7 +74,7 @@ export function useExecuteBoost() {
     )
     setLoading(false)
     setSuccess(true)
-    router.push({ pathname: `/lp` })
+    router.push(LP_PATH)
   }
 
   return {
