@@ -30,20 +30,19 @@ export function useInitializeUser() {
 
   async function fetchUser() {
     try {
+      if (!address) {
+        return
+      }
       let walletType = "eoa"
 
       if (ready && authenticated && privyUser) {
         walletType = "smartwallet"
       }
 
-      const walletAddress = address
-        // walletType === "smartwallet" ? smartAccountAddress : eoaAddress
-
-      if (!walletAddress) return
       console.log("before user")
 
-      const dbUser = await getUserById(walletAddress)
-      console.log("dbUser", dbUser, walletAddress)
+      const dbUser = await getUserById(address)
+      console.log("dbUser", dbUser, address)
 
       if (dbUser) {
         setUser({
@@ -55,13 +54,11 @@ export function useInitializeUser() {
         })
       } else {
         const userUUID =
-          walletType === "eoa"
-            ? uuidv5(walletAddress, NAMESPACE)
-            : privyUser?.id
+          walletType === "eoa" ? uuidv5(address, NAMESPACE) : privyUser?.id
 
         const newUser = {
-          id: walletAddress,
-          walletAddress,
+          id: address,
+          walletAddress: address,
           name: user?.name || "Anon",
           pfp: user?.pfp || DEFAULT_PFP,
           socials: user?.socials || "{}",
