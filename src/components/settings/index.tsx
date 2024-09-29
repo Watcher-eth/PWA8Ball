@@ -18,7 +18,7 @@ import { shortenAddress } from "@/utils/address/shortenAddress"
 import Link from "next/link"
 import { copyToClipboard } from "@/utils/copyToClipboard"
 
-import UserInviteModal from "../onboarding/Invites/UserInviteModal"
+import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal"
 import { useCreateUser } from "@/hooks/actions/UserRegistry/useCreateUser"
 
 export function SettingsPage() {

@@ -35,9 +35,9 @@ function Button({
   return (
     <div
       onClick={onClick}
-      className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border-2 border-[#212121] bg-[#121212] cursor-pointer"
+      className="flex flex-row items-center py-1 px-3 hover:scale-102 active:scale-97 rounded-full border border-[#212121] bg-[#121212] cursor-pointer"
     >
-      <div className="text-lg font-medium text-[#999999] mr-1">{text}</div>
+      <div className="text-base font-medium text-[#999999] mr-1">{text}</div>
       <IconComponent color="#999999" size={"1rem"} strokeWidth={3.5} />
     </div>
   )

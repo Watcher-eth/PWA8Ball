@@ -3,7 +3,7 @@ import { Ban, ImagePlus } from "lucide-react"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { toast } from "sonner"
 
-function DesktopCreateProfile() {
+export function DesktopCreateProfile() {
   const fileInputRef = useRef(null)
 
   const [username, setUsername] = useState("")
@@ -26,7 +26,7 @@ function DesktopCreateProfile() {
   async function uploadProfileData() {
     if (!username) {
       toast(
-        <div className="w-full rounded-full bg-[#101010] font-semibold text-base px-3 pr-4 text-white flex flex-row items-center p-2">
+        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
           <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
             <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />
           </div>
@@ -164,4 +164,4 @@ function DesktopCreateProfile() {
   )
 }
 
-export default DesktopCreateProfile
+

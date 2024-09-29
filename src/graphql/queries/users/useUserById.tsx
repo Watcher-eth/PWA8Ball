@@ -7,10 +7,14 @@ import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 const GET_USER_BY_ID = tgql(/* GraphQL */ `
   query getUserById($id: String!) {
     user(id: $id) {
-      externalAuthProviderUserId
-      createdAt
       name
       pfp
+      id
+      externalAuthProviderUserId
+      createdAt
+      isRegistered
+      theme
+      updatedAt
       walletAddress
     }
   }

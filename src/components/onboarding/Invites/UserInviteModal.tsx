@@ -1,23 +1,23 @@
-import { DrawerTrigger, Drawer, DrawerContent } from "@/components/ui/drawer";
-import React from "react";
-import { motion } from "framer-motion";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
-import { useGetUserInvites } from "@/supabase/queries/Invites/useGetUserInvites";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites";
+import { DrawerTrigger, Drawer, DrawerContent } from "@/components/ui/drawer"
+import React from "react"
+import { motion } from "framer-motion"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Copy } from "lucide-react"
+import { toast } from "sonner"
+import { useGetUserInvites } from "@/supabase/queries/Invites/useGetUserInvites"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites"
 
-function UserInviteModal({ children }) {
-  const { user } = useUserStore();
+export function UserInviteModal({ children }: { children: React.ReactNode }) {
+  const { user } = useUserStore()
   const {
     data: invites,
     isLoading,
     error,
-  } = useFetchOrCreateUserInvites(user?.walletAddress);
+  } = useFetchOrCreateUserInvites(user?.walletAddress)
   const usedInvitesCount = invites?.filter(
     (invite) => invite.status === "used"
-  ).length;
+  ).length
 
   return (
     <Dialog>
@@ -53,7 +53,7 @@ function UserInviteModal({ children }) {
                   <UserInvite
                     setToastVisible={() =>
                       toast(
-                        <div className="w-full rounded-full bg-[#101010] text-base px-3 pr-4 text-white flex flex-row items-center p-2">
+                        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
                           <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
                             <Copy
                               strokeWidth={2.5}
@@ -77,23 +77,21 @@ function UserInviteModal({ children }) {
                     code={item.id}
                     status={item.status}
                   />
-                );
+                )
               })}
             </div>
           </div>
         </motion.div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
-
-export default UserInviteModal;
 
 function UserInvite({ code, status, setToastVisible }) {
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    setToastVisible(true);
-  };
+    navigator.clipboard.writeText(code)
+    setToastVisible(true)
+  }
 
   return (
     <div className="flex flex-col gap-4 w-full px-8 my-2.5">
@@ -115,5 +113,5 @@ function UserInvite({ code, status, setToastVisible }) {
       </div>
       <div className="h-px w-11/12 bg-[#212121]" />
     </div>
-  );
+  )
 }

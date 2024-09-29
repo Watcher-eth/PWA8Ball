@@ -11,7 +11,7 @@ export function formatMarketArr({
   selectedTopic?: string
 }) {
   const strippedSelectedTopic = stripEmoji(selectedTopic ?? "")
-  console.log("markets33", strippedSelectedTopic)
+  // console.log("markets33", strippedSelectedTopic)
   const enrichedFeedData = markets
     ?.map(formatMarket)
     ?.filter((item) =>
