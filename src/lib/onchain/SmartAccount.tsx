@@ -42,7 +42,7 @@ import {
   BASE_SEPOLIA_USDC_ADDRESS,
 } from "@/constants/onchain"
 import { USDC_ABI } from "@/lib/onchain/contracts/Usdc"
-
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
@@ -172,33 +172,7 @@ export function SmartAccountProvider({
     /** Lets see if prev autoapproval works
      * This needs to get moved outside of this useEffect
      */
-    // const allowance = await publicClient.readContract({
-    //   address: BASE_SEPOLIA_USDC_ADDRESS,
-    //   abi: USDC_ABI,
-    //   args: [
-    //     smartAccountClient.account?.address!,
-    //     BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-    //   ],
-    //   functionName: "allowance",
-    // })
-    // if (allowance < 1n) {
-    //   console.log("allowance", allowance)
-    //   try {
-    //     const contract = getContract({
-    //       abi: USDC_ABI,
-    //       address: BASE_SEPOLIA_USDC_ADDRESS,
-    //       client: { public: rpcClient, wallet: smartAccountClient },
-    //     })
-    //     const hash = await contract.write.approve([
-    //       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-    //       10000000000n,
-    //     ])
-    //     console.log("hash", hash)
-    //   } catch (error) {
-    //     console.error("Failed to send transaction:", error)
-    //     // throw error
-    //   }
-    // }
+    // approval logic goes here
     setSmartAccountReady(true)
   }
 
@@ -262,3 +236,31 @@ export const useSmartAccount = () => {
   return useContext(SmartAccountContext)
 }
 
+
+    // const allowance = await publicClient.readContract({
+    //   address: BASE_SEPOLIA_USDC_ADDRESS,
+    //   abi: USDC_ABI,
+    //   args: [
+    //     smartAccountClient.account?.address!,
+    //     BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+    //   ],
+    //   functionName: "allowance",
+    // })
+    // if (allowance < 1n) {
+    //   console.log("allowance", allowance)
+    //   try {
+    //     const contract = getContract({
+    //       abi: USDC_ABI,
+    //       address: BASE_SEPOLIA_USDC_ADDRESS,
+    //       client: { public: rpcClient, wallet: smartAccountClient },
+    //     })
+    //     const hash = await contract.write.approve([
+    //       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+    //       10000000000n,
+    //     ])
+    //     console.log("hash", hash)
+    //   } catch (error) {
+    //     console.error("Failed to send transaction:", error)
+    //     // throw error
+    //   }
+    // }

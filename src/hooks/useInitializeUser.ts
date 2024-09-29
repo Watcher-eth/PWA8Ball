@@ -5,9 +5,7 @@ import { usePrivy } from "@privy-io/react-auth"
 import { useAccount } from "wagmi"
 import { v5 as uuidv5 } from "uuid"
 import { useUserStore } from "@/lib/stores/UserStore"
-import { useSmartAccount } from "@/lib/onchain/SmartAccount"
 
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
 import { getUserById } from "@/graphql/queries/users/useUserById"
 
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"

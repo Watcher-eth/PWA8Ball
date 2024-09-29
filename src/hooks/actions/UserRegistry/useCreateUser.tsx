@@ -1,17 +1,8 @@
 import { useWriteUserRegistryCreateUser } from "@/lib/onchain/generated"
 import { Address } from "viem"
 
-interface CreateUserParams {
-  walletAddress: Address
-  externalAuthProviderUserId: string
-  name: string
-  pfp?: string
-  socials?: string
-  theme?: string
-  metadata?: string
-}
 
-export const useCreateUser = () => {
+export function useCreateUser() {
   const {
     writeContractAsync: createUser,
     isPending,
@@ -20,7 +11,7 @@ export const useCreateUser = () => {
     error,
   } = useWriteUserRegistryCreateUser()
 
-  const handleCreateUser = async ({
+  async function handleCreateUser({
     walletAddress,
     externalAuthProviderUserId,
     name,
@@ -28,7 +19,15 @@ export const useCreateUser = () => {
     socials = "{}",
     theme = "",
     metadata = "",
-  }: CreateUserParams) => {
+  }: {
+    walletAddress: Address
+    externalAuthProviderUserId: string
+    name: string
+    pfp?: string
+    socials?: string
+    theme?: string
+    metadata?: string
+  }) {
     const createdAt = BigInt(Date.now())
     const updatedAt = createdAt
 

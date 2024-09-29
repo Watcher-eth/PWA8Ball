@@ -37,7 +37,7 @@ export function SettingsPage() {
     setShowSaveButton(hasChanges)
   }, [settings])
 
-  const handleSwitchChange = (key: keyof typeof settings, value: boolean) => {
+  function handleSwitchChange(key: keyof typeof settings, value: boolean) {
     setSettings((prevSettings) => ({
       ...prevSettings,
       [key]: value,
@@ -54,7 +54,7 @@ export function SettingsPage() {
           <div className="w-full p-4 rounded-md bg-[#181818] flex flex-row items-center justify-between">
             <div className="text-white font-semibold text-[0.95rem] flex flex-row items-center">
               <img
-                className="h-[1.5rem] w-[1.5rem] oject-cover rounded-full mr-2"
+                className="size-[1.5rem] object-cover rounded-full mr-2"
                 src={user?.pfp}
               />
               {user?.name}
