@@ -15,7 +15,7 @@ export function useCashOutPrediction() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const { approveToken } = useEightBallApproval()
+  const { approveToken, allowance } = useEightBallApproval()
 
   const { user: userCon } = useUserStore()
   const { mutate: cashOut, isPending, isSuccess, isError } = useCashout()
@@ -34,9 +34,11 @@ export function useCashOutPrediction() {
   }) {
     setLoading(true)
     try {
+      if (!allowance || allowance < biAmount) {
+        console.log("Approving token cashout")
 
-
-      approveToken()
+        await approveToken()
+      }
 
       cashOut({
         client,

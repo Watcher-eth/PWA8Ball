@@ -1,4 +1,3 @@
-
 import { Phone } from "lucide-react"
 import { useLoginWithOAuth, usePrivy } from "@privy-io/react-auth"
 import { useAccount } from "wagmi"
@@ -7,13 +6,11 @@ import { DesktopCardModal } from "@/components/modals/DesktopCardModal"
 import { DesktopCreateProfile } from "@/components/onboarding/DesktopCreateProfile"
 import { useUserStore } from "@/lib/stores/UserStore"
 
-
 import { Input } from "@/components/ui/Input"
 import { AppleIcon, GoogleIcon, XIcon } from "./AuthIcons"
 import { WalletOnboardButton } from "./WalletOnboardButton"
 import { SocialOnboardButton } from "./SocialOnboardButton"
 import { CustomConnectButton } from "./CustomConnectButton"
-
 
 const METAMASK_ICON_SRC =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/2048px-MetaMask_Fox.svg.png"
@@ -21,7 +18,6 @@ const COINBASE_ICON_SRC =
   "https://seeklogo.com/images/C/coinbase-coin-logo-C86F46D7B8-seeklogo.com.png"
 const WALLETCONNECT_ICON_SRC =
   "https://api.nuget.org/v3-flatcontainer/walletconnect.auth/2.3.8/icon"
-
 
 export function DesktopOnboardingModal({
   children,
@@ -35,7 +31,7 @@ export function DesktopOnboardingModal({
   // console.log("user", user, PrivyUser)
   return (
     <DesktopCardModal
-      dialogContentClassName="min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
+      dialogContentClassName="min-w-[52vw] md:min-w-[58vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
       content={
@@ -140,7 +136,3 @@ function DesktopOnboarding() {
     </div>
   )
 }
-
-
-
-

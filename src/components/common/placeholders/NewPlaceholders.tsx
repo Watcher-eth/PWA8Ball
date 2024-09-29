@@ -256,16 +256,16 @@ export function ActivityPlaceHolder({ user }) {
             "linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.3) 50%,  #101010 100%)",
         }}
       />
-      <div className="flex flex-col items-center mt-3">
-        <div className="text-white text-lg font-bold mb-2">
+      <div className="flex flex-col z-[20] items-center mt-3">
+        <div className="text-white text-xl font-bold mb-2">
           There's nothing here, yet
         </div>
-        <div className="text-gray-400 text-sm text-center px-5">
-          Start by following other predictors to see what they are upto
+        <div className="text-[lightgray]/80 text-md text-center px-12">
+          Start by following other predictors to see what future they believe in
         </div>
       </div>
-      <Link href={HOME_PATH} className="w-[85%]">
-        <button className="w-full mt-5 py-2 border-[0.1rem] border-[#202020] rounded-full bg-[#181818] text-white font-bold text-lg transition-all active:scale-95">
+      <Link href={HOME_PATH} className="w-[85%] z-[20]">
+        <button className="w-full mt-5 py-2 z-[20] border-[0.1rem] border-[#202020] rounded-full bg-[#181818] text-white font-bold text-lg transition-all active:scale-95">
           {user?.id ? "Find your friends" : "Sign in first"}
         </button>
       </Link>

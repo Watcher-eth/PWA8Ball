@@ -7,6 +7,7 @@ import { timeAgo } from "@/utils/datetime/timeAgo"
 import { parseOption } from "@/utils/predictions/parseOption"
 import { getProfilePath } from "@/utils/urls"
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function CommentHeader({
   user,
@@ -27,7 +28,9 @@ export function CommentHeader({
         <div className="flex  w-full flex-row items-start">
           <div className="mr-3.5">
             <ProfileToolTip user={user}>
-              <UserPfpIcon pfp={user?.pfp} />
+              <UserPfpIcon
+                pfp={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
+              />
             </ProfileToolTip>
           </div>
           <div className="flex flex-row items-center justify-between w-full">

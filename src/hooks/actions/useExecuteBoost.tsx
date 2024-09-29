@@ -33,6 +33,7 @@ export function useExecuteBoost() {
 
 
     if (!allowance || allowance < biAmount) {
+      console.log("Approving token boost")
       await approveToken()
     }
 

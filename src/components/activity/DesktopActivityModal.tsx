@@ -65,7 +65,7 @@ function DesktopFriendActivity(props: { user: User }) {
       </div>
     )
 
-  if (!user?.id) {
+  if (!props?.user?.id) {
     return <ActivityPlaceHolder user={props?.user} />
   }
 

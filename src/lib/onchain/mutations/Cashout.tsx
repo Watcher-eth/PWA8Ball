@@ -46,6 +46,7 @@ async function cashoutPrediction(props: {
       address: tokenAddy,
       client: { public: rpcClient, wallet: props?.client },
     })
+    console.log("Approving token cashout outcome tokens")
 
     const hash1 = await outcomeToken.write.approve([
       BASE_SEPOLIA_EIGHTBALL_ADDRESS,
