@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { type Address, getContract } from "viem"
-import { SmartAccountClient } from "permissionless"
+import { type SmartAccountClient } from "permissionless"
 
 import {
   BASE_SEPOLIA_EIGHTBALL_ADDRESS,
@@ -15,12 +15,11 @@ import {
 } from "@/lib/onchain/generated"
 import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
-export function useRemoveLp({ marketId }: { marketId: number | bigint }) {
+
+export function useRemoveLp({ marketId } :{marketId: number | bigint}) {
   const chainId = DEFAULT_CHAIN_ID
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [error, setError] = useState(false)
-
   const currentPairId = BigInt(marketId)
   const { data: marketPair } = useReadEightBallStorageGetMarketPair({
     chainId,
@@ -48,8 +47,10 @@ export function useRemoveLp({ marketId }: { marketId: number | bigint }) {
 
     setLoading(true)
     try {
+
       const account = address
       const currentPairId = BigInt(marketId)
+
 
       const liquidityTokens = await rpcClient.readContract({
         address: marketPair.liquidityPool,
@@ -64,18 +65,18 @@ export function useRemoveLp({ marketId }: { marketId: number | bigint }) {
         client: { public: client, wallet: client },
       })
 
-      const hash = await contract.write.removeLiquidity(
-        [liquidityTokens, currentPairId],
-        {}
-      )
+      const hash = await contract.write.removeLiquidity([
+        liquidityTokens,
+        currentPairId,
+      ])
+
       console.log("hash", hash)
       setSuccess(true)
     } catch (error) {
-      setError(true)
       console.error("Error during market boost", error)
       throw error
     }
     setLoading(false)
   }
-  return { removeLp, loading, success, error }
+  return { removeLp, loading, success, error: false }
 }

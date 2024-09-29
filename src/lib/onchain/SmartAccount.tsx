@@ -9,9 +9,7 @@ import {
   WalletClient,
   PublicClient,
 } from "viem"
-import { baseSepolia } from "viem/chains"
 import {
-  type SmartAccountClient,
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
   ENTRYPOINT_ADDRESS_V07,
