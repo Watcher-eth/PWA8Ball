@@ -11,7 +11,6 @@
     "gql-watch": "graphql-codegen -w"
   },
   "dependencies": {
-    "@@rainbow-me/rainbowkit": "@@rainbow-me/rainbowkit",
     "@airstack/airstack-react": "^0.6.3",
     "@amplitude/analytics-browser": "^2.10.0",
     "@apollo/client": "^3.11.1",
