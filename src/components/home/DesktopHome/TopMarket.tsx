@@ -42,7 +42,7 @@ export function TopMarket() {
   }))
 
   return (
-    <div className="w-full flex flex-row pl-1 -mt-2 -mb-5  border-b-[0.1rem] border-[#181818] pb-12">
+    <div className="w-full flex flex-row pl-1 -mt-2 -mb-5   border-b-[0.1rem] border-[#181818] pb-8">
       <Link
         href={getMarketPath(enhancedMarket?.marketId)}
         className="flex flex-col w-[30%] pr-5 z-1 pt-2"
@@ -125,8 +125,20 @@ export function TopMarket() {
                 : "Chance"
               : "Chance"}
           </div>
-          <div className="text-3xl text-white/10 font-[Aeonik-Bold]">
-            Glimpse
+          <div className="flex flex-row justify-between -mb-3 items-center">
+            <div></div>
+            <div className="flex flex-row  space-x-3  items-center ">
+              <TopMarketOutcomeBtn
+                id={enhancedMarket?.marketId}
+                outcome={enhancedMarket?.outcomeA}
+                outcomeOdds={enhancedMarket?.outcomeOddsA}
+              />
+              <TopMarketOutcomeBtn
+                id={enhancedMarket?.marketId}
+                outcome={enhancedMarket?.outcomeB}
+                outcomeOdds={enhancedMarket?.outcomeOddsB}
+              />
+            </div>
           </div>
         </Link>
         <Link
@@ -148,21 +160,6 @@ export function TopMarket() {
             }}
           />
         </Link>
-        <div className="flex flex-row justify-between -mb-3 items-center">
-          <div></div>
-          <div className="flex flex-row  space-x-3  items-center ">
-            <TopMarketOutcomeBtn
-              id={enhancedMarket?.marketId}
-              outcome={enhancedMarket?.outcomeA}
-              outcomeOdds={enhancedMarket?.outcomeOddsA}
-            />
-            <TopMarketOutcomeBtn
-              id={enhancedMarket?.marketId}
-              outcome={enhancedMarket?.outcomeB}
-              outcomeOdds={enhancedMarket?.outcomeOddsB}
-            />
-          </div>
-        </div>
       </div>
     </div>
   )
@@ -181,7 +178,7 @@ function TopMarketOutcomeBtn({
     <Link
       href={getMarketPath(id)}
       className={`
-        px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#1B1B1E]/70 hover:scale-101 active:scale-98 text-white border-[0.06rem] border-[#202020] shadow-sm shadow-[#212121]
+        px-6 py-1.5 flex items-baseline font-medium text-[1.1rem] rounded-md bg-[#151515]/70 hover:scale-101 active:scale-98 text-white border-[0.06rem] border-[#202020] shadow-sm 
       `}
     >
       {outcome}
