@@ -4,7 +4,6 @@ import { WalletClient, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 
 import { RootOperatorAddress } from "@/constants/onchain"
-import { createMarket } from "@/supabase/mutations/createMarket"
 import { EightBallConfig } from "@/lib/onchain/generated"
 import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
@@ -33,7 +32,7 @@ async function initialize(props: {
   try {
     const account = props.address
 
-    const initialProb = props?.initialProb ? props?.initialProb : 50
+    const initialProb =  props?.initialProb ?? 50
 
     const contract = getContract({
       abi: EightBallConfig.abi,
@@ -61,19 +60,6 @@ async function initialize(props: {
 
     console.log("hash", hash)
 
-    setTimeout(async () => {
-      const marketData = {
-        title: props.title,
-        question: props.description,
-        image: props.image,
-        options: props.options,
-        topicid: props.topicId,
-        participants: 0,
-        created_by: props.created_by,
-      }
-
-      const send = await createMarket(marketData, props.client)
-    }, 2000)
   } catch (error) {
     console.error("Error during market initialization", error)
     throw error // Rethrow the error after logging it

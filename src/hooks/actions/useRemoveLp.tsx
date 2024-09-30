@@ -1,32 +1,35 @@
 import { useState } from "react"
 import { type Address, getContract } from "viem"
 import {
-  EightBallConfig,
-  PairV1Abi,
   useReadEightBallStorageGetMarketPair,
   useReadPairV1BalanceOf,
+  useWriteEightBallRemoveLiquidity,
 } from "@/lib/onchain/generated"
 import { DEFAULT_CHAIN_ID } from "@/constants/chains"
-import { useClientAddress } from "@/hooks/wallet/useClientAddress"
+import { useAccount } from "wagmi"
 
 
-export function useRemoveLp({ marketId } :{marketId: number | bigint}) {
+export function useRemoveLp({ marketId } : { marketId: number | bigint }) {
   const chainId = DEFAULT_CHAIN_ID
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const currentPairId = BigInt(marketId)
-  const { client, address } = useClientAddress()
+  const biMarketId = BigInt(marketId)
+  const { address } = useAccount()
 
   const { data: marketPair } = useReadEightBallStorageGetMarketPair({
     chainId,
-    args: [currentPairId],
+    args: [biMarketId],
   })
 
   const { data: liquidityTokens } = useReadPairV1BalanceOf({
     chainId,
     address: marketPair?.liquidityPool,
-    args: [address],
+    args: [address!],
   })
+
+  const {
+    writeContractAsync: writeRemoveLiquidity
+  } = useWriteEightBallRemoveLiquidity()
 
   async function removeLp() {
     if (!marketPair) {
@@ -38,28 +41,9 @@ export function useRemoveLp({ marketId } :{marketId: number | bigint}) {
 
     setLoading(true)
     try {
-
-      // const account = address
-      const currentPairId = BigInt(marketId)
-
-
-      // const liquidityTokens = await rpcClient.readContract({
-      //   address: marketPair.liquidityPool,
-      //   abi: PairV1Abi,
-      //   args: [account],
-      //   functionName: "balanceOf",
-      // })
-
-      const contract = getContract({
-        abi: EightBallConfig.abi,
-        address: EightBallConfig.address[DEFAULT_CHAIN_ID],
-        client: { public: client, wallet: client },
+      const hash = await writeRemoveLiquidity({
+        args: [liquidityTokens, biMarketId],
       })
-
-      const hash = await contract.write.removeLiquidity([
-        liquidityTokens,
-        currentPairId,
-      ])
 
       console.log("hash", hash)
       setSuccess(true)
