@@ -46,7 +46,13 @@ export function useExecutePrediction() {
   }) {
     setLoading(true)
     setError(null)
-    console.log({ amount, option, marketId, options })
+    console.log("predict params", {
+      amount,
+      option,
+      marketId,
+      options,
+      referrer,
+    })
 
     try {
       if (!amount || !marketId) {
@@ -93,7 +99,7 @@ export function useExecutePrediction() {
         marketId: BigInt(marketId),
         operator: ROOT_OPERATOR_ADDRESS,
         slippage: 990,
-        referrer: referrer,
+        referrer: referrer !== null ? referrer : ZERO_ADDRESS,
       }
       // const predictionParamsArr = [
       //   biAmount,
@@ -115,7 +121,10 @@ export function useExecutePrediction() {
       setSuccess(true)
       toast(
         <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
+          <div
+            style={{ backgroundColor: "rgba(52, 199, 89, 0.15)" }}
+            className="p-0.5 py-1.5 rounded-full  mr-2 flex justify-center items-center"
+          >
             <Check strokeWidth={4.5} className="text-[#34C759] h-[0.9rem]" />
           </div>
           Prediction successful

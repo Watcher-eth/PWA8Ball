@@ -47,10 +47,8 @@ export function DesktopPredictComponent(props: {
     refetch,
   } = props
   const [step, setStep] = useState<number>(userOwns.length > 0 ? 4 : 0)
-  // const [amount, setAmount] = useState(0);
   const [amountStr, setAmountStr] = useState()
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
-  // const amountStr = amount.toString()
   const setStake = useVotingStore((state) => state.setState)
   console.log("User owsn", userOwns)
   return (
@@ -286,7 +284,6 @@ function DesktopConfirmPrediction({
   const refId = useReferralStore((state) => state.referralId)
 
   const { executePrediction, loading, success, error } = useExecutePrediction()
-  console.log("loading", loading, success)
   return (
     <div
       className={`flex flex-col items-center w-full ${
