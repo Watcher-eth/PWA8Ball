@@ -12,7 +12,6 @@ import {
 } from "lucide-react"
 import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp"
 import { useUserStore } from "@/lib/stores/UserStore"
-import { useSmartAccount } from "@/lib/onchain/SmartAccount"
 import { toast } from "sonner"
 import { DialogClose } from "@/components/ui/dialog"
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
@@ -66,7 +65,7 @@ export function RemoveLPConfirmationScreen(props: {
     try {
       showToast()
       setLoading(true)
-      await removeLP({
+      await removeLp({
         userId: userCon?.externalAuthProviderUserId!,
         marketId: props.id,
         client: client,
