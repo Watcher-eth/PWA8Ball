@@ -12,6 +12,7 @@ export function MarketCard({
   isTwoCards: boolean
   loading?: boolean
 }) {
+  console.log("item", item)
   if (!item) {
     return (
       <div className={`flex flex-col my-3 w-full relative`}>
@@ -51,26 +52,13 @@ export function MarketCard({
       href={getMarketPath(item?.marketId)}
       className={`flex flex-col w-full relative hover:scale-[100.1%] active:scale-[99.5%]`}
     >
-      <div
-        className={`relative ${
+      <img
+        className={`${
           isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
-        } w-full`}
-      >
-        <div className="absolute inset-0 bg-[#212121] animate-pulse rounded-lg"></div>
-        <img
-          className={`absolute inset-0 ${
-            isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
-          } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717] transition-opacity duration-500 ease-in-out opacity-0`}
-          src={item?.image}
-          alt={item?.title}
-          loading="lazy"
-          onLoad={(e) => {
-            const imgElement = e.target as HTMLImageElement
-            imgElement.classList.remove("opacity-0")
-            imgElement.classList.add("opacity-100")
-          }}
-        />
-      </div>
+        } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
+        src={item?.image}
+        alt={item?.title}
+      />
 
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3 w-full">

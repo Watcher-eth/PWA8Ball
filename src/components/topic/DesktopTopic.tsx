@@ -163,17 +163,14 @@ function DesktopTopic({
           <div className="h-[0.05rem] w-full  bg-[#212121] mt-3.5  mb-5" />
 
           <div className="flex flex-col    ">
-            <div className="mb-6 mt-4 text-3xl font-[600] text-white">
-              Trending Predictions
-            </div>
-            <div className="mt-4 flex flex-row ">
+            <div className="mt-6 flex flex-row ">
               <DesktopHomeNews
                 topic={true}
                 amount={3}
                 markets={enhancedTrendingMarkets}
               />
             </div>
-            <div className="mb-6 mt-4 text-3xl font-[600] text-white">
+            <div className="mb-6  text-3xl font-[600] text-white">
               Popular Predictions
             </div>
             <div className=" pb-[3rem]  flex flex-row">
