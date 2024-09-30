@@ -37,7 +37,11 @@ interface CashoutOverviewProps {
 
 export const CashoutOverview: React.FC<CashoutOverviewProps> = (props) => {
   const width = window.innerWidth
-  const { cashOutPrediction, loading, success, error } = useCashOutPrediction()
+  const { cashOutPrediction, loading, success, error } = useCashOutPrediction({
+    marketId: props.id,
+    option: props.option,
+    amount: props?.amount,
+  })
 
   return (
     <div className="flex flex-col items-center w-full bg-[#0c0c0c] md:bg-[#080808] py-1 mt-5 -mb-9 md:mb-0 rounded-lg min-h-[585px] md:min-h-full">

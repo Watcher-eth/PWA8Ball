@@ -9,11 +9,11 @@ export function useTokenContractApproval({
   tokenAddress,
   contractAddress,
 }: {
-  tokenAddress: Address
+  tokenAddress?: Address
   contractAddress: Address
 }) {
   const contractInfo = {
-    address: tokenAddress,
+    address: tokenAddress!,
     abi: erc20Abi,
   }
 
@@ -29,11 +29,11 @@ export function useTokenContractApproval({
     },
   })
 
-  function approveToken() {
+  function approveToken(approvalArgs?: { amount?: bigint }) {
     targetContract.writeContractAsync({
       ...contractInfo,
       functionName: "approve",
-      args: [contractAddress, BigInt(MAX_UINT_256)],
+      args: [contractAddress, approvalArgs?.amount ?? BigInt(MAX_UINT_256)],
     })
   }
 

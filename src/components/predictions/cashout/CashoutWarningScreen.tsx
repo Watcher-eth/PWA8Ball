@@ -1,7 +1,7 @@
-// @ts-nocheck
-import { AlertTriangle, Clock, X } from "lucide-react";
-import { motion } from "framer-motion";
-import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction";
+
+import { AlertTriangle, Clock, X } from "lucide-react"
+import { motion } from "framer-motion"
+import { useCashOutPrediction } from "@/hooks/actions/useCashOutPrediction"
 
 export function CashoutWarningScreen({
   changeStep,
@@ -13,18 +13,22 @@ export function CashoutWarningScreen({
   option,
   isDesktop,
 }: {
-  changeStep: () => void;
-  onClose: () => void;
-  title: string;
-  multiplier: number;
-  points: number;
-  id: number;
-  option: number;
-  isDesktop?: boolean;
+  changeStep: (num: number) => void
+  onClose: () => void
+  title: string
+  multiplier: number
+  points: number
+  id: number
+  option: number
+  isDesktop?: boolean
 }) {
-  const { cashOutPrediction, loading, success } = useCashOutPrediction();
+  const { cashOutPrediction, loading, success } = useCashOutPrediction({
+    marketId: id,
+    option,
+    amount: points,
+  })
 
-  const width = window.innerWidth;
+  const width = window.innerWidth
 
   return (
     <div
@@ -91,7 +95,7 @@ export function CashoutWarningScreen({
       >
         <motion.div
           onClick={() => {
-            isDesktop ? changeStep(4) : changeStep(1);
+            isDesktop ? changeStep(4) : changeStep(1)
           }}
           className={`
             mt-[12px] py-2.5 rounded-[24px] overflow-hidden bg-[#151515]
@@ -105,12 +109,7 @@ export function CashoutWarningScreen({
         </motion.div>
         <motion.div
           onClick={() => {
-            cashOutPrediction({
-              points,
-              option,
-              marketId,
-              options,
-            });
+            cashOutPrediction()
           }}
           className={`
             mt-[12px] flex flex-row ml-[16px]
@@ -128,5 +127,5 @@ export function CashoutWarningScreen({
         </motion.div>
       </div>
     </div>
-  );
+  )
 }
