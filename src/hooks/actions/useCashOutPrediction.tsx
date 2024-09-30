@@ -2,7 +2,6 @@
 import { useState } from "react"
 import { useRouter } from "next/router"
 
-import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 
 import { toast } from "sonner"
@@ -12,10 +11,7 @@ import { getProfilePath } from "@/utils/urls"
 
 import { useReadEightBallStorageGetMarketPair, useWriteEightBallCashOut } from "@/lib/onchain/generated"
 
-import {
-  EightBallConfig,
-  EightBallStorageConfig,
-} from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
 import { RootOperatorAddress } from "@/constants/onchain"
 import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 import { showToast } from "@/utils/Toasts/showToast"
