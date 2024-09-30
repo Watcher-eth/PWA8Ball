@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   ArrowLeftRight,
   Check,
@@ -8,23 +8,20 @@ import {
   Gift,
   PartyPopper,
   X,
-} from "lucide-react";
-import { toast } from "sonner";
-import { useRedeem } from "@/lib/onchain/mutations/Redeem";
+} from "lucide-react"
+import { toast } from "sonner"
 
-interface RedeemModalProps {
-  image: string;
-  totalPot: number;
-  option: string;
-  onClose: () => void;
-}
 
-export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
-  const [toastVisible, setToastVisible] = useState(false);
+export function RedeemModal(props: {
+  image: string
+  totalPot: number
+  option: string
+  onClose: () => void
+}) {
+  const [toastVisible, setToastVisible] = useState(false)
 
-  const { mutate: redeem, isPending } = useRedeem();
   const showToast = () => {
-    setToastVisible(true);
+    setToastVisible(true)
     toast.success("Redeemed successfully!", {
       icon: <DollarSign color="#34C759" size={20} />,
       style: {
@@ -38,13 +35,13 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
         justifyContent: "center",
         padding: "13px 5px",
       },
-    });
+    })
 
-    setTimeout(() => setToastVisible(false), 3500);
+    setTimeout(() => setToastVisible(false), 3500)
     setTimeout(() => {
-      props.onClose();
-    }, 5500);
-  };
+      props.onClose()
+    }, 5500)
+  }
 
   async function redeemPrediction() {
     // Simulate redeem logic here
@@ -55,7 +52,7 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
     //   client: smartAccountClient,
     //   address: smartAccountAddress!,
     // });
-    showToast();
+    showToast()
   }
 
   return (
@@ -109,7 +106,11 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
       <div className="flex flex-row items-center justify-between p-[0.1rem] mt-3 mb-3 bg-gradient-to-r from-green-400/80 via-green-300/60 to-green-500/40  rounded-lg w-full">
         <div className="flex flex-row items-center justify-between w-full p-2 bg-[#151515] rounded-lg">
           <div className="ml-1 bg-[#181818] rounded-full">
-            <CheckCircle strokeWidth={3.5} className="text-green-400" size={20} />
+            <CheckCircle
+              strokeWidth={3.5}
+              className="text-green-400"
+              size={20}
+            />
           </div>
           <p className="text-lg text-white font-bold">You were correct!</p>
           <div style={{ width: 20 }} />
@@ -136,5 +137,5 @@ export const RedeemModal: React.FC<RedeemModalProps> = (props) => {
         <span className="ml-2">Redeem</span>
       </div>
     </div>
-  );
-};
+  )
+}

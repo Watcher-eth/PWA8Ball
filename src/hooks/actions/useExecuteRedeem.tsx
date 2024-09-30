@@ -1,18 +1,23 @@
 // @ts-nocheck
 import { useState } from "react"
 import { useRouter } from "next/router"
-import { useRedeem } from "@/lib/onchain/mutations/Redeem"
+import { WalletClient, getContract, Address } from "viem"
+
 import { toast } from "sonner"
 import { Check, CheckCircle } from "lucide-react"
+
+import { EightBallConfig } from "@/lib/onchain/generated"
+
 import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
+
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 export function useExecuteRedeem() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
-  const { mutate: redeem, isPending, isSuccess, isError } = useRedeem()
   const { client, address } = useClientAddress()
   const { approveToken } = useEightBallApproval()
   const userBalance = useUserUsdcBalance()
@@ -26,10 +31,12 @@ export function useExecuteRedeem() {
     option: number
     marketId: string
   }) {
+    if (!marketId) {
+      console.error( Error("All fields must be provided"))
+    }
     setLoading(true)
 
     try {
- 
 
       const userBalanceNum = Number(userBalance) / 1000000
       const desired = Number(amount)
@@ -44,35 +51,37 @@ export function useExecuteRedeem() {
 
       const preferYes = option === 1
 
-      await redeem({
-        marketId,
-        preferYes,
-        client,
-        address,
+      const contract = getContract({
+        abi: EightBallConfig.abi,
+        address: EightBallConfig.address[DEFAULT_CHAIN_ID],
+        client: { public: client, wallet: client },
       })
 
-      setTimeout(() => {
-        setLoading(false)
-        setSuccess(true)
-        toast(
-          <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-            <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
-              <Check strokeWidth={4.5} className="text-[#34C759] h-[0.9rem]" />
-            </div>
-            Redeemed successfully!
-          </div>,
-          {
-            unstyled: true,
-            classNames: {
-              title: "text-red-400 text-2xl",
-              description: "text-red-400",
-              actionButton: "bg-zinc-400",
-              cancelButton: "bg-orange-400",
-              closeButton: "bg-lime-400",
-            },
-          }
-        )
-      }, 3500)
+      // Redeem position
+      const hash = await contract.write.redeem([BigInt(marketId)], {})
+      console.log("Redeemed", hash)
+
+      setLoading(false)
+      setSuccess(true)
+
+      toast(
+        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
+          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
+            <Check strokeWidth={4.5} className="text-[#34C759] h-[0.9rem]" />
+          </div>
+          Redeemed successfully!
+        </div>,
+        {
+          unstyled: true,
+          classNames: {
+            title: "text-red-400 text-2xl",
+            description: "text-red-400",
+            actionButton: "bg-zinc-400",
+            cancelButton: "bg-orange-400",
+            closeButton: "bg-lime-400",
+          },
+        }
+      )
     } catch (error) {
       console.error("Failed to redeem:", error)
       toast.error("Failed to redeem!")
@@ -82,8 +91,7 @@ export function useExecuteRedeem() {
 
   return {
     executeRedeem,
-    loading: isPending,
-    success: isSuccess,
-    error: isError,
+    loading,
+    success,
   }
 }

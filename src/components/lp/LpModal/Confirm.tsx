@@ -10,7 +10,7 @@ import {
   CheckCircle,
   Clock,
 } from "lucide-react"
-import { useRemoveLp } from "@/lib/onchain/mutations/RemoveLp"
+import { useRemoveLp } from "@/lib/onchain/mutations/useRemoveLp"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { toast } from "sonner"
 import { DialogClose } from "@/components/ui/dialog"
@@ -35,9 +35,7 @@ export function RemoveLPConfirmationScreen(props: {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  const { removeLp, isPending, isSuccess, isError } = useRemoveLp({
-    marketId: props.id,
-  })
+  const { removeLp } = useRemoveLp({ marketId: props.id,})
 
   const showToast = () => {
     toast(
@@ -160,7 +158,7 @@ export function RemoveLPConfirmationScreen(props: {
         {loading || success || loading || error ? (
           <TxStatusButton
             isPending={loading}
-            isSuccess={isSuccess}
+            isSuccess={success}
             height="h-12"
             isError={error}
             pendingText="Withdrawing"
@@ -170,7 +168,7 @@ export function RemoveLPConfirmationScreen(props: {
         ) : (
           <motion.button
             onClick={() => {
-              isSuccess ? () => {} : userRemoveLP()
+              success ? () => {} : userRemoveLP()
             }}
             whileTap={{ scale: 0.95 }}
             className=" flex flex-row ml-4 px-6 h-12 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
