@@ -69,7 +69,7 @@ export function DesktopPredictComponent(props: {
         <AnimatePresence>
           {(userOwns[0] && step === 0) || (userOwns[0] && step === 4) ? (
             <div className="flex justify-between text-[1.5rem] text-white font-medium flex-row items-center gap-3">
-              <div>{step === 0 ? `Predict ${title}` : "Your Predictions"}</div>{" "}
+              <div>{step === 0 ? `${title}?` : "Your Predictions"}</div>{" "}
               <div
                 onClick={() => {
                   if (step === 0) {

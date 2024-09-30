@@ -1,6 +1,6 @@
 // @ts-nocheck
 import _ from "lodash"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useUserStore } from "@/lib/stores/UserStore"
 
 import { BetComment } from "@/types/PostTypes"
@@ -35,6 +35,8 @@ export function CommentSection({
   const { user } = useUserStore()
 
   const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
+  const [replyTo, setReplyTo] = useState<string | null>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null) // Use ref to control input
 
   const {
     data: comments,
@@ -52,8 +54,16 @@ export function CommentSection({
     setOptimisticComments([comment, ...optimisticComments])
   }
 
-  const handleComment = () => {}
-  const setReply = () => {}
+  const handleComment = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
+  const setReply = (name: string) => {
+    setReplyTo(name)
+    handleComment()
+  }
 
   return (
     <div
@@ -81,6 +91,9 @@ export function CommentSection({
         id={marketId}
         topic_id={topic_id}
         user={user}
+        inputRef={inputRef}
+        replyTo={replyTo}
+        setReplyTo={setReplyTo}
         addOptimisticComment={addOptimisticComment}
       />
       <div className="-mt-2 -mb-1.5">

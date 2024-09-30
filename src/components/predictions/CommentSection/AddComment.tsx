@@ -13,24 +13,30 @@ export function AddComment({
   id,
   topic_id,
   addOptimisticComment,
+  replyTo,
+  setReplyTo,
+  inputRef,
 }: {
   id: number
   topic_id: string
   addOptimisticComment: () => void
+  replyTo?: string
+  setReplyTo?: (name: string | null) => void
+  inputRef: React.RefObject<HTMLTextAreaElement>
 }) {
   const [lineCount, setLineCount] = useState(1)
   const [content, setContent] = useState<string>()
-  const inputRef = useRef<HTMLTextAreaElement>(null)
   const { mutate: addComment } = useCreateComment()
-
+  console.log("Reply", replyTo)
   const { user } = useUserStore()
   const handleCancel = () => {
     if (inputRef.current) {
       inputRef.current.blur()
+      setReplyTo?.(null)
+      setContent("")
     }
   }
 
-  console.log("params", id, topic_id)
   const handleInput = () => {
     if (inputRef.current) {
       const lines = inputRef.current.value.split("\n").length
@@ -65,6 +71,8 @@ export function AddComment({
       topic_id: topic_id,
       parent_id: null,
     })
+    setContent("")
+    setReplyTo?.(null)
 
     toast.success("Commented successfully!", {
       icon: <CheckCircle color="#34C759" height={"15px"} />,
@@ -93,7 +101,9 @@ export function AddComment({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             ref={inputRef}
-            placeholder="Join the discussion..."
+            placeholder={
+              replyTo ? `Reply to ${replyTo}` : "Join the discussion..."
+            }
             rows={1}
             className={`p-[0.5rem] -mt-0.5 rounded-md px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
           text-[1.05rem] border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden

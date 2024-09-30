@@ -55,6 +55,7 @@ export function Comment({
       <div className="flex flex-row items-center justify-between mb-1.5 ">
         <button
           onClick={() => {
+            console.log("setting reply", user?.name ?? name)
             setReply(user?.name ?? name)
             handleComment()
           }}
@@ -66,7 +67,12 @@ export function Comment({
         >
           Reply
         </button>
-        <LikeDislikeSection />
+        <LikeDislikeSection
+          setReply={setReply}
+          handleComment={handleComment}
+          user={user}
+          name={name}
+        />
       </div>
       {!isDesktop && (
         <div className="w-full self-center h-0 border-b border-[#212121] mt-3 z-1" />

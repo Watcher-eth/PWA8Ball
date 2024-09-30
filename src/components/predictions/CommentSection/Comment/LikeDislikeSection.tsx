@@ -3,7 +3,13 @@ import { useState } from "react"
 import { Heart, Reply, ThumbsDown } from "lucide-react"
 import { CommentReactionButton } from "./CommentReactionButton"
 
-export function LikeDislikeSection() {
+export function LikeDislikeSection(props: {
+  setReply: (name: string) => void
+  handleComment: () => void
+  user: any
+  name: string
+}) {
+  const { setReply, handleComment, user, name } = props
   const [temporaryLike, setTemporaryLike] = useState(false)
   const [temporaryDislike, setTemporaryDislike] = useState(false)
   const handleLikePress = () => {
@@ -11,9 +17,11 @@ export function LikeDislikeSection() {
     setTemporaryDislike(false)
   }
 
-  const handleDislikePress = () => {
+  const handleReplyPress = () => {
     setTemporaryDislike(!temporaryDislike)
     setTemporaryLike(false)
+    setReply(user?.name ?? name)
+    handleComment()
   }
 
   return (
@@ -28,11 +36,11 @@ export function LikeDislikeSection() {
         }
       />
       <CommentReactionButton
-        onClick={handleDislikePress}
+        onClick={handleReplyPress}
         IconComponent={Reply}
         className={
           temporaryDislike
-            ? " text-blue-500"
+            ? " text-white shadow-md "
             : "text-[lightgray] hover:text-[white]"
         }
       />
