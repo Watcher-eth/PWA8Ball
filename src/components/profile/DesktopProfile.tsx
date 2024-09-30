@@ -77,6 +77,8 @@ export function DesktopProfilePage2({ userId, userC }) {
         ]
       : []
 
+  console.log("merged", mergedData)
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -244,8 +246,11 @@ export function DesktopProfilePage2({ userId, userC }) {
                 <div className="p-2 -mr-1 py-0.5 text-[0.85rem] rounded-full bg-[#414141]">
                   <div>
                     {
-                      mergedData?.filter((item) => Number(item.tokensOwned) > 0)
-                        ?.length
+                      mergedData?.filter(
+                        (item) =>
+                          Number(item.tokensOwned) > 0 ||
+                          item?.type === "created"
+                      )?.length
                     }
                   </div>
                 </div>
@@ -275,9 +280,13 @@ export function DesktopProfilePage2({ userId, userC }) {
           {mergedData.length > 0 ? (
             <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
               {mergedData
-                ?.filter((item) => Number(item.tokensOwned) > 0) // Filter out items with tokensOwned <= 0
+                ?.filter(
+                  (item) =>
+                    Number(item.tokensOwned) > 0 || item.type === "created"
+                )
                 .map((item, index) => {
-                  if (item.type === "created")
+                  if (item.type === "created") {
+                    console.log("created", item.type)
                     return (
                       <ProfilePositionCard
                         key={index}
@@ -286,6 +295,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                         {...item}
                       />
                     )
+                  }
                   if (Number(item.tokensOwned) !== 0) {
                     return (
                       <DesktopMyBetModal
