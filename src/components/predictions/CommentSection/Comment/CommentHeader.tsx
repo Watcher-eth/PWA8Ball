@@ -8,16 +8,23 @@ import { parseOption } from "@/utils/predictions/parseOption"
 import { getProfilePath } from "@/utils/urls"
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
+import { Position } from "@/__generated__/graphql"
+import { Outcome } from "./index"
 
 export function CommentHeader({
   user,
   user2,
   created_at,
+  userOwns,
+  options,
 }: {
   user?: User
   user2?: User
   created_at?: string
+  userOwns: Position[]
+  options: Outcome
 }) {
+  console.log("options,", options)
   return (
     <div className="flex flex-row w-full items-center justify-between">
       <Link
@@ -38,21 +45,32 @@ export function CommentHeader({
               <p className=" text-white text-[1.1rem]  font-[500] hover:text-white/80">
                 {user?.name}
               </p>
-              {user2 && (
+              {userOwns.length > 0 && (
                 <p
+                  style={{
+                    backgroundColor:
+                      userOwns[0].option === 1
+                        ? "rgb(255, 63, 63, 0.1)"
+                        : "rgb(77, 175, 255, 0.1)",
+                  }}
                   className={`
-                      text-[13px] text-white
-                      px-1 py-px font-[400] rounded-sm overflow-hidden ml-1.5
-                      ${
-                        parseOption(user2?.option) === "No"
-                          ? "bg-[#FF0050]"
-                          : "bg-[#0050FF]"
+                      text-[13px] ${
+                        userOwns[0].option === 1
+                          ? "text-[#FF3F3F]"
+                          : "text-[#4DAFFF]"
                       }
+                      px-1 py-px font-[400] rounded-sm overflow-hidden ml-1.5
+                     
                     `}
                 >
                   <span className="font-[600]">
-                    ${(user2?.amount / 10 ** 6).toFixed(2)}{" "}
-                    {parseOption(user2?.option)}
+                    $
+                    {(
+                      ((userOwns[0].tokensOwned / 10 ** 6) *
+                        options[userOwns[0].option === 1 ? 1 : 0].value) /
+                      10000
+                    ).toFixed(2)}{" "}
+                    {options[userOwns[0].option === 1 ? 1 : 0].name}
                   </span>
                 </p>
               )}

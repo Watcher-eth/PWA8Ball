@@ -8,6 +8,12 @@ import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment
 
 import { CommentHeader } from "./CommentHeader"
 import { LikeDislikeSection } from "./LikeDislikeSection"
+import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
+
+export interface Outcome {
+  name: string
+  value: number
+}
 
 export function Comment({
   id,
@@ -18,14 +24,18 @@ export function Comment({
   name,
   date,
   isDesktop,
+  marketId,
   setReply,
   handleComment,
+  options,
 }: BetComment & {
   created_at: string
   setReply: (name: string) => void
   handleComment: () => void
   user2: User
   isDesktop?: boolean
+  marketId?: number
+  options: Outcome[]
 }) {
   const { mutate: deleteComment } = useDeleteComment()
 
@@ -40,6 +50,10 @@ export function Comment({
     })
   }
 
+  const { data: userOwns } = useGetUserPositionsForMarket(
+    user?.walletAddress,
+    marketId
+  )
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,7 +62,13 @@ export function Comment({
       transition={{ duration: 0.5 }}
       className="flex flex-col w-full pt-5"
     >
-      <CommentHeader user={user} user2={user2} created_at={created_at} />
+      <CommentHeader
+        userOwns={userOwns}
+        options={options}
+        user={user}
+        user2={user2}
+        created_at={created_at}
+      />
       <p className=" ml-[3.8rem] -mt-6 font-[300]   text-white text-[1.05rem] ">
         {content}
       </p>

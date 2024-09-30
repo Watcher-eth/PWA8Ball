@@ -131,10 +131,10 @@ export function DesktopPredictComponent(props: {
           {step === 4 && (
             <div
               className={`
-          flex flex-row items-center
-         rounded-[10px] cursor-pointer
-          transition-all mt-4 mb-0.5
-        `}
+        flex flex-row items-center
+       rounded-[10px] cursor-pointer
+        transition-all mt-4 mb-0.5
+      `}
             >
               <img
                 className="h-[54px] w-[54px]  rounded-[6px] object-cover"
@@ -143,15 +143,36 @@ export function DesktopPredictComponent(props: {
               />
               <div className="flex flex-col ml-[9px] w-full -space-y-0.5">
                 <div className="flex items-center justify-between w-full">
-                  <span className="line-clamp-1 font-medium text-[16px] text-[lightgray]/80 max-w-[73vw] mb-[1px] overflow-hidden">
-                    You predicted '{options[1].name}'
+                  <span className="line-clamp-1 flex gap-2 font-medium text-[16px] text-[lightgray]/80 max-w-[73vw] mb-[1px] overflow-hidden">
+                    You predicted{" "}
+                    <p
+                      style={{
+                        backgroundColor:
+                          userOwns[0].option === 1
+                            ? "rgb(255, 63, 63, 0.1)"
+                            : "rgb(77, 175, 255, 0.1)",
+                      }}
+                      className={`flex p-2 py-0.5 text-[0.8rem] font-[700] rounded-full ${
+                        userOwns[0].option === 1
+                          ? "text-[#FF3F3F]"
+                          : "text-[#4DAFFF]"
+                      } flex-row gap-1 items-center`}
+                    >
+                      {options[userOwns[0].option].name}
+                    </p>
                   </span>
                   <span className="line-clamp-1 font-[400] text-[14px] text-[#999999] max-w-[73vw] mb-[1px] overflow-hidden">
                     3hrs ago
                   </span>
                 </div>
                 <span className="text-lg font-[600] text-white">
-                  {options[1].value / 100}% Chance
+                  $
+                  {(
+                    ((userOwns[0].tokensOwned / 10 ** 6) *
+                      options[userOwns[0].option].value) /
+                    10000
+                  ).toFixed(2)}{" "}
+                  Value
                 </span>
               </div>
             </div>

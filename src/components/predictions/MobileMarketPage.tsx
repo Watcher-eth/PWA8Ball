@@ -318,6 +318,10 @@ function MobileMarketContent({
       </div>
       <div className="z-2 -mt-5">
         <CommentSection
+          options={[
+            { name: market?.outcomeA, value: market?.outcomeOddsA },
+            { name: market?.outcomeA, value: market?.outcomeOddsA },
+          ]}
           topic_id={topicId}
           users={users}
           totalComments={market?.total_comments}

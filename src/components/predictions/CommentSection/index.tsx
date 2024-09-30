@@ -8,7 +8,7 @@ import { IUserWithBet } from "@/supabase/types"
 
 import { NewPlaceholderComment } from "@/components/common/placeholders/NewPlaceholders"
 import { AddComment } from "./AddComment"
-import { Comment } from "./Comment"
+import { Comment, Outcome } from "./Comment"
 import { useGetAllCommentsForMarket } from "@/supabase/queries/comments/getCommentsForMarket"
 import { ArrowUpDown, ChevronDown } from "lucide-react"
 
@@ -25,12 +25,14 @@ export function CommentSection({
   users,
   isDesktop,
   topic_id,
+  options,
 }: {
   marketId: string
   totalComments: number
   users: IUserWithBet[]
   isDesktop?: boolean
   topic_id: string
+  options: Outcome[]
 }) {
   const { user } = useUserStore()
 
@@ -103,8 +105,10 @@ export function CommentSection({
 
             return (
               <Comment
+                options={options}
                 key={item.id}
                 {...item}
+                marketId={marketId}
                 setReply={setReply}
                 isDesktop={isDesktop}
                 handleComment={handleComment}

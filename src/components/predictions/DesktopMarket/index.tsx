@@ -112,6 +112,10 @@ export function DesktopMarketPage({ users, market, id }) {
                   {enhancedMarket?.question}
                 </div>
                 <CommentSection
+                  options={[
+                    { name: enhancedMarket?.outcomeA, value: enhancedMarket?.outcomeOddsA },
+                    { name: enhancedMarket?.outcomeA, value: enhancedMarket?.outcomeOddsA },
+                  ]}
                   topic_id={enhancedMarket?.topic_id}
                   users={users}
                   totalComments={enhancedMarket?.total_comments}
