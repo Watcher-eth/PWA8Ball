@@ -1,26 +1,25 @@
-// @ts-nocheck
 import { useState } from "react"
 import { useRouter } from "next/router"
-import { WalletClient, getContract, Address } from "viem"
 
 import { toast } from "sonner"
 import { Check, CheckCircle } from "lucide-react"
 
-import { EightBallConfig } from "@/lib/onchain/generated"
+import { useWriteEightBallRedeem } from "@/lib/onchain/generated"
 
-import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
 
 import { DEFAULT_CHAIN_ID } from "@/constants/chains"
+import { showToast } from "@/utils/Toasts/showToast"
 
 export function useExecuteRedeem() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
-  const { client, address } = useClientAddress()
+
   const { approveToken } = useEightBallApproval()
   const userBalance = useUserUsdcBalance()
+  const { writeContractAsync: writeRedeem } = useWriteEightBallRedeem()
 
   async function executeRedeem({
     amount,
@@ -51,37 +50,21 @@ export function useExecuteRedeem() {
 
       const preferYes = option === 1
 
-      const contract = getContract({
-        abi: EightBallConfig.abi,
-        address: EightBallConfig.address[DEFAULT_CHAIN_ID],
-        client: { public: client, wallet: client },
-      })
 
+      const hash = await writeRedeem({
+        args: [BigInt(marketId)],
+      })
       // Redeem position
-      const hash = await contract.write.redeem([BigInt(marketId)], {})
+
       console.log("Redeemed", hash)
 
       setLoading(false)
       setSuccess(true)
 
-      toast(
-        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
-            <Check strokeWidth={4.5} className="text-[#34C759] h-[0.9rem]" />
-          </div>
-          Redeemed successfully!
-        </div>,
-        {
-          unstyled: true,
-          classNames: {
-            title: "text-red-400 text-2xl",
-            description: "text-red-400",
-            actionButton: "bg-zinc-400",
-            cancelButton: "bg-orange-400",
-            closeButton: "bg-lime-400",
-          },
-        }
-      )
+      showToast({
+        message: "Redeemed successfully!",
+        icon: <Check strokeWidth={4.5} className="text-[#34C759] h-[0.9rem]" />,
+      })
     } catch (error) {
       console.error("Failed to redeem:", error)
       toast.error("Failed to redeem!")
