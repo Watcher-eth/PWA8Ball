@@ -17,7 +17,6 @@ import { useReferralStore } from "@/lib/stores/ReferralStore"
 import { getProfilePath } from "@/utils/urls"
 
 import { ZERO_ADDRESS } from "@/constants/misc"
-import { baseSepolia } from "viem/chains"
 import { EightBallAbi } from "@/lib/onchain/generated"
 
 export function useExecutePrediction() {

@@ -21,40 +21,12 @@ import { useServiceWorker } from "@/hooks/useServiceWorker" // Import the hook
 import { CustomHead } from "@/components/layouts/CustomHead"
 import { RootLayout } from "@/components/layouts/RootLayout"
 
-import { wagmiConfig } from "@/wagmiConfig"
-import { base, baseSepolia, mainnet } from "viem/chains"
-export const queryClient = new QueryClient()
+import { WAGMI_CONFIG } from "@/wagmiConfig"
+import { PRIVY_CONFIG } from "@/privyConfig"
 
-const PRIVY_CONFIG: PrivyClientConfig = {
-  loginMethods: [
-    "email",
-    "wallet",
-    "google",
-    "farcaster",
-    "apple",
-    "twitter",
-    "wallet",
-  ],
-  appearance: {
-    theme: "dark",
-    accentColor: "#0050FF",
-    logo: "https://your-logo-url",
-  },
-  defaultChain: baseSepolia,
-  supportedChains: [baseSepolia], // , base, mainnet
-  // embeddedWallets: {
-  //   createOnLogin: "users-without-wallets",
-  //   noPromptOnSignature: true,
-  // },
-}
 
-// export const wagmiConfig = getDefaultConfig({
-//   appName: "8Ball",
-//   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
-//   chains: [baseSepolia, base, mainnet],
-//   connectors: [injected()],
-//   ssr: true, // If your dApp uses server side rendering (SSR)
-// });
+const QUERY_CLIENT = new QueryClient()
+
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
@@ -76,8 +48,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
         config={PRIVY_CONFIG}
       >
-        <QueryClientProvider client={queryClient}>
-          <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={QUERY_CLIENT}>
+          <WagmiProvider config={WAGMI_CONFIG}>
             <RainbowKitProvider coolMode>
               <AirstackProvider
                 apiKey={process.env.NEXT_PUBLIC_PUBLIC_AIRSTACK ?? ""}

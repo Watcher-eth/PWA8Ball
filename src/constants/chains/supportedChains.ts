@@ -1,7 +1,7 @@
 
-import { mainnet, base, baseSepolia } from "@wagmi/core/chains"
 
-import { BASE_SEPOLIA, ETH } from "@/constants/chains/master"
+
+import { BASE, BASE_SEPOLIA, ETH } from "@/constants/chains/master"
 
 
 export const SUPPORTED_CHAINS = [

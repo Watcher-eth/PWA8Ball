@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import { createPublicClient, http } from "viem"
-import { baseSepolia } from "viem/chains"
+import { DEFAULT_CHAIN } from "@/constants/chains"
 
 export const rpcClient = createPublicClient({
-  chain: baseSepolia,
+  chain: DEFAULT_CHAIN,
   transport: http(),
 })

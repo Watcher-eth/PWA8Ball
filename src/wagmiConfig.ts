@@ -63,16 +63,16 @@ const WALLET_GROUPS = [
   },
 ]
 
-const connectors = connectorsForWallets(WALLET_GROUPS, APP_DETAILS)
-console.log(connectors)
+export const WAGMI_CONNECTORS = connectorsForWallets(WALLET_GROUPS, APP_DETAILS)
+// console.log(connectors)
 const transports = createTransports(SUPPORTED_CHAINS as unknown as Chain[])
 
-export const wagmiConfig = createConfig({
-  connectors,
+export const WAGMI_CONFIG = createConfig({
+  connectors: WAGMI_CONNECTORS,
   chains: SUPPORTED_CHAINS as unknown as readonly [Chain, ...Chain[]],
   transports,
   ssr: true,
 })
 
-export const WAGMI_CONNECTORS = connectors
+
 console.log(WAGMI_CONNECTORS)
