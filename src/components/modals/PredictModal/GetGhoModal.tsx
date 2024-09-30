@@ -40,13 +40,15 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         IconComponent={Repeat}
         className="bg-pink-400"
         onClick={() =>
-          showToast(
-            <CalendarPlus
-              strokeWidth={3.1}
-              className="text-white -mr-2 h-[1.1rem]"
-            />,
-            "Bridging is coming soon!"
-          )
+          showToast({
+            icon: (
+              <CalendarPlus
+                strokeWidth={3.1}
+                className="text-white -mr-2 h-[1.1rem]"
+              />
+            ),
+            message: "Bridging is coming soon!",
+          })
         }
       />
       <LabeledSectionWithIcon

@@ -1,34 +1,38 @@
-import React, { useState } from "react";
-import { useLeaveTopic } from "@/supabase/mutations/topics/useLeaveTopic";
-import { useJoinTopic } from "@/supabase/mutations/topics/useJoinTopic";
-import { useCheckUserTopicMembership } from "@/supabase/mutations/topics/useCheckUserTopicMembership";
-
-interface JoinTopicButtonProps {
-  topicId: string;
-  userId: string;
-  showToast: () => void;
-}
-
-const JoinTopicButton: React.FC<JoinTopicButtonProps> = ({
+import React, { useState } from "react"
+import { useLeaveTopic } from "@/supabase/mutations/topics/useLeaveTopic"
+import { useJoinTopic } from "@/supabase/mutations/topics/useJoinTopic"
+import { useCheckUserTopicMembership } from "@/supabase/mutations/topics/useCheckUserTopicMembership"
+import { showToast } from "@/utils/Toasts/showToast"
+import { UserMinus, UserPlus } from "lucide-react"
+export function JoinTopicButton({
   topicId,
   userId,
-  showToast,
-}) => {
-  const { data: isMember } = useCheckUserTopicMembership(userId, topicId);
-  const leaveMutation = useLeaveTopic();
-  const joinMutation = useJoinTopic();
-  const [optimisticJoin, setOptimisticJoin] = useState(false);
+}: {
+  topicId: string
+  userId: string
+}) {
+  const { data: isMember } = useCheckUserTopicMembership(userId, topicId)
+  const leaveMutation = useLeaveTopic()
+  const joinMutation = useJoinTopic()
+  const [optimisticJoin, setOptimisticJoin] = useState(false)
 
   const handleJoin = () => {
     if (!optimisticJoin) {
-      joinMutation.mutate({ userId, topicId });
-      setOptimisticJoin(true);
-      showToast();
+      joinMutation.mutate({ userId, topicId })
+      setOptimisticJoin(true)
+      showToast({
+        icon: <UserPlus color="#34C759" size={20} />,
+        message: "Joined topic",
+      })
     } else {
-      leaveMutation.mutate({ userId, topicId });
-      setOptimisticJoin(false);
+      leaveMutation.mutate({ userId, topicId })
+      setOptimisticJoin(false)
+      showToast({
+        icon: <UserMinus color="#34C759" size={20} />,
+        message: "Left topic",
+      })
     }
-  };
+  }
 
   return (
     <button
@@ -41,7 +45,5 @@ const JoinTopicButton: React.FC<JoinTopicButtonProps> = ({
     >
       <div>{optimisticJoin || isMember ? "Joined" : "Join"}</div>
     </button>
-  );
-};
-
-export default JoinTopicButton;
+  )
+}

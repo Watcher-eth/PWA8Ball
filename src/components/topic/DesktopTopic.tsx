@@ -14,7 +14,7 @@ import { BetComment } from "@/types/PostTypes"
 import _ from "lodash"
 import Link from "next/link"
 import { Comment } from "../predictions/CommentSection/Comment"
-import JoinTopicButton from "./JoinTopicButton"
+import { JoinTopicButton } from "./JoinTopicButton"
 import { motion } from "framer-motion"
 import { skeletonVariants } from "../ui/Skeleton"
 import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
@@ -128,7 +128,6 @@ function DesktopTopic({
                 <JoinTopicButton
                   topicId={id}
                   userId={user?.walletAddress}
-                  showToast={() => {}}
                 />
                 <DesktopLeaderboardModal title={name} data={LeaderBoardData}>
                   <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-[0.1rem] bg-[#151515]/50 border-[#212121]/60 font-bold rounded-full text-base text-white">

@@ -1,16 +1,12 @@
 import React, { useState } from "react"
 import {
-  ArrowLeftRight,
-  Check,
   CheckCheck,
   CheckCircle,
   DollarSign,
   Gift,
-  PartyPopper,
-  X,
 } from "lucide-react"
-import { toast } from "sonner"
 
+import { showToast } from "@/utils/Toasts/showToast"
 
 export function RedeemModal(props: {
   image: string
@@ -18,30 +14,6 @@ export function RedeemModal(props: {
   option: string
   onClose: () => void
 }) {
-  const [toastVisible, setToastVisible] = useState(false)
-
-  const showToast = () => {
-    setToastVisible(true)
-    toast.success("Redeemed successfully!", {
-      icon: <DollarSign color="#34C759" size={20} />,
-      style: {
-        borderRadius: "30px",
-        background: "rgba(52, 199, 89, 0.15)",
-        color: "#fff",
-        borderColor: "#121212",
-        fontWeight: 700,
-        fontSize: 17,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "13px 5px",
-      },
-    })
-
-    setTimeout(() => setToastVisible(false), 3500)
-    setTimeout(() => {
-      props.onClose()
-    }, 5500)
-  }
 
   async function redeemPrediction() {
     // Simulate redeem logic here
@@ -52,7 +24,10 @@ export function RedeemModal(props: {
     //   client: smartAccountClient,
     //   address: smartAccountAddress!,
     // });
-    showToast()
+    showToast({
+      icon: <DollarSign color="#34C759" size={20} />,
+      message: "Redeemed successfully!",
+    })
   }
 
   return (
