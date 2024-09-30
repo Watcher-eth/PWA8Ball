@@ -24,7 +24,7 @@ export function CommentHeader({
   userOwns: Position[]
   options: Outcome
 }) {
-  console.log("options,", options)
+  console.log("options,", userOwns, user?.name, options[0])
   return (
     <div className="flex flex-row w-full items-center justify-between">
       <Link

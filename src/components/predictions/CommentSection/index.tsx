@@ -38,13 +38,13 @@ export function CommentSection({
 
   const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
   const [replyTo, setReplyTo] = useState<string | null>(null)
-  const inputRef = useRef<HTMLTextAreaElement>(null) // Use ref to control input
+  const inputRef = useRef<HTMLTextAreaElement>(null)
 
   const {
     data: comments,
     error,
     isLoading,
-    refetch, // Method to refetch the data
+    refetch,
   } = useGetAllCommentsForMarket(Number(marketId), user?.walletAddress)
 
   const allComments = _.uniqBy(

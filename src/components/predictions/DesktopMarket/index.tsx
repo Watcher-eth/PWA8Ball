@@ -49,15 +49,17 @@ export function DesktopMarketPage({ users, market, id }) {
   )
 
   const { user: creator, loading } = useGetUserById(market?.userAddress)
-  const { data: userOwns } = useGetUserPositionsForMarket(
+  const { data: userPositions } = useGetUserPositionsForMarket(
     user?.walletAddress,
     id
   )
+  const userOwns = userPositions?.filter((item) => item.tokensOwned > 0) || []
+
   const aggregatedPositions = aggregatePredictedItemsWithImage(
     userOwns ?? [],
     HARD_MARKETS
   )
-  console.log("option", userOwns)
+
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col">
       <StandardBleedOverlay>
@@ -113,8 +115,14 @@ export function DesktopMarketPage({ users, market, id }) {
                 </div>
                 <CommentSection
                   options={[
-                    { name: enhancedMarket?.outcomeA, value: enhancedMarket?.outcomeOddsA },
-                    { name: enhancedMarket?.outcomeA, value: enhancedMarket?.outcomeOddsA },
+                    {
+                      name: enhancedMarket?.outcomeA,
+                      value: enhancedMarket?.outcomeOddsA,
+                    },
+                    {
+                      name: enhancedMarket?.outcomeA,
+                      value: enhancedMarket?.outcomeOddsA,
+                    },
                   ]}
                   topic_id={enhancedMarket?.topic_id}
                   users={users}

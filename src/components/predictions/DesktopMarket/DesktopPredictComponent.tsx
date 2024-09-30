@@ -50,7 +50,8 @@ export function DesktopPredictComponent(props: {
   const [amountStr, setAmountStr] = useState()
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
   const setStake = useVotingStore((state) => state.setState)
-  console.log("User owsn", userOwns)
+
+  
   return (
     <div
       className={`  ${

@@ -54,6 +54,9 @@ export function Comment({
     user?.walletAddress,
     marketId
   )
+  const filteredUserOwns =
+    userOwns?.filter((item) => item.tokensOwned > 0) || []
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -63,7 +66,7 @@ export function Comment({
       className="flex flex-col w-full pt-5"
     >
       <CommentHeader
-        userOwns={userOwns}
+        userOwns={filteredUserOwns}
         options={options}
         user={user}
         user2={user2}

@@ -274,8 +274,8 @@ export function DesktopChart(props: {
               <span className="text-white text-lg font-semibold">
                 $
                 {(
-                  props?.userOwns[0]?.tokensOwned *
-                  (currentPrices[currentPrices.length - 1]?.value / 10000000)
+                  (props?.userOwns[0]?.tokensOwned / 10 ** 6) *
+                  (currentPrices[currentPrices.length - 1]?.value / 100)
                 ).toFixed(2)}
               </span>
             )}
