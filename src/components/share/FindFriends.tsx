@@ -1,31 +1,31 @@
 // @ts-nocheck
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useQuery } from "@airstack/airstack-react";
-import { useRouter } from "next/router";
-import { useLinkAccount } from "@privy-io/react-auth";
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { useQuery } from "@airstack/airstack-react"
+import { useRouter } from "next/router"
+import { useLinkAccount } from "@privy-io/react-auth"
 
-import { Spinner } from "@/components/modals/PredictModal/Spinner";
+import { Spinner } from "@/components/modals/PredictModal/Spinner"
 
-import { FindFriendsItem } from "./FindFriendsItem";
-import { DialogClose } from "../ui/dialog";
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser";
+import { FindFriendsItem } from "./FindFriendsItem"
+import { DialogClose } from "../ui/dialog"
+import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
 
 export const FindFriends = ({ type }) => {
-  const [text, setText] = useState("");
-  const [results, setResults] = useState([]);
-  const { width, height } = { width: 800, height: 600 }; // Example dimensions
-  const { upsertUser } = useUpsertUser();
+  const [text, setText] = useState("")
+  const [results, setResults] = useState([])
+  const { width, height } = { width: 800, height: 600 } // Example dimensions
+  const { upsertUser } = useUpsertUser()
   const { data, loading } = useQuery(
     DFFAULT_ONCHAIN_FOLLOWING_QUERY,
     {},
     { cache: false }
-  );
+  )
 
   useEffect(() => {
     if (text === "") {
-      setResults(data?.SocialFollowings?.Following || []);
+      setResults(data?.SocialFollowings?.Following || [])
     } else {
       const filteredResults = data?.SocialFollowings?.Following.filter(
         (item) =>
@@ -35,27 +35,27 @@ export const FindFriends = ({ type }) => {
           item.followingAddress.socials[0].profileHandle
             .toLowerCase()
             .includes(text.toLowerCase())
-      );
-      setResults(filteredResults);
+      )
+      setResults(filteredResults)
     }
-  }, [text, data]);
+  }, [text, data])
 
   const handleTextChange = (text) => {
-    setText(text); // Update text input state
-  };
+    setText(text) // Update text input state
+  }
 
   const { linkTwitter, linkWallet } = useLinkAccount({
     async onSuccess(user) {
       const twitterAccount = user.linkedAccounts.find(
         (account) => account.type === "twitter_oauth"
-      );
+      )
       if (twitterAccount) {
         try {
-          const userId = user.id;
+          const userId = user.id
           const profilePictureUrl = twitterAccount.profile_picture_url.replace(
             "_normal",
             "_400x400"
-          );
+          )
 
           //TODO: Get wallet addys
           await upsertUser({
@@ -70,21 +70,21 @@ export const FindFriends = ({ type }) => {
               },
             },
             updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
-          });
+          })
         } catch (error) {
-          console.error("Error updating user profile:", error);
+          console.error("Error updating user profile:", error)
         }
       }
     },
-  });
+  })
 
   const { linkFarcaster } = useLinkAccount({
     async onSuccess(user) {
       const farcasterAcc = user.linkedAccounts.find(
         (account) => account.type === "farcaster"
-      );
+      )
       try {
-        const userId = user.id;
+        const userId = user.id
         //TODO: Get wallet addys
         await upsertUser({
           id: user,
@@ -100,15 +100,15 @@ export const FindFriends = ({ type }) => {
             },
           },
           updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
-        });
+        })
       } catch (error) {
-        console.error("Error creating user:", error);
+        console.error("Error creating user:", error)
       }
     },
     onError(error) {
-      console.log("OAuth error", error);
+      console.log("OAuth error", error)
     },
-  });
+  })
 
   if (loading) {
     return (
@@ -125,12 +125,11 @@ export const FindFriends = ({ type }) => {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
-  const dataToRender =
-    text === "" ? data?.SocialFollowings?.Following : results;
-  const router = useRouter();
+  const dataToRender = text === "" ? data?.SocialFollowings?.Following : results
+  const router = useRouter()
   return (
     <div
       className={`
@@ -221,7 +220,7 @@ export const FindFriends = ({ type }) => {
         >
           <button
             onClick={() => {
-              linkWallet();
+              linkWallet()
             }}
           >
             <img
@@ -289,7 +288,7 @@ export const FindFriends = ({ type }) => {
       >
         <button
           onClick={() => {
-            router.back();
+            router.back()
           }}
           className={`
            w-[90%] h-[50px] rounded-[28px]
@@ -301,8 +300,8 @@ export const FindFriends = ({ type }) => {
         </button>
       </DialogClose>
     </div>
-  );
-};
+  )
+}
 
 const DFFAULT_ONCHAIN_FOLLOWING_QUERY = `query MyQuery {
     SocialFollowings(
@@ -313,7 +312,7 @@ const DFFAULT_ONCHAIN_FOLLOWING_QUERY = `query MyQuery {
         followingProfileId
         followingAddress {
           addresses
-          socials(input: {filter: {dappName: {_in: [farcaster, lens]}}}) {
+          socials(input: {filter: {dappName: {_in: [farcaster]}}}) {
             dappName
             profileName
             profileImage
@@ -322,4 +321,4 @@ const DFFAULT_ONCHAIN_FOLLOWING_QUERY = `query MyQuery {
         }
       }
     }
-  }`;
+  }`

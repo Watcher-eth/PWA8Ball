@@ -70,6 +70,14 @@ export const useGetFriendsPositions = (userId: string) => {
       },
     }
   )
-  console.log("data", data?.positions?.items)
-  return { data: data?.positions?.items, error, loading, refetch } ?? []
+  console.log("data", data?.positions?.items, error, loading)
+  return (
+    {
+      data: data?.positions?.items,
+      error,
+      isLoading: loading,
+      loading,
+      refetch,
+    } ?? []
+  )
 }

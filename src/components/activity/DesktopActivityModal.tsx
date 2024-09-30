@@ -57,14 +57,14 @@ function DesktopFriendActivity(props: { user: User }) {
     : []
 
   const groupedPredictions = groupPredictionsByDate(aggregatedPredictions)
+  console.log("userId activity", props?.user)
 
-  if (isLoading && props?.user?.id)
+  if (isLoading && props?.user?.id && props?.user?.totalFollowing > 0)
     return (
       <div className="h-[40vh] bg-[transparent] flex justify-center items-center">
         <Spinner loading={isLoading} />
       </div>
     )
-
   if (!props?.user?.id) {
     return <ActivityPlaceHolder user={props?.user} />
   }

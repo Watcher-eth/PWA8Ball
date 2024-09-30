@@ -20,19 +20,19 @@ export function UserInviteModal({ children }: { children: React.ReactNode }) {
   ).length
 
   return (
-    <Dialog>
+    <Dialog >
       <DialogTrigger>
         <div className="active:scale-93 flex justify-between items-center w-full hover:scale-101 transition-all">
           {children}
         </div>
       </DialogTrigger>
-      <DialogContent className="border-0 rounded-[2rem] self-center">
+      <DialogContent className="border-0  lg:max-w-[35%] xl:max-w-[28%] rounded-[2rem] self-center">
         <motion.div
           layout
           transition={{ duration: 0.2 }}
           className={`
-          bg-[#101010]/70 rounded-[2rem] backdrop border-2 border-[#151515]
-          h-full mb-5  relative w-[90%]
+          bg-[#101010]/70 rounded-[2rem]  backdrop border-[0.1rem] border-[#151515]
+          h-full mb-5  relative 
         `}
         >
           <div className="flex flex-col items-center p-2 pb-12 rounded-lg">

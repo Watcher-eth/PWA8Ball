@@ -1,12 +1,15 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { MailCheck } from "lucide-react";
-import { FindFriendsModal } from "@/components/onboarding/Invites/FindFriendsModal";
+import React, { useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
+import { MailCheck } from "lucide-react"
+import { FindFriendsModal } from "@/components/onboarding/Invites/FindFriendsModal"
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
+import { DialogClose } from "@/components/ui/dialog"
+import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal"
 
 export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
-  const controls = useAnimation();
+  const controls = useAnimation()
 
   useEffect(() => {
     controls.start((i) => ({
@@ -17,13 +20,13 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
         stiffness: 100,
         damping: 10,
       },
-    }));
-  }, [controls]);
+    }))
+  }, [controls])
 
   return (
     <div
       className={`flex h-full flex-col items-center ${
-        props?.isDesktop ? "rounded-[1.5rem]" : "pt-[50px]"
+        props?.isDesktop ? "rounded-[1.5rem] mt-8" : "pt-[50px]"
       } bg-[#080808]`}
     >
       <motion.h1
@@ -47,30 +50,55 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
         initial={{ opacity: 0 }}
         animate={controls}
         src="/images/Friends.png"
-        className="w-full object-cover h-[30%]"
+        className="w-full object-cover my-4 h-[30%]"
       />
-      <FindFriendsModal>
-        <motion.button
-          custom={4}
-          initial={{ opacity: 0 }}
-          animate={controls}
-          className={`
+      {props?.isDesktop ? (
+        <UserInviteModal>
+          <motion.button
+            custom={4}
+            initial={{ opacity: 0 }}
+            animate={controls}
+            className={`
             flex flex-row items-center justify-center
             py-[7px] px-[22px] rounded-[20px] overflow-hidden
             bg-white border-none cursor-pointer
           `}
-        >
-          <MailCheck
-            style={{ marginBottom: -1 }}
-            color="black"
-            size={17}
-            strokeWidth={3.4}
-          />
-          <span className="text-[16.5px] text-center font-bold text-black ml-[3px]">
-            Invite
-          </span>
-        </motion.button>
-      </FindFriendsModal>
+          >
+            <MailCheck
+              style={{ marginBottom: -1 }}
+              color="black"
+              size={17}
+              strokeWidth={3.4}
+            />
+            <span className="text-[16.5px] text-center font-bold text-black ml-[3px]">
+              Invite
+            </span>
+          </motion.button>
+        </UserInviteModal>
+      ) : (
+        <FindFriendsModal>
+          <motion.button
+            custom={4}
+            initial={{ opacity: 0 }}
+            animate={controls}
+            className={`
+            flex flex-row items-center justify-center
+            py-[7px] px-[22px] rounded-[20px] overflow-hidden
+            bg-white border-none cursor-pointer
+          `}
+          >
+            <MailCheck
+              style={{ marginBottom: -1 }}
+              color="black"
+              size={17}
+              strokeWidth={3.4}
+            />
+            <span className="text-[16.5px] text-center font-bold text-black ml-[3px]">
+              Invite
+            </span>
+          </motion.button>
+        </FindFriendsModal>
+      )}
     </div>
-  );
+  )
 }
