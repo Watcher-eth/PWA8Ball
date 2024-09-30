@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
-import { RemoveLiquidityModal } from "./LpModal/RemoveLiquidityModal";
-import { DesktopLpModal } from "./LpModal/DesktopLpModal";
+import { motion } from "framer-motion"
+import { RemoveLiquidityModal } from "./LpModal/RemoveLiquidityModal"
+import { DesktopLpModal } from "./LpModal/DesktopLpModal"
 
 export function LiquidityPosition({
   image,
@@ -11,12 +11,12 @@ export function LiquidityPosition({
   onChange,
   refetch,
 }: {
-  image: string;
-  title: string;
-  amount: number;
-  id: number;
-  onChange: () => void;
-  refetch: () => void;
+  image: string
+  title: string
+  amount: number
+  id: number
+  onChange: () => void
+  refetch: () => void
 }) {
   return (
     <RemoveLiquidityModal
@@ -40,7 +40,7 @@ export function LiquidityPosition({
               {title}
             </span>
             <span className="text-[14.5px] text-white font-[Aeonik] mt-0">
-              +{amount.toFixed(2)}$ Fees earned
+              +{(amount * 0.02).toFixed(2)}$ Fees earned
             </span>
           </div>
         </div>
@@ -50,12 +50,12 @@ export function LiquidityPosition({
               $
             </span>
             <span className="text-[30px] text-white font-['Aeonik-Bold']">
-              {(amount + amount).toFixed(2)}
+              {amount.toFixed(2)}
             </span>
           </div>
           <motion.button
             onClick={() => {
-              refetch();
+              refetch()
             }}
             className="py-[5px] px-[10px] rounded-[17px] flex justify-center items-center overflow-hidden bg-[rgba(20,20,20,0.3)] border-none cursor-pointer"
           >
@@ -66,7 +66,7 @@ export function LiquidityPosition({
         </div>
       </motion.div>
     </RemoveLiquidityModal>
-  );
+  )
 }
 
 export function DesktopLiquidityPosition({
@@ -78,13 +78,13 @@ export function DesktopLiquidityPosition({
   onChange,
   refetch,
 }: {
-  image: string;
-  title: string;
-  amount: number;
-  id: number;
-  amountLp: number;
-  onChange: () => void;
-  refetch: () => void;
+  image: string
+  title: string
+  amount: number
+  id: number
+  amountLp: number
+  onChange: () => void
+  refetch: () => void
 }) {
   return (
     <DesktopLpModal
@@ -132,5 +132,5 @@ export function DesktopLiquidityPosition({
         </div>
       </motion.div>
     </DesktopLpModal>
-  );
+  )
 }

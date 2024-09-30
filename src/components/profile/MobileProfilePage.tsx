@@ -13,6 +13,7 @@ import { MobileProfilePopover } from "../layouts/MobileProfilePopover"
 import { User } from "@/__generated__/graphql"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { LP_PATH } from "@/utils/urls"
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function MobileProfilePage({
   userId,
@@ -33,7 +34,7 @@ export function MobileProfilePage({
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
         <div className="w-full relative">
           <img
-            src={userC?.pfp}
+            src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
             alt="Profile Header"
             className="w-full h-[250px]  object-cover"
           />
@@ -64,7 +65,7 @@ export function MobileProfilePage({
             />
           </MobileProfilePopover>
           <img
-            src={userC?.pfp}
+            src={userC?.pfp ? userC?.pfp : DEFAULT_PFP_PLACEHOLDER}
             className="size-[5rem] -mt-2.5 rounded-full border-4 border-[#202020] "
             alt="Profile"
           />

@@ -63,13 +63,13 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
   )
   const mergedData = [
     ...aggregatedOrdersData.map((item) => ({ ...item, type: "predicted" })),
-    ...(createdMarketsData?.map((item) => ({ ...item, type: "created" })) ||
+    ...(enhancedCreatedMarket?.map((item) => ({ ...item, type: "created" })) ||
       []),
   ]
 
   console.log("aggrea", mergedData)
   return (
-    <div className="flex flex-col items-center -space-y-1.5 z-[10] -mt-4">
+    <div className="flex flex-col items-center space-y-2.5 z-[10] ">
       {mergedData.length < 1 ? (
         <NewPlaceholder isUser={userId === user?.externalAuthProviderUserId} />
       ) : (
@@ -101,6 +101,7 @@ export function GeneralFeed({ walletAddy, id, onParentRefresh }) {
               option={item.option}
               optionNumber={item.option}
               isExternal={false}
+              index={index}
             >
               <UserPrediction
                 key={`predicted-${item.marketId}-${item.option}`}

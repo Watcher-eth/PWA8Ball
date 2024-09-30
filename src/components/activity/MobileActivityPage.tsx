@@ -31,7 +31,7 @@ export function MobileActivityPage({ isDesktop }: { isDesktop?: boolean }) {
     refetch,
   } = useGetFriendsPositions(user?.walletAddress)
 
-  if (isLoading) {
+  if (isLoading && user?.totalFollowing > 0) {
     return (
       <div
         className={`

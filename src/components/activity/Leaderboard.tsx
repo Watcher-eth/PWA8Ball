@@ -23,7 +23,7 @@ export function Leaderboard({ isDesktop }: { isDesktop: boolean }) {
     }))
 
     const remainingPredictors = data?.slice(3)
-
+    console.log("remaning", remainingPredictors.length)
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -42,19 +42,20 @@ export function Leaderboard({ isDesktop }: { isDesktop: boolean }) {
             <h2 className="text-white text-[15px] font-bold">Name</h2>
             <h2 className="text-white text-[15px] font-bold">At stake</h2>
           </div>
-          {remainingPredictors?.map((predictor, index) => (
-            <PredictorInfo
-              key={index}
-              {...predictor}
-              address={predictor?.walletAddress}
-              index={index}
-            />
-          )) ??
-            (!remainingPredictors ? (
-              <LoadingLeaderboardSkeleton />
-            ) : (
-              <p className="text-white">No predictors found</p>
-            ))}
+          {remainingPredictors.length > 0 ? (
+            remainingPredictors?.map((predictor, index) => (
+              <PredictorInfo
+                key={index}
+                {...predictor}
+                address={predictor?.walletAddress}
+                index={index}
+              />
+            ))
+          ) : remainingPredictors ? (
+            <LoadingLeaderboardSkeleton />
+          ) : (
+            <p className="text-white">No predictors found</p>
+          )}
         </div>
       </motion.div>
     )

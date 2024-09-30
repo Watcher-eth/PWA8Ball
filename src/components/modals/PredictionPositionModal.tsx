@@ -34,6 +34,7 @@ export function PredictionPositionModal({
   onClose,
   openCashout,
   handleReceipt,
+  index,
 }: {
   children: React.ReactNode
   title: string
@@ -51,6 +52,7 @@ export function PredictionPositionModal({
   optionNumber?: number
   isExternal?: boolean
   initialProb?: number
+  index?: number
   onClose: () => void
   openCashout: () => void
   refetch: () => void
@@ -79,7 +81,7 @@ export function PredictionPositionModal({
         <DrawerOverlay className="fixed inset-0 bg-black/40" />
 
         <DrawerTrigger>
-          <div className="mt-4 hover:scale-101 active:scale-[99.5%] transition-all">
+          <div className={`${index === 0 && "-mt-0"} hover:scale-101 active:scale-[99.5%] transition-all`}>
             {children}
           </div>
         </DrawerTrigger>

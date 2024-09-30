@@ -1,24 +1,24 @@
 // @ts-nocheck
 
-import { useRouter } from "next/router";
-import { useUserStore } from "@/lib/stores/UserStore";
-import { LiquidityPosition } from "./LiquidityPosition";
-import { motion } from "framer-motion";
-import { ChevronLeft } from "lucide-react";
-import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders";
-import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
-import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp";
-import { HARD_MARKETS } from "@/constants/markets";
+import { useRouter } from "next/router"
+import { useUserStore } from "@/lib/stores/UserStore"
+import { LiquidityPosition } from "./LiquidityPosition"
+import { motion } from "framer-motion"
+import { ChevronLeft } from "lucide-react"
+import { NewPlaceholderLp } from "@/components/common/placeholders/NewPlaceholders"
+import { enhancePositionsWithImages } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
+import { useGetUserLp } from "@/graphql/queries/liquidity/useGetUserLp"
+import { HARD_MARKETS } from "@/constants/markets"
 export function MobileLiquidityPage() {
-  const router = useRouter();
-  const { user } = useUserStore();
-  const { data: lpPositions, refetch } = useGetUserLp(user?.walletAddress);
+  const router = useRouter()
+  const { user } = useUserStore()
+  const { data: lpPositions, refetch } = useGetUserLp(user?.walletAddress)
 
   const filteredPositions =
     enhancePositionsWithImages(
       lpPositions?.filter((item) => item.amountUsdc > 0),
       HARD_MARKETS
-    ) ?? [];
+    ) ?? []
 
   return (
     <div className="pt-4 flex flex-col  min-h-screen bg-[#101010] w-full px-5">
@@ -35,7 +35,7 @@ export function MobileLiquidityPage() {
         <div className="w-5" />
       </div>
       {filteredPositions?.length > 0 ? (
-        <div className="pb-5 w-full">
+        <div className="pb-5 w-full space-y-7">
           {filteredPositions.map((item, index: number) => (
             <div className="w-full mx-5 ">
               <LiquidityPosition
@@ -56,5 +56,5 @@ export function MobileLiquidityPage() {
         </div>
       )}
     </div>
-  );
+  )
 }

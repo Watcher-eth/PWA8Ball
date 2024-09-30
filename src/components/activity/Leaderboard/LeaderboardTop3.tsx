@@ -10,7 +10,6 @@ interface LeaderBoardTopUser {
   walletAddress: string
 }
 
-
 const UserCard: React.FC<{
   user: LeaderBoardTopUser
   showMarginTop?: boolean
@@ -53,28 +52,24 @@ const UserCard: React.FC<{
   </div>
 )
 
-export function LeaderBoardTop3({ users }: {
-  users: LeaderBoardTopUser[]
-}) {
+export function LeaderBoardTop3({ users }: { users: LeaderBoardTopUser[] }) {
   return (
-    <div className="flex justify-between mt-6 mb-5 w-11/12 mx-auto">
+    <div className="flex justify-between mt-6 mb-5 w-full mx-auto">
       {users?.length > 1 ? (
-      <UserCard user={users[1]} showMarginTop />
-    ) : (
-      <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
-    )}
-    {users?.length > 0 ? (
-      <UserCard user={users[0]} showMarginTop />
-    ) : (
-      <div className="h-20 w-20 rounded-full bg-[#212121]  animate-pulse"></div>
-    )}{" "}
-    {users?.length > 2 ? (
-      <UserCard user={users[2]} showMarginTop />
-    ) : (
-      <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
-    )}
+        <UserCard user={users[1]} showMarginTop />
+      ) : (
+        <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
+      )}
+      {users?.length > 0 ? (
+        <UserCard user={users[0]} showMarginTop />
+      ) : (
+        <div className="h-20 w-20 rounded-full bg-[#212121]  animate-pulse"></div>
+      )}{" "}
+      {users?.length > 2 ? (
+        <UserCard user={users[2]} showMarginTop />
+      ) : (
+        <div className="h-20 w-20 rounded-full bg-[#212121] mt-2.5 animate-pulse"></div>
+      )}
     </div>
   )
 }
-
-

@@ -56,7 +56,6 @@ const UserPredictionChip = (props) => {
 
   return (
     <div className="relative flex items-center space-x-3">
-      {/* Gradient Background */}
       <div
         className={`relative flex items-center justify-center rounded-lg 
           border border-gray-800
@@ -94,7 +93,7 @@ export function CreatedPrediction({
   return (
     <Link
       href={getMarketPath(id)}
-      className="transition-all hover:scale-101 active:scale-95"
+      className={`transition-all  hover:scale-101 active:scale-95`}
     >
       <ProfilePrediction
         image={image}
@@ -102,8 +101,24 @@ export function CreatedPrediction({
         title={title}
         index={index}
         rightContent={
-          <div className="p-1.5 rounded-full bg-[#5ACE5A]">
-            <Plus fill={"white"} color={"white"} size={15} strokeWidth={6.5} />
+          <div
+            className={`relative flex items-center justify-center rounded-lg 
+            border border-gray-800
+            bg-gradient-to-r from-[#5ACE5A] via-[#5ACE5A]/20 to-[#5ACE5A]/10
+    
+            backdrop-blur-md 
+            ml-[-50px] `}
+          >
+            <div className="bg-black bg-opacity-20 backdrop-blur-lg rounded-lg border border-gray-900">
+              <div className="p-1.5  rounded-full">
+                <Plus
+                  fill={"white"}
+                  color={"white"}
+                  size={15}
+                  strokeWidth={6.5}
+                />
+              </div>
+            </div>
           </div>
         }
       />
