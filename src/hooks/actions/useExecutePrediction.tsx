@@ -6,10 +6,7 @@ import { toast } from "sonner"
 import { Check } from "lucide-react"
 
 import { rpcClient } from "@/lib/onchain/rpcClient"
-import {
-  ROOT_OPERATOR_ADDRESS,
-  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-} from "@/constants/onchain"
+
 import { useUserStore } from "@/lib/stores/UserStore"
 import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
@@ -17,7 +14,9 @@ import { useReferralStore } from "@/lib/stores/ReferralStore"
 import { getProfilePath } from "@/utils/urls"
 
 import { ZERO_ADDRESS } from "@/constants/misc"
-import { EightBallAbi } from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
+import { RootOperatorAddress } from "@/constants/onchain"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 export function useExecutePrediction() {
   const [loading, setLoading] = useState(false)
@@ -79,15 +78,17 @@ export function useExecutePrediction() {
       const preferYes = Number(option) === 1 ? false : true
       const preferYesNum = preferYes ? 1 : 0
       const contract = getContract({
-        abi: EightBallAbi,
-        address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+        abi: EightBallConfig.abi,
+        address: EightBallConfig.address[DEFAULT_CHAIN_ID],
         client: { public: rpcClient, wallet: client },
       })
+
+      const operatorAddress = RootOperatorAddress[DEFAULT_CHAIN_ID]
 
       console.log("Predict params", {
         preferYes: preferYesNum,
         marketId: BigInt(marketId),
-        operator: ROOT_OPERATOR_ADDRESS,
+        operator: operatorAddress,
         slippage: 990,
         referrer: referrer,
       })
@@ -96,7 +97,7 @@ export function useExecutePrediction() {
         desiredAmount: biAmount,
         preferYes: preferYesNum,
         marketId: BigInt(marketId),
-        operator: ROOT_OPERATOR_ADDRESS,
+        operator: operatorAddress,
         slippage: 990,
         referrer: referrer !== null ? referrer : ZERO_ADDRESS,
       }
@@ -104,7 +105,7 @@ export function useExecutePrediction() {
       //   biAmount,
       //   preferYesNum,
       //   BigInt(marketId),
-      //   ROOT_OPERATOR_ADDRESS,
+      //   operatorAddress,
       //   990,
       //   referrer,
       // ]

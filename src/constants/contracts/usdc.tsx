@@ -1,4 +1,11 @@
-export const USDC_ABI = [
+import { base, baseSepolia } from "viem/chains"
+
+export const UsdcAddress = {
+  [baseSepolia.id]: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+  [base.id]: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+} as const
+
+export const UsdcAbi = [
   {
     type: "function",
     name: "allowance",
@@ -95,3 +102,9 @@ export const USDC_ABI = [
     anonymous: false,
   },
 ] as const
+
+
+export const UsdcConfig = {
+  address: UsdcAddress,
+  abi: UsdcAbi,
+} as const

@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query"
 import { WalletClient, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 
-import { ROOT_OPERATOR_ADDRESS } from "@/constants/onchain"
+import { RootOperatorAddress } from "@/constants/onchain"
 import { createMarket } from "@/supabase/mutations/createMarket"
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
-import { EightBallAbi } from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 async function initialize(props: {
   amount: number
@@ -36,15 +36,16 @@ async function initialize(props: {
     const initialProb = props?.initialProb ? props?.initialProb : 50
 
     const contract = getContract({
-      abi: EightBallAbi,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      abi: EightBallConfig.abi,
+      address: EightBallConfig.address[DEFAULT_CHAIN_ID],
       client: { public: props.client, wallet: props.client },
     })
+    const operatorAddress = RootOperatorAddress[DEFAULT_CHAIN_ID]
     // Initialize the market
     const hash = await contract.write.initializeMarket(
       [
-        ROOT_OPERATOR_ADDRESS,
-        ROOT_OPERATOR_ADDRESS,
+        operatorAddress,
+        operatorAddress,
         account,
         BigInt(initialProb),
         {

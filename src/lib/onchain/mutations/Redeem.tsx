@@ -2,9 +2,9 @@
 
 import { useMutation } from "@tanstack/react-query"
 import { WalletClient, getContract, Address } from "viem"
-import { EightBallAbi } from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
 
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 async function redeemPrediction(props: {
   marketId: number
@@ -19,8 +19,8 @@ async function redeemPrediction(props: {
   }
   try {
     const contract = getContract({
-      abi: EightBallAbi,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      abi: EightBallConfig.abi,
+      address: EightBallConfig.address[DEFAULT_CHAIN_ID],
       client: { public: props.client, wallet: props.client },
     })
 

@@ -5,13 +5,12 @@ import { type Address, getContract } from "viem"
 import { SmartAccountClient } from "permissionless"
 
 import { OutcomeTokenAbi } from "@/lib/onchain/generated"
-import {
-  BASE_SEPOLIA_STORAGE_ADDRESS,
-  ROOT_OPERATOR_ADDRESS,
-} from "@/constants/onchain"
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
+
+
 import { rpcClient } from "@/lib/onchain/rpcClient"
-import { EightBallAbi, EightBallStorageAbi } from "@/lib/onchain/generated"
+import { EightBallConfig, EightBallStorageConfig } from "@/lib/onchain/generated"
+import { RootOperatorAddress } from "@/constants/onchain"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 async function cashoutPrediction(props: {
   preferYes: boolean
@@ -31,8 +30,8 @@ async function cashoutPrediction(props: {
     const currentPairId = BigInt(props?.marketId)
 
     const marketPair = await rpcClient.readContract({
-      address: BASE_SEPOLIA_STORAGE_ADDRESS,
-      abi: EightBallStorageAbi,
+      address: EightBallStorageConfig.address[DEFAULT_CHAIN_ID],
+      abi: EightBallStorageConfig.abi,
       args: [currentPairId],
       functionName: "getMarketPair",
     })
@@ -49,13 +48,13 @@ async function cashoutPrediction(props: {
     console.log("Approving token cashout outcome tokens")
 
     const hash1 = await outcomeToken.write.approve([
-      BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      EightBallConfig.address[DEFAULT_CHAIN_ID],
       BigInt(1000000 * props.ownedTokens),
     ])
 
     const contract = getContract({
-      abi: EightBallAbi,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      abi: EightBallConfig.abi,
+      address: EightBallConfig.address[DEFAULT_CHAIN_ID],
       client: { public: rpcClient, wallet: props.client },
     })
 
@@ -66,7 +65,7 @@ async function cashoutPrediction(props: {
         BigInt(props.ownedTokens),
         preferYesNum,
         BigInt(props.marketId),
-        ROOT_OPERATOR_ADDRESS,
+        RootOperatorAddress[DEFAULT_CHAIN_ID],
       ],
       {}
     )

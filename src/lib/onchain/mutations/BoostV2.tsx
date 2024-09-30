@@ -3,9 +3,9 @@
 import { useMutation } from "@tanstack/react-query"
 import { WalletClient, getContract, Address } from "viem"
 import { SmartAccountClient } from "permissionless"
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { rpcClient } from "@/lib/onchain/rpcClient"
-import { EightBallAbi } from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 
 async function boostV2({
   amount,
@@ -21,8 +21,8 @@ async function boostV2({
   }
   try {
     const contract = getContract({
-      abi: EightBallAbi,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      abi: EightBallConfig.abi,
+      address: EightBallConfig.address[DEFAULT_CHAIN_ID],
       client: { public: rpcClient, wallet: client },
     })
     // Boost the market

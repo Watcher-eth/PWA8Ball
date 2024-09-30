@@ -8,9 +8,9 @@ import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 import { useEightBallApproval } from "@/hooks/actions/useEightBallApproval"
 import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
 import { rpcClient } from "@/lib/onchain/rpcClient"
-import { BASE_SEPOLIA_EIGHTBALL_ADDRESS } from "@/constants/onchain"
 import { txErrorHandlerWrapper } from "@/utils/txErrorHandler"
-import { EightBallAbi } from "@/lib/onchain/generated"
+import { EightBallConfig } from "@/lib/onchain/generated"
+import { DEFAULT_CHAIN_ID } from "@/constants/chains"
 import { LP_PATH } from "@/utils/urls"
 
 export function useExecuteBoost() {
@@ -42,8 +42,8 @@ export function useExecuteBoost() {
     }
 
     const contract = getContract({
-      abi: EightBallAbi,
-      address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+      abi: EightBallConfig.abi,
+      address: EightBallConfig.address[DEFAULT_CHAIN_ID],
       client: { public: rpcClient, wallet: client },
     })
 

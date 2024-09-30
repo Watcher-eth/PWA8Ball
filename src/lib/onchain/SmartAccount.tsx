@@ -24,11 +24,6 @@ import {
 import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth"
 import { useAccount, useConnect, usePublicClient, useWalletClient } from "wagmi"
 
-import {
-  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-  BASE_SEPOLIA_USDC_ADDRESS,
-} from "@/constants/onchain"
-import { USDC_ABI } from "@/lib/onchain/contracts/Usdc"
 import { DEFAULT_CHAIN } from "@/constants/chains"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =

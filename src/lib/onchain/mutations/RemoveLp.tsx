@@ -2,13 +2,10 @@ import { useState } from "react"
 import { type Address, getContract } from "viem"
 import { type SmartAccountClient } from "permissionless"
 
-import {
-  BASE_SEPOLIA_EIGHTBALL_ADDRESS,
-  BASE_SEPOLIA_STORAGE_ADDRESS,
-} from "@/constants/onchain"
+
 import { rpcClient } from "@/lib/onchain/rpcClient"
 import {
-  EightBallAbi,
+  EightBallConfig,
   PairV1Abi,
   useReadEightBallStorageGetMarketPair,
   useReadPairV1BalanceOf,
@@ -60,8 +57,8 @@ export function useRemoveLp({ marketId } :{marketId: number | bigint}) {
       })
 
       const contract = getContract({
-        abi: EightBallAbi,
-        address: BASE_SEPOLIA_EIGHTBALL_ADDRESS,
+        abi: EightBallConfig.abi,
+        address: EightBallConfig.address[DEFAULT_CHAIN_ID],
         client: { public: client, wallet: client },
       })
 
