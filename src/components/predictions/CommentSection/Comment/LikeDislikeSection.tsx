@@ -31,8 +31,8 @@ export function LikeDislikeSection(props: {
         IconComponent={Heart}
         className={
           temporaryLike
-            ? "text-[#e32636] fill-[#e32636]"
-            : "text-[lightgray] hover:fill-[lightgray]"
+            ? "text-[#e32636] hover:scale-102 active:scale-99 fill-[#e32636]"
+            : "text-[lightgray] hover:scale-104 active:scale-99 hover:text-[#FF474D]/50 hover:fill-[#FF474D]/60"
         }
       />
       <CommentReactionButton
@@ -40,8 +40,8 @@ export function LikeDislikeSection(props: {
         IconComponent={Reply}
         className={
           temporaryDislike
-            ? " text-white shadow-md "
-            : "text-[lightgray] hover:text-[white]"
+            ? " text-white hover:scale-101 active:scale-99 shadow-md "
+            : "text-[lightgray] hover:scale-101 active:scale-99 hover:text-[white]"
         }
       />
     </div>

@@ -49,7 +49,7 @@ export function Comment({
       className="flex flex-col w-full pt-5"
     >
       <CommentHeader user={user} user2={user2} created_at={created_at} />
-      <p className=" ml-[3.65rem] -mt-6 font-[300]   text-white text-[1.05rem] ">
+      <p className=" ml-[3.8rem] -mt-6 font-[300]   text-white text-[1.05rem] ">
         {content}
       </p>
       <div className="flex flex-row items-center justify-between mb-1.5 ">
@@ -60,8 +60,8 @@ export function Comment({
             handleComment()
           }}
           className={`
-            text-sm text-white/60 mt-1  ml-[3.65rem] hover:text-white/80   rounded-full
-            ring-1 ring-transparent hover:ring-white/10 active:ring-white/20
+            text-sm text-white/60 mt-1  ml-[3.8rem] hover:text-white/80   rounded-full
+            ring-1 ring-transparent  hover:scale-101
             bg-none border-none cursor-pointer
           `}
         >

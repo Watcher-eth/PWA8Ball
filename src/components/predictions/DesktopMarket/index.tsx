@@ -97,7 +97,7 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full mt-4 overflow-y-auto z-[30] lg:mx-0 flex flex-col">
+      <div className="w-full h-full mt-1.5 overflow-y-auto z-[30] lg:mx-0 flex flex-col">
         <div>
           <Grid
             gap={4}

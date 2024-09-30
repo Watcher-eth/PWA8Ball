@@ -38,7 +38,6 @@ export function DesktopChart(props: {
   odds?: number[]
 }) {
   const [timeframe, setTimeframe] = useState("1M")
-  console.log("props", props)
 
   const { data: prices2 } = useGetMarketPrices(props?.id)
 
@@ -59,7 +58,6 @@ export function DesktopChart(props: {
     [`${props.options[1].name}`]: 100 - price.value,
   }))
 
-  console.log("iuserOwne", props?.userOwns[0])
   return (
     <div>
       <div className="flex flex-row items-center space-x-3 ">
@@ -241,7 +239,9 @@ export function DesktopChart(props: {
       <div
         className={`${
           props?.isMarketPage
-            ? "h-[48vh]  mt-7 -pb-0 pt-2"
+            ? ` ${
+                props?.userOwns.length > 0 ? "h-[48vh]" : "h-[52vh]"
+              }  mt-7 mb-2.5 pt-2`
             : "h-[40vh] pb-2 pt-2"
         }  min-h-[280px] "`}
       >
@@ -260,7 +260,7 @@ export function DesktopChart(props: {
         timeframe={timeframe}
         setTimeframe={setTimeframe}
       />
-      {props?.userOwns && (
+      {props?.userOwns.length > 0 && (
         <div className="flex flex-row items-center justify-between mb-3 mt-2">
           <div className="flex flex-col items-start">
             <span className="text-xs text-white/70">You voted</span>

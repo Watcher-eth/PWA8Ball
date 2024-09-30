@@ -46,7 +46,7 @@ export function DesktopPredictComponent(props: {
     initialProb,
     refetch,
   } = props
-  const [step, setStep] = useState<number>(userOwns[0] ? 4 : 0)
+  const [step, setStep] = useState<number>(userOwns.length > 0 ? 4 : 0)
   // const [amount, setAmount] = useState(0);
   const [amountStr, setAmountStr] = useState()
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)

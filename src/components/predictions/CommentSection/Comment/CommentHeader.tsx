@@ -26,14 +26,14 @@ export function CommentHeader({
         prefetch={true}
       >
         <div className="flex  w-full flex-row items-start">
-          <div className="mr-3.5">
+          <div className="">
             <ProfileToolTip user={user}>
               <UserPfpIcon
                 pfp={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
               />
             </ProfileToolTip>
           </div>
-          <div className="flex flex-row items-center justify-between w-full">
+          <div className="flex flex-row items-center ml-3.5 justify-between w-full">
             <div className="flex flex-row items-center">
               <p className=" text-white text-[1.1rem]  font-[500] hover:text-white/80">
                 {user?.name}
@@ -74,7 +74,7 @@ function UserPfpIcon({ pfp }: { pfp?: string }) {
       <img
         src={pfp}
         alt="profile"
-        className="w-12 h-12 border-[0.08rem] border-[#191919] rounded-[50%] overflow-hidden object-cover "
+        className="w-12 h-12 min-w-12 min-h-12 border-[0.08rem] border-[#191919] rounded-full object-cover "
       />
     )
   } else {
