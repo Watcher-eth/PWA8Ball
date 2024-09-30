@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Ban, ImagePlus } from "lucide-react"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { toast } from "sonner"
+import { showToast } from "@/utils/Toasts/showToast"
 
 export function DesktopCreateProfile() {
   const fileInputRef = useRef(null)
@@ -10,7 +11,7 @@ export function DesktopCreateProfile() {
   const [pfpUrl, setPfpUrl] = useState("")
   const { user, setUser } = useUserStore()
   const handleImageUploadClick = () => {
-    fileInputRef.current.click()
+    fileInputRef.current?.click()
   }
 
   const handleImageChange = (event: { target: { files: any[] } }) => {
@@ -25,24 +26,10 @@ export function DesktopCreateProfile() {
 
   async function uploadProfileData() {
     if (!username) {
-      toast(
-        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
-            <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />
-          </div>
-          Please add a username
-        </div>,
-        {
-          unstyled: true,
-          classNames: {
-            title: "text-red-400 text-2xl",
-            description: "text-red-400",
-            actionButton: "bg-zinc-400",
-            cancelButton: "bg-orange-400",
-            closeButton: "bg-lime-400",
-          },
-        }
-      )
+      showToast({
+        icon: <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />,
+        message: "Please add a username",
+      })
       return
     }
 
@@ -54,7 +41,7 @@ export function DesktopCreateProfile() {
         pfp: pfpUrl,
         walletAddress: user?.walletAddress,
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
-        externalAuthProviderUserId: user?.external_auth_provider_user_id,
+        externalAuthProviderUserId: user?.externalAuthProviderUserId,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
       })
     } else if (user?.walletAddress) {

@@ -5,6 +5,7 @@ import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInvit
 import _ from "lodash"
 import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite"
 import { toast } from "sonner"
+import { showToast } from "@/utils/Toasts/showToast"
 
 
 export function InviteScreen() {
@@ -27,47 +28,16 @@ export function InviteScreen() {
     if (data === true) {
       useInvite(debouncedInvite)
 
-      toast(
-        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(52, 199, 89, 0.15)] mr-2 flex justify-center items-center">
-            <CheckCircle
-              strokeWidth={3}
-              className="text-[#34C759] h-[0.95rem]"
-            />
-          </div>
-          Successfully used invite!
-        </div>,
-        {
-          unstyled: true,
-          classNames: {
-            title: "text-red-400 text-2xl",
-            description: "text-red-400",
-            actionButton: "bg-zinc-400",
-            cancelButton: "bg-orange-400",
-            closeButton: "bg-lime-400",
-          },
-        }
-      )
+      showToast({
+        icon: <CheckCircle strokeWidth={3} className="text-[#34C759] h-[1rem]" />,
+        message: "Successfully used invite!",
+      })
       //TODO: Integrate ponder update user endpoint
     } else {
-      toast(
-        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-          <div className="p-0.5 py-1.5 rounded-full bg-[rgba(255, 63, 63, 0.1)] mr-2 flex justify-center items-center">
-            <Ban strokeWidth={3} className="text-[#FF3F3F] h-[0.95rem]" />
-          </div>
-          Invalid code!{" "}
-        </div>,
-        {
-          unstyled: true,
-          classNames: {
-            title: "text-red-400 text-2xl",
-            description: "text-red-400",
-            actionButton: "bg-zinc-400",
-            cancelButton: "bg-orange-400",
-            closeButton: "bg-lime-400",
-          },
-        }
-      )
+      showToast({
+        icon: <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />,
+        message: "Invalid code!",
+      })
     }
   }
   return (

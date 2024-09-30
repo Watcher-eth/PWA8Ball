@@ -7,6 +7,7 @@ import { toast } from "sonner"
 import { useGetUserInvites } from "@/supabase/queries/Invites/useGetUserInvites"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites"
+import { showToast } from "@/utils/Toasts/showToast"
 
 export function UserInviteModal({ children }: { children: React.ReactNode }) {
   const { user } = useUserStore()
@@ -32,7 +33,7 @@ export function UserInviteModal({ children }: { children: React.ReactNode }) {
           transition={{ duration: 0.2 }}
           className={`
           bg-[#101010]/70 rounded-[2rem]  backdrop border-[0.1rem] border-[#151515]
-          h-full mb-5  relative 
+          h-full mb-5  relative
         `}
         >
           <div className="flex flex-col items-center p-2 pb-12 rounded-lg">
@@ -52,27 +53,14 @@ export function UserInviteModal({ children }: { children: React.ReactNode }) {
                 return (
                   <UserInvite
                     setToastVisible={() =>
-                      toast(
-                        <div className="w-full rounded-full bg-[#212121]/30 backdrop-blur-lg border-[0.1rem] border-[#212121]/20 text-base font-medium px-3 pr-4 text-white flex flex-row items-center p-2">
-                          <div className="p-0.5 py-1.5 rounded-full bg-[#323232] mr-2 flex justify-center items-center">
-                            <Copy
-                              strokeWidth={2.5}
-                              className="text-white h-[0.95rem]"
-                            />
-                          </div>
-                          Copied Invite
-                        </div>,
-                        {
-                          unstyled: true,
-                          classNames: {
-                            title: "text-red-400 text-2xl",
-                            description: "text-red-400",
-                            actionButton: "bg-zinc-400",
-                            cancelButton: "bg-orange-400",
-                            closeButton: "bg-lime-400",
-                          },
-                        }
-                      )
+                      showToast({
+                        icon:
+                          <Copy
+                            strokeWidth={2.5 /** this is 3 everywhere else... */}
+                            className="text-white h-[1rem]"
+                          />,
+                        message: "Copied Invite",
+                      })
                     }
                     code={item.id}
                     status={item.status}
