@@ -26,7 +26,6 @@ async function cashoutPrediction(props: {
     throw new Error("All fields must be provided")
   }
   try {
-    const account = props.address
     const currentPairId = BigInt(props?.marketId)
 
     const marketPair = await rpcClient.readContract({

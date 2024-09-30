@@ -10,12 +10,11 @@ import {
   CheckCircle,
   Clock,
 } from "lucide-react"
-import { useRemoveLp } from "@/lib/onchain/mutations/useRemoveLp"
+import { useRemoveLp } from "@/hooks/actions/useRemoveLp"
 import { useUserStore } from "@/lib/stores/UserStore"
 import { toast } from "sonner"
 import { DialogClose } from "@/components/ui/dialog"
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
-import { useClientAddress } from "@/hooks/wallet/useClientAddress"
 
 export function RemoveLPConfirmationScreen(props: {
   setStep: (num: number) => void
@@ -29,7 +28,7 @@ export function RemoveLPConfirmationScreen(props: {
   amountLp: number
 }) {
   const { onClose, refetch } = props
-  const { client, address } = useClientAddress()
+
   const { user: userCon } = useUserStore()
 
   const [loading, setLoading] = useState(false)
@@ -63,12 +62,7 @@ export function RemoveLPConfirmationScreen(props: {
     try {
       showToast()
       setLoading(true)
-      await removeLp({
-        userId: userCon?.externalAuthProviderUserId!,
-        marketId: props.id,
-        client: client,
-        address: address,
-      })
+      await removeLp()
       setSuccess(true)
       setTimeout(() => setLoading(false), 500)
 
