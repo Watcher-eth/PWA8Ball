@@ -51,11 +51,10 @@ export function DesktopPredictComponent(props: {
   const amount = Number(amountStr?.length > 0 ? amountStr : 0)
   const setStake = useVotingStore((state) => state.setState)
 
-  
   return (
     <div
       className={`  ${
-        step === 0 || step === 4
+        step === 0 || step === 4 || step === 2
           ? ""
           : "p-4 rounded-lg  pt-1 border-[0.1rem] border-[#141414] overflow-hidden"
       } `}
@@ -408,7 +407,7 @@ function DesktopConfirmPrediction({
           <motion.button
             onClick={() => setStep(0)}
             className={`
-         py-2 px-6  h-12 w-[50%] rounded-full bg-[#131313] text-lg text-[#D9D9D9] font-bold
+         py-2 px-6  h-12 w-full rounded-full bg-[#131313] text-lg text-[#D9D9D9] font-bold
           flex-1
         `}
           >
@@ -425,7 +424,7 @@ function DesktopConfirmPrediction({
               odds={odds}
             >
               <TxStatusButton
-                minWidth={"min-w-[11rem]"}
+                minWidth={"min-w-[12rem] w-full"}
                 height="h-12"
                 isPending={loading}
                 isSuccess={success}

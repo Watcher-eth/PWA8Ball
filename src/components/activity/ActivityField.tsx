@@ -69,9 +69,9 @@ export function ActivityField({
         <img
           src={pfp}
           alt="Profile"
-          className="h-[25px] w-[25px] object-cover rounded-[15px] absolute bottom-[-6px] left-[32px] border-[3px] border-[#1B1B1E]"
+          className="h-[28px] w-[28px] object-cover rounded-[15px] absolute bottom-[-6px] left-[32px] border-[2px] border-[#1B1B1E]"
         />
-        <div className="flex flex-col -space-y-0.5 ml-[12.5px] mr-[-36px] max-w-full">
+        <div className="flex flex-col -space-y-0.5 ml-[20.5px] mr-[-40px] max-w-full">
           <h3 className="text-[18px] text-white font-semibold">{name}</h3>
           <p className="text-[15.5px] text-[lightgray] font-normal overflow-hidden whitespace-nowrap text-ellipsis">
             {title}
@@ -80,9 +80,15 @@ export function ActivityField({
       </div>
       <div className="flex flex-col items-end space-y-1">
         <p
+          style={{
+            backgroundColor:
+              option?.index === 0
+                ? "rgba(255, 63, 63, 0.1)"
+                : "rgba(77, 175, 255, 0.1)",
+          }}
           className={`text-[14px] px-2 py-0 rounded-md ${
-            option?.index === 0 ? "bg-[#FF0050]" : "bg-[#0067E1]"
-          } text-white font-semibold`}
+            option?.index === 0 ? "text-[#FF3F3F]" : "text-[#4DAFFF]"
+          }  font-semibold`}
         >
           {option?.name.length < 8
             ? option?.name

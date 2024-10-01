@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
-import { Spinner } from "./Spinner";
-import { X } from "lucide-react";
+import { Spinner } from "./Spinner"
+import { X } from "lucide-react"
 
 export function MobileLoadingPrediction({
   image,
@@ -11,14 +11,14 @@ export function MobileLoadingPrediction({
   loading,
   success,
 }: {
-  image: string;
-  question: string;
-  answer: string;
-  option: string;
-  loading: boolean;
-  success: boolean;
+  image: string
+  question: string
+  answer: string
+  option: string
+  loading: boolean
+  success: boolean
 }) {
-  const controls = useLoadingAnimationControls();
+  const controls = useLoadingAnimationControls()
   return (
     <div className="flex flex-col items-center justify-center w-full h-[430px]">
       <motion.img
@@ -67,7 +67,7 @@ export function MobileLoadingPrediction({
         <Spinner success={success} loading={loading} />
       </div>
     </div>
-  );
+  )
 }
 
 export function DesktopLoadingPrediction({
@@ -78,27 +78,26 @@ export function DesktopLoadingPrediction({
   success,
   setStep,
 }: {
-  image: string;
-  question: string;
-  answer: string;
-  loading: boolean;
-  success: boolean;
-  setStep: (value: number) => void;
+  image: string
+  question: string
+  answer: string
+  loading: boolean
+  success: boolean
+  setStep: (value: number) => void
 }) {
-  const controls = useLoadingAnimationControls();
+  const controls = useLoadingAnimationControls()
 
   return (
-    <div className="flex flex-col items-center rounded-lg bg-[#090909]   justify-center w-full h-full overflow-hidden">
+    <div className="flex flex-col items-center rounded-lg bg-[#090909] border-[0.3rem] border-[#212121]   justify-center w-full h-full overflow-hidden">
       {/* <div className=""> */}
       <motion.img
         src={image}
         alt="Prediction"
-
-        className="rounded-md w-full h-[80%]  overflow-hidden absolute  object-cover  "
+        className="w-full h-[80%] rounded-lg object-cover absolute border-[0.1rem]  border-[#212121] inset-0"
       />
-      <motion.div className=" w-full h-[100%] absolute backdrop-blur-xl " />
+      <motion.div className="w-full h-[80%] border-[0.1rem]  border-[#212121]  rounded-lg  absolute inset-0 backdrop-blur-xl" />
       <motion.div
-        className="absolute  w-full h-[100%] "
+        className="absolute inset-0 rounded-lg w-full h-[80%]"
         style={{
           background:
             "linear-gradient(to bottom, transparent, rgba(9, 9, 9, 0.8), #090909)",
@@ -133,35 +132,32 @@ export function DesktopLoadingPrediction({
         {question}
       </motion.p>
       <motion.p
-        className="text-5xl mt-9 text-white mb-8 font-bold z-10"
+        className="text-5xl mt-9 text-white mb-2 font-bold z-10"
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
       >
         {answer}
       </motion.p>
-      <div className="absolute bottom-[8rem]">
-        <Spinner success={success} loading={loading} />
-      </div>
+      <div className="absolute bottom-[8rem] "></div>
     </div>
-  );
+  )
 }
 
 function useLoadingAnimationControls() {
-  const controls = useAnimation();
+  const controls = useAnimation()
   async function sequence() {
-
     await controls?.start({
       height: 100,
       width: 100,
       transition: { type: "spring", damping: 20, stiffness: 100 },
-    });
-    await controls?.start({ opacity: 1, transition: { delay: 0.3 } });
-    await controls?.start({ opacity: 1, transition: { delay: 0.6 } });
+    })
+    await controls?.start({ opacity: 1, transition: { delay: 0.3 } })
+    await controls?.start({ opacity: 1, transition: { delay: 0.6 } })
   }
 
   useEffect(() => {
-    sequence();
-  }, [controls]);
+    sequence()
+  }, [controls])
 
-  return controls;
+  return controls
 }

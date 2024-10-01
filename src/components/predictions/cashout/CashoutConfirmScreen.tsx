@@ -60,7 +60,7 @@ export function CashoutConfirmScreen(props: {
               <ArrowDown color={"white"} strokeWidth={3.5} size={18} />
             </div>
             <span className="text-[17px] text-white mx-[6px] font-semibold">
-              {props.options[0].name}
+              {props?.options[0]?.name}
             </span>
           </div>
           <div
@@ -72,7 +72,7 @@ export function CashoutConfirmScreen(props: {
         </div>
         <div className="flex flex-row items-center justify-center">
           <div className="text-[3em] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#dcedc1] via-[#a8e6cf] via-white via-[#dcedc1] via-white via-[#dcedc1] to-[#a8e6cf] my-[10px]">
-            ${formatAmountWithCommas(props.points)}
+            ${formatAmountWithCommas(props?.points)}
           </div>
         </div>
         <div className="border border-dashed border-[#404040] mb-[15px]"></div>
@@ -80,7 +80,7 @@ export function CashoutConfirmScreen(props: {
           <span className="text-[17.5px] text-[#D3D3D3]">Market</span>
           <div className="flex flex-row items-center">
             <span className="text-[20px] font-medium text-white mr-[9px]">
-              {props.title}
+              {props?.title}
             </span>
             <img
               className="h-[38px] object-cover w-[38px] rounded-[8px] overflow-hidden"
