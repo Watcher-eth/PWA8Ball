@@ -1,16 +1,8 @@
+import { Address } from "viem"
+
 import { useWriteUserRegistryUpdateUser } from "@/lib/onchain/generated"
 
-interface UpdateUserParams {
-  walletAddress: `0x${string}`
-  externalAuthProviderUserId: string
-  name: string
-  pfp?: string
-  socials?: string
-  theme?: string
-  metadata?: string
-}
-
-export const useUpdateUser = () => {
+export function useUpdateUser() {
   const {
     writeContractAsync: updateUser,
     isPending,
@@ -19,7 +11,7 @@ export const useUpdateUser = () => {
     error,
   } = useWriteUserRegistryUpdateUser()
 
-  const handleUpdateUser = async ({
+  async function handleUpdateUser({
     walletAddress,
     externalAuthProviderUserId,
     name,
@@ -27,7 +19,15 @@ export const useUpdateUser = () => {
     socials = "{}",
     theme = "",
     metadata = "",
-  }: UpdateUserParams) => {
+  }: {
+    walletAddress: Address
+    externalAuthProviderUserId: string
+    name: string
+    pfp?: string
+    socials?: string
+    theme?: string
+    metadata?: string
+  }) {
     const updatedAt = BigInt(Date.now())
 
     const updatedUserData = {

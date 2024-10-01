@@ -19,7 +19,7 @@ const DEFAULT_PFP =
 
 export function useInitializeUser() {
   const { ready, authenticated, user: privyUser } = usePrivy()
-  const { user, setUser, setWalletType } = useUserStore()
+  const { user, setUser } = useUserStore()
   // const { smartAccountAddress, smartAccountClient } = useSmartAccount()
   const { address, isConnected } = useAccount()
   const { handleCreateUser } = useCreateUser()

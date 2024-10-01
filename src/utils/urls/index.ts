@@ -22,7 +22,7 @@ export function getProfilePath(userId: string) {
   return `/u/${userId}` as const
 }
 
-export function getMarketPath(id: string) {
+export function getMarketPath(id: string | number | bigint) {
   return `/p/${id}` as const
 }
 

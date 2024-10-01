@@ -45,7 +45,7 @@ export function useCashOutPrediction({
     isSuccess,
     isError
   } = useWriteEightBallCashOut()
-  const preferYes = Number(option) === 1 ? false : true
+  const preferYes = Number(option) !== 1
   const preferYesNum = !preferYes ? 1 : 0
   const tokenAddress = !preferYes ? marketPair?.yesToken : marketPair?.noToken
 
@@ -58,6 +58,10 @@ export function useCashOutPrediction({
 
 
   async function cashOutPrediction() {
+    if (!address) {
+      console.log("Wallet needs to be connected")
+      return
+    }
     setLoading(true)
     try {
 
@@ -80,10 +84,7 @@ export function useCashOutPrediction({
       })
 
       setTimeout(() => {
-        router.push({
-          // @ts-ignore
-          pathname: getProfilePath(address),
-        })
+        router.push(getProfilePath(address))
       }, 6500)
     } catch (isError) {
       console.error("Failed to cash out:", isError)
