@@ -30,7 +30,7 @@ export function GenericAreaChart({
   })
 
   return (
-    <ChartContainer className="h-full w-full" config={chartConfig}>
+    <ChartContainer className="size-full" config={chartConfig}>
       <AreaChart
         accessibilityLayer
         data={chartData}

@@ -266,7 +266,7 @@ export const MobileMyBetModal = (props: {
       <div className="h-[1px] w-[101%] bg-[rgba(100,100,100,0.3)] my-[14px] mt-[20px]" />
       <div className="flex flex-row items-center gap-[4px]">
         <AlignLeft color="lightgray" strokeWidth={3} size={18} />
-        <span className="text-[lightgray] font-[500] text-[18px]">
+        <span className="text-[lightgray] font-medium text-[18px]">
           About {props.title}
         </span>
       </div>

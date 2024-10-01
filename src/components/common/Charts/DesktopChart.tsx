@@ -91,7 +91,7 @@ export function DesktopChart(props: {
         <div className="flex flex-col w-full  -space-y-0.5">
           <div className="flex flex-row items-center justify-between mt-1">
             {props?.isMarketPage ? (
-              <span className="text-white text-[1.9rem] font-[600]">
+              <span className="text-white text-[1.9rem] font-semibold">
                 {props?.title}
               </span>
             ) : (

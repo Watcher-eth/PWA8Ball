@@ -32,7 +32,7 @@ function StatSection({
       <div className="flex flex-col items-center gap-0">
         <span className="text-[lightgray] text-sm font-semibold">{label}</span>
         {value ? (
-          <span className="text-white text-xl font-[600]">{value}</span>
+          <span className="text-white text-xl font-semibold">{value}</span>
         ) : (
           <div className="animate-pulse bg-[#292929] h-6 w-9 rounded"></div>
         )}

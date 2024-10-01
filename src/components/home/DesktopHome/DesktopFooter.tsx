@@ -90,7 +90,7 @@ function FooterColumn({
 }) {
   return (
     <div className="flex flex-col space-y-2.5">
-      <div className="text-white font-semibold text-[1.05rem]">{title}</div>
+      <div className="text-white font-semibold text-base">{title}</div>
       {children}
     </div>
   )

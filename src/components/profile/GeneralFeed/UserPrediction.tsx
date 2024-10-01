@@ -35,7 +35,7 @@ export function UserPrediction({
             className={`${
               optional === 1 ? "text-[#4DAFFF]/90" : "text-[#FF3F3F]/90"
             }
-            py-1 rounded-full  text-[0.95rem] backdrop-blur-md font-[600]
+            py-1 rounded-full  text-[0.95rem] backdrop-blur-md font-semibold
             ${option === "No" ? "px-3" : "px-2.5"}
           `}
           >
@@ -57,14 +57,14 @@ const UserPredictionChip = (props) => {
   return (
     <div className="relative flex items-center space-x-3">
       <div
-        className={`relative flex items-center justify-center rounded-lg 
+        className={`relative flex items-center justify-center rounded-lg
           border border-gray-800
           ${
             isOptionZero
               ? "bg-gradient-to-r from-red-500 to-transparent"
               : "bg-gradient-to-r from-blue-500 to-transparent"
           }
-          backdrop-blur-md 
+          backdrop-blur-md
           ml-[-50px] p-1`}
       >
         {/* Blur and Border */}
@@ -102,11 +102,11 @@ export function CreatedPrediction({
         index={index}
         rightContent={
           <div
-            className={`relative flex items-center justify-center rounded-lg 
+            className={`relative flex items-center justify-center rounded-lg
             border border-gray-800
             bg-gradient-to-r from-[#5ACE5A] via-[#5ACE5A]/20 to-[#5ACE5A]/10
-    
-            backdrop-blur-md 
+
+            backdrop-blur-md
             ml-[-50px] `}
           >
             <div className="bg-black bg-opacity-20 backdrop-blur-lg rounded-lg border border-gray-900">

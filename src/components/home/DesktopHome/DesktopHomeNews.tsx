@@ -13,7 +13,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
   return (
     <div className="w-full flex flex-col">
       {!topic && (
-        <div className="text-[1.8rem] text-white font-[600] flex flex-row items-center space-x-2">
+        <div className="text-[1.8rem] text-white font-semibold flex flex-row items-center space-x-2">
           {amount === 4 && (
             <img src={"../images/OrbLogo.png"} className="h-10 w-10" />
           )}
@@ -62,9 +62,10 @@ export function DesktopHomeNews({ markets, amount, topic }) {
               >
                 <div className={`flex flex-col  w-full relative`}>
                   <Skeleton
-                    className={`${
-                      amount === 2 ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
-                    } w-full  object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]`}
+                    className={`
+                      ${amount === 2 ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"}
+                      w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]
+                    `}
                   />
                   <Skeleton
                     className={`px-9 py-3.5 absolute z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md ${

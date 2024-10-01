@@ -72,7 +72,7 @@ export function Comment({
         user2={user2}
         created_at={created_at}
       />
-      <p className=" ml-[3.8rem] -mt-6 font-[300]   text-white text-[1.05rem] ">
+      <p className=" ml-[3.8rem] -mt-6 font-[300]   text-white text-base ">
         {content}
       </p>
       <div className="flex flex-row items-center justify-between mb-1.5 ">

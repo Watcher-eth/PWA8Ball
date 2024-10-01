@@ -72,17 +72,17 @@ export function MobileProfilePage({
           <div className="text-white text-[0.75rem] absolute top-[3rem] p-1 px-1.5 bg-[#202020] rounded-full font-bold mt-3">
             0%
           </div>
-          <p className="text-[#ffffff] text-[1.65rem] font-[500] mt-4">
+          <p className="text-[#ffffff] text-[1.65rem] font-medium mt-4">
             {userC?.name}
           </p>
 
           <div className="flex flex-col items-center -mt-2.5">
             <SocialsSection {...userC?.socials} />
-            <div className="flex items-center mt-2 font-[600]">
-              <p className="text-gray-100 text-sm font-[600] border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full">
+            <div className="flex items-center mt-2 font-semibold">
+              <p className="text-gray-100 text-sm font-semibold border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full">
                 ${(Number(balance) / 10 ** 6).toFixed(2)}
               </p>
-              <p className="text-gray-100 text-sm border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full mx-2 font-[600]">
+              <p className="text-gray-100 text-sm border-[0.08rem] border-[#202020] bg-[#181818] py-1.5 px-4 rounded-full mx-2 font-semibold">
                 {totalFollowers} Followers
               </p>
               <FollowButton profileId={userC?.walletAddress} />

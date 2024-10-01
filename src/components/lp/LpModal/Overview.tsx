@@ -132,7 +132,7 @@ export const Overview: React.FC<RemoveLPOverviewProps> = (props) => {
           className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#D9D9D9] rounded-full mt-3 ml-4"
         >
           <ArrowDown color="black" strokeWidth={3} height={23} />
-          <span className="ml-0.5 text-[20px] font-[600] text-[#1D1D1D]">
+          <span className="ml-0.5 text-[20px] font-semibold text-[#1D1D1D]">
             Withdraw
           </span>
         </motion.button>

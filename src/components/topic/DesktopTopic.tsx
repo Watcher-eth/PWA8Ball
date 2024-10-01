@@ -138,7 +138,7 @@ export function DesktopTopic({
                 markets={enhancedTrendingMarkets}
               />
             </div>
-            <div className="mb-6  text-3xl font-[600] text-white">
+            <div className="mb-6  text-3xl font-semibold text-white">
               Popular Predictions
             </div>
             <div className=" pb-[3rem]  flex flex-row">

@@ -35,7 +35,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       className={`
         flex items-start flex-col rounded-lg w-full max-h-[27rem] justify-end h-[105vw] relative
          shadow-md hover:scale-101 active:scale-98 transition-all
-        cursor-pointer 
+        cursor-pointer
       `}
     >
       <div className=" absolute w-full h-full">
@@ -55,10 +55,10 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         className={`
           h-[50vw] w-full   max-h-[21.5rem]
           rounded-b-lg bg-gradient-to-t from-[#151515]/85 to-transparent
-          absolute bottom-0 z-2 
+          absolute bottom-0 z-2
         `}
       />
-      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-[600] p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.07rem] border-[#090909]/5">
+      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.07rem] border-[#090909]/5">
         {odds.toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div

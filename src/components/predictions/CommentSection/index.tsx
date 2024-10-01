@@ -76,16 +76,16 @@ export function CommentSection({
         pb-20`}
     >
       <div className="flex flex-row items-center justify-between">
-        <p className="text-[21px] flex items-center font-semibold  text-white mt-1 mb-2">
+        <p className="text-lg flex items-center font-semibold  text-white mt-1 mb-2">
           <p>Comments</p>
-          <p className="px-3.5 ml-2  text-[14px] font-[500] -mb-[0.1rem] rounded-full border-[0.1rem] border-[#212121]">
+          <p className="px-3 ml-1.5 text-[14px] font-medium -mb-[0.1rem] rounded-full border border-[#212121]">
             {" "}
             {allComments.length}{" "}
           </p>
         </p>
         <div className="flex flex-row items-center gap-1.5 -mb-0.5">
           <ArrowUpDown color="gray" strokeWidth={2.5} size={17} />
-          <div className="text-[gray] text-[18px] font-[500]">Most recent</div>
+          <div className="text-[gray] text-base font-medium">Most recent</div>
           <ChevronDown color="gray" strokeWidth={2} size={17} />
         </div>
       </div>

@@ -33,7 +33,7 @@ export function BoostDetail({
         >
           <div className="flex items-center justify-center px-4 w-full py-2 gap-2  rounded-full">
             <Plus strokeWidth={3.5} size={18} color="white" />
-            <span className="text-[1.1rem] font-[600] text-white">
+            <span className="text-[1.1rem] font-semibold text-white">
               Add Liquidity
             </span>
           </div>

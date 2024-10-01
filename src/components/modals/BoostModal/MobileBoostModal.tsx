@@ -40,7 +40,7 @@ export function MobileBoostModal({
             <BoostInfoRow
               label="Fee Rewards Rate"
               content={
-                <div className="text-white font-medium text-[1.05rem] px-2 py-1 rounded-md bg-[#FF0050]">
+                <div className="text-white font-medium text-base px-2 py-1 rounded-md bg-[#FF0050]">
                   0.5%
                 </div>
               }

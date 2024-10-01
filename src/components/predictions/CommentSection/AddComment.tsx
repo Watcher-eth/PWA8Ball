@@ -94,7 +94,7 @@ export function AddComment({
       />
       <div className="flex flex-col w-full relative group">
         <div
-          className=" h-11  rounded-full bg-transparent placeholder-[lightgray] w-full  text-[lightgray] focus:outline-none transition-all duration-300 
+          className=" h-11  rounded-full bg-transparent placeholder-[lightgray] w-full  text-[lightgray] focus:outline-none transition-all duration-300
            text-xl  outline-none "
         >
           <textarea
@@ -105,8 +105,8 @@ export function AddComment({
               replyTo ? `Reply to ${replyTo}` : "Join the discussion..."
             }
             rows={1}
-            className={`p-[0.5rem] -mt-0.5 rounded-md px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300 
-          text-[1.05rem] border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
+            className={`p-[0.5rem] -mt-0.5 rounded-md px-3.5 border-[#353535]  pb-2 bg-transparent placeholder-[lightgray] w-full  text-[white] focus:outline-none transition-all duration-300
+          text-base border-[0.95px] focus:border-b-1 focus:border-[lightgray]  outline-none overflow-hidden
           `}
             onInput={handleInput}
           />

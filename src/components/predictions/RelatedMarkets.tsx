@@ -26,7 +26,7 @@ export function RelatedMarkets({
       >
         <div className="pb-3 flex flex-row items-center">
           <StarHalf color={"white"} strokeWidth={2.8} />
-          <span className="text-[20px] text-white ml-0 font-[600]">
+          <span className="text-lg text-white font-semibold">
             Related Predictions
           </span>
         </div>

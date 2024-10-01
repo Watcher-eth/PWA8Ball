@@ -29,7 +29,7 @@ export function RelatedMarketQuestion({
         className={`
           flex flex-row items-center
          rounded-[10px] cursor-pointer
-          ${isDesktop ? "bg-transparent py-1.5 " : "bg-[#191919]   p-2"}
+          ${isDesktop ? "bg-transparent py-1.5 " : "bg-[#191919] p-2"}
           transition-all
         `}
       >
@@ -38,11 +38,11 @@ export function RelatedMarketQuestion({
           src={image}
           alt={title}
         />
-        <div className="flex flex-col ml-[9px] -space-y-0.5">
-          <span className="line-clamp-1 font-medium text-[16px] text-[lightgray] max-w-[73vw] mb-[1px] overflow-hidden">
+        <div className="flex flex-col ml-2.5 -space-y-0.5">
+          <span className="line-clamp-1 font-medium text-base text-[lightgray] max-w-[73vw] mb-[1px] overflow-hidden">
             {question}
           </span>
-          <span className="text-lg font-[600] text-white">
+          <span className="text-lg font-semibold text-white">
             {currentprob ?? initialprob}%{" "}
             {option === 0 ? options[option + 1].name : options[option - 1].name}
           </span>

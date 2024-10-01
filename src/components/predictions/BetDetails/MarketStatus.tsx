@@ -55,8 +55,8 @@ const StatusRow: React.FC<StatusRowProps> = ({
 
       <div className="flex flex-row justify-between w-full gap-1">
         <div className="flex flex-col -gap-1.5">
-          <span className="text-white text-lg font-[600]">{title}</span>
-          <span className="text-[#808080] text-base max-w-[65vw]">
+          <span className="text-white text-base font-semibold">{title}</span>
+          <span className="text-[#808080] text-sm max-w-[65vw]">
             {subtitle}
           </span>
         </div>
@@ -169,7 +169,7 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
 
       <button
         onClick={toggleStatus}
-        className="text-[#808080] text-base text-[0.95rem] underline mt-2"
+        className="text-[#808080] text-sm  underline mt-2"
       >
         {expanded ? "Hide current status" : "Show current status"}
       </button>

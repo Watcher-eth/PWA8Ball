@@ -42,7 +42,7 @@ export function CommentHeader({
           </div>
           <div className="flex flex-row items-center ml-3.5 justify-between w-full">
             <div className="flex flex-row items-center">
-              <p className=" text-white text-[1.1rem]  font-[500] hover:text-white/80">
+              <p className=" text-white text-[1.1rem]  font-medium hover:text-white/80">
                 {user?.name}
               </p>
               {userOwns.length > 0 && (
@@ -60,10 +60,10 @@ export function CommentHeader({
                           : "text-[#4DAFFF]"
                       }
                       px-1 py-px font-[400] rounded-sm overflow-hidden ml-1.5
-                     
+
                     `}
                 >
-                  <span className="font-[600]">
+                  <span className="font-semibold">
                     $
                     {(
                       ((userOwns[0].tokensOwned / 10 ** 6) *

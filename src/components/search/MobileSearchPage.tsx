@@ -100,7 +100,7 @@ export function MobileSearchPage() {
   console.log("markets", searchMarkets)
   return (
     <div className="flex flex-col gap-6 p-6 py-10 bg-[#080808] min-h-screen sm:p-8">
-      <h2 className="text-3xl font-[600] text-white -mb-3">Search</h2>
+      <h2 className="text-3xl font-semibold text-white -mb-3">Search</h2>
 
       <div className="relative">
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -127,7 +127,7 @@ export function MobileSearchPage() {
                   src="https://media.tenor.com/vpCPcxEuI-cAAAAj/john-tr.gif"
                   className="h-[15vh]"
                 />
-                <div className="text-center mt-4 text-white text-xl font-[600]">
+                <div className="text-center mt-4 text-white text-xl font-semibold">
                   This future doesn't exist yet
                 </div>
                 <div className="text-center text-[lightgray] text-md font-[Aeonik]">

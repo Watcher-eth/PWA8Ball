@@ -109,11 +109,11 @@ function ReferallItem(props: {
         </div>
         <div className="flex flex-col items-end -space-y-0">
           <p
-            className={`text-[13px]  py-0 rounded-md text-[lightgray] font-[500]`}
+            className={`text-[13px]  py-0 rounded-md text-[lightgray] font-medium`}
           >
             {props.date}
           </p>
-          <p className="text-[17px] text-white font-[600]">
+          <p className="text-[17px] text-white font-semibold">
             ${(props.amount / 10 ** 6).toFixed(2)}
           </p>
         </div>

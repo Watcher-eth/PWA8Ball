@@ -11,7 +11,7 @@ export function TrendingCommunities() {
 
   return (
     <div className=" flex flex-col w-full">
-      <div className="text-[1.8rem] text-white font-[600] mb-7 space-x-2">
+      <div className="text-[1.8rem] text-white font-semibold mb-7 space-x-2">
         Popular Communities
       </div>
       <div className="flex flex-row space-x-7">

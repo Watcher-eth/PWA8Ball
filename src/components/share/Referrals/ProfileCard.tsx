@@ -13,7 +13,7 @@ export const ProfileCard = ({ user, userBalance, onClose }) => {
             <span className="text-[lightgray] text-sm font-[400]">
               Referrals earned
             </span>
-            <span className="text-white text-3xl mt-1 font-[600]">
+            <span className="text-white text-3xl mt-1 font-semibold">
               ${(Number(userBalance) / 1000000).toFixed(2)}
             </span>
           </div>

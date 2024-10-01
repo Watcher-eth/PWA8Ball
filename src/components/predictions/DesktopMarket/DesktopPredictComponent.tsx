@@ -165,7 +165,7 @@ export function DesktopPredictComponent(props: {
                     3hrs ago
                   </span>
                 </div>
-                <span className="text-lg font-[600] text-white">
+                <span className="text-lg font-semibold text-white">
                   $
                   {(
                     ((userOwns[0].tokensOwned / 10 ** 6) *

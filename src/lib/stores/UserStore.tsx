@@ -5,6 +5,7 @@ import { replaceBigInts } from "@/utils/replaceBigInts"
 import { User } from "@/__generated__/graphql"
 
 interface ExtendedUser extends User {
+  socials?: string
   walletType?: "smartwallet" | "eoa"
   invited?: boolean
   totalFollowers?: number

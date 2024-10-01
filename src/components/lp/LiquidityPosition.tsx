@@ -59,7 +59,7 @@ export function LiquidityPosition({
             }}
             className="py-[5px] px-[10px] rounded-[17px] flex justify-center items-center overflow-hidden bg-[rgba(20,20,20,0.3)] border-none cursor-pointer"
           >
-            <span className="text-[13px] text-white  font-[600]">
+            <span className="text-[13px] text-white  font-semibold">
               Withdraw Boost
             </span>
           </motion.button>

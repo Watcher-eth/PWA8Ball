@@ -54,7 +54,7 @@ export function BetBigView({
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
         <div className="absolute top-3 right-3 flex items-center bg-[#909090]/10 border-[0.07rem] border-[#999999]/20 backdrop-blur-md px-2 pr-1 p-1 rounded-lg z-10">
-          <span className="text-white font-[600] text-sm mr-0">223</span>
+          <span className="text-white font-semibold text-sm mr-0">223</span>
           <Users className="text-white" strokeWidth={3.2} height={13} />
         </div>
 
@@ -125,7 +125,7 @@ export function BetSmallView({
           <span className="text-[lightgray] text-sm">Trending Today</span>
           <p
             style={{ lineClamp: 2, lineHeight: 1.3 }}
-            className="text-white line-clamp-2  text-[1.2rem] font-[600] "
+            className="text-white line-clamp-2  text-[1.2rem] font-semibold "
           >
             {question}
           </p>
@@ -143,7 +143,7 @@ export function PollingComponent({ yesValue, noValue, option1, option2 }) {
   return (
     <div className="flex no-scrollbar items-center p-2 px-0 my-1   w-full">
       <motion.div
-        className="flex items-center h-10 justify-start bg-[#181818] px-4 w-full rounded-l-lg p-2 text-white font-[600]"
+        className="flex items-center h-10 justify-start bg-[#181818] px-4 w-full rounded-l-lg p-2 text-white font-semibold"
         style={{
           width: `${noPercentage}vw`,
           borderTopLeftRadius: 8,
@@ -156,7 +156,7 @@ export function PollingComponent({ yesValue, noValue, option1, option2 }) {
       </motion.div>
       <div className="w-[0.35em] bg-white h-12 mx-[0.3rem] rounded-full"></div>
       <motion.div
-        className="flex items-center h-10 justify-end bg-white w-full rounded-r-lg p-2 px-4  text-[#181818] font-[600]"
+        className="flex items-center h-10 justify-end bg-white w-full rounded-r-lg p-2 px-4  text-[#181818] font-semibold"
         style={{
           width: `${yesPercentage}vw`,
           borderTopRightRadius: 8,

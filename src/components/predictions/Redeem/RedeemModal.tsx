@@ -63,10 +63,10 @@ export function RedeemModal(props: {
           </div>
         </div>
       </div>
-      <h2 className="text-[1.4rem] text-white font-[600] mt-3 self-start">
+      <h2 className="text-[1.4rem] text-white font-semibold mt-3 self-start">
         You were correct!
       </h2>
-      <p className="text-[1.05rem] font-medium text-[lightgray] mt-0 self-start">
+      <p className="text-base font-medium text-[lightgray] mt-0 self-start">
         Congratulations, your prediction was correct. You can now redeem your
         winnings.
       </p>
@@ -93,13 +93,13 @@ export function RedeemModal(props: {
       </div>
 
       <div className="flex flex-row items-center justify-between mt-3 w-full">
-        <p className="text-lg text-[lightgray] font-[600]">Payout</p>
+        <p className="text-lg text-[lightgray] font-semibold">Payout</p>
         <p className="text-xl text-white font-bold">
           ${((props.totalPot * 3) / 10 ** 6).toFixed(2)}
         </p>
       </div>
       <div className="flex flex-row items-center justify-between mt-3 w-full">
-        <p className="text-lg text-[lightgray] font-[600]">Cred earned</p>
+        <p className="text-lg text-[lightgray] font-semibold">Cred earned</p>
         <p className="text-xl text-white font-bold">
           {((props.totalPot * 2) / 10 ** 6).toFixed(0)} $Cred
         </p>

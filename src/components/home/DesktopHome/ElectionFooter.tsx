@@ -29,7 +29,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
             <div className="text-[1.9rem] text-white font-[Aeonik-Bold] space-x-2">
               🇺🇸 2024 US Elections
             </div>
-            <div className="text-[1.05rem] text-[lightgray] font-normal flex flex-col space-x-2">
+            <div className="text-base text-[lightgray] font-normal flex flex-col space-x-2">
               Get the latest forecasts about the 2024 US Federal Elections
             </div>
           </div>{" "}

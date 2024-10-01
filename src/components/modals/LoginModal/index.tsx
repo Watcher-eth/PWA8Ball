@@ -35,7 +35,7 @@ export function LoginModal({ isOpen, onClose }) {
         >
           <div className="flex mt-6 w-[86vw] items-center justify-between">
             {step === 1 && (
-              <div className="text-white text-[1.5rem] font-[600] mt-3 mx-[1.65rem]">
+              <div className="text-white text-[1.5rem] font-semibold mt-3 mx-[1.65rem]">
                 Sign in to Glimpse
               </div>
             )}

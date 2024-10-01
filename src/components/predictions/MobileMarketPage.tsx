@@ -209,7 +209,7 @@ function MobileMarketContent({
       </div>
       <div
         className={`
-          text-[1.05rem] self-start
+          text-base self-start
           -mb-px mt-2 ml-5
           text-start text-[lightgray] max-w-full
            z-2 font-medium leading-[1.35rem]
