@@ -2,7 +2,7 @@
 import { supabase } from "@/supabase/supabaseClient"
 import { Topic } from "@/components/topic"
 import { MobiTop } from "@/components/layouts/MobiTop"
-import DesktopTopic from "@/components/topic/DesktopTopic"
+import { DesktopTopic } from "@/components/topic/DesktopTopic"
 import { GRAPH_ENDPOINT_URL } from "@/providers/GraphQlProvider"
 import { Market } from "@/__generated__/graphql"
 import { getAllMarketsForTopicId } from "@/graphql/queries/topics/useGetAllMarketsForTopic"

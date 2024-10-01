@@ -16,7 +16,7 @@ export const REGEX = {
  * @param text The text to get URLs from.
  * @returns An array of URLs.
  */
-export default function getURLs(text: string): string[] {
+export default function getUrls(text: string): string[] {
   if (!text) {
     return []
   }
