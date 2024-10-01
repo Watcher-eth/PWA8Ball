@@ -7,8 +7,7 @@ import {
 import { LeaderBoardTop3 } from "./LeaderboardTop3"
 import { PredictorInfo } from "../PredictorInfo"
 import { LoadingLeaderboardSkeleton } from "../Leaderboard"
-import UserRank from "./UserRank"
-import { Trophy, X } from "lucide-react"
+import { UserRank } from "./UserRank"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 function DesktopLeaderboardModal({

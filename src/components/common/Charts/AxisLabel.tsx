@@ -1,12 +1,9 @@
-import React from "react";
-import { GraphPoint } from "../../../utils/chartUtils";
+import { GraphPoint } from "@/utils/chartUtils"
 
-export const AxisLabel: React.FC<{ x: number; value: number }> = ({
-  x,
-  value,
-}) => (
-  <div
-    style={{
+export function AxisLabel({ x, value }: { x: number; value: number }) {
+  return (
+    <div
+      style={{
       position: "absolute",
       left: x,
       bottom: 0,
@@ -18,8 +15,9 @@ export const AxisLabel: React.FC<{ x: number; value: number }> = ({
       style={{ fontSize: 13, fontWeight: 700, color: "#999999", opacity: 0.9 }}
     >
       {`${value.toFixed(2)}%`}
-    </span>
-  </div>
-);
+      </span>
+    </div>
+  )
+}
 
-export type { GraphPoint };
+export type { GraphPoint }

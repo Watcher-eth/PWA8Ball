@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { MailCheck } from "lucide-react"
 import { FindFriendsModal } from "@/components/onboarding/Invites/FindFriendsModal"

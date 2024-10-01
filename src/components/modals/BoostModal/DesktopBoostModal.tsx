@@ -1,21 +1,20 @@
-// @ts-nocheck
-
+import { useState } from "react"
 import { Input } from "@/components/ui/Input"
-import React, { useState } from "react"
 import { ConfirmButton } from "./ConfirmButton"
 import { DesktopCardModal } from "../DesktopCardModal"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
-export function DesktopBoostContent(props: {
+export function DesktopBoostContent({id, image, onComplete}: {
   image: string
   id: string
   onComplete: () => void
 }) {
   const [amount, setAmount] = useState<number>()
+
   return (
     <div className="flex flex-col p-2 ">
-      <img className="h-14 w-14 object-cover rounded-full" src={props?.image} />
+      <img className="h-14 w-14 object-cover rounded-full" src={image} />
       <div className="text-white text-[1.5rem] font-semibold mt-4 ">
         Boost and earn fees
       </div>
@@ -35,14 +34,14 @@ export function DesktopBoostContent(props: {
       />
       <BoostInfoRow label="Cred Bonus" content="150 Cred" />
       <Input
-        onChange={(e) => setAmount(e.target.value)}
-        className=" my-5 actvive:border-0 border-[#212121] rounded-md text-white p-6 bg-[#151515] font-medium px-3 text-[1.15rem]"
+        onChange={(e) => setAmount(Number(e.target.value))}
+        className=" my-5 active:border-0 border-[#212121] rounded-md text-white p-6 bg-[#151515] font-medium px-3 text-[1.15rem]"
         placeholder="Amount"
         type="number"
       />
       <ConfirmButton
-        id={props?.id}
-        onComplete={props?.onComplete}
+        id={id}
+        onComplete={onComplete}
         amount={amount}
       />
     </div>
@@ -78,7 +77,8 @@ export function DesktopBoostModal({
 }) {
   const [open, setOpen] = useState(false)
   return (
-    <Dialog open={open} onOpenChange={setOpen} className={`!rounded-[1.5rem] `}>
+    // @ts-ignore
+    <Dialog open={open} onOpenChange={setOpen} className={`!rounded-[1.5rem]`}>
       <DialogTrigger asChild>
         <div onClick={() => setOpen(true)}>{children}</div>
       </DialogTrigger>

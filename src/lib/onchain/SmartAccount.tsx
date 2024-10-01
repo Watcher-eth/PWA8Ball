@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from "react"
+import { useState, useEffect, useContext, createContext } from "react"
 
 import {
   type Address,
@@ -28,13 +28,13 @@ import { DEFAULT_CHAIN } from "@/constants/chains"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
   "0x91E60e0613810449d098b0b5Ec8b51A0FE8c8985"
-export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
-  "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
+// export const BASE_GOERLI_ENTRYPOINT_ADDRESS =
+//   "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
 
 
 /** Interface returned by custom `useSmartAccount` hook */
 
-const SmartAccountContext = React.createContext({
+const SmartAccountContext = createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
   smartAccountReady: false,

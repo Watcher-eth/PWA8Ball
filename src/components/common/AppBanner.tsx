@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react"
 
 export function AppBanner() {
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(false)
 
   const handleInstallClick = () => {
     // Handle the logic to check if the app is installed
     // For now, we'll simulate it with a state change
-    setIsInstalled(true);
-  };
+    setIsInstalled(true)
+  }
 
   return (
     <div className="bg-[#101010]/[05] backdrop-blur-md text-white p-2.5  top-0 w-full z-50 flex justify-between items-center shadow-md">
@@ -32,5 +32,5 @@ export function AppBanner() {
         {isInstalled ? "OPEN" : "VIEW"}
       </a>
     </div>
-  );
-};
+  )
+}

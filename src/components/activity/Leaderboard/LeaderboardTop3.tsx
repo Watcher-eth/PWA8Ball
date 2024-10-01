@@ -1,57 +1,63 @@
+import Link from "next/link"
+
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
 import { getProfilePath } from "@/utils/urls"
-import Link from "next/link"
-import React from "react"
 
-interface LeaderBoardTopUser {
+type LeaderBoardTopUser = {
   name: string
   image: string
   score: number
   walletAddress: string
 }
 
-const UserCard: React.FC<{
+function UserCard({
+  user,
+  showMarginTop,
+}: {
   user: LeaderBoardTopUser
   showMarginTop?: boolean
-}> = ({ user, showMarginTop }) => (
-  <div
-    className={`flex flex-col items-center ${showMarginTop ? "mt-2.5" : ""}`}
-  >
-    {user.image ? (
-      <ProfileToolTip
-        user={{
-          pfp: user?.image,
-          name: user?.name,
-          // @ts-ignore
-          walletAddress: user?.walletAddress,
-        }}
-      >
-        <Link href={getProfilePath(user?.walletAddress)}>
-          <img
-            src={user.image}
-            alt={user.name}
-            className="h-20 hover:scale-102 w-20 rounded-full"
-          />
-        </Link>
-      </ProfileToolTip>
-    ) : (
-      <div className="h-20 w-20 rounded-full bg-gray-300 animate-pulse"></div>
-    )}
-    {user.name ? (
-      <p className="text-lg font-semibold text-white mt-2 mb-0">{user.name}</p>
-    ) : (
-      <div className="h-4 w-24 bg-gray-300 animate-pulse mt-2 mb-2"></div>
-    )}
-    {user.score !== undefined ? (
-      <p className="text-sm text-[lightgray] font-medium">
-        ${user.score.toFixed(2)}
-      </p>
-    ) : (
-      <div className="h-3 w-20 bg-gray-300 animate-pulse"></div>
-    )}
-  </div>
-)
-
+}) {
+  return (
+    <div
+      className={`flex flex-col items-center ${showMarginTop ? "mt-2.5" : ""}`}
+    >
+      {user.image ? (
+        <ProfileToolTip
+          user={{
+            pfp: user?.image,
+            name: user?.name,
+            // @ts-ignore
+            walletAddress: user?.walletAddress,
+          }}
+        >
+          <Link href={getProfilePath(user?.walletAddress)}>
+            <img
+              src={user.image}
+              alt={user.name}
+              className="h-20 hover:scale-102 w-20 rounded-full"
+            />
+          </Link>
+        </ProfileToolTip>
+      ) : (
+        <div className="h-20 w-20 rounded-full bg-gray-300 animate-pulse"></div>
+      )}
+      {user.name ? (
+        <p className="text-lg font-semibold text-white mt-2 mb-0">
+          {user.name}
+        </p>
+      ) : (
+        <div className="h-4 w-24 bg-gray-300 animate-pulse mt-2 mb-2"></div>
+      )}
+      {user.score !== undefined ? (
+        <p className="text-sm text-[lightgray] font-medium">
+          ${user.score.toFixed(2)}
+        </p>
+      ) : (
+        <div className="h-3 w-20 bg-gray-300 animate-pulse"></div>
+      )}
+    </div>
+  )
+}
 export function LeaderBoardTop3({ users }: { users: LeaderBoardTopUser[] }) {
   return (
     <div className="flex justify-between mt-6 mb-5 w-full mx-auto">

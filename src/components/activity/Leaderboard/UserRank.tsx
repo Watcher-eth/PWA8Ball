@@ -1,8 +1,8 @@
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 import { useUserStore } from "@/lib/stores/UserStore"
-import React from "react"
 
-function UserRank() {
+
+export function UserRank() {
   const { user } = useUserStore()
   //TODO: Get user rank
   return (
@@ -36,4 +36,3 @@ function UserRank() {
   )
 }
 
-export default UserRank

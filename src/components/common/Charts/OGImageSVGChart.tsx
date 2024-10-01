@@ -1,17 +1,12 @@
-import React from "react";
-import { LineChart, Line } from "recharts";
-import { renderToStaticMarkup } from "react-dom/server";
+import { LineChart, Line } from "recharts"
+import { renderToStaticMarkup } from "react-dom/server"
 
 type Price = {
-  value: number;
-  date: Date;
-};
+  value: number
+  date: Date
+}
 
-type OGChartData = {
-  prices: Price[];
-};
-
-function Chart({ prices }: OGChartData) {
+function Chart({ prices }: { prices: Price[] }) {
   return (
     <LineChart width={1200} height={630} data={prices}>
       <Line
@@ -22,5 +17,5 @@ function Chart({ prices }: OGChartData) {
         dot={false}
       />
     </LineChart>
-  );
+  )
 }
