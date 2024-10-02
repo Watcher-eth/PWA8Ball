@@ -19,6 +19,7 @@ export function useUpdateUser() {
     socials = "{}",
     theme = "",
     metadata = "",
+    createdAt,
   }: {
     walletAddress: Address
     externalAuthProviderUserId: string
@@ -27,11 +28,12 @@ export function useUpdateUser() {
     socials?: string
     theme?: string
     metadata?: string
+    createdAt: number
   }) {
     const updatedAt = BigInt(Date.now())
 
     const updatedUserData = {
-      createdAt: BigInt(0),
+      createdAt: BigInt(createdAt),
       updatedAt,
       id: walletAddress,
       externalAuthProviderUserId,
