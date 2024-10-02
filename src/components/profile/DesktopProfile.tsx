@@ -35,8 +35,8 @@ import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCrea
 import { PredictionPositionModal } from "../modals/PredictionPositionModal"
 import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
 import { DesktopOnrampModal } from "../onboarding/Onramp/DesktopOnrampModal"
+import { useUpdateUser } from "@/hooks/actions/UserRegistry/useUpdateUser"
 
 export function DesktopProfilePage2({ userId, userC }) {
   const { user, setUser } = useUserStore()
@@ -45,7 +45,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedName, setEditedName] = useState("")
   const [editedPfp, setEditedPfp] = useState(userC?.pfp)
-  const { upsertUser } = useUpsertUser()
+  const { handleUpdateUser } = useUpdateUser()
   const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
   const {
     markets: createdMarketsData,
@@ -97,10 +97,14 @@ export function DesktopProfilePage2({ userId, userC }) {
       pfp: editedPfp ?? user?.pfp,
     })
 
-    await upsertUser({
+    handleUpdateUser({
       id: user?.walletAddress,
       name: editedName?.length > 2 ? editedName : user?.name,
       pfp: editedPfp ?? user?.pfp,
+      createdAt: user?.createdAt,
+      socials: user?.socials,
+      externalAuthProviderUserId: user?.externalAuthProviderUserId,
+      walletAddress: user?.walletAddress,
     })
 
     setIsEditing(false)

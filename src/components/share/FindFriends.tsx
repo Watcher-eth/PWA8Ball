@@ -10,18 +10,20 @@ import { Spinner } from "@/components/modals/PredictModal/Spinner"
 
 import { FindFriendsItem } from "./FindFriendsItem"
 import { DialogClose } from "../ui/dialog"
-import { useUpsertUser } from "@/graphql/queries/users/useUpsertUser"
+import { useUpdateUser } from "@/hooks/actions/UserRegistry/useUpdateUser"
+import { useUserStore } from "@/lib/stores/UserStore"
 
 export const FindFriends = ({ type }) => {
   const [text, setText] = useState("")
   const [results, setResults] = useState([])
   const { width, height } = { width: 800, height: 600 } // Example dimensions
-  const { upsertUser } = useUpsertUser()
+  const { handleUpdateUser } = useUpdateUser()
   const { data, loading } = useQuery(
     DFFAULT_ONCHAIN_FOLLOWING_QUERY,
     {},
     { cache: false }
   )
+  const { userC } = useUserStore()
 
   useEffect(() => {
     if (text === "") {
@@ -57,20 +59,23 @@ export const FindFriends = ({ type }) => {
             "_400x400"
           )
 
-          //TODO: Get wallet addys
-          await upsertUser({
-            id: user,
+          handleUpdateUser({
+            id: userC?.walletAddress,
             name: twitterAccount.name,
             pfp: profilePictureUrl,
             socials: {
+              ...userC?.socials,
               twitter: {
                 username: twitterAccount.username,
                 name: twitterAccount.name,
                 pfp: profilePictureUrl,
               },
             },
-            updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+            createdAt: userC?.createdAt,
+            externalAuthProviderUserId: userC?.externalAuthProviderUserId,
+            walletAddress: userC?.walletAddress,
           })
+          //TODO: Get wallet addys
         } catch (error) {
           console.error("Error updating user profile:", error)
         }
@@ -85,12 +90,13 @@ export const FindFriends = ({ type }) => {
       )
       try {
         const userId = user.id
-        //TODO: Get wallet addys
-        await upsertUser({
-          id: user,
+
+        handleUpdateUser({
+          id: userC?.walletAddress,
           name: farcasterAcc.display_name,
           pfp: farcasterAcc.profile_picture,
           socials: {
+            ...userC?.socials,
             farcaster: {
               fid: farcasterAcc.fid,
               username: farcasterAcc.username,
@@ -99,7 +105,9 @@ export const FindFriends = ({ type }) => {
               pfp: farcasterAcc.profile_picture,
             },
           },
-          updatedAt: BigInt(Math.floor(Date.now() / 1000)), // Example of using BigInt
+          createdAt: userC?.createdAt,
+          externalAuthProviderUserId: userC?.externalAuthProviderUserId,
+          walletAddress: userC?.walletAddress,
         })
       } catch (error) {
         console.error("Error creating user:", error)
