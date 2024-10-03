@@ -37,7 +37,6 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
 const SmartAccountContext = createContext({
   smartAccountClient: undefined,
   smartAccountAddress: undefined,
-  smartAccountReady: false,
 })
 
 export function SmartAccountProvider({
@@ -48,12 +47,11 @@ export function SmartAccountProvider({
   const { connectors, connect, status, error } = useConnect()
 
   const { ready, wallets } = useWallets()
-  const { isConnected, address, connector: currentConnector } = useAccount()
+  const { isConnected, address } = useAccount()
   const { data: client } = useWalletClient({
     account: address as Address,
     chainId: DEFAULT_CHAIN.id,
   })
-  // const publicClient = usePublicClient({ chainId: DEFAULT_CHAIN.id })
 
   const {
     // user: privyUser,
@@ -61,17 +59,11 @@ export function SmartAccountProvider({
     authenticated,
     createWallet,
   } = usePrivy()
-  // const { walletType } = user || {}
+
   const embeddedWallet = wallets.find(
     (wallet) => wallet.walletClientType === "privy"
   )
-  console.log({ client, address, currentConnector })
 
-  // console.log("accountAddress", accountAddress)
-  // console.log("ready1", ready)
-  // console.log("wallets1", wallets)
-  // console.log("embeddedWallet1", embeddedWallet)
-  // console.log("privyUser", privyUser)
   // States to store the smart account and its status
   const [smartAccountReady, setSmartAccountReady] = useState(false)
 
@@ -196,7 +188,6 @@ export function SmartAccountProvider({
   return (
     <SmartAccountContext.Provider
       value={{
-        smartAccountReady,
         smartAccountClient: client,
         smartAccountAddress: address,
       }}
