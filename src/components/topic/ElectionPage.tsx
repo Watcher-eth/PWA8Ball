@@ -13,7 +13,7 @@ import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
 } from "../layouts/StandardBleedOverlay"
-import { SECTION_DATA_MAP, SwingStates } from "@/constants/elections_"
+import { SECTION_DATA_MAP, SwingStates } from "@/constants/elections"
 import Link from "next/link"
 import { getMarketPath } from "@/utils/urls"
 import { UsMapCard } from "../map/UsMapCard"
