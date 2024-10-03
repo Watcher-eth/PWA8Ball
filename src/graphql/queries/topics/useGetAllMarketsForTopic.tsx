@@ -23,7 +23,7 @@ const GET_ALL_MARKETS = tgql(/* GraphQL */ `
 export async function getAllMarketsForTopicId(id: number) {
   const { data } = await APOLLO_CLIENT.query({
     query: GET_ALL_MARKETS,
-    variables: { id },
+    variables: { id: BigInt(id) },
   })
   return data?.markets?.items
 }

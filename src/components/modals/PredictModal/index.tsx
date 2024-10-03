@@ -9,13 +9,13 @@ import MotionNumber from "motion-number"
 import { formatWithCommas } from "@/utils/string/formatWithCommas"
 import { useVotingStore } from "@/lib/stores/VotingStore"
 import { useUserStore } from "@/lib/stores/UserStore"
-
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { NumericKeypad } from "@/components/NumericKeypad"
 import { ConfirmPrediction } from "./ConfirmPrediction"
 import { GetGhoModal } from "./GetGhoModal"
 import { OnrampStep } from "./OnrampStep"
-import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance"
+
 
 export function PredictModal({
   text,

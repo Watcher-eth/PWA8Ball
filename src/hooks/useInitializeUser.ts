@@ -89,7 +89,6 @@ export function useInitializeUser() {
     ponderUser?.id,
     // privyUser,
     address,
-    // smartAccountAddress,
     isConnected,
     // eoaAddress,
     followersCount,

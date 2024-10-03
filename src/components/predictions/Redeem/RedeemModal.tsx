@@ -17,13 +17,7 @@ export function RedeemModal(props: {
 
   async function redeemPrediction() {
     // Simulate redeem logic here
-    // redeem({
-    //   marketId: props.marketId,
-    //   outcomeTokenAddress: 0x${string},
-    //   userId: smartAccountAddress!,
-    //   client: smartAccountClient,
-    //   address: smartAccountAddress!,
-    // });
+
     showToast({
       icon: <DollarSign color="#34C759" size={20} />,
       message: "Redeemed successfully!",

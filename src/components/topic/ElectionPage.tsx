@@ -176,17 +176,17 @@ export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59")
 
 export function ElectionPage({
   trendingMarkets,
-  allTopicMarkets,
+  allElectionMarkets,
 }: {
   trendingMarkets: Market[]
-  allTopicMarkets: Market[]
+  allElectionMarkets: Market[]
 }) {
   const [section, setSection] =
     useState("Presidency")
 
   // @ts-ignore
   const markets = enhanceMarketsWithImageAndPolyId(
-    allTopicMarkets,
+    allElectionMarkets,
     HARD_MARKETS,
     HARD_TOPICS
   )

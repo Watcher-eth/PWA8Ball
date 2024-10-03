@@ -23,9 +23,6 @@ import {
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico"
 
-
-
-
 import { DEFAULT_CHAIN } from "@/constants/chains"
 
 export const SMART_ACCOUNT_FACTORY_ADDRESS =
@@ -38,7 +35,6 @@ export const SMART_ACCOUNT_FACTORY_ADDRESS =
 
 const SmartAccountContext = createContext({
   smartAccountClient: undefined,
-  smartAccountAddress: undefined,
 })
 
 export function SmartAccountProvider({
@@ -170,28 +166,18 @@ export function SmartAccountProvider({
       console.log("connecting smart account")
       createAndConnectSmartAccount()
     }
-    // console.log("walletType", walletType)
-    // if (walletType === "smartwallet" && embeddedWallet) {
-    // createSmartWallet()
-
-    // }
   }, [
-    // walletType,
-    // smartAccountAddress,
-    // embeddedWallet?.address,
-    // embeddedWallet,
     isConnected,
     userReady,
     authenticated,
     smartAccountReady,
-    // smartAccountClient,
   ])
 
   return (
     <SmartAccountContext.Provider
       value={{
+        // @ts-ignore
         smartAccountClient: client,
-        smartAccountAddress: address,
       }}
     >
       {children}
