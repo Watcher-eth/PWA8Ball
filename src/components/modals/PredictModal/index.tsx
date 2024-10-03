@@ -67,14 +67,14 @@ export function PredictModal({
     setFontSize(`${newLength}rem`) // animate the change
   }, [sliderValue])
 
-  const triggerShakeIfExceedsBalance = (value) => {
+  function triggerShakeIfExceedsBalance(value) {
     if (parseFloat(value.replace(/,/g, "")) >= Number(userBalance) / 10 ** 6) {
       setShake(true)
       setTimeout(() => setShake(false), 500) // Reset the shake state after animation
     }
   }
 
-  const handleButtonPress = (value) => {
+  function handleButtonPress(value) {
     if (value === ".") {
       // Add a decimal point only if there isn't one already
       if (!sliderValue.includes(".")) {

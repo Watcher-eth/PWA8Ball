@@ -170,13 +170,13 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
       </div>
       <div
         style={{ lineHeight: "1.3rem" }}
-        className="text-[lightgray] flex text-base/[1rem] items-center px-1 text-sm mb-4 mt-1 font-bold mx-6"
+        className="text-[lightgray] flex items-center px-1 text-sm mb-4 mt-1 font-bold mx-6"
       >
         Buy USDC using your credit card or Apple or Google Pay. All Payments are
         facilitated by 3rd Parties.
       </div>
       <div className="h-[0.05rem] w-full my-6 bg-[#323232] mx-6 mb-4 rounded-full" />
-      <div className="text-[lightgray] w-full flex mt-8 justify-between text-base/[1rem] items-center px-1 text-[1.rem] mb-3 mt-1 font-bold mx-6">
+      <div className="text-[lightgray] w-full flex justify-between text-base/[1rem] items-center px-1 text-[1.rem] mb-3 mt-1 font-bold mx-6">
         <div className="flex items-center">
           <div>Conversion 1.00</div>
           <Avatar className="h-[1.18rem] w-[1.18rem] ml-1">

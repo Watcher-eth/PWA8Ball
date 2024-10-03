@@ -1,15 +1,14 @@
-// @ts-nocheck
-
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 import {
   // Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { Card } from "@/components/ui/tailwind/Card";
-import { AnimatePresence, motion } from "framer-motion";
+} from "@/components/ui/card"
+import { Card } from "@/components/ui/tailwind/Card"
+import { AnimatePresence, motion } from "framer-motion"
+
 export function DesktopCardModal({
   children,
   content,
@@ -19,19 +18,19 @@ export function DesktopCardModal({
   cardClassName = "",
   cardContentClassName = "",
   dialogClassName = "",
-  onOpenChange = null,
+  onOpenChange = () => {},
   open,
 }: {
-  children: React.ReactNode;
-  content: React.ReactNode;
-  title?: string;
-  subtitle?: string;
-  dialogContentClassName?: string;
-  cardClassName?: string;
-  cardContentClassName?: string;
-  dialogClassName?: string;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode
+  content: React.ReactNode
+  title?: string
+  subtitle?: string
+  dialogContentClassName?: string
+  cardClassName?: string
+  cardContentClassName?: string
+  dialogClassName?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }) {
   return (
     <Dialog
@@ -77,5 +76,5 @@ export function DesktopCardModal({
         </motion.div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
