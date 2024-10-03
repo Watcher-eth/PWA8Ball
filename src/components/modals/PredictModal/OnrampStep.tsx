@@ -103,7 +103,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         <div className="text-[lightgray] text-base  m-[-0.2rem] font-bold ">
           Network
         </div>
-        <div className="text-white flex items-center space-x-[0.5rem]  text-[1.15rem] font-bold  ">
+        <div className="text-white flex items-center space-x-[0.5rem]  text-lg font-bold  ">
           <div>Base</div>
           <Avatar className="h-[1.3rem] w-[1.3rem] mt-[0.1rem]  ">
             <AvatarImage
@@ -117,7 +117,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         <div className="text-[lightgray] text-base m-[-0.2rem] font-bold ">
           Recommended Minimum
         </div>
-        <div className="text-[white] flex items-center space-x-[0.3rem]  text-[1.15rem] font-bold  ">
+        <div className="text-[white] flex items-center space-x-[0.3rem]  text-lg font-bold  ">
           <div>15.00 USDC</div>
         </div>
       </div>
@@ -195,7 +195,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
           backgroundImage:
             "linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4)",
         }}
-        className="flex items-center  text-[1.15rem] mx-6 font-bold h-[2.8rem] text-white rounded-md my-3 w-full"
+        className="flex items-center  text-lg mx-6 font-bold h-[2.8rem] text-white rounded-md my-3 w-full"
         onClick={() =>
           window.open(
             "https://buy-sandbox.moonpay.com/?apiKey=pk_test_123",
@@ -213,7 +213,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
           backgroundColor: "#232526",
           backgroundImage: "linear-gradient(to right, #232526, #414345)",
         }}
-        className="active:bg-[#121212] mb-9  flex items-center hover:bg-[#151515] bg-[#181818] text-[1.15rem] mx-6 font-bold text-white h-[2.9rem] rounded-md mt-3 w-full"
+        className="active:bg-[#121212] mb-9  flex items-center hover:bg-[#151515] bg-[#181818] text-lg mx-6 font-bold text-white h-[2.9rem] rounded-md mt-3 w-full"
         onClick={() =>
           window.open(
             "https://buy-sandbox.moonpay.com/?apiKey=pk_test_123",
@@ -238,10 +238,10 @@ function StepButton({ onClick, children, isDark, label, className = "" }) {
   let styleClassName
   if (isDark) {
     styleClassName =
-      "active:bg-[#131313] hover:bg-[#181818] bg-[#151515] border-[0.07rem] border-[#191919] text-white"
+      "active:bg-[#131313] hover:bg-[#181818] bg-[#151515] border border-[#191919] text-white"
   } else {
     styleClassName =
-      "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] border-[0.07rem] border-[#808080] text-[#212121]"
+      "active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] border border-[#808080] text-[#212121]"
   }
 
   return (
@@ -253,7 +253,7 @@ function StepButton({ onClick, children, isDark, label, className = "" }) {
     >
       <Button
         onClick={onClick}
-        className={`w-full flex items-center text-[1.15rem] font-bold h-[2.8rem] rounded-full ${styleClassName} ${className}`}
+        className={`w-full flex items-center text-lg font-bold h-[2.8rem] rounded-full ${styleClassName} ${className}`}
       >
         {label ?? children}
       </Button>

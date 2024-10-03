@@ -248,7 +248,7 @@ function EmailLogin({
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             style={{ border: "0.2px solid lightgray" }}
-            className="w-[81vw] mb-4   mt-2 rounded-xl mx-5 text-gray-400 text-[1.15rem] p-3 "
+            className="w-[81vw] mb-4   mt-2 rounded-xl mx-5 text-gray-400 text-lg p-3 "
           />
           <div className="flex items-center ml-5 my-6 justify-between mx-6">
             <motion.div
@@ -259,7 +259,7 @@ function EmailLogin({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-[38vw]">
+              <Button className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-lg font-bold h-[2.8rem] rounded-full w-[38vw]">
                 Back
               </Button>
             </motion.div>
@@ -269,7 +269,7 @@ function EmailLogin({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="active:bg-gray-900 hover:bg-gray-900 bg-gray-900 text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
+              <Button className="active:bg-gray-900 hover:bg-gray-900 bg-gray-900 text-lg text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
                 Send Code
               </Button>
             </motion.div>
@@ -295,7 +295,7 @@ function EmailLogin({
             onChange={(e) => setCode(e.target.value)}
             value={code}
             style={{ border: "0.2px solid lightgray" }}
-            className="w-[81vw] mb-4 mt-2 rounded-xl mx-5 text-gray-400 text-[1.15rem] p-3 "
+            className="w-[81vw] mb-4 mt-2 rounded-xl mx-5 text-gray-400 text-lg p-3 "
           />
           <div className="flex items-center ml-5 my-6 justify-between mx-6">
             <motion.div
@@ -306,7 +306,7 @@ function EmailLogin({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-[1.15rem] font-bold h-[2.8rem] rounded-full w-[38vw]">
+              <Button className="active:bg-[#aeaeb1] hover:bg-[#aeaeb1] bg-[#aeaeb1] text-lg font-bold h-[2.8rem] rounded-full w-[38vw]">
                 Back
               </Button>
             </motion.div>
@@ -316,7 +316,7 @@ function EmailLogin({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="active:bg-gray-900 hover:bg-gray-900 bg-gray-900 text-[1.15rem] text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
+              <Button className="active:bg-gray-900 hover:bg-gray-900 bg-gray-900 text-lg text-white font-bold  h-[2.8rem] rounded-full w-[38vw]">
                 Verify
               </Button>
             </motion.div>

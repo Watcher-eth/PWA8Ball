@@ -35,7 +35,7 @@ export function DesktopBoostContent({id, image, onComplete}: {
       <BoostInfoRow label="Cred Bonus" content="150 Cred" />
       <Input
         onChange={(e) => setAmount(Number(e.target.value))}
-        className=" my-5 active:border-0 border-[#212121] rounded-md text-white p-6 bg-[#151515] font-medium px-3 text-[1.15rem]"
+        className=" my-5 active:border-0 border-[#212121] rounded-md text-white p-6 bg-[#151515] font-medium px-3 text-lg"
         placeholder="Amount"
         type="number"
       />

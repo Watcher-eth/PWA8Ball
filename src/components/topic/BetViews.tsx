@@ -51,7 +51,7 @@ export function BetBigView({
           className="absolute top-[20vh] w-full h-16 bg-gradient-to-t from-[#080808] to-transparent rounded-b-lg"
           style={{ borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
         ></div>
-        <div className="absolute top-3 right-3 flex items-center bg-[#909090]/10 border-[0.07rem] border-[#999999]/20 backdrop-blur-md px-2 pr-1 p-1 rounded-lg z-10">
+        <div className="absolute top-3 right-3 flex items-center bg-[#909090]/10 border border-[#999999]/20 backdrop-blur-md px-2 pr-1 p-1 rounded-lg z-10">
           <span className="text-white font-semibold text-sm mr-0">223</span>
           <Users className="text-white" strokeWidth={3.2} height={13} />
         </div>

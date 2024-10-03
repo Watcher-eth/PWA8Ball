@@ -58,7 +58,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
           absolute bottom-0 z-2
         `}
       />
-      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-lg border-[0.07rem] border-[#090909]/5">
+      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-lg border border-[#090909]/5">
         {odds.toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div
