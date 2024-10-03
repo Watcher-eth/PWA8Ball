@@ -72,4 +72,4 @@ export const SwingStates = [
     votes: 15,
     marketId: 14,
   },
-]
+] as const

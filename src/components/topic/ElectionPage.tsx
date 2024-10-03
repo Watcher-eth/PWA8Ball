@@ -23,6 +23,9 @@ import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMar
 import { HARD_MARKETS } from "@/constants/markets"
 import { HARD_TOPICS } from "@/constants/topics"
 
+import { Market } from "@/__generated__/graphql"
+
+
 function Button({
   text,
   IconComponent,
@@ -171,8 +174,15 @@ function SwingStateComponent({
 
 export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59")
 
-export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
-  const [section, setSection] = useState("Presidency")
+export function ElectionPage({
+  trendingMarkets,
+  allTopicMarkets,
+}: {
+  trendingMarkets: Market[]
+  allTopicMarkets: Market[]
+}) {
+  const [section, setSection] =
+    useState("Presidency")
 
   // @ts-ignore
   const markets = enhanceMarketsWithImageAndPolyId(
@@ -186,7 +196,7 @@ export function ElectionPage({ trendingMarkets, allTopicMarkets }) {
     HARD_MARKETS,
     HARD_TOPICS
   )
-  const sectionData = SECTION_DATA_MAP[section]
+  const sectionData = SECTION_DATA_MAP[section as keyof typeof SECTION_DATA_MAP]
 
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col ">

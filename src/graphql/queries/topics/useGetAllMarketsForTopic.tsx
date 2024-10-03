@@ -1,9 +1,8 @@
-//@ts-nocheck
-
+import { tgql } from "@/__generated__"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery as useApolloQuery } from "@apollo/client"
 
-const GET_ALL_MARKETS = gql`
+const GET_ALL_MARKETS = tgql(/* GraphQL */ `
   query getMarketsForTopic($id: BigInt) {
     markets(where: { topicId: $id }) {
       items {
@@ -19,7 +18,7 @@ const GET_ALL_MARKETS = gql`
       }
     }
   }
-`
+`)
 
 export async function getAllMarketsForTopicId(id: number) {
   const { data } = await APOLLO_CLIENT.query({
