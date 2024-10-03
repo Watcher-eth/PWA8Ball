@@ -234,7 +234,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
             </DesktopOnrampModal>
           )}
-          <div className="h-[0.1rem] w-full bg-[#222222] my-3" />
+          <div className="h-px w-full bg-[#222222] my-3" />
           <div className="flex flex-row">
             <AnimatedBackground
               defaultValue={filter}

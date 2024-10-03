@@ -1,14 +1,13 @@
-// @ts-nocheck
 
 import Link from "next/link"
 import { UserCircle2Icon } from "lucide-react"
-import { User } from "@/types/UserTypes"
+
 import { timeAgo } from "@/utils/datetime/timeAgo"
 import { parseOption } from "@/utils/predictions/parseOption"
 import { getProfilePath } from "@/utils/urls"
 import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
 import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
-import { Position } from "@/__generated__/graphql"
+import { Position, User } from "@/__generated__/graphql"
 import { Outcome } from "./index"
 
 export function CommentHeader({
@@ -21,22 +20,21 @@ export function CommentHeader({
   user?: User
   user2?: User
   created_at?: string
-  userOwns: Position[]
-  options: Outcome
+  userOwns: Partial<Position>[]
+  options: Outcome[]
 }) {
-  console.log("options,", userOwns, user?.name, options[0])
   return (
     <div className="flex flex-row w-full items-center justify-between">
       <Link
         className="cursor-pointer group w-full"
-        href={getProfilePath(user2?.walletAddress)} // why is this walletAddress & not walletAddress?  need to find out
+        href={getProfilePath(user2?.walletAddress ?? "")} // why is this walletAddress & not walletAddress?  need to find out
         prefetch={true}
       >
         <div className="flex  w-full flex-row items-start">
-          <div className="">
-            <ProfileToolTip user={user}>
+          <div>
+            <ProfileToolTip user={user!}>
               <UserPfpIcon
-                pfp={user?.pfp ? user?.pfp : DEFAULT_PFP_PLACEHOLDER}
+                pfp={user?.pfp ?? DEFAULT_PFP_PLACEHOLDER}
               />
             </ProfileToolTip>
           </div>
@@ -77,7 +75,7 @@ export function CommentHeader({
             </div>
 
             <p className="text-[0.9rem] font-[400] text-white/70">
-              {timeAgo(created_at)}
+              {timeAgo(created_at!)}
             </p>
           </div>
         </div>
@@ -87,7 +85,7 @@ export function CommentHeader({
 }
 
 function UserPfpIcon({ pfp }: { pfp?: string }) {
-  if (pfp?.length > 0) {
+  if (pfp?.length! > 0) {
     return (
       <img
         src={pfp}

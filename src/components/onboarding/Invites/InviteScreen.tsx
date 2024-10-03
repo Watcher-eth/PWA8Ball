@@ -85,9 +85,9 @@ export function InviteScreen() {
           </div>
         )}
         <div className="flex items-center mb-4 mt-0 justify-between w-full">
-          <div className="h-[0.1rem] w-full bg-[#212121]" />
+          <div className="h-px w-full bg-[#212121]" />
           <p className="text-center mx-4 font-medium text-[lightgray]">OR</p>
-          <div className="h-[0.1rem] w-full bg-[#212121]" />
+          <div className="h-px w-full bg-[#212121]" />
         </div>
         <div className="py-2 hover:scale-101 active:scale-98 mb-20 w-full font-medium space-x-2 text-white flex justify-center items-center  bg-[#151515] border-2 border-[#181818] rounded-md">
           <Share color="white" strokeWidth={2.8} size={16} />{" "}

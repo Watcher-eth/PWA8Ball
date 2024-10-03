@@ -107,7 +107,7 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
 
   return (
     <div className="flex flex-col px-4">
-      <div className="h-[0.1rem] w-full bg-[#151515] my-4"></div>
+      <div className="h-px w-full bg-[#151515] my-4"></div>
 
       <div className="flex flex-row justify-between -mb-3">
         <span className="text-white text-lg font-semibold">Timeline</span>
@@ -174,7 +174,7 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
         {expanded ? "Hide current status" : "Show current status"}
       </button>
 
-      <div className="h-[0.1rem] w-full bg-[#151515] my-4"></div>
+      <div className="h-px w-full bg-[#151515] my-4"></div>
     </div>
   )
 }

@@ -3,13 +3,17 @@ import { useState } from "react"
 import { Heart, Reply, ThumbsDown } from "lucide-react"
 import { CommentReactionButton } from "./CommentReactionButton"
 
-export function LikeDislikeSection(props: {
+export function LikeDislikeSection({
+  setReply,
+  handleComment,
+  user,
+  name,
+}: {
   setReply: (name: string) => void
   handleComment: () => void
   user: any
   name: string
 }) {
-  const { setReply, handleComment, user, name } = props
   const [temporaryLike, setTemporaryLike] = useState(false)
   const [temporaryDislike, setTemporaryDislike] = useState(false)
   const handleLikePress = () => {

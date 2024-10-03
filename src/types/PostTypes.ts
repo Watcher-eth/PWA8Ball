@@ -1,13 +1,12 @@
 // @ts-nocheck
 
 import { IUser, IUserWithBet } from "@/supabase/types"
-
-
+import { User } from "@/__generated__/graphql"
 
 export type BetComment = {
   setReply: () => void
   hasPosition: boolean
-  user?: IUser
+  user?: User
   user2: IUserWithBet
   handleComment: () => void
   name: string

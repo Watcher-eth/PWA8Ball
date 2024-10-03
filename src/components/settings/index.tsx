@@ -76,7 +76,7 @@ export function SettingsPage() {
                 className="bg-[#212121]"
               />
             </div>
-            <div className="h-[0.1rem] w-full  bg-[#212121]" />
+            <div className="h-px w-full  bg-[#212121]" />
             <div className="w-full py-4 flex flex-row items-center justify-between">
               <div className="text-white text-[0.95rem]">
                 Personalized Recommendations
@@ -89,7 +89,7 @@ export function SettingsPage() {
                 className="bg-[#212121]"
               />
             </div>
-            <div className="h-[0.1rem] w-full  bg-[#212121]" />
+            <div className="h-px w-full  bg-[#212121]" />
             <div className="w-full py-4 flex flex-row items-center justify-between">
               <div className="text-white text-[0.95rem]">Public Profile</div>
               <Switch
@@ -108,7 +108,7 @@ export function SettingsPage() {
               <div className="text-white text-[0.95rem]">Privacy</div>
               <ChevronRight className="text-white h-[1rem]" strokeWidth={3} />
             </Link>
-            <div className="h-[0.1rem] w-full  bg-[#212121]" />
+            <div className="h-px w-full  bg-[#212121]" />
             <Link
               href={"/tos"}
               className="w-full py-4  flex flex-row items-center justify-between"
@@ -116,7 +116,7 @@ export function SettingsPage() {
               <div className="text-white text-[0.95rem]">Terms of Service</div>
               <ChevronRight className="text-white h-[1rem]" strokeWidth={3} />
             </Link>
-            <div className="h-[0.1rem] w-full  bg-[#212121]" />
+            <div className="h-px w-full  bg-[#212121]" />
             <div className="w-full py-4  flex flex-row items-center justify-between">
               <div className="text-white text-[0.95rem]">Region</div>
               <div className="text-white text-[0.85rem] px-3 p-1 bg-[#262626] rounded-md">
@@ -133,7 +133,7 @@ export function SettingsPage() {
                 Invite your friends to Glimpse and receive a share of their
                 points for life!
               </div>
-              <div className="h-[0.1rem] mt-4 my-5 w-full  bg-[#212121]" />
+              <div className="h-px mt-4 my-5 w-full  bg-[#212121]" />
               <div className="flex flex-row space-x-3 items-center">
                 <UserInviteModal>
                   <button className="px-3 text-white text-md flex items-center flex-row py-1 rounded-md bg-[#262626]">
@@ -198,7 +198,7 @@ export function SettingsPage() {
                 </div>
               </div>
             </div>
-            <div className="h-[0.1rem] w-full mb-4 mt-6 bg-[#212121]" />
+            <div className="h-px w-full mb-4 mt-6 bg-[#212121]" />
             <div className="flex flex-row items-center justify-between">
               <div className="text-[lightgray] text-base mt-1 font-medium">
                 Joined May 2024
@@ -232,7 +232,7 @@ export function SettingsPage() {
               apps.
             </div>
             <img className="w-full h-full" src="/images/Wallet.png" />
-            <div className="h-[0.1rem] w-full bg-[#222222] mb-5 mt-1.5" />
+            <div className="h-px w-full bg-[#222222] mb-5 mt-1.5" />
             <div className="flex flex-row items-center justify-between">
               <button
                 onClick={() => copyToClipboard(user?.walletAddress)}

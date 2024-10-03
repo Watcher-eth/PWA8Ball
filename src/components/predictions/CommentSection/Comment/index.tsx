@@ -1,14 +1,14 @@
-// @ts-nocheck
 import { motion } from "framer-motion"
 
 import type { BetComment } from "@/types/PostTypes"
-import type { User } from "@/types/UserTypes"
 
 import { useDeleteComment } from "@/supabase/mutations/comments/useDeleteComment"
 
 import { CommentHeader } from "./CommentHeader"
 import { LikeDislikeSection } from "./LikeDislikeSection"
 import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
+
+import { User } from "@/__generated__/graphql"
 
 export interface Outcome {
   name: string

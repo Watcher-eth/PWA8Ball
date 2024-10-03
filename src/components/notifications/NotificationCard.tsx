@@ -38,7 +38,7 @@ export function NotificationCard({
       className="  animate-fadeInUp"
       style={{ animationDelay: `${index * 150}ms` }}
     >
-      <div className="my-1 h-[0.1rem] w-full bg-[#191919] " />
+      <div className="my-1 h-px w-full bg-[#191919] " />
       <div
         className="flex items-center p-3 px-5 rounded-lg shadow-lg"
         onClick={() => {}}

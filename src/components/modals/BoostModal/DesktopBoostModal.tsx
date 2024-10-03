@@ -22,7 +22,7 @@ export function DesktopBoostContent({id, image, onComplete}: {
         Boost this market to improve it's accuracy and earn fees. The more
         popular a prediction gets the more fees you receive.
       </div>
-      <div className="h-[0.1rem] w-full bg-[#212121] mt-2 mb-5" />
+      <div className="h-px w-full bg-[#212121] mt-2 mb-5" />
       <BoostInfoRow label="Minimum Boost" content="$10.00" />
       <BoostInfoRow
         label="Fee Rewards Rate"

@@ -62,7 +62,7 @@ function CandidateSection({
         <div className="flex flex-col hover:scale-101 items-center">
           <img
             src={image}
-            className="h-[4rem] w-[4rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+            className="size-16 md:h-[8rem] md:w-[8rem] object-cover rounded-full"
           />
           <div className=" text-[1.4rem] md:text-[1.8rem] mt-1 md:mt-3 font-[Aeonik-Bold] text-white">
             {name}
@@ -91,7 +91,7 @@ function CandidateSection({
         <div className="flex flex-col hover:scale-101 items-center">
           <img
             src={image}
-            className="h-[4rem] w-[4rem] md:h-[8rem] md:w-[8rem] object-cover rounded-full"
+            className="size-16 md:h-[8rem] md:w-[8rem] object-cover rounded-full"
           />
           <div className="text-[1.4rem] md:text-[1.8rem] mt-1 md:mt-3 font-[Aeonik-Bold] text-white">
             {name}
@@ -138,7 +138,7 @@ function SwingStateComponent({
           <div className="flex flex-row space-x-4 items-center">
             <img
               src={sectionData.images[0]}
-              className="h-[4rem] w-[4rem] object-cover rounded-full"
+              className="size-16 object-cover rounded-full"
             />
             <div className="text-[3rem] text-white flex flex-row items-baseline font-semibold">
               {state.odds[0]}
@@ -157,7 +157,7 @@ function SwingStateComponent({
             </div>
             <img
               src={sectionData.images[1]}
-              className="h-[4rem] w-[4rem] object-cover rounded-full"
+              className="size-16 object-cover rounded-full"
             />
           </div>
           <div className="text-xl  text-[lightgray] font-semibold">

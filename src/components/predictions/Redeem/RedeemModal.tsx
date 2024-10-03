@@ -37,7 +37,7 @@ export function RedeemModal(props: {
           <img
             src={props.image}
             alt="Market"
-            className="h-[4rem] w-[4rem] rounded-full object-cover"
+            className="size-16 rounded-full object-cover"
           />
           <div
             style={{

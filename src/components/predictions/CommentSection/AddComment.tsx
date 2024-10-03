@@ -2,7 +2,6 @@
 import { useState, useRef } from "react"
 import { toast } from "sonner"
 import { CheckCircle } from "lucide-react"
-import type { User } from "@/types/UserTypes"
 import { useCreateComment } from "@/supabase/mutations/useCreateComment"
 
 import { formatDateWithMilliseconds } from "@/utils/datetime/extractEndDate"
