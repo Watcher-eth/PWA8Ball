@@ -9,6 +9,8 @@ import {
   WalletClient,
   PublicClient,
 } from "viem"
+import { useAccount, useConnect, useWalletClient } from "wagmi"
+import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth"
 import {
   createSmartAccountClient,
   walletClientToSmartAccountSigner,
@@ -21,8 +23,8 @@ import {
   createPimlicoPaymasterClient,
 } from "permissionless/clients/pimlico"
 
-import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth"
-import { useAccount, useConnect, usePublicClient, useWalletClient } from "wagmi"
+
+
 
 import { DEFAULT_CHAIN } from "@/constants/chains"
 
@@ -197,7 +199,7 @@ export function SmartAccountProvider({
   )
 }
 
-export const useSmartAccount = () => {
+export function useSmartAccount() {
   return useContext(SmartAccountContext)
 }
 

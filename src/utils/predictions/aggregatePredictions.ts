@@ -1,6 +1,7 @@
 // @ts-nocheck
+import _ from "lodash"
 
-export const aggregatePredictions = (predictions) => {
+export function aggregatePredictions<T>(predictions: T[]) {
   const aggregated = predictions.reduce((acc, prediction) => {
     const { market_id, option } = prediction
     const optionObject = JSON.parse(option) // Parse the option JSON string
@@ -14,10 +15,10 @@ export const aggregatePredictions = (predictions) => {
     return acc
   }, {})
   // Convert the aggregated object back to an array
-  return Object.values(aggregated)
+  return _.values(aggregated)
 }
 
-export const aggregatePredictedItems = (orders: any) => {
+export function aggregatePredictedItems<T>(orders: T[]) {
   const aggregated = {}
 
   orders?.forEach((item: any) => {
@@ -29,15 +30,18 @@ export const aggregatePredictedItems = (orders: any) => {
     }
   })
 
-  return Object.values(aggregated)
+  return _.values(aggregated)
 }
 
-export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
+export function aggregatePredictedItemsWithImage<T, M>(
+  orders: T[],
+  markets: M[]
+) {
   const aggregated: { [key: string]: any } = {}
 
   orders.forEach((item: any) => {
     const marketIdFromOrder = parseInt(item?.marketId, 10) // Ensure it's an integer
-    const market = Markets.find((m: any) => m.id === marketIdFromOrder)
+    const market = markets.find((m: any) => m.id === marketIdFromOrder)
 
     if (market && item.tokensOwned !== 0) {
       // Check that amount is not zero
@@ -57,5 +61,5 @@ export const aggregatePredictedItemsWithImage = (orders: any, Markets: any) => {
   })
 
   // Filter out any aggregated items with amount === 0, just in case
-  return Object.values(aggregated).filter((item: any) => item.tokensOwned !== 0)
+  return _.values(aggregated).filter((item: any) => item.tokensOwned !== 0)
 }

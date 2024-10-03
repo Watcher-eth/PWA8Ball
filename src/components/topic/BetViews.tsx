@@ -27,8 +27,7 @@ export function BetBigView({
       className=" my-1.5"
     >
       <motion.div
-        style={{ borderRadius: 12 }}
-        className="flex flex-col  w-full mx-auto my-2 relative cursor-pointer"
+        className="flex flex-col w-full mx-auto my-2 relative cursor-pointer rounded-[12px]"
         onClick={() =>
           router.push({
             pathname: "/[id]",
@@ -46,8 +45,7 @@ export function BetBigView({
         <img
           src={image}
           alt="Market Image"
-          style={{ borderRadius: 12 }}
-          className="w-full h-[25vh] active:scale-99 hover:scale-101 rounded-lg object-cover"
+          className="w-full h-[25vh] active:scale-99 hover:scale-101 rounded-lg object-cover rounded-[12px]"
         />
         <div
           className="absolute top-[20vh] w-full h-16 bg-gradient-to-t from-[#080808] to-transparent rounded-b-lg"

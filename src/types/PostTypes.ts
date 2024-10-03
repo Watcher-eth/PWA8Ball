@@ -2,22 +2,7 @@
 
 import { IUser, IUserWithBet } from "@/supabase/types"
 
-export type PostFeedType = {
-  name: string
-  post: string
-  type: string
-  image: string
-}
 
-export type PostUploadState = {
-  content: string
-  type: string
-  media: string
-  topic: string
-  // A generic setter function type
-  setState: (values: Partial<PostUploadState>) => void
-  reset: () => void
-}
 
 export type BetComment = {
   setReply: () => void

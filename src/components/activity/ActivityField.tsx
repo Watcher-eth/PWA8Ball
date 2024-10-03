@@ -53,8 +53,8 @@ export function ActivityField({
 
       ${
         isDesktop
-          ? "bg-[transparnet] p-[0px] my-5  rounded-[13px]"
-          : "mx-[10px]  my-[13.5px]"
+          ? "bg-transparent p-0 my-5  rounded-[13px]"
+          : "mx-2.5  my-[13.5px]"
       } `}
       onClick={onOpenBottomSheet}
     >
@@ -200,7 +200,7 @@ export function ActivityFieldMobile({
 
       ${
         isDesktop
-          ? "bg-[transparnet] p-[0px] my-5  rounded-[13px]"
+          ? "bg-transparent p-0 my-5  rounded-[13px]"
           : "mx-[2px]  my-[13.5px]"
       } `}
         onClick={onOpenBottomSheet}

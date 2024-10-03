@@ -1,4 +1,3 @@
-import { ActivityChartType } from "@/types/AcitivityTypes"
 
 export const DEFAULT_USER_ID = "did:privy:clutganzs01rz2oqk4vvlwtih"
 export const DEFAULT_PFP_PLACEHOLDER =
@@ -92,7 +91,7 @@ export const TEST_FIND_FRIENDS_DATA = [
   },
 ]
 
-export const TEST_ACTIVITY_CHART_DATA: ActivityChartType[] = [
+export const TEST_ACTIVITY_CHART_DATA = [
   {
     amount: 3.7,
     image:
@@ -108,7 +107,7 @@ export const TEST_ACTIVITY_CHART_DATA: ActivityChartType[] = [
     image:
       "https://www.brides.com/thmb/AKCV9mWFEAgFRgRN9HnbePceqLk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1179298993-016de42ca11d4a25b911999cb8a7db1f.jpg",
   },
-]
+] as const
 
 export const TEST_TOPICS = [
   "🔥 Trending",

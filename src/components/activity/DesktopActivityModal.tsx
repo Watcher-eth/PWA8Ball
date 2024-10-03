@@ -117,7 +117,6 @@ function DesktopFriendActivity(props: { user: User }) {
                         title={item.market.title}
                         image={item.image}
                         id={item?.marketId}
-                        odds={12}
                         userId={item?.user?.walletAddress}
                         initialProb={item.market.initialProb}
                         onOpenBottomSheet={() => {}}

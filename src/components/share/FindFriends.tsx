@@ -158,7 +158,7 @@ export const FindFriends = ({ type }) => {
         className={`
           flex
           text-[18px] w-[90%]
-          p-2.5 px-4 mt-[15px] mx-[10px] mb-0
+          p-2.5 px-4 mt-[15px] mx-2.5 mb-0
           bg-[rgb(17,17,17)] text-[lightgray] rounded-full
         `}
         onChange={(e) => handleTextChange(e.target.value)}
