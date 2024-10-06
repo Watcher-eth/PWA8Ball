@@ -6,7 +6,7 @@ import * as all from "./master"
 
 export * from "./supportedChains"
 
-export const DEFAULT_CHAIN = baseSepolia
+export const DEFAULT_CHAIN = base //baseSepolia
 export const DEFAULT_CHAIN_ID = DEFAULT_CHAIN.id
 
 export type ChainsByChainID = {

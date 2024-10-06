@@ -1,16 +1,16 @@
 
-
+import { base } from "viem/chains"
 
 import { BASE, BASE_SEPOLIA, ETH } from "@/constants/chains/master"
 
 
 export const SUPPORTED_CHAINS = [
-  {
-    ...BASE_SEPOLIA,
-    iconUrl: BASE_SEPOLIA.chainImg.src,
-    iconBackground: "transparent",
-  },
-  // base,
+  // {
+  //   ...BASE_SEPOLIA,
+  //   iconUrl: BASE_SEPOLIA.chainImg.src,
+  //   iconBackground: "transparent",
+  // },
+  base,
   // {
   //   ...mainnet,
   //   iconUrl: ETH.chainImg.src,

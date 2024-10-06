@@ -23,7 +23,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
       <div className="text-white text-[1.5rem] font-semibold mt-3 ">
         Fund your account
       </div>
-      <div className="text-[lightgray] text-base/5 text-[1.08rem] mb-2  ml-[-0.1rem]  font-medium ">
+      <div className="text-[lightgray] text-base text-[1.08rem] mb-2  ml-[-0.1rem]  font-medium ">
         You don't have enough funds. Please fund your account to continue.
       </div>
       {/* <div className="h-px w-full my-6 mb-4 bg-[#383838] mx-6 rounded-full" /> */}
