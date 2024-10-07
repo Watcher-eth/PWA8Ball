@@ -153,4 +153,12 @@ export const HARD_TOPICS = [
     image: "https://roastbrief.us/wp-content/uploads/2023/10/influencers.webp",
     members: "0",
   },
+  {
+    id: "20",
+    title: "Celebrities",
+    description:
+      "Latest news and forecast about the worlds biggest Celebrities, Influencers and Stars",
+    image: "https://static01.nyt.com/images/2023/07/29/business/00threads-celebs-SUB/00threads-celebs-SUB-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+    members: "0",
+  },
 ]
