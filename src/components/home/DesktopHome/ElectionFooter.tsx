@@ -1,26 +1,25 @@
-import { formatMarketArr } from "@/utils/markets/formatMarketArr"
-import { motion } from "framer-motion"
-import { Skeleton } from "@/components/ui/Skeleton"
+import Link from "next/link";
+import { ELECTIONS_PATH } from "@/utils/urls";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { formatMarketArr } from "@/utils/markets/formatMarketArr";
+import { Countdown } from "@/components/common/CountDown";
+import { ELECTION_END_DATE } from "@/components/topic/ElectionPage";
+import { ChevronDown } from "lucide-react";
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay"
-import { Countdown } from "@/components/common/CountDown"
-import { ELECTION_END_DATE } from "@/components/topic/ElectionPage"
-
-import { MarketCard } from "./MarketCard"
-import { DesktopFooter } from "./DesktopFooter"
-import { ChevronDown } from "lucide-react"
-import Link from "next/link"
-import { ELECTIONS_PATH } from "@/utils/urls"
+} from "@/components/layouts/StandardBleedOverlay";
+import { DesktopFooter } from "./DesktopFooter";
+import { motion } from "framer-motion";
+import { DesktopCardSectionSkelleton, MarketCard } from "./MarketCard";
 
 export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   const enrichedFeedData = formatMarketArr({
     // @ts-ignore
     markets,
     selectedTopic: "🇺🇸 2024 US Elections",
-  })
-  // console.log("markets356", markets)
+  });
+
   return (
     <div className="px-0 xl:px-4 mt-[6.5rem] flex flex-col w-full">
       <div className="flex flex-col w-full px-6 lg:px-14">
@@ -32,14 +31,16 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
             <div className="text-base text-[lightgray] font-normal flex flex-col space-x-2">
               Get the latest forecasts about the 2024 US Federal Elections
             </div>
-          </div>{" "}
+          </div>
           <Countdown endDate={ELECTION_END_DATE} />
         </div>
 
         <MarketCardSection
           length={3}
           feedDataArr={enrichedFeedData?.slice(0, 3)}
+          amount={{ base: 3, xl: 4 }}
         />
+
         <div className="flex items-center justify-between">
           <div className="text-[1.7rem] text-white font-[Aeonik-Bold] space-x-2 hover:scale-[100.5%] active:scale-99">
             Latest News
@@ -51,10 +52,13 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
             <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
           </Link>
         </div>
+
         <MarketCardSection
           length={2}
-          feedDataArr={enrichedFeedData?.slice(1, 4)}
+          feedDataArr={enrichedFeedData?.slice(0, 4)}
+          amount={{ base: 2, xl: 2 }}
         />
+
         <Link
           href={ELECTIONS_PATH}
           className="flex items-center justify-center gap-1 hover:scale-[100.5%] active:scale-99"
@@ -64,7 +68,9 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           </div>
           <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
         </Link>
+
         <div className="mb-40" />
+
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
             <DesktopFooter />
@@ -72,33 +78,46 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
         </StandardBleedOverlay>
       </div>
     </div>
-  )
+  );
 }
 
 function MarketCardSection<T>({
   feedDataArr,
   length,
+  amount,
 }: {
-  feedDataArr?: T[]
-  length: number
+  feedDataArr?: T[];
+  length: number;
+  amount: { base: number; xl: number; "2xl"?: number };
 }) {
+  const skeletonCount =
+    amount?.base && feedDataArr?.length
+      ? Math.max(amount.base - feedDataArr.length, 0)
+      : 0;
+
   return (
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6   mb-7"
+      className="flex flex-row overflow-x-auto no-scrollbar w-full gap-6 py-6 mb-7"
     >
       {feedDataArr?.map((item: T, index: number) => (
-        <MarketCard key={index} item={item} isTwoCards={length === 2} />
-      )) ??
-        [1, 2, 3, 4, 5, 6].map((index) => (
-          <div
-            className={`self-center ${index === 0 ? "mt-6" : "mt-2"}`}
-            key={index}
-          >
-            <Skeleton className="rounded-lg w-[88vw] max-w-[23.5rem] md:max-w-[21.5rem] lg:max-w-[21.5rem] max-h-[27rem] h-[107vw]" />
-          </div>
-        ))}
+        <MarketCard
+          key={index}
+          item={item}
+          isTwoCards={length === 2}
+          amount={amount}
+        />
+      ))}
+
+      {Array.from({ length: skeletonCount }).map((_, index) => (
+        <DesktopCardSectionSkelleton
+          item={index}
+          isTwoCards={length === 2}
+          loading={false}
+          amount={amount}
+        />
+      ))}
     </motion.div>
-  )
+  );
 }

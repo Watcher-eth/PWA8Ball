@@ -1,63 +1,51 @@
 import Link from "next/link";
-import { Stars } from "lucide-react";
 import { getMarketPath } from "@/utils/urls";
-import { Skeleton } from "@/components/ui/Skeleton"; // Assuming you have a Skeleton component
-import { BettersOverviewPlaceholder } from "@/components/predictions/Betters/BettersOverviewPlaceholder";
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
+import { Skeleton } from "@/components/ui/Skeleton";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
 
 export function MarketCard({
   item,
   isTwoCards,
   loading = false,
+  amount,
 }: {
   item: any;
   isTwoCards: boolean;
   loading?: boolean;
+  amount: { base: number; xl: number; "2xl": number }; // Adjusted to accept an amount object
 }) {
-  console.log("item", item);
+  const baseAmount = amount?.base || 2;
+  const xlAmount = amount?.xl || baseAmount;
+  const twoXlAmount = amount?.["2xl"] || xlAmount;
+
+  const heightClass = isTwoCards
+    ? "h-[29vw]"
+    : amount["2xl"] >= 5
+    ? "min-h-[20vw] h-[20vw] xl:h-[14vw] xl:min-h-[14vw]"
+    : amount["2xl"] >= 4 || amount["xl"] >= 4
+    ? "min-h-[21vw] h-[21vw] xl:h-[18vw] xl:min-h-[18.5vw]"
+    : amount["xl"] >= 4
+    ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
+    : "min-h-[25vw] h-[23vw] xl:h-[19vw] xl:min-h-[19.5vw]";
+
   if (!item) {
     return (
-      <div className={`flex flex-col my-3 w-full relative`}>
-        {/* Image Skeleton */}
-        <Skeleton
-          className={`${
-            isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
-          } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]`}
-        />
-        {/* Odds Skeleton */}
-        <Skeleton
-          className={`px-9 py-3.5 absolute z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md ${
-            isTwoCards
-              ? "text-sm top-5 right-5 h-[1.5rem] w-[3rem]"
-              : "text-[0.8rem] top-4 right-4 h-[1.4rem] w-[3rem]"
-          }`}
-        />
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-col mt-3">
-            {/* Title Skeleton */}
-            <Skeleton className="h-[1.4rem] w-[80%]" />
-            {/* Question Skeleton */}
-            <Skeleton className="mt-2 h-[1.1rem] w-[23vw] " />
-          </div>
-          {isTwoCards && (
-            <Skeleton className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] h-[2.2rem] w-[6.5rem] mt-4" />
-          )}
-        </div>
-        {/* Stake Skeleton */}
-        <Skeleton className="text-[gray] mt-2 h-[0.9rem] w-[15%]" />
-      </div>
+      <DesktopCardSectionSkelleton
+        item={item}
+        isTwoCards={isTwoCards}
+        loading={false}
+        amount={amount}
+      />
     );
   }
-
+  console.log(twoXlAmount, xlAmount, item?.title);
   return (
     <Link
       href={getMarketPath(item?.marketId)}
       className={`flex flex-col w-full relative hover:scale-[100.1%] active:scale-[99.5%]`}
     >
       <img
-        className={`${
-          isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
-        } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
+        className={`${heightClass} w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
         src={item?.image ? item?.image : DEFAULT_PFP_PLACEHOLDER}
         alt={item?.title}
       />
@@ -86,5 +74,54 @@ export function MarketCard({
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
+  );
+}
+
+export function DesktopCardSectionSkelleton({
+  item,
+  isTwoCards,
+  loading = false,
+  amount,
+}: {
+  item: any;
+  isTwoCards: boolean;
+  loading?: boolean;
+  amount: { base: number; xl: number; "2xl": number };
+}) {
+  const baseAmount = amount?.base || 2;
+  const xlAmount = amount?.xl || baseAmount;
+  const twoXlAmount = amount?.["2xl"] || xlAmount;
+  const heightClass = isTwoCards
+    ? "h-[29vw]"
+    : amount["2xl"] >= 5
+    ? "min-h-[20vw] h-[20vw] xl:h-[16vw] xl:min-h-[16vw]"
+    : amount["2xl"] >= 4 || amount["xl"] >= 4
+    ? "min-h-[21vw] h-[21vw] xl:h-[18vw] xl:min-h-[18.5vw]"
+    : amount["xl"] >= 4
+    ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
+    : "min-h-[25vw] h-[23vw] xl:h-[19vw] xl:min-h-[19.5vw]";
+  return (
+    <div className={`flex flex-col my-0 w-full relative`}>
+      <Skeleton
+        className={`${heightClass} w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]`}
+      />
+      <Skeleton
+        className={`px-9 py-3.5 absolute z-20 border-[0.09rem] border-white/5 rounded-full bg-[#353535]/20 backdrop-blur-md ${
+          isTwoCards
+            ? "text-sm top-5 right-5 h-[1.5rem] w-[3rem] "
+            : "text-[0.8rem] top-4 right-4 h-[1.4rem] w-[3rem]"
+        }`}
+      />
+      <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-col mt-3">
+          <Skeleton className="h-[1.4rem] w-[80%] xl:w-[39%]" />
+          <Skeleton className="mt-2 h-[1.1rem] w-[23vw] xl:w-[69%]" />
+        </div>
+        {isTwoCards && (
+          <Skeleton className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] h-[2.2rem] w-[6.5rem] mt-4" />
+        )}
+      </div>
+      <Skeleton className="text-[gray] mt-2 h-[0.9rem] w-[15%]" />
+    </div>
   );
 }
