@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { getMarketPath } from "@/utils/urls"
-import Link from "next/link"
+import { getMarketPath } from "@/utils/urls";
+import Link from "next/link";
 
 export function FeedCard({
   image,
@@ -26,7 +26,7 @@ export function FeedCard({
         />
       </Link>
     </div>
-  )
+  );
 }
 
 function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
@@ -35,7 +35,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
       className={`
         flex items-start flex-col rounded-lg w-full max-h-[27rem] justify-end h-[105vw] relative
          shadow-md hover:scale-101 active:scale-98 transition-all
-        cursor-pointer
+        cursor-pointer border-[0.06rem] border-[#212121]/90
       `}
     >
       <div className=" absolute w-full h-full">
@@ -45,9 +45,9 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
           src={image}
           className="w-full h-full absolute object-cover rounded-lg z-2 transition-opacity duration-500 ease-in-out opacity-0"
           onLoad={(e) => {
-            const imgElement = e.target as HTMLImageElement
-            imgElement.classList.remove("opacity-0")
-            imgElement.classList.add("opacity-100")
+            const imgElement = e.target as HTMLImageElement;
+            imgElement.classList.remove("opacity-0");
+            imgElement.classList.add("opacity-100");
           }}
         />
       </div>
@@ -58,7 +58,7 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
           absolute bottom-0 z-2
         `}
       />
-      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-lg border border-[#090909]/5">
+      <div className="absolute top-4 z-3 right-3 text-[0.9rem] bg-[#101010]/10 text-white font-semibold p-2.5 py-1 rounded-full backdrop-blur-lg border border-[#212121]/5">
         {odds.toFixed(1)}% {optionA !== "Yes" ? optionA : "Chance"}
       </div>
       <div
@@ -92,5 +92,5 @@ function DisplayFeedCard({ image, title, description, icon, odds, optionA }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

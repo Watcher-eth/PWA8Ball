@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { capitalizeFirstLetter } from "@/utils/strings";
 
 export function OutcomeButton({
   text,
@@ -34,7 +35,7 @@ export function OutcomeButton({
             : "text-[18px] sm:text-[16px] xl:text-[22px]"
         }
       >
-        {text}{" "}
+        {capitalizeFirstLetter(text)}{" "}
       </div>
       <div
         className={`
