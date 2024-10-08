@@ -22,7 +22,7 @@ export function DesktopShareBetModal({
 }) {
   return (
     <DesktopCardModal
-      dialogContentClassName="!w-[35vw]"
+      dialogContentClassName="lg:w-[35vw] "
       content={
         <ShareBetContent
           isDesktop={true}

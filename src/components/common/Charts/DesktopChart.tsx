@@ -261,7 +261,7 @@ export function DesktopChart(props: {
         setTimeframe={setTimeframe}
       />
       {props?.userOwns.length > 0 && (
-        <div className="flex flex-row items-center justify-between mb-3 mt-4">
+        <div className="flex flex-row items-center justify-between mb-2 mt-7">
           <div className="flex flex-col items-start">
             <span className="text-xs text-white/70">You voted</span>
             <span className="text-white text-lg font-semibold">

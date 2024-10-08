@@ -5,7 +5,6 @@ import { fillUserImages } from "@/utils/fillUserImages";
 import { useModalStore } from "@/lib/stores/ModalStore";
 import { useUserStore } from "@/lib/stores/UserStore";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Grid } from "@/components/ui/tailwind/Grid";
 import { Col } from "@/components/ui/tailwind/Col";
 import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
@@ -20,15 +19,10 @@ import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 
 import { DesktopPredictComponent } from "./DesktopPredictComponent";
 
-import { AlignLeft } from "lucide-react";
-
-import { DesktopBettersModal } from "../Betters/DesktopBettersModal";
-
 import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
 import { HARD_MARKETS } from "@/constants/markets";
 import { HARD_TOPICS } from "@/constants/topics";
 import { useCheckReferral } from "@/hooks/useCheckReferral";
-import { DesktopMarketHeader } from "./DesktopMarketHeader";
 import { DesktopChartCard } from "./DesktopChartCard";
 import { MarketMetadata } from "../BetDetails/MarketMetadata";
 import { shortenAddress } from "@/utils/address/shortenAddress";
@@ -54,11 +48,6 @@ export function DesktopMarketPage({ users, market, id }) {
     id
   );
   const userOwns = userPositions?.filter((item) => item.tokensOwned > 0) || [];
-
-  const aggregatedPositions = aggregatePredictedItemsWithImage(
-    userOwns ?? [],
-    HARD_MARKETS
-  );
 
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col">
@@ -106,34 +95,18 @@ export function DesktopMarketPage({ users, market, id }) {
             cols={{ xs: 8, sm: 2, md: 2, lg: 8 }}
             className="px-2 pt-4"
           >
-            <Col xs={4} sm={4} md={4} lg={5}>
+            {/* Column for Chart */}
+            <Col xs={8} sm={8} md={8} lg={5} className="order-1">
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
-
-              <div className="py-4">
-                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-medium">
-                  {enhancedMarket?.question}
-                </div>
-                <CommentSection
-                  options={[
-                    {
-                      name: enhancedMarket?.outcomeA,
-                      value: enhancedMarket?.outcomeOddsA,
-                    },
-                    {
-                      name: enhancedMarket?.outcomeA,
-                      value: enhancedMarket?.outcomeOddsA,
-                    },
-                  ]}
-                  topic_id={enhancedMarket?.topic_id}
-                  users={users}
-                  totalComments={enhancedMarket?.total_comments}
-                  marketId={id}
-                  isDesktop={true}
-                />
-              </div>
             </Col>
-            <Col xs={4} lg={3}>
-              <div className="xl:px-4 border-none  pb-1">
+
+            {/* Column for DesktopPredictComponent and other details */}
+            <Col
+              xs={8}
+              lg={3}
+              className="order-2 md:order-2 flex flex-col -mt-3 lg:mt-0"
+            >
+              <div className="xl:px-4 border-none pb-1 px-2  lg:px-0">
                 <DesktopPredictComponent
                   id={id}
                   question={enhancedMarket?.question}
@@ -189,6 +162,42 @@ export function DesktopMarketPage({ users, market, id }) {
                   proposedAt={market?.proposedAt}
                 />
               </div>
+            </Col>
+
+            {/* Comments Section - Moved after DesktopPredictComponent on small and medium */}
+            <Col
+              xs={8}
+              sm={8}
+              md={8}
+              lg={5}
+              className="order-3 md:order-3 mt-4 md:mt-4 px-4 lg:px-0"
+            >
+              <div className="py-4">
+                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-medium">
+                  {enhancedMarket?.question}
+                </div>
+                <CommentSection
+                  options={[
+                    {
+                      name: enhancedMarket?.outcomeA,
+                      value: enhancedMarket?.outcomeOddsA,
+                    },
+                    {
+                      name: enhancedMarket?.outcomeA,
+                      value: enhancedMarket?.outcomeOddsA,
+                    },
+                  ]}
+                  topic_id={enhancedMarket?.topic_id}
+                  users={users}
+                  totalComments={enhancedMarket?.total_comments}
+                  marketId={id}
+                  isDesktop={true}
+                />
+              </div>
+            </Col>
+
+            {/* Related Markets - Shown after Comments Section on small and medium */}
+            <Col xs={8} lg={3} className="order-4 mt-4 md:mt-4">
               <div className="mx-4 -mt-2 rounded-lg">
                 <RelatedMarkets
                   isDesktop={true}
@@ -197,10 +206,6 @@ export function DesktopMarketPage({ users, market, id }) {
                 />
               </div>
             </Col>
-          </Grid>
-          <Grid gap={4} cols={{ xs: 8 }}>
-            <Col xs={5} className=" p-4 rounded-lg mt-1"></Col>
-            <Col xs={3}></Col>
           </Grid>
         </div>
       </div>
