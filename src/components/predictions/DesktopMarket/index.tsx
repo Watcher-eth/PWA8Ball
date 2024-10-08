@@ -63,7 +63,7 @@ export function DesktopMarketPage({ users, market, id }) {
               className={`
                h-[8rem] w-full
                 bg-gradient-to-t from-[#080808] via-[#080808]/65  to-[#080808]/45
-                backdrop-blur-xl absolute bottom-0
+                absolute bottom-0
               `}
             />
             {/* <InverseBleedOverlay>
@@ -88,7 +88,7 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full mt-1.5 overflow-y-auto z-[30] lg:mx-0 2xl:px-20 flex flex-col">
+      <div className="w-full h-full mt-5 overflow-y-auto z-[30] lg:mx-0 flex flex-col">
         <div>
           <Grid
             gap={4}
@@ -98,15 +98,18 @@ export function DesktopMarketPage({ users, market, id }) {
             {/* Column for Chart */}
             <Col xs={8} sm={8} md={8} lg={5} className="order-1">
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
+              <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-0 mb-5 text-align-center text-white text-lg font-medium">
+                {enhancedMarket?.question}
+              </div>
             </Col>
 
             {/* Column for DesktopPredictComponent and other details */}
             <Col
               xs={8}
               lg={3}
-              className="order-2 md:order-2 flex flex-col -mt-3 lg:mt-0"
+              className="order-2 md:order-1 flex flex-col -mt-3 lg:mt-0"
             >
-              <div className="xl:px-4 border-none pb-1 px-2  lg:px-0">
+              <div className="xl:px-4 border-none pb-1 px-2 lg:px-0">
                 <DesktopPredictComponent
                   id={id}
                   question={enhancedMarket?.question}
@@ -164,18 +167,15 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
 
-            {/* Comments Section - Moved after DesktopPredictComponent on small and medium */}
             <Col
               xs={8}
               sm={8}
               md={8}
               lg={5}
-              className="order-3 md:order-3 mt-4 md:mt-4 px-4 lg:px-0"
+              xl={5}
+              className="order-3 md:order-1 mt-4 -lg:mt-4 px-4 lg:px-0"
             >
-              <div className="py-4">
-                <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-3 mb-5 text-align-center text-white text-lg font-medium">
-                  {enhancedMarket?.question}
-                </div>
+              <div className="py-4 md:-mt-4 -lg:mt-5">
                 <CommentSection
                   options={[
                     {
@@ -196,9 +196,8 @@ export function DesktopMarketPage({ users, market, id }) {
               </div>
             </Col>
 
-            {/* Related Markets - Shown after Comments Section on small and medium */}
             <Col xs={8} lg={3} className="order-4 mt-4 md:mt-4">
-              <div className="mx-4 -mt-2 rounded-lg">
+              <div className="mx-4 -mt-2 xl:-mt-40 rounded-lg">
                 <RelatedMarkets
                   isDesktop={true}
                   topicId={enhancedMarket?.topic_id}

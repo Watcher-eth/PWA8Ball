@@ -1,25 +1,25 @@
 // @ts-nocheck
 
-import { ActivityIcon, Calendar } from "lucide-react"
-import { DesktopCardModal } from "../modals/DesktopCardModal"
-import { useUserStore } from "@/lib/stores/UserStore"
-import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate"
-import { parseOptionJSON } from "@/utils/predictions/parseOption"
-import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder"
-import { ActivityField } from "./ActivityField"
-import { User } from "@/__generated__/graphql"
-import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders"
-import { HARD_MARKETS } from "@/constants/markets"
-import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
-import { Spinner } from "../modals/PredictModal/Spinner"
-import { ActivityPlaceHolder } from "../common/placeholders/NewPlaceholders"
+import { ActivityIcon, Calendar } from "lucide-react";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { groupPredictionsByDate } from "@/utils/predictions/groupPredictionsByDate";
+import { parseOptionJSON } from "@/utils/predictions/parseOption";
+import { InviteFriendsPlaceholder } from "../common/placeholders/InviteFriendsPlaceholder";
+import { ActivityField } from "./ActivityField";
+import { User } from "@/__generated__/graphql";
+import { useGetFriendsPositions } from "@/graphql/queries/friends/useGetFriendsOrders";
+import { HARD_MARKETS } from "@/constants/markets";
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions";
+import { Spinner } from "../modals/PredictModal/Spinner";
+import { ActivityPlaceHolder } from "../common/placeholders/NewPlaceholders";
 
 export function DesktopActivityModal({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const { user } = useUserStore()
+  const { user } = useUserStore();
   return (
     <DesktopCardModal
       title="Activity"
@@ -41,7 +41,7 @@ export function DesktopActivityModal({
     >
       {children}
     </DesktopCardModal>
-  )
+  );
 }
 
 function DesktopFriendActivity(props: { user: User }) {
@@ -50,23 +50,27 @@ function DesktopFriendActivity(props: { user: User }) {
     error,
     loading: isLoading,
     refetch,
-  } = useGetFriendsPositions(props?.user?.walletAddress)
+  } = useGetFriendsPositions(props?.user?.walletAddress);
 
   const aggregatedPredictions = predictions
     ? aggregatePredictedItemsWithImage(predictions, HARD_MARKETS)
-    : []
+    : [];
 
-  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions)
-  console.log("userId activity", props?.user)
+  const groupedPredictions = groupPredictionsByDate(aggregatedPredictions);
+  console.log("userId activity", props?.user);
 
   if (isLoading && props?.user?.id && props?.user?.totalFollowing > 0)
     return (
-      <div className="h-[40vh] bg-[transparent] flex justify-center items-center">
+      <div className="h-[45vh] bg-[transparent] flex justify-center items-center">
         <Spinner loading={isLoading} />
       </div>
-    )
+    );
   if (!props?.user?.id) {
-    return <ActivityPlaceHolder user={props?.user} />
+    return (
+      <div className="h-[45vh] w-full flex justify-center items-center">
+        <ActivityPlaceHolder user={props?.user} />
+      </div>
+    );
   }
 
   return (
@@ -92,7 +96,7 @@ function DesktopFriendActivity(props: { user: User }) {
                     </h2>
                   </div>
                   {predictions.map((item, idx) => {
-                    const option = parseOptionJSON(item.option)
+                    const option = parseOptionJSON(item.option);
                     return (
                       <ActivityField
                         refetch={refetch}
@@ -121,17 +125,19 @@ function DesktopFriendActivity(props: { user: User }) {
                         initialProb={item.market.initialProb}
                         onOpenBottomSheet={() => {}}
                       />
-                    )
+                    );
                   })}
                 </div>
-              )
+              );
             }
           )}
           <div className="h-[110px]" />
         </div>
       ) : (
-        <InviteFriendsPlaceholder isDesktop={true} />
+        <div className="h-[45vh] pt-[20%] w-full flex justify-center items-center">
+          <InviteFriendsPlaceholder isDesktop={true} />
+        </div>
       )}
     </div>
-  )
+  );
 }

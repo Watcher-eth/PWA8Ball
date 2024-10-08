@@ -45,8 +45,8 @@ const StatusRow: React.FC<StatusRowProps> = ({
             <div
               className={`w-[0.1rem] absolute left-4 ${
                 title === "End Date"
-                  ? "h-[6rem]  -bottom-[6.6rem] "
-                  : "h-7  -bottom-9 "
+                  ? "h-[3rem]  -bottom-[3.2rem] "
+                  : "h-7  -bottom-8 "
               } bg-[#212121] mt-4 `}
             ></div>
           )}
@@ -164,12 +164,16 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
       </motion.div>
 
       {!expanded && (
-        <div className="bg-gradient-to-b from-transparent via-[rgba(8,8,8,0.5)] to-[#080808] h-11 w-full mt-[-25px]"></div>
+        <div
+          className={`bg-gradient-to-b from-transparent via-[rgba(8,8,8,0.5)] to-[#080808] h-11 w-full  mt-[-25px]`}
+        ></div>
       )}
 
       <button
         onClick={toggleStatus}
-        className="text-[#808080] text-sm  underline mt-2"
+        className={`text-[#808080] text-sm  underline mt-2 ${
+          expanded ? "mb-[8rem]" : "mb-0"
+        }`}
       >
         {expanded ? "Hide full timeline" : "Show full timeline"}
       </button>
@@ -217,7 +221,6 @@ const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
 
   return (
     <div className="relative flex items-center justify-center">
-      {/* Outer blurred pulsing circle */}
       <motion.div
         animate={outerControls}
         className={`absolute w-2 h-2 rounded-full ${
@@ -225,7 +228,6 @@ const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
         }`}
       ></motion.div>
 
-      {/* Inner bright pulsing circle */}
       <motion.div
         animate={innerControls}
         className={`relative w-2 h-2 rounded-full ${

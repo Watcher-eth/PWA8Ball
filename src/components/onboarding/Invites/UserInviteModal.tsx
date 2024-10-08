@@ -1,34 +1,34 @@
-import { motion } from "framer-motion"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Copy } from "lucide-react"
-import { useUserStore } from "@/lib/stores/UserStore"
-import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites"
-import { showToast } from "@/utils/Toasts/showToast"
+import { motion } from "framer-motion";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Copy } from "lucide-react";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { useFetchOrCreateUserInvites } from "@/supabase/queries/Invites/useFetchOrCreateUserInvites";
+import { showToast } from "@/utils/Toasts/showToast";
 
 export function UserInviteModal({ children }: { children: React.ReactNode }) {
-  const { user } = useUserStore()
+  const { user } = useUserStore();
   const {
     data: invites,
     isLoading,
     error,
-  } = useFetchOrCreateUserInvites(user?.walletAddress)
+  } = useFetchOrCreateUserInvites(user?.walletAddress);
   const usedInvitesCount = invites?.filter(
     (invite) => invite.status === "used"
-  ).length
+  ).length;
 
   return (
-    <Dialog >
+    <Dialog>
       <DialogTrigger>
         <div className="active:scale-93 flex justify-between items-center w-full hover:scale-101 transition-all">
           {children}
         </div>
       </DialogTrigger>
-      <DialogContent className="border-0  lg:max-w-[35%] xl:max-w-[28%] rounded-[2rem] self-center">
+      <DialogContent className="border-0  lg:max-w-[35%] xl:max-w-[28%] 2xl:max-w-[20%] rounded-[0.5rem] self-center">
         <motion.div
           layout
           transition={{ duration: 0.2 }}
           className={`
-          bg-[#101010]/70 rounded-[2rem]  backdrop border-[0.1rem] border-[#151515]
+          bg-[#090909]/90 rounded-[1.5rem]  backdrop border-[0.07rem] border-[#151515]
           h-full mb-5  relative
         `}
         >
@@ -50,32 +50,35 @@ export function UserInviteModal({ children }: { children: React.ReactNode }) {
                   <UserInvite
                     setToastVisible={() =>
                       showToast({
-                        icon:
+                        icon: (
                           <Copy
-                            strokeWidth={2.5 /** this is 3 everywhere else... */}
+                            strokeWidth={
+                              2.5 /** this is 3 everywhere else... */
+                            }
                             className="text-white h-[1rem]"
-                          />,
+                          />
+                        ),
                         message: "Copied Invite",
                       })
                     }
                     code={item.id}
                     status={item.status}
                   />
-                )
+                );
               })}
             </div>
           </div>
         </motion.div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 function UserInvite({ code, status, setToastVisible }) {
   const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setToastVisible(true)
-  }
+    navigator.clipboard.writeText(code);
+    setToastVisible(true);
+  };
 
   return (
     <div className="flex flex-col gap-4 w-full px-8 my-2.5">
@@ -97,5 +100,5 @@ function UserInvite({ code, status, setToastVisible }) {
       </div>
       <div className="h-px w-11/12 bg-[#212121]" />
     </div>
-  )
+  );
 }

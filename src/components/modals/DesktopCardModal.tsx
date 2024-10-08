@@ -43,7 +43,7 @@ export function DesktopCardModal({
       </DialogTrigger>
       <DialogContent
         className={`
-          p-0 bg-transparent  border-0
+          p-0 bg-transparent  border-0 
           rounded-2xl ${dialogContentClassName}
         `}
       >
@@ -54,12 +54,12 @@ export function DesktopCardModal({
           <AnimatePresence>
             <Card
               className={`
-            shadow-none !p-0 w-full
+            shadow-none !p-0 w-full border-[#121212] border-[0.04rem]
             rounded-2xl  !bg-[#080808]/85 ${cardClassName}
           `}
             >
               {(title || subtitle) && (
-                <CardHeader className="border-b border-[#212121]">
+                <CardHeader className="border-b border-[#151515]">
                   <CardTitle className="text-white">{title}</CardTitle>
                   <CardDescription className="text-[lightgray]">
                     {subtitle}

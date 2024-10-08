@@ -1,36 +1,36 @@
-import React, { useRef, useState } from "react"
-import { Ban, ImagePlus } from "lucide-react"
-import { useUserStore } from "@/lib/stores/UserStore"
-import { toast } from "sonner"
-import { showToast } from "@/utils/Toasts/showToast"
+import React, { useRef, useState } from "react";
+import { Ban, ImagePlus } from "lucide-react";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { toast } from "sonner";
+import { showToast } from "@/utils/Toasts/showToast";
 
 export function DesktopCreateProfile() {
-  const fileInputRef = useRef(null)
+  const fileInputRef = useRef(null);
 
-  const [username, setUsername] = useState("")
-  const [pfpUrl, setPfpUrl] = useState("")
-  const { user, setUser } = useUserStore()
+  const [username, setUsername] = useState("");
+  const [pfpUrl, setPfpUrl] = useState("");
+  const { user, setUser } = useUserStore();
   const handleImageUploadClick = () => {
-    fileInputRef.current?.click()
-  }
+    fileInputRef.current?.click();
+  };
 
   const handleImageChange = (event: { target: { files: any[] } }) => {
-    const file = event.target.files[0]
+    const file = event.target.files[0];
     if (file) {
-      const fileUrl = URL.createObjectURL(file) // Create a temporary URL for the file
+      const fileUrl = URL.createObjectURL(file); // Create a temporary URL for the file
 
-      setPfpUrl(fileUrl)
+      setPfpUrl(fileUrl);
       // TODO: Add ipfs upload
     }
-  }
+  };
 
   async function uploadProfileData() {
     if (!username) {
       showToast({
         icon: <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />,
         message: "Please add a username",
-      })
-      return
+      });
+      return;
     }
 
     if (user?.walletType === "eoa") {
@@ -43,7 +43,7 @@ export function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.externalAuthProviderUserId,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      })
+      });
     } else if (user?.walletAddress) {
       setUser({
         ...user,
@@ -54,7 +54,7 @@ export function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      })
+      });
     } else {
       setUser({
         ...user,
@@ -63,12 +63,12 @@ export function DesktopCreateProfile() {
         createdAt: BigInt(Math.floor(Date.now() / 1000)),
         externalAuthProviderUserId: user?.external_auth_provider_user_id,
         updatedAt: BigInt(Math.floor(Date.now() / 1000)),
-      })
+      });
     }
   }
 
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw]">
+    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw]  xl:min-w-[40vw] xl:max-w-[45vw] ">
       <div className="flex flex-col items-center justify-center w-1/2 p-10 py-8 text-white">
         <img
           src={"/images/OrbLogo.png"}
@@ -79,7 +79,7 @@ export function DesktopCreateProfile() {
         <p className="text-center mb-6 px-6 text-[lightgray]">
           Please add a profile picture and a username to complete your profile
         </p>
-        <div className="rounded-lg md:min-w-[23vw]  bg-[#101010] flex flex-col justify-between p-5 mt-5 shadow-lg h-[14.5rem] border-2 border-[#181818] w-full mx-3">
+        <div className="rounded-lg md:min-w-[23vw]  xl:min-w-[90%]  bg-[#101010] flex flex-col justify-between p-5 mt-5 shadow-lg h-[14.5rem] border-2 border-[#181818] w-full mx-3">
           <div className="flex flex-row items-start justify-between">
             {pfpUrl ? (
               <img
@@ -132,8 +132,8 @@ export function DesktopCreateProfile() {
         </div>
         <div
           onClick={() => {
-            user.name = "Anon"
-            setUser(user)
+            user.name = "Anon";
+            setUser(user);
           }}
           className="text-md mt-2.5 text-[#707070] underline font-medium"
         >
@@ -148,7 +148,5 @@ export function DesktopCreateProfile() {
         />
       </div>
     </div>
-  )
+  );
 }
-
-

@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import { useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
-import { MailCheck } from "lucide-react"
-import { FindFriendsModal } from "@/components/onboarding/Invites/FindFriendsModal"
-import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends"
-import { DialogClose } from "@/components/ui/dialog"
-import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal"
+import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { MailCheck } from "lucide-react";
+import { FindFriendsModal } from "@/components/onboarding/Invites/FindFriendsModal";
+import { DesktopInviteFriends } from "@/components/share/DesktopInviteFriends";
+import { DialogClose } from "@/components/ui/dialog";
+import { UserInviteModal } from "@/components/onboarding/Invites/UserInviteModal";
 
 export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
-  const controls = useAnimation()
+  const controls = useAnimation();
 
   useEffect(() => {
     controls.start((i) => ({
@@ -20,12 +20,12 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
         stiffness: 100,
         damping: 10,
       },
-    }))
-  }, [controls])
+    }));
+  }, [controls]);
 
   return (
     <div
-      className={`flex h-full flex-col items-center ${
+      className={`flex h-full w-full self-center flex-col items-center ${
         props?.isDesktop ? "rounded-[1.5rem] mt-8" : "pt-[50px]"
       } bg-[#080808]`}
     >
@@ -100,5 +100,5 @@ export function InviteFriendsPlaceholder(props: { isDesktop: boolean }) {
         </FindFriendsModal>
       )}
     </div>
-  )
+  );
 }
