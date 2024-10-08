@@ -9,7 +9,6 @@ import { PaginationDots } from "./CarouselDotButton"
 
 export function DesktopHomeNews({ markets, amount, topic }) {
   const skeletonCount = markets ? amount - markets.length : amount
-  console.log("amount", amount, skeletonCount)
   return (
     <div className="w-full flex flex-col">
       {!topic && (

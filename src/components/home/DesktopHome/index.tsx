@@ -1,36 +1,36 @@
-import { useState } from "react"
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
-import { HARD_MARKETS } from "@/constants/markets"
-import { HARD_TOPICS } from "@/constants/topics"
-import { Market } from "@/__generated__/graphql"
-import { formatMarketArr } from "@/utils/markets/formatMarketArr"
+import { useState } from "react";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
+import { Market } from "@/__generated__/graphql";
+import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper"
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay"
-import { TopicHeader } from "@/components/home/TopicHeader"
+} from "@/components/layouts/StandardBleedOverlay";
+import { TopicHeader } from "@/components/home/TopicHeader";
 
-import { TrendingCommunities } from "./TrendingCommunities"
-import { ElectionFooter } from "./ElectionFooter"
-import { TopMarket } from "./TopMarket"
-import { DesktopHomeNews } from "./DesktopHomeNews"
-import { FeaturedMarketsSection } from "./FeaturedMarketsSection"
+import { TrendingCommunities } from "./TrendingCommunities";
+import { ElectionFooter } from "./ElectionFooter";
+import { TopMarket } from "./TopMarket";
+import { DesktopHomeNews } from "./DesktopHomeNews";
+import { FeaturedMarketsSection } from "./FeaturedMarketsSection";
 
 export function DesktopHome({ markets }: { markets: Market[] }) {
-  const [selectedTopic, setSelectedTopic] = useState("🔥 Trending") // State to track selected topic
+  const [selectedTopic, setSelectedTopic] = useState("🔥 Trending"); // State to track selected topic
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
     HARD_MARKETS,
     HARD_TOPICS
-  )
+  );
 
   const enrichedFeedData = formatMarketArr({
     markets: enhancedMarkets,
     selectedTopic,
-  })
+  });
 
   return (
     <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
@@ -71,7 +71,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 
         <HomeDivider />
         <div className="pt-12 pb-[6rem] flex flex-row px-2">
-          <FeaturedMarketsSection markets={enhancedMarkets} />
+          <FeaturedMarketsSection markets={[...enhancedMarkets].reverse()} />
         </div>
         <HomeDivider />
 
@@ -88,9 +88,9 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
         </StandardBleedOverlay>
       </div>
     </StandardPageWrapper>
-  )
+  );
 }
 
 function HomeDivider({ className = "" }: { className?: string }) {
-  return <div className={`h-px w-full bg-[#212121] px-8 ${className}`} />
+  return <div className={`h-px w-full bg-[#212121] px-8 ${className}`} />;
 }
