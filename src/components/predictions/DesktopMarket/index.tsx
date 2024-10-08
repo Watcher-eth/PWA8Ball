@@ -61,9 +61,9 @@ export function DesktopMarketPage({ users, market, id }) {
             />
             <div
               className={`
-               h-[8rem] w-full
+               h-[8.2rem] w-full
                 bg-gradient-to-t from-[#080808] via-[#080808]/65  to-[#080808]/45
-                absolute bottom-0
+                absolute -bottom-0.5
               `}
             />
             {/* <InverseBleedOverlay>
