@@ -1,12 +1,10 @@
-//@ts-nocheck
-
 import { tgql } from "@/__generated__"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 
 export const GET_POSITION_BY_USER_ADDRESSES = tgql(/* GraphQL */ `
-  query FriendsOrders($userAddress_in: [String]!) {
-    positions(where: { userAddress_in: $userAddress_in }, limit: 1) {
+  query FriendsOrders($userAddresses: [String]!) {
+    positions(where: { userAddress_in: $userAddresses }, limit: 1) {
       items {
         marketId
         option
@@ -34,17 +32,14 @@ export const GET_POSITION_BY_USER_ADDRESSES = tgql(/* GraphQL */ `
 `)
 
 export function useGetPositionsByUserAddresses(userAddresses: string[]) {
-  const { data, loading, error } = useApolloQuery(
-    GET_ORDERS_BY_USER_ADDRESSES,
-    {
-      variables: {
-        userAddresses:
-          userAddresses.length > 0
-            ? userAddresses?.map(getChecksummedAddress)
-            : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"],
-      },
-    }
-  )
+  const { data, loading, error } = useQuery(GET_POSITION_BY_USER_ADDRESSES, {
+    variables: {
+      userAddresses:
+        userAddresses.length > 0
+          ? userAddresses?.map(getChecksummedAddress)
+          : ["0x870b7F3f229D08918d33F8b09766eaB412aBEebf"],
+    },
+  })
 
   return {
     orders: data?.positions?.items ?? [],

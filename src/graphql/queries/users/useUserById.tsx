@@ -1,4 +1,4 @@
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 import { User } from "@/__generated__/graphql"
@@ -29,7 +29,7 @@ export async function getUserById(userId: string) {
 }
 
 export function useGetUserById(id: string) {
-  const { data, loading, error, refetch } = useApolloQuery(GET_USER_BY_ID, {
+  const { data, loading, error, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { id: getChecksummedAddress(id) },
   })
   return {

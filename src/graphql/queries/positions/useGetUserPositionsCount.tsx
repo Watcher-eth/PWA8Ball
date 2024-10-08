@@ -1,11 +1,11 @@
-//@ts-nocheck
+
 
 import { tgql } from "@/__generated__"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 
 const GET_USER_POSITION_COUNT = tgql(/* GraphQL */ `
-  query UserOrderCount($userAddress: String = "") {
+  query UserOrderCount($userAddress: String) {
     positions(where: { userAddress: $userAddress }) {
       items {
         marketId
@@ -16,9 +16,9 @@ const GET_USER_POSITION_COUNT = tgql(/* GraphQL */ `
 `)
 
 export function useGetUserPositionsCount(userAddress?: string) {
-  const { data, loading, error } = useApolloQuery(GET_USER_POSITION_COUNT, {
+  const { data, loading, error } = useQuery(GET_USER_POSITION_COUNT, {
     variables: {
-      userAddress: getChecksummedAddress(userAddress),
+      userAddress: getChecksummedAddress(userAddress!),
     },
   })
 

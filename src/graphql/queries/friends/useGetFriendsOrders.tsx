@@ -1,7 +1,7 @@
 // Yeah im not touching this file with a 10 meter pole till monke knows what its trying 2 do
 
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
 import { supabase } from "@/supabase/supabaseClient"
 import { useEffect, useState } from "react"
@@ -62,7 +62,7 @@ export const useGetFriendsPositions = (userId: string) => {
   useEffect(() => {
     getAndSetFollowingIds()
   }, [userId])
-  const { data, error, loading, refetch } = useApolloQuery(
+  const { data, error, loading, refetch } = useQuery(
     GET_ORDERS_BY_USER_ADDRESSES,
     {
       variables: {

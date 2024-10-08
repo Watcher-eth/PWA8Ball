@@ -1,4 +1,4 @@
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 
@@ -32,7 +32,7 @@ export async function getCreatedMarketsByUser(userAddress: string) {
 }
 
 export function useGetCreatedMarketsByUser(userAddress: string) {
-  const { data, loading, error, refetch } = useApolloQuery(
+  const { data, loading, error, refetch } = useQuery(
     GET_CREATED_MARKETS_BY_USER,
     {
       variables: { userAddress: String(userAddress) },

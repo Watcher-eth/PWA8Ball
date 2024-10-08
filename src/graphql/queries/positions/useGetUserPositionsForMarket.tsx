@@ -1,9 +1,9 @@
 import { tgql } from "@/__generated__"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 
 const USER_POSITIONS_BY_MARKET = tgql(/* GraphQL */ `
-  query userPositionsByMarket($marketId: BigInt, $userAddress: String) {
+  query UserPositionsByMarket($marketId: BigInt, $userAddress: String) {
     positions(where: { marketId: $marketId, userAddress: $userAddress }) {
       items {
         createdAt
@@ -18,7 +18,7 @@ export function useGetUserPositionsForMarket(
   userAddress?: string,
   marketId?: number
 ) {
-  const { data, loading, error } = useApolloQuery(USER_POSITIONS_BY_MARKET, {
+  const { data, loading, error } = useQuery(USER_POSITIONS_BY_MARKET, {
     variables: {
       userAddress: getChecksummedAddress(userAddress!),
       marketId: marketId,

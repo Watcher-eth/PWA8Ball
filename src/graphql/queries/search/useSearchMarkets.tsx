@@ -1,6 +1,6 @@
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
-import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
+
 
 const SEARCH_MARKETS = tgql(/* GraphQL */ `
   query SearchMarkets($question_contains: String!) {
@@ -19,7 +19,7 @@ const SEARCH_MARKETS = tgql(/* GraphQL */ `
 `)
 
 export function useSearchMarkets(searchString: string) {
-  const { data, loading, error, refetch } = useApolloQuery(SEARCH_MARKETS, {
+  const { data, loading, error, refetch } = useQuery(SEARCH_MARKETS, {
     variables: { question_contains: String(searchString) },
   })
 

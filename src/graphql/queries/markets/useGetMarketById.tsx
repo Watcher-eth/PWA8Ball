@@ -1,4 +1,4 @@
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 
@@ -36,7 +36,7 @@ export async function getMarketById(id: string) {
 }
 
 export function useGetMarketById(id: string) {
-  const { data, loading, error, refetch } = useApolloQuery(GET_ONCHAIN_MARKET, {
+  const { data, loading, error, refetch } = useQuery(GET_ONCHAIN_MARKET, {
     variables: { id: String(id) },
   })
 

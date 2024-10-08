@@ -1,5 +1,5 @@
 import { tgql } from "@/__generated__"
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 
 const GET_MARKET_USERS_QUERY = tgql(/* GraphQL */ `
@@ -31,7 +31,7 @@ export async function getUsersByMarketId(marketId: string) {
 }
 
 export function useUsersByMarketId(marketId: string) {
-  const { data, refetch } = useApolloQuery(GET_MARKET_USERS_QUERY, {
+  const { data, refetch } = useQuery(GET_MARKET_USERS_QUERY, {
     variables: { marketId: marketId },
   })
 

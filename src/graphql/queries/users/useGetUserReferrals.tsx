@@ -1,8 +1,8 @@
+import { Address } from "viem"
 import { tgql } from "@/__generated__"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
-import { Address } from "viem"
+import { useQuery } from "@apollo/client"
 
 // Define the GraphQL query for getting a topic by ID
 const GET_USER_REFERRALS = tgql(/* GraphQL */ `
@@ -32,7 +32,7 @@ export async function getUserReferrals(referrerAddress: Address) {
 }
 
 export function useGetUserReferrals(referrerAddress: Address) {
-  const { data, loading, error } = useApolloQuery(GET_USER_REFERRALS, {
+  const { data, loading, error } = useQuery(GET_USER_REFERRALS, {
     variables: { referrerAddress: getChecksummedAddress(referrerAddress) },
   })
   return {

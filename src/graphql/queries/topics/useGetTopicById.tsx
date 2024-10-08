@@ -1,6 +1,6 @@
 import { tgql } from "@/__generated__"
 import { APOLLO_CLIENT } from "@/providers/GraphQlProvider"
-import { gql, useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 
 // Define the GraphQL query for getting a topic by ID
 const GET_TOPIC_BY_ID = tgql(/* GraphQL */ `
@@ -24,7 +24,7 @@ export async function getTopicById(id: number) {
 
 // Create the custom hook for fetching the topic by ID
 export function useGetTopicById(id: number) {
-  const { data, loading, error } = useApolloQuery(GET_TOPIC_BY_ID, {
+  const { data, loading, error } = useQuery(GET_TOPIC_BY_ID, {
     variables: { id: BigInt(id) },
   })
 

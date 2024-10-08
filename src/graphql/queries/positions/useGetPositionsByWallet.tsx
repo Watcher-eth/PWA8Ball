@@ -1,4 +1,4 @@
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { getChecksummedAddress } from "@/utils/address/getChecksummedAddress"
 import { tgql } from "@/__generated__"
 
@@ -34,14 +34,11 @@ export const GET_POSITIONS_BY_WALLET = tgql(/* GraphQL */ `
 `)
 
 export function useGetPositionsByWallet(userAddress: string) {
-  const { data, loading, error, refetch } = useApolloQuery(
-    GET_POSITIONS_BY_WALLET,
-    {
-      variables: {
-        userAddress: getChecksummedAddress(userAddress),
-      },
-    }
-  )
+  const { data, loading, error, refetch } = useQuery(GET_POSITIONS_BY_WALLET, {
+    variables: {
+      userAddress: getChecksummedAddress(userAddress),
+    },
+  })
   return {
     orders: data?.positions?.items,
     loading,

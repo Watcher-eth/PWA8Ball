@@ -1,8 +1,8 @@
-import { useQuery as useApolloQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { tgql } from "@/__generated__"
 
-const SEARCH_USERS = tgql(/* GraphQL */ `
-  query searchUsers($name_contains: String!) {
+const SEARCH_USERS_QUERY = tgql(/* GraphQL */ `
+  query SearchUsers($name_contains: String!) {
     users(where: { name_contains: $name_contains }) {
       items {
         name
@@ -15,7 +15,7 @@ const SEARCH_USERS = tgql(/* GraphQL */ `
 `)
 
 export function useSearchUsers(searchString: string) {
-  const { data, loading, error, refetch } = useApolloQuery(SEARCH_USERS, {
+  const { data, loading, error, refetch } = useQuery(SEARCH_USERS_QUERY, {
     variables: { name_contains: String(searchString) },
   })
 
