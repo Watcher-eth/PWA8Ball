@@ -1,79 +1,79 @@
 // @ts-nocheck
 
-import { fillUserImages } from "@/utils/fillUserImages"
+import { fillUserImages } from "@/utils/fillUserImages";
 
-import { useModalStore } from "@/lib/stores/ModalStore"
-import { useUserStore } from "@/lib/stores/UserStore"
+import { useModalStore } from "@/lib/stores/ModalStore";
+import { useUserStore } from "@/lib/stores/UserStore";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Grid } from "@/components/ui/tailwind/Grid"
-import { Col } from "@/components/ui/tailwind/Col"
-import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper"
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Grid } from "@/components/ui/tailwind/Grid";
+import { Col } from "@/components/ui/tailwind/Col";
+import { StandardPageWrapper } from "@/components/layouts/StandardPageWrapper";
 import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "@/components/layouts/StandardBleedOverlay"
-import { CommentSection } from "@/components/predictions/CommentSection"
-import { BetDetails } from "@/components/predictions/BetDetails"
-import { RelatedMarkets } from "@/components/predictions/RelatedMarkets"
+} from "@/components/layouts/StandardBleedOverlay";
+import { CommentSection } from "@/components/predictions/CommentSection";
+import { BetDetails } from "@/components/predictions/BetDetails";
+import { RelatedMarkets } from "@/components/predictions/RelatedMarkets";
 
-import { DesktopPredictComponent } from "./DesktopPredictComponent"
+import { DesktopPredictComponent } from "./DesktopPredictComponent";
 
-import { AlignLeft } from "lucide-react"
+import { AlignLeft } from "lucide-react";
 
-import { DesktopBettersModal } from "../Betters/DesktopBettersModal"
+import { DesktopBettersModal } from "../Betters/DesktopBettersModal";
 
-import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
-import { HARD_MARKETS } from "@/constants/markets"
-import { HARD_TOPICS } from "@/constants/topics"
-import { useCheckReferral } from "@/hooks/useCheckReferral"
-import { DesktopMarketHeader } from "./DesktopMarketHeader"
-import { DesktopChartCard } from "./DesktopChartCard"
-import { MarketMetadata } from "../BetDetails/MarketMetadata"
-import { shortenAddress } from "@/utils/address/shortenAddress"
-import { StatusBlock } from "../BetDetails/MarketStatus"
-import { useGetUserById } from "@/graphql/queries/users/useUserById"
-import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket"
-import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions"
+import { enhanceSingleMarketWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
+import { useCheckReferral } from "@/hooks/useCheckReferral";
+import { DesktopMarketHeader } from "./DesktopMarketHeader";
+import { DesktopChartCard } from "./DesktopChartCard";
+import { MarketMetadata } from "../BetDetails/MarketMetadata";
+import { shortenAddress } from "@/utils/address/shortenAddress";
+import { StatusBlock } from "../BetDetails/MarketStatus";
+import { useGetUserById } from "@/graphql/queries/users/useUserById";
+import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket";
+import { aggregatePredictedItemsWithImage } from "@/utils/predictions/aggregatePredictions";
 
 export function DesktopMarketPage({ users, market, id }) {
-  const { user } = useUserStore()
-  const openLoginModal = useModalStore((state) => state.openLoginModal)
-  useCheckReferral()
-  const userImages = fillUserImages(users, 3)
+  const { user } = useUserStore();
+  const openLoginModal = useModalStore((state) => state.openLoginModal);
+  useCheckReferral();
+  const userImages = fillUserImages(users, 3);
   const enhancedMarket = enhanceSingleMarketWithImageAndPolyId(
     market,
     HARD_MARKETS,
     HARD_TOPICS
-  )
+  );
 
-  const { user: creator, loading } = useGetUserById(market?.userAddress)
+  const { user: creator, loading } = useGetUserById(market?.userAddress);
   const { data: userPositions } = useGetUserPositionsForMarket(
     user?.walletAddress,
     id
-  )
-  const userOwns = userPositions?.filter((item) => item.tokensOwned > 0) || []
+  );
+  const userOwns = userPositions?.filter((item) => item.tokensOwned > 0) || [];
 
   const aggregatedPositions = aggregatePredictedItemsWithImage(
     userOwns ?? [],
     HARD_MARKETS
-  )
+  );
 
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col">
       <StandardBleedOverlay>
         <InverseVerticalBleedOverlay>
-          <div className="w-full h-40 relative">
+          <div className="w-full h-[8rem] relative">
             <img
-              className="w-full transform rotate-180 object-cover h-40 relative"
+              className="w-full transform rotate-180 object-cover h-[8rem] relative"
               alt="CoverImage"
               src={enhancedMarket?.image}
             />
             <div
               className={`
-                h-40 w-full
-                bg-gradient-to-t from-[#080808] to-[#080808]/5
+               h-[8rem] w-full
+                bg-gradient-to-t from-[#080808] via-[#080808]/65  to-[#080808]/45
                 backdrop-blur-xl absolute bottom-0
               `}
             />
@@ -99,7 +99,7 @@ export function DesktopMarketPage({ users, market, id }) {
           </div>
         </InverseVerticalBleedOverlay>
       </StandardBleedOverlay>
-      <div className="w-full h-full mt-1.5 overflow-y-auto z-[30] lg:mx-0 flex flex-col">
+      <div className="w-full h-full mt-1.5 overflow-y-auto z-[30] lg:mx-0 2xl:px-20 flex flex-col">
         <div>
           <Grid
             gap={4}
@@ -205,5 +205,5 @@ export function DesktopMarketPage({ users, market, id }) {
         </div>
       </div>
     </StandardPageWrapper>
-  )
+  );
 }

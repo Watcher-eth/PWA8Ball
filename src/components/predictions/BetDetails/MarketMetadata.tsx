@@ -32,7 +32,7 @@ export const MarketMetadata: React.FC<MarketMetadataProps> = (props) => {
         value={(props?.liquidityStake / 10 ** 6).toFixed(2)}
         icon={Landmark}
       />
-      <MetadataItem name="Rewards" value={`3x 🔭`} icon={Gift} />
+      <MetadataItem name="Rewards" value={`3x Multiplier`} icon={Gift} />
       <CreatorItem
         name="Created by"
         value={props.creatorAddress}

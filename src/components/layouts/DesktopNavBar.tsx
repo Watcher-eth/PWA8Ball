@@ -1,28 +1,28 @@
 // @ts-nocheck
-import Link from "next/link"
-import { ActivityIcon, Bell, Search, Trophy } from "lucide-react"
-import { HOME_PATH } from "@/utils/urls"
-import { useUserStore } from "@/lib/stores/UserStore"
+import Link from "next/link";
+import { ActivityIcon, Bell, Search, Trophy } from "lucide-react";
+import { HOME_PATH } from "@/utils/urls";
+import { useUserStore } from "@/lib/stores/UserStore";
 
-import { ConnectButton } from "@/components/buttons/ConnectButton"
-import { NavIconButton } from "@/components/buttons/NavIconButton"
+import { ConnectButton } from "@/components/buttons/ConnectButton";
+import { NavIconButton } from "@/components/buttons/NavIconButton";
 
-import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal"
-import { DesktopSearchModal } from "@/components/search/DesktopSearchModal"
-import { DesktopProfilePopover } from "@/components/layouts/DesktopProfilePopover"
-import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal"
-import { DesktopActivityModal } from "../activity/DesktopActivityModal"
-import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal"
-import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard"
-import { DesktopReferralModal } from "../share/Referrals/DesktopReferralModal"
+import { DesktopNotificationModal } from "@/components/notifications/DesktopNotificationModal";
+import { DesktopSearchModal } from "@/components/search/DesktopSearchModal";
+import { DesktopProfilePopover } from "@/components/layouts/DesktopProfilePopover";
+import { DesktopOnboardingModal } from "@/components/onboarding/DesktopOnboardingModal";
+import { DesktopActivityModal } from "../activity/DesktopActivityModal";
+import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal";
+import { useGetGlobalLeaderboard } from "@/graphql/leaderboard/useGetGlobalLeaderboard";
+import { DesktopReferralModal } from "../share/Referrals/DesktopReferralModal";
 
 export function DesktopNavBar() {
-  const { user } = useUserStore()
-  const userId = user?.external_auth_provider_user_id
-  const { data } = useGetGlobalLeaderboard()
+  const { user } = useUserStore();
+  const userId = user?.external_auth_provider_user_id;
+  const { data } = useGetGlobalLeaderboard();
   const isNotEOA =
     user?.walletType !== "smartwallet" ||
-    (!user?.name?.startsWith("0x") && user?.walletType === "smartwallet")
+    (!user?.name?.startsWith("0x") && user?.walletType === "smartwallet");
 
   // console.log({ user, isNotEOA })
   return (
@@ -30,7 +30,7 @@ export function DesktopNavBar() {
       <div className={`text-white z-50 fixed w-full`}>
         <div
           className={`
-            flex justify-between items-center w-full p-3  px-8
+            flex justify-between  items-center w-full p-3  px-8
             backdrop-blur-sm bg-gradient-to-b from-[transparent] to-[transparent]
           `}
         >
@@ -79,5 +79,5 @@ export function DesktopNavBar() {
         </div>
       </div>
     </div>
-  )
+  );
 }

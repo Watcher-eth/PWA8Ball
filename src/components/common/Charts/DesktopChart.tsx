@@ -240,7 +240,7 @@ export function DesktopChart(props: {
         className={`${
           props?.isMarketPage
             ? ` ${
-                props?.userOwns.length > 0 ? "h-[48vh]" : "h-[52vh]"
+                props?.userOwns.length > 0 ? "h-[45vh] " : "h-[49vh]"
               }  mt-7 mb-2.5 pt-2`
             : "h-[40vh] pb-2 pt-2"
         }  min-h-[280px] "`}
@@ -261,7 +261,7 @@ export function DesktopChart(props: {
         setTimeframe={setTimeframe}
       />
       {props?.userOwns.length > 0 && (
-        <div className="flex flex-row items-center justify-between mb-3 mt-2">
+        <div className="flex flex-row items-center justify-between mb-3 mt-4">
           <div className="flex flex-col items-start">
             <span className="text-xs text-white/70">You voted</span>
             <span className="text-white text-lg font-semibold">
