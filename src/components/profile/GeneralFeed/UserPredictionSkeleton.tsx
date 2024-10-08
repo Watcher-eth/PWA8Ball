@@ -9,7 +9,7 @@ export function UserPredictionSkeleton({ index }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="flex items-center w-full min-w-[90vw] md:min-w-full md:max-w-[24vw] justify-between p-2 rounded-2xl bg-[#171717] my-2"
+      className="flex items-center w-full min-w-[90vw] md:min-w-full md:max-w-[24vw] justify-between p-2 rounded-2xl bg-[#131313] border-[0.1rem] border-[#191919] my-2"
     >
       <div className="flex items-center gap-2">
         <AltSkeleton className="w-14 h-14" />

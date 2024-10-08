@@ -1,33 +1,33 @@
 // @ts-nocheck
 
-import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser"
+import { useGetNotificationsForUser } from "@/supabase/queries/notifications/useGetNotificationsForUser";
 
-import { NotificationsPlaceholder } from "../common/placeholders/NewPlaceholders"
-import { DesktopCardModal } from "../modals/DesktopCardModal"
-import { useUserStore } from "@/lib/stores/UserStore"
+import { NotificationsPlaceholder } from "../common/placeholders/NewPlaceholders";
+import { DesktopCardModal } from "../modals/DesktopCardModal";
+import { useUserStore } from "@/lib/stores/UserStore";
 
-import { NotificationCard } from "./NotificationCard"
+import { NotificationCard } from "./NotificationCard";
 
 export function DesktopNotificationModal({
   children,
   userId,
 }: {
-  children: React.ReactNode
-  userId: string
+  children: React.ReactNode;
+  userId: string;
 }) {
   const {
     data: notifications,
     isLoading,
     error,
-  } = useGetNotificationsForUser(userId)
-  const { user } = useUserStore()
+  } = useGetNotificationsForUser(userId);
+  const { user } = useUserStore();
   return (
     <DesktopCardModal
       title="Notifications"
       subtitle="You have 3 unread messages."
       cardClassName=""
-      dialogContentClassName="xl:max-w-[29vw] backdrop-blur-lg "
-      cardContentClassName="px-0 xl:max-w-[29vw] min-h-[50vh] "
+      dialogContentClassName="xl:max-w-[25vw] backdrop-blur-lg "
+      cardContentClassName="px-0 xl:max-w-[25vw] min-h-[50vh] "
       dialogClassName=""
       content={
         <div className="overflow-y-auto w-full">
@@ -51,5 +51,5 @@ export function DesktopNotificationModal({
     >
       {children}
     </DesktopCardModal>
-  )
+  );
 }

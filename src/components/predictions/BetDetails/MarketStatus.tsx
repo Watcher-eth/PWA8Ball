@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   BadgeHelp,
   Calendar,
@@ -6,22 +6,22 @@ import {
   ListChecks,
   Plus,
   Split,
-} from "lucide-react"
-import { motion, useAnimation } from "framer-motion"
-import { User } from "@/__generated__/graphql" // Assuming you're using this generated type
+} from "lucide-react";
+import { motion, useAnimation } from "framer-motion";
+import { User } from "@/__generated__/graphql"; // Assuming you're using this generated type
 import {
   formatUnixTimestamp,
   parseAndFormatDate,
-} from "@/utils/datetime/extractEndDate"
+} from "@/utils/datetime/extractEndDate";
 
 // Utility Functions
 
 interface StatusRowProps {
-  icon: React.ElementType
-  title: string
-  subtitle: string
-  isLast?: boolean
-  status?: boolean
+  icon: React.ElementType;
+  title: string;
+  subtitle: string;
+  isLast?: boolean;
+  status?: boolean;
 }
 
 const StatusRow: React.FC<StatusRowProps> = ({
@@ -72,18 +72,18 @@ const StatusRow: React.FC<StatusRowProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 interface StatusBlockProps {
-  endDate: string
-  createdAt: string
-  resolved: boolean
-  outcome: number
-  resolvedAt: string
-  proposedOutcome: number
-  proposedAt: string
-  creator: User
+  endDate: string;
+  createdAt: string;
+  resolved: boolean;
+  outcome: number;
+  resolvedAt: string;
+  proposedOutcome: number;
+  proposedAt: string;
+  creator: User;
 }
 
 export const StatusBlock: React.FC<StatusBlockProps> = ({
@@ -95,15 +95,15 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
   proposedOutcome,
   proposedAt,
 }) => {
-  const [expanded, setExpanded] = useState(false)
+  const [expanded, setExpanded] = useState(false);
   const { fullMonth, fullDay, year } = parseAndFormatDate(
     "12th September, 2024"
-  )
-  const createdDate = formatUnixTimestamp(Number(createdAt))
-  const proposedAtFormatted = formatUnixTimestamp(Number(proposedAt))
-  const resolvedAtFormatted = formatUnixTimestamp(Number(resolvedAt))
+  );
+  const createdDate = formatUnixTimestamp(Number(createdAt));
+  const proposedAtFormatted = formatUnixTimestamp(Number(proposedAt));
+  const resolvedAtFormatted = formatUnixTimestamp(Number(resolvedAt));
 
-  const toggleStatus = () => setExpanded(!expanded)
+  const toggleStatus = () => setExpanded(!expanded);
 
   return (
     <div className="flex flex-col px-4">
@@ -171,21 +171,21 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
         onClick={toggleStatus}
         className="text-[#808080] text-sm  underline mt-2"
       >
-        {expanded ? "Hide current status" : "Show current status"}
+        {expanded ? "Hide full timeline" : "Show full timeline"}
       </button>
 
       <div className="h-px w-full bg-[#151515] my-4"></div>
     </div>
-  )
-}
+  );
+};
 
 interface PulsingViewProps {
-  status?: boolean
+  status?: boolean;
 }
 
 const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
-  const innerControls = useAnimation()
-  const outerControls = useAnimation()
+  const innerControls = useAnimation();
+  const outerControls = useAnimation();
 
   useEffect(() => {
     const pulseSequence = async () => {
@@ -197,7 +197,7 @@ const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
             duration: 0.6,
             ease: "easeInOut",
           },
-        })
+        });
 
         // Outer pulse after
         await outerControls.start({
@@ -208,12 +208,12 @@ const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
             duration: 1,
             ease: "easeInOut",
           },
-        })
+        });
       }
-    }
+    };
 
-    pulseSequence()
-  }, [innerControls, outerControls])
+    pulseSequence();
+  }, [innerControls, outerControls]);
 
   return (
     <div className="relative flex items-center justify-center">
@@ -239,5 +239,5 @@ const PulsingView: React.FC<PulsingViewProps> = ({ status }) => {
         }`}
       ></motion.div>
     </div>
-  )
-}
+  );
+};
