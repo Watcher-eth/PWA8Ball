@@ -31,7 +31,7 @@ export function DesktopOnboardingModal({
   // console.log("user", user, PrivyUser)
   return (
     <DesktopCardModal
-      dialogContentClassName="min-w-[52vw] md:min-w-[58vw] xl:min-w-[42vw] xl:max-w-[42vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
+      dialogContentClassName="min-w-[52vw] md:min-w-[50vw] lg:min-w-[75vw]  xl:min-w-[42vw] xl:max-w-[55vw] 2xl:max-w-[43vw] sm:min-w-[90vw] bg-[#080808]/[0.8]"
       cardClassName="w-full"
       cardContentClassName="!p-0"
       content={
@@ -56,7 +56,7 @@ function DesktopOnboarding() {
   const { loginWithOAuth, initOAuth } = useLoginWithOAuth();
   return (
     <div className="flex overflow-hidden rounded-lg ">
-      <div className="flex flex-col items-center justify-center sm:w-1/2 w-full p-10 pt-6 text-white">
+      <div className="flex flex-col items-center justify-center lg:w-1/2 w-full p-10 pt-6 text-white">
         <img
           src={"/images/OrbLogo.png"}
           className="flex items-center justify-center w-14 h-14 mb-3 rounded-full"
@@ -126,11 +126,11 @@ function DesktopOnboarding() {
           </a>
         </div>
       </div>
-      <div className="hidden sm:block sm:w-1/2">
+      <div className="hidden lg:block lg:w-1/2">
         <img
           src="/images/Onboarding.png"
           alt="Onboarding illustration"
-          className="object-cover w-full h-[70vh] xl:h-[50vh]"
+          className="object-cover w-full h-full xl:h-[50vh]"
         />
       </div>
     </div>

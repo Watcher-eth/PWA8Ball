@@ -179,19 +179,19 @@ export const NewPlaceholderComment = ({ isUser, isPost, onOpen }) => (
           "linear-gradient(180deg, rgba(7, 7, 7, 0) 0%, rgba(7, 7, 7, 0.95) 95%, #070707 100%)",
         height: "240px",
         width: "100%",
-        marginTop: "-240px",
+        marginTop: "-230px",
       }}
     />
     <div className="flex flex-col items-center mt-[-0.5rem]">
-      <div className="text-white text-xl font-bold mb-1">No comments, yet</div>
-      <div className="text-[lightgray] text-sm text-center px-5">
+      <div className="text-white text-2xl font-bold mb-1">No comments, yet</div>
+      <div className="text-[lightgray] text-md text-center px-5 mt-0.5">
         Be the first to comment on this {isPost ? "post" : "prediction"} and the
         reply guys will follow
       </div>
     </div>
     <motion.button
       onClick={onOpen}
-      className="w-[85%] mt-5 py-3 rounded-full bg-[#171717] text-white font-bold text-md"
+      className="w-[75%] mt-5 py-3 rounded-full bg-[#131313] border-[0.1rem] border-[#191919] text-white font-[600] text-md"
       whileTap={{ scale: 0.95 }}
     >
       {isUser ? "Join the discussion" : "Join the discussion"}
