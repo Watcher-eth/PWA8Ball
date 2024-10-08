@@ -24,9 +24,9 @@ export function MarketCard({
     ? "min-h-[20vw] h-[20vw] xl:h-[14vw] xl:min-h-[14vw]"
     : amount["2xl"] >= 4 || amount["xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[18vw] xl:min-h-[18.5vw]"
-    : amount["xl"] >= 4
+    : amount["2xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
-    : "min-h-[25vw] h-[23vw] xl:h-[19vw] xl:min-h-[19.5vw]";
+    : "min-h-[21vw] h-[21vw] xl:h-[19vw] xl:min-h-[19.5vw]";
 
   if (!item) {
     return (
@@ -89,15 +89,16 @@ export function DesktopCardSectionSkelleton({
   amount: { base: number; xl: number; "2xl": number };
 }) {
   const baseAmount = amount?.base || 2;
+
   const xlAmount = amount?.xl || baseAmount;
   const twoXlAmount = amount?.["2xl"] || xlAmount;
   const heightClass = isTwoCards
     ? "h-[29vw]"
     : amount["2xl"] >= 5
-    ? "min-h-[20vw] h-[20vw] xl:h-[16vw] xl:min-h-[16vw]"
+    ? "min-h-[20vw] h-[20vw] xl:h-[14vw] xl:min-h-[14vw]"
     : amount["2xl"] >= 4 || amount["xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[18vw] xl:min-h-[18.5vw]"
-    : amount["xl"] >= 4
+    : amount["2xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
     : "min-h-[25vw] h-[23vw] xl:h-[19vw] xl:min-h-[19.5vw]";
   return (
@@ -112,10 +113,10 @@ export function DesktopCardSectionSkelleton({
             : "text-[0.8rem] top-4 right-4 h-[1.4rem] w-[3rem]"
         }`}
       />
-      <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-col mt-3">
-          <Skeleton className="h-[1.4rem] w-[80%] xl:w-[39%]" />
-          <Skeleton className="mt-2 h-[1.1rem] w-[23vw] xl:w-[69%]" />
+      <div className="flex flex-row justify-between w-full items-center">
+        <div className="flex flex-col mt-3 w-full">
+          <Skeleton className="h-[1.4rem] mt-2 w-[80%] xl:w-[60%]" />
+          <Skeleton className="mt-3.5 mb-1 h-[1.1rem] w-[23vw] xl:w-[80%]" />
         </div>
         {isTwoCards && (
           <Skeleton className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] h-[2.2rem] w-[6.5rem] mt-4" />

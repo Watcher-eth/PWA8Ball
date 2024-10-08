@@ -1,24 +1,25 @@
-import { formatMarketArr } from "@/utils/markets/formatMarketArr"
+import { formatMarketArr } from "@/utils/markets/formatMarketArr";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel"
-import { MarketCard } from "./MarketCard"
-import { PaginationDots } from "./CarouselDotButton"
-import { Skeleton } from "@/components/ui/Skeleton"
+} from "@/components/ui/carousel";
+import { MarketCard } from "./MarketCard";
+import { PaginationDots } from "./CarouselDotButton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export function FeaturedMarketsSection({ markets, topic }) {
   const enrichedFeedData = formatMarketArr({
     markets,
     selectedTopic: "🔥 Trending",
-  })
+  });
 
   // Determine the number of skeletons needed if fewer items are available
-  const skeletonCount = 24 - enrichedFeedData.length > 0 ? 24 - enrichedFeedData.length : 0
+  const skeletonCount =
+    24 - enrichedFeedData.length > 0 ? 24 - enrichedFeedData.length : 0;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full -mb-3">
       {!topic && (
         <div className="text-[1.8rem] text-white font-semibold mb-7 space-x-2">
           Trending Today
@@ -53,5 +54,5 @@ export function FeaturedMarketsSection({ markets, topic }) {
         <PaginationDots />
       </Carousel>
     </div>
-  )
+  );
 }

@@ -8,18 +8,16 @@ import { PaginationDots } from "./CarouselDotButton";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 export function DesktopHomeNews({ markets, amount, topic }) {
+  // Adjust the amount based on screen size
   const adjustedAmount = {
-    base: amount,
-    "2xl": amount === 4 ? 5 : amount === 2 ? 4 : amount,
-    xl: amount === 4 ? 5 : amount === 2 ? 4 : amount,
+    base: amount, // Respect base amount for smaller screens
+    xl: Math.min(amount, 3), // Limit the amount for xl screens to a maximum of 3
+    "2xl": amount === 4 ? 5 : amount === 2 ? 4 : amount, // Adjust for 2xl screens
   };
 
+  // Dynamically calculate skeletons based on the adjusted amount for the current screen size.
   const skeletonCount =
-    Math.max(
-      adjustedAmount["2xl"], // Use the largest amount (e.g., for 2xl screens)
-      adjustedAmount["xl"],
-      adjustedAmount["base"]
-    ) - markets.length;
+    Math.max(adjustedAmount["base"], adjustedAmount["2xl"]) - markets.length;
 
   return (
     <div className="w-full flex flex-col">
@@ -36,16 +34,20 @@ export function DesktopHomeNews({ markets, amount, topic }) {
           topic === true && "-mt-10"
         }`}
       >
-        <Carousel className="flex flex-col no-scrollbar mb-8 w-full gap-2 overflow-y-visible">
+        <Carousel
+          className={`flex flex-col no-scrollbar ${
+            adjustedAmount["xl"] >= 3 ? "mb-0" : "mb-8"
+          } w-full gap-2 overflow-y-visible`}
+        >
           <CarouselContent className="flex flex-row no-scrollbar w-full gap-1 py-6 overflow-y-visible">
             {markets &&
               markets.slice(0, adjustedAmount["base"]).map((item, index) => (
                 <CarouselItem
                   key={index}
                   className={`${
-                    adjustedAmount["2xl"] === 5 || adjustedAmount["2xl"] === 4
-                      ? "basis-1/5 w-1/5"
-                      : adjustedAmount["base"] === 3
+                    adjustedAmount["2xl"] === 5
+                      ? "basis-1/3 w-1/3 xl:basis-1/4 xl:w-1/4 2xl:basis-1/5 2xl:w-1/5"
+                      : adjustedAmount["xl"] === 3
                       ? "basis-1/3 w-1/3"
                       : "basis-1/2 w-1/2"
                   }`}
@@ -63,9 +65,9 @@ export function DesktopHomeNews({ markets, amount, topic }) {
               <CarouselItem
                 key={`skeleton-${index}`}
                 className={`${
-                  adjustedAmount["2xl"] === 5 || adjustedAmount["2xl"] === 4
+                  adjustedAmount["2xl"] === 5
                     ? "basis-1/5 w-1/5"
-                    : adjustedAmount["base"] === 3
+                    : adjustedAmount["xl"] === 3
                     ? "basis-1/3 w-1/3"
                     : "basis-1/2 w-1/2"
                 }`}
@@ -73,7 +75,11 @@ export function DesktopHomeNews({ markets, amount, topic }) {
                 <div className="flex flex-col w-full relative">
                   <Skeleton
                     className={`${
-                      adjustedAmount["2xl"] >= 4 ? "h-[18vw]" : "h-[21vw]"
+                      adjustedAmount["2xl"] === 5
+                        ? "h-[14.1vw]"
+                        : adjustedAmount["2xl"] >= 4
+                        ? "h-[18vw]"
+                        : "h-[21vw]"
                     } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010]`}
                   />
                   <Skeleton
@@ -84,9 +90,9 @@ export function DesktopHomeNews({ markets, amount, topic }) {
                     }`}
                   />
                   <div className="flex flex-row justify-between items-center">
-                    <div className="flex flex-col mt-6">
+                    <div className="flex flex-col mt-5">
                       <Skeleton className="h-[1.4rem] w-[80%]" />
-                      <Skeleton className="mt-3 h-[1.1rem] w-[23vw]" />
+                      <Skeleton className="mt-3 mb-0.5 h-[1.1rem] w-[23vw]" />
                     </div>
                     {adjustedAmount["base"] === 2 && (
                       <Skeleton className="py-1 px-3.5 pr-1.5 rounded-full bg-[#181818] h-[2.2rem] w-[6.5rem] mt-4" />
