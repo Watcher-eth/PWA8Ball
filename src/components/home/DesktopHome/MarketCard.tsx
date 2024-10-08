@@ -1,18 +1,20 @@
-import Link from "next/link"
-import { Stars } from "lucide-react"
-import { getMarketPath } from "@/utils/urls"
-import { Skeleton } from "@/components/ui/Skeleton" // Assuming you have a Skeleton component
+import Link from "next/link";
+import { Stars } from "lucide-react";
+import { getMarketPath } from "@/utils/urls";
+import { Skeleton } from "@/components/ui/Skeleton"; // Assuming you have a Skeleton component
+import { BettersOverviewPlaceholder } from "@/components/predictions/Betters/BettersOverviewPlaceholder";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
 
 export function MarketCard({
   item,
   isTwoCards,
   loading = false,
 }: {
-  item: any
-  isTwoCards: boolean
-  loading?: boolean
+  item: any;
+  isTwoCards: boolean;
+  loading?: boolean;
 }) {
-  console.log("item", item)
+  console.log("item", item);
   if (!item) {
     return (
       <div className={`flex flex-col my-3 w-full relative`}>
@@ -44,7 +46,7 @@ export function MarketCard({
         {/* Stake Skeleton */}
         <Skeleton className="text-[gray] mt-2 h-[0.9rem] w-[15%]" />
       </div>
-    )
+    );
   }
 
   return (
@@ -56,7 +58,7 @@ export function MarketCard({
         className={`${
           isTwoCards ? "h-[29vw]" : "min-h-[21vw] h-[21vw]"
         } w-full object-cover rounded-lg border-[0.08rem] border-[#303030]/25 shadow-md shadow-[#101010] hover:shadow-[#171717]`}
-        src={item?.image}
+        src={item?.image ? item?.image : DEFAULT_PFP_PLACEHOLDER}
         alt={item?.title}
       />
 
@@ -84,5 +86,5 @@ export function MarketCard({
         ${Number(item?.usdcStake / 10 ** 6).toFixed(2)} at stake
       </div>
     </Link>
-  )
+  );
 }

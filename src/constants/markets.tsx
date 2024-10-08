@@ -25,7 +25,7 @@ export const HARD_MARKETS = [
     id: 1, // Shreli back to Jail
     title: "Shreli back to Jail",
     image:
-      "https://bdc2020.o0bc.com/wp-content/uploads/2020/05/Martin_Shkreli_Lawsuit_56315-scaled.jpg",
+      "https://static01.nyt.com/images/2015/12/18/business/18shkreli-web4/18shkreli-web4-superJumbo.jpg",
     options: [
       {
         name: "Yes",
