@@ -20,7 +20,7 @@ export function useGetMarketPrices(id: string) {
   const { data, loading, error } = useApolloQuery(GET_MARKET_CHART_DATA, {
     variables: { marketId: id },
   })
-  console.log("data", data)
+  // console.log("data", data)
 
   return {
     data: data?.prices?.items ?? [],
