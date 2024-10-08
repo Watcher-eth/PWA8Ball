@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query getMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n": types.GetMarketPricesDocument,
+    "\n  query GetMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n": types.GetMarketPricesDocument,
     "\n  query FriendsOrdersByUser($userAddressArr: [String]!) {\n    positions(where: { userAddress_in: $userAddressArr }, limit: 15) {\n      items {\n        marketId\n        option\n        tokensOwned\n        createdAt\n        market {\n          id\n          initialProb\n          marketId\n          outcomeA\n          outcomeB\n          outcomeOddsA\n          outcomeOddsB\n          question\n          title\n          usdcStake\n        }\n        user {\n          externalAuthProviderUserId\n          name\n          pfp\n          walletAddress\n        }\n      }\n    }\n  }\n": types.FriendsOrdersByUserDocument,
     "\n  query getLpPositionsData($userAddress: String!) {\n    lpPositionPrices(where: { userAddress: $userAddress }) {\n      items {\n        amountLp\n        amountUsdc\n        marketId\n        id\n        timestamp\n        userAddress\n      }\n    }\n  }\n": types.GetLpPositionsDataDocument,
     "\n  query getLpPositionOriginalValueUSDC($userAddress: String!) {\n    lpTrades(where: { userAddress: $userAddress }) {\n      items {\n        amountLp\n        amountUsdc\n        userAddress\n      }\n    }\n  }\n": types.GetLpPositionOriginalValueUsdcDocument,
@@ -52,7 +52,7 @@ export function tgql(source: string): unknown;
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function tgql(source: "\n  query getMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n"];
+export function tgql(source: "\n  query GetMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMarketPrices($marketId: BigInt) {\n    prices(where: { marketId: $marketId }) {\n      items {\n        id\n        marketId\n        price\n        timestamp\n      }\n    }\n  }\n"];
 /**
  * The tgql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
