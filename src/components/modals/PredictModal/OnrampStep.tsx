@@ -151,17 +151,17 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
   const { user } = useUserStore();
   const [visible, setVisible] = useState(false);
   const handleGetSignature = async (url: string): Promise<string> => {
-    const response = await fetch('/api/signUrl', {
-      method: 'POST',
+    const response = await fetch("/api/signUrl", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ url }),
     });
 
-    return response
-  }
-  
+    return response;
+  };
+
   return (
     <motion.div
       key="step5"
@@ -178,7 +178,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
         defaultCurrencyCode="eth"
         visible={visible}
         // walletAddress={user?.walletAddress}
-        // onUrlSignatureRequested={handleGetSignature}
+        onUrlSignatureRequested={handleGetSignature}
       />
       <div className="text-white text-[1.5rem] font-[600] mt-3 ">Buy USDC</div>
       <div
