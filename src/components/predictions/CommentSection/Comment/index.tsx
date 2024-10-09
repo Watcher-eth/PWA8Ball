@@ -109,16 +109,14 @@ export function Comment({
         />
       </div>
 
-      {/* Show first reply if available */}
       {firstReply && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-col w-9/10 my-4 pt-0 border-l border-[#212121] pl-8 ml-[3.8rem]"
+          className="flex flex-col w-9/10 mt-5 mb-3 md:my-4 pt-0 border-l border-[#212121] pl-6 md:pl-8  md:ml-[3.8rem]"
         >
-          {/* Ensure the firstReply's data is passed correctly to CommentHeader */}
           <CommentHeader
             userOwns={filteredReplyUserOwns}
             options={options}
@@ -164,7 +162,7 @@ export function Comment({
       )}
 
       {!isDesktop && (
-        <div className="w-full self-center h-0 border-b border-[#212121] mt-3 z-1" />
+        <div className="w-full self-center h-0 border-[0.1px] border-[#171717] mt-3 z-0" />
       )}
     </motion.div>
   );
