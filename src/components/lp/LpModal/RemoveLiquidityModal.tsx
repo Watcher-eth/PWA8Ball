@@ -57,6 +57,7 @@ export function RemoveLiquidityModal({
                 multiplier={multiplier}
                 setStep={setStep}
                 totalPot={amount}
+                id={Number(id)}
               />
             )}
             {step === 2 && (

@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo } from "react";
 
-
 export function TxStatusButton({
   isPending,
   isSuccess,
@@ -12,30 +11,30 @@ export function TxStatusButton({
   minWidth,
   height,
 }: {
-  isPending: boolean
-  isSuccess: boolean
-  isError: boolean
-  pendingText: string
-  successText: string
-  errorText: string
-  minWidth?: string
-  height?: string
+  isPending: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  pendingText: string;
+  successText: string;
+  errorText: string;
+  minWidth?: string;
+  height?: string;
 }) {
   // let state
   // let currentText
   const state = useMemo<"success" | "error" | "pending">(() => {
-    if (isPending) return "pending"
-    if (isSuccess) return "success"
-    if (isError) return "error"
-    return "pending"
-  }, [isPending, isSuccess, isError])
+    if (isPending) return "pending";
+    if (isSuccess) return "success";
+    if (isError) return "error";
+    return "pending";
+  }, [isPending, isSuccess, isError]);
 
   const currentText = useMemo(() => {
-    if (isPending) return pendingText
-    if (isSuccess) return successText
-    if (isError) return errorText
-    return pendingText
-  }, [isPending, isSuccess, isError, pendingText, successText, errorText])
+    if (isPending) return pendingText;
+    if (isSuccess) return successText;
+    if (isError) return errorText;
+    return pendingText;
+  }, [isPending, isSuccess, isError, pendingText, successText, errorText]);
 
   return (
     <motion.button
@@ -68,7 +67,7 @@ export function TxStatusButton({
         height ? height : "h-14"
       } cursor-default items-center gap-2 overflow-hidden rounded-full px-4 ${
         minWidth ? minWidth : " min-w-[10.5rem]"
-      } items-center justify-center  text-xl font-semibold tracking-[-0.4px]`}
+      } items-center justify-center w-1/2  text-xl font-semibold tracking-[-0.4px]`}
     >
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
@@ -106,7 +105,7 @@ export function TxStatusButton({
         </motion.span>
       </AnimatePresence>
     </motion.button>
-  )
+  );
 }
 
 function LoaderIcon({ className }: { className: string }) {
@@ -155,7 +154,7 @@ function SolidWarningIcon({ className }: { className: string }) {
   );
 }
 
-function SolidCheckIcon({className}: { className: string }) {
+function SolidCheckIcon({ className }: { className: string }) {
   return (
     <svg
       viewBox="0 0 26 26"

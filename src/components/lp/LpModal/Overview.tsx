@@ -1,20 +1,20 @@
-
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import {
   X,
   WalletCards,
   ArrowDown,
   AlertTriangle,
   InfoIcon,
-} from "lucide-react"
-import { DialogClose } from "@/components/ui/dialog"
+} from "lucide-react";
+import { DialogClose } from "@/components/ui/dialog";
 import {
   Tooltip,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { TooltipContent } from "@radix-ui/react-tooltip"
-
+} from "@/components/ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
+import { useRemoveLp } from "@/hooks/actions/useRemoveLp";
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 
 export function Overview({
   setStep,
@@ -26,17 +26,23 @@ export function Overview({
   multiplier,
   totalPot,
   isDesktop,
+  id,
 }: {
-  setStep: (num: number) => void
-  onClose: () => void
-  changeStep: (step: number) => void
-  image: string
-  title: string
-  amount: string
-  multiplier: string
-  totalPot: number
-  isDesktop?: boolean
+  setStep: (num: number) => void;
+  onClose: () => void;
+  changeStep: (step: number) => void;
+  image: string;
+  title: string;
+  amount: string;
+  multiplier: string;
+  totalPot: number;
+  isDesktop?: boolean;
+  id: number;
 }) {
+  const { removeLp, loading, success, error } = useRemoveLp({
+    marketId: id,
+  });
+
   return (
     <div
       className={`flex flex-col items-center ${
@@ -124,28 +130,50 @@ export function Overview({
           </span>
         </div>
       ))}
-      <div className="flex flex-row items-center gap-1.5 mt-2 mb-1 w-full">
+      <div className="flex flex-row items-center gap-1.5 mt-5 mb-1 w-full">
         <DialogClose asChild>
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#1D1D1D] rounded-full mt-3"
+            className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#1D1D1D] rounded-full"
           >
             <span className="ml-1.5 text-[20px] font-extrabold text-[#D9D9D9]">
               Cancel
             </span>
           </motion.button>
         </DialogClose>
-        <motion.button
-          onClick={() => setStep(2)}
-          whileTap={{ scale: 0.95 }}
-          className="flex flex-row items-center justify-center w-1/2 px-6 h-12 bg-[#D9D9D9] rounded-full mt-3 ml-4"
-        >
-          <ArrowDown color="black" strokeWidth={3} height={23} />
-          <span className="ml-0.5 text-[20px] font-semibold text-[#1D1D1D]">
-            Withdraw
-          </span>
-        </motion.button>
+        {loading || success || loading || error ? (
+          <TxStatusButton
+            isPending={loading}
+            isSuccess={success}
+            height="h-12"
+            isError={error}
+            pendingText="Withdrawing"
+            successText="Success" 
+            
+            errorText="Withdrawl Failed"
+          />
+        ) : (
+          <motion.button
+            onClick={() => {
+              success ? () => {} : removeLp(id);
+            }}
+            whileTap={{ scale: 0.95 }}
+            className=" flex flex-row ml-4 px-6 h-12 rounded-full bg-[#D9D9D9] w-1/2 items-center justify-center border-none"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-row items-center w-1/2 justify-center"
+            >
+              <ArrowDown color="black" strokeWidth={3} height={23} />
+              <span className="text-[20px] text-[#1D1D1D] font-semibold ml-0.5">
+                Withdraw
+              </span>
+            </motion.div>
+          </motion.button>
+        )}
       </div>
     </div>
-  )
+  );
 }

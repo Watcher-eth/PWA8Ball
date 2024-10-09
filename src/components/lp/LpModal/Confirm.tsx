@@ -30,7 +30,7 @@ export function RemoveLPConfirmationScreen(props: {
 }) {
   const { onClose, refetch } = props
 
-  const { removeLp, loading, success } = useRemoveLp({ marketId: props.id,})
+  const { removeLp, loading, success, error } = useRemoveLp({ marketId: props.id,})
 
   async function userRemoveLP() {
     try {
