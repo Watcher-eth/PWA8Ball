@@ -91,8 +91,8 @@ function MarketCardSection<T>({
   amount: { base: number; xl: number; "2xl"?: number };
 }) {
   const skeletonCount =
-    amount?.base && feedDataArr?.length
-      ? Math.max(amount.base - feedDataArr.length, 0)
+    amount?.xl && feedDataArr?.length
+      ? Math.max(amount.xl - feedDataArr.length, 0)
       : 0;
 
   return (

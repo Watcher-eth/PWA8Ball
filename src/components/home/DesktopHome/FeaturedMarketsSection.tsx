@@ -14,14 +14,14 @@ export function FeaturedMarketsSection({ markets, topic }) {
     selectedTopic: "🔥 Trending",
   });
 
-  const isTwoCards = typeof window !== "undefined" && window.innerWidth < 1324;
+  const isTwoCards = typeof window !== "undefined" && window.innerWidth < 1024;
 
   const skeletonCount =
     24 - enrichedFeedData.length > 0 ? 24 - enrichedFeedData.length : 0;
 
   const adjustedAmount = {
     base: 2,
-    xl: Math.min(2, 2),
+    xl: Math.min(3, 3),
     "2xl": 4,
   };
 
@@ -35,7 +35,7 @@ export function FeaturedMarketsSection({ markets, topic }) {
       <Carousel>
         <CarouselContent className="flex flex-row space-x-3.5  w-full">
           {enrichedFeedData.map((item, index) => (
-            <CarouselItem key={index} className="basis-1/2 w-1/2  xl:w-1/4">
+            <CarouselItem key={index} className="basis-1/2 w-1/2 lg:basis-1/4  lg:w-1/4">
               <MarketCard
                 item={item}
                 isTwoCards={isTwoCards}
