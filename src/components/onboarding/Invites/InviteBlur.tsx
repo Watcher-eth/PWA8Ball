@@ -44,7 +44,7 @@ function BlurOverlay() {
 export function BlurOverlayWrapper({ children, shouldShowOverlay }) {
   return (
     <>
-      {shouldShowOverlay && <BlurOverlay />}
+      {/* {false && <BlurOverlay />} */}
       {children}
     </>
   );
