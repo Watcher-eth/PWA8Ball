@@ -34,7 +34,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 
   return (
     <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
-      <div className="flex flex-col mx-2 -mt-6 lg:mx-0">
+      <div className="flex flex-col mx-2 -mt-6 lg:mx-2">
         {/* <div className=" pb-8  flex flex-row">
           <TopMarket />
         </div> */}

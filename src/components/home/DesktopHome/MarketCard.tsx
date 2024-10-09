@@ -26,7 +26,7 @@ export function MarketCard({
     ? "min-h-[21vw] h-[21vw] xl:h-[16vw] xl:min-h-[16.5vw]"
     : amount["2xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
-    : "min-h-[21vw] h-[21vw] xl:h-[19vw] xl:min-h-[19.5vw]";
+    : "min-h-[21vw] h-[21vw] xl:h-[15vw] xl:min-h-[15.5vw]";
 
   if (!item) {
     return (

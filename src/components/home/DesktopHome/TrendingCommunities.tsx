@@ -12,7 +12,7 @@ export function TrendingCommunities() {
   return (
     <div className=" flex flex-col w-full -mb-7">
       <div className="text-[1.8rem] text-white font-semibold mb-7 space-x-2">
-        Popular Communities
+        Popular Topics
       </div>
       <div className="flex flex-row space-x-7">
         {topics?.map((topic, index) => {

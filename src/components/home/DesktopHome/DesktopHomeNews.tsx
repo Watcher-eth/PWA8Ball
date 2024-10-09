@@ -10,8 +10,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 export function DesktopHomeNews({ markets, amount, topic }) {
   const adjustedAmount = {
     base: amount, 
-    xl: Math.min(amount, 3), 
-    "2xl": amount === 4 ? 5 : amount === 2 ? 4 : amount,
+    xl: Math.min(amount, 4), 
+    "2xl": amount === 3 ? 5 : amount === 4 ? 5 : amount === 2 ? 5 : amount,
   };
 
   const skeletonCount =
@@ -43,7 +43,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
                     adjustedAmount["2xl"] === 5
                       ? "basis-1/3 w-1/3 xl:basis-1/4 xl:w-1/4 2xl:basis-1/5 2xl:w-1/5"
                       : adjustedAmount["xl"] === 3
-                      ? "basis-1/3 w-1/3"
+                      ? "basis-1/4 w-1/4"
                       : "basis-1/2 w-1/2"
                   }`}
                 >
