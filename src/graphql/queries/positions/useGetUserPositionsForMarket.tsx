@@ -23,6 +23,7 @@ export function useGetUserPositionsForMarket(
       userAddress: getChecksummedAddress(userAddress!),
       marketId: marketId,
     },
+    
   })
 
   const orders = data?.positions?.items ?? []
