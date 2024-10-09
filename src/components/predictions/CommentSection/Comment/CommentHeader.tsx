@@ -1,14 +1,13 @@
+import Link from "next/link";
+import { UserCircle2Icon } from "lucide-react";
 
-import Link from "next/link"
-import { UserCircle2Icon } from "lucide-react"
-
-import { timeAgo } from "@/utils/datetime/timeAgo"
-import { parseOption } from "@/utils/predictions/parseOption"
-import { getProfilePath } from "@/utils/urls"
-import { ProfileToolTip } from "@/components/profile/ProfileToolTip"
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
-import { Position, User } from "@/__generated__/graphql"
-import { Outcome } from "./index"
+import { timeAgo } from "@/utils/datetime/timeAgo";
+import { parseOption } from "@/utils/predictions/parseOption";
+import { getProfilePath } from "@/utils/urls";
+import { ProfileToolTip } from "@/components/profile/ProfileToolTip";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+import { Position, User } from "@/__generated__/graphql";
+import { Outcome } from "./index";
 
 export function CommentHeader({
   user,
@@ -17,11 +16,11 @@ export function CommentHeader({
   userOwns,
   options,
 }: {
-  user?: User
-  user2?: User
-  created_at?: string
-  userOwns: Partial<Position>[]
-  options: Outcome[]
+  user?: User;
+  user2?: User;
+  created_at?: string;
+  userOwns: Partial<Position>[];
+  options: Outcome[];
 }) {
   return (
     <div className="flex flex-row w-full items-center justify-between">
@@ -33,9 +32,7 @@ export function CommentHeader({
         <div className="flex  w-full flex-row items-start">
           <div>
             <ProfileToolTip user={user!}>
-              <UserPfpIcon
-                pfp={user?.pfp ?? DEFAULT_PFP_PLACEHOLDER}
-              />
+              <UserPfpIcon pfp={user?.pfp ?? DEFAULT_PFP_PLACEHOLDER} />
             </ProfileToolTip>
           </div>
           <div className="flex flex-row items-center ml-3.5 justify-between w-full">
@@ -47,13 +44,13 @@ export function CommentHeader({
                 <p
                   style={{
                     backgroundColor:
-                      userOwns[0].option === 1
+                      userOwns[0].option === 0
                         ? "rgb(255, 63, 63, 0.1)"
                         : "rgb(77, 175, 255, 0.1)",
                   }}
                   className={`
                       text-[13px] ${
-                        userOwns[0].option === 1
+                        userOwns[0].option === 0
                           ? "text-[#FF3F3F]"
                           : "text-[#4DAFFF]"
                       }
@@ -81,7 +78,7 @@ export function CommentHeader({
         </div>
       </Link>
     </div>
-  )
+  );
 }
 
 function UserPfpIcon({ pfp }: { pfp?: string }) {
@@ -92,8 +89,8 @@ function UserPfpIcon({ pfp }: { pfp?: string }) {
         alt="profile"
         className="w-12 h-12 min-w-12 min-h-12 border-[0.08rem] border-[#191919] rounded-full object-cover "
       />
-    )
+    );
   } else {
-    return <UserCircle2Icon color="gray" size={20} />
+    return <UserCircle2Icon color="gray" size={20} />;
   }
 }

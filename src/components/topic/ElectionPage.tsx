@@ -1,39 +1,39 @@
-import _ from "lodash"
-import { useState } from "react"
-import { Countdown } from "../common/CountDown"
+import _ from "lodash";
+import { useState } from "react";
+import { Countdown } from "../common/CountDown";
 import {
   ChevronDown,
   ChevronUp,
   ShareIcon,
   Split,
   TrendingUp,
-} from "lucide-react"
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
+} from "lucide-react";
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay"
-import { SECTION_DATA_MAP, SwingStates } from "@/constants/elections"
-import Link from "next/link"
-import { getMarketPath } from "@/utils/urls"
-import { UsMapCard } from "../map/UsMapCard"
-import MotionNumber from "motion-number"
-import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
-import { HARD_MARKETS } from "@/constants/markets"
-import { HARD_TOPICS } from "@/constants/topics"
+} from "../layouts/StandardBleedOverlay";
+import { SECTION_DATA_MAP, SwingStates } from "@/constants/elections";
+import Link from "next/link";
+import { getMarketPath } from "@/utils/urls";
+import { UsMapCard } from "../map/UsMapCard";
+import MotionNumber from "motion-number";
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 
-import { Market } from "@/__generated__/graphql"
-
+import { Market } from "@/__generated__/graphql";
+import { usePreviousRouteTitle } from "@/utils/router/getPreviousRouteTitle";
 
 function Button({
   text,
   IconComponent,
   onClick,
 }: {
-  text: string
-  IconComponent: any
-  onClick?: any
+  text: string;
+  IconComponent: any;
+  onClick?: any;
 }) {
   return (
     <div
@@ -43,7 +43,7 @@ function Button({
       <div className="text-base font-medium text-[#999999] mr-1">{text}</div>
       <IconComponent color="#999999" size={"1rem"} strokeWidth={3.5} />
     </div>
-  )
+  );
 }
 
 function CandidateSection({
@@ -53,11 +53,11 @@ function CandidateSection({
   change,
   side,
 }: {
-  image: string
-  name: string
-  odds: number
-  change: number
-  side: 1 | 2
+  image: string;
+  name: string;
+  odds: number;
+  change: number;
+  side: 1 | 2;
 }) {
   return (
     <div className="flex  flex-row items-center z-1">
@@ -102,15 +102,15 @@ function CandidateSection({
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function SwingStateComponent({
   sectionData,
   state,
 }: {
-  sectionData: any
-  state: any
+  sectionData: any;
+  state: any;
 }) {
   return (
     <Link
@@ -169,34 +169,34 @@ function SwingStateComponent({
         </div>
       </div>
     </Link>
-  )
+  );
 }
 
-export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59")
+export const ELECTION_END_DATE = new Date("2024-11-04T23:59:59");
 
 export function ElectionPage({
   trendingMarkets,
   allElectionMarkets,
 }: {
-  trendingMarkets: Market[]
-  allElectionMarkets: Market[]
+  trendingMarkets: Market[];
+  allElectionMarkets: Market[];
 }) {
-  const [section, setSection] =
-    useState("Presidency")
+  const [section, setSection] = useState("Presidency");
 
   // @ts-ignore
   const markets = enhanceMarketsWithImageAndPolyId(
     allElectionMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  )
+  );
 
   const enhancedeTrendingMarkets = enhanceMarketsWithImageAndPolyId(
     trendingMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  )
-  const sectionData = SECTION_DATA_MAP[section as keyof typeof SECTION_DATA_MAP]
+  );
+  const sectionData =
+    SECTION_DATA_MAP[section as keyof typeof SECTION_DATA_MAP];
 
   return (
     <StandardPageWrapper className="h-full w-full flex flex-col ">
@@ -343,5 +343,5 @@ export function ElectionPage({
         ))}
       </div>
     </StandardPageWrapper>
-  )
+  );
 }
