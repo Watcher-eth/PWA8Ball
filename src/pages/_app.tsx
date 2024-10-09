@@ -1,32 +1,36 @@
-import "@/styles/fonts.css"
-import "@/styles/globals.css"
-import "@rainbow-me/rainbowkit/styles.css"
+import "@/styles/fonts.css";
+import "@/styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 
-import type { AppProps } from "next/app"
+import type { AppProps } from "next/app";
 // import { WagmiProvider } from "wagmi"
-import { WagmiProvider } from "@privy-io/wagmi" // SWAP: wagmi with @privy-io/wagmi
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { init, AirstackProvider } from "@airstack/airstack-react"
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
-import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
+import { WagmiProvider } from "@privy-io/wagmi"; // SWAP: wagmi with @privy-io/wagmi
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { init, AirstackProvider } from "@airstack/airstack-react";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth";
 // import * as amplitude from "@amplitude/analytics-browser";
-import "../utils/patch"
-import { SonnerToaster } from "@/components/ui/SonnerToaster"
+import "../utils/patch";
+import { SonnerToaster } from "@/components/ui/SonnerToaster";
 
-import { AuthChecker } from "@/providers/AuthProvider"
-import { GraphQlProvider } from "@/providers/GraphQlProvider"
+import { AuthChecker } from "@/providers/AuthProvider";
+import { GraphQlProvider } from "@/providers/GraphQlProvider";
 
-import { useServiceWorker } from "@/hooks/useServiceWorker" // Import the hook
+import { useServiceWorker } from "@/hooks/useServiceWorker"; // Import the hook
 
-import { CustomHead } from "@/components/layouts/CustomHead"
-import { RootLayout } from "@/components/layouts/RootLayout"
+import { CustomHead } from "@/components/layouts/CustomHead";
+import { RootLayout } from "@/components/layouts/RootLayout";
 
-import { WAGMI_CONFIG } from "@/wagmiConfig"
-import { PRIVY_CONFIG } from "@/privyConfig"
+import { WAGMI_CONFIG } from "@/wagmiConfig";
+import { PRIVY_CONFIG } from "@/privyConfig";
+import dynamic from "next/dynamic";
 
+const MoonPayProvider = dynamic(
+  () => import("@moonpay/moonpay-react").then((mod) => mod.MoonPayProvider),
+  { ssr: false }
+);
 
-const QUERY_CLIENT = new QueryClient()
-
+const QUERY_CLIENT = new QueryClient();
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // console.log(router)
@@ -35,7 +39,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   // amplitude.init("3b52857bdc943ed9b3ec5ac60e5dbba1", {
   //   autocapture: { elementInteractions: true },
   // });
-  useServiceWorker() // Use the custom hook
+  useServiceWorker(); // Use the custom hook
 
   return (
     <>
@@ -57,7 +61,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 <GraphQlProvider>
                   <RootLayout>
                     <AuthChecker>
-                      <Component {...pageProps} />
+                      <MoonPayProvider apiKey="pk_test_1e58TqyEMfB8v3fPzA9c8HKwbrxj5nr" debug>
+                        <Component {...pageProps} />
+                      </MoonPayProvider>
                     </AuthChecker>
                   </RootLayout>
                 </GraphQlProvider>
@@ -68,5 +74,5 @@ export default function App({ Component, pageProps, router }: AppProps) {
       </PrivyProvider>
       {/**Need to check if this is valid*/}
     </>
-  )
+  );
 }

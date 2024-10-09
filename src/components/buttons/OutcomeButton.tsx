@@ -39,7 +39,7 @@ export function OutcomeButton({
             boxShadow:
               "0px 0px 60px 30px rgb(255 255 255 / 60%), 0 0 100px 60px rgb(0 0 0 / 50%), 0 0 140px 90px rgb(0 0 0 / 50%)",
           }}
-          size={25}
+          size={10}
         />
       )}
       <div

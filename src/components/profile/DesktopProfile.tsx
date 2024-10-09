@@ -196,6 +196,27 @@ export function DesktopProfilePage2({ userId, userC }) {
             </div>
           </div>
           <div className="flex flex-row -ml-1 space-x-3 -mt-3.5 items-center">
+            {userC?.name === user?.name && balance < 5000000 ? (
+              <DesktopOnrampModal>
+                <div className="flex flex-row space-x-3 -ml-1 items-center">
+                  <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
+                    <Wallet size={16} color="white" strokeWidth={2.6} />
+                    <div className=" hover:scale-101 active:scale-98  rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-semibold">
+                      Fund your account
+                    </div>
+                  </div>
+                </div>
+              </DesktopOnrampModal>
+            ) : (
+              <div className="flex flex-row space-x-3 -ml-1 items-center">
+                <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
+                  <Wallet size={16} color="white" strokeWidth={2.6} />
+                  <div className=" hover:scale-101 active:scale-98  rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-semibold">
+                    ${(Number(balance) / 10 ** 6).toFixed(2)}
+                  </div>
+                </div>
+              </div>
+            )}
             <div
               onClick={() => copyToClipboard(userC?.walletAddress)}
               className="py-2 hover:scale-101 active:scale-99 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-[Aeonik]"
@@ -207,6 +228,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               </div>
               <Copy size={16} color="white" strokeWidth={2.5} />
             </div>
+
             {isEditing ? (
               <button
                 onClick={handleConfirm}
@@ -225,16 +247,7 @@ export function DesktopProfilePage2({ userId, userC }) {
               <FollowButton profileId={userC?.walletAddress} />
             )}
           </div>
-          {userC?.name === user?.name && balance < 1 && (
-            <DesktopOnrampModal>
-              <div className="flex flex-row space-x-3 -ml-1 items-center">
-                <div className="py-2 px-3 rounded-full bg-[#1B1B1E] space-x-2 flex flex-row items-center text-white text-sm font-medium">
-                  <Wallet size={16} color="white" strokeWidth={3} />
-                  <div>Fund your account</div>
-                </div>
-              </div>
-            </DesktopOnrampModal>
-          )}
+
           <div className="h-px w-full bg-[#222222] my-3" />
           <div className="flex flex-row">
             <AnimatedBackground
