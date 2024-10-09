@@ -111,7 +111,7 @@ export function DesktopProfilePage2({ userId, userC }) {
   }
   console.log("userC", userC?.socials)
   return (
-    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+    <BlurOverlayWrapper shouldShowOverlay={!user?.invited}>
       <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>

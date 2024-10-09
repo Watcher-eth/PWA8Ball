@@ -51,7 +51,7 @@ export function DesktopOnboardingModal({
   );
 }
 
-function DesktopOnboarding() {
+export function DesktopOnboarding() {
   const { ready, authenticated, login } = usePrivy();
   const { loginWithOAuth, initOAuth } = useLoginWithOAuth();
   return (
@@ -126,11 +126,11 @@ function DesktopOnboarding() {
           </a>
         </div>
       </div>
-      <div className="hidden lg:block lg:w-1/2">
+      <div className="hidden w-[0%]  lg:block lg:w-1/2">
         <img
           src="/images/Onboarding.png"
           alt="Onboarding illustration"
-          className="object-cover w-full h-full xl:h-[50vh]"
+          className="object-cover lg:block h-full xl:h-[50vh]"
         />
       </div>
     </div>

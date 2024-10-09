@@ -3,20 +3,29 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/supabase/supabaseClient";
 
-const useInvite = async (inviteId: string) => {
+const useInvite = async (inviteId: string, userId: string) => {
   const { data, error } = await supabase
     .from("invites")
-    .update({ status: "used", updated_at: new Date().toISOString() })
+    .update({
+      status: "used",
+      used_by: userId,
+      updated_at: new Date(),
+    })
     .eq("id", inviteId)
-    .single();
+    .eq("status", "unused");
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("Error using invite:", error.message);
+    throw new Error(error.message);
+  }
+
   return data;
 };
 
 export const useUseInvite = () => {
   return useMutation({
-    mutationFn: useInvite,
+    mutationFn: ({ inviteId, userId }: { inviteId: string; userId: string }) =>
+      useInvite(inviteId, userId),
     onError: (error: Error) => {
       console.error("Error using invite:", error);
     },

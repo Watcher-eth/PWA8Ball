@@ -1,47 +1,54 @@
-import { Input } from "@/components/ui/Input"
-import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react"
-import { useCallback, useState } from "react"
-import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInviteUsed"
-import _ from "lodash"
-import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite"
-import { toast } from "sonner"
-import { showToast } from "@/utils/Toasts/showToast"
-
+import { Input } from "@/components/ui/Input";
+import { Ban, Check, CheckCircle, Lock, Phone, Share } from "lucide-react";
+import { useCallback, useState } from "react";
+import { useCheckIfInviteUsed } from "@/supabase/queries/Invites/useCheckIfInviteUsed";
+import _ from "lodash";
+import { useUseInvite } from "@/supabase/queries/Invites/useUseInvite";
+import { toast } from "sonner";
+import { showToast } from "@/utils/Toasts/showToast";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 export function InviteScreen() {
-  const [invite, setInvite] = useState("")
-  const [debouncedInvite, setDebouncedInvite] = useState("")
-  const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite)
-  const { mutate: useInvite } = useUseInvite()
+  const [invite, setInvite] = useState("");
+  const [debouncedInvite, setDebouncedInvite] = useState("");
+  const { user } = useUserStore();
+  const { data, isLoading, error } = useCheckIfInviteUsed(debouncedInvite);
+  const useInviteMutation = useUseInvite();
   const debouncedChange = useCallback(
     _.debounce((nextValue) => setDebouncedInvite(nextValue), 500),
     []
-  )
+  );
 
   const handleInviteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const nextValue = event.target.value
-    setInvite(nextValue)
-    debouncedChange(nextValue)
-  }
+    const nextValue = event.target.value;
+    setInvite(nextValue);
+    debouncedChange(nextValue);
+  };
+
+  const handleUseInvite = (inviteId: string, userId: string) => {
+    useInviteMutation.mutate({ inviteId, userId });
+  };
 
   async function verifyInvite() {
     if (data === true) {
-      useInvite(debouncedInvite)
+      handleUseInvite(debouncedInvite, user?.externalAuthProviderUserId);
 
       showToast({
-        icon: <CheckCircle strokeWidth={3} className="text-[#34C759] h-[1rem]" />,
+        icon: (
+          <CheckCircle strokeWidth={3} className="text-[#34C759] h-[1rem]" />
+        ),
         message: "Successfully used invite!",
-      })
+      });
       //TODO: Integrate ponder update user endpoint
     } else {
       showToast({
         icon: <Ban strokeWidth={3} className="text-[#FF3F3F] h-[1rem]" />,
         message: "Invalid code!",
-      })
+      });
     }
   }
   return (
-    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[55vw] md:min-w-[68vw] sm:min-w-[90vw] ">
+    <div className="flex overflow-hidden rounded-lg shadow-lg min-w-[60vw] max-w-[80vw] md:min-w-[68vw] sm:min-w-[90vw] lg:min-w-[40vw] lg:max-w-[70vw] xl:max-w-[65vw] 2xl:max-w-[48vw] 3xl:max-w-[40vw]">
       <div className="flex flex-col items-center justify-center w-1/2  p-10 pt-20 text-white">
         <div className="h-[6rem] w-[6rem] flex items-center justify-center my-5 rounded-full bg-[#191919]">
           <div className="text-[3.4rem] rotate-6">🔓</div>
@@ -119,5 +126,5 @@ export function InviteScreen() {
         />
       </div>
     </div>
-  )
+  );
 }

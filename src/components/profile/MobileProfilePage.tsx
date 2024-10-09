@@ -30,7 +30,7 @@ export function MobileProfilePage({
   })
 
   return (
-    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+    <BlurOverlayWrapper shouldShowOverlay={!user?.invited}>
       <div className="flex flex-col items-center min-h-screen bg-[#080808] relative">
         <div className="w-full relative">
           <img

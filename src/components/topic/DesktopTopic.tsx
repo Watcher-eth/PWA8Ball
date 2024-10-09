@@ -1,33 +1,32 @@
 // @ts-nocheck
-import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic"
-import { useRouter } from "next/router"
-import React, { useRef, useState } from "react"
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
+import { useGetMembersForTopic } from "@/supabase/mutations/topics/useGetMembersForTopic";
+import { useRouter } from "next/router";
+import React, { useRef, useState } from "react";
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay"
-import { Medal, Trophy, UserPlus } from "lucide-react"
-import { useUserStore } from "@/lib/stores/UserStore"
-import { BetComment } from "@/types/PostTypes"
-import _ from "lodash"
+} from "../layouts/StandardBleedOverlay";
+import { Medal, Trophy, UserPlus } from "lucide-react";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { BetComment } from "@/types/PostTypes";
+import _ from "lodash";
 
-import { JoinTopicButton } from "./JoinTopicButton"
-import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic"
-import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId"
-import { HARD_MARKETS } from "@/constants/markets"
-import { HARD_TOPICS } from "@/constants/topics"
+import { JoinTopicButton } from "./JoinTopicButton";
+import { useGetAllMarketsForTopic } from "@/graphql/queries/topics/useGetAllMarketsForTopic";
+import { enhanceMarketsWithImageAndPolyId } from "@/utils/predictions/enhanceMarketsWithImageAndPolyId";
+import { HARD_MARKETS } from "@/constants/markets";
+import { HARD_TOPICS } from "@/constants/topics";
 import {
   BlurOverlay,
   BlurOverlayWrapper,
-} from "../onboarding/Invites/InviteBlur"
-import { INVITES_ACTIVE } from "@/constants"
-import { DesktopHomeNews } from "../home/DesktopHome/DesktopHomeNews"
-import { FeaturedMarketsSection } from "../home/DesktopHome/FeaturedMarketsSection"
-import { useGetTopicLeaderboard } from "@/graphql/leaderboard/useGetTopicLeaderboard"
-import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal"
-import { getMarketPath } from "@/utils/urls"
-
+} from "../onboarding/Invites/InviteBlur";
+import { INVITES_ACTIVE } from "@/constants";
+import { DesktopHomeNews } from "../home/DesktopHome/DesktopHomeNews";
+import { FeaturedMarketsSection } from "../home/DesktopHome/FeaturedMarketsSection";
+import { useGetTopicLeaderboard } from "@/graphql/leaderboard/useGetTopicLeaderboard";
+import DesktopLeaderboardModal from "../activity/Leaderboard/DesktopLeaderboardModal";
+import { getMarketPath } from "@/utils/urls";
 
 export function DesktopTopic({
   name,
@@ -41,33 +40,32 @@ export function DesktopTopic({
   markets,
   allTopicMarkets,
 }) {
-  const router = useRouter()
-  const scrollRef = useRef(null)
-
-  const { data: membersProfiles } = useGetMembersForTopic(id)
-  const { user } = useUserStore()
+  const { data: membersProfiles } = useGetMembersForTopic(id);
+  const { user } = useUserStore();
 
   const enhancedMarkets = enhanceMarketsWithImageAndPolyId(
     allTopicMarkets,
     HARD_MARKETS,
     HARD_TOPICS
-  )
+  );
 
   const enhancedTrendingMarkets = enhanceMarketsWithImageAndPolyId(
     markets,
     HARD_MARKETS,
     HARD_TOPICS
-  )
+  );
 
-  const { data: LeaderBoardData } = useGetTopicLeaderboard()
+  const { data: LeaderBoardData } = useGetTopicLeaderboard();
 
-  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>([])
+  const [optimisticComments, setOptimisticComments] = useState<BetComment[]>(
+    []
+  );
 
-  const handleComment = () => {}
-  const setReply = () => {}
+  const handleComment = () => {};
+  const setReply = () => {};
 
   return (
-    <BlurOverlayWrapper shouldShowOverlay={INVITES_ACTIVE}>
+    <BlurOverlayWrapper shouldShowOverlay={!user?.invited}>
       <StandardPageWrapper className="h-full flex flex-col">
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>
@@ -93,10 +91,7 @@ export function DesktopTopic({
             </div>
             <div className="flex flex-col items-end">
               <div className="flex flex-row space-x-2 items-center">
-                <JoinTopicButton
-                  topicId={id}
-                  userId={user?.walletAddress}
-                />
+                <JoinTopicButton topicId={id} userId={user?.walletAddress} />
                 <DesktopLeaderboardModal title={name} data={LeaderBoardData}>
                   <div className="p-2.5 hover:scale-103 active:scale-97 flex space-x-2  items-center py-2.5 border-[0.1rem] bg-[#151515]/50 border-[#212121]/60 font-bold rounded-full text-base text-white">
                     <Trophy
@@ -152,6 +147,5 @@ export function DesktopTopic({
         </div>
       </StandardPageWrapper>
     </BlurOverlayWrapper>
-  )
+  );
 }
-
