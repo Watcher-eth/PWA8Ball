@@ -115,7 +115,7 @@ export function Comment({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-col w-9/10 mt-5 mb-3 md:my-4 pt-0 border-l border-[#212121] pl-6 md:pl-8  md:ml-[3.8rem]"
+          className="flex flex-col w-9/10 mt-5 mb-3 md:my-4 pt-0 border-l border-[#212121] pl-6 md:pl-8 ml-0.5  md:ml-[3.8rem]"
         >
           <CommentHeader
             userOwns={filteredReplyUserOwns}

@@ -1,5 +1,7 @@
+import { Position } from "@/__generated__/graphql";
 import { Button } from "@/components/ui/Button";
 import { capitalizeFirstLetter } from "@/utils/strings";
+import { BorderTrail } from "../common/Animated/BorderTrail";
 
 export function OutcomeButton({
   text,
@@ -8,15 +10,18 @@ export function OutcomeButton({
   className,
   isDesktop,
   onClick,
+  userOwns,
 }: {
   text: string;
   multiplier: number;
   option: number;
   className?: string;
   isDesktop?: boolean;
+  userOwns: Position;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   const outcomeOptionClassName = getClassNameFromOption(option);
+  console.log("userOwns", userOwns?.option, option);
   return (
     <Button
       onClick={onClick}
@@ -24,10 +29,19 @@ export function OutcomeButton({
             ${outcomeOptionClassName}
             active:scale-99 hover:scale-101 transition-all
             text-[1.3rem] text-white font-bold h-[2.8rem] rounded-[0.6rem] items-center
-            w-full
+            w-full relative
             ${className}
         `}
     >
+      {Number(userOwns?.option) === Number(option) && (
+        <BorderTrail
+          style={{
+            boxShadow:
+              "0px 0px 60px 30px rgb(255 255 255 / 60%), 0 0 100px 60px rgb(0 0 0 / 50%), 0 0 140px 90px rgb(0 0 0 / 50%)",
+          }}
+          size={25}
+        />
+      )}
       <div
         className={
           text?.length < 6

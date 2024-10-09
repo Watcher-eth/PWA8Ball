@@ -23,6 +23,7 @@ import { Card } from "@/components/ui/tailwind/Card";
 import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 import { cleanNumberInput } from "@/utils/string/cleanNumberInput";
 import { useReferralStore } from "@/lib/stores/ReferralStore";
+import { BorderTrail } from "@/components/common/Animated/BorderTrail";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -103,12 +104,14 @@ export function DesktopPredictComponent(props: {
                   text={options[1].name}
                   multiplier={options[1].value / 100}
                   option={0}
+                  userOwns={userOwns[0]}
                   onClick={() => {
                     setStake({ amount, option: 1 });
                     setStep(2);
                   }}
                 />
                 <OutcomeButton
+                  userOwns={userOwns[0]}
                   isDesktop={true}
                   text={options[0].name}
                   multiplier={options[0].value / 100}

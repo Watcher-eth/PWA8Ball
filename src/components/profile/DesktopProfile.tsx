@@ -1,61 +1,62 @@
 // @ts-nocheck
-import { useState } from "react"
-import Link from "next/link"
+import { useState } from "react";
+import Link from "next/link";
 
-import { Copy, Wallet, WalletCards } from "lucide-react"
+import { Copy, Wallet, WalletCards } from "lucide-react";
 
-import { useUserStore } from "@/lib/stores/UserStore"
-import { SocialsSection } from "@/components/common/SocialsSection"
+import { useUserStore } from "@/lib/stores/UserStore";
+import { SocialsSection } from "@/components/common/SocialsSection";
 
-import { ContrastButton } from "@/components/buttons/ContrastButton"
-import { StandardPageWrapper } from "../layouts/StandardPageWrapper"
+import { ContrastButton } from "@/components/buttons/ContrastButton";
+import { StandardPageWrapper } from "../layouts/StandardPageWrapper";
 import {
   InverseBleedOverlay,
   InverseVerticalBleedOverlay,
   StandardBleedOverlay,
-} from "../layouts/StandardBleedOverlay"
-import { shortenAddress } from "@/utils/address/shortenAddress"
-import { FollowButton } from "./FollowButton"
-import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance"
-import { copyToClipboard } from "@/utils/copyToClipboard"
+} from "../layouts/StandardBleedOverlay";
+import { shortenAddress } from "@/utils/address/shortenAddress";
+import { FollowButton } from "./FollowButton";
+import { useUserUsdcBalance } from "@/hooks/wallet/useUserUsdcBalance";
+import { copyToClipboard } from "@/utils/copyToClipboard";
 import {
   BlurOverlay,
   BlurOverlayWrapper,
   withBlurOverlay,
-} from "../onboarding/Invites/InviteBlur"
-import AnimatedBackground from "../common/Animated/AnimatedSelector"
-import { INVITES_ACTIVE } from "@/constants"
-import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet"
+} from "../onboarding/Invites/InviteBlur";
+import AnimatedBackground from "../common/Animated/AnimatedSelector";
+import { INVITES_ACTIVE } from "@/constants";
+import { useGetPositionsByWallet } from "@/graphql/queries/positions/useGetPositionsByWallet";
 import {
   aggregatePredictedItems,
   aggregatePredictedItemsWithImage,
-} from "@/utils/predictions/aggregatePredictions"
-import { HARD_MARKETS } from "@/constants/markets"
-import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser"
-import { PredictionPositionModal } from "../modals/PredictionPositionModal"
-import { DesktopMyBetModal } from "../common/Charts/MyBetModal"
-import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData"
-import { DesktopOnrampModal } from "../onboarding/Onramp/DesktopOnrampModal"
-import { useUpdateUser } from "@/hooks/actions/UserRegistry/useUpdateUser"
+} from "@/utils/predictions/aggregatePredictions";
+import { HARD_MARKETS } from "@/constants/markets";
+import { useGetCreatedMarketsByUser } from "@/graphql/queries/markets/useGetCreatedMarketsByUser";
+import { PredictionPositionModal } from "../modals/PredictionPositionModal";
+import { DesktopMyBetModal } from "../common/Charts/MyBetModal";
+import { DEFAULT_PFP_PLACEHOLDER } from "@/constants/testData";
+import { DesktopOnrampModal } from "../onboarding/Onramp/DesktopOnrampModal";
+import { useUpdateUser } from "@/hooks/actions/UserRegistry/useUpdateUser";
+import { BorderTrail } from "../common/Animated/BorderTrail";
 
 export function DesktopProfilePage2({ userId, userC }) {
-  const { user, setUser } = useUserStore()
-  const balance = useUserUsdcBalance()
-  const [filter, setFilter] = useState("All")
-  const [isEditing, setIsEditing] = useState(false)
-  const [editedName, setEditedName] = useState("")
-  const [editedPfp, setEditedPfp] = useState(userC?.pfp)
-  const { handleUpdateUser } = useUpdateUser()
-  const { orders: ordersData, refetch } = useGetPositionsByWallet(userId)
+  const { user, setUser } = useUserStore();
+  const balance = useUserUsdcBalance();
+  const [filter, setFilter] = useState("All");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedName, setEditedName] = useState("");
+  const [editedPfp, setEditedPfp] = useState(userC?.pfp);
+  const { handleUpdateUser } = useUpdateUser();
+  const { orders: ordersData, refetch } = useGetPositionsByWallet(userId);
   const {
     markets: createdMarketsData,
     isLoading: isCreatedMarketsLoading,
     refetch: refetchCreated,
-  } = useGetCreatedMarketsByUser(userId)
+  } = useGetCreatedMarketsByUser(userId);
   const aggregatedOrdersData = aggregatePredictedItemsWithImage(
     ordersData ?? [],
     HARD_MARKETS
-  )
+  );
   const mergedData =
     filter === "All"
       ? [
@@ -75,27 +76,27 @@ export function DesktopProfilePage2({ userId, userC }) {
             type: "created",
           })),
         ]
-      : []
+      : [];
 
-  console.log("merged", mergedData)
+  console.log("merged", mergedData);
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onloadend = () => {
-        setEditedPfp(reader.result)
-      }
-      reader.readAsDataURL(file)
+        setEditedPfp(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   async function handleConfirm() {
     setUser({
       ...user,
       name: editedName?.length > 2 ? editedName : user?.name,
       pfp: editedPfp ?? user?.pfp,
-    })
+    });
 
     handleUpdateUser({
       id: user?.walletAddress,
@@ -105,11 +106,11 @@ export function DesktopProfilePage2({ userId, userC }) {
       socials: user?.socials,
       externalAuthProviderUserId: user?.externalAuthProviderUserId,
       walletAddress: user?.walletAddress,
-    })
+    });
 
-    setIsEditing(false)
+    setIsEditing(false);
   }
-  console.log("userC", userC?.socials)
+  console.log("userC", userC?.socials);
   return (
     <BlurOverlayWrapper shouldShowOverlay={!user?.invited}>
       <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
@@ -282,7 +283,7 @@ export function DesktopProfilePage2({ userId, userC }) {
             </AnimatedBackground>
           </div>
           {mergedData.length > 0 ? (
-            <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols:1 md:grid-cols:2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6">
               {mergedData
                 ?.filter(
                   (item) =>
@@ -290,7 +291,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                 )
                 .map((item, index) => {
                   if (item.type === "created") {
-                    console.log("created", item.type)
+                    console.log("created", item.type);
                     return (
                       <ProfilePositionCard
                         key={index}
@@ -298,7 +299,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                         pfp={userC?.pfp}
                         {...item}
                       />
-                    )
+                    );
                   }
                   if (Number(item.tokensOwned) !== 0) {
                     return (
@@ -340,7 +341,7 @@ export function DesktopProfilePage2({ userId, userC }) {
                           {...item}
                         />
                       </DesktopMyBetModal>
-                    )
+                    );
                   }
                 })}
             </div>
@@ -357,7 +358,7 @@ export function DesktopProfilePage2({ userId, userC }) {
         </div>
       </StandardPageWrapper>
     </BlurOverlayWrapper>
-  )
+  );
 }
 
 function ProfilePositionCard(
@@ -370,14 +371,24 @@ function ProfilePositionCard(
   optionA,
   userName
 ) {
+  console.log("market", item.market);
   return (
-    <div className="w-full hover:scale-[100.5%] active:scale-99 h-[50vh] border-[0.095rem] border-[#212121]/50 bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
+    <div className="w-full hover:scale-[100.5%] active:scale-99 h-[50vh] 2xl:h-[45vh] border-[0.095rem] border-[#212121]/50 bg-[#212121] flex flex-col justify-between my-3 rounded-lg relative">
       <img
         src={item.image}
         className="w-full h-3/4 z-[1] object-cover opacity-50  rounded-lg absolute"
       />
       <div className="w-full bg-gradient-to-b from-[#101010]/50  via-[#101010]/0 to-[#101010]/75 backdrop-blur-3xl  h-full z-[1] object-cover rounded-lg absolute" />
-
+      {item.market.resolved === true && (
+        <BorderTrail
+          style={{
+            zIndex: 10,
+            boxShadow:
+              "0px 0px 60px 30px rgb(255 255 255 / 0%), 0 0 100px 60px rgb(0 0 0 / 50%), 0 0 140px 90px rgb(0 0 0 / 50%)",
+          }}
+          size={100}
+        />
+      )}
       <div className="flex flex-col z-10 pt-6 px-6">
         <div className="flex flex-row justify-between">
           <img
@@ -431,5 +442,5 @@ function ProfilePositionCard(
         </div>
       </div>
     </div>
-  )
+  );
 }
