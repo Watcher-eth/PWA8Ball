@@ -22,7 +22,7 @@ export function FeaturedMarketsSection({ markets, topic }) {
   const adjustedAmount = {
     base: 2,
     xl: Math.min(3, 3),
-    "2xl": 4,
+    "2xl": 5,
   };
 
   return (
@@ -33,9 +33,9 @@ export function FeaturedMarketsSection({ markets, topic }) {
         </div>
       )}
       <Carousel>
-        <CarouselContent className="flex flex-row space-x-3.5  w-full">
+        <CarouselContent className="flex flex-row space-x-2.5 lg:space-x-0.5  w-full">
           {enrichedFeedData.map((item, index) => (
-            <CarouselItem key={index} className="basis-1/2 w-1/2 lg:basis-1/4  lg:w-1/4">
+            <CarouselItem key={index} className="basis-1/2 w-1/2 lg:basis-1/5  lg:w-1/5">
               <MarketCard
                 item={item}
                 isTwoCards={isTwoCards}

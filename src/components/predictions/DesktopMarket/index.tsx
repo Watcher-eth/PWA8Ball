@@ -98,7 +98,7 @@ export function DesktopMarketPage({ users, market, id }) {
             {/* Column for Chart */}
             <Col xs={8} sm={8} md={8} lg={5} className="order-1">
               <DesktopChartCard {...enhancedMarket} userOwns={userOwns} />
-              <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] -mt-0 mb-5 text-align-center text-white text-lg font-medium">
+              <div className="flex p-3 rounded-md items-center justify-center border-dashed border-[0.1rem] border-[#303030] mt-9 mb-9 text-align-center text-white text-lg font-medium">
                 {enhancedMarket?.question}
               </div>
             </Col>
@@ -172,9 +172,9 @@ export function DesktopMarketPage({ users, market, id }) {
               md={8}
               lg={5}
               xl={5}
-              className="order-3 md:order-1 mt-4 -lg:mt-4 px-4 lg:px-0"
+              className="order-3 md:order-1 mt-4  px-4 lg:px-0"
             >
-              <div className="py-4 md:-mt-4 -lg:mt-5">
+              <div className="py-4 md:-mt-12 -lg:mt-0">
                 <CommentSection
                   options={[
                     {

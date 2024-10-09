@@ -11,7 +11,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
   const adjustedAmount = {
     base: amount, 
     xl: Math.min(amount, 4), 
-    "2xl": amount === 3 ? 5 : amount === 4 ? 5 : amount === 2 ? 5 : amount,
+    "2xl": amount === 3 ? 4 : amount === 4 ? 5 : amount === 2 ? 5 : amount,
   };
 
   const skeletonCount =

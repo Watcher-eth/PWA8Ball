@@ -240,7 +240,7 @@ export function DesktopChart(props: {
         className={`${
           props?.isMarketPage
             ? ` ${
-                props?.userOwns.length > 0 ? "h-[45vh] " : "h-[49vh]"
+                props?.userOwns.length > 0 ? "xl:h-[40vh] lg:h-[36vh] h-[37vh]" : "h-[38vh] lg:h-[36vh] xl:h-[43vh]"
               }  mt-7 mb-2.5 pt-2`
             : "h-[40vh] pb-2 pt-2"
         }  min-h-[280px] "`}
