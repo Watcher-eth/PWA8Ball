@@ -33,7 +33,7 @@ export function DesktopLpModal({
       onOpenChange={setOpen}
       cardClassName="rounded-[1.5rem]"
       dialogContentClassName="w-full rounded-[1.5rem] xl:w-[30vw] p-2 "
-      cardContentClassName=" min-h-[50vh] rounded-[1.5rem] p-2 bg-[#080808]"
+      cardContentClassName=" min-h-[50vh] xl:min-h-[41vh] rounded-[1.5rem] p-2 bg-[#080808]"
       content={
         step === 1 ? (
           <Overview

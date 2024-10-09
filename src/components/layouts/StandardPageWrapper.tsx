@@ -7,7 +7,7 @@ export function StandardPageWrapper({
 }) {
   return (
     <div
-      className={`bg-[#080808] sm:px-0 md:px-4 lg:px-8 xl:px-9  ${className}`}
+      className={`bg-[#080808] sm:px-0 md:px-4   ${className}`}
     >
       {children}
     </div>

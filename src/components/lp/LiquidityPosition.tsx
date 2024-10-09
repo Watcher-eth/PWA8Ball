@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { motion } from "framer-motion"
-import { RemoveLiquidityModal } from "./LpModal/RemoveLiquidityModal"
-import { DesktopLpModal } from "./LpModal/DesktopLpModal"
+import { motion } from "framer-motion";
+import { RemoveLiquidityModal } from "./LpModal/RemoveLiquidityModal";
+import { DesktopLpModal } from "./LpModal/DesktopLpModal";
 
 export function LiquidityPosition({
   image,
@@ -11,12 +11,12 @@ export function LiquidityPosition({
   onChange,
   refetch,
 }: {
-  image: string
-  title: string
-  amount: number
-  id: number
-  onChange: () => void
-  refetch: () => void
+  image: string;
+  title: string;
+  amount: number;
+  id: number;
+  onChange: () => void;
+  refetch: () => void;
 }) {
   return (
     <RemoveLiquidityModal
@@ -55,7 +55,7 @@ export function LiquidityPosition({
           </div>
           <motion.button
             onClick={() => {
-              refetch()
+              refetch();
             }}
             className="py-[5px] px-[10px] rounded-[17px] flex justify-center items-center overflow-hidden bg-[rgba(20,20,20,0.3)] border-none cursor-pointer"
           >
@@ -66,7 +66,7 @@ export function LiquidityPosition({
         </div>
       </motion.div>
     </RemoveLiquidityModal>
-  )
+  );
 }
 
 export function DesktopLiquidityPosition({
@@ -78,13 +78,13 @@ export function DesktopLiquidityPosition({
   onChange,
   refetch,
 }: {
-  image: string
-  title: string
-  amount: number
-  id: number
-  amountLp: number
-  onChange: () => void
-  refetch: () => void
+  image: string;
+  title: string;
+  amount: number;
+  id: number;
+  amountLp: number;
+  onChange: () => void;
+  refetch: () => void;
 }) {
   return (
     <DesktopLpModal
@@ -95,16 +95,16 @@ export function DesktopLiquidityPosition({
       refetch={refetch}
       amountLp={amountLp}
     >
-      <motion.div className="flex min-h-[20vh] border-2 border-[#151515]/10 justify-between hover:scale-101 active:scale-97 flex-col p-3.5 pt-3 pb-3 rounded-[15px] bg-[rgba(49,49,49,0.78)] mb-[15px] relative cursor-pointer overflow-hidden">
+      <motion.div className="flex min-h-[20vh] border-[0.06rem] border-[#101010]/10 justify-between hover:scale-101 active:scale-97 flex-col p-3.5 pt-5 pb-4 rounded-[15px] bg-[rgba(49,49,49,0.78)] mb-[15px] mt-3 relative cursor-pointer overflow-hidden">
         <img
-          className="h-full  w-full rounded-[15px] object-cover absolute z-0 filter  scale-[1.2]"
+          className="h-full  w-full rounded-[15px]  object-cover absolute z-0 filter  scale-[1.2]"
           src={image}
           alt="background"
         />
-        <div className="h-full bg-[#080808]/50 w-full rounded-[15px] object-cover absolute z-0 filter  scale-[1.2]" />
+        <div className="h-full bg-[#080808]/50 w-full backdrop-blur-lg rounded-[15px] object-cover absolute z-0 filter  scale-[1.2]" />
         <div className="flex h-full flex-row justify-between items-center mb-[25px] relative z-2">
           <div className="flex h-full flex-col items-start mt-1">
-            <span className="text-[20.5px] text-[rgba(250,250,250,0.95)] font-['Aeonik-Bold']">
+            <span className="text-[33.5px] text-[rgba(250,250,250,0.95)] font-['Aeonik-Bold']">
               {title}
             </span>
             <span className="text-[15.5px] text-white  mt-0">
@@ -114,23 +114,23 @@ export function DesktopLiquidityPosition({
         </div>
         <div className="flex flex-row justify-between items-center relative z-2">
           <div className="flex flex-row">
-            <span className="text-[15px] text-white font-['Aeonik-Bold'] self-start mt-[5px]">
+            <span className="text-[15px] lg:text-[27px] lg:mt-[6px] mr-0.5 text-white font-['Aeonik-Bold'] self-start mt-[5px]">
               $
             </span>
-            <span className="text-[30px] text-white font-['Aeonik-Bold']">
+            <span className="text-[30px] lg:text-[40px] text-white font-['Aeonik-Bold']">
               {(amount + amount / 11).toFixed(2)}
             </span>
           </div>
           <motion.button
             onClick={() => {}}
-            className="py-[5.5px] px-[10px] rounded-[17px] backdrop-blur-xl border-[0.1rem] border-[#303030]/20 overflow-hidden bg-[rgba(20,20,20,0.2)] cursor-pointer"
+            className="py-[5.5px] px-[10px] rounded-[17px] backdrop-blur-lg border-[0.1rem] border-[#efefef]/10 overflow-hidden bg-[rgba(100,100,100,0.15)] cursor-pointer"
           >
-            <span className="text-[14px] text-white font-['Aeonik-Bold'] font-normal">
+            <span className="text-[16px] text-white font-['Aeonik-Bold'] font-normal">
               Withdraw Boost
             </span>
           </motion.button>
         </div>
       </motion.div>
     </DesktopLpModal>
-  )
+  );
 }

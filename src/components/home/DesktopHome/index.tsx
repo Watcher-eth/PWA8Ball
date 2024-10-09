@@ -34,10 +34,10 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 
   return (
     <StandardPageWrapper className="h-full bg-[#080808] flex flex-col">
-      <div className="flex flex-col mx-2 lg:mx-0">
-        <div className=" pb-8  flex flex-row">
+      <div className="flex flex-col mx-2 -mt-6 lg:mx-0">
+        {/* <div className=" pb-8  flex flex-row">
           <TopMarket />
-        </div>
+        </div> */}
         <StandardBleedOverlay>
           <TopicHeader
             setSelectedTopic={setSelectedTopic}
@@ -45,7 +45,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
           />
         </StandardBleedOverlay>
         <HomeDivider />
-        <div className="pt-11 pb-9 px-1">
+        <div className="pt-3 pb-9 ">
           {/* Show 4 items on large screens */}
           <div className="hidden lg:flex">
             <DesktopHomeNews amount={4} markets={enrichedFeedData} />
@@ -58,7 +58,7 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 
         <HomeDivider />
 
-        <div className="pt-10 pb-11 px-1">
+        <div className="pt-10 pb-11 ">
           {/* Show 3 items on large screens */}
           <div className="hidden lg:flex">
             <DesktopHomeNews amount={3} markets={enhancedMarkets} />
@@ -70,12 +70,12 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
         </div>
 
         <HomeDivider />
-        <div className="pt-12 pb-[6rem] flex flex-row px-2">
+        <div className="pt-12 pb-[6rem]  flex flex-row ">
           <FeaturedMarketsSection markets={[...enhancedMarkets].reverse()} />
         </div>
         <HomeDivider />
 
-        <div className="pt-12 pb-[6.5rem] flex flex-row px-2.5 lg:px-5">
+        <div className="pt-12 pb-[6.5rem] flex flex-row ">
           <TrendingCommunities />
         </div>
         <HomeDivider />
@@ -92,5 +92,5 @@ export function DesktopHome({ markets }: { markets: Market[] }) {
 }
 
 function HomeDivider({ className = "" }: { className?: string }) {
-  return <div className={`h-px w-full bg-[#212121] px-8 ${className}`} />;
+  return <div className={`h-px w-full bg-[#212121] px-6 ${className}`} />;
 }

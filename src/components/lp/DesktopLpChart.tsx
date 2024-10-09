@@ -22,9 +22,9 @@ const chartData = [
 ];
 
 const data = [
-  { date: "2023-01", sales: 100, profit: 50, customers: 200 },
-  { date: "2023-02", sales: 150, profit: 75, customers: 250 },
-  { date: "2023-03", sales: 200, profit: 100, customers: 300 },
+  { date: "2023-01", sales: 100 },
+  { date: "2023-02", sales: 150 },
+  { date: "2023-03", sales: 200 },
 ];
 
 export function DesktopLpChart() {

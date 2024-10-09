@@ -23,7 +23,7 @@ export function MarketCard({
     : amount["2xl"] >= 5
     ? "min-h-[20vw] h-[20vw] xl:h-[14vw] xl:min-h-[14vw]"
     : amount["2xl"] >= 4 || amount["xl"] >= 4
-    ? "min-h-[21vw] h-[21vw] xl:h-[18vw] xl:min-h-[18.5vw]"
+    ? "min-h-[21vw] h-[21vw] xl:h-[16vw] xl:min-h-[16.5vw]"
     : amount["2xl"] >= 4
     ? "min-h-[21vw] h-[21vw] xl:h-[6vw] xl:min-h-[6.5vw]"
     : "min-h-[21vw] h-[21vw] xl:h-[19vw] xl:min-h-[19.5vw]";
@@ -53,7 +53,11 @@ export function MarketCard({
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col mt-3 w-full">
           <div className="flex items-center w-full justify-between">
-            <div className="text-white text-[1.6rem] font-[Aeonik-Bold]">
+            <div
+              className={`text-white  ${
+                twoXlAmount > 3 ? "text-[1.3rem]" : "text-[1.2rem] lg:text-[1.6rem]"
+              } font-[Aeonik-Bold]`}
+            >
               {item?.title}
             </div>
             <div

@@ -8,14 +8,12 @@ import { PaginationDots } from "./CarouselDotButton";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 export function DesktopHomeNews({ markets, amount, topic }) {
-  // Adjust the amount based on screen size
   const adjustedAmount = {
-    base: amount, // Respect base amount for smaller screens
-    xl: Math.min(amount, 3), // Limit the amount for xl screens to a maximum of 3
-    "2xl": amount === 4 ? 5 : amount === 2 ? 4 : amount, // Adjust for 2xl screens
+    base: amount, 
+    xl: Math.min(amount, 3), 
+    "2xl": amount === 4 ? 5 : amount === 2 ? 4 : amount,
   };
 
-  // Dynamically calculate skeletons based on the adjusted amount for the current screen size.
   const skeletonCount =
     Math.max(adjustedAmount["base"], adjustedAmount["2xl"]) - markets.length;
 
@@ -23,10 +21,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
     <div className="w-full flex flex-col">
       {!topic && (
         <div className="text-[1.8rem] text-white font-semibold flex flex-row items-center space-x-2">
-          {amount === 4 && (
-            <img src={"../images/OrbLogo.png"} className="h-10 w-10" />
-          )}
-          <div>{amount === 4 ? "Breaking News" : "New Predictions"}</div>
+          <div>{amount === 4 ? "" : "New Predictions"}</div>
         </div>
       )}
       <div
@@ -39,7 +34,7 @@ export function DesktopHomeNews({ markets, amount, topic }) {
             adjustedAmount["xl"] >= 3 ? "mb-0" : "mb-8"
           } w-full gap-2 overflow-y-visible`}
         >
-          <CarouselContent className="flex flex-row no-scrollbar w-full gap-1 py-6 overflow-y-visible">
+          <CarouselContent className="flex flex-row no-scrollbar w-full gap-1 py-6 -mb-5 overflow-y-visible">
             {markets &&
               markets.slice(0, adjustedAmount["base"]).map((item, index) => (
                 <CarouselItem

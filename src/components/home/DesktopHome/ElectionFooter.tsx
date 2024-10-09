@@ -21,8 +21,8 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
   });
 
   return (
-    <div className="px-0 xl:px-4 mt-[6.5rem] flex flex-col w-full">
-      <div className="flex flex-col w-full px-6 lg:px-14">
+    <div className="px-0  mt-[6.5rem] flex flex-col w-full xl:px-7">
+      <div className="flex flex-col w-full px-6 lg:px-7">
         <div className="flex items-center justify-between">
           <div className="flex flex-col space-y-0 mb-3">
             <div className="text-[1.9rem] text-white font-[Aeonik-Bold] space-x-2">
@@ -69,7 +69,7 @@ export function ElectionFooter<T>({ markets }: { markets: T[] }) {
           <ChevronDown color="gray" strokeWidth={2.4} size={"1.1rem"} />
         </Link>
 
-        <div className="mb-40" />
+        <div className=" mb-[6rem] lg:mb-40 " />
 
         <StandardBleedOverlay>
           <InverseVerticalBleedOverlay>

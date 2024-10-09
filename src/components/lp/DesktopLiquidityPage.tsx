@@ -21,10 +21,6 @@ export function DesktopLiquidityPage() {
   const { user } = useUserStore();
   const { data: lpPositions, refetch } = useGetUserLp(user?.walletAddress);
 
-  const { data: lpPositionsData } = useGetLpPositionsByUser(
-    user?.walletAddress
-  );
-
   const { lpTrades: originalLpValues } = useGetOriginalLpPrice(
     user?.walletAddress
   );
