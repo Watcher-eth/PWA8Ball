@@ -10,7 +10,7 @@ import { BoostInfoRow } from "./DesktopBoostModal";
 import { Input } from "@/components/ui/Input";
 import { useState } from "react";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { ReceiveGHO } from "./OnrampStep";
+import { ReceiveGHO } from "../PredictModal/OnrampStep";
 import { GetGhoModal } from "../PredictModal/GetGhoModal";
 import dynamic from "next/dynamic";
 
@@ -39,7 +39,7 @@ export function MobileBoostModal({
         <MoonPayBuyWidget
           variant="overlay"
           baseCurrencyCode="usd"
-          baseCurrencyAmount={String(amount / 10) ?? "35"}
+          baseCurrencyAmount={amount ? String(amount / 10) : "35"}
           defaultCurrencyCode="USDC"
           visible={visible}
           walletAddress={user?.walletAddress}
@@ -78,7 +78,12 @@ export function MobileBoostModal({
                 placeholder="Amount"
                 type="number"
               />
-              <ConfirmButton id={id} onComplete={() => {}} amount={amount} setStep={setStep}/>
+              <ConfirmButton
+                id={id}
+                onComplete={() => {}}
+                amount={amount}
+                setStep={setStep}
+              />
             </div>
           )}
           {step === 4 && (

@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useUserStore } from "@/lib/stores/UserStore";
-import { ReceiveGHO } from "./OnrampStep";
+import { ReceiveGHO } from "../PredictModal/OnrampStep";
 import { GetGhoModal } from "../PredictModal/GetGhoModal";
 
 const MoonPayBuyWidget = dynamic(
@@ -34,7 +34,7 @@ export function DesktopBoostContent({
         <MoonPayBuyWidget
           variant="overlay"
           baseCurrencyCode="usd"
-          baseCurrencyAmount={String(amount / 10) ?? "35"}
+          baseCurrencyAmount={amount ? String(amount / 10) : "35"}
           defaultCurrencyCode="USDC"
           visible={visible}
           walletAddress={user?.walletAddress}

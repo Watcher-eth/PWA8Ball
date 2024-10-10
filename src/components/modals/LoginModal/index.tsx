@@ -12,7 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { OnrampStep } from "../BoostModal/OnrampStep";
+import { OnrampStep } from "../PredictModal/OnrampStep";
 import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {

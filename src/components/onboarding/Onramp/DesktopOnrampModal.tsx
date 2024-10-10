@@ -2,7 +2,7 @@
 
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { GetGhoModal } from "@/components/modals/PredictModal/GetGhoModal";
-import { OnrampStep } from "@/components/modals/BoostModal/OnrampStep";
+import { OnrampStep } from "@/components/modals/PredictModal/OnrampStep";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -70,7 +70,7 @@ function DesktopOnramp(props: { amount?: number }) {
       <MoonPayBuyWidget
         variant="overlay"
         baseCurrencyCode="usd"
-        baseCurrencyAmount={String(amount) ?? "35"}
+        baseCurrencyAmount={String(props.amount) ?? "35"}
         defaultCurrencyCode="USDC"
         visible={visible}
         walletAddress={user?.walletAddress}

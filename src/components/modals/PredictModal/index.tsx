@@ -15,7 +15,7 @@ import { NumericKeypad } from "@/components/NumericKeypad";
 import { ConfirmPrediction } from "./ConfirmPrediction";
 import { GetGhoModal } from "./GetGhoModal";
 import dynamic from "next/dynamic";
-import { ReceiveGHO } from "../BoostModal/OnrampStep";
+import { ReceiveGHO } from "./OnrampStep";
 
 const MoonPayBuyWidget = dynamic(
   () => import("@moonpay/moonpay-react").then((mod) => mod.MoonPayBuyWidget),
@@ -139,7 +139,7 @@ export function PredictModal({
       <MoonPayBuyWidget
         variant="overlay"
         baseCurrencyCode="usd"
-        baseCurrencyAmount={String(amount / 10) ?? "35"}
+        baseCurrencyAmount={amount ? String(amount / 10) : "35"}
         defaultCurrencyCode="USDC"
         visible={visible}
         walletAddress={user?.walletAddress}
