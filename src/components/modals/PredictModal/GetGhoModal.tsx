@@ -34,17 +34,17 @@ export function GetGhoModal({
       </div>
       {/* <div className="h-px w-full my-6 mb-4 bg-[#383838] mx-6 rounded-full" /> */}
       <LabeledSectionWithIcon
-        title="Buy with Credit Card"
+        title="Buy with Moonpay"
         description="Fund your wallet using your credit card or Apple/Google Pay"
         IconComponent={CreditCard}
-        className="bg-orange-400"
+        className="bg-purple-700"
         onClick={() => setVisible()}
       />
       <LabeledSectionWithIcon
         title="Bridge to Base"
         description="Swap ETH, Stablecoins or Matic for USDC using Uniswap"
         IconComponent={Repeat}
-        className="bg-pink-400"
+        className="bg-orange-400"
         onClick={() =>
           showToast({
             icon: (
@@ -92,7 +92,14 @@ function LabeledSectionWithIcon({
       <div
         className={`rounded-full mt-3  p-2 max-h-[2.65rem] ml-3 my-2 ${className}`}
       >
-        <IconComponent size={25} strokeWidth={3} className="stroke-white " />
+        {title === "Buy with Moonpay" ? (
+          <img
+            className="h-7 w-7 rounded-full"
+            src="https://files.readme.io/e6aad6c-small-moonpay_symbol_wht.png"
+          />
+        ) : (
+          <IconComponent size={25} strokeWidth={3} className="stroke-white " />
+        )}
       </div>
       <div className=" flex flex-col space-y-[-0.15rem] font-bold mb-3 mt-2 mr-1 ml-3">
         <div className="text-white text-[1.1rem] font-bold">{title}</div>

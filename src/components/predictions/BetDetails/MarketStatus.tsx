@@ -171,8 +171,8 @@ export const StatusBlock: React.FC<StatusBlockProps> = ({
 
       <button
         onClick={toggleStatus}
-        className={`text-[#808080] text-sm  underline mt-2 ${
-          expanded ? "mb-[8rem]" : "mb-0"
+        className={`text-[#808080] text-sm  underline ${
+          expanded ? "mb-[0rem]  mt-4" : "mb-0  mt-2"
         }`}
       >
         {expanded ? "Hide full timeline" : "Show full timeline"}
