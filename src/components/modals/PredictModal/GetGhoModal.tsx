@@ -1,17 +1,23 @@
 // @ts-nocheck
 
-import React from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/Button"
-import { ArrowDown, CalendarPlus, CreditCard, Repeat } from "lucide-react"
-import { showToast } from "@/utils/Toasts/showToast"
+import React from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { ArrowDown, CalendarPlus, CreditCard, Repeat } from "lucide-react";
+import { showToast } from "@/utils/Toasts/showToast";
 
-export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
+export function GetGhoModal({
+  setStep,
+  setVisible,
+}: {
+  setStep: (step: number) => void;
+  setVisible: () => void;
+}) {
   const stepVariants = {
     initial: { opacity: 0, y: 10 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -10 },
-  }
+  };
   return (
     <motion.div
       key="step2"
@@ -32,7 +38,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         description="Fund your wallet using your credit card or Apple/Google Pay"
         IconComponent={CreditCard}
         className="bg-orange-400"
-        onClick={() => setStep(3)}
+        onClick={() => setVisible()}
       />
       <LabeledSectionWithIcon
         title="Bridge to Base"
@@ -59,7 +65,7 @@ export function GetGhoModal({ setStep }: { setStep: (step: number) => void }) {
         onClick={() => setStep(4)}
       />
     </motion.div>
-  )
+  );
 }
 
 function LabeledSectionWithIcon({
@@ -69,11 +75,11 @@ function LabeledSectionWithIcon({
   className,
   onClick,
 }: {
-  title: string
-  description: string
-  IconComponent: React.FC
-  className: string
-  onClick: () => void
+  title: string;
+  description: string;
+  IconComponent: React.FC;
+  className: string;
+  onClick: () => void;
 }) {
   return (
     <div
@@ -95,5 +101,5 @@ function LabeledSectionWithIcon({
         </div>
       </div>
     </div>
-  )
+  );
 }

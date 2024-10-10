@@ -150,17 +150,6 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
 const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
   const { user } = useUserStore();
   const [visible, setVisible] = useState(false);
-  const handleGetSignature = async (url: string): Promise<string> => {
-    const response = await fetch("/api/signUrl", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ url }),
-    });
-
-    return response;
-  };
 
   return (
     <motion.div
@@ -171,15 +160,7 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
       exit="exit"
       className="p-2 py-3"
     >
-      <MoonPayBuyWidget
-        variant="overlay"
-        baseCurrencyCode="usd"
-        baseCurrencyAmount="100"
-        defaultCurrencyCode="eth"
-        visible={visible}
-        // walletAddress={user?.walletAddress}
-        onUrlSignatureRequested={handleGetSignature}
-      />
+  
       <div className="text-white text-[1.5rem] font-[600] mt-3 ">Buy USDC</div>
       <div
         style={{ lineHeight: "1.5rem" }}

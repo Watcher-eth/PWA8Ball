@@ -1,32 +1,39 @@
 // @ts-nocheck
 
-import { motion } from "framer-motion"
-import { AlignLeft } from "lucide-react"
-import { useVotingStore } from "@/lib/stores/VotingStore"
-import { SharePredictButton } from "@/components/buttons/SharePredictButton"
+import { motion } from "framer-motion";
+import { AlignLeft } from "lucide-react";
+import { useVotingStore } from "@/lib/stores/VotingStore";
+import { SharePredictButton } from "@/components/buttons/SharePredictButton";
 
-import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction"
+import { useExecutePrediction } from "@/hooks/actions/useExecutePrediction";
 
-import { MobileLoadingPrediction } from "./LoadingPrediction"
-import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus"
-import { useReferralStore } from "@/lib/stores/ReferralStore"
-import { useUserStore } from "@/lib/stores/UserStore"
+import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
+import { useReferralStore } from "@/lib/stores/ReferralStore";
+import { useUserStore } from "@/lib/stores/UserStore";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
+const MoonPayBuyWidget = dynamic(
+  () => import("@moonpay/moonpay-react").then((mod) => mod.MoonPayBuyWidget),
+  { ssr: false }
+);
 
 export function ConfirmPrediction(props: {
-  setStep: (step: number) => void
-  image: string
-  option: string
-  options: string[]
-  question: string
-  title: string
-  id: string
-  odds: number
+  setStep: (step: number) => void;
+  image: string;
+  option: string;
+  options: string[];
+  question: string;
+  title: string;
+  id: string;
+  odds: number;
 }) {
-  const { executePrediction, loading, success, error } = useExecutePrediction()
-  const { user } = useUserStore()
-  const amount = useVotingStore((state) => state.amount)
-  const option = useVotingStore((state) => state.option)
-  const refId = useReferralStore((state) => state.referralId)
+  const { executePrediction, loading, success, error } = useExecutePrediction();
+  const { user } = useUserStore();
+  const amount = useVotingStore((state) => state.amount);
+  const option = useVotingStore((state) => state.option);
+  const refId = useReferralStore((state) => state.referralId);
+  const [visible, setVisible] = useState(false);
 
   const shareLink = async () => {
     try {
@@ -36,13 +43,21 @@ export function ConfirmPrediction(props: {
           options[Option - 1]
         } for ${question}. What do you think?`,
         url: `https://tryglimpse.xyz?ref=${user?.walletAddress}`,
-      })
+      });
     } catch (error) {
-      console.error("Error during sharing", error)
+      console.error("Error during sharing", error);
     }
-  }
+  };
   return (
     <div className="flex flex-col items-center w-full bg-[#090909] py-4 pt-0 mt-5 rounded-lg min-h-[485px]">
+      <MoonPayBuyWidget
+        variant="overlay"
+        baseCurrencyCode="usd"
+        baseCurrencyAmount="35"
+        defaultCurrencyCode="USDC"
+        visible={visible}
+        walletAddress={user?.walletAddress}
+      />
       <motion.div className="flex flex-col items-center w-full bg-[#090909] px-6  rounded-lg">
         <div className="flex flex-col w-full my-2 mt-0">
           <img
@@ -125,7 +140,7 @@ export function ConfirmPrediction(props: {
       >
         <motion.button
           onClick={() => {
-            props.setStep(1)
+            props.setStep(1);
           }}
           className={`
             py-2 px-6 w-1/2 rounded-full bg-[#1D1D1D] text-lg text-[#D9D9D9] font-bold
@@ -156,7 +171,7 @@ export function ConfirmPrediction(props: {
                     marketId: props?.id,
                     options: props?.options,
                     referrer: refId,
-                  })
+                  });
             }}
             className="py-2 px-6 rounded-full bg-[#D9D9D9] text-lg text-[#1D1D1D] font-bold flex items-center justify-center gap-1"
             initial={{ width: "40vw" }}
@@ -180,5 +195,5 @@ export function ConfirmPrediction(props: {
         )}
       </div>
     </div>
-  )
+  );
 }
