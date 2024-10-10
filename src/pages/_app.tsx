@@ -62,7 +62,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                   <RootLayout>
                     <AuthChecker>
                       <MoonPayProvider
-                        apiKey={process.env.MOONPAY_API_KEY!}
+                        apiKey="pk_test_1e58TqyEMfB8v3fPzA9c8HKwbrxj5nr"
                         debug
                       >
                         <Component {...pageProps} />
