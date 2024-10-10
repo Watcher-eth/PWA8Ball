@@ -58,14 +58,14 @@ function BuyWithUniswap({ setStep }: { setStep: (step: number) => void }) {
         <div className="Uniswap"></div>
       </div>
       <div className="flex items-center w-full mt-2 mx-6 my-2 justify-between">
-        <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
+        <StepButton onClick={() => setStep(0)} isDark={false} label="Back" />
         <StepButton onClick={() => setStep(3)} isDark={true} label="Continue" />
       </div>
     </motion.div>
   );
 }
 
-function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
+export function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
   const { user } = useUserStore();
   return (
     <motion.div
@@ -128,7 +128,7 @@ function ReceiveGHO({ setStep }: { setStep: (step: number) => void }) {
         </div>
       </div>
       <div className="flex items-center self-center  mt-2 w-full   my-0 space-x-4 ">
-        <StepButton onClick={() => setStep(1)} isDark={false} label="Back" />
+        <StepButton onClick={() => setStep(0)} isDark={false} label="Back" />
         <StepButton
           isDark={true}
           onClick={() => {
@@ -160,7 +160,6 @@ const BuyWithFiat = ({ setStep }: { setStep: (step: number) => void }) => {
       exit="exit"
       className="p-2 py-3"
     >
-  
       <div className="text-white text-[1.5rem] font-[600] mt-3 ">Buy USDC</div>
       <div
         style={{ lineHeight: "1.5rem" }}

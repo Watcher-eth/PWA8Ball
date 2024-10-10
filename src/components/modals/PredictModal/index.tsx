@@ -1,22 +1,26 @@
 // @ts-nocheck
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion"
-import Marquee from "react-fast-marquee"
-import { Vote } from "lucide-react"
-import MotionNumber from "motion-number"
-import { formatWithCommas } from "@/utils/string/formatWithCommas"
-import { useVotingStore } from "@/lib/stores/VotingStore"
-import { useUserStore } from "@/lib/stores/UserStore"
-import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance"
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
-import { NumericKeypad } from "@/components/NumericKeypad"
-import { ConfirmPrediction } from "./ConfirmPrediction"
-import { GetGhoModal } from "./GetGhoModal"
-import { OnrampStep } from "./OnrampStep"
+import { AnimatePresence, motion } from "framer-motion";
+import Marquee from "react-fast-marquee";
+import { Vote } from "lucide-react";
+import MotionNumber from "motion-number";
+import { formatWithCommas } from "@/utils/string/formatWithCommas";
+import { useVotingStore } from "@/lib/stores/VotingStore";
+import { useUserStore } from "@/lib/stores/UserStore";
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { NumericKeypad } from "@/components/NumericKeypad";
+import { ConfirmPrediction } from "./ConfirmPrediction";
+import { GetGhoModal } from "./GetGhoModal";
+import dynamic from "next/dynamic";
+import { ReceiveGHO } from "../BoostModal/OnrampStep";
 
-
+const MoonPayBuyWidget = dynamic(
+  () => import("@moonpay/moonpay-react").then((mod) => mod.MoonPayBuyWidget),
+  { ssr: false }
+);
 export function PredictModal({
   text,
   option,
@@ -29,32 +33,33 @@ export function PredictModal({
   handleOpen,
   children,
 }: {
-  text: string
-  option: number
-  multiplier: number
-  image: string
-  question: string
-  options: string[]
-  marketId: string
-  odds: number
-  handleOpen: () => void
-  children: React.ReactNode
+  text: string;
+  option: number;
+  multiplier: number;
+  image: string;
+  question: string;
+  options: string[];
+  marketId: string;
+  odds: number;
+  handleOpen: () => void;
+  children: React.ReactNode;
 }) {
-  const [step, setStep] = useState(1)
-  const [sliderValue, setSliderValue] = useState("") // Use a string to hold the value
-  const setVotingState = useVotingStore((state) => state.setState)
-  const amount = useVotingStore((state) => state.amount)
-  const { user } = useUserStore()
+  const [step, setStep] = useState(1);
+  const [sliderValue, setSliderValue] = useState(""); // Use a string to hold the value
+  const setVotingState = useVotingStore((state) => state.setState);
+  const amount = useVotingStore((state) => state.amount);
+  const { user } = useUserStore();
   const userBalanceUnformatted = useUsdcBalance({
     address: user?.walletAddress,
-  })
-  const userBalance = userBalanceUnformatted
-  const baseFontSize = "5.3rem"
-  const lengthAdjustmentThreshold = 3
-  const fontSizeAdjustmentFactor = 0.95
+  });
+  const userBalance = userBalanceUnformatted;
+  const baseFontSize = "5.3rem";
+  const lengthAdjustmentThreshold = 3;
+  const fontSizeAdjustmentFactor = 0.95;
 
-  const [fontSize, setFontSize] = useState(baseFontSize)
-  const [shake, setShake] = useState(false)
+  const [fontSize, setFontSize] = useState(baseFontSize);
+  const [shake, setShake] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const newLength =
@@ -63,72 +68,82 @@ export function PredictModal({
             fontSizeAdjustmentFactor,
             sliderValue.length - lengthAdjustmentThreshold
           ) * parseFloat(baseFontSize)
-        : parseFloat(baseFontSize)
-    setFontSize(`${newLength}rem`) // animate the change
-  }, [sliderValue])
+        : parseFloat(baseFontSize);
+    setFontSize(`${newLength}rem`);
+  }, [sliderValue]);
 
   function triggerShakeIfExceedsBalance(value) {
     if (parseFloat(value.replace(/,/g, "")) >= Number(userBalance) / 10 ** 6) {
-      setShake(true)
-      setTimeout(() => setShake(false), 500) // Reset the shake state after animation
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
     }
   }
 
   function handleButtonPress(value) {
     if (value === ".") {
-      // Add a decimal point only if there isn't one already
       if (!sliderValue.includes(".")) {
-        setSliderValue((prev) => prev + value)
+        setSliderValue((prev) => prev + value);
       }
     } else {
-      // Ensure the decimal has been added and limit the decimal part to two digits
       if (!sliderValue.includes(".")) {
-        // If there's no decimal, just add the number
         if (sliderValue.length < 12)
-          setSliderValue((prev) => formatWithCommas(prev + value))
+          setSliderValue((prev) => formatWithCommas(prev + value));
       } else {
-        // If there is a decimal, split the value
-        const parts = sliderValue.split(".")
-        const integerPart = parts[0]
-        const decimalPart = parts[1] || ""
+        const parts = sliderValue.split(".");
+        const integerPart = parts[0];
+        const decimalPart = parts[1] || "";
 
-        // Check if the decimal part is less than 2
         if (decimalPart.length < 2) {
-          // Update the slider value with the new number added to the decimal part
-          setSliderValue(integerPart + "." + decimalPart + value)
+          setSliderValue(integerPart + "." + decimalPart + value);
         }
       }
     }
 
-    // Trigger shake animation if the amount exceeds user balance
-    triggerShakeIfExceedsBalance(sliderValue + value)
+    triggerShakeIfExceedsBalance(sliderValue + value);
   }
 
   function handleDelete() {
-    const newValue = formatWithCommas(sliderValue.slice(0, -1))
-    setSliderValue(newValue)
+    const newValue = formatWithCommas(sliderValue.slice(0, -1));
+    setSliderValue(newValue);
 
-    // Trigger shake animation if the amount exceeds user balance
-    triggerShakeIfExceedsBalance(newValue)
+    triggerShakeIfExceedsBalance(newValue);
   }
 
   function handleContinue() {
-    confirmSelection(2)
-    setStep(2)
+    if (
+      parseFloat(sliderValue.replace(/,/g, "")) >=
+      Number(userBalance) / 10 ** 6
+    ) {
+      setStep(5);
+      return;
+    }
+    confirmSelection(2);
+    setStep(5);
   }
 
   function confirmSelection(option) {
-    if (parseFloat(sliderValue.replace(/,/g, "")) >= userBalance) {
-      // showToast();
-      return
+    if (
+      parseFloat(sliderValue.replace(/,/g, "")) >=
+      Number(userBalance) / 10 ** 6
+    ) {
+      setStep(5);
+      return;
     }
     setVotingState({
       amount: parseFloat(sliderValue.replace(/,/g, "")),
-    })
+    });
   }
 
   return (
     <div className="w-full flex-grow ">
+      <MoonPayBuyWidget
+        variant="overlay"
+        baseCurrencyCode="usd"
+        baseCurrencyAmount={String(amount / 10) ?? "35"}
+        defaultCurrencyCode="USDC"
+        visible={visible}
+        walletAddress={user?.walletAddress}
+      />
       <Drawer>
         <DrawerTrigger className="w-full">{children}</DrawerTrigger>
         <DrawerContent className="border-0 rounded-[2rem] self-center">
@@ -250,11 +265,20 @@ export function PredictModal({
                   odds={odds}
                 />
               )}
-              {step === 4 && <OnrampStep setStep={setStep} method={1} />}
+              {step === 4 && (
+                <div className="p-5">
+                  <ReceiveGHO />
+                </div>
+              )}
+              {step === 5 && (
+                <div className="p-5">
+                  <GetGhoModal setVisible={setVisible} setStep={setStep} />
+                </div>
+              )}
             </AnimatePresence>
           </motion.div>
         </DrawerContent>
       </Drawer>
     </div>
-  )
+  );
 }

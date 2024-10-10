@@ -39,6 +39,9 @@ import { LoginModal } from "../modals/LoginModal";
 import { useGetUserById } from "@/graphql/queries/users/useUserById";
 import { useGetUserPositionsForMarket } from "@/graphql/queries/positions/useGetUserPositionsForMarket";
 import { StatusBlock } from "./BetDetails/MarketStatus";
+import { OnrampModal } from "../onboarding/Onramp/DesktopOnrampModal";
+import { useState } from "react";
+import { useVotingStore } from "@/lib/stores/VotingStore";
 
 export function MobileMarketPage({ market, users, id }) {
   const openLoginModal = useModalStore((state) => state.openLoginModal);
@@ -102,6 +105,8 @@ function MobileMarketContent({
       onClick={() => setIsDrawerOpen(false)}
       className="bg-[#070707] w-screen overflow-auto flex flex-col"
     >
+  
+
       <div className="relative h-[100vw]">
         <div className="flex items-center absolute top-3 justify-between px-4 py-2 w-screen z-2">
           <DrawerClose>
@@ -205,9 +210,7 @@ function MobileMarketContent({
           </div>
         </MobileBettersModal>
       </div>
-      <div className="h-[0.06rem]  text-[0.01rem] bg-[#212121] w-[90%] my-1 z-1 self-center">
-        h
-      </div>
+
       <div
         className={`
           text-base self-start

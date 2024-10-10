@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { useEffect, useState } from "react"
-import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer"
-import { AnimatePresence, motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import { Drawer, DrawerClose, DrawerContent } from "@/components/ui/drawer";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowDown,
   AtSign,
@@ -10,21 +10,21 @@ import {
   ShoppingBag,
   WalletCards,
   X,
-} from "lucide-react"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { OnrampStep } from "../PredictModal/OnrampStep"
-import { SignUp } from "./SignUp"
+} from "lucide-react";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { OnrampStep } from "../BoostModal/OnrampStep";
+import { SignUp } from "./SignUp";
 
 export function LoginModal({ isOpen, onClose }) {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     if (isOpen) {
-      setStep(1) // Reset to the first step whenever the modal is opened
+      setStep(1); // Reset to the first step whenever the modal is opened
     }
-    console.log("open", isOpen)
-  }, [isOpen])
-  console.log("isOpen", isOpen)
+    console.log("open", isOpen);
+  }, [isOpen]);
+  console.log("isOpen", isOpen);
   return (
     <Drawer open={isOpen}>
       <DrawerContent className="border-0 bg-[transparent] rounded-3xl self-center">
@@ -82,5 +82,5 @@ export function LoginModal({ isOpen, onClose }) {
         </motion.div>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }

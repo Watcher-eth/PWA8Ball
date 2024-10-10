@@ -2,7 +2,7 @@
 
 import { DesktopCardModal } from "@/components/modals/DesktopCardModal";
 import { GetGhoModal } from "@/components/modals/PredictModal/GetGhoModal";
-import { OnrampStep } from "@/components/modals/PredictModal/OnrampStep";
+import { OnrampStep } from "@/components/modals/BoostModal/OnrampStep";
 import { useUserStore } from "@/lib/stores/UserStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -31,7 +31,33 @@ export function DesktopOnrampModal({
   );
 }
 
-function DesktopOnramp() {
+export function OnrampModal({
+  children,
+  open,
+  onOpenChange,
+  amount,
+}: {
+  children: React.ReactNode;
+  open: boolean;
+  onOpenChange: () => void;
+  amount?: number;
+}) {
+  return (
+    <DesktopCardModal
+      open={open}
+      onOpenChange={onOpenChange}
+      dialogClassName="max-w-[35vw] xl:max-w-[28vw]  2xl:max-w-[23vw]"
+      dialogContentClassName="max-w-[35vw] xl:max-w-[28vw]  2xl:max-w-[23vw]"
+      cardClassName="max-w-[35vw] xl:max-w-[28vw]  2xl:max-w-[23vw]"
+      cardContentClassName="bg-[#080808]/75 w-full backdrop-blur-lg max-w-[35vw] xl:max-w-[30vw] 2xl:max-w-[23vw]"
+      content={<DesktopOnramp amount={amount} />}
+    >
+      {children}
+    </DesktopCardModal>
+  );
+}
+
+function DesktopOnramp(props: { amount?: number }) {
   const [step, setStep] = useState(1);
   const { user } = useUserStore();
   const [visible, setVisible] = useState(false);
@@ -44,7 +70,7 @@ function DesktopOnramp() {
       <MoonPayBuyWidget
         variant="overlay"
         baseCurrencyCode="usd"
-        baseCurrencyAmount="35"
+        baseCurrencyAmount={String(amount) ?? "35"}
         defaultCurrencyCode="USDC"
         visible={visible}
         walletAddress={user?.walletAddress}

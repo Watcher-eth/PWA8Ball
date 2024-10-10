@@ -24,6 +24,9 @@ import { TxStatusButton } from "@/components/common/Animated/AnimatedTxStatus";
 import { cleanNumberInput } from "@/utils/string/cleanNumberInput";
 import { useReferralStore } from "@/lib/stores/ReferralStore";
 import { BorderTrail } from "@/components/common/Animated/BorderTrail";
+import { OnrampModal } from "@/components/onboarding/Onramp/DesktopOnrampModal";
+import { useUsdcBalance } from "@/hooks/wallet/useUsdcBalance";
+import { useUserStore } from "@/lib/stores/UserStore";
 
 export function DesktopPredictComponent(props: {
   question: string;
@@ -47,10 +50,13 @@ export function DesktopPredictComponent(props: {
     initialProb,
     refetch,
   } = props;
+  const { user } = useUserStore();
   const [step, setStep] = useState<number>(userOwns.length > 0 ? 4 : 0);
   const [amountStr, setAmountStr] = useState();
   const amount = Number(amountStr?.length > 0 ? amountStr : 0);
   const setStake = useVotingStore((state) => state.setState);
+  const [open, setOpen] = useState(false);
+  const userBalance = useUsdcBalance({ address: user?.walletAddress });
 
   return (
     <div
@@ -60,6 +66,11 @@ export function DesktopPredictComponent(props: {
           : "p-4 rounded-lg  pt-1 border-[0.1rem] border-[#141414] overflow-hidden"
       } `}
     >
+      <OnrampModal
+        amount={amount}
+        open={open}
+        onOpenChange={setOpen}
+      ></OnrampModal>
       <motion.div
         layout
         transition={{ duration: "0.6", type: "spring" }}
@@ -106,8 +117,12 @@ export function DesktopPredictComponent(props: {
                   option={0}
                   userOwns={userOwns[0]}
                   onClick={() => {
-                    setStake({ amount, option: 1 });
-                    setStep(2);
+                    if (Number(userBalance) / 10 ** 6 < amount) {
+                      setOpen(true);
+                    } else {
+                      setStake({ amount, option: 1 });
+                      setStep(2);
+                    }
                   }}
                 />
                 <OutcomeButton
@@ -117,8 +132,12 @@ export function DesktopPredictComponent(props: {
                   multiplier={options[0].value / 100}
                   option={1}
                   onClick={() => {
-                    setStake({ amount, option: 2 });
-                    setStep(2);
+                    if (Number(userBalance) / 10 ** 6 < amount) {
+                      setOpen(true);
+                    } else {
+                      setStake({ amount, option: 2 });
+                      setStep(2);
+                    }
                   }}
                 />
               </div>
@@ -129,6 +148,7 @@ export function DesktopPredictComponent(props: {
               {...props}
               odds={options[0].value / 100}
               setStep={setStep}
+              setOnrampOpen={setOpen}
             />
           )}
           {step === 4 && (
@@ -151,17 +171,17 @@ export function DesktopPredictComponent(props: {
                     <p
                       style={{
                         backgroundColor:
-                          userOwns[0].option === 1
+                          userOwns[0].option - 1 === 1
                             ? "rgb(255, 63, 63, 0.1)"
                             : "rgb(77, 175, 255, 0.1)",
                       }}
                       className={`flex p-2 py-0.5 text-[0.8rem] font-[700] rounded-full ${
-                        userOwns[0].option === 1
+                        userOwns[0].option - 1 === 1
                           ? "text-[#FF3F3F]"
                           : "text-[#4DAFFF]"
                       } flex-row gap-1 items-center`}
                     >
-                      {options[userOwns[0].option].name}
+                      {options[userOwns[0].option - 1].name}
                     </p>
                   </span>
                   <span className="line-clamp-1 font-[400] text-[14px] text-[#999999] max-w-[73vw] mb-[1px] overflow-hidden">
@@ -293,6 +313,7 @@ function DesktopConfirmPrediction({
   title,
   id,
   odds,
+  setOnrampOpen,
 }: {
   setStep: (step: number) => void;
   image: string;
@@ -302,6 +323,7 @@ function DesktopConfirmPrediction({
   title: string;
   id: string;
   odds: number;
+  setOnrampOpen: (boolean: boolean) => void;
 }) {
   const amount = useVotingStore((state) => state.amount);
   const option = useVotingStore((state) => state.option);
